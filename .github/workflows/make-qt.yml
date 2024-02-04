@@ -1,0 +1,33 @@
+name: qt-build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: "5.12.8"
+          host: "linux"
+          target: "desktop"
+
+      - name: Run qmake
+        run: |
+          cd quizzy && qmake
+
+      - name: Run make
+        run: |
+          cd quizzy && make
