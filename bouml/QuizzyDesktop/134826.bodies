@@ -1,0 +1,5 @@
+class Quizzy
+!!!135082.cpp!!!	Quizzy(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO;
+!!!135210.cpp!!!	~Quizzy()
+    qDebug() << Q_FUNC_INFO;
