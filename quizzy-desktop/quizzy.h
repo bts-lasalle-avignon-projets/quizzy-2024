@@ -1,17 +1,22 @@
 #ifndef QUIZZY_H
 #define QUIZZY_H
 
+#include <QObject>
 #include <QVector>
-#include "question.h"
 
-class Quizzy
+#define INDEX_NON_DEFINI -1
+
+class Question;
+
+class Quizzy : public QObject
 {
+    Q_OBJECT
   private:
     QVector<Question*> listeQuestions;
     int                indexQuestionActuelle;
 
   public:
-    Quizzy();
+    Quizzy(QObject* parent = nullptr);
     ~Quizzy();
 };
 
