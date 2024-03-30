@@ -4,7 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += \
+         core gui \
+         bluetooth
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,11 +22,13 @@ SOURCES += \
         main.cpp \
         ihmquizzy.cpp \
         quizzy.cpp \
-        question.cpp
+        question.cpp \
+    communicationbluetooth.cpp
 
 HEADERS += \
         ihmquizzy.h \
         quizzy.h \
-        question.h
+        question.h \
+    communicationbluetooth.h
 
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
