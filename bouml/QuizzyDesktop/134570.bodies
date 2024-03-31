@@ -1,0 +1,10 @@
+class IHMQuizzy
+!!!134570.cpp!!!	IHMQuizzy(inout parent : QWidget = 0)
+    qDebug() << Q_FUNC_INFO;
+    setWindowTitle(QString(NOM_APP) + QString(" v") + QString(VERSION_APP));
+#ifdef PLEIN_ECRAN_RASPBERRY_PI
+    showFullScreen();
+// showMaximized();
+#endif
+!!!134698.cpp!!!	~IHMQuizzy()
+    qDebug() << Q_FUNC_INFO;

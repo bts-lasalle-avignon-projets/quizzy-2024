@@ -1,7 +1,8 @@
 format 224
 "QuizzyDesktop"
-  revision 1
-  modified_by 2 "btssn2"
+  revision 3
+  modified_by 42 "tv"
+  cpp_root_dir "../../"
 
 
   
@@ -339,4 +340,6 @@ format 224
       end
     end
   end
+
+  package_ref 134570 // quizzy-desktop
 end
