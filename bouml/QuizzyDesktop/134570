@@ -1,6 +1,6 @@
 format 224
 "quizzy-desktop" // quizzy-desktop
-  revision 1
+  revision 2
   modified_by 42 "tv"
   // class settings
   
@@ -210,6 +210,15 @@ ${inlines}
 	MysqlColumn
       end
 
+      classrelation 141610 // bluetooth (<unidirectional association>)
+	relation 141610 --->
+	  a role_name "bluetooth" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 141610 // bluetooth (<unidirectional association>)
+	  b parent class_ref 141610 // CommunicationBluetooth
+      end
+
       operation 135082 "Quizzy"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -218,7 +227,8 @@ ${inlines}
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI)
+    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI),
+    bluetooth(new CommunicationBluetooth(this))
 ${throw}{
 ${body}}
 "
@@ -351,6 +361,106 @@ ${body}}
       classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
+
+    class 141610 "CommunicationBluetooth"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141482 // <generalisation>
+	relation 141482 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 141482 // <generalisation>
+	  b parent class_ref 135082 // typedef2
+      end
+
+      extra_member 141226 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 141610 "nomAppareil"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141738 "adresseAppareil"
+	private explicit_type "QBluetoothAddress"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141866 "socket"
+	private explicit_type "QBluetoothSocket"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141738 "CommunicationBluetooth"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "QObject"
+	    defaultvalue "nullptr"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
+    QObject(parent)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 141866 "~CommunicationBluetooth"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
   end
 
   deploymentview 134570 "quizzy-desktop"
@@ -452,6 +562,29 @@ int main(int argc, char* argv[])
 }
 "
       associated_elems
+      end
+    end
+
+    artifact 141482 "communicationbluetooth"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 141610 // CommunicationBluetooth
       end
     end
   end
