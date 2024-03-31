@@ -15,7 +15,7 @@ class CommunicationBluetooth : public QObject
     QBluetoothSocket* socket;
 
   public:
-    CommunicationBluetooth();
+    CommunicationBluetooth(QObject* parent = nullptr);
     ~CommunicationBluetooth();
 };
 

@@ -6,7 +6,7 @@
 
 Quizzy::Quizzy(QObject* parent) :
     QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI),
-    bluetooth(new CommunicationBluetooth())
+    bluetooth(new CommunicationBluetooth(this))
 {
     qDebug() << Q_FUNC_INFO;
 }

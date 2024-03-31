@@ -1,6 +1,7 @@
 #include "communicationbluetooth.h"
 
-CommunicationBluetooth::CommunicationBluetooth()
+CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
+    QObject(parent)
 {
 }
 
