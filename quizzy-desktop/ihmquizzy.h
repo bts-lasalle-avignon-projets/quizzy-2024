@@ -41,11 +41,23 @@ class IHMQuizzy : public QWidget
     Q_OBJECT
 
   private:
-    Quizzy* quizzy; //!< association vers la classe Quizzy
+    Quizzy*         quizzy; //!< association vers la classe Quizzy
+    QStackedWidget* fenetres;
+    QWidget*        fenetreAccueil;
+    QWidget*        fenetreJeu;
+    QWidget*        fenetreResultats;
+
+  private slots:
+    void afficherFenetreJeu();
+    void afficherFenetreResultats();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
     ~IHMQuizzy();
+
+    void creerFenetreAccueil();
+    void creerFenetreJeu();
+    void creerFenetreResultats();
 };
 
 #endif // IHMQUIZZY_H

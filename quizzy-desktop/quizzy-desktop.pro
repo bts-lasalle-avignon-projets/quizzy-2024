@@ -31,4 +31,10 @@ HEADERS += \
         question.h \
     communicationbluetooth.h
 
+RESOURCES += \
+    quizzy.qrc
+
+DISTFILES += \
+    style.qss
+
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
