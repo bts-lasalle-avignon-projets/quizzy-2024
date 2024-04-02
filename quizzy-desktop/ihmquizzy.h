@@ -24,6 +24,18 @@
 #define VERSION_APP "0.1"
 
 /**
+ * @def TAILLE_LARGEUR_ECRAN_MIN
+ * @brief Pour le mode plein écran sur la Raspberry Pi
+ */
+#define TAILLE_LARGEUR_ECRAN_MIN 1920
+
+/**
+ * @def TAILLE_HAUTEUR_ECRAN_MIN
+ * @brief Pour le mode plein écran sur la Raspberry Pi
+ */
+#define TAILLE_HAUTEUR_ECRAN_MIN 1024
+
+/**
  * @def PLEIN_ECRAN_RASPBERRY_PI
  * @brief Pour le mode plein écran sur la Raspberry Pi
  */
@@ -40,24 +52,51 @@ class IHMQuizzy : public QWidget
 {
     Q_OBJECT
 
+  public:
+    /**
+     * @enum Fenetre
+     * @brief Définit les différentes fenêtres de la GUI
+     *
+     */
+    enum Fenetre
+    {
+        FenetreAccueil = 0,
+        FenetreParticipants,
+        FenetreJeu,
+        FenetreResultats,
+        NbEcrans
+    };
+
   private:
-    Quizzy*         quizzy; //!< association vers la classe Quizzy
+    Quizzy* quizzy; //!< association vers la classe Quizzy
+    // Les ressources de la GUI
     QStackedWidget* fenetres;
     QWidget*        fenetreAccueil;
+    QLabel*         titreFenetreAccueil;
+    QWidget*        fenetreParticipants;
+    QLabel*         titreFenetreParticipants;
     QWidget*        fenetreJeu;
+    QLabel*         titreFenetreJeu;
     QWidget*        fenetreResultats;
+    QLabel*         titreFenetreResultats;
 
-  private slots:
-    void afficherFenetreJeu();
-    void afficherFenetreResultats();
+    void creerFenetres();
+    void creerFenetreAccueil();
+    void creerFenetreParticipants();
+    void creerFenetreJeu();
+    void creerFenetreResultats();
+    void initialiserFenetres();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
     ~IHMQuizzy();
 
-    void creerFenetreAccueil();
-    void creerFenetreJeu();
-    void creerFenetreResultats();
+  public slots:
+    void afficherFenetre(IHMQuizzy::Fenetre fenetre);
+    void afficherFenetreAccueil();
+    void afficherFenetrePariticipants();
+    void afficherFenetreJeu();
+    void afficherFenetreResultats();
 };
 
 #endif // IHMQUIZZY_H
