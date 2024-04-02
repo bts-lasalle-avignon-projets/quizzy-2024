@@ -1,10 +1,69 @@
 class IHMQuizzy
+!!!148394.cpp!!!	creerFenetres() : void
+    fenetres = new QStackedWidget(this);
+    creerFenetreAccueil();
+    creerFenetreParticipants();
+    creerFenetreJeu();
+    creerFenetreResultats();
+
+    initialiserFenetres();
+!!!148522.cpp!!!	creerFenetreAccueil() : void
+    fenetreAccueil             = new QWidget(this);
+    QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
+    titreFenetreAccueil        = new QLabel("Accueil", this);
+    layoutAccueil->addWidget(titreFenetreAccueil);
+
+    fenetres->addWidget(fenetreAccueil);
+!!!148650.cpp!!!	creerFenetreParticipants() : void
+    fenetreParticipants          = new QWidget(this);
+    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreParticipants);
+    titreFenetreParticipants     = new QLabel("Participants", this);
+    layoutPrincipal->addWidget(titreFenetreParticipants);
+
+    fenetres->addWidget(fenetreParticipants);
+!!!148778.cpp!!!	creerFenetreJeu() : void
+    fenetreJeu                   = new QWidget(this);
+    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreJeu);
+    titreFenetreJeu              = new QLabel("Jeu", this);
+    layoutPrincipal->addWidget(titreFenetreJeu);
+
+    fenetres->addWidget(fenetreJeu);
+!!!148906.cpp!!!	creerFenetreResultats() : void
+    fenetreResultats             = new QWidget(this);
+    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreResultats);
+    titreFenetreResultats        = new QLabel("Résultats", this);
+    layoutPrincipal->addWidget(titreFenetreResultats);
+
+    fenetres->addWidget(fenetreResultats);
+!!!149034.cpp!!!	initialiserFenetres() : void
+    QVBoxLayout* layoutPrincipal = new QVBoxLayout();
+    layoutPrincipal->setSpacing(0);
+    layoutPrincipal->setContentsMargins(0, 0, 0, 0);
+    layoutPrincipal->addWidget(fenetres);
+    setLayout(layoutPrincipal);
+    setMinimumSize(QSize(TAILLE_LARGEUR_ECRAN_MIN, TAILLE_HAUTEUR_ECRAN_MIN));
+    setWindowTitle(QString(NOM_APP) + QString(" v") + QString(VERSION_APP));
 !!!134570.cpp!!!	IHMQuizzy(inout parent : QWidget = 0)
     qDebug() << Q_FUNC_INFO;
-    setWindowTitle(QString(NOM_APP) + QString(" v") + QString(VERSION_APP));
+
+    creerFenetres();
+
+    afficherFenetreAccueil();
+
 #ifdef PLEIN_ECRAN_RASPBERRY_PI
     showFullScreen();
 // showMaximized();
 #endif
 !!!134698.cpp!!!	~IHMQuizzy()
     qDebug() << Q_FUNC_INFO;
+!!!149162.cpp!!!	afficherFenetre(in fenetre : IHMQuizzy::Fenetre) : void
+    qDebug() << Q_FUNC_INFO << "fenetre" << fenetre;
+    fenetres->setCurrentIndex(fenetre);
+!!!149290.cpp!!!	afficherFenetreAccueil() : void
+    afficherFenetre(Fenetre::FenetreAccueil);
+!!!149418.cpp!!!	afficherFenetrePariticipants() : void
+    afficherFenetre(Fenetre::FenetreParticipants);
+!!!149546.cpp!!!	afficherFenetreJeu() : void
+    afficherFenetre(Fenetre::FenetreJeu);
+!!!149674.cpp!!!	afficherFenetreResultats() : void
+    afficherFenetre(Fenetre::FenetreResultats);
