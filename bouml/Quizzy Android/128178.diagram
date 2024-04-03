@@ -1,0 +1,59 @@
+format 224
+
+classcanvas 128050 class_ref 128178 // Évaluateur
+  simpleclassdiagramsettings end
+  xyz 70 313 2000
+end
+usecasecanvas 128178 usecase_ref 128178 // Sélectionner un quiz
+  xyzwh 263 155 3005 64 32 label_xy 227 138
+end
+usecasecanvas 128306 usecase_ref 128306 // Connecter les pupitres des participants
+  xyzwh 393 352 3005 64 32 label_xy 296 334
+end
+usecasecanvas 128434 usecase_ref 128434 // Gérer le quiz
+  xyzwh 251 506 3005 64 32 label_xy 241 538
+end
+usecasecanvas 129586 usecase_ref 129074 // Choisir le thème
+  xyzwh 504 58 3005 64 32 label_xy 482 90
+end
+usecasecanvas 129714 usecase_ref 128690 // Choisir les questions
+  xyzwh 504 154 3005 64 32 label_xy 467 186
+end
+usecasecanvas 129842 usecase_ref 129202 // Définir le temps par question
+  xyzwh 504 252 3005 64 32 label_xy 440 284
+end
+usecasecanvas 129970 usecase_ref 129330 // Démarrer le quiz
+  xyzwh 504 443 3005 64 32 label_xy 482 475
+end
+usecasecanvas 130098 usecase_ref 129458 // Abandonner le quiz
+  xyzwh 504 535 3005 64 32 label_xy 472 567
+end
+usecasecanvas 130226 usecase_ref 129586 // Sauvegarder resultats
+  xyzwh 393 620 3005 64 32 label_xy 352 652
+end
+line 130994 ----
+  from ref 128050 z 3006 to ref 128178
+line 131378 ----
+  from ref 128050 z 3006 to ref 128434
+simplerelationcanvas 133426 simplerelation_ref 128050
+  from ref 128178 z 3006 stereotype "<<include>>" xyz 374.5 119.5 3000 to ref 129586
+end
+simplerelationcanvas 133554 simplerelation_ref 128178
+  from ref 128178 z 3006 stereotype "<<include>>" xyz 374 168.5 3000 to ref 129714
+end
+simplerelationcanvas 133682 simplerelation_ref 128306
+  from ref 129842 z 3006 stereotype "<<extend>>" xyz 374 217 3000 to ref 128178
+end
+simplerelationcanvas 133810 simplerelation_ref 128434
+  from ref 128434 z 3006 stereotype "<<include>>" xyz 310 443.5 3000 to ref 128306
+end
+simplerelationcanvas 133938 simplerelation_ref 128562
+  from ref 128434 z 3006 stereotype "<<include>>" xyz 368.5 487.5 3000 to ref 129970
+end
+simplerelationcanvas 134066 simplerelation_ref 128690
+  from ref 130098 z 3006 stereotype "<<extend>>" xyz 368.5 534.5 3000 to ref 128434
+end
+simplerelationcanvas 134194 simplerelation_ref 128818
+  from ref 130226 z 3006 stereotype "<<extend>>" xyz 313 578 3000 to ref 128434
+end
+end
