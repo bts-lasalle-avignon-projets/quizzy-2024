@@ -10,6 +10,7 @@
  */
 
 #include <QtWidgets>
+#include <QVector>
 
 /**
  * @def NOM_APP
@@ -24,12 +25,28 @@
 #define VERSION_APP "0.1"
 
 /**
+ * @def TAILLE_LARGEUR_ECRAN_MIN
+ * @brief Pour le mode plein écran sur la Raspberry Pi
+ */
+#define TAILLE_LARGEUR_ECRAN_MIN 1920
+
+/**
+ * @def TAILLE_HAUTEUR_ECRAN_MIN
+ * @brief Pour le mode plein écran sur la Raspberry Pi
+ */
+#define TAILLE_HAUTEUR_ECRAN_MIN 1024
+
+/**
  * @def PLEIN_ECRAN_RASPBERRY_PI
  * @brief Pour le mode plein écran sur la Raspberry Pi
  */
 //#define PLEIN_ECRAN_RASPBERRY_PI
 
+#define TEST_FENETRE_PARTICIPANTS
+#define TEST_FENETRE_JEU
+
 class Quizzy;
+class Question;
 
 /**
  * @class IHMQuizzy
@@ -40,12 +57,79 @@ class IHMQuizzy : public QWidget
 {
     Q_OBJECT
 
+  public:
+    /**
+     * @enum Fenetre
+     * @brief Définit les différentes fenêtres de la GUI
+     *
+     */
+    enum Fenetre
+    {
+        FenetreAccueil = 0,
+        FenetreParticipants,
+        FenetreJeu,
+        FenetreResultats,
+        NbEcrans
+    };
+
   private:
-    Quizzy* quizzy; //!< association vers la classe Quizzy
+    Quizzy*            quizzy;    //!< association vers la classe Quizzy
+    QVector<Question*> questions; //!< conteneur de Question pour le quiz
+    // Les ressources de la GUI
+    QStackedWidget* fenetres;
+    // FenetreAccueil
+    QWidget* fenetreAccueil;
+    QLabel*  titreFenetreAccueil;
+    QLabel*  messageAttente;
+    // FenetreParticipants
+    QWidget*     fenetreParticipants;
+    QLabel*      titreFenetreParticipants;
+    QVBoxLayout* layoutPrincipalParticipants;
+    // FenetreJeu
+    QWidget*     fenetreJeu;
+    QLabel*      titreFenetreJeu;
+    QVBoxLayout* layoutPrincipalJeu;
+    QHBoxLayout* layoutLibelle;
+    QVBoxLayout* layoutPropositionReponse;
+    QHBoxLayout* layoutPropositonAB;
+    QHBoxLayout* layoutPropositonCD;
+    QHBoxLayout* layoutChronometre;
+    QLabel*      labelNombreTotal;
+    QLabel*      labelQuestion;
+    QLabel*      propositionReponseA;
+    QLabel*      propositionReponseB;
+    QLabel*      propositionReponseC;
+    QLabel*      propositionReponseD;
+    QLabel*      labelChronometre;
+    // FenetreResultats
+    QWidget* fenetreResultats;
+    QLabel*  titreFenetreResultats;
+
+    void initialiserFenetres();
+    void creerFenetres();
+    void creerFenetreAccueil();
+    void creerFenetreParticipants();
+    void creerLayoutsFenetreParticipants();
+    void creerWidgetsFenetreParticipants();
+    void placerWidgetsFenetreParticipants();
+    void creerFenetreJeu();
+    void creerLayoutsFenetreJeu();
+    void creerWidgetsFenetreJeu();
+    void placerWidgetsFenetreJeu();
+    void creerFenetreResultats();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
     ~IHMQuizzy();
+
+  public slots:
+    void afficherFenetre(IHMQuizzy::Fenetre fenetre);
+    void afficherFenetreAccueil();
+    void afficherFenetreParticipants();
+    void afficherFenetreJeu();
+    void afficherFenetreResultats();
+    void ajouterParticipant(QString participant);
+    void ajouterLibelleQuestion(const Question& question);
 };
 
 #endif // IHMQUIZZY_H

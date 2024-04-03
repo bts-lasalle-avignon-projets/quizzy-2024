@@ -18,6 +18,13 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
     IHMQuizzy    ihmQuizzy;
 
+    QFile fichier(":/qss/style.qss");
+    if(fichier.open(QFile::ReadOnly))
+    {
+        QString feuilleStyle = QLatin1String(fichier.readAll());
+        a.setStyleSheet(feuilleStyle);
+    }
+
     ihmQuizzy.show();
 
     return a.exec();

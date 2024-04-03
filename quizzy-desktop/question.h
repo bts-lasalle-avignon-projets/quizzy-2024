@@ -8,13 +8,17 @@ class Question
 {
   private:
     QString             libelle;
+    QStringList         participants;
     QMap<char, QString> propositions;
     int                 duree;
     char                reponseCorrecte;
 
   public:
-    Question();
+    Question(QString libelle, QStringList propositions);
     ~Question();
+
+    QString             getLibelle() const;
+    QMap<char, QString> getPropositions() const;
 };
 
 #endif // QUESTION_H
