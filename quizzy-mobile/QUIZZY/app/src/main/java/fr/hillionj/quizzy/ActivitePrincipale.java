@@ -70,7 +70,26 @@ public class ActivitePrincipale extends AppCompatActivity
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(handler);
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.arg1) {
+                    case CODE_CONNEXION:
+                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
+                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null).ajouterPeripheriqueConnecter(msg.arg2);
+                        break;
+                    case CODE_ERREUR_CONNEXION:
+                        FragmentPupitre.getVueActive().activerBoutonConnecter();
+                        Toast.makeText(getApplicationContext(), "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
     }
 
     /**
