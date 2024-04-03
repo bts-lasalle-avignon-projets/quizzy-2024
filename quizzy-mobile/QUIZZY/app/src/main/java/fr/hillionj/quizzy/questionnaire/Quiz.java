@@ -3,40 +3,46 @@ package fr.hillionj.quizzy.questionnaire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
-    private List<Question> questions = new ArrayList<>();
-    private int indiceQuestionActuelle = -1;
-    private String theme = "Aucun";
-    public String getTheme() {
-        return theme;
-    }
-    public List<Question> getQuestions() {
-        return questions;
+public class Quiz
+{
+    private String         theme                  = "Aucun";
+    private List<Question> questions              = new ArrayList<>();
+    private int            indiceQuestionActuelle = -1;
+
+    Quiz()
+    {
     }
 
-    public boolean genererQuiz(String theme, int nombreQuestion) {
-        // TODO Partie Base de données
+    public boolean genererQuiz(String theme, int nombreQuestions)
+    {
         return false;
     }
 
-    public List<String> getThemes() {
-        // TODO Partie Base de données
+    public String getTheme()
+    {
+        return theme;
+    }
+
+    public List<String> getThemes()
+    {
         return null;
     }
 
-    public void demarrer() {
-        
+    public List<Question> getQuestions()
+    {
+        return questions;
     }
 
-    public void arreter() {
-
+    public void demarrer()
+    {
     }
 
-    public Question questionSuivante() {
-        return null;
+    public void arreter()
+    {
     }
 
-    public boolean estTermine() {
+    public boolean estTermine()
+    {
         return false;
     }
 }

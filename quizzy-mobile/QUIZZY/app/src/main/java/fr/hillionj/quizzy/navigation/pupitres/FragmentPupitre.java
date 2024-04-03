@@ -22,41 +22,49 @@ import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 
-public class FragmentPupitre extends Fragment {
+public class FragmentPupitre extends Fragment
+{
     private FragmentDashboardBinding binding;
-    public Button btnConnecter, btnDeconnecter;
-    public Spinner spinnerListePeripheriques;
-    public ListView listViewPeripheriquesConnectes;
-    private static FragmentPupitre vueActive = null;
-    public static FragmentPupitre getVueActive() {
+    public Button                    btnConnecter, btnDeconnecter;
+    public Spinner                   spinnerListePeripheriques;
+    public ListView                  listViewPeripheriquesConnectes;
+    private static FragmentPupitre   vueActive = null;
+    public static FragmentPupitre    getVueActive()
+    {
         return vueActive;
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup               container,
+                             Bundle                  savedInstanceState)
+    {
         ModelePupitre dashboardViewModel = new ViewModelProvider(this).get(ModelePupitre.class);
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding   = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }
 
-    public void initialiserVue(View vue) {
-
+    public void initialiserVue(View vue)
+    {
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         binding = null;
     }
 
-    public void desactiverBoutons() {
+    public void desactiverBoutons()
+    {
     }
 
-    public void activerBoutonConnecter() {
+    public void activerBoutonConnecter()
+    {
     }
 
-    public void activerBoutonDeconnecter() {
+    public void activerBoutonDeconnecter()
+    {
     }
     public void onClick(View v)
     {

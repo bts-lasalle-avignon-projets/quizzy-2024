@@ -14,42 +14,51 @@ import java.util.UUID;
 
 import fr.hillionj.quizzy.ActivitePrincipale;
 
-public class Peripherique extends Thread {
-    private String nom, adresse;
-    private Handler handler = null;
-    private BluetoothDevice device = null;
-    private BluetoothSocket socket = null;
-    private InputStream receiveStream = null;
-    private OutputStream sendStream = null;
-    private TReception tReception;
-    private int indicePeripherique;
+public class Peripherique extends Thread
+{
+    private String          nom;
+    private String          adresse;
+    private Handler         handler       = null;
+    private BluetoothDevice device        = null;
+    private BluetoothSocket socket        = null;
+    private InputStream     receiveStream = null;
+    private OutputStream    sendStream    = null;
+    private TReception      tReception;
+    private int             indicePeripherique;
     @SuppressLint("MissingPermission")
-    public Peripherique(BluetoothDevice device, Handler handler, int indicePeripherique) {
-        this.device = device;
-        this.handler = handler;
+    public Peripherique(BluetoothDevice device, Handler handler, int indicePeripherique)
+    {
+        this.device             = device;
+        this.handler            = handler;
         this.indicePeripherique = indicePeripherique;
-        if (device != null) {
-            this.nom = device.getName();
+        if(device != null)
+        {
+            this.nom     = device.getName();
             this.adresse = device.getAddress();
-        } else {
-            this.nom = "Aucun";
+        }
+        else
+        {
+            this.nom     = "Aucun";
             this.adresse = "";
         }
     }
-    public String getNom() {
+    public String getNom()
+    {
         return nom;
     }
 
-    public String getAdresse() {
+    public String getAdresse()
+    {
         return adresse;
     }
 
-    public boolean estConnecte() {
+    public boolean estConnecte()
+    {
         return false;
     }
 
-    public void connecter() {
-
+    public void connecter()
+    {
     }
 
     public boolean deconnecter()
@@ -61,20 +70,23 @@ public class Peripherique extends Thread {
     {
     }
 
-    private class TReception extends Thread {
-        Handler handlerUI;
+    private class TReception extends Thread
+    {
+        Handler         handlerUI;
         private boolean fini = false;
 
-        TReception(Handler h) {
+        TReception(Handler h)
+        {
             handlerUI = h;
         }
 
         @Override
-        public void run() {
-
+        public void run()
+        {
         }
 
-        public void arreter() {
+        public void arreter()
+        {
         }
     }
 }
