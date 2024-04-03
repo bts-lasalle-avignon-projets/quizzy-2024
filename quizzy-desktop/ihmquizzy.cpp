@@ -24,10 +24,7 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
 
     creerFenetres();
     afficherFenetreAccueil();
-    afficherFenetreParticipants();
-
-#ifdef PLEIN_ECRAN_RASPBERRY_PI
-    showFullScreen();
+#ifdef PLEIN_ECRAN_RASPBERRY_PI showFullScreen();
 // showMaximized();
 #endif
 }
@@ -108,7 +105,9 @@ void IHMQuizzy::creerFenetreParticipants()
     fenetres->addWidget(fenetreParticipants);
 }
 
-// Ajuster et créer une classe Participant
+/**
+ * @todo Créer un classe spécifique pour les participants
+ */
 void IHMQuizzy::creerListeParticipants(QVBoxLayout* layoutPrincipal)
 {
     QStringList listeParticipants;
@@ -116,17 +115,58 @@ void IHMQuizzy::creerListeParticipants(QVBoxLayout* layoutPrincipal)
                       << "Participant 2";
     for(const QString& participant: listeParticipants)
     {
-        QLabel* labelParticipant = new QLabel(participant, this);
-        layoutPrincipal->addWidget(labelParticipant);
+        QWidget*     widgetParticipant = new QWidget(this);
+        QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
+        QLabel*      labelParticipant  = new QLabel(participant, this);
+
+        layoutParticipant->setContentsMargins(100, 10, 100, 10);
+        layoutParticipant->addWidget(labelParticipant);
+        layoutPrincipal->addWidget(widgetParticipant);
     }
+}
+
+/**
+ * @todo Faire en sorte que Qmap et Qstring soit dans la classe Question
+ */
+
+void IHMQuizzy::creerLayouts()
+{
+    layoutPrincipal          = new QVBoxLayout(fenetreJeu);
+    layoutLibelle            = new QHBoxLayout();
+    layoutPropositionReponse = new QVBoxLayout();
+    layoutPropositonAB       = new QHBoxLayout();
+    layoutPropositonCD       = new QHBoxLayout();
+    layoutChronometre        = new QHBoxLayout();
+}
+
+void IHMQuizzy::creerLabels()
+{
+    labelNombreTotal    = new QLabel("0/0", this);
+    labelQuestion       = new QLabel("Question : ", this);
+    propositionReponseA = new QLabel("Proposition A", this);
+    propositionReponseB = new QLabel("Proposition B", this);
+    propositionReponseC = new QLabel("Proposition C", this);
+    propositionReponseD = new QLabel("Proposition D", this);
+    labelChronometre    = new QLabel("00:00", this);
 }
 
 void IHMQuizzy::creerFenetreJeu()
 {
-    fenetreJeu                   = new QWidget(this);
-    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreJeu);
-    titreFenetreJeu              = new QLabel("Jeu", this);
-    layoutPrincipal->addWidget(titreFenetreJeu);
+    fenetreJeu = new QWidget(this);
+    creerLayouts();
+    creerLabels();
+    layoutLibelle->addWidget(labelNombreTotal);
+    layoutLibelle->addWidget(labelQuestion);
+    layoutPrincipal->addLayout(layoutLibelle);
+    layoutPropositonAB->addWidget(propositionReponseA);
+    layoutPropositonAB->addWidget(propositionReponseB);
+    layoutPropositonCD->addWidget(propositionReponseC);
+    layoutPropositonCD->addWidget(propositionReponseD);
+    layoutPropositionReponse->addLayout(layoutPropositonAB);
+    layoutPropositionReponse->addLayout(layoutPropositonCD);
+    layoutPrincipal->addLayout(layoutPropositionReponse);
+    layoutChronometre->addWidget(labelChronometre);
+    layoutPrincipal->addLayout(layoutChronometre);
 
     fenetres->addWidget(fenetreJeu);
 }

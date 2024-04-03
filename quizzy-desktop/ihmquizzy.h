@@ -83,14 +83,31 @@ class IHMQuizzy : public QWidget
     QLabel*         titreFenetreResultats;
     QLabel*         messageAttente;
 
+    QVBoxLayout* layoutPrincipal;
+    QHBoxLayout* layoutLibelle;
+    QVBoxLayout* layoutPropositionReponse;
+    QHBoxLayout* layoutPropositonAB;
+    QHBoxLayout* layoutPropositonCD;
+    QHBoxLayout* layoutChronometre;
+
+    QLabel* labelNombreTotal;
+    QLabel* labelQuestion;
+    QLabel* propositionReponseA;
+    QLabel* propositionReponseB;
+    QLabel* propositionReponseC;
+    QLabel* propositionReponseD;
+    QLabel* labelChronometre;
+
     void creerFenetres();
     void creerFenetreAccueil();
     void creerFenetreParticipants();
     void creerFenetreJeu();
     void creerFenetreResultats();
     void initialiserFenetres();
-
     void creerListeParticipants(QVBoxLayout* layoutPrincipal);
+
+    void creerLayouts();
+    void creerLabels();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
