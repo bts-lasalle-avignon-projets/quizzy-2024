@@ -1,7 +1,7 @@
 format 224
 "bluetooth" // quizzy::bluetooth
-  revision 1
-  modified_by 23 "tvaira"
+  revision 2
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -53,14 +53,19 @@ format 224
     activitydiagramsettings
      end
     class 134807 "GestionnaireBluetooth"
-      visibility public 
-      cpp_decl ""
+      visibility public stereotype "singleton"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
 "
       php_decl ""
       python_2_2 python_decl ""
-      idl_decl ""
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       mysql_decl ""
       

@@ -7,7 +7,6 @@
 package fr.hillionj.quizzy;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,11 +37,13 @@ public class ActivitePrincipale extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_ActivitePrincipale"; //!< TAG pour les logs (cf. Logcat)
-    public final int            CODE_CONNEXION        = 33;
-    public final int            CODE_RECEPTION        = 35;
-    public final int            CODE_DECONNEXION      = 34;
-    public final int            CODE_ERREUR_CONNEXION = 36;
-
+    public static final int     CODE_CONNEXION_BLUETOOTH        = 33;
+    public static final int     CODE_RECEPTION_BLUETOOTH        = 35;
+    public static final int     CODE_DECONNEXION_BLUETOOTH      = 34;
+    public static final int     CODE_ERREUR_CONNEXION_BLUETOOTH = 36;
+    /**
+     * Attributs
+     */
     private ActivityMainBinding   binding;
     private GestionnaireBluetooth gestionnaireBluetooth;
     public Handler                handler;
@@ -57,39 +58,8 @@ public class ActivitePrincipale extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration  appBarConfiguration =
-          new AppBarConfiguration
-            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-            .build();
-        NavController navController =
-          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-        handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.arg1) {
-                    case CODE_CONNEXION:
-                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null).ajouterPeripheriqueConnecter(msg.arg2);
-                        break;
-                    case CODE_ERREUR_CONNEXION:
-                        FragmentPupitre.getVueActive().activerBoutonConnecter();
-                        Toast.makeText(getApplicationContext(), "Erreur de connexion", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-
-        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
+        initialiserActivite();
+        initialiserCommunicationBluetooth();
     }
 
     /**
@@ -147,5 +117,60 @@ public class ActivitePrincipale extends AppCompatActivity
         {
             peripherique.deconnecter();
         }
+    }
+
+    private void initialiserActivite()
+    {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initialiserNavigation();
+    }
+    private void initialiserNavigation()
+    {
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration  appBarConfiguration =
+          new AppBarConfiguration
+            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+            .build();
+        NavController navController =
+          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    private void initialiserCommunicationBluetooth()
+    {
+        gererHandler();
+        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
+    }
+
+    private void gererHandler()
+    {
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                switch(msg.arg1)
+                {
+                    case CODE_CONNEXION_BLUETOOTH:
+                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
+                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                          .ajouterPeripheriqueConnecter(msg.arg2);
+                        break;
+                    case CODE_ERREUR_CONNEXION_BLUETOOTH:
+                        FragmentPupitre.getVueActive().activerBoutonConnecter();
+                        Toast
+                          .makeText(getApplicationContext(),
+                                    "Erreur de connexion",
+                                    Toast.LENGTH_SHORT)
+                          .show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
     }
 }
