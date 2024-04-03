@@ -1,0 +1,11 @@
+class Question
+!!!134826.cpp!!!	Question(in libelle : QString, in propositions : QStringList)
+    char indexPropositions[] = { 'A', 'B', 'C', 'D' };
+    for(int i = 0; i < propositions.size(); ++i)
+    {
+        this->propositions[indexPropositions[i]] = propositions.at(i);
+    }
+!!!157354.cpp!!!	getLibelle() : QString
+    return libelle;
+!!!157482.cpp!!!	getPropositions() : QMap<char, QString>
+    return propositions;

@@ -1,4 +1,3 @@
-
 QWidget {
 
     background-color: #f9e4b7;
@@ -27,6 +26,7 @@ QLabel
 #titreParticipants {
     font-size: 30px;
     text-align: center;
+}
 
 QPushButton
 {

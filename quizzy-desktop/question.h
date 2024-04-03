@@ -14,8 +14,11 @@ class Question
     char                reponseCorrecte;
 
   public:
-    Question();
+    Question(QString libelle, QStringList propositions);
     ~Question();
+
+    QString             getLibelle() const;
+    QMap<char, QString> getPropositions() const;
 };
 
 #endif // QUESTION_H

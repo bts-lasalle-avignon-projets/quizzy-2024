@@ -2,33 +2,39 @@ format 224
 
 classcanvas 128042 class_ref 134570 // IHMQuizzy
   classdiagramsettings member_max_width 0 end
-  xyz 10 42 2000
+  xyz 10 41 2000
 end
 classcanvas 128170 class_ref 134826 // Quizzy
   classdiagramsettings member_max_width 0 end
-  xyz 578 158 2006
+  xyz 674 39 2006
 end
 classcanvas 128426 class_ref 134954 // Question
   classdiagramsettings member_max_width 0 end
-  xyz 575 377 3005
+  xyz 602 375 3005
 end
 classcanvas 128682 class_ref 141610 // CommunicationBluetooth
   classdiagramsettings member_max_width 0 end
-  xyz 1239 137 3005
+  xyz 1238 42 3005
 end
 relationcanvas 128298 relation_ref 134698 // <unidirectional association>
+  decenter_begin 74
   from ref 128042 z 2007 to ref 128170
-  role_a_pos 509 202 3000 no_role_b
+  role_a_pos 605 72 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128554 relation_ref 134954 // <unidirectional association>
-  from ref 128170 z 3006 stereotype "<<QVector>>" xyz 699 314 3006 to ref 128426
-  role_a_pos 763 351 3000 no_role_b
+  from ref 128170 z 3006 stereotype "<<QVector>>" xyz 795 253.5 3006 to ref 128426
+  role_a_pos 859 349 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 141610 // <unidirectional association>
   from ref 128170 z 3006 to ref 128682
-  role_a_pos 1147 180 3000 no_role_b
+  role_a_pos 1146 74 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129066 relation_ref 148266 // <unidirectional association>
+  from ref 128042 z 3006 stereotype "<<QVector>>" xyz 477.5 506 3000 to ref 128426
+  role_a_pos 506 476 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end
