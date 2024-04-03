@@ -1,0 +1,11 @@
+class FragmentParametres
+!!!137879.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModeleParametres notificationsViewModel =
+          new ViewModelProvider(this).get(ModeleParametres.class);
+
+        binding   = FragmentNotificationsBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        return root;
+!!!138007.java!!!	onDestroyView() : void
+        super.onDestroyView();
+        binding = null;

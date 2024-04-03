@@ -1,0 +1,23 @@
+class Peripherique
+!!!136599.java!!!	Peripherique(inout device : BluetoothDevice, inout handler : Handler, in indicePeripherique : int)
+        this.device             = device;
+        this.handler            = handler;
+        this.indicePeripherique = indicePeripherique;
+        if(device != null)
+        {
+            this.nom     = device.getName();
+            this.adresse = device.getAddress();
+        }
+        else
+        {
+            this.nom     = "Aucun";
+            this.adresse = "";
+        }
+!!!136727.java!!!	getNom() : String
+        return nom;
+!!!136855.java!!!	getAdresse() : String
+        return adresse;
+!!!136983.java!!!	estConnecte() : boolean
+        return false;
+!!!137239.java!!!	deconnecter() : boolean
+        return false;

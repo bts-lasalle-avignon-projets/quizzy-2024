@@ -1,0 +1,11 @@
+class FragmentPupitre
+!!!138263.java!!!	getVueActive() : FragmentPupitre
+        return vueActive;
+!!!138391.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModelePupitre dashboardViewModel = new ViewModelProvider(this).get(ModelePupitre.class);
+        binding   = FragmentDashboardBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        return root;
+!!!138647.java!!!	onDestroyView() : void
+        super.onDestroyView();
+        binding = null;

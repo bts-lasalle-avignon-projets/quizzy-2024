@@ -1,0 +1,11 @@
+class Question
+!!!139799.java!!!	Question(in question : String, inout reponses : List<String>)
+        this.bonneReponse = reponses.get(0);
+        this.reponses     = reponses;
+        this.question     = question;
+!!!139927.java!!!	getBonneReponse() : String
+        return bonneReponse;
+!!!140055.java!!!	getQuestion() : String
+        return question;
+!!!140183.java!!!	getReponses() : List<String>
+        return reponses;

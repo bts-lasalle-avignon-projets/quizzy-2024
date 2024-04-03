@@ -1,0 +1,3 @@
+class TReception
+!!!137495.java!!!	TReception(inout h : Handler)
+            handlerUI = h;
