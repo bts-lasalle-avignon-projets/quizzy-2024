@@ -41,5 +41,5 @@ jobs:
         shell: bash
         #if: runner.os == 'ubuntu'
         run: |
-          echo sdk.dir=/usr/local/lib/android/sdk >> eco-classroom-mobile/local.properties
-          cd quizzy && ./gradlew --no-daemon build
+          echo sdk.dir=/usr/local/lib/android/sdk >> quizzy-mobile/local.properties
+          cd quizzy-mobile && ./gradlew --no-daemon build

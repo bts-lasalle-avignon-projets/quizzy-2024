@@ -26,8 +26,8 @@ jobs:
 
       - name: Run qmake
         run: |
-          cd quizzy && qmake
+          cd quizzy-desktop && qmake
 
       - name: Run make
         run: |
-          cd quizzy && make
+          cd quizzy-desktop && make
