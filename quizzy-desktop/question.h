@@ -8,6 +8,7 @@ class Question
 {
   private:
     QString             libelle;
+    QStringList         participants;
     QMap<char, QString> propositions;
     int                 duree;
     char                reponseCorrecte;

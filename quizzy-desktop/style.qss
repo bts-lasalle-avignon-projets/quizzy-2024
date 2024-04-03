@@ -14,6 +14,22 @@ QLabel
     font-size: 20px;
 }
 
+#titreAccueil {
+    font-size: 30px;
+    text-align: center;
+}
+
+#messageAttente {
+    font-size: 30px;
+    text-align: center;
+}
+
+#titreParticipants {
+    font-size: 30px;
+    text-align: center;
+}
+
+
 QPushButton
 {
     color: #fff;

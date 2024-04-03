@@ -23,8 +23,8 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
     qDebug() << Q_FUNC_INFO;
 
     creerFenetres();
-
     afficherFenetreAccueil();
+    afficherFenetreParticipants();
 
 #ifdef PLEIN_ECRAN_RASPBERRY_PI
     showFullScreen();
@@ -48,7 +48,7 @@ void IHMQuizzy::afficherFenetreAccueil()
     afficherFenetre(Fenetre::FenetreAccueil);
 }
 
-void IHMQuizzy::afficherFenetrePariticipants()
+void IHMQuizzy::afficherFenetreParticipants()
 {
     afficherFenetre(Fenetre::FenetreParticipants);
 }
@@ -78,8 +78,17 @@ void IHMQuizzy::creerFenetreAccueil()
 {
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
-    titreFenetreAccueil        = new QLabel("Accueil", this);
+    titreFenetreAccueil        = new QLabel("QUIZZY", this);
+    messageAttente = new QLabel("En attente des participants...", this);
+
+    titreFenetreAccueil->setObjectName("titreAccueil");
+    messageAttente->setObjectName("messageAttente");
+
+    titreFenetreAccueil->setAlignment(Qt::AlignCenter);
+    messageAttente->setAlignment(Qt::AlignCenter);
+
     layoutAccueil->addWidget(titreFenetreAccueil);
+    layoutAccueil->addWidget(messageAttente);
 
     fenetres->addWidget(fenetreAccueil);
 }
@@ -88,10 +97,28 @@ void IHMQuizzy::creerFenetreParticipants()
 {
     fenetreParticipants          = new QWidget(this);
     QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreParticipants);
-    titreFenetreParticipants     = new QLabel("Participants", this);
+    titreFenetreParticipants     = new QLabel("Liste des participants", this);
+
+    titreFenetreParticipants->setAlignment(Qt::AlignCenter);
+    titreFenetreParticipants->setObjectName("titreParticipants");
     layoutPrincipal->addWidget(titreFenetreParticipants);
 
+    creerListeParticipants(layoutPrincipal);
+
     fenetres->addWidget(fenetreParticipants);
+}
+
+// Ajuster et créer une classe Participant
+void IHMQuizzy::creerListeParticipants(QVBoxLayout* layoutPrincipal)
+{
+    QStringList listeParticipants;
+    listeParticipants << "Participant 1"
+                      << "Participant 2";
+    for(const QString& participant: listeParticipants)
+    {
+        QLabel* labelParticipant = new QLabel(participant, this);
+        layoutPrincipal->addWidget(labelParticipant);
+    }
 }
 
 void IHMQuizzy::creerFenetreJeu()

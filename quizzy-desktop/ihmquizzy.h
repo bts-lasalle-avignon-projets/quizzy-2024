@@ -42,6 +42,7 @@
 //#define PLEIN_ECRAN_RASPBERRY_PI
 
 class Quizzy;
+class Question;
 
 /**
  * @class IHMQuizzy
@@ -68,7 +69,8 @@ class IHMQuizzy : public QWidget
     };
 
   private:
-    Quizzy* quizzy; //!< association vers la classe Quizzy
+    Quizzy*   quizzy; //!< association vers la classe Quizzy
+    Question* question;
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     QWidget*        fenetreAccueil;
@@ -79,6 +81,7 @@ class IHMQuizzy : public QWidget
     QLabel*         titreFenetreJeu;
     QWidget*        fenetreResultats;
     QLabel*         titreFenetreResultats;
+    QLabel*         messageAttente;
 
     void creerFenetres();
     void creerFenetreAccueil();
@@ -87,6 +90,8 @@ class IHMQuizzy : public QWidget
     void creerFenetreResultats();
     void initialiserFenetres();
 
+    void creerListeParticipants(QVBoxLayout* layoutPrincipal);
+
   public:
     IHMQuizzy(QWidget* parent = 0);
     ~IHMQuizzy();
@@ -94,7 +99,7 @@ class IHMQuizzy : public QWidget
   public slots:
     void afficherFenetre(IHMQuizzy::Fenetre fenetre);
     void afficherFenetreAccueil();
-    void afficherFenetrePariticipants();
+    void afficherFenetreParticipants();
     void afficherFenetreJeu();
     void afficherFenetreResultats();
 };
