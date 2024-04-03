@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".navigation.quiz.FragmentQuiz">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="731dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_rounded"
+        android:text="Question:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/barreProgression"
+        app:layout_constraintStart_toStartOf="@+id/barreProgression"
+        app:layout_constraintTop_toBottomOf="@+id/barreProgression" />
+
+    <Button
+        android:id="@+id/btn_lancer"
+        android:layout_width="158dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Lancer QCM"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/barreProgression"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="1164dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="144dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_arreter"
+        android:layout_width="158dp"
+        android:layout_height="62dp"
+        android:layout_marginEnd="536dp"
+        android:text="Arrêt forcé"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_lancer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toEndOf="@+id/btn_lancer"
+        app:layout_constraintTop_toTopOf="@+id/btn_lancer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/reponse1"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_sub_rounded"
+        android:text="Réponse 1"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/question"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <TextView
+        android:id="@+id/reponse2"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/bg_sub_rounded"
+        android:text="Réponse 2"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/question"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <TextView
+        android:id="@+id/reponse3"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_sub_rounded"
+        android:text="Réponse 3"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/reponse1"
+        app:layout_constraintTop_toBottomOf="@+id/reponse1" />
+
+    <TextView
+        android:id="@+id/reponse4"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_sub_rounded"
+        android:text="Réponse 4"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/reponse2"
+        app:layout_constraintTop_toBottomOf="@+id/reponse2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
