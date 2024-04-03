@@ -1,0 +1,10 @@
+class FragmentQuiz
+!!!139415.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModeleQuiz homeViewModel = new ViewModelProvider(this).get(ModeleQuiz.class);
+
+        binding   = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        return root;
+!!!139543.java!!!	onDestroyView() : void
+        super.onDestroyView();
+        binding = null;

@@ -1,0 +1,11 @@
+class Quiz
+!!!140439.java!!!	genererQuiz(in theme : String, in nombreQuestions : int) : boolean
+        return false;
+!!!140567.java!!!	getTheme() : String
+        return theme;
+!!!140695.java!!!	getThemes() : List<String>
+        return null;
+!!!140823.java!!!	getQuestions() : Question
+        return questions;
+!!!141207.java!!!	estTermine() : boolean
+        return false;

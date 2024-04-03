@@ -1,7 +1,8 @@
 format 224
 "QuizzyAndroid"
-  revision 2
-  modified_by 50 "btssn2"
+  revision 3
+  modified_by 23 "tvaira"
+  java_root_dir "../../"
 
 
   
@@ -44,6 +45,7 @@ format 224
 
   mark_for_import
   
+  java_package "fr.hillionj"
   usecaseview 128178 "Diagramme cas d'utilisation"
     
     usecasediagramsettings end
@@ -395,4 +397,8 @@ format 224
       end
     end
   end
+
+  package_ref 134551 // quizzy
+
+  package_ref 134679 // unknown
 end
