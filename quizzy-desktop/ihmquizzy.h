@@ -42,9 +42,6 @@
  */
 //#define PLEIN_ECRAN_RASPBERRY_PI
 
-#define TEST_FENETRE_PARTICIPANTS
-#define TEST_FENETRE_JEU
-
 class Quizzy;
 class Question;
 
