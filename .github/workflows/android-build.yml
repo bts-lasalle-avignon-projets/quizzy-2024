@@ -1,0 +1,45 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+    #          - macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 11
+          cache: gradle
+
+      - name: Setup Android SDK
+        id: "setup-android"
+        uses: android-actions/setup-android@v2
+
+      - name: Build Application
+        id: "android-build"
+        continue-on-error: true
+        shell: bash
+        #if: runner.os == 'ubuntu'
+        run: |
+          echo sdk.dir=/usr/local/lib/android/sdk >> quizzy-mobile/local.properties
+          cd quizzy-mobile && ./gradlew --no-daemon build

@@ -1,0 +1,20 @@
+class GestionnaireBluetooth
+!!!135575.java!!!	getGestionnaireBluetooth(inout handler : Handler) : GestionnaireBluetooth
+        if(gestionnaireBluetooth == null)
+            gestionnaireBluetooth = new GestionnaireBluetooth(handler);
+        return gestionnaireBluetooth;
+!!!135703.java!!!	GestionnaireBluetooth(inout handler : Handler)
+        this.handler = handler;
+        if(!verifierPermissions())
+        {
+            return;
+        }
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+!!!136087.java!!!	getPeripheriquesConnectes() : Peripherique
+        return null;
+!!!136215.java!!!	connecter() : boolean
+        return true;
+!!!136343.java!!!	deconnecter() : boolean
+        return false;
+!!!136471.java!!!	verifierPermissions() : boolean
+        return true;

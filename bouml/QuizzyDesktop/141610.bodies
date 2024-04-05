@@ -1,0 +1,5 @@
+class CommunicationBluetooth
+!!!141738.cpp!!!	CommunicationBluetooth(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO;
+!!!141866.cpp!!!	~CommunicationBluetooth()
+    qDebug() << Q_FUNC_INFO;

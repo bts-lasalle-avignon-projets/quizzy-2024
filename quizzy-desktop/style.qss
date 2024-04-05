@@ -1,0 +1,53 @@
+QWidget {
+
+    background-color: #f9e4b7;
+    padding: 20px;
+}
+
+QLabel
+{
+    color: #333;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#titreAccueil {
+    font-size: 30px;
+    text-align: center;
+}
+
+#messageAttente {
+    font-size: 30px;
+    text-align: center;
+}
+
+#titreParticipants {
+    font-size: 30px;
+    text-align: center;
+}
+
+QPushButton
+{
+    color: #fff;
+    background-color: #ff8a65;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+QPushButton:hover
+{
+    background-color: #ff7043;
+}
+
+QPushButton:pressed
+{
+    background-color: #ff7043;
+}
+
+QGridLayout {
+    margin: 0px;
+}
