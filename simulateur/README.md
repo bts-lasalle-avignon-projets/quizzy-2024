@@ -18,7 +18,7 @@ Valeur par défaut :
 
 Nom des périphériques Bluetooth :
 
-- \"quizzy-écran\" pour la RPI et,
+- \"quizzy-ecran\" pour la RPI et,
 - \"quizzy-pn\" où \"n\" est le numéro de pupitre
 
 ## platform.ini

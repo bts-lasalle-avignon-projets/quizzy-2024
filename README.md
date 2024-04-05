@@ -2,26 +2,25 @@
 
 [![qt-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment)
 
-# Le projet quizzy 2024
+# Le projet QUIZZY 2024
 
-- [Le projet quizzy 2024](#le-projet-quizzy-2024)
-  - [Informations](#informations)
+- [Le projet QUIZZY 2024](#le-projet-quizzy-2024)
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
     - [Android](#android)
     - [Ecran](#ecran)
-  - [ Itérations](#itérations)
+  - [Itérations](#itérations)
     - [Itération 1](#itération-1)
-    - [ Itération 2](#itération-2)
+    - [Itération 2](#itération-2)
     - [Itération 3](#itération-3)
   - [Tickets Jira](#tickets-jira)
   - [Documentation du code](#documentation-du-code)
   - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
-    - [Android](#android-1)
-    - [ Qt Creator](#qt-creator)
+    - [Quizzy-mobile (Java/Android)](#quizzy-mobile-javaandroid)
+    - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt)
   - [Diagramme de classes](#diagramme-de-classes)
-    - [Android](#android-2)
-    - [ Qt Creator](#qt-creator-1)
+    - [Quizzy-mobile (Java/Android)](#quizzy-mobile-javaandroid-1)
+    - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt-1)
   - [Protocole](#protocole)
     - [Évaluateur -\> Interface de jeu](#évaluateur---interface-de-jeu)
     - [Évaluateur -\> Pupitre](#évaluateur---pupitre)
@@ -35,28 +34,20 @@
       - [Vue d'attente de participants](#vue-dattente-de-participants)
   - [Historique des versions](#historique-des-versions)
     - [Version 0.1](#version-01)
-      - [Android](#android-3)
-      - [Ecran](#ecran-1)
+      - [Tablette](#tablette)
+      - [Écran](#écran)
   - [Recette](#recette)
   - [Auteurs](#auteurs)
 
 ---
 
-
-## Informations
-
-- Nom du logiciel : Quizzy
-- Date de début : 15 février 2024
-- Numéro de version du logiciel : 0.1
-
-
 ## Présentation
 
 Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion dans une salle.
 
-- Un écran principal permet de visualiser le quiz en cours avec la question posée et ses propositions de réponse
 - Une tablette est associée à l'évaluateur qui peut chosir le quiz à afficher
-- Un ou plusieurs pupitres disposant chacun de 4 bumpers permettant de sélectionner la réponse d'un participant. Une rangée de LED affiche le temps restant pour répondre
+- Un écran principal permet de visualiser le quiz en cours avec la question posée et ses propositions de réponse
+- Un ou plusieurs pupitres disposant chacun de 4 _bumpers_ permettant de sélectionner la réponse d'un participant. Une rangée de LED affiche le temps restant pour répondre en mode compte à rebours.
 
 ![Presentatation système](images/Presentation.png)
 
@@ -64,15 +55,15 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ### Android
 
-- Se connecter à un périphérique Bluetooth
-- Emettre une requête vers un périphérique Bluetooth
-- Recevoir une trame
+- Se connecter à un périphérique Bluetooth (pupitre)
+- Emettre une requête vers un périphérique Bluetooth (pupitre)
+- Recevoir une trame d'un périphérique Bluetooth (pupitre)
 
 ### Ecran
 
-- Afficher disposition des fenêtres
+- Afficher les différentes fenêtres
 
-##  Itérations
+## Itérations
 
 ### Itération 1
 
@@ -81,7 +72,7 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Afficher les questions** : Les questions sont affichées à l’utilisateur.
 - **Afficher les propositions** de réponse :Afficher les 4 propositions de réponse.
 
-###  Itération 2
+### Itération 2
 
 - **Paramétrage partie** : L’utilisateur peut paramétrer sa partie.
 - **Avoir des thèmes de questions** : L’utilisateur peut choisir parmi différents thèmes de questions.
@@ -103,25 +94,30 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ## Diagramme de cas d'utilisation
 
-### Android
+### Quizzy-mobile (Java/Android)
 
 ![Android diagramme cas d'utilisation](images/Android_v0.1_diagramme_cas_dutilisation.png)
 
-###  Qt Creator
+### Quizzy-desktop (C++/Qt)
 
 ![Qt diagramme cas d'utilisation](images/Qt_v0.1_diagramme_cas_dutilisation.png)
 
 ## Diagramme de classes
 
-### Android
+### Quizzy-mobile (Java/Android)
 
 ![Android diagramme de classes](images/Android_v0.1_diagramme_classes.png)
 
-###  Qt Creator
+### Quizzy-desktop (C++/Qt)
 
 ![Qt diagramme de classes](images/Qt_v0.1_diagramme_classes.png)
 
 ## Protocole
+
+Nom des périphériques Bluetooth :
+
+- \"**quizzy-ecran**\" pour la Raspberry Pi et,
+- \"**quizzy-pn**\" où \"**n**\" est le numéro de pupitre
 
 ### Évaluateur -> Interface de jeu
 
@@ -137,7 +133,6 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 | Revenir à la question précédente | `$P\n`| Afficher question précédente| `$P\n` |
 | Finir un quiz | `$F\n`| Signaler la fin d’un quiz | `$F\n` |
 
-
 ### Évaluateur -> Pupitre
 
 | Type | Format | Description | Exemple |
@@ -145,7 +140,6 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 | Indiquer le numéro de question et le temps alloué pour répondre | `$Q;NUMERO_QUESTION;TEMPS\n`| NUMERO_QUESTION : de 1 à n <br> TEMPS QUESTION : en secondes si 0 alors la question n’a pas de temps limite | `$Q;1;30\n`<br>Question n°1<br>30 secondes pour cette question |
 | Désactiver buzzers + chronomètre | `$D;NUMERO_QUESTION\n`| Désactiver les buzzers et arrêter le chronomètre si besoin | `$D;1\n` |
 | Activer buzzers + lancer chronomètre | `$E;NUMERO_QUESTION\n` | Activer les buzzers pour ce numéro de question et lancer le chronomètre si besoin | `$E;1\n` |
-
 
 ### Pupitre -> Évaluateur
 
@@ -188,27 +182,27 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ### Version 0.1
 
-#### Android
+#### Tablette
 
 - Se connecter à un périphérique Bluetooth
 - Emettre une requête vers un périphérique Bluetooth
 - Recevoir une trame
 
-#### Ecran
+#### Écran
 
 - Afficher disposition des fenêtres
 
 ## Recette
 
 | Fonctionalités | Oui | Non |
-|----------------|-----|-----|
-| Connexion Bluetooth (Android) | X |  |
-| Communication Bluetooth (Qt) | | X |
-| Décodage des trame | | X |
-| Envoyer une question | X | |
-| Récupérer les réponses | X | |
-| Afficher les questions | X | |
-| Afficher les propositions | X | |
+|----------------|:---:|:---:|
+| Connexion Bluetooth (Android) | X |   |
+| Communication Bluetooth (Qt)  |   | X |
+| Décodage des trames           |   | X |
+| Envoyer une question          | X |   |
+| Récupérer les réponses        | X |   |
+| Afficher les questions        | X |   |
+| Afficher les propositions     | X |   |
 
 ## Auteurs
 
