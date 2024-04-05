@@ -1,7 +1,7 @@
 format 224
 "quizzy" // quizzy
-  revision 1
-  modified_by 23 "tvaira"
+  revision 2
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -91,8 +91,8 @@ ${members}}
 !< TAG pour les logs (cf. Logcat)"
       end
 
-      attribute 134679 "CODE_CONNEXION"
-	const_attribute public explicit_type "int"
+      attribute 128042 "CODE_CONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
 	init_value " 33"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
@@ -104,8 +104,8 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 134807 "CODE_RECEPTION"
-	const_attribute public explicit_type "int"
+      attribute 128170 "CODE_RECEPTION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
 	init_value " 35"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
@@ -117,8 +117,8 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 134935 "CODE_DECONNEXION"
-	const_attribute public explicit_type "int"
+      attribute 128298 "CODE_DECONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
 	init_value " 34"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
@@ -130,8 +130,8 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 135063 "CODE_ERREUR_CONNEXION"
-	const_attribute public explicit_type "int"
+      attribute 128426 "CODE_ERREUR_CONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
 	init_value " 36"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
@@ -153,6 +153,9 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "Attributs
+
+"
       end
 
       classrelation 134679 // gestionnaireBluetooth (<unidirectional association>)
@@ -276,6 +279,54 @@ reprend sur un onResume()) ou avant onStop() (activité plus visible)
 et détruite par le système Android)
 "
       end
+
+      operation 128042 "initialiserActivite"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128170 "initialiserNavigation"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128298 "initialiserCommunicationBluetooth"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128426 "gererHandler"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     classdiagram 134551 "diagramme de classes"
@@ -296,7 +347,6 @@ et détruite par le système Android)
 ${package}
 ${imports}
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
