@@ -37,4 +37,8 @@ RESOURCES += \
 DISTFILES += \
     style.qss
 
+# Les defines pour la version release (sans debug)
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
+# Les defines pour la version debug
+#CONFIG(debug, debug|release):DEFINES+=TEST_FENETRE_PARTICIPANTS
+#CONFIG(debug, debug|release):DEFINES+=TEST_FENETRE_JEU
