@@ -5,6 +5,7 @@
 # Le projet quizzy 2024
 
 - [Le projet quizzy 2024](#le-projet-quizzy-2024)
+  - [Informations](#informations)
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
     - [Android](#android)
@@ -41,9 +42,17 @@
 
 ---
 
+
+## Informations
+
+- Nom du logiciel : Quizzy
+- Date de début : 15 février 2024
+- Numéro de version du logiciel : 0.1
+
+
 ## Présentation
 
-Le système QUIZZY permet de "jouer" et de s'évaluer en pleine immersion dans une salle.
+Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion dans une salle.
 
 - Un écran principal permet de visualiser le quiz en cours avec la question posée et ses propositions de réponse
 - Une tablette est associée à l'évaluateur qui peut chosir le quiz à afficher
