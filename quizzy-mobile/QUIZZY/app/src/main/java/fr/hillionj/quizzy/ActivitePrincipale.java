@@ -22,10 +22,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
+import java.util.Vector;
 
 /**
  * @class EcranPrincipal
@@ -47,6 +49,9 @@ public class ActivitePrincipale extends AppCompatActivity
     private ActivityMainBinding   binding;
     private GestionnaireBluetooth gestionnaireBluetooth;
     public Handler                handler;
+    // Exemple d'accès à la base de données
+    private BaseDeDonnees  baseDeDonnees;    //!< Association avec la base de donnees
+    private Vector<String> nomsParticipants; // test
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -60,6 +65,11 @@ public class ActivitePrincipale extends AppCompatActivity
 
         initialiserActivite();
         initialiserCommunicationBluetooth();
+
+        // Test BDD
+        baseDeDonnees    = BaseDeDonnees.getInstance(this);
+        nomsParticipants = baseDeDonnees.getNomsParticipants();
+        Log.d(TAG, "nomsParticipants = " + nomsParticipants);
     }
 
     /**
