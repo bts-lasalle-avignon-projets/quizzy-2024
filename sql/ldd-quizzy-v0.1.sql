@@ -5,9 +5,9 @@
 DROP TABLE IF EXISTS resultats;
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS questionnaires;
-DROP TABLE IF EXISTS evaluations;
 DROP TABLE IF EXISTS propositions;
 DROP TABLE IF EXISTS reponses;
+DROP TABLE IF EXISTS evaluations;
 DROP TABLE IF EXISTS participants;
 DROP TABLE IF EXISTS niveaux;
 DROP TABLE IF EXISTS evaluateurs;
@@ -42,12 +42,12 @@ CREATE TABLE IF NOT EXISTS propositions (id INTEGER PRIMARY KEY AUTOINCREMENT, l
 --- Table reponses
 --- réponse d'une proposition d'un participant à une question d'un questionnaire (avec le temps mis pour répondre et s'il a bien répondu)
 
-CREATE TABLE IF NOT EXISTS reponses (idEvaluation INTEGER, idParticipant INTEGER, idQuestion INTEGER, idProposition INTEGER, temps INTEGER, correct BOOLEAN NOT NULL CHECK (correct IN (0, 1)), FOREIGN KEY (idEvaluation) REFERENCES evaluations(id) ON DELETE CASCADE, FOREIGN KEY (idParticipant) REFERENCES participants(id) ON DELETE CASCADE, FOREIGN KEY (idProposition) REFERENCES propositions(id));
+CREATE TABLE IF NOT EXISTS reponses (idEvaluation INTEGER, idParticipant INTEGER, idQuestion INTEGER, idProposition INTEGER, temps INTEGER, correct BOOLEAN NOT NULL CHECK (correct IN (0, 1)), FOREIGN KEY (idEvaluation) REFERENCES evaluations(id) ON DELETE CASCADE, PRIMARY KEY (idEvaluation, idParticipant, idQuestion, idProposition), FOREIGN KEY (idParticipant) REFERENCES participants(id) ON DELETE CASCADE, FOREIGN KEY (idQuestion) REFERENCES questions(id) ON DELETE CASCADE, FOREIGN KEY (idProposition) REFERENCES propositions(id));
 
 --- Table questionnaires
 --- une question d'un questionnaire d'une évaluation avec les propositions ainsi que la bonne réponse à fournir
 
-CREATE TABLE IF NOT EXISTS questionnaires (idEvaluation INTEGER, idQuestion INTEGER, idProposition INTEGER, correct BOOLEAN NOT NULL CHECK (correct IN (0, 1)), FOREIGN KEY (idEvaluation) REFERENCES evaluations(id) ON DELETE CASCADE, FOREIGN KEY (idProposition) REFERENCES propositions(id));
+CREATE TABLE IF NOT EXISTS questionnaires (idEvaluation INTEGER, idQuestion INTEGER, idProposition INTEGER, correct BOOLEAN NOT NULL CHECK (correct IN (0, 1)), PRIMARY KEY (idEvaluation, idQuestion, idProposition), FOREIGN KEY (idEvaluation) REFERENCES evaluations(id) ON DELETE CASCADE, FOREIGN KEY (idQuestion) REFERENCES questions(id) ON DELETE CASCADE, FOREIGN KEY (idProposition) REFERENCES propositions(id));
 
 --- Table resultats
 --- les résultats d'un participant à une évaluation
