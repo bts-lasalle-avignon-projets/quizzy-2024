@@ -31,9 +31,14 @@ relationcanvas 128279 relation_ref 134807 // <unidirectional association>
   role_a_pos 1121 46 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
+relationcanvas 128298 relation_ref 134698 // <unidirectional association>
+  from ref 128023 z 2001 to ref 129175
+  role_a_pos 333 79 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
 relationcanvas 128663 relation_ref 134679 // <unidirectional association>
   from ref 128023 z 2011 to ref 128151
-  role_a_pos 1121 165 3000 no_role_b
+  role_a_pos 1121 168 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128919 relation_ref 134935 // <unidirectional association>
@@ -42,7 +47,7 @@ relationcanvas 128919 relation_ref 134935 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129047 relation_ref 135063 // <unidirectional association>
-  from ref 128151 z 3006 stereotype "<<List>>" xyz 1532.5 373 3006 to ref 128791
+  from ref 128151 z 3006 stereotype "<<List>>" xyz 1532 373 3006 to ref 128791
   role_a_pos 1641 434 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end

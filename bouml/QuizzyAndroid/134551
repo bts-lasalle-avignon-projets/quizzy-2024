@@ -1,6 +1,6 @@
 format 224
 "quizzy" // quizzy
-  revision 2
+  revision 3
   modified_by 42 "tv"
   // class settings
   
@@ -177,6 +177,31 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      classrelation 134698 // baseDeDonnees (<unidirectional association>)
+	relation 134698 --->
+	  a role_name "baseDeDonnees" private
+	    comment " Exemple d'accès à la base de données
+!< Association avec la base de donnees"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134698 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 134935 // BaseDeDonnees
+      end
+
+      attribute 134954 "nomsParticipants"
+	private explicit_type "String"
+	stereotype "Vector"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " test"
       end
 
       operation 134551 "onCreate"
@@ -359,10 +384,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
+import java.util.Vector;
 ${definition}"
       associated_elems
 	class_ref 134551 // ActivitePrincipale
