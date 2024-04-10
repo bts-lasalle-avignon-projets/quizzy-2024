@@ -16,7 +16,7 @@ public class ProtocoleDesactiverBuzzers extends Protocole
     @Override
     public String getFormat()
     {
-        return "$E;QUESTION\n";
+        return "$" + getType().getIndiceType() + ";QUESTION\n";
     }
 
     @Override

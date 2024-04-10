@@ -9,7 +9,7 @@ public class ProtocoleAfficherQuestionPrecedente extends Protocole
     @Override
     public String getFormat()
     {
-        return "$P\n";
+        return "$" + getType().getIndiceType() + "\n";
     }
 
     @Override

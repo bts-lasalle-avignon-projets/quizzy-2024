@@ -9,7 +9,7 @@ public class ProtocoleLancementQuestion extends Protocole
     @Override
     public String getFormat()
     {
-        return "$T\n";
+        return "$" + getType().getIndiceType() + "\n";
     }
 
     @Override

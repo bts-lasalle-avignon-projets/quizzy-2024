@@ -16,7 +16,7 @@ public class ProtocoleReceptionReponse extends Protocole
     @Override
     public String getFormat()
     {
-        return "$R;QUESTION;REPONSE;TEMPS\n";
+        return "$" + getType().getIndiceType() + ";QUESTION;REPONSE;TEMPS\n";
     }
 
     @Override

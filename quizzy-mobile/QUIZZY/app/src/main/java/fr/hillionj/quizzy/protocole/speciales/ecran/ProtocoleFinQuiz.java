@@ -9,7 +9,7 @@ public class ProtocoleFinQuiz extends Protocole
     @Override
     public String getFormat()
     {
-        return "$F\n";
+        return "$" + getType().getIndiceType() + "\n";
     }
 
     @Override

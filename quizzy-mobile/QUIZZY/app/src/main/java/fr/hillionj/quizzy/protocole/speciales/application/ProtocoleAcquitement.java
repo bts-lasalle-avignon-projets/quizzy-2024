@@ -9,7 +9,7 @@ public class ProtocoleAcquitement extends Protocole
     @Override
     public String getFormat()
     {
-        return "$A\n";
+        return "$" + getType().getIndiceType() + "\n";
     }
 
     @Override

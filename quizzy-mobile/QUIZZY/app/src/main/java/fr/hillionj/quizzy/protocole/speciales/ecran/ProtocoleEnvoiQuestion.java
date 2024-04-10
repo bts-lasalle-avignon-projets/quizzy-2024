@@ -19,7 +19,7 @@ public class ProtocoleEnvoiQuestion extends Protocole
     @Override
     public String getFormat()
     {
-        return "$Q;LIBELLE;PROP1;PROP2;PROP3;PROP4;REPONSE;TEMPS\n";
+        return "$" + getType().getIndiceType() + ";LIBELLE;PROP1;PROP2;PROP3;PROP4;REPONSE;TEMPS\n";
     }
 
     @Override

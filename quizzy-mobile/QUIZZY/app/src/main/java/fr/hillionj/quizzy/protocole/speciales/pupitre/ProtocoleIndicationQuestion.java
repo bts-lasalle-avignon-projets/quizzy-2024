@@ -16,7 +16,7 @@ public class ProtocoleIndicationQuestion extends Protocole
     @Override
     public String getFormat()
     {
-        return "$G;QUESTION;TEMPS\n";
+        return "$" + getType().getIndiceType() + ";QUESTION;TEMPS\n";
     }
 
     @Override

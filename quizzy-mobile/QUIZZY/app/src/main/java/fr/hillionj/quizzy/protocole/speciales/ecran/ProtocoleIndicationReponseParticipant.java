@@ -20,7 +20,7 @@ public class ProtocoleIndicationReponseParticipant extends Protocole
     @Override
     public String getFormat()
     {
-        return "$R;PID;REPONSE;TEMPS\n";
+        return "$" + getType().getIndiceType() + ";PID;REPONSE;TEMPS\n";
     }
 
     @Override

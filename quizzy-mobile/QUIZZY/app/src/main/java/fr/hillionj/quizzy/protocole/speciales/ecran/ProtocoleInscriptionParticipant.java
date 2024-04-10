@@ -15,7 +15,7 @@ public class ProtocoleInscriptionParticipant extends Protocole
     @Override
     public String getFormat()
     {
-        return "$I;PID;NOM\n";
+        return "$" + getType().getIndiceType() + ";PID;NOM\n";
     }
     @Override
     public String getTrame()

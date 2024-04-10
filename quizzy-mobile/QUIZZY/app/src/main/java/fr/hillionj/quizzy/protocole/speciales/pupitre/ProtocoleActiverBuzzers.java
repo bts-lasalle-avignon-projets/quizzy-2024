@@ -16,7 +16,7 @@ public class ProtocoleActiverBuzzers extends Protocole
     @Override
     public String getFormat()
     {
-        return "$D;QUESTION\n";
+        return "$" + getType().getIndiceType() + ";QUESTION\n";
     }
 
     @Override

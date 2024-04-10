@@ -20,7 +20,7 @@ public enum TypeProtocole {
     INDICATION_QUESTION("G"),
     ACTIVER_BUZZERS("D"),
     DESACTIVER_BUZZERS("E"),
-    RECEPTION_REPONSE("R"),
+    RECEPTION_REPONSE("U"),
     ACQUITEMENT("A");
 
     private String indiceType;

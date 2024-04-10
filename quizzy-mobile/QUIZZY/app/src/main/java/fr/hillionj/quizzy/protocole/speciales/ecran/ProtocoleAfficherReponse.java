@@ -9,7 +9,7 @@ public class ProtocoleAfficherReponse extends Protocole
     @Override
     public String getFormat()
     {
-        return "$H\n";
+        return "$" + getType().getIndiceType() + "\n";
     }
 
     @Override
