@@ -5,6 +5,11 @@ class ActivitePrincipale
 
         initialiserActivite();
         initialiserCommunicationBluetooth();
+
+        // Test BDD
+        baseDeDonnees    = BaseDeDonnees.getInstance(this);
+        nomsParticipants = baseDeDonnees.getNomsParticipants();
+        Log.d(TAG, "nomsParticipants = " + nomsParticipants);
 !!!134679.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");

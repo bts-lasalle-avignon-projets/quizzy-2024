@@ -1,7 +1,7 @@
 format 224
 "questionnaire" // quizzy::questionnaire
-  revision 1
-  modified_by 23 "tvaira"
+  revision 2
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -30,7 +30,7 @@ format 224
   activitydiagramsettings
    end
   
-  java_dir "/home/tvaira/Documents/git/projets/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/questionnaire/"
+  java_dir "quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/questionnaire/"
   java_package "fr.hillionj.quizzy.questionnaire"
   classview 135447 "questionnaire"
     

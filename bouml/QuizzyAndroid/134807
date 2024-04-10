@@ -1,6 +1,6 @@
 format 224
 "bluetooth" // quizzy::bluetooth
-  revision 2
+  revision 3
   modified_by 42 "tv"
   // class settings
   
@@ -30,7 +30,7 @@ format 224
   activitydiagramsettings
    end
   
-  java_dir "/home/tvaira/Documents/git/projets/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/bluetooth/"
+  java_dir "quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/bluetooth/"
   java_package "fr.hillionj.quizzy.bluetooth"
   classview 134807 "bluetooth"
     
