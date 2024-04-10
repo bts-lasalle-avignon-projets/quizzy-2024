@@ -89,9 +89,6 @@ void IHMQuizzy::afficherFenetreResultats()
 
 void IHMQuizzy::ajouterParticipant(QString participant)
 {
-    /**
-     * @todo Créer un classe spécifique pour les participants ?
-     */
     QWidget*     widgetParticipant = new QWidget(this);
     QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
     QLabel*      labelParticipant  = new QLabel(participant, this);
