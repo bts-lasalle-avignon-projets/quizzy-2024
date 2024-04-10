@@ -23,6 +23,8 @@ import java.util.Vector;
  * @class BaseDeDonnees
  * @brief La classe assurant la gestion de la base de données SQLite "QUIZZY.db"
  */
+
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class BaseDeDonnees extends SQLiteOpenHelper
 {
     /**
@@ -71,7 +73,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     public ArrayList<String> getListeEnregistrements()
     {
         ArrayList<String> listeEnregistrements = new ArrayList<String>();
-        Cursor            curseur              = sqlite.rawQuery("SELECT ... FROM ...", null);
+        Cursor            curseur = sqlite.rawQuery("SELECT * FROM participants", null);
 
         if(curseur.moveToFirst())
         {
@@ -141,7 +143,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
      */
     public void supprimerJoueur(String nom)
     {
-        sqlite.execSQL("DELETE FROM ... WHERE nom = ?", new String[] { nom });
+        sqlite.execSQL("DELETE FROM participants WHERE nom = ?", new String[] { nom });
     }
 
     /**

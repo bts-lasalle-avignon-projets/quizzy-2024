@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import fr.hillionj.quizzy.ActivitePrincipale;
 
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Peripherique extends Thread
 {
     private final String    TAG = "_Peripherique";
