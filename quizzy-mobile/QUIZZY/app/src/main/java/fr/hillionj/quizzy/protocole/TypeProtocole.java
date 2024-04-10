@@ -4,7 +4,7 @@ import fr.hillionj.quizzy.protocole.speciales.ProtocoleInscriptionParticipant;
 import fr.hillionj.quizzy.protocole.speciales.ProtocoleLancement;
 
 public enum TypeProtocole {
-    LANCEMENT("S"), INSCRIPTION_PARTICIPANT("I");
+    LANCEMENT("L"), INSCRIPTION_PARTICIPANT("I");
 
     private String indiceType;
 

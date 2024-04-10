@@ -16,6 +16,6 @@ public class ProtocoleLancement extends Protocole {
 
     @Override
     public TypeProtocole getType() {
-        return null;
+        return TypeProtocole.LANCEMENT;
     }
 }

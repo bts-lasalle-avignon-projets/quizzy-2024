@@ -27,6 +27,10 @@ import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+import fr.hillionj.quizzy.protocole.speciales.ProtocoleInscriptionParticipant;
+
 import java.util.Vector;
 
 /**
@@ -67,8 +71,8 @@ public class ActivitePrincipale extends AppCompatActivity
         initialiserCommunicationBluetooth();
 
         // Test BDD
-        baseDeDonnees    = BaseDeDonnees.getInstance(this);
-        nomsParticipants = baseDeDonnees.getNomsParticipants();
+        /*baseDeDonnees    = BaseDeDonnees.getInstance(this);
+        nomsParticipants = baseDeDonnees.getNomsParticipants();*/
         Log.d(TAG, "nomsParticipants = " + nomsParticipants);
     }
 
