@@ -18,6 +18,9 @@ public abstract class Protocole {
         }
         return type.getProtocole(trame);
     }
+    public static Protocole getProtocole(TypeProtocole type) {
+        return type.getProtocole(null);
+    }
 
     public abstract String getFormat();
     public abstract String getTrame();
