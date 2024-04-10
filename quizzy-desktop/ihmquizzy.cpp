@@ -1,6 +1,7 @@
 #include "ihmquizzy.h"
 #include "quizzy.h"
 #include "question.h"
+#include "participant.h"
 #include <QDebug>
 
 /**
@@ -30,9 +31,10 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
     QStringList listeParticipants;
     listeParticipants << "Participant 1"
                       << "Participant 2";
-    for(const QString& participant: listeParticipants)
+    for(int i = 0; i < listeParticipants.size(); ++i)
     {
-        ajouterParticipant(participant);
+        Participant participant(listeParticipants.at(i), i + 1);
+        ajouterParticipant(participant.getNom());
     }
     afficherFenetreParticipants();
 #endif
@@ -89,9 +91,6 @@ void IHMQuizzy::afficherFenetreResultats()
 
 void IHMQuizzy::ajouterParticipant(QString participant)
 {
-    /**
-     * @todo Créer un classe spécifique pour les participants ?
-     */
     QWidget*     widgetParticipant = new QWidget(this);
     QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
     QLabel*      labelParticipant  = new QLabel(participant, this);
