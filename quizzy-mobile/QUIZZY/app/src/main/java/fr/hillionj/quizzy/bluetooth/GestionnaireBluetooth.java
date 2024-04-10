@@ -25,6 +25,7 @@ import java.util.List;
 import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class GestionnaireBluetooth
 {
     private static final String          TAG = "_GestionnaireBluetooth"; //!< TAG pour les logs

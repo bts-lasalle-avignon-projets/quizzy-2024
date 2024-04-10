@@ -1,13 +1,13 @@
 package fr.hillionj.quizzy.questionnaire;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Question
 {
-    private String       question;
-    private List<String> reponses = new ArrayList<>();
-    private String       bonneReponse;
+    private final String question;
+    private final List<String> reponses;
+    private final String       bonneReponse;
 
     public Question(String question, List<String> reponses)
     {

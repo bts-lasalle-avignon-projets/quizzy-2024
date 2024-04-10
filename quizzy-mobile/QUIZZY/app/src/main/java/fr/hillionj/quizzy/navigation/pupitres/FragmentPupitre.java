@@ -22,6 +22,7 @@ import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class FragmentPupitre extends Fragment
 {
     private FragmentDashboardBinding binding;
@@ -42,7 +43,8 @@ public class FragmentPupitre extends Fragment
         binding   = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         initialiserVue(root);
-        if (vueActive == null) {
+        if(vueActive == null)
+        {
             vueActive = this;
             GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiser();
         }
@@ -55,7 +57,8 @@ public class FragmentPupitre extends Fragment
         btnConnecter = vue.findViewById(R.id.bouton_connecter);
         btnConnecter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 FragmentPupitre.this.onClick(v);
             }
         });
@@ -63,18 +66,22 @@ public class FragmentPupitre extends Fragment
         btnDeconnecter = vue.findViewById(R.id.bouton_deconnecter);
         btnDeconnecter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 FragmentPupitre.this.onClick(v);
             }
         });
-        spinnerListePeripheriques = vue.findViewById(R.id.liste_peripheriques);
+        spinnerListePeripheriques      = vue.findViewById(R.id.liste_peripheriques);
         listViewPeripheriquesConnectes = vue.findViewById(R.id.listViewPeripheriquesConnectes);
-        if (vueActive != null) {
+        if(vueActive != null)
+        {
             btnConnecter.setEnabled(vueActive.btnConnecter.isEnabled());
             btnDeconnecter.setEnabled(vueActive.btnDeconnecter.isEnabled());
             spinnerListePeripheriques.setEnabled(vueActive.spinnerListePeripheriques.isEnabled());
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiserSpinner(spinnerListePeripheriques);
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiserListView(listViewPeripheriquesConnectes);
+            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+              .initialiserSpinner(spinnerListePeripheriques);
+            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+              .initialiserListView(listViewPeripheriquesConnectes);
         }
     }
 
@@ -107,10 +114,13 @@ public class FragmentPupitre extends Fragment
     }
     public void onClick(View v)
     {
-        if(v.getId() == R.id.bouton_connecter && GestionnaireBluetooth.getGestionnaireBluetooth(null, null).connecter())
+        if(v.getId() == R.id.bouton_connecter &&
+           GestionnaireBluetooth.getGestionnaireBluetooth(null, null).connecter())
         {
             desactiverBoutons();
-        } else if(v.getId() == R.id.bouton_deconnecter && GestionnaireBluetooth.getGestionnaireBluetooth(null, null).deconnecter())
+        }
+        else if(v.getId() == R.id.bouton_deconnecter &&
+                GestionnaireBluetooth.getGestionnaireBluetooth(null, null).deconnecter())
         {
             activerBoutonConnecter();
         }
