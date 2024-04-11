@@ -13,14 +13,11 @@ public class ProtocoleAcquitement extends Protocole
     }
 
     @Override
-    public String getTrame()
-    {
-        return getFormat();
-    }
-
-    @Override
     public TypeProtocole getType()
     {
         return TypeProtocole.ACQUITEMENT;
+    }
+    public void genererTrame() {
+        super.genererTrame();
     }
 }

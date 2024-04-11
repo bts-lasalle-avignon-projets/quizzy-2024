@@ -13,14 +13,11 @@ public class ProtocoleFinQuiz extends Protocole
     }
 
     @Override
-    public String getTrame()
-    {
-        return getFormat();
-    }
-
-    @Override
     public TypeProtocole getType()
     {
         return TypeProtocole.FIN_QUIZ;
+    }
+    public void genererTrame() {
+        super.genererTrame();
     }
 }

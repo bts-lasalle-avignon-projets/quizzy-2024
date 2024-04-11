@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import fr.hillionj.quizzy.ActivitePrincipale;
+import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Peripherique extends Thread
@@ -99,7 +100,7 @@ public class Peripherique extends Thread
                 {
                     socket.connect();
                     Message msg = Message.obtain();
-                    msg.what    = ActivitePrincipale.CODE_CONNEXION_BLUETOOTH;
+                    msg.what    = GestionnaireProtocoles.CODE_CONNEXION_BLUETOOTH;
                     msg.obj     = indicePeripherique;
                     handler.sendMessage(msg);
                     tReception.start();
@@ -109,7 +110,7 @@ public class Peripherique extends Thread
                     Log.d(TAG, "connecter() erreur connect socket");
                     e.printStackTrace();
                     Message msg = Message.obtain();
-                    msg.what    = ActivitePrincipale.CODE_ERREUR_CONNEXION_BLUETOOTH;
+                    msg.what    = GestionnaireProtocoles.CODE_ERREUR_CONNEXION_BLUETOOTH;
                     msg.obj     = indicePeripherique;
                     handler.sendMessage(msg);
                 }
@@ -127,7 +128,7 @@ public class Peripherique extends Thread
             tReception.arreter();
             socket.close();
             Message msg = Message.obtain();
-            msg.what    = ActivitePrincipale.CODE_DECONNEXION_BLUETOOTH;
+            msg.what    = GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH;
             msg.obj     = indicePeripherique;
             handler.sendMessage(msg);
             return true;
@@ -197,7 +198,7 @@ public class Peripherique extends Thread
                                     " - datas = " + data);
                             Message msg = Message.obtain();
                             handler.sendMessage(msg);
-                            msg.what = ActivitePrincipale.CODE_RECEPTION_BLUETOOTH;
+                            msg.what = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
                             msg.obj  = data;
                             handlerUI.sendMessage(msg);
                         }

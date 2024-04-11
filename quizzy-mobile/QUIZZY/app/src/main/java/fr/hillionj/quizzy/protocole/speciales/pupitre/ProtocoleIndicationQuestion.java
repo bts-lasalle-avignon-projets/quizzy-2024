@@ -6,23 +6,15 @@ import fr.hillionj.quizzy.protocole.TypeProtocole;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class ProtocoleIndicationQuestion extends Protocole
 {
-    private final String trame;
-
     public ProtocoleIndicationQuestion(String trame)
     {
-        this.trame = trame;
+        setTrame(trame);
     }
 
     @Override
     public String getFormat()
     {
         return "$" + getType().getIndiceType() + ";QUESTION;TEMPS\n";
-    }
-
-    @Override
-    public String getTrame()
-    {
-        return trame;
     }
 
     @Override
@@ -39,5 +31,9 @@ public class ProtocoleIndicationQuestion extends Protocole
     public int getNumeroQuestion()
     {
         return toInt(extraireDonnees().get("QUESTION"));
+    }
+
+    public void genererTrame(int numeroQuestion, int tempsAlloue) {
+        super.genererTrame(numeroQuestion + "", tempsAlloue + "");
     }
 }

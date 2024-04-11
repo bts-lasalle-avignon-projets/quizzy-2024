@@ -26,15 +26,27 @@ public abstract class Protocole
         return type.getProtocole(null);
     }
 
+    private String trame;
+
     public abstract String        getFormat();
-    public abstract String        getTrame();
     public abstract TypeProtocole getType();
 
-    public String genererTrame(String... contenu)
+    public String getTrame()
+    {
+        return trame;
+    }
+
+    public void setTrame(String trame)
+    {
+        this.trame = trame;
+    }
+
+    protected void genererTrame(String... contenu)
     {
         if(!estValide(false, contenu))
         {
-            return null;
+            setTrame(null);
+            return;
         }
         StringBuilder sb = new StringBuilder("$" + getType().getIndiceType());
         if(contenu != null)
@@ -45,7 +57,7 @@ public abstract class Protocole
             }
         }
         sb.append("\n");
-        return sb.toString();
+        setTrame(sb.toString());
     }
 
     public boolean estValide(boolean trameComplete, String... contenu)

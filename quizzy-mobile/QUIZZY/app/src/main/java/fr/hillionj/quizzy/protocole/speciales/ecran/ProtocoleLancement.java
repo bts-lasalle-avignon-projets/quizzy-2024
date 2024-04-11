@@ -13,14 +13,12 @@ public class ProtocoleLancement extends Protocole
     }
 
     @Override
-    public String getTrame()
-    {
-        return getFormat();
-    }
-
-    @Override
     public TypeProtocole getType()
     {
         return TypeProtocole.LANCEMENT;
+    }
+
+    public void genererTrame() {
+        super.genererTrame();
     }
 }
