@@ -9,10 +9,7 @@ package fr.hillionj.quizzy;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,11 +23,7 @@ import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
-import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
-import fr.hillionj.quizzy.protocole.Protocole;
-import fr.hillionj.quizzy.protocole.TypeProtocole;
-import fr.hillionj.quizzy.protocole.speciales.ecran.ProtocoleLancement;
 
 import java.util.Vector;
 

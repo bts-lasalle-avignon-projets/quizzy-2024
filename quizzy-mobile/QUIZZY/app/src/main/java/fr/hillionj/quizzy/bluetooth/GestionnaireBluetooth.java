@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -22,7 +21,6 @@ import androidx.core.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -227,5 +225,9 @@ public class GestionnaireBluetooth
             return false;
         }
         return true;
+    }
+
+    public List<Peripherique> getPeripheriques() {
+        return peripheriques;
     }
 }

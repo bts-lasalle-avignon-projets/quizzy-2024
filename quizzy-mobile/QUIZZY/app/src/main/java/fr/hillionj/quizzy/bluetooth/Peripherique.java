@@ -89,7 +89,7 @@ public class Peripherique extends Thread
         }
         if(socket != null)
         {
-            tReception = new TReception(handler);
+            tReception = new TReception();
         }
         new Thread() {
             @SuppressLint("MissingPermission")
@@ -143,9 +143,9 @@ public class Peripherique extends Thread
 
     public void envoyer(String data)
     {
-        Log.d(TAG,
+        /*Log.d(TAG,
               "envoyer() nom = " + getNom() + " - adresse mac = " + getAdresse() +
-                " - indicePeripherique = " + indicePeripherique + " - datas = " + data);
+                " - indicePeripherique = " + indicePeripherique + " - datas = " + data);*/
         if(socket == null)
             return;
         try
@@ -163,12 +163,7 @@ public class Peripherique extends Thread
     private class TReception extends Thread
     {
         private final String TAG = "_TReception";
-        Handler              handlerUI;
         private boolean      fini = false;
-        TReception(Handler h)
-        {
-            handlerUI = h;
-        }
 
         @Override
         public void run()
@@ -192,15 +187,15 @@ public class Peripherique extends Thread
                             for(int i = 0; i < k; i++)
                                 rawdata[i] = buffer[i];
                             String data = new String(rawdata);
-                            Log.d(TAG,
+                            /*Log.d(TAG,
                                   "recevoir() nom = " + getNom() + " - adresse mac = " +
                                     getAdresse() + " - indicePeripherique = " + indicePeripherique +
-                                    " - datas = " + data);
+                                    " - datas = " + data);*/
                             Message msg = Message.obtain();
-                            handler.sendMessage(msg);
                             msg.what = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
                             msg.obj  = data;
-                            handlerUI.sendMessage(msg);
+                            msg.arg1     = indicePeripherique;
+                            handler.sendMessage(msg);
                         }
                     }
                     try
