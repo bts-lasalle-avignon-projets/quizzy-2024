@@ -42,7 +42,7 @@ public class Quiz
 
     public void demarrer()
     {
-        
+
     }
 
     public void arreter()
