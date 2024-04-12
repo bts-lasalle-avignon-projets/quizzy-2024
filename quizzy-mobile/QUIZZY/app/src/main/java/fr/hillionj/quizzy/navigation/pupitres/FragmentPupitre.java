@@ -36,14 +36,15 @@ public class FragmentPupitre extends Fragment
         ModelePupitre dashboardViewModel = new ViewModelProvider(this).get(ModelePupitre.class);
         binding   = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         initialiserVue(root);
+
         if(vueActive == null)
         {
             vueActive = this;
             GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiser();
         }
         vueActive = this;
-
         return root;
     }
 
