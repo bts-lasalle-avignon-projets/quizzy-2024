@@ -9,10 +9,7 @@ package fr.hillionj.quizzy;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -26,10 +23,7 @@ import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
-import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
-import fr.hillionj.quizzy.protocole.Protocole;
-import fr.hillionj.quizzy.protocole.TypeProtocole;
-import fr.hillionj.quizzy.protocole.speciales.ecran.ProtocoleLancement;
+import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 
 import java.util.Vector;
 
@@ -45,16 +39,11 @@ public class ActivitePrincipale extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_ActivitePrincipale"; //!< TAG pour les logs (cf. Logcat)
-    public static final int     CODE_CONNEXION_BLUETOOTH        = 33;
-    public static final int     CODE_RECEPTION_BLUETOOTH        = 35;
-    public static final int     CODE_DECONNEXION_BLUETOOTH      = 34;
-    public static final int     CODE_ERREUR_CONNEXION_BLUETOOTH = 36;
     /**
      * Attributs
      */
     private ActivityMainBinding   binding;
     private GestionnaireBluetooth gestionnaireBluetooth;
-    public Handler                handler;
     // Exemple d'accès à la base de données
     private BaseDeDonnees  baseDeDonnees;    //!< Association avec la base de donnees
     private Vector<String> nomsParticipants; // test
@@ -70,7 +59,7 @@ public class ActivitePrincipale extends AppCompatActivity
         Log.d(TAG, "onCreate()");
 
         initialiserActivite();
-        initialiserCommunicationBluetooth();
+        initialiserCommunication();
 
         // Test BDD
         /*baseDeDonnees    = BaseDeDonnees.getInstance(this);
@@ -155,38 +144,10 @@ public class ActivitePrincipale extends AppCompatActivity
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    private void initialiserCommunicationBluetooth()
+    private void initialiserCommunication()
     {
-        gererHandler();
+        Handler handler =
+          GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
         gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
-    }
-
-    private void gererHandler()
-    {
-        handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg)
-            {
-                super.handleMessage(msg);
-                switch(msg.arg1)
-                {
-                    case CODE_CONNEXION_BLUETOOTH:
-                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
-                          .ajouterPeripheriqueConnecter(msg.arg2);
-                        break;
-                    case CODE_ERREUR_CONNEXION_BLUETOOTH:
-                        FragmentPupitre.getVueActive().activerBoutonConnecter();
-                        Toast
-                          .makeText(getApplicationContext(),
-                                    "Erreur de connexion",
-                                    Toast.LENGTH_SHORT)
-                          .show();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
     }
 }

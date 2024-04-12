@@ -13,14 +13,13 @@ public class ProtocoleAfficherQuestionPrecedente extends Protocole
     }
 
     @Override
-    public String getTrame()
-    {
-        return getFormat();
-    }
-
-    @Override
     public TypeProtocole getType()
     {
         return TypeProtocole.AFFICHER_QUESTION_PRECEDENTE;
+    }
+
+    public void genererTrame()
+    {
+        super.genererTrame();
     }
 }

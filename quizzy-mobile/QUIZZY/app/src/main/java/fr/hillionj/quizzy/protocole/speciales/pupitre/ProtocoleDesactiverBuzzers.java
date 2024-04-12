@@ -6,23 +6,15 @@ import fr.hillionj.quizzy.protocole.TypeProtocole;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class ProtocoleDesactiverBuzzers extends Protocole
 {
-    private final String trame;
-
     public ProtocoleDesactiverBuzzers(String trame)
     {
-        this.trame = trame;
+        setTrame(trame);
     }
 
     @Override
     public String getFormat()
     {
         return "$" + getType().getIndiceType() + ";QUESTION\n";
-    }
-
-    @Override
-    public String getTrame()
-    {
-        return trame;
     }
 
     @Override
@@ -34,5 +26,10 @@ public class ProtocoleDesactiverBuzzers extends Protocole
     public int getNumeroQuestion()
     {
         return toInt(extraireDonnees().get("QUESTION"));
+    }
+
+    public void genererTrame(int numeroQuestion)
+    {
+        super.genererTrame(numeroQuestion + "");
     }
 }

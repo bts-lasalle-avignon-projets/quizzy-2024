@@ -1,7 +1,12 @@
 package fr.hillionj.quizzy.protocole;
 
+import android.util.Log;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import fr.hillionj.quizzy.receveurs.ReceveurProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public abstract class Protocole
@@ -9,11 +14,11 @@ public abstract class Protocole
     private static final String TAG = "_Protocole";
     public static Protocole     traiterTrame(String trame)
     {
-        if(trame == null || !trame.contains(";"))
+        if(trame == null)
         {
             return null;
         }
-        String        indiceTypeProtocole = trame.split(";")[0].replace("$", "");
+        String        indiceTypeProtocole = trame.split(";")[0].replace("$", "").replace("\n", "");
         TypeProtocole type                = TypeProtocole.getType(indiceTypeProtocole);
         if(type == null)
         {
@@ -26,15 +31,27 @@ public abstract class Protocole
         return type.getProtocole(null);
     }
 
+    private String trame;
+
     public abstract String        getFormat();
-    public abstract String        getTrame();
     public abstract TypeProtocole getType();
 
-    public String genererTrame(String... contenu)
+    public String getTrame()
+    {
+        return trame;
+    }
+
+    public void setTrame(String trame)
+    {
+        this.trame = trame;
+    }
+
+    protected void genererTrame(String... contenu)
     {
         if(!estValide(false, contenu))
         {
-            return null;
+            setTrame(null);
+            return;
         }
         StringBuilder sb = new StringBuilder("$" + getType().getIndiceType());
         if(contenu != null)
@@ -45,7 +62,32 @@ public abstract class Protocole
             }
         }
         sb.append("\n");
-        return sb.toString();
+        setTrame(sb.toString());
+    }
+
+    public void envoyer(List<? extends ReceveurProtocole> receveursProtocoles)
+    {
+        for(ReceveurProtocole receveur: receveursProtocoles)
+        {
+            envoyer(receveur);
+        }
+    }
+
+    public void envoyer(ReceveurProtocole receveur)
+    {
+        if(receveur.getPeripherique() == null)
+        {
+            Log.i(TAG,
+                  "(quizzy-e1) Envoi du Protocole " + getClass().getSimpleName() + " : " +
+                    getTrame().replace("\n", "\\n"));
+        }
+        else
+        {
+            Log.v(TAG,
+                  "(" + receveur.getPeripherique().getNom() + ") Envoi du Protocole " +
+                    getClass().getSimpleName() + " : " + getTrame().replace("\n", "\\n"));
+            receveur.getPeripherique().envoyer(getTrame());
+        }
     }
 
     public boolean estValide(boolean trameComplete, String... contenu)

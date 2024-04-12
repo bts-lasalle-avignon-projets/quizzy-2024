@@ -1,23 +1,17 @@
 package fr.hillionj.quizzy.navigation.pupitres;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
@@ -49,6 +43,7 @@ public class FragmentPupitre extends Fragment
             GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiser();
         }
         vueActive = this;
+
         return root;
     }
 
