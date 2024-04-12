@@ -34,7 +34,6 @@ void CommunicationBluetooth::verifierBluetooth()
         activerBluetooth();
         lireNomAppareil();
         rendreAppareilVisible();
-        obtenirAppareilsConnectes();
     }
     else
     {
@@ -60,30 +59,4 @@ void CommunicationBluetooth::rendreAppareilVisible()
 {
     appareilLocal.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
     qDebug() << "Appareil visible";
-}
-
-void CommunicationBluetooth::obtenirAppareilsConnectes()
-{
-    QList<QBluetoothAddress> appareils;
-    appareils = appareilLocal.connectedDevices();
-    qDebug() << "Appareils connectés :" << appareils;
-}
-
-void CommunicationBluetooth::demarrerScanAppareil()
-{
-    QBluetoothDeviceDiscoveryAgent* agentDecouverte =
-      new QBluetoothDeviceDiscoveryAgent(this);
-    connect(agentDecouverte,
-            SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
-            this,
-            SLOT(appareilDecouvert(QBluetoothDeviceInfo)));
-
-    agentDecouverte->start();
-}
-
-void CommunicationBluetooth::appareilDecouvert(
-  const QBluetoothDeviceInfo& appareil)
-{
-    qDebug() << "Nouvel appareil trouvé:" << appareil.name() << '('
-             << appareil.address().toString() << ')';
 }

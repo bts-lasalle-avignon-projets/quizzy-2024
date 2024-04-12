@@ -33,9 +33,6 @@ class CommunicationBluetooth : public QObject
     QBluetoothLocalDevice appareilLocal;
     QString               nomAppareilLocal;
 
-  public slots:
-    void appareilDecouvert(const QBluetoothDeviceInfo& appareil);
-
   public:
     CommunicationBluetooth(QObject* parent = nullptr);
     ~CommunicationBluetooth();
@@ -44,8 +41,6 @@ class CommunicationBluetooth : public QObject
     void activerBluetooth();
     void lireNomAppareil();
     void rendreAppareilVisible();
-    void obtenirAppareilsConnectes();
-    void demarrerScanAppareil();
 };
 
 #endif // COMMUNICATIONBLUETOOTH_H
