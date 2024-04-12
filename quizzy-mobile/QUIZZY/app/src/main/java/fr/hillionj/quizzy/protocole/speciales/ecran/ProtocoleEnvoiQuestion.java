@@ -54,7 +54,8 @@ public class ProtocoleEnvoiQuestion extends Protocole
         return toInt(extraireDonnees().get("REPONSE"));
     }
 
-    public void genererTrame(Question question) {
+    public void genererTrame(Question question)
+    {
         List<String> arguments = new ArrayList<>();
         arguments.add(question.getQuestion());
         arguments.addAll(question.getReponses());

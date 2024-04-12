@@ -33,7 +33,8 @@ public class ProtocoleIndicationQuestion extends Protocole
         return toInt(extraireDonnees().get("QUESTION"));
     }
 
-    public void genererTrame(int numeroQuestion, int tempsAlloue) {
+    public void genererTrame(int numeroQuestion, int tempsAlloue)
+    {
         super.genererTrame(numeroQuestion + "", tempsAlloue + "");
     }
 }

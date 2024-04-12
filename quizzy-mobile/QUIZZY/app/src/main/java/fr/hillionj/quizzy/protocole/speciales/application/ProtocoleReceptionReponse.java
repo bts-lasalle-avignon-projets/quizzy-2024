@@ -38,7 +38,8 @@ public class ProtocoleReceptionReponse extends Protocole
         return toInt(extraireDonnees().get("QUESTION"));
     }
 
-    public void genererTrame(int numeroQuestion, int numeroReponse, int tempsReponse) {
+    public void genererTrame(int numeroQuestion, int numeroReponse, int tempsReponse)
+    {
         super.genererTrame(numeroQuestion + "", numeroReponse + "", tempsReponse + "");
     }
 }

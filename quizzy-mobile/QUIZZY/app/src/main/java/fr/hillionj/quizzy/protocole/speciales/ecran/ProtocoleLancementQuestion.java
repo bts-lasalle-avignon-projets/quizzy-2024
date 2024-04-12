@@ -18,7 +18,8 @@ public class ProtocoleLancementQuestion extends Protocole
         return TypeProtocole.DEMARRAGE_QUESTION;
     }
 
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }

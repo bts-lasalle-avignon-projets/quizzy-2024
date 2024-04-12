@@ -65,15 +65,29 @@ public abstract class Protocole
         setTrame(sb.toString());
     }
 
-    public void envoyer(List<? extends ReceveurProtocole> receveursProtocoles) {
-        for (ReceveurProtocole receveur : receveursProtocoles) {
+    public void envoyer(List<? extends ReceveurProtocole> receveursProtocoles)
+    {
+        for(ReceveurProtocole receveur: receveursProtocoles)
+        {
             envoyer(receveur);
         }
     }
 
-    public void envoyer(ReceveurProtocole receveur) {
-        Log.d(TAG,  "(" + receveur.getPeripherique().getNom() +  ") Envoi du Protocole " + getClass().getSimpleName() + " : " + getTrame().replace("\n", "\\n"));
-        receveur.getPeripherique().envoyer(getTrame());
+    public void envoyer(ReceveurProtocole receveur)
+    {
+        if(receveur.getPeripherique() == null)
+        {
+            Log.i(TAG,
+                  "(quizzy-e1) Envoi du Protocole " + getClass().getSimpleName() + " : " +
+                    getTrame().replace("\n", "\\n"));
+        }
+        else
+        {
+            Log.v(TAG,
+                  "(" + receveur.getPeripherique().getNom() + ") Envoi du Protocole " +
+                    getClass().getSimpleName() + " : " + getTrame().replace("\n", "\\n"));
+            receveur.getPeripherique().envoyer(getTrame());
+        }
     }
 
     public boolean estValide(boolean trameComplete, String... contenu)

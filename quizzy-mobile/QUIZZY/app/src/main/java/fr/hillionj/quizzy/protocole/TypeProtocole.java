@@ -34,7 +34,7 @@ public enum TypeProtocole {
     RECEPTION_REPONSE("R"),
     ACQUITEMENT("A");
 
-    private String indiceType;
+    private String              indiceType;
     private static final String TAG = "_TypeProtocole";
 
     TypeProtocole(String indiceType)
@@ -91,7 +91,9 @@ public enum TypeProtocole {
             case AFFICHER_QUESTION_PRECEDENTE:
                 return new ProtocoleAfficherQuestionPrecedente();
             default:
-                Log.d(TAG, "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " + (trame == null ? "null" : trame));
+                Log.d(TAG,
+                      "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +
+                        (trame == null ? "null" : trame));
                 break;
         }
         return null;

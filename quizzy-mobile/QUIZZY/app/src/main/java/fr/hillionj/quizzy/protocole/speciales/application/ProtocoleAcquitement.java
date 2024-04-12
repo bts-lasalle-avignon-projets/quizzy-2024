@@ -17,7 +17,8 @@ public class ProtocoleAcquitement extends Protocole
     {
         return TypeProtocole.ACQUITEMENT;
     }
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }

@@ -17,7 +17,8 @@ public class ProtocoleFinQuiz extends Protocole
     {
         return TypeProtocole.FIN_QUIZ;
     }
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }

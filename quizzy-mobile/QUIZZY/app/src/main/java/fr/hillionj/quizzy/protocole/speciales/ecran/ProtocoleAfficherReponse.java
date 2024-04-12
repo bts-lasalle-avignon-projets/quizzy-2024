@@ -18,7 +18,8 @@ public class ProtocoleAfficherReponse extends Protocole
         return TypeProtocole.AFFICHER_REPONSE;
     }
 
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }

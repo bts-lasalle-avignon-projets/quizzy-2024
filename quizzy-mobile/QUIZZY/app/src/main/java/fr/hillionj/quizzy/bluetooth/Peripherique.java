@@ -162,7 +162,7 @@ public class Peripherique extends Thread
 
     private class TReception extends Thread
     {
-        private final String TAG = "_TReception";
+        private final String TAG  = "_TReception";
         private boolean      fini = false;
 
         @Override
@@ -192,9 +192,9 @@ public class Peripherique extends Thread
                                     getAdresse() + " - indicePeripherique = " + indicePeripherique +
                                     " - datas = " + data);*/
                             Message msg = Message.obtain();
-                            msg.what = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
-                            msg.obj  = data;
-                            msg.arg1     = indicePeripherique;
+                            msg.what    = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
+                            msg.obj     = data;
+                            msg.arg1    = indicePeripherique;
                             handler.sendMessage(msg);
                         }
                     }

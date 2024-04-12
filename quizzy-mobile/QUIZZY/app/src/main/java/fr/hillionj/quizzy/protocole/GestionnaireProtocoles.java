@@ -19,7 +19,7 @@ import fr.hillionj.quizzy.questionnaire.Quiz;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class GestionnaireProtocoles
 {
-    private static final String TAG = "_GestionnaireProtocoles";
+    private static final String           TAG = "_GestionnaireProtocoles";
     private static GestionnaireProtocoles gestionnaireProtocoles;
     public static final int               CODE_CONNEXION_BLUETOOTH        = 33;
     public static final int               CODE_RECEPTION_BLUETOOTH        = 35;
@@ -42,16 +42,20 @@ public class GestionnaireProtocoles
         }
     }
 
-    public void traiterProtocoleEntrant(Peripherique peripherique, Protocole protocole) {
-        switch (protocole.getType()) {
+    public void traiterProtocoleEntrant(Peripherique peripherique, Protocole protocole)
+    {
+        switch(protocole.getType())
+        {
             case RECEPTION_REPONSE:
-                Quiz.getQuizEnCours().reponseSaisie(peripherique, (ProtocoleReceptionReponse) protocole);
+                Quiz.getQuizEnCours().reponseSaisie(peripherique,
+                                                    (ProtocoleReceptionReponse)protocole);
                 break;
             case ACQUITEMENT:
                 Log.d(TAG, protocole.getClass().getSimpleName());
                 break;
             default:
-                Log.e(TAG, "Aucun protocole entrant pour " + protocole.getTrame() + " n'est trouvé");
+                Log.e(TAG,
+                      "Aucun protocole entrant pour " + protocole.getTrame() + " n'est trouvé");
                 break;
         }
     }
@@ -67,14 +71,8 @@ public class GestionnaireProtocoles
                 {
                     case CODE_CONNEXION_BLUETOOTH:
                         FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null).ajouterPeripheriqueConnecter((int) msg.obj);
-
-                        // Test QUIZ
-                        Quiz quiz = Quiz.getQuizEnCours();
-                        quiz.ajouterParticipant(new Participant("Jules", GestionnaireBluetooth.getGestionnaireBluetooth(null, null).getPeripheriques().get(1)));
-                        quiz.genererQuiz(null, 0);
-                        quiz.demarrer();
-
+                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                          .ajouterPeripheriqueConnecter((int)msg.obj);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
                         FragmentPupitre.getVueActive().activerBoutonConnecter();
@@ -85,10 +83,15 @@ public class GestionnaireProtocoles
                           .show();
                         break;
                     case CODE_RECEPTION_BLUETOOTH:
-                        for (String trame : ((String)msg.obj).split("\n")) {
-                            Protocole protocole = Protocole.traiterTrame(trame + "\n");
-                            Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth(null, null).getPeripheriques().get(msg.arg1);
-                            if (protocole != null) {
+                        for(String trame: ((String)msg.obj).split("\n"))
+                        {
+                            Protocole    protocole = Protocole.traiterTrame(trame + "\n");
+                            Peripherique peripherique =
+                              GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                                .getPeripheriques()
+                                .get(msg.arg1);
+                            if(protocole != null)
+                            {
                                 traiterProtocoleEntrant(peripherique, protocole);
                             }
                         }

@@ -32,7 +32,8 @@ public class ProtocoleInscriptionParticipant extends Protocole
         return extraireDonnees().get("PID");
     }
 
-    public void genererTrame(String pid, String nom) {
+    public void genererTrame(String pid, String nom)
+    {
         super.genererTrame(pid, nom);
     }
 }

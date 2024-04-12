@@ -227,7 +227,8 @@ public class GestionnaireBluetooth
         return true;
     }
 
-    public List<Peripherique> getPeripheriques() {
+    public List<Peripherique> getPeripheriques()
+    {
         return peripheriques;
     }
 }

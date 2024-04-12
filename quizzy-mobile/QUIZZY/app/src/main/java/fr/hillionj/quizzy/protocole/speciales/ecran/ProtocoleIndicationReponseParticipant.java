@@ -42,7 +42,8 @@ public class ProtocoleIndicationReponseParticipant extends Protocole
         return toInt(extraireDonnees().get("REPONSE"));
     }
 
-    public void genererTrame(String pid, int numeroReponse, long tempsReponse) {
+    public void genererTrame(String pid, int numeroReponse, long tempsReponse)
+    {
         super.genererTrame(pid, numeroReponse + "", tempsReponse + "");
     }
 }

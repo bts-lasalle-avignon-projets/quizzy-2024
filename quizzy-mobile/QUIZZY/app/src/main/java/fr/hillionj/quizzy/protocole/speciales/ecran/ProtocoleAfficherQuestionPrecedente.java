@@ -18,7 +18,8 @@ public class ProtocoleAfficherQuestionPrecedente extends Protocole
         return TypeProtocole.AFFICHER_QUESTION_PRECEDENTE;
     }
 
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }

@@ -28,7 +28,8 @@ public class ProtocoleActiverBuzzers extends Protocole
         return toInt(extraireDonnees().get("QUESTION"));
     }
 
-    public void genererTrame(int numeroQuestion) {
+    public void genererTrame(int numeroQuestion)
+    {
         super.genererTrame(numeroQuestion + "");
     }
 }

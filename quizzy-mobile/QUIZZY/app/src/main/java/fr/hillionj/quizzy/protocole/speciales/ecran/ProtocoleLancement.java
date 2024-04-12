@@ -18,7 +18,8 @@ public class ProtocoleLancement extends Protocole
         return TypeProtocole.LANCEMENT;
     }
 
-    public void genererTrame() {
+    public void genererTrame()
+    {
         super.genererTrame();
     }
 }
