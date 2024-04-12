@@ -189,7 +189,7 @@ public class Quiz
         afficherQuestionPrecedente.envoyer(ecrans);
     }
 
-    public void reponseSaisie(Peripherique peripherique, ProtocoleReceptionReponse receptionReponse)
+    public void recupererReponseSaisie(Peripherique peripherique, ProtocoleReceptionReponse receptionReponse)
     {
         Participant participant = getParticipant(peripherique);
         if(participant == null)

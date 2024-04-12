@@ -47,7 +47,7 @@ public class GestionnaireProtocoles
         switch(protocole.getType())
         {
             case RECEPTION_REPONSE:
-                Quiz.getQuizEnCours().reponseSaisie(peripherique,
+                Quiz.getQuizEnCours().recupererReponseSaisie(peripherique,
                                                     (ProtocoleReceptionReponse)protocole);
                 break;
             case ACQUITEMENT:
