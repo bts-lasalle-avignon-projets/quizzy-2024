@@ -50,8 +50,10 @@ void CommunicationBluetooth::activerBluetooth()
 
 void CommunicationBluetooth::lireNomAppareil()
 {
-    nomAppareilLocal = appareilLocal.name();
-    qDebug() << "nom de l'appareil :" << nomAppareilLocal;
+    nomAppareilLocal   = appareilLocal.name();
+    QString adresseMAC = appareilLocal.address().toString();
+    qDebug() << "nom de l'appareil :" << nomAppareilLocal << "Adresse MAC"
+             << adresseMAC;
 }
 
 void CommunicationBluetooth::rendreAppareilVisible()
