@@ -10,11 +10,18 @@
  */
 
 #include <QObject>
+
 #include <QBluetoothAddress>
+#include <QBluetoothServer>
 #include <QBluetoothSocket>
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QBluetoothDeviceInfo>
+
+// Liasion série via Bluetooth
+static const QString serviceUuid(
+  QStringLiteral("00001101-0000-1000-8000-00805F9B34FB"));
+static const QString serviceNom(QStringLiteral("quizzy-desktop"));
 
 /**
  * @class CommunicationBluetooth
@@ -26,12 +33,16 @@ class CommunicationBluetooth : public QObject
     Q_OBJECT
 
   private:
-    QString           nomAppareil;
-    QBluetoothAddress adresseAppareil;
-    QBluetoothSocket* socket;
+    QBluetoothLocalDevice appareilLocal; //!< Le périphérique Bluetooth
+    QString nomAppareilLocal;            //!< Le nom du périphérique Bluetooth
+    QBluetoothAddress
+      adresseAppareilLocal; //!< L'adresse MAC du périphérique Bluetooth
+    QBluetoothServer* serveurBluetooth; //!< Le serveur Bluetooth
+    QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
+    QBluetoothServiceInfo
+      serviceInfo; //!< Les informations sur le service bluetooth
 
-    QBluetoothLocalDevice appareilLocal;
-    QString               nomAppareilLocal;
+    bool verifierTrame();
 
   public:
     CommunicationBluetooth(QObject* parent = nullptr);
@@ -41,6 +52,19 @@ class CommunicationBluetooth : public QObject
     void activerBluetooth();
     void lireNomAppareil();
     void rendreAppareilVisible();
+    void demarrerServeur();
+    void arreterServeur();
+
+  private slots:
+    void connecterTablette();
+    void deconnecterTablette();
+    void recevoirTrame();
+
+  signals:
+    void tabletteConnectee();
+    void tabletteDeconnectee();
+    // @todo déclarer chaque signal associé à un type de trame reçu avec en
+    // paramètres les données de la trame
 };
 
 #endif // COMMUNICATIONBLUETOOTH_H
