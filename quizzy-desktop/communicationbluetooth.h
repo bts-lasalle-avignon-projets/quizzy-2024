@@ -43,6 +43,7 @@ class CommunicationBluetooth : public QObject
       serviceInfo; //!< Les informations sur le service bluetooth
 
     bool verifierTrame();
+    bool connecte;
 
   public:
     CommunicationBluetooth(QObject* parent = nullptr);
@@ -59,6 +60,9 @@ class CommunicationBluetooth : public QObject
     void connecterTablette();
     void deconnecterTablette();
     void recevoirTrame();
+
+    void socketDisconnected();
+    void socketReadyRead();
 
   signals:
     void tabletteConnectee();

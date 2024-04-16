@@ -7,6 +7,7 @@
  */
 #include "communicationbluetooth.h"
 #include <QDebug>
+#include <unistd.h>
 
 /**
  * @brief Constructeur de la classe CommunicationBluetooth
@@ -16,6 +17,7 @@ CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     verifierBluetooth();
+    demarrerServeur();
 }
 
 /**
@@ -70,14 +72,16 @@ void CommunicationBluetooth::demarrerServeur()
     if(serveurBluetooth == nullptr)
     {
         qDebug() << Q_FUNC_INFO;
-        // @todo Instancier un objet QBluetoothServer pour le service
-        // QBluetoothServiceInfo::RfcommProtocol
+        serveurBluetooth =
+          new QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, this);
 
-        // @todo Faire la connexion signal/slot pour les connexions sur le
-        // serveur (newConnection() -> connecterTablette())
+        connect(serveurBluetooth,
+                SIGNAL(newConnection()),
+                this,
+                SLOT(connecterTablette()));
 
-        // @todo Placer l'objet QBluetoothServer en écoute de demandes de
-        // connexion pour l'uuid QBluetoothUuid::Rfcomm
+        QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);
+        serviceInfo = serveurBluetooth->listen(uuid, serviceNom);
     }
 }
 
@@ -91,35 +95,53 @@ void CommunicationBluetooth::arreterServeur()
     if(socketTablette == nullptr)
         return;
 
-    // @todo Fermer la socket socketTablette
-
-    // @todo Libérer l'instance socketTablette
-
-    // @todo Affecter nullptr à socketTablette
-
-    // @todo Libérer l'instance serveurBluetooth
-
-    // @todo Affecter nullptr à serveurBluetooth
-
+    socketTablette->close();
+    delete socketTablette;
+    socketTablette = nullptr;
+    delete serveurBluetooth;
+    serveurBluetooth = nullptr;
     qDebug() << Q_FUNC_INFO;
 }
 
 void CommunicationBluetooth::connecterTablette()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Récupérer la socket socketTablette suite à la connexion en attente
-    // sur la socket serveurBluetooth
+    socketTablette = serveurBluetooth->nextPendingConnection();
 
-    // @todo Faire la connexion signal/slot pour les signaux readyRead() et
-    // disconnected()
+    if(!socketTablette)
+        return;
+    connect(socketTablette,
+            SIGNAL(disconnected()),
+            this,
+            SLOT(socketDisconnected()));
+    connect(socketTablette, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
 
-    // @todo Emettre le signal tabletteConnectee()
+    emit tabletteConnectee();
 }
 
 void CommunicationBluetooth::deconnecterTablette()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Emettre le signal tabletteDeconnectee()
+    emit tabletteDeconnectee();
+}
+
+void CommunicationBluetooth::socketDisconnected()
+{
+    qDebug() << Q_FUNC_INFO;
+    connecte = false;
+    emit tabletteDeconnectee();
+}
+
+void CommunicationBluetooth::socketReadyRead()
+{
+    qDebug() << Q_FUNC_INFO;
+    QByteArray donnees;
+
+    while(socketTablette->bytesAvailable())
+    {
+        donnees += socketTablette->readAll();
+        usleep(150000);
+    }
 }
 
 void CommunicationBluetooth::recevoirTrame()
