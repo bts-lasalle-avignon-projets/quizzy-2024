@@ -24,21 +24,24 @@
         android:id="@+id/btn_lancer"
         android:layout_width="158dp"
         android:layout_height="62dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:text="Lancer QCM"
+        app:layout_constraintBottom_toTopOf="@+id/barreProgression"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
 
     <ProgressBar
         android:id="@+id/barreProgression"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="1164dp"
         android:layout_height="21dp"
-        android:layout_marginTop="144dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.157" />
 
     <Button
         android:id="@+id/btn_arreter"
@@ -106,5 +109,16 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/reponse2"
         app:layout_constraintTop_toBottomOf="@+id/reponse2" />
+
+    <ListView
+        android:id="@+id/liste_participants"
+        android:layout_width="480dp"
+        android:layout_height="256dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barreProgression"
+        app:layout_constraintVertical_bias="0.938" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

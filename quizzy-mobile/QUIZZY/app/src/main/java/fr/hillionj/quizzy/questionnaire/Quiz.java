@@ -38,7 +38,9 @@ public class Quiz
     private List<Ecran>       ecrans                  = new ArrayList<>();
     private boolean           termine                 = true;
     private int               indiceQuestion = 0;
+    private long heureDemarrageTempsMort = 0;
 
+    private static final long tempsEntreQuestion = 5000;
     private static final String TAG         = "_Quiz";
     private static final Quiz         quizEnCours = new Quiz();
     private long heureDemarrageQuestion = 0;
@@ -54,7 +56,17 @@ public class Quiz
                             FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
                         }
                     });
-                    if (!estTermine() && getTempsQuestionEnCours() >= getQuestionEnCours().getTemps()) {
+                    if (!estTermine() && getTempsQuestionEnCours() >= getQuestionEnCours().getTemps() && !estTempsMort()) {
+                        heureDemarrageTempsMort = System.currentTimeMillis();
+                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+                            }
+                        });
+                    }
+                    if (estTempsMort() && System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion) {
+                        heureDemarrageTempsMort = 0;
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -170,12 +182,13 @@ public class Quiz
     {
         for(Participant participant: participants)
         {
-            participant.setRepondu(false);
+            participant.setRepondu(false, 0, 0);
         }
     }
 
     public void envoyerQuestionSuivante()
     {
+        heureDemarrageTempsMort = 0;
         if(indiceQuestion >= questions.size())
         {
             arreter();
@@ -203,6 +216,7 @@ public class Quiz
 
     public void envoyerQuestionPrecedente()
     {
+        heureDemarrageTempsMort = 0;
         renitialiserReponses();
         if(indiceQuestion > 0)
         {
@@ -227,7 +241,7 @@ public class Quiz
         {
             return;
         }
-        participant.setRepondu(true);
+        participant.setRepondu(true, receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
 
         Log.d(TAG,
               "Réponse de " + participant.getNom() + " : Réponse N°" +
@@ -246,6 +260,8 @@ public class Quiz
                                                   receptionReponse.getNumeroReponse(),
                                                   receptionReponse.getTempsReponse());
         indicationReponseParticipant.envoyer(ecrans);
+
+        FragmentQuiz.getVueActive().mettreAjoutListeParticipants();
 
         verifierParticipants();
     }
@@ -266,7 +282,8 @@ public class Quiz
         afficherReponse.genererTrame();
         afficherReponse.envoyer(ecrans);
 
-        envoyerQuestionSuivante();
+        heureDemarrageTempsMort = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
     }
 
     private Participant getParticipant(Peripherique peripherique)
@@ -315,5 +332,13 @@ public class Quiz
         long tempActuelle = System.currentTimeMillis();
         long difference = tempActuelle - heureDemarrageQuestion;
         return (double) difference / 1000.0;
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public boolean estTempsMort() {
+        return heureDemarrageTempsMort > 0;
     }
 }

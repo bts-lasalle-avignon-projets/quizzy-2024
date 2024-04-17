@@ -10,6 +10,8 @@ public class Participant implements ReceveurProtocole
     private Peripherique peripherique;
     private int          score   = 0;
     private boolean      repondu = false;
+    private int numeroReponse = 0;
+    private long tempsReponse = 0;
 
     public Participant(String nom, Peripherique peripherique)
     {
@@ -49,8 +51,18 @@ public class Participant implements ReceveurProtocole
         this.score = score;
     }
 
-    public void setRepondu(boolean repondu)
+    public void setRepondu(boolean repondu, int numeroReponse, long tempsReponse)
     {
         this.repondu = repondu;
+        this.numeroReponse = numeroReponse;
+        this.tempsReponse = tempsReponse;
+    }
+
+    public int getNumeroReponse() {
+        return this.numeroReponse;
+    }
+
+    public long getTempsReponse() {
+        return tempsReponse;
     }
 }
