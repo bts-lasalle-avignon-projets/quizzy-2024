@@ -17,16 +17,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentHomeBinding;
-import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
-import fr.hillionj.quizzy.protocole.Protocole;
 import fr.hillionj.quizzy.questionnaire.Question;
 import fr.hillionj.quizzy.questionnaire.Quiz;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
@@ -35,7 +31,7 @@ import fr.hillionj.quizzy.receveurs.speciales.Participant;
 public class FragmentQuiz extends Fragment
 {
     private FragmentHomeBinding binding;
-    private Button              btnLancerQuiz, btnAbandonnerQuiz;
+    private Button              btnLancerQuiz, btnAbandonnerQuiz, btnPauseQuiz;
     private TextView question;
     private final List<TextView> propositions = new ArrayList<>();
     private ListView liste_participants;
@@ -62,6 +58,7 @@ public class FragmentQuiz extends Fragment
 
         btnLancerQuiz     = root.findViewById(R.id.btn_lancer);
         btnAbandonnerQuiz = root.findViewById(R.id.btn_arreter);
+        btnPauseQuiz = root.findViewById(R.id.btn_pause);
         liste_participants = root.findViewById(R.id.liste_participants);
         if(this.adapterListeParticipants == null)
         {
@@ -111,6 +108,14 @@ public class FragmentQuiz extends Fragment
             }
         });
 
+        btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Quiz.getQuizEnCours().basculerPause();
+                mettreAjourEtatBoutons();
+            }
+        });
+
         return root;
     }
 
@@ -133,7 +138,9 @@ public class FragmentQuiz extends Fragment
             adapterListeParticipants.remove(adapterListeParticipants.getItem(i));
             String affichageParticipant = participantAssocie.getNom() + " : ";
             if (!participantAssocie.estRepondu()) {
-                affichageParticipant += "(aucune réponse)";
+                affichageParticipant += "(en attente)";
+            } else if (participantAssocie.getNumeroReponse() == 0) {
+                affichageParticipant += "Aucune réponse";
             } else {
                 affichageParticipant += "Réponse N°" + participantAssocie.getNumeroReponse() + " (" + participantAssocie.getTempsReponse() + " ms)";
             }
@@ -147,12 +154,14 @@ public class FragmentQuiz extends Fragment
         if(Quiz.getQuizEnCours().estTermine())
         {
             btnLancerQuiz.setEnabled(true);
+            btnPauseQuiz.setEnabled(false);
             btnAbandonnerQuiz.setEnabled(false);
         }
         else
         {
             btnLancerQuiz.setEnabled(false);
-            btnAbandonnerQuiz.setEnabled(true);
+            btnPauseQuiz.setEnabled(!Quiz.getQuizEnCours().estTempsMort());
+            btnAbandonnerQuiz.setEnabled(!Quiz.getQuizEnCours().estEnPause());
         }
     }
 
@@ -171,7 +180,10 @@ public class FragmentQuiz extends Fragment
             for (int i = 0; i < propositionsEnCours.size(); i++) {
                 propositions.get(i).setText(propositionsEnCours.get(i));
                 if (i == indiceReponse && Quiz.getQuizEnCours().estTempsMort()) {
-                    propositions.get(i).setBackgroundColor(Color.argb(50, 0, 255, 0));
+                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
+                } else if (Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1)) {
+                    Log.d("_Quiz", "test:" + (i + 1));
+                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
                 } else {
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
                 }
@@ -183,17 +195,30 @@ public class FragmentQuiz extends Fragment
 
     public void mettreAjourBarreDeProgression() {
         if (Quiz.getQuizEnCours().estTermine()) {
+            barreProgression.getProgressDrawable().setColorFilter(Color.GRAY, android.graphics.PorterDuff.Mode.SRC_IN);
             barreProgression.setProgress(0);
             return;
         }
-        long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
-        if (heureDemarrageQuestion == 0) {
-            barreProgression.setProgress(0);
+        if (Quiz.getQuizEnCours().estTempsMort()) {
+            barreProgression.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
             return;
+        } else if (Quiz.getQuizEnCours().estEnPause()) {
+            barreProgression.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+            return;
+        } else {
+            barreProgression.getProgressDrawable().setColorFilter(Color.CYAN, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        barreProgression.setProgress(getProgression());
+    }
+
+    private int getProgression() {
+        long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
+        if (heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort()) {
+            return 0;
         }
         double tempsProgressionSecondes = Quiz.getQuizEnCours().getTempsQuestionEnCours();
         int pourcentageProgression = (int) (tempsProgressionSecondes / (double) Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
-        barreProgression.setProgress(pourcentageProgression);
+        return pourcentageProgression;
     }
 
     @Override

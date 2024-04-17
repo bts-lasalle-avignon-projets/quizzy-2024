@@ -37,10 +37,13 @@ public class Quiz
     private List<Participant> participants            = new ArrayList<>();
     private List<Ecran>       ecrans                  = new ArrayList<>();
     private boolean           termine                 = true;
+    private boolean           pause                 = false;
     private int               indiceQuestion = 0;
     private long heureDemarrageTempsMort = 0;
+    private long heureDemarrageTempsPause = 0;
+    private long totalTempsPause = 0;
 
-    private static final long tempsEntreQuestion = 5000;
+    public static final long tempsEntreQuestion = 5000;
     private static final String TAG         = "_Quiz";
     private static final Quiz         quizEnCours = new Quiz();
     private long heureDemarrageQuestion = 0;
@@ -56,8 +59,8 @@ public class Quiz
                             FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
                         }
                     });
-                    if (!estTermine() && getTempsQuestionEnCours() >= getQuestionEnCours().getTemps() && !estTempsMort()) {
-                        heureDemarrageTempsMort = System.currentTimeMillis();
+                    if (!estTermine() && getTempsQuestionEnCours() >= getQuestionEnCours().getTemps() && !estTempsMort() && !estEnPause()) {
+                        afficherReponse();
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -189,6 +192,9 @@ public class Quiz
     public void envoyerQuestionSuivante()
     {
         heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause = 0;
         if(indiceQuestion >= questions.size())
         {
             arreter();
@@ -217,6 +223,9 @@ public class Quiz
     public void envoyerQuestionPrecedente()
     {
         heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause = 0;
         renitialiserReponses();
         if(indiceQuestion > 0)
         {
@@ -241,11 +250,13 @@ public class Quiz
         {
             return;
         }
-        participant.setRepondu(true, receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
+        long tempsReponse = receptionReponse.getTempsReponse() + totalTempsPause;
+        participant.setRepondu(true, receptionReponse.getNumeroReponse(), tempsReponse);
+        getQuestionEnCours().ajouterSelection(receptionReponse.getNumeroReponse());
 
         Log.d(TAG,
               "Réponse de " + participant.getNom() + " : Réponse N°" +
-                receptionReponse.getNumeroReponse() + " en " + receptionReponse.getTempsReponse() +
+                receptionReponse.getNumeroReponse() + " en " + tempsReponse +
                 "ms.");
 
         ProtocoleDesactiverBuzzers desactiverBuzzers =
@@ -258,16 +269,19 @@ public class Quiz
             TypeProtocole.INDICATION_REPONSE_PARTICIPANT);
         indicationReponseParticipant.genererTrame(participant.getPID(),
                                                   receptionReponse.getNumeroReponse(),
-                                                  receptionReponse.getTempsReponse());
+                tempsReponse);
         indicationReponseParticipant.envoyer(ecrans);
 
-        FragmentQuiz.getVueActive().mettreAjoutListeParticipants();
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
 
         verifierParticipants();
     }
 
     private void verifierParticipants()
     {
+        if (participants.isEmpty()) {
+            return;
+        }
         for(Participant participant: participants)
         {
             if(!participant.estRepondu())
@@ -275,14 +289,15 @@ public class Quiz
                 return;
             }
         }
-        heureDemarrageQuestion = 0;
 
         ProtocoleAfficherReponse afficherReponse =
           (ProtocoleAfficherReponse)Protocole.getProtocole(TypeProtocole.AFFICHER_REPONSE);
         afficherReponse.genererTrame();
         afficherReponse.envoyer(ecrans);
 
-        heureDemarrageTempsMort = System.currentTimeMillis();
+        if (!estEnPause()) {
+            afficherReponse();
+        }
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
     }
 
@@ -340,5 +355,39 @@ public class Quiz
 
     public boolean estTempsMort() {
         return heureDemarrageTempsMort > 0;
+    }
+
+    public long getDifferenceTempsMort() {
+        return System.currentTimeMillis() - heureDemarrageTempsMort;
+    }
+
+    public void afficherReponse() {
+        heureDemarrageTempsMort = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+    }
+
+    public void basculerPause() {
+        pause = !pause;
+        if (estEnPause()) {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+
+            ProtocoleDesactiverBuzzers activerBuzzers = (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+            activerBuzzers.genererTrame(indiceQuestion);
+            activerBuzzers.envoyer(participants);
+        } else {
+            long tempsPause = System.currentTimeMillis() - heureDemarrageTempsPause;
+            totalTempsPause = System.currentTimeMillis() - heureDemarrageQuestion - tempsPause;
+            heureDemarrageQuestion += tempsPause;
+            heureDemarrageTempsPause = 0;
+            verifierParticipants();
+
+            ProtocoleActiverBuzzers activerBuzzers = (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+            activerBuzzers.genererTrame(indiceQuestion);
+            activerBuzzers.envoyer(participants);
+        }
+    }
+
+    public boolean estEnPause() {
+        return pause;
     }
 }

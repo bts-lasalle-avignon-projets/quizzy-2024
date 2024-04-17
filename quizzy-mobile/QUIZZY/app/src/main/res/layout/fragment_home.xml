@@ -26,7 +26,7 @@
         android:layout_height="62dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
-        android:text="Lancer QCM"
+        android:text="Démarrer"
         app:layout_constraintBottom_toTopOf="@+id/barreProgression"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -44,14 +44,12 @@
         app:layout_constraintVertical_bias="0.157" />
 
     <Button
-        android:id="@+id/btn_arreter"
+        android:id="@+id/btn_pause"
         android:layout_width="158dp"
         android:layout_height="62dp"
-        android:layout_marginEnd="536dp"
-        android:text="Arrêt forcé"
+        android:layout_marginStart="16dp"
+        android:text="Pause"
         app:layout_constraintBottom_toBottomOf="@+id/btn_lancer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toEndOf="@+id/btn_lancer"
         app:layout_constraintTop_toTopOf="@+id/btn_lancer"
         app:layout_constraintVertical_bias="0.0" />
@@ -120,5 +118,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barreProgression"
         app:layout_constraintVertical_bias="0.938" />
+
+    <Button
+        android:id="@+id/btn_arreter"
+        android:layout_width="158dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:text="Abandonner"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_pause"
+        app:layout_constraintTop_toTopOf="@+id/btn_pause"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
