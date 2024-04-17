@@ -17,7 +17,6 @@ CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     verifierBluetooth();
-    demarrerServeur();
 }
 
 /**

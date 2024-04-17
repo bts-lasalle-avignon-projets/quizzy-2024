@@ -23,7 +23,7 @@ void Quizzy::initialiserCommunicationTablette()
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 
-    // @todo Démarrer le serveur
+    communicationTablette->demarrerServeur();
 }
 
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
