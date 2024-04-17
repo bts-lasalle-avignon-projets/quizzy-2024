@@ -48,7 +48,7 @@ public class GestionnaireProtocoles
         {
             case RECEPTION_REPONSE:
                 Quiz.getQuizEnCours().recupererReponseSaisie(peripherique,
-                                                    (ProtocoleReceptionReponse)protocole);
+                                                             (ProtocoleReceptionReponse)protocole);
                 break;
             case ACQUITEMENT:
                 Log.d(TAG, protocole.getClass().getSimpleName());

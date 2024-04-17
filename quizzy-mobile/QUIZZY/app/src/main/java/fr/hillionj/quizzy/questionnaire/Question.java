@@ -11,7 +11,7 @@ public class Question
     private final List<String> reponses;
     private final int          numeroBonneReponse;
     private final int          temps;
-    private List<Integer> selection = new ArrayList<>();
+    private List<Integer>      selection = new ArrayList<>();
 
     public Question(String question, List<String> reponses, int temps)
     {
@@ -44,12 +44,15 @@ public class Question
         return temps;
     }
 
-    public boolean estSelectionnee(int numeroProposition) {
+    public boolean estSelectionnee(int numeroProposition)
+    {
         return selection.contains(numeroProposition);
     }
 
-    public void ajouterSelection(int numeroProposition) {
-        if (!estSelectionnee(numeroProposition)) {
+    public void ajouterSelection(int numeroProposition)
+    {
+        if(!estSelectionnee(numeroProposition))
+        {
             selection.add(numeroProposition);
         }
     }

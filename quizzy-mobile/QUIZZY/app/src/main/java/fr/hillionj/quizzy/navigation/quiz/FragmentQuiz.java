@@ -32,15 +32,15 @@ public class FragmentQuiz extends Fragment
 {
     private FragmentHomeBinding binding;
     private Button              btnLancerQuiz, btnAbandonnerQuiz, btnPauseQuiz;
-    private TextView question;
+    private TextView            question;
     private final List<TextView> propositions = new ArrayList<>();
-    private ListView liste_participants;
-    private ProgressBar barreProgression;
-    private static FragmentQuiz vueActive = null;
+    private ListView             liste_participants;
+    private ProgressBar          barreProgression;
+    private static FragmentQuiz  vueActive                = null;
     private ArrayAdapter<String> adapterListeParticipants = null;
 
     private static final String TAG = "_FragmentQuiz";
-    public static FragmentQuiz    getVueActive()
+    public static FragmentQuiz  getVueActive()
     {
         return vueActive;
     }
@@ -56,17 +56,18 @@ public class FragmentQuiz extends Fragment
 
         vueActive = this;
 
-        btnLancerQuiz     = root.findViewById(R.id.btn_lancer);
-        btnAbandonnerQuiz = root.findViewById(R.id.btn_arreter);
-        btnPauseQuiz = root.findViewById(R.id.btn_pause);
+        btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
+        btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
+        btnPauseQuiz       = root.findViewById(R.id.btn_pause);
         liste_participants = root.findViewById(R.id.liste_participants);
         if(this.adapterListeParticipants == null)
         {
-            this.adapterListeParticipants = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+            this.adapterListeParticipants =
+              new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
         }
         liste_participants.setAdapter(this.adapterListeParticipants);
         Log.d(TAG, "CREATE");
-        question = root.findViewById(R.id.question);
+        question         = root.findViewById(R.id.question);
         barreProgression = root.findViewById(R.id.barreProgression);
         barreProgression.setMax(100);
         propositions.clear();
@@ -110,7 +111,8 @@ public class FragmentQuiz extends Fragment
 
         btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Quiz.getQuizEnCours().basculerPause();
                 mettreAjourEtatBoutons();
             }
@@ -119,30 +121,41 @@ public class FragmentQuiz extends Fragment
         return root;
     }
 
-    public void mettreAjoutListeParticipants() {
+    public void mettreAjoutListeParticipants()
+    {
         Quiz quiz = Quiz.getQuizEnCours();
-        if (quiz.estTermine()) {
+        if(quiz.estTermine())
+        {
             adapterListeParticipants.clear();
             return;
         }
         List<Participant> liste = quiz.getParticipants();
-        if (adapterListeParticipants.getCount() != quiz.getParticipants().size()) {
+        if(adapterListeParticipants.getCount() != quiz.getParticipants().size())
+        {
             adapterListeParticipants.clear();
-            for (Participant participant : liste) {
+            for(Participant participant: liste)
+            {
                 adapterListeParticipants.add(participant.getNom());
                 Log.d("_Quiz", participant.getNom());
             }
         }
-        for (int i = 0; i < liste.size(); i++) {
+        for(int i = 0; i < liste.size(); i++)
+        {
             Participant participantAssocie = liste.get(i);
             adapterListeParticipants.remove(adapterListeParticipants.getItem(i));
             String affichageParticipant = participantAssocie.getNom() + " : ";
-            if (!participantAssocie.estRepondu()) {
+            if(!participantAssocie.estRepondu())
+            {
                 affichageParticipant += "(en attente)";
-            } else if (participantAssocie.getNumeroReponse() == 0) {
+            }
+            else if(participantAssocie.getNumeroReponse() == 0)
+            {
                 affichageParticipant += "Aucune réponse";
-            } else {
-                affichageParticipant += "Réponse N°" + participantAssocie.getNumeroReponse() + " (" + participantAssocie.getTempsReponse() + " ms)";
+            }
+            else
+            {
+                affichageParticipant += "Réponse N°" + participantAssocie.getNumeroReponse() +
+                                        " (" + participantAssocie.getTempsReponse() + " ms)";
             }
             Log.d("_Quiz", affichageParticipant);
             adapterListeParticipants.insert(affichageParticipant, i);
@@ -165,26 +178,37 @@ public class FragmentQuiz extends Fragment
         }
     }
 
-    public void mettreAjourDeroulement() {
-        if (Quiz.getQuizEnCours().estTermine()) {
+    public void mettreAjourDeroulement()
+    {
+        if(Quiz.getQuizEnCours().estTermine())
+        {
             question.setText("");
-            for (TextView proposition : propositions) {
+            for(TextView proposition: propositions)
+            {
                 proposition.setText("");
                 proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
             }
-        } else {
+        }
+        else
+        {
             Question questionEnCours = Quiz.getQuizEnCours().getQuestionEnCours();
             question.setText(questionEnCours.getQuestion());
             List<String> propositionsEnCours = questionEnCours.getReponses();
-            int indiceReponse = questionEnCours.getNumeroBonneReponse() - 1;
-            for (int i = 0; i < propositionsEnCours.size(); i++) {
+            int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
+            for(int i = 0; i < propositionsEnCours.size(); i++)
+            {
                 propositions.get(i).setText(propositionsEnCours.get(i));
-                if (i == indiceReponse && Quiz.getQuizEnCours().estTempsMort()) {
+                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort())
+                {
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
-                } else if (Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1)) {
+                }
+                else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
+                {
                     Log.d("_Quiz", "test:" + (i + 1));
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
-                } else {
+                }
+                else
+                {
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
                 }
             }
@@ -193,31 +217,50 @@ public class FragmentQuiz extends Fragment
         mettreAjoutListeParticipants();
     }
 
-    public void mettreAjourBarreDeProgression() {
-        if (Quiz.getQuizEnCours().estTermine()) {
-            barreProgression.getProgressDrawable().setColorFilter(Color.GRAY, android.graphics.PorterDuff.Mode.SRC_IN);
+    public void mettreAjourBarreDeProgression()
+    {
+        if(Quiz.getQuizEnCours().estTermine())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.GRAY,
+              android.graphics.PorterDuff.Mode.SRC_IN);
             barreProgression.setProgress(0);
             return;
         }
-        if (Quiz.getQuizEnCours().estTempsMort()) {
-            barreProgression.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+        if(Quiz.getQuizEnCours().estTempsMort())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.RED,
+              android.graphics.PorterDuff.Mode.SRC_IN);
             return;
-        } else if (Quiz.getQuizEnCours().estEnPause()) {
-            barreProgression.getProgressDrawable().setColorFilter(Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        else if(Quiz.getQuizEnCours().estEnPause())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.YELLOW,
+              android.graphics.PorterDuff.Mode.SRC_IN);
             return;
-        } else {
-            barreProgression.getProgressDrawable().setColorFilter(Color.CYAN, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        else
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.CYAN,
+              android.graphics.PorterDuff.Mode.SRC_IN);
         }
         barreProgression.setProgress(getProgression());
     }
 
-    private int getProgression() {
+    private int getProgression()
+    {
         long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
-        if (heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort()) {
+        if(heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort())
+        {
             return 0;
         }
         double tempsProgressionSecondes = Quiz.getQuizEnCours().getTempsQuestionEnCours();
-        int pourcentageProgression = (int) (tempsProgressionSecondes / (double) Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
+        int    pourcentageProgression =
+          (int)(tempsProgressionSecondes /
+                (double)Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
         return pourcentageProgression;
     }
 
