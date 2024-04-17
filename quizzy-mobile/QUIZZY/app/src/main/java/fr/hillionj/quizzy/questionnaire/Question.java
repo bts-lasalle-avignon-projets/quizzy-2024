@@ -56,4 +56,9 @@ public class Question
             selection.add(numeroProposition);
         }
     }
+
+    public List<Integer> getSelection()
+    {
+        return selection;
+    }
 }

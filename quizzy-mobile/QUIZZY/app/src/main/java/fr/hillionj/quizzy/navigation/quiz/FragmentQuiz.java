@@ -31,7 +31,7 @@ import fr.hillionj.quizzy.receveurs.speciales.Participant;
 public class FragmentQuiz extends Fragment
 {
     private FragmentHomeBinding binding;
-    private Button              btnLancerQuiz, btnAbandonnerQuiz, btnPauseQuiz;
+    private Button              btnLancerQuiz, btnAbandonnerQuiz, btnPauseQuiz, btnReinitialiser;
     private TextView            question;
     private final List<TextView> propositions = new ArrayList<>();
     private ListView             liste_participants;
@@ -59,6 +59,7 @@ public class FragmentQuiz extends Fragment
         btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
         btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
         btnPauseQuiz       = root.findViewById(R.id.btn_pause);
+        btnReinitialiser   = root.findViewById(R.id.btn_reinitialiser);
         liste_participants = root.findViewById(R.id.liste_participants);
         if(this.adapterListeParticipants == null)
         {
@@ -118,6 +119,15 @@ public class FragmentQuiz extends Fragment
             }
         });
 
+        btnReinitialiser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().reinitialiser();
+                mettreAjourEtatBoutons();
+            }
+        });
+
         return root;
     }
 
@@ -136,7 +146,6 @@ public class FragmentQuiz extends Fragment
             for(Participant participant: liste)
             {
                 adapterListeParticipants.add(participant.getNom());
-                Log.d("_Quiz", participant.getNom());
             }
         }
         for(int i = 0; i < liste.size(); i++)
@@ -157,7 +166,6 @@ public class FragmentQuiz extends Fragment
                 affichageParticipant += "Réponse N°" + participantAssocie.getNumeroReponse() +
                                         " (" + participantAssocie.getTempsReponse() + " ms)";
             }
-            Log.d("_Quiz", affichageParticipant);
             adapterListeParticipants.insert(affichageParticipant, i);
         }
     }
@@ -169,11 +177,13 @@ public class FragmentQuiz extends Fragment
             btnLancerQuiz.setEnabled(true);
             btnPauseQuiz.setEnabled(false);
             btnAbandonnerQuiz.setEnabled(false);
+            btnReinitialiser.setEnabled(false);
         }
         else
         {
             btnLancerQuiz.setEnabled(false);
             btnPauseQuiz.setEnabled(!Quiz.getQuizEnCours().estTempsMort());
+            btnReinitialiser.setEnabled(!Quiz.getQuizEnCours().estTempsMort());
             btnAbandonnerQuiz.setEnabled(!Quiz.getQuizEnCours().estEnPause());
         }
     }
@@ -204,7 +214,6 @@ public class FragmentQuiz extends Fragment
                 }
                 else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
                 {
-                    Log.d("_Quiz", "test:" + (i + 1));
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
                 }
                 else
@@ -248,6 +257,11 @@ public class FragmentQuiz extends Fragment
               android.graphics.PorterDuff.Mode.SRC_IN);
         }
         barreProgression.setProgress(getProgression());
+    }
+
+    public ProgressBar getBarreProgression()
+    {
+        return barreProgression;
     }
 
     private int getProgression()

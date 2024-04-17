@@ -63,15 +63,16 @@ public class Quiz
                             FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
                         }
                     });
-                    if(!estTermine() &&
-                       getTempsQuestionEnCours() >= getQuestionEnCours().getTemps() &&
-                       !estTempsMort() && !estEnPause())
+                    Question questionEnCours = getQuestionEnCours();
+                    if(questionEnCours != null && !estTermine() &&
+                       getTempsQuestionEnCours() >= questionEnCours.getTemps() && !estTempsMort() &&
+                       !estEnPause())
                     {
-                        afficherReponse();
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run()
                             {
+                                afficherReponse();
                                 FragmentQuiz.getVueActive().mettreAjourDeroulement();
                             }
                         });
@@ -349,6 +350,10 @@ public class Quiz
 
     public Question getQuestionEnCours()
     {
+        if(indiceQuestion == 0)
+        {
+            return null;
+        }
         return questions.get(indiceQuestion - 1);
     }
 
@@ -385,6 +390,11 @@ public class Quiz
 
     public void afficherReponse()
     {
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
         heureDemarrageTempsMort = System.currentTimeMillis();
         FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
     }
@@ -396,10 +406,10 @@ public class Quiz
         {
             heureDemarrageTempsPause = System.currentTimeMillis();
 
-            ProtocoleDesactiverBuzzers activerBuzzers =
+            ProtocoleDesactiverBuzzers desactiverBuzzers =
               (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
-            activerBuzzers.genererTrame(indiceQuestion);
-            activerBuzzers.envoyer(participants);
+            desactiverBuzzers.genererTrame(indiceQuestion);
+            desactiverBuzzers.envoyer(participants);
         }
         else
         {
@@ -407,13 +417,58 @@ public class Quiz
             totalTempsPause = System.currentTimeMillis() - heureDemarrageQuestion - tempsPause;
             heureDemarrageQuestion += tempsPause;
             heureDemarrageTempsPause = 0;
-            verifierParticipants();
 
-            ProtocoleActiverBuzzers activerBuzzers =
-              (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
-            activerBuzzers.genererTrame(indiceQuestion);
-            activerBuzzers.envoyer(participants);
+            activerBuzzersParticipantsSansReponse();
+
+            verifierParticipants();
         }
+    }
+
+    public void reinitialiser()
+    {
+        if(estTempsMort())
+        {
+            return;
+        }
+        for(Participant participant: participants)
+        {
+            participant.setRepondu(false, 0, 0);
+        }
+        getQuestionEnCours().getSelection().clear();
+        heureDemarrageQuestion = System.currentTimeMillis();
+        if(estEnPause())
+        {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+        }
+
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        FragmentQuiz.getVueActive().getBarreProgression().setProgress(0);
+        if(!estEnPause())
+        {
+            activerBuzzersParticipantsSansReponse();
+        }
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+    }
+
+    public void activerBuzzersParticipantsSansReponse()
+    {
+        List<Participant> listeParticipants = new ArrayList<>();
+        for(Participant participant: participants)
+        {
+            if(!participant.estRepondu())
+            {
+                listeParticipants.add(participant);
+            }
+        }
+        ProtocoleActiverBuzzers activerBuzzers =
+          (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+        activerBuzzers.genererTrame(indiceQuestion);
+        activerBuzzers.envoyer(listeParticipants);
     }
 
     public boolean estEnPause()
