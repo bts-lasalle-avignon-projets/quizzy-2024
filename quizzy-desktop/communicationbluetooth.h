@@ -36,7 +36,7 @@ class CommunicationBluetooth : public QObject
     QBluetoothLocalDevice appareilLocal; //!< Le périphérique Bluetooth
     QString nomAppareilLocal;            //!< Le nom du périphérique Bluetooth
     QBluetoothAddress
-      adresseAppareilLocal; //!< L'adresse MAC du périphérique Bluetooth
+                      adresseAppareilLocal; //!< L'adresse MAC du périphérique Bluetooth
     QBluetoothServer* serveurBluetooth; //!< Le serveur Bluetooth
     QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
     QBluetoothServiceInfo
@@ -60,9 +60,6 @@ class CommunicationBluetooth : public QObject
     void connecterTablette();
     void deconnecterTablette();
     void recevoirTrame();
-
-    void socketDisconnected();
-    void socketReadyRead();
 
   signals:
     void tabletteConnectee();

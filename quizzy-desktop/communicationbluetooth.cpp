@@ -113,8 +113,8 @@ void CommunicationBluetooth::connecterTablette()
     connect(socketTablette,
             SIGNAL(disconnected()),
             this,
-            SLOT(socketDisconnected()));
-    connect(socketTablette, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
+            SLOT(deconnecterTablette()));
+    connect(socketTablette, SIGNAL(readyRead()), this, SLOT(recevoirTrame()));
 
     emit tabletteConnectee();
 }
@@ -123,25 +123,6 @@ void CommunicationBluetooth::deconnecterTablette()
 {
     qDebug() << Q_FUNC_INFO;
     emit tabletteDeconnectee();
-}
-
-void CommunicationBluetooth::socketDisconnected()
-{
-    qDebug() << Q_FUNC_INFO;
-    connecte = false;
-    emit tabletteDeconnectee();
-}
-
-void CommunicationBluetooth::socketReadyRead()
-{
-    qDebug() << Q_FUNC_INFO;
-    QByteArray donnees;
-
-    while(socketTablette->bytesAvailable())
-    {
-        donnees += socketTablette->readAll();
-        usleep(150000);
-    }
 }
 
 void CommunicationBluetooth::recevoirTrame()
