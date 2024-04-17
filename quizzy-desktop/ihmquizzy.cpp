@@ -2,6 +2,7 @@
 #include "quizzy.h"
 #include "question.h"
 #include "participant.h"
+#include "communicationbluetooth.h"
 #include <QDebug>
 
 /**
