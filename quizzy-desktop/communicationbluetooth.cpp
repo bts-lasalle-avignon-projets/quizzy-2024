@@ -128,59 +128,41 @@ void CommunicationBluetooth::recevoirTrame()
 {
     QByteArray donneesRecues;
 
-    donneesRecues               = socketTablette->readAll();
-    QString StringDonneesRecues = QString(donneesRecues);
-    qDebug() << Q_FUNC_INFO << "donneesRecues" << StringDonneesRecues;
+    donneesRecues        = socketTablette->readAll();
+    const QString& trame = QString(donneesRecues);
+    qDebug() << Q_FUNC_INFO << "donneesRecues" << trame;
 
-    verifierTrame(StringDonneesRecues);
-
-    // @todo Si la trame est valide et complète, alors procéder à son décodage
-    // puis émettre les données extraites de la trame dans un signal.
-    // Chaque signal est associé à un type de trame.
-    // Ces signaux doivent être connectés dans l'objet ihmQuizzy pas dans cette
-    // classe. Les slots peuvent être des méthodes de l'objet ihmQuizzy ou de
-    // l'objet quizzy
+    if(verifierTrame(trame))
+    {
+        // @todo Si la trame est valide et complète, alors procéder à son
+        // décodage puis émettre les données extraites de la trame dans un
+        // signal. Chaque signal est associé à un type de trame. Ces signaux
+        // doivent être connectés dans l'objet ihmQuizzy pas dans cette classe.
+        // Les slots peuvent être des méthodes de l'objet ihmQuizzy ou de
+        // l'objet quizzy
+    }
 }
 
-void CommunicationBluetooth::verifierTrame(QString StringDonneesRecues)
+bool CommunicationBluetooth::verifierTrame(const QString& trame)
 {
     QRegExp regexTrame("^\\$(.*;.*|[^;]*)\n$");
-    if(regexTrame.exactMatch(StringDonneesRecues))
+    if(regexTrame.exactMatch(trame))
     {
         qDebug() << Q_FUNC_INFO << "Trame valide";
 
         // Vérifier le nombre de champs
-        verifierChampsTrame(StringDonneesRecues);
+        verifierChampsTrame(trame);
+        return true;
     }
     else
     {
         qDebug() << Q_FUNC_INFO << "Trame non valide.";
+        return false;
     }
 }
 
-void CommunicationBluetooth::verifierChampsTrame(QString StringDonneesRecues)
+bool CommunicationBluetooth::verifierChampsTrame(const QString& trame)
 {
-    QStringList champs         = StringDonneesRecues.split(';');
-    int         nombreDeChamps = champs.size();
-
-    QMap<QChar, int> formatTrame;
-    formatTrame.insert('L', 1);
-    formatTrame.insert('I', 3);
-    formatTrame.insert('G', 8);
-    formatTrame.insert('T', 1);
-    formatTrame.insert('U', 4);
-    formatTrame.insert('H', 1);
-    formatTrame.insert('S', 1);
-    formatTrame.insert('P', 1);
-    formatTrame.insert('F', 1);
-
-    if(formatTrame.contains(StringDonneesRecues[1]) &&
-       formatTrame.value(StringDonneesRecues[1]) == nombreDeChamps)
-    {
-        qDebug() << Q_FUNC_INFO << "Trame cohérent";
-    }
-    else
-    {
-        qDebug() << Q_FUNC_INFO << "Trame incohérent.";
-    }
+    // @todo Implémenter la vérification des champs de la trame
+    return true;
 }

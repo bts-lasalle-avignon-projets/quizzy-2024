@@ -36,14 +36,14 @@ class CommunicationBluetooth : public QObject
     QBluetoothLocalDevice appareilLocal; //!< Le périphérique Bluetooth
     QString nomAppareilLocal;            //!< Le nom du périphérique Bluetooth
     QBluetoothAddress
-                      adresseAppareilLocal; //!< L'adresse MAC du périphérique Bluetooth
+      adresseAppareilLocal; //!< L'adresse MAC du périphérique Bluetooth
     QBluetoothServer* serveurBluetooth; //!< Le serveur Bluetooth
     QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
     QBluetoothServiceInfo
-      serviceInfo; //!< Les informations sur le service bluetooth
-
-    bool verifierTrame();
+         serviceInfo; //!< Les informations sur le service bluetooth
     bool connecte;
+    bool verifierChampsTrame(const QString& trame);
+    bool verifierTrame(const QString& trame);
 
   public:
     CommunicationBluetooth(QObject* parent = nullptr);
@@ -55,9 +55,6 @@ class CommunicationBluetooth : public QObject
     void rendreAppareilVisible();
     void demarrerServeur();
     void arreterServeur();
-
-    void verifierChampsTrame(QString StringDonneesRecues);
-    void verifierTrame(QString StringDonneesRecues);
 
   private slots:
     void connecterTablette();
