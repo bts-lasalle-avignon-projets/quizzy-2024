@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
+import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
 import fr.hillionj.quizzy.navigation.quiz.FragmentQuiz;
 import fr.hillionj.quizzy.protocole.Protocole;
 import fr.hillionj.quizzy.protocole.TypeProtocole;
@@ -32,37 +34,66 @@ import fr.hillionj.quizzy.receveurs.speciales.Participant;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Quiz
 {
-    private String            theme                   = "Aucun";
-    private List<Question>    questions               = new ArrayList<>();
-    private List<Participant> participants            = new ArrayList<>();
-    private List<Ecran>       ecrans                  = new ArrayList<>();
-    private boolean           termine                 = true;
-    private int               indiceQuestion = 0;
+    private String            theme                    = "Aucun";
+    private List<Question>    questions                = new ArrayList<>();
+    private List<Participant> participants             = new ArrayList<>();
+    private List<Ecran>       ecrans                   = new ArrayList<>();
+    private boolean           termine                  = true;
+    private boolean           pause                    = false;
+    private int               indiceQuestion           = 0;
+    private long              heureDemarrageTempsMort  = 0;
+    private long              heureDemarrageTempsPause = 0;
+    private long              totalTempsPause          = 0;
 
-    private static final String TAG         = "_Quiz";
-    private static final Quiz         quizEnCours = new Quiz();
-    private long heureDemarrageQuestion = 0;
+    public static final long    tempsEntreQuestion     = 5000;
+    private static final String TAG                    = "_Quiz";
+    private static final Quiz   quizEnCours            = new Quiz();
+    private long                heureDemarrageQuestion = 0;
 
-    public Quiz() {
+    public Quiz()
+    {
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
             @Override
-            public void run() {
-                try {
+            public void run()
+            {
+                try
+                {
                     FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
                         }
                     });
-                    if (!estTermine() && getTempsQuestionEnCours() >= getQuestionEnCours().getTemps()) {
+                    Question questionEnCours = getQuestionEnCours();
+                    if(questionEnCours != null && !estTermine() &&
+                       getTempsQuestionEnCours() >= questionEnCours.getTemps() && !estTempsMort() &&
+                       !estEnPause())
+                    {
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                             @Override
-                            public void run() {
+                            public void run()
+                            {
+                                afficherReponse();
+                                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+                            }
+                        });
+                    }
+                    if(estTempsMort() &&
+                       System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion)
+                    {
+                        heureDemarrageTempsMort = 0;
+                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run()
+                            {
                                 envoyerQuestionSuivante();
                             }
                         });
                     }
-                } catch (Exception e) {
+                }
+                catch(Exception e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -76,13 +107,8 @@ public class Quiz
 
     public void genererQuiz(String theme, int nombreQuestions)
     {
-        // Tests questions:
-        questions.add(new Question("Quel est le meilleur OS",
-                                   Arrays.asList("Minitel", "Windows", "Mac", "Linux"),
-                                   15));
-        questions.add(new Question("Quel est l'autheur de l'application",
-                                   Arrays.asList("Jules", "Thomas", "Red", "Tvaira"),
-                                   30));
+        questions.clear();
+        questions.addAll(BaseDeDonnees.getInstance(null).getQuestionnaire(FragmentParametres.getVueActive().getNombreQuestion(), FragmentParametres.getVueActive().getThemeChoisi()));
     }
 
     public List<String> getThemes()
@@ -105,7 +131,7 @@ public class Quiz
         termine = false;
         ecrans.clear();
         for(Peripherique peripherique:
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null).getPeripheriquesConnectes())
+            GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriquesConnectes())
         {
             if(peripherique.getNom().startsWith("quizzy-e"))
             {
@@ -159,7 +185,7 @@ public class Quiz
 
         participants.clear();
         questions.clear();
-        termine                 = true;
+        termine        = true;
         indiceQuestion = 0;
 
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
@@ -170,12 +196,16 @@ public class Quiz
     {
         for(Participant participant: participants)
         {
-            participant.setRepondu(false);
+            participant.setRepondu(false, 0, 0);
         }
     }
 
     public void envoyerQuestionSuivante()
     {
+        heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause        = 0;
         if(indiceQuestion >= questions.size())
         {
             arreter();
@@ -203,6 +233,10 @@ public class Quiz
 
     public void envoyerQuestionPrecedente()
     {
+        heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause        = 0;
         renitialiserReponses();
         if(indiceQuestion > 0)
         {
@@ -220,19 +254,21 @@ public class Quiz
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
     }
 
-    public void recupererReponseSaisie(Peripherique peripherique, ProtocoleReceptionReponse receptionReponse)
+    public void recupererReponseSaisie(Peripherique              peripherique,
+                                       ProtocoleReceptionReponse receptionReponse)
     {
         Participant participant = getParticipant(peripherique);
         if(participant == null)
         {
             return;
         }
-        participant.setRepondu(true);
+        long tempsReponse = receptionReponse.getTempsReponse() + totalTempsPause;
+        participant.setRepondu(true, receptionReponse.getNumeroReponse(), tempsReponse);
+        getQuestionEnCours().ajouterSelection(receptionReponse.getNumeroReponse());
 
         Log.d(TAG,
               "Réponse de " + participant.getNom() + " : Réponse N°" +
-                receptionReponse.getNumeroReponse() + " en " + receptionReponse.getTempsReponse() +
-                "ms.");
+                receptionReponse.getNumeroReponse() + " en " + tempsReponse + "ms.");
 
         ProtocoleDesactiverBuzzers desactiverBuzzers =
           (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
@@ -244,14 +280,20 @@ public class Quiz
             TypeProtocole.INDICATION_REPONSE_PARTICIPANT);
         indicationReponseParticipant.genererTrame(participant.getPID(),
                                                   receptionReponse.getNumeroReponse(),
-                                                  receptionReponse.getTempsReponse());
+                                                  tempsReponse);
         indicationReponseParticipant.envoyer(ecrans);
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
 
         verifierParticipants();
     }
 
     private void verifierParticipants()
     {
+        if(participants.isEmpty())
+        {
+            return;
+        }
         for(Participant participant: participants)
         {
             if(!participant.estRepondu())
@@ -259,14 +301,17 @@ public class Quiz
                 return;
             }
         }
-        heureDemarrageQuestion = 0;
 
         ProtocoleAfficherReponse afficherReponse =
           (ProtocoleAfficherReponse)Protocole.getProtocole(TypeProtocole.AFFICHER_REPONSE);
         afficherReponse.genererTrame();
         afficherReponse.envoyer(ecrans);
 
-        envoyerQuestionSuivante();
+        if(!estEnPause())
+        {
+            afficherReponse();
+        }
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
     }
 
     private Participant getParticipant(Peripherique peripherique)
@@ -300,20 +345,131 @@ public class Quiz
         return termine;
     }
 
-    public Question getQuestionEnCours() {
+    public Question getQuestionEnCours()
+    {
+        if(indiceQuestion == 0)
+        {
+            return null;
+        }
         return questions.get(indiceQuestion - 1);
     }
 
-    public long getHeureDemarrageQuestion() {
+    public long getHeureDemarrageQuestion()
+    {
         return heureDemarrageQuestion;
     }
 
-    public double getTempsQuestionEnCours() {
-        if (heureDemarrageQuestion == 0) {
+    public double getTempsQuestionEnCours()
+    {
+        if(heureDemarrageQuestion == 0)
+        {
             return -1;
         }
         long tempActuelle = System.currentTimeMillis();
-        long difference = tempActuelle - heureDemarrageQuestion;
-        return (double) difference / 1000.0;
+        long difference   = tempActuelle - heureDemarrageQuestion;
+        return (double)difference / 1000.0;
+    }
+
+    public List<Participant> getParticipants()
+    {
+        return participants;
+    }
+
+    public boolean estTempsMort()
+    {
+        return heureDemarrageTempsMort > 0;
+    }
+
+    public long getDifferenceTempsMort()
+    {
+        return System.currentTimeMillis() - heureDemarrageTempsMort;
+    }
+
+    public void afficherReponse()
+    {
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        heureDemarrageTempsMort = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+    }
+
+    public void basculerPause()
+    {
+        pause = !pause;
+        if(estEnPause())
+        {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+
+            ProtocoleDesactiverBuzzers desactiverBuzzers =
+              (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+            desactiverBuzzers.genererTrame(indiceQuestion);
+            desactiverBuzzers.envoyer(participants);
+        }
+        else
+        {
+            long tempsPause = System.currentTimeMillis() - heureDemarrageTempsPause;
+            totalTempsPause = System.currentTimeMillis() - heureDemarrageQuestion - tempsPause;
+            heureDemarrageQuestion += tempsPause;
+            heureDemarrageTempsPause = 0;
+
+            activerBuzzersParticipantsSansReponse();
+
+            verifierParticipants();
+        }
+    }
+
+    public void reinitialiser()
+    {
+        if(estTempsMort())
+        {
+            return;
+        }
+        for(Participant participant: participants)
+        {
+            participant.setRepondu(false, 0, 0);
+        }
+        getQuestionEnCours().getSelection().clear();
+        heureDemarrageQuestion = System.currentTimeMillis();
+        if(estEnPause())
+        {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+        }
+
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        FragmentQuiz.getVueActive().getBarreProgression().setProgress(0);
+        if(!estEnPause())
+        {
+            activerBuzzersParticipantsSansReponse();
+        }
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+    }
+
+    public void activerBuzzersParticipantsSansReponse()
+    {
+        List<Participant> listeParticipants = new ArrayList<>();
+        for(Participant participant: participants)
+        {
+            if(!participant.estRepondu())
+            {
+                listeParticipants.add(participant);
+            }
+        }
+        ProtocoleActiverBuzzers activerBuzzers =
+          (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+        activerBuzzers.genererTrame(indiceQuestion);
+        activerBuzzers.envoyer(listeParticipants);
+    }
+
+    public boolean estEnPause()
+    {
+        return pause;
     }
 }

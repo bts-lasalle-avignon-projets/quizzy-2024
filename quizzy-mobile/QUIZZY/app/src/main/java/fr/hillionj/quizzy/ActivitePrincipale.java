@@ -45,8 +45,7 @@ public class ActivitePrincipale extends AppCompatActivity
     private ActivityMainBinding   binding;
     private GestionnaireBluetooth gestionnaireBluetooth;
     // Exemple d'accès à la base de données
-    private BaseDeDonnees  baseDeDonnees;    //!< Association avec la base de donnees
-    private Vector<String> nomsParticipants; // test
+    private BaseDeDonnees baseDeDonnees; //!< Association avec la base de donnees
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -62,9 +61,8 @@ public class ActivitePrincipale extends AppCompatActivity
         initialiserCommunication();
 
         // Test BDD
-        /*baseDeDonnees    = BaseDeDonnees.getInstance(this);
-        nomsParticipants = baseDeDonnees.getNomsParticipants();*/
-        Log.d(TAG, "nomsParticipants = " + nomsParticipants);
+        baseDeDonnees = BaseDeDonnees.getInstance(this);
+        Log.d(TAG, baseDeDonnees.getThemes().toString());
     }
 
     /**
@@ -146,8 +144,7 @@ public class ActivitePrincipale extends AppCompatActivity
 
     private void initialiserCommunication()
     {
-        Handler handler =
-          GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
-        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
+        Handler handler = GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
+        gestionnaireBluetooth = GestionnaireBluetooth.initialiser(this, handler);
     }
 }

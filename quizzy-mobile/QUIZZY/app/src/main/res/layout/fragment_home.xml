@@ -25,30 +25,30 @@
         android:layout_width="158dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Lancer QCM"
+        android:text="Démarrer"
+        app:layout_constraintBottom_toTopOf="@+id/barreProgression"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/barreProgression"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="1164dp"
         android:layout_height="21dp"
-        android:layout_marginTop="144dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
 
     <Button
-        android:id="@+id/btn_arreter"
+        android:id="@+id/btn_pause"
         android:layout_width="158dp"
         android:layout_height="62dp"
-        android:layout_marginEnd="536dp"
-        android:text="Arrêt forcé"
+        android:layout_marginStart="16dp"
+        android:text="Pause"
         app:layout_constraintBottom_toBottomOf="@+id/btn_lancer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toEndOf="@+id/btn_lancer"
         app:layout_constraintTop_toTopOf="@+id/btn_lancer"
         app:layout_constraintVertical_bias="0.0" />
@@ -106,5 +106,36 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/reponse2"
         app:layout_constraintTop_toBottomOf="@+id/reponse2" />
+
+    <ListView
+        android:id="@+id/liste_participants"
+        android:layout_width="480dp"
+        android:layout_height="256dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barreProgression"
+        app:layout_constraintVertical_bias="0.938" />
+
+    <Button
+        android:id="@+id/btn_arreter"
+        android:layout_width="158dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:text="Abandonner"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_pause"
+        app:layout_constraintStart_toEndOf="@+id/btn_pause"
+        app:layout_constraintTop_toTopOf="@+id/btn_pause" />
+
+    <Button
+        android:id="@+id/btn_reinitialiser"
+        android:layout_width="158dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="16dp"
+        android:text="Réinitialiser"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_arreter"
+        app:layout_constraintStart_toEndOf="@+id/btn_arreter"
+        app:layout_constraintTop_toTopOf="@+id/btn_arreter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

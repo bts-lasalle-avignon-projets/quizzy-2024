@@ -37,14 +37,8 @@ public class FragmentPupitre extends Fragment
         binding   = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initialiserVue(root);
-
-        if(vueActive == null)
-        {
-            vueActive = this;
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiser();
-        }
         vueActive = this;
+        initialiserVue(root);
         return root;
     }
 
@@ -74,10 +68,10 @@ public class FragmentPupitre extends Fragment
             btnConnecter.setEnabled(vueActive.btnConnecter.isEnabled());
             btnDeconnecter.setEnabled(vueActive.btnDeconnecter.isEnabled());
             spinnerListePeripheriques.setEnabled(vueActive.spinnerListePeripheriques.isEnabled());
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
-              .initialiserSpinner(spinnerListePeripheriques);
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
-              .initialiserListView(listViewPeripheriquesConnectes);
+            GestionnaireBluetooth.getGestionnaireBluetooth()
+              .mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
+            GestionnaireBluetooth.getGestionnaireBluetooth()
+              .mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
         }
     }
 
@@ -111,12 +105,12 @@ public class FragmentPupitre extends Fragment
     public void onClick(View v)
     {
         if(v.getId() == R.id.bouton_connecter &&
-           GestionnaireBluetooth.getGestionnaireBluetooth(null, null).connecter())
+           GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
         {
             desactiverBoutons();
         }
         else if(v.getId() == R.id.bouton_deconnecter &&
-                GestionnaireBluetooth.getGestionnaireBluetooth(null, null).deconnecter())
+                GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
         {
             activerBoutonConnecter();
         }

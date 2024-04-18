@@ -48,7 +48,7 @@ public class GestionnaireProtocoles
         {
             case RECEPTION_REPONSE:
                 Quiz.getQuizEnCours().recupererReponseSaisie(peripherique,
-                                                    (ProtocoleReceptionReponse)protocole);
+                                                             (ProtocoleReceptionReponse)protocole);
                 break;
             case ACQUITEMENT:
                 Log.d(TAG, protocole.getClass().getSimpleName());
@@ -71,7 +71,7 @@ public class GestionnaireProtocoles
                 {
                     case CODE_CONNEXION_BLUETOOTH:
                         FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                        GestionnaireBluetooth.getGestionnaireBluetooth()
                           .ajouterPeripheriqueConnecter((int)msg.obj);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
@@ -87,7 +87,7 @@ public class GestionnaireProtocoles
                         {
                             Protocole    protocole = Protocole.traiterTrame(trame + "\n");
                             Peripherique peripherique =
-                              GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                              GestionnaireBluetooth.getGestionnaireBluetooth()
                                 .getPeripheriques()
                                 .get(msg.arg1);
                             if(protocole != null)

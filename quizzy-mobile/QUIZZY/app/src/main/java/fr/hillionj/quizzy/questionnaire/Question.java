@@ -1,5 +1,6 @@
 package fr.hillionj.quizzy.questionnaire;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Question
     private final List<String> reponses;
     private final int          numeroBonneReponse;
     private final int          temps;
+    private List<Integer>      selection = new ArrayList<>();
 
     public Question(String question, List<String> reponses, int temps)
     {
@@ -40,5 +42,23 @@ public class Question
     public int getTemps()
     {
         return temps;
+    }
+
+    public boolean estSelectionnee(int numeroProposition)
+    {
+        return selection.contains(numeroProposition);
+    }
+
+    public void ajouterSelection(int numeroProposition)
+    {
+        if(!estSelectionnee(numeroProposition))
+        {
+            selection.add(numeroProposition);
+        }
+    }
+
+    public List<Integer> getSelection()
+    {
+        return selection;
     }
 }
