@@ -128,12 +128,11 @@ void CommunicationBluetooth::recevoirTrame()
 {
     QByteArray donneesRecues;
 
-    donneesRecues = socketTablette->readAll();
+    donneesRecues               = socketTablette->readAll();
+    QString StringDonneesRecues = QString(donneesRecues);
+    qDebug() << Q_FUNC_INFO << "donneesRecues" << StringDonneesRecues;
 
-    donneesRecues += QString(donneesRecues.data());
-    qDebug() << Q_FUNC_INFO << "donneesRecues" << donneesRecues;
-
-    // @todo Vérifier la trame
+    verifierTrame(StringDonneesRecues);
 
     // @todo Si la trame est valide et complète, alors procéder à son décodage
     // puis émettre les données extraites de la trame dans un signal.
@@ -141,4 +140,47 @@ void CommunicationBluetooth::recevoirTrame()
     // Ces signaux doivent être connectés dans l'objet ihmQuizzy pas dans cette
     // classe. Les slots peuvent être des méthodes de l'objet ihmQuizzy ou de
     // l'objet quizzy
+}
+
+void CommunicationBluetooth::verifierTrame(QString StringDonneesRecues)
+{
+    QRegExp regexTrame("^\\$(.*;.*|[^;]*)\n$");
+    if(regexTrame.exactMatch(StringDonneesRecues))
+    {
+        qDebug() << Q_FUNC_INFO << "Trame valide";
+
+        // Vérifier le nombre de champs
+        verifierChampsTrame(StringDonneesRecues);
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "Trame non valide.";
+    }
+}
+
+void CommunicationBluetooth::verifierChampsTrame(QString StringDonneesRecues)
+{
+    QStringList champs         = StringDonneesRecues.split(';');
+    int         nombreDeChamps = champs.size();
+
+    QMap<QChar, int> formatTrame;
+    formatTrame.insert('L', 1);
+    formatTrame.insert('I', 3);
+    formatTrame.insert('G', 8);
+    formatTrame.insert('T', 1);
+    formatTrame.insert('U', 4);
+    formatTrame.insert('H', 1);
+    formatTrame.insert('S', 1);
+    formatTrame.insert('P', 1);
+    formatTrame.insert('F', 1);
+
+    if(formatTrame.contains(StringDonneesRecues[1]) &&
+       formatTrame.value(StringDonneesRecues[1]) == nombreDeChamps)
+    {
+        qDebug() << Q_FUNC_INFO << "Trame cohérent";
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "Trame incohérent.";
+    }
 }

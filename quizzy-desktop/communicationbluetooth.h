@@ -56,6 +56,9 @@ class CommunicationBluetooth : public QObject
     void demarrerServeur();
     void arreterServeur();
 
+    void verifierChampsTrame(QString StringDonneesRecues);
+    void verifierTrame(QString StringDonneesRecues);
+
   private slots:
     void connecterTablette();
     void deconnecterTablette();
