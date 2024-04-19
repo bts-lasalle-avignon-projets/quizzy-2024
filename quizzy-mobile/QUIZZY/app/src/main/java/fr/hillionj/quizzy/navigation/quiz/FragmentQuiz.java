@@ -24,6 +24,7 @@ import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentHomeBinding;
 import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
+import fr.hillionj.quizzy.questionnaire.EtapeQuiz;
 import fr.hillionj.quizzy.questionnaire.Question;
 import fr.hillionj.quizzy.questionnaire.Quiz;
 import fr.hillionj.quizzy.receveurs.speciales.Ecran;
@@ -175,6 +176,7 @@ public class FragmentQuiz extends Fragment
 
     public void mettreAjourEtatBoutons()
     {
+        Log.d(TAG, "estTempsMort : " + Quiz.getQuizEnCours().estTempsMort());
         if(Quiz.getQuizEnCours().estTermine())
         {
             btnLancerQuiz.setEnabled(true);
@@ -211,7 +213,7 @@ public class FragmentQuiz extends Fragment
             for(int i = 0; i < propositionsEnCours.size(); i++)
             {
                 propositions.get(i).setText(propositionsEnCours.get(i));
-                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort())
+                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() && Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
                 {
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
                 }

@@ -33,72 +33,23 @@ import fr.hillionj.quizzy.receveurs.speciales.Participant;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Quiz
 {
-    private String            theme                    = "Aucun";
-    private List<Question>    questions                = new ArrayList<>();
-    private List<Participant> participants             = new ArrayList<>();
-    private List<Ecran>       ecrans                   = new ArrayList<>();
-    private boolean           termine                  = true;
-    private boolean           pause                    = false;
+    private final List<Question>    questions                = new ArrayList<>();
+    private final List<Participant> participants             = new ArrayList<>();
+    private final List<Ecran>       ecrans                   = new ArrayList<>();
     private int               indiceQuestion           = 0;
-    private long              heureDemarrageTempsMort  = 0;
+    public long              heureDemarrageTempsMort  = 0;
     private long              heureDemarrageTempsPause = 0;
     private long              totalTempsPause          = 0;
+    private long              heureDemarrageQuestion = 0;
+    private EtapeQuiz etape = EtapeQuiz.ARRET;
 
-    public static final long    tempsEntreQuestion     = 5000;
+    public static final long    tempsEntreQuestion     = 2000;
     private static final String TAG                    = "_Quiz";
     private static final Quiz   quizEnCours            = new Quiz();
-    private long                heureDemarrageQuestion = 0;
 
     public Quiz()
     {
-        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    if (FragmentQuiz.getVueActive() != null && FragmentQuiz.getVueActive().getActivity() != null) {
-                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run()
-                            {
-                                FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
-                            }
-                        });
-                    }
-                    Question questionEnCours = getQuestionEnCours();
-                    if(questionEnCours != null && !estTermine() &&
-                       getTempsQuestionEnCours() >= questionEnCours.getTemps() && !estTempsMort() &&
-                       !estEnPause() && FragmentQuiz.getVueActive() != null && FragmentQuiz.getVueActive().getActivity() != null)
-                    {
-                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run()
-                            {
-                                afficherReponse();
-                                FragmentQuiz.getVueActive().mettreAjourDeroulement();
-                            }
-                        });
-                    }
-                    if(estTempsMort() &&
-                       System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion && FragmentQuiz.getVueActive() != null)
-                    {
-                        heureDemarrageTempsMort = 0;
-                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run()
-                            {
-                                envoyerQuestionSuivante();
-                            }
-                        });
-                    }
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }, 0, 50, TimeUnit.MILLISECONDS);
+        new WatchDog(this);
     }
 
     public static Quiz getQuizEnCours()
@@ -112,16 +63,6 @@ public class Quiz
         questions.addAll(BaseDeDonnees.getInstance().getQuestionnaire(FragmentParametres.getNombreQuestion(), FragmentParametres.getThemeChoisi()));
     }
 
-    public List<String> getThemes()
-    {
-        return null;
-    }
-
-    public String getTheme()
-    {
-        return theme;
-    }
-
     public List<Question> getQuestions()
     {
         return questions;
@@ -129,7 +70,6 @@ public class Quiz
 
     public void demarrer()
     {
-        termine = false;
         ecrans.clear();
         for(Peripherique peripherique:
             GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriquesConnectes())
@@ -191,7 +131,7 @@ public class Quiz
 
         participants.clear();
         questions.clear();
-        termine        = true;
+        setEtape(EtapeQuiz.ARRET);
         indiceQuestion = 0;
 
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
@@ -208,6 +148,7 @@ public class Quiz
 
     public void envoyerQuestionSuivante()
     {
+        setEtape(EtapeQuiz.ATTENTE);
         heureDemarrageTempsMort = 0;
         FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
         heureDemarrageQuestion = 0;
@@ -239,6 +180,7 @@ public class Quiz
 
     public void envoyerQuestionPrecedente()
     {
+        setEtape(EtapeQuiz.ATTENTE);
         heureDemarrageTempsMort = 0;
         FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
         heureDemarrageQuestion = 0;
@@ -272,10 +214,6 @@ public class Quiz
         participant.setRepondu(true, receptionReponse.getNumeroReponse(), tempsReponse);
         getQuestionEnCours().ajouterSelection(receptionReponse.getNumeroReponse());
 
-        Log.d(TAG,
-              "Réponse de " + participant.getNom() + " : Réponse N°" +
-                receptionReponse.getNumeroReponse() + " en " + tempsReponse + "ms.");
-
         ProtocoleDesactiverBuzzers desactiverBuzzers =
           (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
         desactiverBuzzers.genererTrame(indiceQuestion);
@@ -292,6 +230,8 @@ public class Quiz
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
 
         verifierParticipants();
+
+        GestionnaireBruitage.getGestionnaireBruitage().jouerSelectionReponse();
     }
 
     private void verifierParticipants()
@@ -315,9 +255,11 @@ public class Quiz
 
         if(!estEnPause())
         {
-            afficherReponse();
+            setEtape(EtapeQuiz.AFFICHAGE_REPONSE);
+            demarrerTempsMort();
         }
         FragmentQuiz.getVueActive().mettreAjourDeroulement();
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
     }
 
     private Participant getParticipant(Peripherique peripherique)
@@ -344,11 +286,13 @@ public class Quiz
           (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
         activerBuzzers.genererTrame(indiceQuestion + 1);
         activerBuzzers.envoyer(participants);
+
+        GestionnaireBruitage.getGestionnaireBruitage().jouerNouvelleQuestion();
     }
 
     public boolean estTermine()
     {
-        return termine;
+        return etape == EtapeQuiz.ARRET;
     }
 
     public Question getQuestionEnCours()
@@ -398,13 +342,34 @@ public class Quiz
         desactiverBuzzers.genererTrame(indiceQuestion);
         desactiverBuzzers.envoyer(participants);
 
-        heureDemarrageTempsMort = System.currentTimeMillis();
+        setEtape(EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE);
+        demarrerTempsMort();
         FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+
+        boolean estVraie = false, estFausse = false;
+        for (Participant participant : participants) {
+            if (participant.getNumeroReponse() == getQuestionEnCours().getNumeroBonneReponse()) {
+                estVraie = true;
+            } else if (participant.getNumeroReponse() != 0) {
+                estFausse = true;
+            }
+        }
+        if (estVraie && estFausse) {
+            GestionnaireBruitage.getGestionnaireBruitage().jouerReponsesVaries();
+        } else if (estFausse) {
+            GestionnaireBruitage.getGestionnaireBruitage().jouerMauvaiseReponse();
+        } else {
+            GestionnaireBruitage.getGestionnaireBruitage().jouerBonneReponse();
+        }
     }
 
     public void basculerPause()
     {
-        pause = !pause;
+        if (etape == EtapeQuiz.PAUSE) {
+            setEtape(EtapeQuiz.ATTENTE);
+        } else {
+            setEtape(EtapeQuiz.PAUSE);
+        }
         if(estEnPause())
         {
             heureDemarrageTempsPause = System.currentTimeMillis();
@@ -476,6 +441,18 @@ public class Quiz
 
     public boolean estEnPause()
     {
-        return pause;
+        return etape == EtapeQuiz.PAUSE;
+    }
+
+    public void demarrerTempsMort() {
+        heureDemarrageTempsMort = System.currentTimeMillis();
+    }
+
+    public void setEtape(EtapeQuiz etape) {
+        this.etape = etape;
+    }
+
+    public EtapeQuiz getEtape() {
+        return etape;
     }
 }

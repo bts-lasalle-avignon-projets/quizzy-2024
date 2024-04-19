@@ -24,6 +24,7 @@ import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
+import fr.hillionj.quizzy.questionnaire.GestionnaireBruitage;
 
 /**
  * @class EcranPrincipal
@@ -52,6 +53,7 @@ public class ActivitePrincipale extends AppCompatActivity
         if (!estInitialiser()) {
             initialiserCommunication();
             BaseDeDonnees.initialiser(this);
+            GestionnaireBruitage.initialiser(this);
         }
 
         GestionnaireBluetooth.getGestionnaireBluetooth().setActivite(this);
