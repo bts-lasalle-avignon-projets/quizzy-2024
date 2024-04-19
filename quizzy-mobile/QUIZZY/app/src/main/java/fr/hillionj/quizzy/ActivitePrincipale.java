@@ -25,8 +25,6 @@ import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 
-import java.util.Vector;
-
 /**
  * @class EcranPrincipal
  * @brief L'activité principale
@@ -35,17 +33,9 @@ import java.util.Vector;
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class ActivitePrincipale extends AppCompatActivity
 {
-    /**
-     * Constantes
-     */
     private static final String TAG = "_ActivitePrincipale"; //!< TAG pour les logs (cf. Logcat)
-    /**
-     * Attributs
-     */
+
     private ActivityMainBinding   binding;
-    private GestionnaireBluetooth gestionnaireBluetooth;
-    // Exemple d'accès à la base de données
-    private BaseDeDonnees baseDeDonnees; //!< Association avec la base de donnees
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -58,11 +48,13 @@ public class ActivitePrincipale extends AppCompatActivity
         Log.d(TAG, "onCreate()");
 
         initialiserActivite();
-        initialiserCommunication();
 
-        // Test BDD
-        baseDeDonnees = BaseDeDonnees.getInstance(this);
-        Log.d(TAG, baseDeDonnees.getThemes().toString());
+        if (!estInitialiser()) {
+            initialiserCommunication();
+            BaseDeDonnees.initialiser(this);
+        }
+
+        GestionnaireBluetooth.getGestionnaireBluetooth().setActivite(this);
     }
 
     /**
@@ -116,10 +108,6 @@ public class ActivitePrincipale extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
-        for(Peripherique peripherique: gestionnaireBluetooth.getPeripheriquesConnectes())
-        {
-            peripherique.deconnecter();
-        }
     }
 
     private void initialiserActivite()
@@ -145,6 +133,10 @@ public class ActivitePrincipale extends AppCompatActivity
     private void initialiserCommunication()
     {
         Handler handler = GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
-        gestionnaireBluetooth = GestionnaireBluetooth.initialiser(this, handler);
+        GestionnaireBluetooth.initialiser(this, handler);
+    }
+
+    public boolean estInitialiser() {
+        return GestionnaireBluetooth.getGestionnaireBluetooth() != null;
     }
 }

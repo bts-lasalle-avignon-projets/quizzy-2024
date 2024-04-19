@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentNotificationsBinding;
-import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -45,14 +43,14 @@ public class FragmentParametres extends Fragment
     private static List<String> getNomsParticipants() {
         List<String> nomsParticipants = new ArrayList<>();
         nomsParticipants.add("Aucun");
-        nomsParticipants.addAll(BaseDeDonnees.getInstance(null).getNomsParticipants());
+        nomsParticipants.addAll(BaseDeDonnees.getInstance().getNomsParticipants());
         return nomsParticipants;
     }
 
     private static List<String> getThemes() {
         List<String> listeThemes = new ArrayList<>();
         listeThemes.add("Aléatoire");
-        listeThemes.addAll(BaseDeDonnees.getInstance(null).getThemes());
+        listeThemes.addAll(BaseDeDonnees.getInstance().getThemes());
         return listeThemes;
     }
 
@@ -125,15 +123,15 @@ public class FragmentParametres extends Fragment
         spinner_themes.setAdapter(adapterTheme);
     }
 
-    public int getNombreQuestion() {
+    public static int getNombreQuestion() {
         return nombreQuestion;
     }
 
-    public String getThemeChoisi() {
-        if (spinner_themes.getSelectedItemPosition() == 0) {
+    public static String getThemeChoisi() {
+        if (vueActive == null || vueActive.spinner_themes.getSelectedItemPosition() == 0) {
             return null;
         }
-        return (String) spinner_themes.getSelectedItem();
+        return (String) vueActive.spinner_themes.getSelectedItem();
     }
 
     @Override
@@ -157,7 +155,7 @@ public class FragmentParametres extends Fragment
         return false;
     }
 
-    public Participant getParticipant(Peripherique peripherique) {
+    public static Participant getParticipant(Peripherique peripherique) {
         for (Participant participant : participants) {
             if (participant.getPeripherique() == peripherique) {
                 return participant;

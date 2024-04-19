@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
+import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -82,37 +83,35 @@ public class FragmentPupitre extends Fragment
         binding = null;
     }
 
-    public void desactiverBoutons()
-    {
-        btnConnecter.setEnabled(false);
-        btnDeconnecter.setEnabled(false);
-        spinnerListePeripheriques.setEnabled(false);
+    public void mettreAjourEtatBoutons() {
+        Peripherique peripheriqueSelectionne = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriqueSelectionne();
+        if(peripheriqueSelectionne.estConnecte())
+        {
+            btnConnecter.setEnabled(false);
+            btnDeconnecter.setEnabled(true);
+            spinnerListePeripheriques.setEnabled(true);
+        /*}
+        else if (peripheriqueSelectionne.seConnecte()) {
+            btnConnecter.setEnabled(false);
+            btnDeconnecter.setEnabled(false);
+            spinnerListePeripheriques.setEnabled(false);*/
+        } else
+        {
+            btnConnecter.setEnabled(true);
+            btnDeconnecter.setEnabled(false);
+            spinnerListePeripheriques.setEnabled(true);
+        }
     }
 
-    public void activerBoutonConnecter()
-    {
-        btnConnecter.setEnabled(true);
-        btnDeconnecter.setEnabled(false);
-        spinnerListePeripheriques.setEnabled(true);
-    }
-
-    public void activerBoutonDeconnecter()
-    {
-        btnConnecter.setEnabled(false);
-        btnDeconnecter.setEnabled(true);
-        spinnerListePeripheriques.setEnabled(true);
-    }
     public void onClick(View v)
     {
-        if(v.getId() == R.id.bouton_connecter &&
-           GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
+        if(v.getId() == R.id.bouton_connecter && GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
         {
-            desactiverBoutons();
+            mettreAjourEtatBoutons();
         }
-        else if(v.getId() == R.id.bouton_deconnecter &&
-                GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
+        else if(v.getId() == R.id.bouton_deconnecter && GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
         {
-            activerBoutonConnecter();
+            mettreAjourEtatBoutons();
         }
     }
 }

@@ -26,6 +26,7 @@ import fr.hillionj.quizzy.databinding.FragmentHomeBinding;
 import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
 import fr.hillionj.quizzy.questionnaire.Question;
 import fr.hillionj.quizzy.questionnaire.Quiz;
+import fr.hillionj.quizzy.receveurs.speciales.Ecran;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -84,7 +85,6 @@ public class FragmentQuiz extends Fragment
             @Override
             public void onClick(View view)
             {
-                // Test QUIZ
                 Quiz quiz = Quiz.getQuizEnCours();
                 for(Peripherique peripherique:
                     GestionnaireBluetooth.getGestionnaireBluetooth()
@@ -92,7 +92,10 @@ public class FragmentQuiz extends Fragment
                 {
                     if(peripherique.getNom().startsWith("quizzy-p"))
                     {
-                        quiz.ajouterParticipant(FragmentParametres.getVueActive().getParticipant(peripherique));
+                        quiz.ajouterParticipant(FragmentParametres.getParticipant(peripherique));
+                    } else if(peripherique.getNom().startsWith("quizzy-e"))
+                    {
+                        quiz.ajouterEcran(new Ecran(peripherique));
                     }
                 }
                 quiz.genererQuiz(null, 0);

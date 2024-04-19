@@ -11,19 +11,13 @@ import static android.provider.MediaStore.getVersion;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-import android.os.FileUtils;
 import android.util.Log;
-
-import androidx.core.database.sqlite.SQLiteDatabaseKt;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +28,7 @@ import java.util.Vector;
 
 import fr.hillionj.quizzy.questionnaire.Question;
 
-@SuppressWarnings({ "SpellCheckingInspection", "unused" })
+@SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class BaseDeDonnees extends SQLiteOpenHelper
 {
     private static final String TAG                = "_BaseDeDonnees"; //!< TAG pour les logs
@@ -58,13 +52,14 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         verifierBaseDeDonnes();
     }
 
-    public synchronized static BaseDeDonnees getInstance(Context context)
+    public synchronized static BaseDeDonnees getInstance()
     {
-        if(baseDeDonnees == null)
-        {
-            baseDeDonnees = new BaseDeDonnees(context);
-        }
         return baseDeDonnees;
+    }
+
+    public synchronized static void initialiser(Context context)
+    {
+        baseDeDonnees = new BaseDeDonnees(context);
     }
 
     public List<Question> getQuestionnaire(int nombreQuestion)
@@ -158,7 +153,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         }
         sqlite = this.getReadableDatabase();
     }
@@ -189,7 +184,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                 }
                 catch(IOException e)
                 {
-                    e.printStackTrace();
+                    Log.e(TAG, e.getMessage(), e);
                 }
             }
             if(input != null)
@@ -200,7 +195,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
                 }
                 catch(IOException e)
                 {
-                    e.printStackTrace();
+                    Log.e(TAG, e.getMessage(), e);
                 }
             }
         }

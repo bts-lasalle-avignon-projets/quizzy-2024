@@ -3,7 +3,6 @@ package fr.hillionj.quizzy.questionnaire;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -58,17 +57,19 @@ public class Quiz
             {
                 try
                 {
-                    FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run()
-                        {
-                            FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
-                        }
-                    });
+                    if (FragmentQuiz.getVueActive() != null && FragmentQuiz.getVueActive().getActivity() != null) {
+                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
+                            }
+                        });
+                    }
                     Question questionEnCours = getQuestionEnCours();
                     if(questionEnCours != null && !estTermine() &&
                        getTempsQuestionEnCours() >= questionEnCours.getTemps() && !estTempsMort() &&
-                       !estEnPause())
+                       !estEnPause() && FragmentQuiz.getVueActive() != null && FragmentQuiz.getVueActive().getActivity() != null)
                     {
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
                             @Override
@@ -80,7 +81,7 @@ public class Quiz
                         });
                     }
                     if(estTempsMort() &&
-                       System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion)
+                       System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion && FragmentQuiz.getVueActive() != null)
                     {
                         heureDemarrageTempsMort = 0;
                         FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
@@ -108,7 +109,7 @@ public class Quiz
     public void genererQuiz(String theme, int nombreQuestions)
     {
         questions.clear();
-        questions.addAll(BaseDeDonnees.getInstance(null).getQuestionnaire(FragmentParametres.getVueActive().getNombreQuestion(), FragmentParametres.getVueActive().getThemeChoisi()));
+        questions.addAll(BaseDeDonnees.getInstance().getQuestionnaire(FragmentParametres.getNombreQuestion(), FragmentParametres.getThemeChoisi()));
     }
 
     public List<String> getThemes()
@@ -170,6 +171,11 @@ public class Quiz
     public void ajouterParticipant(Participant participant)
     {
         participants.add(participant);
+    }
+
+    public void ajouterEcran(Ecran ecran)
+    {
+        ecrans.add(ecran);
     }
 
     public void arreter()

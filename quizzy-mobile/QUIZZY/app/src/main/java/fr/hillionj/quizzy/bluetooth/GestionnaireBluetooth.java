@@ -95,14 +95,7 @@ public class GestionnaireBluetooth
               {
                   peripherique = peripheriques.get(position);
                   if (FragmentPupitre.getVueActive() != null) {
-                      if(peripherique.estConnecte())
-                      {
-                          FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                      }
-                      else
-                      {
-                          FragmentPupitre.getVueActive().activerBoutonConnecter();
-                      }
+                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
                   }
               }
 
@@ -120,6 +113,10 @@ public class GestionnaireBluetooth
             this.adapterPeripheriquesConnectes = new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
         }
         listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
+    }
+
+    public void setActivite(AppCompatActivity activite) {
+        this.activite = activite;
     }
 
     @SuppressLint("MissingPermission")
@@ -213,6 +210,10 @@ public class GestionnaireBluetooth
             return false;
         }
         return true;
+    }
+
+    public Peripherique getPeripheriqueSelectionne() {
+        return peripherique;
     }
 
     public List<Peripherique> getPeripheriques()
