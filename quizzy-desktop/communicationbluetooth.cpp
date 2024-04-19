@@ -16,6 +16,9 @@ CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
     QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
+
+    initialiserFormatTrame();
+
     verifierBluetooth();
 }
 
@@ -130,7 +133,7 @@ void CommunicationBluetooth::recevoirTrame()
 
     donneesRecues        = socketTablette->readAll();
     const QString& trame = QString(donneesRecues);
-    qDebug() << Q_FUNC_INFO << "donneesRecues" << trame;
+    qDebug() << Q_FUNC_INFO << "trame" << trame;
 
     if(verifierTrame(trame))
     {
@@ -143,6 +146,8 @@ void CommunicationBluetooth::recevoirTrame()
     }
 }
 
+// Méthodes privées
+
 bool CommunicationBluetooth::verifierTrame(const QString& trame)
 {
     QRegExp regexTrame("^\\$(.*;.*|[^;]*)\n$");
@@ -150,9 +155,8 @@ bool CommunicationBluetooth::verifierTrame(const QString& trame)
     {
         qDebug() << Q_FUNC_INFO << "Trame valide";
 
-        // Vérifier le nombre de champs
-        verifierChampsTrame(trame);
-        return true;
+        // Vérifier le respect du protocole
+        return verifierChampsTrame(trame);
     }
     else
     {
@@ -161,8 +165,49 @@ bool CommunicationBluetooth::verifierTrame(const QString& trame)
     }
 }
 
-bool CommunicationBluetooth::verifierChampsTrame(const QString& trame)
+bool CommunicationBluetooth::verifierChampsTrame(QString trame)
 {
-    // @todo Implémenter la vérification des champs de la trame
+    trame.remove(0, 1);                // supprime le $
+    trame.remove(trame.size() - 1, 1); // supprime le \n
+
+    qDebug() << Q_FUNC_INFO << "Nb séparateurs"
+             << trame.count(SEPARATEUR_DE_CHAMPS);
+    QStringList champs         = trame.split(SEPARATEUR_DE_CHAMPS);
+    int         nombreDeChamps = champs.size();
+    qDebug() << Q_FUNC_INFO << "nombreDeChamps" << nombreDeChamps;
+    qDebug() << Q_FUNC_INFO << "champs" << champs;
+
+    // vérification du nombre de champs de la trame
+    if(formatTrame.contains(trame.at(0)) &&
+       formatTrame.value(trame.at(0)) == nombreDeChamps)
+    {
+        qDebug() << Q_FUNC_INFO << "Trame complète";
+        return true;
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "Trame incomplète";
+        return false;
+    }
+
     return true;
+}
+
+void CommunicationBluetooth::initialiserFormatTrame()
+{
+    formatTrame.insert('L', 0); // Lancer un quiz : $L\n
+    formatTrame.insert(
+      'I',
+      3); // Indiquer un participant au quiz : $I;PID;NOM DU JOUEUR\n
+    formatTrame.insert('G',
+                       8); // Envoyer une question :
+                           // $G;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n
+    formatTrame.insert('T',
+                       1); // Signaler le démarrage (top) d’une question : $T\n
+    formatTrame.insert('U', 4); // Indiquer la réponse choisie par un joueur :
+                                // $U;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n
+    formatTrame.insert('H', 1); // Afficher la réponse : $H\n
+    formatTrame.insert('S', 1); // Passer à la question suivante : $S\n
+    formatTrame.insert('P', 1); // Revenir à la question précédente : $P\n
+    formatTrame.insert('F', 1); // Finir un quiz : $F\n
 }

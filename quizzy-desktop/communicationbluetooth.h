@@ -10,6 +10,7 @@
  */
 
 #include <QObject>
+#include <QMap>
 
 #include <QBluetoothAddress>
 #include <QBluetoothServer>
@@ -17,6 +18,8 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QBluetoothDeviceInfo>
+
+#define SEPARATEUR_DE_CHAMPS ';'
 
 // Liasion série via Bluetooth
 static const QString serviceUuid(
@@ -40,10 +43,13 @@ class CommunicationBluetooth : public QObject
     QBluetoothServer* serveurBluetooth; //!< Le serveur Bluetooth
     QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
     QBluetoothServiceInfo
-         serviceInfo; //!< Les informations sur le service bluetooth
-    bool connecte;
-    bool verifierChampsTrame(const QString& trame);
+                     serviceInfo; //!< Les informations sur le service bluetooth
+    bool             connecte;
+    QMap<QChar, int> formatTrame;
+
     bool verifierTrame(const QString& trame);
+    bool verifierChampsTrame(QString trame);
+    void initialiserFormatTrame();
 
   public:
     CommunicationBluetooth(QObject* parent = nullptr);
