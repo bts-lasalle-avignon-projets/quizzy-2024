@@ -196,7 +196,7 @@ bool CommunicationBluetooth::verifierChampsTrame(QString trame)
 
 void CommunicationBluetooth::initialiserFormatTrame()
 {
-    formatTrame.insert('L', 0); // Lancer un quiz : $L\n
+    formatTrame.insert('L', 1); // Lancer un quiz : $L\n
     formatTrame.insert(
       'I',
       3); // Indiquer un participant au quiz : $I;PID;NOM DU JOUEUR\n
@@ -224,7 +224,7 @@ void CommunicationBluetooth::decoderTrame(QString trame)
     switch(typeTrame.toLatin1())
     {
         case 'L':
-            // @todo decoderTrameL(champs);
+            emit debutQuiz();
             break;
         case 'I':
             // @todo decoderTrameI(champs);

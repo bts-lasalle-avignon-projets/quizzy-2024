@@ -71,6 +71,7 @@ class CommunicationBluetooth : public QObject
   signals:
     void tabletteConnectee();
     void tabletteDeconnectee();
+    void debutQuiz();
     // @todo déclarer chaque signal associé à un type de trame reçu avec en
     // paramètres les données de la trame
 };
