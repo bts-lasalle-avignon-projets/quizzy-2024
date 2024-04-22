@@ -50,6 +50,7 @@ class CommunicationBluetooth : public QObject
     bool verifierTrame(const QString& trame);
     bool verifierChampsTrame(QString trame);
     void initialiserFormatTrame();
+    void decoderTrame(QString trame);
 
   public:
     CommunicationBluetooth(QObject* parent = nullptr);

@@ -137,6 +137,7 @@ void CommunicationBluetooth::recevoirTrame()
 
     if(verifierTrame(trame))
     {
+        decoderTrame(trame);
         // @todo Si la trame est valide et complète, alors procéder à son
         // décodage puis émettre les données extraites de la trame dans un
         // signal. Chaque signal est associé à un type de trame. Ces signaux
@@ -210,4 +211,47 @@ void CommunicationBluetooth::initialiserFormatTrame()
     formatTrame.insert('S', 1); // Passer à la question suivante : $S\n
     formatTrame.insert('P', 1); // Revenir à la question précédente : $P\n
     formatTrame.insert('F', 1); // Finir un quiz : $F\n
+}
+
+void CommunicationBluetooth::decoderTrame(QString trame)
+{
+    qDebug() << Q_FUNC_INFO;
+    trame.remove(0, 1);                // supprime le $
+    trame.remove(trame.size() - 1, 1); // supprime le \n
+    QStringList champs    = trame.split(SEPARATEUR_DE_CHAMPS);
+    QChar       typeTrame = champs[0].at(0);
+
+    switch(typeTrame.toLatin1())
+    {
+        case 'L':
+            // @todo decoderTrameL(champs);
+            break;
+        case 'I':
+            // @todo decoderTrameI(champs);
+            break;
+        case 'G':
+            // @todo decoderTrameG(champs);
+            break;
+        case 'T':
+            // @todo decoderTrameT(champs);
+            break;
+        case 'U':
+            // @todo decoderTrameU(champs);
+            break;
+        case 'H':
+            // @todo decoderTrameH(champs);
+            break;
+        case 'S':
+            // @todo decoderTrameS(champs);
+            break;
+        case 'P':
+            // decoderTrameP(champs);
+            break;
+        case 'F':
+            // @todo decoderTrameF(champs);
+            break;
+        default:
+
+            break;
+    }
 }
