@@ -227,7 +227,7 @@ void CommunicationBluetooth::decoderTrame(QString trame)
             emit debutQuiz();
             break;
         case 'I':
-            // @todo decoderTrameI(champs);
+            emit nouveauParticipant(champs[1], champs[2]);
             break;
         case 'G':
             // @todo decoderTrameG(champs);
