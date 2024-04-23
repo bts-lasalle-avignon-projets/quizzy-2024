@@ -230,25 +230,36 @@ void CommunicationBluetooth::decoderTrame(QString trame)
             emit nouveauParticipant(champs[1], champs[2]);
             break;
         case 'G':
-            // @todo decoderTrameG(champs);
+        {
+            QMap<char, QString> propositions;
+            propositions.insert('A', champs[2]);
+            propositions.insert('B', champs[3]);
+            propositions.insert('C', champs[4]);
+            propositions.insert('D', champs[5]);
+            emit nouvelleQuestion(champs[1],
+                                  propositions,
+                                  champs[6].toInt(),
+                                  champs[7].toInt());
             break;
+        }
         case 'T':
-            // @todo decoderTrameT(champs);
+
+            emit debutQuestion();
             break;
         case 'U':
-            // @todo decoderTrameU(champs);
+            emit choixReponse(champs[1], champs[2].toInt(), champs[3].toInt());
             break;
         case 'H':
-            // @todo decoderTrameH(champs);
+            emit bonneReponse();
             break;
         case 'S':
-            // @todo decoderTrameS(champs);
+            emit questionSuivante();
             break;
         case 'P':
-            // decoderTrameP(champs);
+            emit questionPrecedente();
             break;
         case 'F':
-            // @todo decoderTrameF(champs);
+            emit finQuiz();
             break;
         default:
 
