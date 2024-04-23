@@ -27,18 +27,7 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
 
     creerFenetres();
     afficherFenetreAccueil();
-
-#ifdef TEST_FENETRE_PARTICIPANTS
-    QStringList listeParticipants;
-    listeParticipants << "Participant 1"
-                      << "Participant 2";
-    for(int i = 0; i < listeParticipants.size(); ++i)
-    {
-        Participant participant(listeParticipants.at(i), i + 1);
-        ajouterParticipant(participant.getNom());
-    }
-    afficherFenetreParticipants();
-#endif
+    initialiserEvenements();
 
 #ifdef TEST_FENETRE_JEU
     QStringList propositions;
@@ -90,8 +79,16 @@ void IHMQuizzy::afficherFenetreResultats()
     afficherFenetre(Fenetre::FenetreResultats);
 }
 
-void IHMQuizzy::ajouterParticipant(QString participant)
+void IHMQuizzy::debuterQuiz()
 {
+    quizzy->debuter();
+    afficherFenetreParticipants();
+}
+
+void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
+{
+    quizzy->ajouterParticipant(pidJoueur, participant);
+
     QWidget*     widgetParticipant = new QWidget(this);
     QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
     QLabel*      labelParticipant  = new QLabel(participant, this);
@@ -224,4 +221,16 @@ void IHMQuizzy::creerFenetreResultats()
     layoutPrincipal->addWidget(titreFenetreResultats);
 
     fenetres->addWidget(fenetreResultats);
+}
+
+void IHMQuizzy::initialiserEvenements()
+{
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(debutQuiz()),
+            this,
+            SLOT(debuterQuiz()));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(nouveauParticipant(QString, QString)),
+            this,
+            SLOT(ajouterParticipant(QString, QString)));
 }

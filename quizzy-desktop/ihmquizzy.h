@@ -114,6 +114,7 @@ class IHMQuizzy : public QWidget
     void creerWidgetsFenetreJeu();
     void placerWidgetsFenetreJeu();
     void creerFenetreResultats();
+    void initialiserEvenements();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
@@ -125,7 +126,8 @@ class IHMQuizzy : public QWidget
     void afficherFenetreParticipants();
     void afficherFenetreJeu();
     void afficherFenetreResultats();
-    void ajouterParticipant(QString participant);
+    void debuterQuiz();
+    void ajouterParticipant(QString pidJoueur, QString participant);
     void ajouterLibelleQuestion(const Question& question);
 };
 
