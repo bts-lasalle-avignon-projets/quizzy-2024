@@ -131,25 +131,19 @@ void CommunicationBluetooth::recevoirTrame()
 {
     QByteArray donneesRecues;
 
-    donneesRecues        = socketTablette->readAll();
-    const QString& trame = QString(donneesRecues);
+    donneesRecues = socketTablette->readAll();
+    QString trame = QString(donneesRecues);
     qDebug() << Q_FUNC_INFO << "trame" << trame;
 
     if(verifierTrame(trame))
     {
         decoderTrame(trame);
-        // @todo Si la trame est valide et complète, alors procéder à son
-        // décodage puis émettre les données extraites de la trame dans un
-        // signal. Chaque signal est associé à un type de trame. Ces signaux
-        // doivent être connectés dans l'objet ihmQuizzy pas dans cette classe.
-        // Les slots peuvent être des méthodes de l'objet ihmQuizzy ou de
-        // l'objet quizzy
     }
 }
 
 // Méthodes privées
 
-bool CommunicationBluetooth::verifierTrame(const QString& trame)
+bool CommunicationBluetooth::verifierTrame(const QString& trame) const
 {
     QRegExp regexTrame("^\\$(.*;.*|[^;]*)\n$");
     if(regexTrame.exactMatch(trame))
@@ -166,7 +160,7 @@ bool CommunicationBluetooth::verifierTrame(const QString& trame)
     }
 }
 
-bool CommunicationBluetooth::verifierChampsTrame(QString trame)
+bool CommunicationBluetooth::verifierChampsTrame(QString trame) const
 {
     trame.remove(0, 1);                // supprime le $
     trame.remove(trame.size() - 1, 1); // supprime le \n
@@ -215,21 +209,22 @@ void CommunicationBluetooth::initialiserFormatTrame()
 
 void CommunicationBluetooth::decoderTrame(QString trame)
 {
-    qDebug() << Q_FUNC_INFO;
     trame.remove(0, 1);                // supprime le $
     trame.remove(trame.size() - 1, 1); // supprime le \n
-    QStringList champs    = trame.split(SEPARATEUR_DE_CHAMPS);
-    QChar       typeTrame = champs[TYPE_TRAME].at(0);
+    QStringList champs = trame.split(SEPARATEUR_DE_CHAMPS);
+    qDebug() << Q_FUNC_INFO << "champs" << champs;
+    QChar typeTrame = champs[TYPE_TRAME].at(0);
 
     switch(typeTrame.toLatin1())
     {
-        case 'L':
+        case 'L': // Lancer un quiz : $L\n
             emit debutQuiz();
             break;
-        case 'I':
+        case 'I': // Un participant au quiz : $I;PID;NOM DU JOUEUR\n
             emit nouveauParticipant(champs[PID_JOUEUR], champs[NOM_JOUEUR]);
             break;
-        case 'G':
+        case 'G': // Une question :
+                  // $G;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n
         {
             QStringList propositions;
             propositions << champs[PROPOSITION_A] << champs[PROPOSITION_B]
@@ -240,29 +235,29 @@ void CommunicationBluetooth::decoderTrame(QString trame)
                              champs[TEMPS].toInt());
             break;
         }
-        case 'T':
-
+        case 'T': // Signaler le démarrage (top) d’une question : $T\n
             emit debutQuestion();
             break;
-        case 'U':
+        case 'U': // Réponse choisie par un joueur :
+                  // $U;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n
             emit choixReponse(champs[PID_JOUEUR],
                               champs[NUMERO_REPONSE_PARTICIPANT].toInt(),
                               champs[TEMPS_REPONSE_PARTICIPANT].toInt());
             break;
-        case 'H':
+        case 'H': // Afficher la réponse : $H\n
             emit bonneReponse();
             break;
-        case 'S':
+        case 'S': // Passer à la question suivante : $S\n
             emit questionSuivante();
             break;
-        case 'P':
+        case 'P': // Revenir à la question précédente : $P\n
             emit questionPrecedente();
             break;
-        case 'F':
+        case 'F': // Finir un quiz : $F\n
             emit finQuiz();
             break;
         default:
-
+            qDebug() << Q_FUNC_INFO << "type de trame inconnu !";
             break;
     }
 }

@@ -233,4 +233,6 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
             SLOT(ajouterParticipant(QString, QString)));
+    // @todo Faire la connexion signal/slot des signaux émis par l'objet
+    // communicationTablette
 }

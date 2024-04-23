@@ -21,8 +21,6 @@ Quizzy::~Quizzy()
 void Quizzy::initialiserCommunicationTablette()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Faire la connexion signal/slot des signaux émis par l'objet
-    // communicationTablette
 
     communicationTablette->demarrerServeur();
 }
