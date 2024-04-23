@@ -21,6 +21,19 @@
 
 #define SEPARATEUR_DE_CHAMPS ';'
 
+#define TYPE_TRAME                 0
+#define PID_JOUEUR                 1
+#define NOM_JOUEUR                 2
+#define LIBELLE                    1
+#define PROPOSITION_A              2
+#define PROPOSITION_B              3
+#define PROPOSITION_C              4
+#define PROPOSITION_D              5
+#define NUMERO_REPONSE_VALIDE      6
+#define TEMPS                      7
+#define NUMERO_REPONSE_PARTICIPANT 2
+#define TEMPS_REPONSE_PARTICIPANT  3
+
 // Liasion série via Bluetooth
 static const QString serviceUuid(
   QStringLiteral("00001101-0000-1000-8000-00805F9B34FB"));
@@ -73,10 +86,10 @@ class CommunicationBluetooth : public QObject
     void tabletteDeconnectee();
     void debutQuiz();
     void nouveauParticipant(QString pidJoueur, QString nomJoueur);
-    void nouvelleQuestion(QString             libelle,
-                          QMap<char, QString> propositions,
-                          int                 numeroBonneReponse,
-                          int                 temps);
+    void nouvelleQuestion(QString     libelle,
+                          QStringList propositions,
+                          int         numeroReponse,
+                          int         temps);
     void debutQuestion();
     void choixReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
     void bonneReponse();

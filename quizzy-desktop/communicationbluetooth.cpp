@@ -219,7 +219,7 @@ void CommunicationBluetooth::decoderTrame(QString trame)
     trame.remove(0, 1);                // supprime le $
     trame.remove(trame.size() - 1, 1); // supprime le \n
     QStringList champs    = trame.split(SEPARATEUR_DE_CHAMPS);
-    QChar       typeTrame = champs[0].at(0);
+    QChar       typeTrame = champs[TYPE_TRAME].at(0);
 
     switch(typeTrame.toLatin1())
     {
@@ -227,19 +227,17 @@ void CommunicationBluetooth::decoderTrame(QString trame)
             emit debutQuiz();
             break;
         case 'I':
-            emit nouveauParticipant(champs[1], champs[2]);
+            emit nouveauParticipant(champs[PID_JOUEUR], champs[NOM_JOUEUR]);
             break;
         case 'G':
         {
-            QMap<char, QString> propositions;
-            propositions.insert('A', champs[2]);
-            propositions.insert('B', champs[3]);
-            propositions.insert('C', champs[4]);
-            propositions.insert('D', champs[5]);
-            emit nouvelleQuestion(champs[1],
-                                  propositions,
-                                  champs[6].toInt(),
-                                  champs[7].toInt());
+            QStringList propositions;
+            propositions << champs[PROPOSITION_A] << champs[PROPOSITION_B]
+                         << champs[PROPOSITION_C] << champs[PROPOSITION_D];
+            nouvelleQuestion(champs[LIBELLE],
+                             propositions,
+                             champs[NUMERO_REPONSE_VALIDE].toInt(),
+                             champs[TEMPS].toInt());
             break;
         }
         case 'T':
@@ -247,7 +245,9 @@ void CommunicationBluetooth::decoderTrame(QString trame)
             emit debutQuestion();
             break;
         case 'U':
-            emit choixReponse(champs[1], champs[2].toInt(), champs[3].toInt());
+            emit choixReponse(champs[PID_JOUEUR],
+                              champs[NUMERO_REPONSE_PARTICIPANT].toInt(),
+                              champs[TEMPS_REPONSE_PARTICIPANT].toInt());
             break;
         case 'H':
             emit bonneReponse();
