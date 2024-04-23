@@ -1,4 +1,5 @@
 #include "quizzy.h"
+#include "participant.h"
 #include "question.h"
 #include "communicationbluetooth.h"
 
@@ -20,10 +21,21 @@ Quizzy::~Quizzy()
 void Quizzy::initialiserCommunicationTablette()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Faire la connexion signal/slot des signaux émis par l'objet
-    // communicationTablette
 
     communicationTablette->demarrerServeur();
+}
+
+void Quizzy::debuter()
+{
+    participants.clear();
+    listeQuestions.clear();
+}
+
+void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
+{
+    Participant* participant =
+      new Participant(nomParticipant, pidJoueur.toInt());
+    participants.push_back(participant);
 }
 
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
