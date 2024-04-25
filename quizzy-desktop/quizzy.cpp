@@ -38,6 +38,15 @@ void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
     participants.push_back(participant);
 }
 
+void Quizzy::afficherNouvelleQuestion(QString     libelle,
+                                      QStringList propositions,
+                                      int         reponseValide,
+                                      int         temps)
+{
+    Question* question = new Question(libelle, propositions);
+    listeQuestions.append(question);
+}
+
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;

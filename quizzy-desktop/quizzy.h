@@ -29,6 +29,10 @@ class Quizzy : public QObject
 
     void debuter();
     void ajouterParticipant(QString pidJoueur, QString nomParticipant);
+    void afficherNouvelleQuestion(QString     libelle,
+                                  QStringList propositions,
+                                  int         reponseValide,
+                                  int         temps);
     CommunicationBluetooth* getCommunicationTablette();
 };
 

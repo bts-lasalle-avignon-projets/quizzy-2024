@@ -129,6 +129,10 @@ class IHMQuizzy : public QWidget
     void debuterQuiz();
     void ajouterParticipant(QString pidJoueur, QString participant);
     void ajouterLibelleQuestion(const Question& question);
+    void afficherNouvelleQuestion(QString     libelle,
+                                  QStringList propositions,
+                                  int         reponseValide,
+                                  int         temps);
 };
 
 #endif // IHMQUIZZY_H

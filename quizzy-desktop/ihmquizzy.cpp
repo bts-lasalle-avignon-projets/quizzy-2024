@@ -102,6 +102,26 @@ void IHMQuizzy::ajouterLibelleQuestion(const Question& question)
     labelQuestion->setText(question.getLibelle());
 }
 
+void IHMQuizzy::afficherNouvelleQuestion(QString     libelle,
+                                         QStringList propositions,
+                                         int         reponseValide,
+                                         int         temps)
+{
+    afficherFenetreJeu();
+    quizzy->afficherNouvelleQuestion(libelle,
+                                     propositions,
+                                     reponseValide,
+                                     temps);
+    labelQuestion->setText(libelle);
+    propositionReponseA->setText(propositions[0]);
+    propositionReponseB->setText(propositions[1]);
+    propositionReponseC->setText(propositions[2]);
+    propositionReponseD->setText(propositions[3]);
+    QString tempsAffichage =
+      QString::number(temps); // @todo Faire logique timer
+    labelChronometre->setText(tempsAffichage);
+}
+
 void IHMQuizzy::initialiserFenetres()
 {
     fenetres                     = new QStackedWidget(this);
@@ -233,6 +253,11 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
             SLOT(ajouterParticipant(QString, QString)));
+
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
+            this,
+            SLOT(afficherNouvelleQuestion(QString, QStringList, int, int)));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }
