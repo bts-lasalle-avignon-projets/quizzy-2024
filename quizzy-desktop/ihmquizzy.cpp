@@ -29,19 +29,6 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
     afficherFenetreAccueil();
     initialiserEvenements();
 
-#ifdef TEST_FENETRE_JEU
-    QStringList propositions;
-    propositions << "Linux"
-                 << "Windows"
-                 << "Mac"
-                 << "Minitel";
-    questions.push_back(
-      new Question("Quel est le meilleur OS ?", propositions));
-    ajouterLibelleQuestion(*questions.last());
-    // @todo etc ...
-    afficherFenetreJeu();
-#endif
-
 #ifdef PLEIN_ECRAN_RASPBERRY_PI
     showFullScreen();
 // showMaximized();
@@ -89,37 +76,17 @@ void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
     quizzy->ajouterParticipant(pidJoueur, participant);
 
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(participant, this);
-    layoutParticipant->setContentsMargins(100, 10, 100, 10);
-    layoutParticipant->addWidget(labelParticipant);
-    layoutPrincipalParticipants->addWidget(widgetParticipant);
+    afficherParticipant(pidJoueur, participant);
 }
 
-void IHMQuizzy::ajouterLibelleQuestion(const Question& question)
+void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
+                                        QStringList propositions,
+                                        int         reponseValide,
+                                        int         temps)
 {
-    labelQuestion->setText(question.getLibelle());
-}
+    quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
 
-void IHMQuizzy::afficherNouvelleQuestion(QString     libelle,
-                                         QStringList propositions,
-                                         int         reponseValide,
-                                         int         temps)
-{
-    afficherFenetreJeu();
-    quizzy->afficherNouvelleQuestion(libelle,
-                                     propositions,
-                                     reponseValide,
-                                     temps);
-    labelQuestion->setText(libelle);
-    propositionReponseA->setText(propositions[0]);
-    propositionReponseB->setText(propositions[1]);
-    propositionReponseC->setText(propositions[2]);
-    propositionReponseD->setText(propositions[3]);
-    QString tempsAffichage =
-      QString::number(temps); // @todo Faire logique timer
-    labelChronometre->setText(tempsAffichage);
+    afficherQuestion();
 }
 
 void IHMQuizzy::initialiserFenetres()
@@ -257,7 +224,46 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
             this,
-            SLOT(afficherNouvelleQuestion(QString, QStringList, int, int)));
+            SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
+}
+
+void IHMQuizzy::afficherParticipant(QString pidJoueur, QString participant)
+{
+    QWidget*     widgetParticipant = new QWidget(this);
+    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
+    QLabel*      labelParticipant  = new QLabel(participant, this);
+    layoutParticipant->setContentsMargins(100, 10, 100, 10);
+    layoutParticipant->addWidget(labelParticipant);
+    layoutPrincipalParticipants->addWidget(widgetParticipant);
+}
+
+void IHMQuizzy::afficherQuestion()
+{
+    Question* question = quizzy->getQuestion();
+    afficherLibelleQuestion(*question);
+    afficherPropositionsQuestion(*question);
+    afficherTempsQuestion(*question);
+    afficherFenetreJeu();
+}
+
+void IHMQuizzy::afficherLibelleQuestion(const Question& question)
+{
+    labelQuestion->setText(question.getLibelle());
+}
+
+void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
+{
+    QMap<char, QString> propositions = question.getPropositions();
+    propositionReponseA->setText(propositions['A']);
+    propositionReponseB->setText(propositions['B']);
+    propositionReponseC->setText(propositions['C']);
+    propositionReponseD->setText(propositions['D']);
+}
+
+void IHMQuizzy::afficherTempsQuestion(const Question& question)
+{
+    // @todo Faire logique timer
+    labelChronometre->setText(QString::number(question.getDuree()));
 }
