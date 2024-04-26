@@ -98,6 +98,7 @@ class IHMQuizzy : public QWidget
     QLabel*      propositionReponseC;
     QLabel*      propositionReponseD;
     QLabel*      labelChronometre;
+    QTimer*      timer;
     // FenetreResultats
     QWidget* fenetreResultats;
     QLabel*  titreFenetreResultats;
@@ -137,6 +138,7 @@ class IHMQuizzy : public QWidget
                                  QStringList propositions,
                                  int         reponseValide,
                                  int         temps);
+    void demarrerQuestion();
 };
 
 #endif // IHMQUIZZY_H

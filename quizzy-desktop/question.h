@@ -20,6 +20,7 @@ class Question
     QString             getLibelle() const;
     QMap<char, QString> getPropositions() const;
     int                 getDuree() const;
+    void                setDuree(int temps);
 };
 
 #endif // QUESTION_H

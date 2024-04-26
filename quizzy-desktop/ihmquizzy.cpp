@@ -89,6 +89,10 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
     afficherQuestion();
 }
 
+void IHMQuizzy::demarrerQuestion()
+{
+}
+
 void IHMQuizzy::initialiserFenetres()
 {
     fenetres                     = new QStackedWidget(this);
@@ -225,6 +229,11 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
             this,
             SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
+
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(debutQuestion()),
+            this,
+            SLOT(demarrerQuestion()));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }

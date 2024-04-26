@@ -27,3 +27,7 @@ int Question::getDuree() const
 {
     return duree;
 }
+void Question::setDuree(int temps)
+{
+    duree = temps;
+}

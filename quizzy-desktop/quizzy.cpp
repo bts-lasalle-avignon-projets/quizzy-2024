@@ -44,6 +44,7 @@ void Quizzy::ajouterQuestion(QString     libelle,
                              int         temps)
 {
     Question* question = new Question(libelle, propositions);
+    question->setDuree(temps);
     listeQuestions.append(question);
 }
 
