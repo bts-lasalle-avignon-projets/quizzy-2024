@@ -229,10 +229,10 @@ void CommunicationBluetooth::decoderTrame(QString trame)
             QStringList propositions;
             propositions << champs[PROPOSITION_A] << champs[PROPOSITION_B]
                          << champs[PROPOSITION_C] << champs[PROPOSITION_D];
-            nouvelleQuestion(champs[LIBELLE],
-                             propositions,
-                             champs[NUMERO_REPONSE_VALIDE].toInt(),
-                             champs[TEMPS].toInt());
+            emit nouvelleQuestion(champs[LIBELLE],
+                                  propositions,
+                                  champs[NUMERO_REPONSE_VALIDE].toInt(),
+                                  champs[TEMPS].toInt());
             break;
         }
         case 'T': // Signaler le démarrage (top) d’une question : $T\n

@@ -27,8 +27,13 @@ class Quizzy : public QObject
     Quizzy(QObject* parent = nullptr);
     ~Quizzy();
 
-    void debuter();
-    void ajouterParticipant(QString pidJoueur, QString nomParticipant);
+    void      debuter();
+    void      ajouterParticipant(QString pidJoueur, QString nomParticipant);
+    void      ajouterQuestion(QString     libelle,
+                              QStringList propositions,
+                              int         reponseValide,
+                              int         temps);
+    Question* getQuestion();
     CommunicationBluetooth* getCommunicationTablette();
 };
 

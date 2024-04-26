@@ -19,6 +19,7 @@ class Question
 
     QString             getLibelle() const;
     QMap<char, QString> getPropositions() const;
+    int                 getDuree() const;
 };
 
 #endif // QUESTION_H

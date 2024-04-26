@@ -22,3 +22,8 @@ QMap<char, QString> Question::getPropositions() const
 {
     return propositions;
 }
+
+int Question::getDuree() const
+{
+    return duree;
+}
