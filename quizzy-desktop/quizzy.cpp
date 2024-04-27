@@ -51,6 +51,8 @@ void Quizzy::ajouterQuestion(QString     libelle,
 
 Question* Quizzy::getQuestion()
 {
+    if(listeQuestions.isEmpty())
+        return nullptr;
     return listeQuestions.last();
 }
 

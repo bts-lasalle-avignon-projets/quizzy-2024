@@ -74,6 +74,8 @@ void IHMQuizzy::debuterQuiz()
 
 void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "participant"
+             << participant;
     quizzy->ajouterParticipant(pidJoueur, participant);
 
     afficherParticipant(pidJoueur, participant);
@@ -91,42 +93,31 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
 
 void IHMQuizzy::demarrerQuestion()
 {
-    decompteQuestion = quizzy->getQuestion()->getDuree();
-    connect(minuteur,
-            SIGNAL(timeout()),
-            this,
-            SLOT(afficherDecompteQuestion()));
+    if(quizzy->estEncours() && quizzy->getQuestion() != nullptr)
+    {
+        decompteQuestion = quizzy->getQuestion()->getDuree();
 
-    minuteur->start(1000);
+        connect(minuteur,
+                SIGNAL(timeout()),
+                this,
+                SLOT(afficherDecompteQuestion()));
+
+        minuteur->start(TOP_SECONDE);
+    }
 }
 
 void IHMQuizzy::afficherDecompteQuestion()
 {
-    if(fenetres->currentIndex() == Fenetre::FenetreJeu && quizzy->estEncours())
+    if(fenetres->currentIndex() == Fenetre::FenetreJeu)
     {
         changerCouleurChronometre();
         labelChronometre->setText(QString::number(decompteQuestion) + "s");
         decompteQuestion--;
-
         if(decompteQuestion < 0)
         {
             minuteur->stop();
         }
     }
-}
-
-void IHMQuizzy::changerCouleurChronometre()
-{
-    QString couleur;
-    if(decompteQuestion > 3)
-    {
-        couleur = "#94fe8a"; // Vert
-    }
-    else
-    {
-        couleur = "#fd5555"; // Rouge
-    }
-    labelChronometre->setStyleSheet("background-color: " + couleur);
 }
 
 void IHMQuizzy::initialiserFenetres()
@@ -298,16 +289,30 @@ void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
     propositionReponseA->setStyleSheet("background-color: #f9b7b7"); // Rouge
-    propositionReponseA->setText(propositions['A']);
+    propositionReponseA->setText("A. " + propositions['A']);
     propositionReponseB->setStyleSheet("background-color: #b7f9ba"); // Vert
-    propositionReponseB->setText(propositions['B']);
+    propositionReponseB->setText("B. " + propositions['B']);
     propositionReponseC->setStyleSheet("background-color: #f6f476"); // Jaune
-    propositionReponseC->setText(propositions['C']);
+    propositionReponseC->setText("C. " + propositions['C']);
     propositionReponseD->setStyleSheet("background-color: #b7baf9"); // Bleu
-    propositionReponseD->setText(propositions['D']);
+    propositionReponseD->setText("D. " + propositions['D']);
 }
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
     labelChronometre->setText(QString::number(question.getDuree()) + "s");
+}
+
+void IHMQuizzy::changerCouleurChronometre()
+{
+    QString couleur;
+    if(decompteQuestion > 3)
+    {
+        couleur = "#94fe8a"; // Vert
+    }
+    else
+    {
+        couleur = "#fd5555"; // Rouge
+    }
+    labelChronometre->setStyleSheet("background-color: " + couleur);
 }
