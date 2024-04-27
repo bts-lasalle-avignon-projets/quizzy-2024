@@ -21,7 +21,7 @@
  * fenêtre principale de l'application
  */
 IHMQuizzy::IHMQuizzy(QWidget* parent) :
-    QWidget(parent), quizzy(new Quizzy(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -74,6 +74,8 @@ void IHMQuizzy::debuterQuiz()
 
 void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "participant"
+             << participant;
     quizzy->ajouterParticipant(pidJoueur, participant);
 
     afficherParticipant(pidJoueur, participant);
@@ -87,6 +89,35 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
     quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
 
     afficherQuestion();
+}
+
+void IHMQuizzy::demarrerQuestion()
+{
+    if(quizzy->estEncours() && quizzy->getQuestion() != nullptr)
+    {
+        decompteQuestion = quizzy->getQuestion()->getDuree();
+
+        connect(minuteur,
+                SIGNAL(timeout()),
+                this,
+                SLOT(afficherDecompteQuestion()));
+
+        minuteur->start(TOP_SECONDE);
+    }
+}
+
+void IHMQuizzy::afficherDecompteQuestion()
+{
+    if(fenetres->currentIndex() == Fenetre::FenetreJeu)
+    {
+        changerCouleurChronometre();
+        labelChronometre->setText(QString::number(decompteQuestion) + "s");
+        decompteQuestion--;
+        if(decompteQuestion < 0)
+        {
+            minuteur->stop();
+        }
+    }
 }
 
 void IHMQuizzy::initialiserFenetres()
@@ -131,8 +162,6 @@ void IHMQuizzy::creerFenetreParticipants()
     creerLayoutsFenetreParticipants();
     creerWidgetsFenetreParticipants();
     placerWidgetsFenetreParticipants();
-
-    // creerListeParticipants(layoutPrincipal);
 
     fenetres->addWidget(fenetreParticipants);
 }
@@ -220,11 +249,14 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
             SLOT(ajouterParticipant(QString, QString)));
-
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
             this,
             SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(debutQuestion()),
+            this,
+            SLOT(demarrerQuestion()));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }
@@ -256,14 +288,31 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setText(propositions['A']);
-    propositionReponseB->setText(propositions['B']);
-    propositionReponseC->setText(propositions['C']);
-    propositionReponseD->setText(propositions['D']);
+    propositionReponseA->setStyleSheet("background-color: #f9b7b7"); // Rouge
+    propositionReponseA->setText("A. " + propositions['A']);
+    propositionReponseB->setStyleSheet("background-color: #b7f9ba"); // Vert
+    propositionReponseB->setText("B. " + propositions['B']);
+    propositionReponseC->setStyleSheet("background-color: #f6f476"); // Jaune
+    propositionReponseC->setText("C. " + propositions['C']);
+    propositionReponseD->setStyleSheet("background-color: #b7baf9"); // Bleu
+    propositionReponseD->setText("D. " + propositions['D']);
 }
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
-    // @todo Faire logique timer
-    labelChronometre->setText(QString::number(question.getDuree()));
+    labelChronometre->setText(QString::number(question.getDuree()) + "s");
+}
+
+void IHMQuizzy::changerCouleurChronometre()
+{
+    QString couleur;
+    if(decompteQuestion > 3)
+    {
+        couleur = "#94fe8a"; // Vert
+    }
+    else
+    {
+        couleur = "#fd5555"; // Rouge
+    }
+    labelChronometre->setStyleSheet("background-color: " + couleur);
 }

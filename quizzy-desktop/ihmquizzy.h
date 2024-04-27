@@ -11,6 +11,7 @@
 
 #include <QtWidgets>
 #include <QVector>
+#include <QTimer>
 
 /**
  * @def NOM_APP
@@ -42,6 +43,8 @@
  */
 //#define PLEIN_ECRAN_RASPBERRY_PI
 
+#define TOP_SECONDE 1000
+
 class Quizzy;
 class Question;
 
@@ -72,6 +75,8 @@ class IHMQuizzy : public QWidget
   private:
     Quizzy*            quizzy;    //!< association vers la classe Quizzy
     QVector<Question*> questions; //!< conteneur de Question pour le quiz
+    QTimer*            minuteur;  //!< pour gérer le temps d'une question
+    int                decompteQuestion; //!< pour le temps d'une question
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     // FenetreAccueil
@@ -98,6 +103,7 @@ class IHMQuizzy : public QWidget
     QLabel*      propositionReponseC;
     QLabel*      propositionReponseD;
     QLabel*      labelChronometre;
+    QTimer*      timer;
     // FenetreResultats
     QWidget* fenetreResultats;
     QLabel*  titreFenetreResultats;
@@ -120,6 +126,7 @@ class IHMQuizzy : public QWidget
     void afficherLibelleQuestion(const Question& question);
     void afficherPropositionsQuestion(const Question& question);
     void afficherTempsQuestion(const Question& question);
+    void changerCouleurChronometre();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
@@ -137,6 +144,8 @@ class IHMQuizzy : public QWidget
                                  QStringList propositions,
                                  int         reponseValide,
                                  int         temps);
+    void demarrerQuestion();
+    void afficherDecompteQuestion();
 };
 
 #endif // IHMQUIZZY_H

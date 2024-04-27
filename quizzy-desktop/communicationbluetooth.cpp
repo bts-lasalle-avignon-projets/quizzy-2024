@@ -165,11 +165,11 @@ bool CommunicationBluetooth::verifierChampsTrame(QString trame) const
     trame.remove(0, 1);                // supprime le $
     trame.remove(trame.size() - 1, 1); // supprime le \n
 
-    qDebug() << Q_FUNC_INFO << "Nb séparateurs"
-             << trame.count(SEPARATEUR_DE_CHAMPS);
+    // qDebug() << Q_FUNC_INFO << "Nb séparateurs" <<
+    // trame.count(SEPARATEUR_DE_CHAMPS);
     QStringList champs         = trame.split(SEPARATEUR_DE_CHAMPS);
     int         nombreDeChamps = champs.size();
-    qDebug() << Q_FUNC_INFO << "nombreDeChamps" << nombreDeChamps;
+    // qDebug() << Q_FUNC_INFO << "nombreDeChamps" << nombreDeChamps;
     qDebug() << Q_FUNC_INFO << "champs" << champs;
 
     // vérification du nombre de champs de la trame

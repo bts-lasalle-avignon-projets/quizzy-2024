@@ -51,3 +51,29 @@ QPushButton:pressed
 QGridLayout {
     margin: 0px;
 }
+#propositionReponseA {
+    background-color: #f9b7b7;  /* Rouge */
+}
+
+#propositionReponseB {
+
+    background-color: #b7f9ba; /* Vert */
+}
+
+#propositionReponseC {
+
+    background-color: #f6f476; /* Jaune */
+}
+
+#propositionReponseD {
+
+    background-color: #b7baf9; /* bleu */
+}
+
+#labelChronometreVert {
+    background-color: #94fe8a;  /* Vert */
+}
+
+#labelChronometreRouge {
+    background-color: #fd5555; /* Rouge */
+}
