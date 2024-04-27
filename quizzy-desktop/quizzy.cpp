@@ -6,7 +6,7 @@
 #include <QDebug>
 
 Quizzy::Quizzy(QObject* parent) :
-    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI),
+    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), enCours(false),
     communicationTablette(new CommunicationBluetooth(this))
 {
     qDebug() << Q_FUNC_INFO;
@@ -29,6 +29,7 @@ void Quizzy::debuter()
 {
     participants.clear();
     listeQuestions.clear();
+    enCours = true;
 }
 
 void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
@@ -51,6 +52,11 @@ void Quizzy::ajouterQuestion(QString     libelle,
 Question* Quizzy::getQuestion()
 {
     return listeQuestions.last();
+}
+
+bool Quizzy::estEncours() const
+{
+    return enCours;
 }
 
 CommunicationBluetooth* Quizzy::getCommunicationTablette()

@@ -17,6 +17,7 @@ class Quizzy : public QObject
     QVector<Participant*> participants;
     QVector<Question*>    listeQuestions;
     int                   indexQuestionActuelle;
+    bool                  enCours;
     CommunicationBluetooth*
       communicationTablette; //!< association vers la classe
                              //!< CommunicationBluetooth
@@ -34,6 +35,7 @@ class Quizzy : public QObject
                               int         reponseValide,
                               int         temps);
     Question* getQuestion();
+    bool      estEncours() const;
     CommunicationBluetooth* getCommunicationTablette();
 };
 

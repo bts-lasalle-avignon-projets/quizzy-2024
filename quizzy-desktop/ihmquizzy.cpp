@@ -21,7 +21,7 @@
  * fenêtre principale de l'application
  */
 IHMQuizzy::IHMQuizzy(QWidget* parent) :
-    QWidget(parent), quizzy(new Quizzy(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -91,6 +91,23 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
 
 void IHMQuizzy::demarrerQuestion()
 {
+    // @todo Initialiser la variable de décompte avec la durée de la question
+
+    // @todo Connecter le signal timeout() sur le slot
+
+    // @todo Démarrer le minuteur
+}
+
+void IHMQuizzy::afficherDecompteQuestion()
+{
+    // @todo Vérifier si la fenêtre courante est la FenetreJeu et si le quiz est
+    // en cours
+
+    // @todo Afficher le décompte en secondes dans le QLabel (fond vert)
+
+    // @todo Décrémenter le décompte
+
+    // @todo Arrêter le décompte lorsque le temps est écoulé  (fond rouge)
 }
 
 void IHMQuizzy::initialiserFenetres()
@@ -135,8 +152,6 @@ void IHMQuizzy::creerFenetreParticipants()
     creerLayoutsFenetreParticipants();
     creerWidgetsFenetreParticipants();
     placerWidgetsFenetreParticipants();
-
-    // creerListeParticipants(layoutPrincipal);
 
     fenetres->addWidget(fenetreParticipants);
 }
@@ -224,12 +239,10 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
             SLOT(ajouterParticipant(QString, QString)));
-
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
             this,
             SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
-
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuestion()),
             this,
@@ -265,6 +278,7 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
+    // @todo Mettre les couleurs de fond correspondant aux boutons du pupitre
     propositionReponseA->setText(propositions['A']);
     propositionReponseB->setText(propositions['B']);
     propositionReponseC->setText(propositions['C']);
@@ -273,6 +287,5 @@ void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
-    // @todo Faire logique timer
-    labelChronometre->setText(QString::number(question.getDuree()));
+    labelChronometre->setText(QString::number(question.getDuree()) + "s");
 }
