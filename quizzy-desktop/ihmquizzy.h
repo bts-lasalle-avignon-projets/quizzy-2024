@@ -126,6 +126,7 @@ class IHMQuizzy : public QWidget
     void afficherLibelleQuestion(const Question& question);
     void afficherPropositionsQuestion(const Question& question);
     void afficherTempsQuestion(const Question& question);
+    void changerCouleurChronometre();
 
   public:
     IHMQuizzy(QWidget* parent = 0);

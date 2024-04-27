@@ -91,23 +91,42 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
 
 void IHMQuizzy::demarrerQuestion()
 {
-    // @todo Initialiser la variable de décompte avec la durée de la question
+    decompteQuestion = quizzy->getQuestion()->getDuree();
+    connect(minuteur,
+            SIGNAL(timeout()),
+            this,
+            SLOT(afficherDecompteQuestion()));
 
-    // @todo Connecter le signal timeout() sur le slot
-
-    // @todo Démarrer le minuteur
+    minuteur->start(1000);
 }
 
 void IHMQuizzy::afficherDecompteQuestion()
 {
-    // @todo Vérifier si la fenêtre courante est la FenetreJeu et si le quiz est
-    // en cours
+    if(fenetres->currentIndex() == Fenetre::FenetreJeu && quizzy->estEncours())
+    {
+        changerCouleurChronometre();
+        labelChronometre->setText(QString::number(decompteQuestion) + "s");
+        decompteQuestion--;
 
-    // @todo Afficher le décompte en secondes dans le QLabel (fond vert)
+        if(decompteQuestion < 0)
+        {
+            minuteur->stop();
+        }
+    }
+}
 
-    // @todo Décrémenter le décompte
-
-    // @todo Arrêter le décompte lorsque le temps est écoulé  (fond rouge)
+void IHMQuizzy::changerCouleurChronometre()
+{
+    QString couleur;
+    if(decompteQuestion > 3)
+    {
+        couleur = "#94fe8a"; // Vert
+    }
+    else
+    {
+        couleur = "#fd5555"; // Rouge
+    }
+    labelChronometre->setStyleSheet("background-color: " + couleur);
 }
 
 void IHMQuizzy::initialiserFenetres()
@@ -278,10 +297,13 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    // @todo Mettre les couleurs de fond correspondant aux boutons du pupitre
+    propositionReponseA->setStyleSheet("background-color: #f9b7b7"); // Rouge
     propositionReponseA->setText(propositions['A']);
+    propositionReponseB->setStyleSheet("background-color: #b7f9ba"); // Vert
     propositionReponseB->setText(propositions['B']);
+    propositionReponseC->setStyleSheet("background-color: #f6f476"); // Jaune
     propositionReponseC->setText(propositions['C']);
+    propositionReponseD->setStyleSheet("background-color: #b7baf9"); // Bleu
     propositionReponseD->setText(propositions['D']);
 }
 
