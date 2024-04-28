@@ -68,6 +68,7 @@ void IHMQuizzy::afficherFenetreResultats()
 
 void IHMQuizzy::debuterQuiz()
 {
+    qDebug() << Q_FUNC_INFO;
     quizzy->debuter();
     afficherFenetreParticipants();
 }
@@ -86,6 +87,7 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
                                         int         reponseValide,
                                         int         temps)
 {
+    qDebug() << Q_FUNC_INFO << "libelle" << libelle;
     quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
 
     afficherQuestion();
@@ -96,13 +98,9 @@ void IHMQuizzy::demarrerQuestion()
     if(quizzy->estEncours() && quizzy->getQuestion() != nullptr)
     {
         decompteQuestion = quizzy->getQuestion()->getDuree();
+        qDebug() << Q_FUNC_INFO << "decompteQuestion" << decompteQuestion;
 
-        disconnect(minuteur,
-                   SIGNAL(timeout()),
-                   this,
-                   SLOT(afficherDecompteQuestion()));
-
-        if(decompteQuestion != 0)
+        if(decompteQuestion > 0)
         {
             connect(minuteur,
                     SIGNAL(timeout()),
@@ -110,6 +108,15 @@ void IHMQuizzy::demarrerQuestion()
                     SLOT(afficherDecompteQuestion()));
 
             minuteur->start(TOP_SECONDE);
+        }
+        else
+        {
+            disconnect(minuteur,
+                       SIGNAL(timeout()),
+                       this,
+                       SLOT(afficherDecompteQuestion()));
+
+            minuteur->stop();
         }
     }
 }
@@ -309,7 +316,15 @@ void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
-    labelChronometre->setText(QString::number(question.getDuree()) + "s");
+    if(question.getDuree() > 0)
+    {
+        labelChronometre->setText(QString::number(question.getDuree()) + "s");
+        labelChronometre->setVisible(true);
+    }
+    else
+    {
+        labelChronometre->setVisible(false);
+    }
 }
 
 void IHMQuizzy::changerCouleurChronometre()
