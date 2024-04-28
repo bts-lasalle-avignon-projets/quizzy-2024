@@ -23,7 +23,7 @@ import java.util.List;
 
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 
-@SuppressWarnings({ "SpellCheckingInspection", "unused" })
+@SuppressWarnings({ "SpellCheckingInspection", "unused" , "MissingPermission"})
 public class GestionnaireBluetooth
 {
     private static final String          TAG = "_GestionnaireBluetooth"; //!< TAG pour les logs
@@ -31,17 +31,40 @@ public class GestionnaireBluetooth
     private Handler                      handler               = null;
     private BluetoothAdapter             bluetoothAdapter      = null;
     private Peripherique                 peripherique;
-    private final List<Peripherique> peripheriques             = new ArrayList<>();
-    private final List<String>   noms                          = new ArrayList<>();
-    private ArrayAdapter<String> adapterPeripheriquesConnectes = null;
+    private static final List<Peripherique> peripheriques             = new ArrayList<>();
+    private static final List<String>   noms                          = new ArrayList<>();
+    private static ArrayAdapter<String> adapterPeripheriquesConnectes = null;
     private AppCompatActivity    activite;
 
-    public synchronized static GestionnaireBluetooth getGestionnaireBluetooth(
+    public synchronized static GestionnaireBluetooth initialiser(
       AppCompatActivity activite,
       Handler           handler)
     {
-        if(gestionnaireBluetooth == null)
-            gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
+        gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
+        if(gestionnaireBluetooth.bluetoothAdapter == null)
+        {
+            Toast.makeText(activite.getApplicationContext(),
+                            "Bluetooth non activé !",
+                            Toast.LENGTH_SHORT)
+                    .show();
+        } else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
+        {
+            Toast
+                    .makeText(activite.getApplicationContext(),
+                            "Bluetooth non activé !",
+                            Toast.LENGTH_SHORT)
+                    .show();
+            Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activite.startActivityForResult(activeBlueTooth, 0);
+        }
+        else
+        {
+            gestionnaireBluetooth.rechercherPeripheriquesConnus();
+        }
+        return gestionnaireBluetooth;
+    }
+
+    public synchronized static GestionnaireBluetooth getGestionnaireBluetooth() {
         return gestionnaireBluetooth;
     }
 
@@ -59,42 +82,9 @@ public class GestionnaireBluetooth
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
-    @SuppressLint("MissingPermission")
-    public void initialiser()
+    public void mettreAjourSpinnerPeripheriques(Spinner spinnerListePeripheriques)
     {
-        Log.d(TAG, "initialiser() bluetoothAdapter = " + bluetoothAdapter);
-        if(bluetoothAdapter == null)
-        {
-            FragmentPupitre.getVueActive().desactiverBoutons();
-            Toast
-              .makeText(activite.getApplicationContext(),
-                        "Bluetooth non activé !",
-                        Toast.LENGTH_SHORT)
-              .show();
-            return;
-        }
-        if(!bluetoothAdapter.isEnabled())
-        {
-            Toast
-              .makeText(activite.getApplicationContext(),
-                        "Bluetooth non activé !",
-                        Toast.LENGTH_SHORT)
-              .show();
-            Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            activite.startActivityForResult(activeBlueTooth, 0);
-        }
-        else
-        {
-            rechercherPeripheriquesConnus();
-            initialiserSpinner(FragmentPupitre.getVueActive().spinnerListePeripheriques);
-            initialiserListView(FragmentPupitre.getVueActive().listViewPeripheriquesConnectes);
-        }
-    }
-
-    public void initialiserSpinner(Spinner spinnerListePeripheriques)
-    {
-        ArrayAdapter<String> adapter =
-          new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerListePeripheriques.setAdapter(adapter);
         adapter.setNotifyOnChange(true);
@@ -104,13 +94,8 @@ public class GestionnaireBluetooth
               public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
               {
                   peripherique = peripheriques.get(position);
-                  if(peripherique.estConnecte())
-                  {
-                      FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                  }
-                  else
-                  {
-                      FragmentPupitre.getVueActive().activerBoutonConnecter();
+                  if (FragmentPupitre.getVueActive() != null) {
+                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
                   }
               }
 
@@ -121,14 +106,17 @@ public class GestionnaireBluetooth
           });
     }
 
-    public void initialiserListView(ListView listViewPeripheriquesConnectes)
+    public void mettreAjourListViewPeripheriques(ListView listViewPeripheriquesConnectes)
     {
         if(this.adapterPeripheriquesConnectes == null)
         {
-            this.adapterPeripheriquesConnectes =
-              new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
+            this.adapterPeripheriquesConnectes = new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
         }
         listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
+    }
+
+    public void setActivite(AppCompatActivity activite) {
+        this.activite = activite;
     }
 
     @SuppressLint("MissingPermission")
@@ -136,11 +124,8 @@ public class GestionnaireBluetooth
     {
         for(BluetoothDevice blueDevice: bluetoothAdapter.getBondedDevices())
         {
-            // @todo Filtrer les périphériques QUIZZY par leur nom : "quizzy-écran" pour la RPI et
-            // "quizzy-pn" où "n" est le numéro de pupitre
             peripheriques.add(new Peripherique(blueDevice, handler, peripheriques.size()));
             noms.add(blueDevice.getName());
-            FragmentPupitre.getVueActive().activerBoutonConnecter();
         }
         if(peripheriques.isEmpty())
         {
@@ -225,6 +210,10 @@ public class GestionnaireBluetooth
             return false;
         }
         return true;
+    }
+
+    public Peripherique getPeripheriqueSelectionne() {
+        return peripherique;
     }
 
     public List<Peripherique> getPeripheriques()

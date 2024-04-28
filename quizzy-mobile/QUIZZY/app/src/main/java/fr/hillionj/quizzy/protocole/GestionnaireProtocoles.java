@@ -70,12 +70,16 @@ public class GestionnaireProtocoles
                 switch(msg.what)
                 {
                     case CODE_CONNEXION_BLUETOOTH:
-                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
-                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                        if (FragmentPupitre.getVueActive() != null) {
+                            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+                        }
+                        GestionnaireBluetooth.getGestionnaireBluetooth()
                           .ajouterPeripheriqueConnecter((int)msg.obj);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
-                        FragmentPupitre.getVueActive().activerBoutonConnecter();
+                        if (FragmentPupitre.getVueActive() != null) {
+                            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+                        }
                         Toast
                           .makeText(activite.getApplicationContext(),
                                     "Erreur de connexion",
@@ -87,7 +91,7 @@ public class GestionnaireProtocoles
                         {
                             Protocole    protocole = Protocole.traiterTrame(trame + "\n");
                             Peripherique peripherique =
-                              GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                              GestionnaireBluetooth.getGestionnaireBluetooth()
                                 .getPeripheriques()
                                 .get(msg.arg1);
                             if(protocole != null)

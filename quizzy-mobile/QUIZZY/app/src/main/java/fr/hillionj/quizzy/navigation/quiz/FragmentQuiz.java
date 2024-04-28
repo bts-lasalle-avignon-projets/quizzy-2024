@@ -23,8 +23,11 @@ import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentHomeBinding;
+import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
+import fr.hillionj.quizzy.questionnaire.EtapeQuiz;
 import fr.hillionj.quizzy.questionnaire.Question;
 import fr.hillionj.quizzy.questionnaire.Quiz;
+import fr.hillionj.quizzy.receveurs.speciales.Ecran;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -83,16 +86,17 @@ public class FragmentQuiz extends Fragment
             @Override
             public void onClick(View view)
             {
-                // Test QUIZ
                 Quiz quiz = Quiz.getQuizEnCours();
                 for(Peripherique peripherique:
-                    GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                    GestionnaireBluetooth.getGestionnaireBluetooth()
                       .getPeripheriquesConnectes())
                 {
                     if(peripherique.getNom().startsWith("quizzy-p"))
                     {
-                        quiz.ajouterParticipant(
-                          new Participant(peripherique.getNom(), peripherique));
+                        quiz.ajouterParticipant(FragmentParametres.getParticipant(peripherique));
+                    } else if(peripherique.getNom().startsWith("quizzy-e"))
+                    {
+                        quiz.ajouterEcran(new Ecran(peripherique));
                     }
                 }
                 quiz.genererQuiz(null, 0);
@@ -172,6 +176,7 @@ public class FragmentQuiz extends Fragment
 
     public void mettreAjourEtatBoutons()
     {
+        Log.d(TAG, "estTempsMort : " + Quiz.getQuizEnCours().estTempsMort());
         if(Quiz.getQuizEnCours().estTermine())
         {
             btnLancerQuiz.setEnabled(true);
@@ -208,7 +213,7 @@ public class FragmentQuiz extends Fragment
             for(int i = 0; i < propositionsEnCours.size(); i++)
             {
                 propositions.get(i).setText(propositionsEnCours.get(i));
-                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort())
+                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() && Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
                 {
                     propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
                 }

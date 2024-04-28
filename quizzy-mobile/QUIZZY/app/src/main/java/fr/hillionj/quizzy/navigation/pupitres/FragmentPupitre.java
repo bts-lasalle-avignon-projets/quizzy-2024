@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
+import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -37,14 +38,8 @@ public class FragmentPupitre extends Fragment
         binding   = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initialiserVue(root);
-
-        if(vueActive == null)
-        {
-            vueActive = this;
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null).initialiser();
-        }
         vueActive = this;
+        initialiserVue(root);
         return root;
     }
 
@@ -74,10 +69,10 @@ public class FragmentPupitre extends Fragment
             btnConnecter.setEnabled(vueActive.btnConnecter.isEnabled());
             btnDeconnecter.setEnabled(vueActive.btnDeconnecter.isEnabled());
             spinnerListePeripheriques.setEnabled(vueActive.spinnerListePeripheriques.isEnabled());
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
-              .initialiserSpinner(spinnerListePeripheriques);
-            GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
-              .initialiserListView(listViewPeripheriquesConnectes);
+            GestionnaireBluetooth.getGestionnaireBluetooth()
+              .mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
+            GestionnaireBluetooth.getGestionnaireBluetooth()
+              .mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
         }
     }
 
@@ -88,37 +83,35 @@ public class FragmentPupitre extends Fragment
         binding = null;
     }
 
-    public void desactiverBoutons()
-    {
-        btnConnecter.setEnabled(false);
-        btnDeconnecter.setEnabled(false);
-        spinnerListePeripheriques.setEnabled(false);
+    public void mettreAjourEtatBoutons() {
+        Peripherique peripheriqueSelectionne = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriqueSelectionne();
+        if(peripheriqueSelectionne.estConnecte())
+        {
+            btnConnecter.setEnabled(false);
+            btnDeconnecter.setEnabled(true);
+            spinnerListePeripheriques.setEnabled(true);
+        /*}
+        else if (peripheriqueSelectionne.seConnecte()) {
+            btnConnecter.setEnabled(false);
+            btnDeconnecter.setEnabled(false);
+            spinnerListePeripheriques.setEnabled(false);*/
+        } else
+        {
+            btnConnecter.setEnabled(true);
+            btnDeconnecter.setEnabled(false);
+            spinnerListePeripheriques.setEnabled(true);
+        }
     }
 
-    public void activerBoutonConnecter()
-    {
-        btnConnecter.setEnabled(true);
-        btnDeconnecter.setEnabled(false);
-        spinnerListePeripheriques.setEnabled(true);
-    }
-
-    public void activerBoutonDeconnecter()
-    {
-        btnConnecter.setEnabled(false);
-        btnDeconnecter.setEnabled(true);
-        spinnerListePeripheriques.setEnabled(true);
-    }
     public void onClick(View v)
     {
-        if(v.getId() == R.id.bouton_connecter &&
-           GestionnaireBluetooth.getGestionnaireBluetooth(null, null).connecter())
+        if(v.getId() == R.id.bouton_connecter && GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
         {
-            desactiverBoutons();
+            mettreAjourEtatBoutons();
         }
-        else if(v.getId() == R.id.bouton_deconnecter &&
-                GestionnaireBluetooth.getGestionnaireBluetooth(null, null).deconnecter())
+        else if(v.getId() == R.id.bouton_deconnecter && GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
         {
-            activerBoutonConnecter();
+            mettreAjourEtatBoutons();
         }
     }
 }
