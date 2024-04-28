@@ -97,12 +97,20 @@ void IHMQuizzy::demarrerQuestion()
     {
         decompteQuestion = quizzy->getQuestion()->getDuree();
 
-        connect(minuteur,
-                SIGNAL(timeout()),
-                this,
-                SLOT(afficherDecompteQuestion()));
+        disconnect(minuteur,
+                   SIGNAL(timeout()),
+                   this,
+                   SLOT(afficherDecompteQuestion()));
 
-        minuteur->start(TOP_SECONDE);
+        if(decompteQuestion != 0)
+        {
+            connect(minuteur,
+                    SIGNAL(timeout()),
+                    this,
+                    SLOT(afficherDecompteQuestion()));
+
+            minuteur->start(TOP_SECONDE);
+        }
     }
 }
 
@@ -116,6 +124,7 @@ void IHMQuizzy::afficherDecompteQuestion()
         if(decompteQuestion < 0)
         {
             minuteur->stop();
+            labelChronometre->setStyleSheet("background-color: #f9e4b7");
         }
     }
 }
