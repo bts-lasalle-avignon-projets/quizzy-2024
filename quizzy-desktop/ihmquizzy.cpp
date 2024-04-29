@@ -65,42 +65,22 @@ void IHMQuizzy::afficherFenetreResultats()
 {
     afficherFenetre(Fenetre::FenetreResultats);
 }
-void IHMQuizzy::debuterQuiz()
-{
-    qDebug() << Q_FUNC_INFO;
-    quizzy->debuter();
-}
 
 void IHMQuizzy::lancerQuiz()
 {
-    qDebug() << Q_FUNC_INFO;
-    quizzy->lancer();
     if(quizzy->getNbQuestions() > 0)
     {
         afficherQuestion();
     }
 }
 
-void IHMQuizzy::traiterTrameL()
-{
-    if(!quizzy->estEncours() && quizzy->getNbParticipants() == 0 &&
-       quizzy->getNbQuestions() == 0)
-    {
-        debuterQuiz();
-    }
-    else
-    {
-        lancerQuiz();
-    }
-}
-
 void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
-    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "participant"
-             << participant;
-    quizzy->ajouterParticipant(pidJoueur, participant);
-    afficherParticipant(pidJoueur, participant);
-    afficherFenetreParticipants();
+    if(quizzy->ajouterParticipant(pidJoueur, participant))
+    {
+        afficherParticipant(pidJoueur, participant);
+        afficherFenetreParticipants();
+    }
 }
 
 void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
@@ -108,18 +88,17 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
                                         int         reponseValide,
                                         int         temps)
 {
-    qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
-             << propositions << "reponseValide" << reponseValide << temps
-             << temps;
     if(quizzy->getNbParticipants() > 0)
     {
         quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
+        // @todo Afficher prêt à lancer le quiz
     }
 }
 
 void IHMQuizzy::demarrerQuestion()
 {
-    if(quizzy->estEncours() && quizzy->getQuestion() != nullptr)
+    if(quizzy->getEtat() == Quizzy::Etat::QuizLance &&
+       quizzy->getQuestion() != nullptr)
     {
         initialiserChronometre();
     }
@@ -266,8 +245,12 @@ void IHMQuizzy::initialiserEvenements()
 {
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuiz()),
+            quizzy,
+            SLOT(gererDebutQuiz()));
+    connect(quizzy,
+            SIGNAL(affichagePremiereQuestion()),
             this,
-            SLOT(traiterTrameL()));
+            SLOT(lancerQuiz()));
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
@@ -297,17 +280,21 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString participant)
 void IHMQuizzy::afficherQuestion()
 {
     Question* question = quizzy->getQuestion();
-    afficherNbQuestions(quizzy->getNbQuestions());
+    afficherNbQuestions(quizzy->getIndexQuestionActuelle() + 1,
+                        quizzy->getNbQuestions());
     afficherLibelleQuestion(*question);
     afficherPropositionsQuestion(*question);
     afficherTempsQuestion(*question);
     afficherFenetreJeu();
 }
 
-void IHMQuizzy::afficherNbQuestions(unsigned int nbQuestions)
+void IHMQuizzy::afficherNbQuestions(unsigned int numeroQuestion,
+                                    unsigned int nbQuestions)
 {
+    qDebug() << Q_FUNC_INFO << "numeroQuestion" << numeroQuestion
+             << "nbQuestions" << nbQuestions;
     labelNombreTotal->setText(QString("Question n°") +
-                              QString::number(nbQuestions));
+                              QString::number(numeroQuestion));
 }
 
 void IHMQuizzy::afficherLibelleQuestion(const Question& question)

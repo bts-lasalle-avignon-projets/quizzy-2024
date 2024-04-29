@@ -17,18 +17,33 @@ class Quizzy : public QObject
   public:
     enum Etat
     {
-        EtatInitial,
-        EtatParticipantsAjoutes,
-        EtatQuestionsAjoutees,
-        EtatQuizLance
+        Initial,
+        QuizDemarre,
+        ParticipantsAjoutes,
+        QuestionsAjoutees,
+        QuizLance,
+        Resultats,
+        QuizFini
     };
 
+  private:
+    QVector<Participant*> participants;
+    QVector<Question*>    listeQuestions;
+    int                   indexQuestionActuelle;
+    Etat                  etat;
+    CommunicationBluetooth*
+      communicationTablette; //!< association vers la classe
+                             //!< CommunicationBluetooth
+
+    void initialiserCommunicationTablette();
+
+  public:
     Quizzy(QObject* parent = nullptr);
     ~Quizzy();
 
-    void         debuter();
+    void         debuter(bool reset = true);
     void         lancer();
-    void         ajouterParticipant(QString pidJoueur, QString nomParticipant);
+    bool         ajouterParticipant(QString pidJoueur, QString nomParticipant);
     void         ajouterQuestion(QString     libelle,
                                  QStringList propositions,
                                  int         reponseValide,
@@ -36,20 +51,15 @@ class Quizzy : public QObject
     unsigned int getNbQuestions();
     unsigned int getNbParticipants();
     Question*    getQuestion();
-    bool         estEncours() const;
+    Etat         getEtat() const;
+    int          getIndexQuestionActuelle() const;
     CommunicationBluetooth* getCommunicationTablette();
 
-  private:
-    QVector<Participant*> participants;
-    QVector<Question*>    listeQuestions;
-    int                   indexQuestionActuelle;
-    bool                  enCours;
-    Etat                  etat;
-    CommunicationBluetooth*
-      communicationTablette; //!< association vers la classe
-                             //!< CommunicationBluetooth
+  signals:
+    void affichagePremiereQuestion();
 
-    void initialiserCommunicationTablette();
+  public slots:
+    void gererDebutQuiz();
 };
 
 #endif // QUIZZY_H

@@ -6,8 +6,8 @@
 #include <QDebug>
 
 Quizzy::Quizzy(QObject* parent) :
-    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), enCours(false),
-    communicationTablette(new CommunicationBluetooth(this)), etat(EtatInitial)
+    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), etat(Initial),
+    communicationTablette(new CommunicationBluetooth(this))
 {
     qDebug() << Q_FUNC_INFO;
     initialiserCommunicationTablette();
@@ -25,38 +25,51 @@ void Quizzy::initialiserCommunicationTablette()
     communicationTablette->demarrerServeur();
 }
 
-void Quizzy::debuter()
+void Quizzy::debuter(bool reset)
 {
-    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
-    participants.clear();
-    listeQuestions.clear();
-    enCours = false;
-    etat    = EtatInitial;
-    qDebug() << "Etat après : " << etat;
+    if(etat == Initial)
+    {
+        if(reset)
+        {
+            qDebug() << Q_FUNC_INFO << "reset" << reset;
+            participants.clear();
+            listeQuestions.clear();
+            indexQuestionActuelle = INDEX_NON_DEFINI;
+        }
+        etat = QuizDemarre;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+    }
 }
 
 void Quizzy::lancer()
 {
-    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
-    if(etat == EtatQuestionsAjoutees)
+    if(etat == QuestionsAjoutees)
     {
-        enCours = true;
-        etat    = EtatQuizLance;
+        indexQuestionActuelle = 0;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+        etat = QuizLance;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit affichagePremiereQuestion();
     }
-    qDebug() << "Etat après : " << etat;
 }
 
-void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
+bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 {
-    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
-    Participant* participant =
-      new Participant(nomParticipant, pidJoueur.toInt());
-    participants.push_back(participant);
-    if(etat == EtatInitial)
+    if(etat == QuizDemarre || etat == ParticipantsAjoutes)
     {
-        etat = EtatParticipantsAjoutes;
+        // @todo Vérifier l'existence du pidJoueur/nomParticipant
+        Participant* participant =
+          new Participant(nomParticipant, pidJoueur.toInt());
+        participants.push_back(participant);
+
+        etat = ParticipantsAjoutes;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+
+        return true;
     }
-    qDebug() << "Etat après : " << etat;
+
+    return false;
 }
 
 void Quizzy::ajouterQuestion(QString     libelle,
@@ -64,15 +77,18 @@ void Quizzy::ajouterQuestion(QString     libelle,
                              int         reponseValide,
                              int         temps)
 {
-    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
-    Question* question = new Question(libelle, propositions);
-    question->setDuree(temps);
-    listeQuestions.append(question);
-    if(etat == EtatParticipantsAjoutes)
+    if(etat == ParticipantsAjoutes || etat == QuestionsAjoutees)
     {
-        etat = EtatQuestionsAjoutees;
+        qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
+                 << propositions << "reponseValide" << reponseValide << temps
+                 << temps;
+        Question* question = new Question(libelle, propositions);
+        question->setDuree(temps);
+        listeQuestions.append(question);
+
+        etat = QuestionsAjoutees;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
     }
-    qDebug() << "Etat après : " << etat;
 }
 
 unsigned int Quizzy::getNbQuestions()
@@ -89,15 +105,32 @@ Question* Quizzy::getQuestion()
 {
     if(listeQuestions.isEmpty())
         return nullptr;
-    return listeQuestions.last();
+    return listeQuestions[indexQuestionActuelle];
 }
 
-bool Quizzy::estEncours() const
+Quizzy::Etat Quizzy::getEtat() const
 {
-    return enCours;
+    return etat;
+}
+
+int Quizzy::getIndexQuestionActuelle() const
+{
+    return indexQuestionActuelle;
 }
 
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;
+}
+
+void Quizzy::gererDebutQuiz()
+{
+    if(etat == Initial)
+    {
+        debuter();
+    }
+    else if(etat == QuestionsAjoutees)
+    {
+        lancer();
+    }
 }
