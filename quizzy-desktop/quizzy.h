@@ -35,6 +35,7 @@ class Quizzy : public QObject
                                  int         reponseValide,
                                  int         temps);
     unsigned int getNbQuestions();
+    unsigned int getNbParticipants();
     Question*    getQuestion();
     bool         estEncours() const;
     CommunicationBluetooth* getCommunicationTablette();

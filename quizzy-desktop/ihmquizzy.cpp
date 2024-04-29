@@ -65,24 +65,23 @@ void IHMQuizzy::afficherFenetreResultats()
 {
     afficherFenetre(Fenetre::FenetreResultats);
 }
-
 void IHMQuizzy::debuterQuiz()
 {
     qDebug() << Q_FUNC_INFO;
     quizzy->debuter();
-    afficherFenetreParticipants();
+    if(quizzy->getNbQuestions() > 0)
+    {
+        afficherQuestion();
+    }
 }
 
 void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "participant"
              << participant;
-    if(quizzy->estEncours())
-    {
-        quizzy->ajouterParticipant(pidJoueur, participant);
-
-        afficherParticipant(pidJoueur, participant);
-    }
+    quizzy->ajouterParticipant(pidJoueur, participant);
+    afficherParticipant(pidJoueur, participant);
+    afficherFenetreParticipants();
 }
 
 void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
@@ -93,11 +92,9 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
     qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
              << propositions << "reponseValide" << reponseValide << temps
              << temps;
-    if(quizzy->estEncours())
+    if(quizzy->getNbParticipants() > 0)
     {
         quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
-
-        afficherQuestion();
     }
 }
 

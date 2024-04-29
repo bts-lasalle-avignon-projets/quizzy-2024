@@ -28,7 +28,6 @@ void Quizzy::initialiserCommunicationTablette()
 void Quizzy::debuter()
 {
     participants.clear();
-    listeQuestions.clear();
     enCours = true;
 }
 
@@ -52,6 +51,11 @@ void Quizzy::ajouterQuestion(QString     libelle,
 unsigned int Quizzy::getNbQuestions()
 {
     return listeQuestions.size();
+}
+
+unsigned int Quizzy::getNbParticipants()
+{
+    return participants.size();
 }
 
 Question* Quizzy::getQuestion()
