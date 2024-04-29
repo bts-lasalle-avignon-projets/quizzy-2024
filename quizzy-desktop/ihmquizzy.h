@@ -154,6 +154,9 @@ class IHMQuizzy : public QWidget
     void afficherFenetreJeu();
     void afficherFenetreResultats();
     void debuterQuiz();
+    void lancerQuiz();
+    void traiterTrameL();
+
     void ajouterParticipant(QString pidJoueur, QString participant);
     void ajouterNouvelleQuestion(QString     libelle,
                                  QStringList propositions,

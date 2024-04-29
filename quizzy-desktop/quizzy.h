@@ -13,22 +13,21 @@ class CommunicationBluetooth;
 class Quizzy : public QObject
 {
     Q_OBJECT
-  private:
-    QVector<Participant*> participants;
-    QVector<Question*>    listeQuestions;
-    int                   indexQuestionActuelle;
-    bool                  enCours;
-    CommunicationBluetooth*
-      communicationTablette; //!< association vers la classe
-                             //!< CommunicationBluetooth
-
-    void initialiserCommunicationTablette();
 
   public:
+    enum Etat
+    {
+        EtatInitial,
+        EtatParticipantsAjoutes,
+        EtatQuestionsAjoutees,
+        EtatQuizLance
+    };
+
     Quizzy(QObject* parent = nullptr);
     ~Quizzy();
 
     void         debuter();
+    void         lancer();
     void         ajouterParticipant(QString pidJoueur, QString nomParticipant);
     void         ajouterQuestion(QString     libelle,
                                  QStringList propositions,
@@ -39,6 +38,18 @@ class Quizzy : public QObject
     Question*    getQuestion();
     bool         estEncours() const;
     CommunicationBluetooth* getCommunicationTablette();
+
+  private:
+    QVector<Participant*> participants;
+    QVector<Question*>    listeQuestions;
+    int                   indexQuestionActuelle;
+    bool                  enCours;
+    Etat                  etat;
+    CommunicationBluetooth*
+      communicationTablette; //!< association vers la classe
+                             //!< CommunicationBluetooth
+
+    void initialiserCommunicationTablette();
 };
 
 #endif // QUIZZY_H

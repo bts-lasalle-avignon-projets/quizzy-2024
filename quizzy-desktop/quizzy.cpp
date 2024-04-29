@@ -7,7 +7,7 @@
 
 Quizzy::Quizzy(QObject* parent) :
     QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), enCours(false),
-    communicationTablette(new CommunicationBluetooth(this))
+    communicationTablette(new CommunicationBluetooth(this)), etat(EtatInitial)
 {
     qDebug() << Q_FUNC_INFO;
     initialiserCommunicationTablette();
@@ -27,15 +27,36 @@ void Quizzy::initialiserCommunicationTablette()
 
 void Quizzy::debuter()
 {
+    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
     participants.clear();
-    enCours = true;
+    listeQuestions.clear();
+    enCours = false;
+    etat    = EtatInitial;
+    qDebug() << "Etat après : " << etat;
+}
+
+void Quizzy::lancer()
+{
+    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
+    if(etat == EtatQuestionsAjoutees)
+    {
+        enCours = true;
+        etat    = EtatQuizLance;
+    }
+    qDebug() << "Etat après : " << etat;
 }
 
 void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 {
+    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
     Participant* participant =
       new Participant(nomParticipant, pidJoueur.toInt());
     participants.push_back(participant);
+    if(etat == EtatInitial)
+    {
+        etat = EtatParticipantsAjoutes;
+    }
+    qDebug() << "Etat après : " << etat;
 }
 
 void Quizzy::ajouterQuestion(QString     libelle,
@@ -43,9 +64,15 @@ void Quizzy::ajouterQuestion(QString     libelle,
                              int         reponseValide,
                              int         temps)
 {
+    qDebug() << Q_FUNC_INFO << "Etat avant : " << etat;
     Question* question = new Question(libelle, propositions);
     question->setDuree(temps);
     listeQuestions.append(question);
+    if(etat == EtatParticipantsAjoutes)
+    {
+        etat = EtatQuestionsAjoutees;
+    }
+    qDebug() << "Etat après : " << etat;
 }
 
 unsigned int Quizzy::getNbQuestions()

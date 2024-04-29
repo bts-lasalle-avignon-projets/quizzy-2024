@@ -69,9 +69,28 @@ void IHMQuizzy::debuterQuiz()
 {
     qDebug() << Q_FUNC_INFO;
     quizzy->debuter();
+}
+
+void IHMQuizzy::lancerQuiz()
+{
+    qDebug() << Q_FUNC_INFO;
+    quizzy->lancer();
     if(quizzy->getNbQuestions() > 0)
     {
         afficherQuestion();
+    }
+}
+
+void IHMQuizzy::traiterTrameL()
+{
+    if(!quizzy->estEncours() && quizzy->getNbParticipants() == 0 &&
+       quizzy->getNbQuestions() == 0)
+    {
+        debuterQuiz();
+    }
+    else
+    {
+        lancerQuiz();
     }
 }
 
@@ -248,7 +267,7 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuiz()),
             this,
-            SLOT(debuterQuiz()));
+            SLOT(traiterTrameL()));
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouveauParticipant(QString, QString)),
             this,
