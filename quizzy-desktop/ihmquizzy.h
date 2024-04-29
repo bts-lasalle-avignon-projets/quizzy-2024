@@ -43,7 +43,20 @@
  */
 //#define PLEIN_ECRAN_RASPBERRY_PI
 
+/**
+ * @def TOP_SECONDE
+ * @brief Pour la gestion du chronomètre en millisecondes
+ */
 #define TOP_SECONDE 1000
+
+/**
+ * @def ECHEANCE_CHRONOMETRE
+ * @brief Pour la fin du chronomètre en secondes
+ */
+#define ECHEANCE_CHRONOMETRE 3
+
+#define FOND_VERT  "#94fe8a"
+#define FOND_ROUGE "#fd5555"
 
 class Quizzy;
 class Question;
@@ -123,9 +136,11 @@ class IHMQuizzy : public QWidget
     void initialiserEvenements();
     void afficherParticipant(QString pidJoueur, QString participant);
     void afficherQuestion();
+    void afficherNbQuestions(unsigned int nbQuestions);
     void afficherLibelleQuestion(const Question& question);
     void afficherPropositionsQuestion(const Question& question);
     void afficherTempsQuestion(const Question& question);
+    void initialiserChronometre();
     void changerCouleurChronometre();
 
   public:
