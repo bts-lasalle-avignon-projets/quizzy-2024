@@ -77,9 +77,12 @@ void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
 {
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "participant"
              << participant;
-    quizzy->ajouterParticipant(pidJoueur, participant);
+    if(quizzy->estEncours())
+    {
+        quizzy->ajouterParticipant(pidJoueur, participant);
 
-    afficherParticipant(pidJoueur, participant);
+        afficherParticipant(pidJoueur, participant);
+    }
 }
 
 void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
@@ -87,37 +90,22 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
                                         int         reponseValide,
                                         int         temps)
 {
-    qDebug() << Q_FUNC_INFO << "libelle" << libelle;
-    quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
+    qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
+             << propositions << "reponseValide" << reponseValide << temps
+             << temps;
+    if(quizzy->estEncours())
+    {
+        quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
 
-    afficherQuestion();
+        afficherQuestion();
+    }
 }
 
 void IHMQuizzy::demarrerQuestion()
 {
     if(quizzy->estEncours() && quizzy->getQuestion() != nullptr)
     {
-        decompteQuestion = quizzy->getQuestion()->getDuree();
-        qDebug() << Q_FUNC_INFO << "decompteQuestion" << decompteQuestion;
-
-        if(decompteQuestion > 0)
-        {
-            connect(minuteur,
-                    SIGNAL(timeout()),
-                    this,
-                    SLOT(afficherDecompteQuestion()));
-
-            minuteur->start(TOP_SECONDE);
-        }
-        else
-        {
-            disconnect(minuteur,
-                       SIGNAL(timeout()),
-                       this,
-                       SLOT(afficherDecompteQuestion()));
-
-            minuteur->stop();
-        }
+        initialiserChronometre();
     }
 }
 
@@ -131,10 +119,13 @@ void IHMQuizzy::afficherDecompteQuestion()
         if(decompteQuestion < 0)
         {
             minuteur->stop();
+            labelChronometre->setText(QString::number(0) + "s");
             labelChronometre->setStyleSheet("background-color: #f9e4b7");
         }
     }
 }
+
+// Méthodes privées
 
 void IHMQuizzy::initialiserFenetres()
 {
@@ -290,10 +281,17 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString participant)
 void IHMQuizzy::afficherQuestion()
 {
     Question* question = quizzy->getQuestion();
+    afficherNbQuestions(quizzy->getNbQuestions());
     afficherLibelleQuestion(*question);
     afficherPropositionsQuestion(*question);
     afficherTempsQuestion(*question);
     afficherFenetreJeu();
+}
+
+void IHMQuizzy::afficherNbQuestions(unsigned int nbQuestions)
+{
+    labelNombreTotal->setText(QString("Question n°") +
+                              QString::number(nbQuestions));
 }
 
 void IHMQuizzy::afficherLibelleQuestion(const Question& question)
@@ -327,16 +325,40 @@ void IHMQuizzy::afficherTempsQuestion(const Question& question)
     }
 }
 
+void IHMQuizzy::initialiserChronometre()
+{
+    decompteQuestion = quizzy->getQuestion()->getDuree();
+    qDebug() << Q_FUNC_INFO << "decompteQuestion" << decompteQuestion;
+
+    disconnect(minuteur,
+               SIGNAL(timeout()),
+               this,
+               SLOT(afficherDecompteQuestion()));
+
+    if(minuteur->isActive())
+        minuteur->stop();
+
+    if(decompteQuestion > 0)
+    {
+        connect(minuteur,
+                SIGNAL(timeout()),
+                this,
+                SLOT(afficherDecompteQuestion()));
+
+        minuteur->start(TOP_SECONDE);
+    }
+}
+
 void IHMQuizzy::changerCouleurChronometre()
 {
     QString couleur;
-    if(decompteQuestion > 3)
+    if(decompteQuestion > ECHEANCE_CHRONOMETRE)
     {
-        couleur = "#94fe8a"; // Vert
+        couleur = FOND_VERT;
     }
     else
     {
-        couleur = "#fd5555"; // Rouge
+        couleur = FOND_ROUGE;
     }
     labelChronometre->setStyleSheet("background-color: " + couleur);
 }

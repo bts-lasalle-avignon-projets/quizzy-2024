@@ -49,6 +49,11 @@ void Quizzy::ajouterQuestion(QString     libelle,
     listeQuestions.append(question);
 }
 
+unsigned int Quizzy::getNbQuestions()
+{
+    return listeQuestions.size();
+}
+
 Question* Quizzy::getQuestion()
 {
     if(listeQuestions.isEmpty())
