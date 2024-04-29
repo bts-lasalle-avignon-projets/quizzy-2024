@@ -136,7 +136,8 @@ class IHMQuizzy : public QWidget
     void initialiserEvenements();
     void afficherParticipant(QString pidJoueur, QString participant);
     void afficherQuestion();
-    void afficherNbQuestions(unsigned int nbQuestions);
+    void afficherNbQuestions(unsigned int numeroQuestion,
+                             unsigned int nbQuestions);
     void afficherLibelleQuestion(const Question& question);
     void afficherPropositionsQuestion(const Question& question);
     void afficherTempsQuestion(const Question& question);
@@ -153,7 +154,7 @@ class IHMQuizzy : public QWidget
     void afficherFenetreParticipants();
     void afficherFenetreJeu();
     void afficherFenetreResultats();
-    void debuterQuiz();
+    void lancerQuiz();
     void ajouterParticipant(QString pidJoueur, QString participant);
     void ajouterNouvelleQuestion(QString     libelle,
                                  QStringList propositions,
