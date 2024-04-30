@@ -376,8 +376,7 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
 {
     if(!quizzy->estParticipantActuel(pidJoueur))
     {
-        qDebug() << "Le pidJoueur" << pidJoueur
-                 << "n'est pas un participant actuel.";
+        qDebug() << Q_FUNC_INFO << "pidJoueur non participant :" << pidJoueur;
         return;
     }
     switch(numeroReponse)
@@ -401,7 +400,8 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         default:
             break;
     }
-    qDebug() << "Le participant avec l'ID du pupitre" << pidJoueur
-             << "a choisi la réponse" << numeroReponse;
+    qDebug() << Q_FUNC_INFO << "pidJoueur:" << pidJoueur
+             << "choix:" << numeroReponse;
+
     quizzy->verifierReponse(pidJoueur, numeroReponse);
 }

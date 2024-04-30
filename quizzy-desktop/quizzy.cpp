@@ -102,7 +102,7 @@ void Quizzy::ajouterQuestion(QString     libelle,
         question->setDuree(temps);
         listeQuestions.append(question);
 
-        qDebug() << "Reponse valide pour la question :" << reponseValide;
+        qDebug() << Q_FUNC_INFO << "reponseValide:" << reponseValide;
 
         etat = QuestionsAjoutees;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
@@ -127,21 +127,19 @@ void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
     if(questionActuelle)
     {
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
-        qDebug() << "Reponse correcte:" << reponseCorrecte;
-        qDebug() << "Numero de reponse:" << numeroReponse;
+        qDebug() << Q_FUNC_INFO << "reponseCorrecte:" << reponseCorrecte;
+        qDebug() << Q_FUNC_INFO << "Numero de reponse:" << numeroReponse;
 
         if(numeroReponse == reponseCorrecte)
         {
             participant->incrementerNombreReponsesCorrectes();
-            qDebug() << "Le participant avec l'ID du pupitre"
-                     << participant->getIdPupitre()
-                     << "a choisi la bonne réponse" << numeroReponse;
+            qDebug() << Q_FUNC_INFO << "pupitre:" << participant->getIdPupitre()
+                     << "Bonne reponse:" << numeroReponse;
         }
         else
         {
-            qDebug() << "Le participant avec l'ID du pupitre"
-                     << participant->getIdPupitre()
-                     << "a choisi la mauvaise réponse" << numeroReponse;
+            qDebug() << Q_FUNC_INFO << "pupitre:" << participant->getIdPupitre()
+                     << "Mauvaise reponse:" << numeroReponse;
         }
     }
 }
@@ -150,8 +148,7 @@ void Quizzy::verifierReponse(QString pidJoueur, int numeroReponse)
 {
     if(!estParticipantActuel(pidJoueur))
     {
-        qDebug() << "Le pidJoueur" << pidJoueur
-                 << "n'est pas un participant actuel.";
+        qDebug() << Q_FUNC_INFO << "pidJoueur non participant :" << pidJoueur;
         return;
     }
 
