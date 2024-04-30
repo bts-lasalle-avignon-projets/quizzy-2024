@@ -190,6 +190,18 @@ int Quizzy::getIndexQuestionActuelle() const
     return indexQuestionActuelle;
 }
 
+QString Quizzy::getNomDuParticipant(QString pidJoueur)
+{
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            return participant->getNom();
+        }
+    }
+    return QString();
+}
+
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;

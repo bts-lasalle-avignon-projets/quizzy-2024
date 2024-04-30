@@ -379,27 +379,36 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         qDebug() << Q_FUNC_INFO << "pidJoueur non participant :" << pidJoueur;
         return;
     }
+    QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
+    choixParticipants[numeroReponse].append(nomParticipant);
+    QString texte = "<br><small>Choisi par : </small>" + nomParticipant;
+
     switch(numeroReponse)
     {
         case 1:
             propositionReponseA->setStyleSheet(
               "background-color: #f9b7b7; border: 3px solid red");
+            propositionReponseA->setText(propositionReponseA->text() + texte);
             break;
         case 2:
             propositionReponseB->setStyleSheet(
               "background-color: #b7f9ba; border: 3px solid red");
+            propositionReponseB->setText(propositionReponseB->text() + texte);
             break;
         case 3:
             propositionReponseC->setStyleSheet(
               "background-color: #f6f476; border: 3px solid red");
+            propositionReponseC->setText(propositionReponseC->text() + texte);
             break;
         case 4:
             propositionReponseD->setStyleSheet(
               "background-color: #b7baf9; border: 3px solid red");
+            propositionReponseD->setText(propositionReponseD->text() + texte);
             break;
         default:
             break;
     }
+
     qDebug() << Q_FUNC_INFO << "pidJoueur:" << pidJoueur
              << "choix:" << numeroReponse;
 

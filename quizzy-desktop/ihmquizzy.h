@@ -86,10 +86,11 @@ class IHMQuizzy : public QWidget
     };
 
   private:
-    Quizzy*            quizzy;    //!< association vers la classe Quizzy
-    QVector<Question*> questions; //!< conteneur de Question pour le quiz
-    QTimer*            minuteur;  //!< pour gérer le temps d'une question
-    int                decompteQuestion; //!< pour le temps d'une question
+    Quizzy*                quizzy;    //!< association vers la classe Quizzy
+    QVector<Question*>     questions; //!< conteneur de Question pour le quiz
+    QTimer*                minuteur;  //!< pour gérer le temps d'une question
+    int                    decompteQuestion; //!< pour le temps d'une question
+    QMap<int, QStringList> choixParticipants;
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     // FenetreAccueil
