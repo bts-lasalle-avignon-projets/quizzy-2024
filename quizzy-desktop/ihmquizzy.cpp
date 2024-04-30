@@ -263,6 +263,10 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(debutQuestion()),
             this,
             SLOT(demarrerQuestion()));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(choixReponse(QString, int, int)),
+            this,
+            SLOT(afficherChoixReponse(QString, int, int)));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }
@@ -364,4 +368,40 @@ void IHMQuizzy::changerCouleurChronometre()
         couleur = FOND_ROUGE;
     }
     labelChronometre->setStyleSheet("background-color: " + couleur);
+}
+
+void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
+                                     int     numeroReponse,
+                                     int     tempsReponse)
+{
+    if(!quizzy->verifierParticipantActuel(pidJoueur))
+    {
+        qDebug() << "Le pidJoueur" << pidJoueur
+                 << "n'est pas un participant actuel.";
+        return;
+    }
+    switch(numeroReponse)
+    {
+        case 1:
+            propositionReponseA->setStyleSheet(
+              "background-color: #f9b7b7; border: 3px solid red");
+            break;
+        case 2:
+            propositionReponseB->setStyleSheet(
+              "background-color: #b7f9ba; border: 3px solid red");
+            break;
+        case 3:
+            propositionReponseC->setStyleSheet(
+              "background-color: #f6f476; border: 3px solid red");
+            break;
+        case 4:
+            propositionReponseD->setStyleSheet(
+              "background-color: #b7baf9; border: 3px solid red");
+            break;
+        default:
+            break;
+    }
+    qDebug() << "Le participant avec l'ID du pupitre" << pidJoueur
+             << "a choisi la réponse" << numeroReponse;
+    quizzy->verifierReponse(pidJoueur, numeroReponse);
 }

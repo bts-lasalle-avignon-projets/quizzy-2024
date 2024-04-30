@@ -5,6 +5,7 @@
 
 #include <QDebug>
 
+// Constructeur et destructeur
 Quizzy::Quizzy(QObject* parent) :
     QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), etat(Initial),
     communicationTablette(new CommunicationBluetooth(this))
@@ -18,13 +19,14 @@ Quizzy::~Quizzy()
     qDebug() << Q_FUNC_INFO;
 }
 
+// Initialisation
 void Quizzy::initialiserCommunicationTablette()
 {
     qDebug() << Q_FUNC_INFO;
-
     communicationTablette->demarrerServeur();
 }
 
+// Gestion du quiz
 void Quizzy::debuter(bool reset)
 {
     if(etat == Initial)
@@ -54,6 +56,19 @@ void Quizzy::lancer()
     }
 }
 
+void Quizzy::gererDebutQuiz()
+{
+    if(etat == Initial)
+    {
+        debuter();
+    }
+    else if(etat == QuestionsAjoutees)
+    {
+        lancer();
+    }
+}
+
+// Gestion des participants
 bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 {
     if(etat == QuizDemarre || etat == ParticipantsAjoutes)
@@ -72,6 +87,7 @@ bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
     return false;
 }
 
+// Gestion des questions
 void Quizzy::ajouterQuestion(QString     libelle,
                              QStringList propositions,
                              int         reponseValide,
@@ -82,15 +98,74 @@ void Quizzy::ajouterQuestion(QString     libelle,
         qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
                  << propositions << "reponseValide" << reponseValide << temps
                  << temps;
-        Question* question = new Question(libelle, propositions);
+        Question* question = new Question(libelle, propositions, reponseValide);
         question->setDuree(temps);
         listeQuestions.append(question);
+
+        qDebug() << "Reponse valide pour la question :" << reponseValide;
 
         etat = QuestionsAjoutees;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
     }
 }
 
+bool Quizzy::verifierParticipantActuel(QString pidJoueur)
+{
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
+{
+    Question* questionActuelle = getQuestion();
+    if(questionActuelle)
+    {
+        int reponseCorrecte = questionActuelle->getReponseCorrecte();
+        qDebug() << "Reponse correcte:" << reponseCorrecte;
+        qDebug() << "Numero de reponse:" << numeroReponse;
+
+        if(numeroReponse == reponseCorrecte)
+        {
+            participant->incrementerNombreReponsesCorrectes();
+            qDebug() << "Le participant avec l'ID du pupitre"
+                     << participant->getIdPupitre()
+                     << "a choisi la bonne réponse" << numeroReponse;
+        }
+        else
+        {
+            qDebug() << "Le participant avec l'ID du pupitre"
+                     << participant->getIdPupitre()
+                     << "a choisi la mauvaise réponse" << numeroReponse;
+        }
+    }
+}
+
+void Quizzy::verifierReponse(QString pidJoueur, int numeroReponse)
+{
+    if(!verifierParticipantActuel(pidJoueur))
+    {
+        qDebug() << "Le pidJoueur" << pidJoueur
+                 << "n'est pas un participant actuel.";
+        return;
+    }
+
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            traiterReponse(participant, numeroReponse);
+            break;
+        }
+    }
+}
+
+// Getters
 unsigned int Quizzy::getNbQuestions()
 {
     return listeQuestions.size();
@@ -121,16 +196,4 @@ int Quizzy::getIndexQuestionActuelle() const
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;
-}
-
-void Quizzy::gererDebutQuiz()
-{
-    if(etat == Initial)
-    {
-        debuter();
-    }
-    else if(etat == QuestionsAjoutees)
-    {
-        lancer();
-    }
 }

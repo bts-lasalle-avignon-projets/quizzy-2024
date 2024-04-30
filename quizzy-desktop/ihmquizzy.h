@@ -162,6 +162,9 @@ class IHMQuizzy : public QWidget
                                  int         temps);
     void demarrerQuestion();
     void afficherDecompteQuestion();
+    void afficherChoixReponse(QString pidJoueur,
+                              int     numeroReponse,
+                              int     tempsReponse);
 };
 
 #endif // IHMQUIZZY_H
