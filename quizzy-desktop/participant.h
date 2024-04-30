@@ -10,6 +10,7 @@
  */
 
 #include <QString>
+#include <QVector>
 
 /**
  * @def ID_PUPITRE_NON_DEFINI
@@ -28,6 +29,7 @@ class Participant
     QString      nom;                     //!< le nom du participant
     int          idPupitre;               //!< l'id du pupitre
     unsigned int nombreReponsesCorrectes; //!< le nombre de bonnes réponses
+    QVector<int> reponses;
 
   public:
     Participant(const QString& nom, int idPupitre);
@@ -36,6 +38,8 @@ class Participant
     QString      getNom() const;
     int          getIdPupitre() const;
     unsigned int getNombreReponsesCorrectes() const;
+    QVector<int> getReponses() const;
+    void         enregistrerReponse(int reponse);
     void         incrementerNombreReponsesCorrectes();
 };
 

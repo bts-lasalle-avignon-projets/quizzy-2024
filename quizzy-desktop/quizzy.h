@@ -48,13 +48,12 @@ class Quizzy : public QObject
     void traiterReponse(Participant* participant, int numeroReponse);
 
     // Getters
-    unsigned int getNbQuestions();
-    unsigned int getNbParticipants();
-    Question*    getQuestion();
-    Etat         getEtat() const;
-    int          getIndexQuestionActuelle() const;
-    QString      getNomDuParticipant(QString pidJoueur);
-
+    unsigned int            getNbQuestions();
+    unsigned int            getNbParticipants();
+    Question*               getQuestion();
+    Etat                    getEtat() const;
+    int                     getIndexQuestionActuelle() const;
+    QString                 getNomDuParticipant(QString pidJoueur);
     CommunicationBluetooth* getCommunicationTablette();
 
   public slots:

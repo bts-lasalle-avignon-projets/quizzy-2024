@@ -130,6 +130,8 @@ void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
         qDebug() << Q_FUNC_INFO << "reponseCorrecte:" << reponseCorrecte;
         qDebug() << Q_FUNC_INFO << "Numero de reponse:" << numeroReponse;
 
+        participant->enregistrerReponse(numeroReponse);
+
         if(numeroReponse == reponseCorrecte)
         {
             participant->incrementerNombreReponsesCorrectes();
