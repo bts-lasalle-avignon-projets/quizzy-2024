@@ -109,7 +109,7 @@ void Quizzy::ajouterQuestion(QString     libelle,
     }
 }
 
-bool Quizzy::verifierParticipantActuel(QString pidJoueur)
+bool Quizzy::estParticipantActuel(QString pidJoueur)
 {
     for(Participant* participant: participants)
     {
@@ -148,7 +148,7 @@ void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
 
 void Quizzy::verifierReponse(QString pidJoueur, int numeroReponse)
 {
-    if(!verifierParticipantActuel(pidJoueur))
+    if(!estParticipantActuel(pidJoueur))
     {
         qDebug() << "Le pidJoueur" << pidJoueur
                  << "n'est pas un participant actuel.";

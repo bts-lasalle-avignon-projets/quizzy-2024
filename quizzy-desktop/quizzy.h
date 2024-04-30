@@ -44,7 +44,7 @@ class Quizzy : public QObject
                          int         reponseValide,
                          int         temps);
     void verifierReponse(QString pidJoueur, int numeroReponse);
-    bool verifierParticipantActuel(QString pidJoueur);
+    bool estParticipantActuel(QString pidJoueur);
     void traiterReponse(Participant* participant, int numeroReponse);
 
     // Getters

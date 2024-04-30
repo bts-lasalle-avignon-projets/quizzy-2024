@@ -374,7 +374,7 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
                                      int     numeroReponse,
                                      int     tempsReponse)
 {
-    if(!quizzy->verifierParticipantActuel(pidJoueur))
+    if(!quizzy->estParticipantActuel(pidJoueur))
     {
         qDebug() << "Le pidJoueur" << pidJoueur
                  << "n'est pas un participant actuel.";
