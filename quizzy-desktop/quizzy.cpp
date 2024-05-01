@@ -74,7 +74,7 @@ bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
     if(etat == QuizDemarre || etat == ParticipantsAjoutes)
     {
         if(estParticipantActuel(pidJoueur))
-            return;
+            return false;
 
         Participant* participant =
           new Participant(nomParticipant, pidJoueur.toInt());
