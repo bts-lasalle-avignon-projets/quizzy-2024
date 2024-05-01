@@ -391,6 +391,14 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         return;
     }
 
+    mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
+    genererChoixParticipant();
+}
+
+void IHMQuizzy::mettreAJourChoix(QString pidJoueur,
+                                 int     numeroReponse,
+                                 int     tempsReponse)
+{
     quizzy->traiterReponse(pidJoueur, numeroReponse, tempsReponse);
 
     QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
@@ -399,9 +407,30 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         choixParticipants[i].clear();
     }
     choixParticipants[numeroReponse].append(nomParticipant);
+}
 
-    // @todo Parcourir la map pour générer les choix de chaque participant
-    QString texte = "<br><small>Choisi par : </small>" + nomParticipant;
+void IHMQuizzy::genererChoixParticipant()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    for(auto it = choixParticipants.begin(); it != choixParticipants.end();
+        ++it)
+    {
+        int         numeroReponse     = it.key();
+        QStringList listeParticipants = it.value();
+
+        for(const QString& nomParticipant: listeParticipants)
+        {
+            QString texte = "<br><small>Choisi par : </small>" + nomParticipant;
+            mettreAJourProposition(numeroReponse, texte);
+        }
+    }
+}
+
+void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
+{
+    qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse << "texte"
+             << texte;
 
     switch(numeroReponse)
     {

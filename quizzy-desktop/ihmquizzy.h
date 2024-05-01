@@ -146,6 +146,11 @@ class IHMQuizzy : public QWidget
     void afficherTempsQuestion(const Question& question);
     void initialiserChronometre();
     void changerCouleurChronometre();
+    void mettreAJourChoix(QString pidJoueur,
+                          int     numeroReponse,
+                          int     tempsReponse);
+    void genererChoixParticipant();
+    void mettreAJourProposition(int numeroReponse, QString texte);
 
   public:
     IHMQuizzy(QWidget* parent = 0);
