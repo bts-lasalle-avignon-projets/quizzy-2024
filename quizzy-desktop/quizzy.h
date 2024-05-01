@@ -37,14 +37,16 @@ class Quizzy : public QObject
 
     // Gestion des participants
     bool ajouterParticipant(QString pidJoueur, QString nomParticipant);
+    bool estParticipantActuel(QString pidJoueur) const;
 
     // Gestion des questions
     void ajouterQuestion(QString     libelle,
                          QStringList propositions,
                          int         reponseValide,
                          int         temps);
-    void verifierReponse(QString pidJoueur, int numeroReponse);
-    bool estParticipantActuel(QString pidJoueur);
+
+    // Gestion des réponses
+    void traiterReponse(QString pidJoueur, int numeroReponse);
     void traiterReponse(Participant* participant, int numeroReponse);
 
     // Getters

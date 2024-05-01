@@ -73,7 +73,9 @@ bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 {
     if(etat == QuizDemarre || etat == ParticipantsAjoutes)
     {
-        // @todo Vérifier l'existence du pidJoueur/nomParticipant
+        if(estParticipantActuel(pidJoueur))
+            return;
+
         Participant* participant =
           new Participant(nomParticipant, pidJoueur.toInt());
         participants.push_back(participant);
@@ -84,6 +86,21 @@ bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
         return true;
     }
 
+    return false;
+}
+
+bool Quizzy::estParticipantActuel(QString pidJoueur) const
+{
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nom"
+                     << participant->getNom() << "true";
+            return true;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "false";
     return false;
 }
 
@@ -109,16 +126,24 @@ void Quizzy::ajouterQuestion(QString     libelle,
     }
 }
 
-bool Quizzy::estParticipantActuel(QString pidJoueur)
+// Gestion des réponses
+void Quizzy::traiterReponse(QString pidJoueur, int numeroReponse)
 {
+    if(!estParticipantActuel(pidJoueur))
+    {
+        return;
+    }
+
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
+             << numeroReponse;
     for(Participant* participant: participants)
     {
         if(participant->getIdPupitre() == pidJoueur.toInt())
         {
-            return true;
+            traiterReponse(participant, numeroReponse);
+            break;
         }
     }
-    return false;
 }
 
 void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
@@ -127,39 +152,15 @@ void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
     if(questionActuelle)
     {
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
-        qDebug() << Q_FUNC_INFO << "reponseCorrecte:" << reponseCorrecte;
-        qDebug() << Q_FUNC_INFO << "Numero de reponse:" << numeroReponse;
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
+                 << "nom" << participant->getNom() << "numeroReponse"
+                 << numeroReponse << "reponseCorrecte" << reponseCorrecte;
 
         participant->enregistrerReponse(numeroReponse);
 
         if(numeroReponse == reponseCorrecte)
         {
             participant->incrementerNombreReponsesCorrectes();
-            qDebug() << Q_FUNC_INFO << "pupitre:" << participant->getIdPupitre()
-                     << "Bonne reponse:" << numeroReponse;
-        }
-        else
-        {
-            qDebug() << Q_FUNC_INFO << "pupitre:" << participant->getIdPupitre()
-                     << "Mauvaise reponse:" << numeroReponse;
-        }
-    }
-}
-
-void Quizzy::verifierReponse(QString pidJoueur, int numeroReponse)
-{
-    if(!estParticipantActuel(pidJoueur))
-    {
-        qDebug() << Q_FUNC_INFO << "pidJoueur non participant :" << pidJoueur;
-        return;
-    }
-
-    for(Participant* participant: participants)
-    {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
-        {
-            traiterReponse(participant, numeroReponse);
-            break;
         }
     }
 }

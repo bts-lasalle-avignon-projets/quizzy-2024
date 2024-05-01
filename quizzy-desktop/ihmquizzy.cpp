@@ -374,13 +374,23 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
                                      int     numeroReponse,
                                      int     tempsReponse)
 {
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
+             << numeroReponse << "tempsReponse" << tempsReponse;
+
     if(!quizzy->estParticipantActuel(pidJoueur))
     {
-        qDebug() << Q_FUNC_INFO << "pidJoueur non participant :" << pidJoueur;
         return;
     }
+
+    // @todo Traiter le temps réponse
+    quizzy->traiterReponse(pidJoueur, numeroReponse);
+
     QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
+
+    // @todo Effacer les choix à chaque question
     choixParticipants[numeroReponse].append(nomParticipant);
+
+    // @todo Parcourir la map pour générer les choix de chaque participant
     QString texte = "<br><small>Choisi par : </small>" + nomParticipant;
 
     switch(numeroReponse)
@@ -408,9 +418,4 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         default:
             break;
     }
-
-    qDebug() << Q_FUNC_INFO << "pidJoueur:" << pidJoueur
-             << "choix:" << numeroReponse;
-
-    quizzy->verifierReponse(pidJoueur, numeroReponse);
 }
