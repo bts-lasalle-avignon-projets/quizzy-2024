@@ -119,7 +119,7 @@ void Quizzy::ajouterQuestion(QString     libelle,
         question->setDuree(temps);
         listeQuestions.append(question);
 
-        qDebug() << Q_FUNC_INFO << "reponseValide:" << reponseValide;
+        qDebug() << Q_FUNC_INFO << "reponseValide" << reponseValide;
 
         etat = QuestionsAjoutees;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
@@ -127,7 +127,9 @@ void Quizzy::ajouterQuestion(QString     libelle,
 }
 
 // Gestion des réponses
-void Quizzy::traiterReponse(QString pidJoueur, int numeroReponse)
+void Quizzy::traiterReponse(QString pidJoueur,
+                            int     numeroReponse,
+                            int     tempsReponse)
 {
     if(!estParticipantActuel(pidJoueur))
     {
@@ -135,18 +137,20 @@ void Quizzy::traiterReponse(QString pidJoueur, int numeroReponse)
     }
 
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
-             << numeroReponse;
+             << numeroReponse << "tempsReponse" << tempsReponse;
     for(Participant* participant: participants)
     {
         if(participant->getIdPupitre() == pidJoueur.toInt())
         {
-            traiterReponse(participant, numeroReponse);
+            traiterReponseParticipant(participant, numeroReponse, tempsReponse);
             break;
         }
     }
 }
 
-void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
+void Quizzy::traiterReponseParticipant(Participant* participant,
+                                       int          numeroReponse,
+                                       int          tempsReponse)
 {
     Question* questionActuelle = getQuestion();
     if(questionActuelle)
@@ -154,9 +158,10 @@ void Quizzy::traiterReponse(Participant* participant, int numeroReponse)
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
         qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
                  << "nom" << participant->getNom() << "numeroReponse"
-                 << numeroReponse << "reponseCorrecte" << reponseCorrecte;
+                 << numeroReponse << "reponseCorrecte" << reponseCorrecte
+                 << "tempsReponse" << tempsReponse;
 
-        participant->enregistrerReponse(numeroReponse);
+        participant->enregistrerReponse(numeroReponse, tempsReponse);
 
         if(numeroReponse == reponseCorrecte)
         {
@@ -204,7 +209,6 @@ QString Quizzy::getNomDuParticipant(QString pidJoueur)
     }
     return QString();
 }
-
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;

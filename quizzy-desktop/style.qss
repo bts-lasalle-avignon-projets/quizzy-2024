@@ -28,6 +28,13 @@ QLabel
     text-align: center;
 }
 
+#infoQuiz {
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+    border: none;
+}
+
 QPushButton
 {
     color: #fff;

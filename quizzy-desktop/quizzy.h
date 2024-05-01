@@ -46,8 +46,10 @@ class Quizzy : public QObject
                          int         temps);
 
     // Gestion des réponses
-    void traiterReponse(QString pidJoueur, int numeroReponse);
-    void traiterReponse(Participant* participant, int numeroReponse);
+    void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
+    void traiterReponseParticipant(Participant* participant,
+                                   int          numeroReponse,
+                                   int          tempsReponse);
 
     // Getters
     unsigned int            getNbQuestions();

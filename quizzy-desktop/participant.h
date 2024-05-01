@@ -30,6 +30,7 @@ class Participant
     int          idPupitre;               //!< l'id du pupitre
     unsigned int nombreReponsesCorrectes; //!< le nombre de bonnes réponses
     QVector<int> reponses;
+    QVector<int> tempsReponses; //!< les temps de réponse
 
   public:
     Participant(const QString& nom, int idPupitre);
@@ -39,7 +40,8 @@ class Participant
     int          getIdPupitre() const;
     unsigned int getNombreReponsesCorrectes() const;
     QVector<int> getReponses() const;
-    void         enregistrerReponse(int reponse);
+    QVector<int> getTempsReponses() const;
+    void         enregistrerReponse(int reponse, int tempsReponse);
     void         incrementerNombreReponsesCorrectes();
 };
 

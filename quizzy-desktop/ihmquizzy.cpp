@@ -24,7 +24,6 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
     QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
 {
     qDebug() << Q_FUNC_INFO;
-
     creerFenetres();
     afficherFenetreAccueil();
     initialiserEvenements();
@@ -91,7 +90,7 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
     if(quizzy->getNbParticipants() > 0)
     {
         quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
-        // @todo Afficher prêt à lancer le quiz
+        infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
     }
 }
 
@@ -178,11 +177,21 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
     titreFenetreParticipants->setObjectName("titreParticipants");
+
+    infoQuiz = new QLabel(this);
+    infoQuiz->setFixedSize(500, 100);
+    infoQuiz->setAlignment(Qt::AlignCenter);
+    infoQuiz->setObjectName("infoQuiz");
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
 {
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
+    layoutInfoQuiz = new QHBoxLayout;
+    layoutInfoQuiz->addStretch();
+    layoutInfoQuiz->addWidget(infoQuiz);
+    layoutInfoQuiz->addStretch();
+    layoutPrincipalParticipants->addLayout(layoutInfoQuiz);
 }
 
 void IHMQuizzy::creerFenetreJeu()
@@ -382,12 +391,13 @@ void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
         return;
     }
 
-    // @todo Traiter le temps réponse
-    quizzy->traiterReponse(pidJoueur, numeroReponse);
+    quizzy->traiterReponse(pidJoueur, numeroReponse, tempsReponse);
 
     QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
-
-    // @todo Effacer les choix à chaque question
+    for(int i = 0; i < choixParticipants.size(); ++i)
+    {
+        choixParticipants[i].clear();
+    }
     choixParticipants[numeroReponse].append(nomParticipant);
 
     // @todo Parcourir la map pour générer les choix de chaque participant

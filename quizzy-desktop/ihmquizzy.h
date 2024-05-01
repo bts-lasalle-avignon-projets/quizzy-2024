@@ -101,6 +101,8 @@ class IHMQuizzy : public QWidget
     QWidget*     fenetreParticipants;
     QLabel*      titreFenetreParticipants;
     QVBoxLayout* layoutPrincipalParticipants;
+    QHBoxLayout* layoutInfoQuiz;
+    QLabel*      infoQuiz;
     // FenetreJeu
     QWidget*     fenetreJeu;
     QLabel*      titreFenetreJeu;
@@ -157,6 +159,7 @@ class IHMQuizzy : public QWidget
     void afficherFenetreResultats();
     void lancerQuiz();
     void ajouterParticipant(QString pidJoueur, QString participant);
+
     void ajouterNouvelleQuestion(QString     libelle,
                                  QStringList propositions,
                                  int         reponseValide,
