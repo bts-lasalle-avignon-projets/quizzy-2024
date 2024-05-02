@@ -278,6 +278,10 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(choixReponse(QString, int, int)),
             this,
             SLOT(traiterChoixReponse(QString, int, int)));
+    connect(quizzy,
+            SIGNAL(questionTerminee()),
+            this,
+            SLOT(afficherChoixReponse()));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }
@@ -400,7 +404,7 @@ void IHMQuizzy::afficherChoixReponse()
     qDebug() << Q_FUNC_INFO;
 
     // @todo Déclencher par un signal émis par quizzy
-    // afficherChoixParticipants();
+    afficherChoixParticipants();
 }
 
 void IHMQuizzy::effacerChoix()
