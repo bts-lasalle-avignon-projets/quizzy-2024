@@ -69,6 +69,7 @@ class Quizzy : public QObject
 
   signals:
     void affichagePremiereQuestion();
+    void questionTerminee();
 
   private:
     void initialiserCommunicationTablette();

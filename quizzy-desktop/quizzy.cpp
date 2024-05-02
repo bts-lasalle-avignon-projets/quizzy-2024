@@ -143,6 +143,7 @@ bool Quizzy::terminerQuestion()
         etat = Quizzy::QuestionTerminee;
         // @todo Emettre un signal pour déclencher l'affichage des réponses des
         // participants
+        emit questionTerminee();
         return true;
     }
     return false;
