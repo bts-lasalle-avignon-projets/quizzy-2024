@@ -96,8 +96,7 @@ void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
 
 void IHMQuizzy::demarrerQuestion()
 {
-    if(quizzy->getEtat() == Quizzy::Etat::QuizLance &&
-       quizzy->getQuestion() != nullptr)
+    if(quizzy->demarrerQuestion())
     {
         initialiserChronometre();
     }
@@ -115,6 +114,9 @@ void IHMQuizzy::afficherDecompteQuestion()
             minuteur->stop();
             labelChronometre->setText(QString::number(0) + "s");
             labelChronometre->setStyleSheet("background-color: #f9e4b7");
+            // @fixme Si la question n'a pas de durée, il faudra créer une trame
+            // pour mettre fin à cette question ou utilise-t-on la trame $S ?
+            quizzy->terminerQuestion();
         }
     }
 }
@@ -275,7 +277,7 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(choixReponse(QString, int, int)),
             this,
-            SLOT(afficherChoixReponse(QString, int, int)));
+            SLOT(traiterChoixReponse(QString, int, int)));
     // @todo Faire la connexion signal/slot des signaux émis par l'objet
     // communicationTablette
 }
@@ -298,6 +300,7 @@ void IHMQuizzy::afficherQuestion()
     afficherLibelleQuestion(*question);
     afficherPropositionsQuestion(*question);
     afficherTempsQuestion(*question);
+    effacerChoix();
     afficherFenetreJeu();
 }
 
@@ -379,51 +382,64 @@ void IHMQuizzy::changerCouleurChronometre()
     labelChronometre->setStyleSheet("background-color: " + couleur);
 }
 
-void IHMQuizzy::afficherChoixReponse(QString pidJoueur,
-                                     int     numeroReponse,
-                                     int     tempsReponse)
+void IHMQuizzy::traiterChoixReponse(QString pidJoueur,
+                                    int     numeroReponse,
+                                    int     tempsReponse)
 {
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
              << numeroReponse << "tempsReponse" << tempsReponse;
 
-    if(!quizzy->estParticipantActuel(pidJoueur))
+    if(quizzy->traiterReponse(pidJoueur, numeroReponse, tempsReponse))
     {
-        return;
+        mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
     }
+}
 
-    mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
-    genererChoixParticipant();
+void IHMQuizzy::afficherChoixReponse()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // @todo Déclencher par un signal émis par quizzy
+    // afficherChoixParticipants();
+}
+
+void IHMQuizzy::effacerChoix()
+{
+    for(int i = 0; i < choixParticipants.size(); ++i)
+    {
+        choixParticipants[i].clear();
+    }
 }
 
 void IHMQuizzy::mettreAJourChoix(QString pidJoueur,
                                  int     numeroReponse,
                                  int     tempsReponse)
 {
-    quizzy->traiterReponse(pidJoueur, numeroReponse, tempsReponse);
-
     QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
-    for(int i = 0; i < choixParticipants.size(); ++i)
-    {
-        choixParticipants[i].clear();
-    }
     choixParticipants[numeroReponse].append(nomParticipant);
 }
 
-void IHMQuizzy::genererChoixParticipant()
+void IHMQuizzy::afficherChoixParticipants()
 {
-    qDebug() << Q_FUNC_INFO;
-
+    // @todo A revoir
     for(auto it = choixParticipants.begin(); it != choixParticipants.end();
         ++it)
     {
         int         numeroReponse     = it.key();
         QStringList listeParticipants = it.value();
+        qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse
+                 << "listeParticipants" << listeParticipants;
 
+        if(listeParticipants.size() < 1)
+            continue;
+
+        QString texte = "<br><small>Choisie par : ";
         for(const QString& nomParticipant: listeParticipants)
         {
-            QString texte = "<br><small>Choisi par : </small>" + nomParticipant;
-            mettreAJourProposition(numeroReponse, texte);
+            texte += nomParticipant + " ";
         }
+        texte += "</small>";
+        mettreAJourProposition(numeroReponse, texte);
     }
 }
 

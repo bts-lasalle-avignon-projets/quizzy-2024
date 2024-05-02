@@ -126,29 +126,56 @@ void Quizzy::ajouterQuestion(QString     libelle,
     }
 }
 
+bool Quizzy::demarrerQuestion()
+{
+    if(etat == QuizLance && getQuestion() != nullptr)
+    {
+        etat = QuestionDemarree;
+        return true;
+    }
+    return false;
+}
+
+bool Quizzy::terminerQuestion()
+{
+    if(etat == QuestionDemarree && getQuestion() != nullptr)
+    {
+        etat = Quizzy::QuestionTerminee;
+        // @todo Emettre un signal pour déclencher l'affichage des réponses des
+        // participants
+        return true;
+    }
+    return false;
+}
+
 // Gestion des réponses
-void Quizzy::traiterReponse(QString pidJoueur,
+bool Quizzy::traiterReponse(QString pidJoueur,
                             int     numeroReponse,
                             int     tempsReponse)
 {
-    if(!estParticipantActuel(pidJoueur))
+    if(etat == QuestionDemarree)
     {
-        return;
-    }
-
-    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
-             << numeroReponse << "tempsReponse" << tempsReponse;
-    for(Participant* participant: participants)
-    {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(!estParticipantActuel(pidJoueur))
         {
-            traiterReponseParticipant(participant, numeroReponse, tempsReponse);
-            break;
+            return false;
+        }
+
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
+                 << numeroReponse << "tempsReponse" << tempsReponse;
+        for(Participant* participant: participants)
+        {
+            if(participant->getIdPupitre() == pidJoueur.toInt())
+            {
+                return traiterReponseParticipant(participant,
+                                                 numeroReponse,
+                                                 tempsReponse);
+            }
         }
     }
+    return false;
 }
 
-void Quizzy::traiterReponseParticipant(Participant* participant,
+bool Quizzy::traiterReponseParticipant(Participant* participant,
                                        int          numeroReponse,
                                        int          tempsReponse)
 {
@@ -167,7 +194,9 @@ void Quizzy::traiterReponseParticipant(Participant* participant,
         {
             participant->incrementerNombreReponsesCorrectes();
         }
+        return true;
     }
+    return false;
 }
 
 // Getters

@@ -23,6 +23,8 @@ class Quizzy : public QObject
         ParticipantsAjoutes,
         QuestionsAjoutees,
         QuizLance,
+        QuestionDemarree,
+        QuestionTerminee,
         Resultats,
         QuizFini
     };
@@ -44,10 +46,12 @@ class Quizzy : public QObject
                          QStringList propositions,
                          int         reponseValide,
                          int         temps);
+    bool demarrerQuestion();
+    bool terminerQuestion();
 
     // Gestion des réponses
-    void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
-    void traiterReponseParticipant(Participant* participant,
+    bool traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
+    bool traiterReponseParticipant(Participant* participant,
                                    int          numeroReponse,
                                    int          tempsReponse);
 
