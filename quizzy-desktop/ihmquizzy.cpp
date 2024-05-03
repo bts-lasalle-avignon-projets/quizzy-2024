@@ -213,6 +213,10 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
     layoutPropositionReponse = new QVBoxLayout();
     layoutPropositonAB       = new QHBoxLayout();
     layoutPropositonCD       = new QHBoxLayout();
+    layoutPropositionChoixA  = new QHBoxLayout(); // Nouveau layout
+    layoutPropositionChoixB  = new QHBoxLayout(); // Nouveau layout
+    layoutPropositionChoixC  = new QHBoxLayout(); // Nouveau layout
+    layoutPropositionChoixD  = new QHBoxLayout(); // Nouveau layout
     layoutChronometre        = new QHBoxLayout();
 }
 
@@ -221,23 +225,53 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     labelNombreTotal    = new QLabel("0/0", this);
     labelQuestion       = new QLabel("", this);
     propositionReponseA = new QLabel("A", this);
+    choixPropositionA   = new QLabel("Choix A", this);
     propositionReponseB = new QLabel("B", this);
+    choixPropositionB   = new QLabel("Choix B", this);
     propositionReponseC = new QLabel("C", this);
+    choixPropositionC   = new QLabel("Choix C", this);
     propositionReponseD = new QLabel("D", this);
+    choixPropositionD   = new QLabel("Choix D", this);
     labelChronometre    = new QLabel("00:00", this);
+    styleFenetreJeu();
+}
+
+void IHMQuizzy::styleFenetreJeu()
+{
+    propositionReponseA->setObjectName("propositionReponseA");
+    propositionReponseB->setObjectName("propositionReponseB");
+    propositionReponseC->setObjectName("propositionReponseC");
+    propositionReponseD->setObjectName("propositionReponseD");
+    choixPropositionA->setObjectName("choixPropositionA");
+    choixPropositionB->setObjectName("choixPropositionB");
+    choixPropositionC->setObjectName("choixPropositionC");
+    choixPropositionD->setObjectName("choixPropositionD");
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
 {
+    // En-tête Question
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
-    layoutPropositonAB->addWidget(propositionReponseA);
-    layoutPropositonAB->addWidget(propositionReponseB);
-    layoutPropositonCD->addWidget(propositionReponseC);
-    layoutPropositonCD->addWidget(propositionReponseD);
+    // Proposition A et B
+    layoutPropositionChoixA->addWidget(propositionReponseA);
+    layoutPropositionChoixA->addWidget(choixPropositionA);
+    layoutPropositonAB->addLayout(layoutPropositionChoixA);
+    layoutPropositionChoixB->addWidget(propositionReponseB);
+    layoutPropositionChoixB->addWidget(choixPropositionB);
+    layoutPropositonAB->addLayout(layoutPropositionChoixB);
     layoutPropositionReponse->addLayout(layoutPropositonAB);
+
+    // Proposition C et D
+    layoutPropositionChoixC->addWidget(propositionReponseC);
+    layoutPropositionChoixC->addWidget(choixPropositionC);
+    layoutPropositonCD->addLayout(layoutPropositionChoixC);
+    layoutPropositionChoixD->addWidget(propositionReponseD);
+    layoutPropositionChoixD->addWidget(choixPropositionD);
+    layoutPropositonCD->addLayout(layoutPropositionChoixD);
     layoutPropositionReponse->addLayout(layoutPropositonCD);
+    // Ajout Layout principal
     layoutPrincipalJeu->addLayout(layoutPropositionReponse);
     layoutChronometre->addWidget(labelChronometre);
     layoutPrincipalJeu->addLayout(layoutChronometre);
@@ -330,13 +364,9 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setStyleSheet("background-color: #f9b7b7"); // Rouge
     propositionReponseA->setText("A. " + propositions['A']);
-    propositionReponseB->setStyleSheet("background-color: #b7f9ba"); // Vert
     propositionReponseB->setText("B. " + propositions['B']);
-    propositionReponseC->setStyleSheet("background-color: #f6f476"); // Jaune
     propositionReponseC->setText("C. " + propositions['C']);
-    propositionReponseD->setStyleSheet("background-color: #b7baf9"); // Bleu
     propositionReponseD->setText("D. " + propositions['D']);
 }
 
