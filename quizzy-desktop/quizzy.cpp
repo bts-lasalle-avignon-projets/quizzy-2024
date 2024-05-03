@@ -43,6 +43,7 @@ void Quizzy::lancer()
         qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
                  << indexQuestionActuelle;
         etat = QuizLance;
+        effacerChoix();
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit lancementQuiz();
     }
@@ -84,9 +85,19 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
         {
             participant->incrementerNombreReponsesCorrectes();
         }
+
+        choixParticipants[numeroReponse].append(participant->getNom());
         return true;
     }
     return false;
+}
+
+void Quizzy::effacerChoix()
+{
+    for(int i = 0; i < choixParticipants.size(); ++i)
+    {
+        choixParticipants[i].clear();
+    }
 }
 
 // Slot Gestion du quiz
@@ -212,6 +223,11 @@ Question* Quizzy::getQuestion()
 Quizzy::Etat Quizzy::getEtat() const
 {
     return etat;
+}
+
+QMap<int, QStringList> Quizzy::getChoixParticipants() const
+{
+    return choixParticipants;
 }
 
 int Quizzy::getIndexQuestionActuelle() const

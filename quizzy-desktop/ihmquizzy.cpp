@@ -122,6 +122,30 @@ void IHMQuizzy::afficherDecompteQuestion()
     }
 }
 
+void IHMQuizzy::afficherChoixParticipants()
+{
+    QMap<int, QStringList> choixParticipants = quizzy->getChoixParticipants();
+    for(auto it = choixParticipants.begin(); it != choixParticipants.end();
+        ++it)
+    {
+        int         numeroReponse     = it.key();
+        QStringList listeParticipants = it.value();
+        qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse
+                 << "listeParticipants" << listeParticipants;
+
+        if(listeParticipants.size() < 1)
+            continue;
+
+        QString texte = "<small>";
+        for(const QString& nomParticipant: listeParticipants)
+        {
+            texte += nomParticipant + " ";
+        }
+        texte += "</small>";
+        mettreAJourProposition(numeroReponse, texte);
+    }
+}
+
 // Méthodes privées
 
 void IHMQuizzy::initialiserFenetres()
@@ -334,7 +358,7 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy,
             SIGNAL(questionTerminee()),
             this,
-            SLOT(afficherChoixReponse()));
+            SLOT(afficherChoixParticipants()));
 }
 
 void IHMQuizzy::afficherQuestion()
@@ -346,7 +370,6 @@ void IHMQuizzy::afficherQuestion()
     afficherLibelleQuestion(*question);
     afficherPropositionsQuestion(*question);
     afficherTempsQuestion(*question);
-    effacerChoix();
     afficherFenetreJeu();
 }
 
@@ -424,62 +447,6 @@ void IHMQuizzy::changerCouleurChronometre()
     labelChronometre->setStyleSheet("background-color: " + couleur);
 }
 
-void IHMQuizzy::traiterChoixReponse(QString pidJoueur,
-                                    int     numeroReponse,
-                                    int     tempsReponse)
-{
-    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
-             << numeroReponse << "tempsReponse" << tempsReponse;
-
-    mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
-}
-
-void IHMQuizzy::afficherChoixReponse()
-{
-    qDebug() << Q_FUNC_INFO;
-
-    afficherChoixParticipants();
-}
-
-void IHMQuizzy::effacerChoix()
-{
-    for(int i = 0; i < choixParticipants.size(); ++i)
-    {
-        choixParticipants[i].clear();
-    }
-}
-
-void IHMQuizzy::mettreAJourChoix(QString pidJoueur,
-                                 int     numeroReponse,
-                                 int     tempsReponse)
-{
-    QString nomParticipant = quizzy->getNomDuParticipant(pidJoueur);
-    choixParticipants[numeroReponse].append(nomParticipant);
-}
-
-void IHMQuizzy::afficherChoixParticipants()
-{
-    // @todo A revoir
-    for(auto it = choixParticipants.begin(); it != choixParticipants.end();
-        ++it)
-    {
-        int         numeroReponse     = it.key();
-        QStringList listeParticipants = it.value();
-        qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse
-                 << "listeParticipants" << listeParticipants;
-
-        if(listeParticipants.size() < 1)
-            continue;
-
-        QString texte = "<br><small>Choisie par : ";
-        for(const QString& nomParticipant: listeParticipants)
-        {
-            texte += nomParticipant + " ";
-        }
-        texte += "</small>";
-        mettreAJourProposition(numeroReponse, texte);
-    }
-}
 void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
 {
     qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse << "texte"

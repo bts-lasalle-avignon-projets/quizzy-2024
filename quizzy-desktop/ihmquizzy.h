@@ -86,11 +86,10 @@ class IHMQuizzy : public QWidget
     };
 
   private:
-    Quizzy*                quizzy;    //!< association vers la classe Quizzy
-    QVector<Question*>     questions; //!< conteneur de Question pour le quiz
-    QTimer*                minuteur;  //!< pour gérer le temps d'une question
-    int                    decompteQuestion; //!< pour le temps d'une question
-    QMap<int, QStringList> choixParticipants;
+    Quizzy*            quizzy;    //!< association vers la classe Quizzy
+    QVector<Question*> questions; //!< conteneur de Question pour le quiz
+    QTimer*            minuteur;  //!< pour gérer le temps d'une question
+    int                decompteQuestion; //!< pour le temps d'une question
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     // FenetreAccueil
@@ -155,11 +154,6 @@ class IHMQuizzy : public QWidget
     void afficherTempsQuestion(const Question& question);
     void initialiserChronometre();
     void changerCouleurChronometre();
-    void effacerChoix();
-    void mettreAJourChoix(QString pidJoueur,
-                          int     numeroReponse,
-                          int     tempsReponse);
-    void afficherChoixParticipants();
     void mettreAJourProposition(int numeroReponse, QString texte);
 
   public:
@@ -178,10 +172,7 @@ class IHMQuizzy : public QWidget
     void afficherParticipant(QString pidJoueur, QString nomParticipant);
     void demarrerQuestion();
     void afficherDecompteQuestion();
-    void traiterChoixReponse(QString pidJoueur,
-                             int     numeroReponse,
-                             int     tempsReponse);
-    void afficherChoixReponse();
+    void afficherChoixParticipants();
 };
 
 #endif // IHMQUIZZY_H

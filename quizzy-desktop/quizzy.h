@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QVector>
+#include <QMap>
 
 #define INDEX_NON_DEFINI -1
 
@@ -31,6 +32,7 @@ class Quizzy : public QObject
   private:
     QVector<Participant*>   participants;
     QVector<Question*>      listeQuestions;
+    QMap<int, QStringList>  choixParticipants;
     int                     indexQuestionActuelle;
     Etat                    etat;
     CommunicationBluetooth* communicationTablette;
@@ -54,12 +56,14 @@ class Quizzy : public QObject
     bool traiterReponseParticipant(Participant* participant,
                                    int          numeroReponse,
                                    int          tempsReponse);
+    void effacerChoix();
 
     // Getters
     unsigned int            getNbQuestions();
     unsigned int            getNbParticipants();
     Question*               getQuestion();
     Etat                    getEtat() const;
+    QMap<int, QStringList>  getChoixParticipants() const;
     int                     getIndexQuestionActuelle() const;
     QString                 getNomDuParticipant(QString pidJoueur);
     CommunicationBluetooth* getCommunicationTablette();
