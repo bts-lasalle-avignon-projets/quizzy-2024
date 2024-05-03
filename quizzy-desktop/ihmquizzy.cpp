@@ -150,10 +150,8 @@ void IHMQuizzy::creerFenetreAccueil()
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
     titreFenetreAccueil        = new QLabel("QUIZZY", this);
-    titreFenetreAccueil->setObjectName("titreAccueil");
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
     messageAttente = new QLabel("", this);
-    messageAttente->setObjectName("messageAttente");
     messageAttente->setAlignment(Qt::AlignCenter);
     layoutAccueil->addWidget(titreFenetreAccueil);
     layoutAccueil->addWidget(messageAttente);
@@ -179,12 +177,9 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
 {
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
-    titreFenetreParticipants->setObjectName("titreParticipants");
-
     infoQuiz = new QLabel(this);
     infoQuiz->setFixedSize(500, 100);
     infoQuiz->setAlignment(Qt::AlignCenter);
-    infoQuiz->setObjectName("infoQuiz");
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
@@ -233,11 +228,19 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     propositionReponseD = new QLabel("D", this);
     choixPropositionD   = new QLabel("", this);
     labelChronometre    = new QLabel("00:00", this);
-    styleFenetreJeu();
+    definirNomsObjets();
 }
 
-void IHMQuizzy::styleFenetreJeu()
+void IHMQuizzy::definirNomsObjets()
 {
+    // Fenêtre Accueil
+    titreFenetreAccueil->setObjectName("titreAccueil");
+
+    // Fenêtre Participants
+    titreFenetreParticipants->setObjectName("titreParticipants");
+    infoQuiz->setObjectName("infoQuiz");
+
+    // Fenêtre jeu
     propositionReponseA->setObjectName("propositionReponseA");
     propositionReponseB->setObjectName("propositionReponseB");
     propositionReponseC->setObjectName("propositionReponseC");
@@ -478,7 +481,6 @@ void IHMQuizzy::afficherChoixParticipants()
         mettreAJourProposition(numeroReponse, texte);
     }
 }
-
 void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
 {
     qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse << "texte"
@@ -487,24 +489,24 @@ void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
     switch(numeroReponse)
     {
         case 1:
-            propositionReponseA->setStyleSheet(
+            choixPropositionA->setStyleSheet(
               "background-color: #f9b7b7; border: 3px solid red");
-            propositionReponseA->setText(propositionReponseA->text() + texte);
+            choixPropositionA->setText(choixPropositionA->text() + texte);
             break;
         case 2:
-            propositionReponseB->setStyleSheet(
+            choixPropositionB->setStyleSheet(
               "background-color: #b7f9ba; border: 3px solid red");
-            propositionReponseB->setText(propositionReponseB->text() + texte);
+            choixPropositionB->setText(choixPropositionB->text() + texte);
             break;
         case 3:
-            propositionReponseC->setStyleSheet(
+            choixPropositionC->setStyleSheet(
               "background-color: #f6f476; border: 3px solid red");
-            propositionReponseC->setText(propositionReponseC->text() + texte);
+            choixPropositionC->setText(choixPropositionC->text() + texte);
             break;
         case 4:
-            propositionReponseD->setStyleSheet(
+            choixPropositionD->setStyleSheet(
               "background-color: #b7baf9; border: 3px solid red");
-            propositionReponseD->setText(propositionReponseD->text() + texte);
+            choixPropositionD->setText(choixPropositionD->text() + texte);
             break;
         default:
             break;

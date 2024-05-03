@@ -143,7 +143,7 @@ class IHMQuizzy : public QWidget
     void creerFenetreJeu();
     void creerLayoutsFenetreJeu();
     void creerWidgetsFenetreJeu();
-    void styleFenetreJeu();
+    void definirNomsObjets();
     void placerWidgetsFenetreJeu();
     void creerFenetreResultats();
     void initialiserEvenements();
