@@ -65,41 +65,42 @@ void IHMQuizzy::afficherFenetreResultats()
     afficherFenetre(Fenetre::FenetreResultats);
 }
 
-void IHMQuizzy::lancerQuiz()
+void IHMQuizzy::afficherDebutQuiz()
 {
-    if(quizzy->getNbQuestions() > 0)
-    {
-        afficherQuestion();
-    }
+    qDebug() << Q_FUNC_INFO;
+    messageAttente->setText("En attente des participants...");
+    afficherFenetreAccueil();
 }
 
-void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
+void IHMQuizzy::afficherLancementQuiz()
 {
-    if(quizzy->ajouterParticipant(pidJoueur, participant))
-    {
-        afficherParticipant(pidJoueur, participant);
-        afficherFenetreParticipants();
-    }
+    qDebug() << Q_FUNC_INFO;
+    afficherQuestion();
 }
 
-void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
-                                        QStringList propositions,
-                                        int         reponseValide,
-                                        int         temps)
+void IHMQuizzy::afficherPret()
 {
-    if(quizzy->getNbParticipants() > 0)
-    {
-        quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
-        infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
-    }
+    qDebug() << Q_FUNC_INFO;
+    infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
+}
+
+void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
+{
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
+             << nomParticipant;
+    QWidget*     widgetParticipant = new QWidget(this);
+    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
+    QLabel*      labelParticipant  = new QLabel(nomParticipant, this);
+    layoutParticipant->setContentsMargins(100, 10, 100, 10);
+    layoutParticipant->addWidget(labelParticipant);
+    layoutPrincipalParticipants->addWidget(widgetParticipant);
+
+    afficherFenetreParticipants();
 }
 
 void IHMQuizzy::demarrerQuestion()
 {
-    if(quizzy->demarrerQuestion())
-    {
-        initialiserChronometre();
-    }
+    initialiserChronometre();
 }
 
 void IHMQuizzy::afficherDecompteQuestion()
@@ -151,7 +152,7 @@ void IHMQuizzy::creerFenetreAccueil()
     titreFenetreAccueil        = new QLabel("QUIZZY", this);
     titreFenetreAccueil->setObjectName("titreAccueil");
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
-    messageAttente = new QLabel("En attente des participants...", this);
+    messageAttente = new QLabel("", this);
     messageAttente->setObjectName("messageAttente");
     messageAttente->setAlignment(Qt::AlignCenter);
     layoutAccueil->addWidget(titreFenetreAccueil);
@@ -254,50 +255,54 @@ void IHMQuizzy::creerFenetreResultats()
 
 void IHMQuizzy::initialiserEvenements()
 {
+    // communicationTablette vers quizzy
+    // Trame $L
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuiz()),
             quizzy,
             SLOT(gererDebutQuiz()));
-    connect(quizzy,
-            SIGNAL(affichagePremiereQuestion()),
-            this,
-            SLOT(lancerQuiz()));
+    // Trame $I
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouveauParticipant(QString, QString)),
-            this,
+            quizzy,
             SLOT(ajouterParticipant(QString, QString)));
+    // Trame $G
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
-            this,
-            SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
+            quizzy,
+            SLOT(ajouterQuestion(QString, QStringList, int, int)));
+    // Trame $T
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuestion()),
-            this,
+            quizzy,
             SLOT(demarrerQuestion()));
+    // Trame $U
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(choixReponse(QString, int, int)),
+            quizzy,
+            SLOT(traiterReponse(QString, int, int)));
+
+    // quizzy vers ihmQuizzy (this)
+    connect(quizzy, SIGNAL(debutQuiz()), this, SLOT(afficherDebutQuiz()));
+    connect(quizzy,
+            SIGNAL(participantAjoute(QString, QString)),
             this,
-            SLOT(traiterChoixReponse(QString, int, int)));
+            SLOT(afficherParticipant(QString, QString)));
+    connect(quizzy,
+            SIGNAL(lancementQuiz()),
+            this,
+            SLOT(afficherLancementQuiz()));
+    connect(quizzy, SIGNAL(questionAjoutee()), this, SLOT(afficherPret()));
+    connect(quizzy, SIGNAL(questionDemarree()), this, SLOT(demarrerQuestion()));
     connect(quizzy,
             SIGNAL(questionTerminee()),
             this,
             SLOT(afficherChoixReponse()));
-    // @todo Faire la connexion signal/slot des signaux émis par l'objet
-    // communicationTablette
-}
-
-void IHMQuizzy::afficherParticipant(QString pidJoueur, QString participant)
-{
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(participant, this);
-    layoutParticipant->setContentsMargins(100, 10, 100, 10);
-    layoutParticipant->addWidget(labelParticipant);
-    layoutPrincipalParticipants->addWidget(widgetParticipant);
 }
 
 void IHMQuizzy::afficherQuestion()
 {
+    qDebug() << Q_FUNC_INFO;
     Question* question = quizzy->getQuestion();
     afficherNbQuestions(quizzy->getIndexQuestionActuelle() + 1,
                         quizzy->getNbQuestions());
@@ -393,10 +398,7 @@ void IHMQuizzy::traiterChoixReponse(QString pidJoueur,
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
              << numeroReponse << "tempsReponse" << tempsReponse;
 
-    if(quizzy->traiterReponse(pidJoueur, numeroReponse, tempsReponse))
-    {
-        mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
-    }
+    mettreAJourChoix(pidJoueur, numeroReponse, tempsReponse);
 }
 
 void IHMQuizzy::afficherChoixReponse()

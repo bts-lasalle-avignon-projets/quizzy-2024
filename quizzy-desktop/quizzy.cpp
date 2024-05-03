@@ -2,10 +2,8 @@
 #include "participant.h"
 #include "question.h"
 #include "communicationbluetooth.h"
-
 #include <QDebug>
 
-// Constructeur et destructeur
 Quizzy::Quizzy(QObject* parent) :
     QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), etat(Initial),
     communicationTablette(new CommunicationBluetooth(this))
@@ -17,13 +15,6 @@ Quizzy::Quizzy(QObject* parent) :
 Quizzy::~Quizzy()
 {
     qDebug() << Q_FUNC_INFO;
-}
-
-// Initialisation
-void Quizzy::initialiserCommunicationTablette()
-{
-    qDebug() << Q_FUNC_INFO;
-    communicationTablette->demarrerServeur();
 }
 
 // Gestion du quiz
@@ -40,6 +31,7 @@ void Quizzy::debuter(bool reset)
         }
         etat = QuizDemarre;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit debutQuiz();
     }
 }
 
@@ -52,43 +44,11 @@ void Quizzy::lancer()
                  << indexQuestionActuelle;
         etat = QuizLance;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
-        emit affichagePremiereQuestion();
-    }
-}
-
-void Quizzy::gererDebutQuiz()
-{
-    if(etat == Initial)
-    {
-        debuter();
-    }
-    else if(etat == QuestionsAjoutees)
-    {
-        lancer();
+        emit lancementQuiz();
     }
 }
 
 // Gestion des participants
-bool Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
-{
-    if(etat == QuizDemarre || etat == ParticipantsAjoutes)
-    {
-        if(estParticipantActuel(pidJoueur))
-            return false;
-
-        Participant* participant =
-          new Participant(nomParticipant, pidJoueur.toInt());
-        participants.push_back(participant);
-
-        etat = ParticipantsAjoutes;
-        qDebug() << Q_FUNC_INFO << "etat" << etat;
-
-        return true;
-    }
-
-    return false;
-}
-
 bool Quizzy::estParticipantActuel(QString pidJoueur) const
 {
     for(Participant* participant: participants)
@@ -104,78 +64,7 @@ bool Quizzy::estParticipantActuel(QString pidJoueur) const
     return false;
 }
 
-// Gestion des questions
-void Quizzy::ajouterQuestion(QString     libelle,
-                             QStringList propositions,
-                             int         reponseValide,
-                             int         temps)
-{
-    if(etat == ParticipantsAjoutes || etat == QuestionsAjoutees)
-    {
-        qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
-                 << propositions << "reponseValide" << reponseValide << temps
-                 << temps;
-        Question* question = new Question(libelle, propositions, reponseValide);
-        question->setDuree(temps);
-        listeQuestions.append(question);
-
-        qDebug() << Q_FUNC_INFO << "reponseValide" << reponseValide;
-
-        etat = QuestionsAjoutees;
-        qDebug() << Q_FUNC_INFO << "etat" << etat;
-    }
-}
-
-bool Quizzy::demarrerQuestion()
-{
-    if(etat == QuizLance && getQuestion() != nullptr)
-    {
-        etat = QuestionDemarree;
-        return true;
-    }
-    return false;
-}
-
-bool Quizzy::terminerQuestion()
-{
-    if(etat == QuestionDemarree && getQuestion() != nullptr)
-    {
-        etat = Quizzy::QuestionTerminee;
-        // @todo Emettre un signal pour déclencher l'affichage des réponses des
-        // participants
-        emit questionTerminee();
-        return true;
-    }
-    return false;
-}
-
 // Gestion des réponses
-bool Quizzy::traiterReponse(QString pidJoueur,
-                            int     numeroReponse,
-                            int     tempsReponse)
-{
-    if(etat == QuestionDemarree)
-    {
-        if(!estParticipantActuel(pidJoueur))
-        {
-            return false;
-        }
-
-        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
-                 << numeroReponse << "tempsReponse" << tempsReponse;
-        for(Participant* participant: participants)
-        {
-            if(participant->getIdPupitre() == pidJoueur.toInt())
-            {
-                return traiterReponseParticipant(participant,
-                                                 numeroReponse,
-                                                 tempsReponse);
-            }
-        }
-    }
-    return false;
-}
-
 bool Quizzy::traiterReponseParticipant(Participant* participant,
                                        int          numeroReponse,
                                        int          tempsReponse)
@@ -198,6 +87,108 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
         return true;
     }
     return false;
+}
+
+// Slot Gestion du quiz
+void Quizzy::gererDebutQuiz()
+{
+    if(etat == Initial)
+    {
+        debuter();
+    }
+    else if(etat == QuestionsAjoutees)
+    {
+        lancer();
+    }
+}
+
+// Slot Gestion des participants
+void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
+{
+    if(etat == QuizDemarre || etat == ParticipantsAjoutes)
+    {
+        if(estParticipantActuel(pidJoueur))
+            return;
+
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
+                 << nomParticipant;
+        Participant* participant =
+          new Participant(nomParticipant, pidJoueur.toInt());
+        participants.push_back(participant);
+
+        etat = ParticipantsAjoutes;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+
+        emit participantAjoute(pidJoueur, nomParticipant);
+    }
+}
+
+// Slot Gestion des questions
+void Quizzy::ajouterQuestion(QString     libelle,
+                             QStringList propositions,
+                             int         reponseValide,
+                             int         temps)
+{
+    if(etat == ParticipantsAjoutes || etat == QuestionsAjoutees)
+    {
+        qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
+                 << propositions << "reponseValide" << reponseValide << temps
+                 << temps;
+        Question* question = new Question(libelle, propositions, reponseValide);
+        question->setDuree(temps);
+        listeQuestions.append(question);
+
+        etat = QuestionsAjoutees;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+
+        emit questionAjoutee();
+    }
+}
+
+void Quizzy::demarrerQuestion()
+{
+    if(etat == QuizLance && getQuestion() != nullptr)
+    {
+        etat = QuestionDemarree;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionDemarree();
+    }
+}
+
+void Quizzy::terminerQuestion()
+{
+    if(etat == QuestionDemarree && getQuestion() != nullptr)
+    {
+        etat = Quizzy::QuestionTerminee;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionTerminee();
+    }
+}
+
+// Gestion des réponses
+void Quizzy::traiterReponse(QString pidJoueur,
+                            int     numeroReponse,
+                            int     tempsReponse)
+{
+    if(etat == QuestionDemarree)
+    {
+        if(!estParticipantActuel(pidJoueur))
+        {
+            return;
+        }
+
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
+                 << numeroReponse << "tempsReponse" << tempsReponse;
+        for(Participant* participant: participants)
+        {
+            if(participant->getIdPupitre() == pidJoueur.toInt())
+            {
+                traiterReponseParticipant(participant,
+                                          numeroReponse,
+                                          tempsReponse);
+            }
+        }
+    }
 }
 
 // Getters
@@ -239,7 +230,15 @@ QString Quizzy::getNomDuParticipant(QString pidJoueur)
     }
     return QString();
 }
+
 CommunicationBluetooth* Quizzy::getCommunicationTablette()
 {
     return communicationTablette;
+}
+
+// Méthodes privées
+void Quizzy::initialiserCommunicationTablette()
+{
+    qDebug() << Q_FUNC_INFO;
+    communicationTablette->demarrerServeur();
 }

@@ -15,7 +15,6 @@ class Quizzy : public QObject
     Q_OBJECT
 
   public:
-    // Enumérations
     enum Etat
     {
         Initial,
@@ -29,7 +28,16 @@ class Quizzy : public QObject
         QuizFini
     };
 
-    // Constructeur et destructeur
+  private:
+    QVector<Participant*>   participants;
+    QVector<Question*>      listeQuestions;
+    int                     indexQuestionActuelle;
+    Etat                    etat;
+    CommunicationBluetooth* communicationTablette;
+
+    void initialiserCommunicationTablette();
+
+  public:
     Quizzy(QObject* parent = nullptr);
     ~Quizzy();
 
@@ -38,19 +46,11 @@ class Quizzy : public QObject
     void lancer();
 
     // Gestion des participants
-    bool ajouterParticipant(QString pidJoueur, QString nomParticipant);
     bool estParticipantActuel(QString pidJoueur) const;
 
     // Gestion des questions
-    void ajouterQuestion(QString     libelle,
-                         QStringList propositions,
-                         int         reponseValide,
-                         int         temps);
-    bool demarrerQuestion();
-    bool terminerQuestion();
 
     // Gestion des réponses
-    bool traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
     bool traiterReponseParticipant(Participant* participant,
                                    int          numeroReponse,
                                    int          tempsReponse);
@@ -65,21 +65,25 @@ class Quizzy : public QObject
     CommunicationBluetooth* getCommunicationTablette();
 
   public slots:
+    // Gestion du quiz
     void gererDebutQuiz();
+    // Gestion des participants
+    void ajouterParticipant(QString pidJoueur, QString participant);
+    void ajouterQuestion(QString     libelle,
+                         QStringList propositions,
+                         int         reponseValide,
+                         int         temps);
+    void demarrerQuestion();
+    void terminerQuestion();
+    void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
 
   signals:
-    void affichagePremiereQuestion();
+    void debutQuiz();
+    void lancementQuiz();
+    void participantAjoute(QString pidJoueur, QString nomParticipant);
+    void questionAjoutee();
+    void questionDemarree();
     void questionTerminee();
-
-  private:
-    void initialiserCommunicationTablette();
-
-    // Variables
-    QVector<Participant*>   participants;
-    QVector<Question*>      listeQuestions;
-    int                     indexQuestionActuelle;
-    Etat                    etat;
-    CommunicationBluetooth* communicationTablette;
 };
 
 #endif // QUIZZY_H
