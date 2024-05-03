@@ -143,6 +143,7 @@ void IHMQuizzy::creerFenetres()
     creerFenetreParticipants();
     creerFenetreJeu();
     creerFenetreResultats();
+    definirNomsObjets();
 }
 
 void IHMQuizzy::creerFenetreAccueil()
@@ -228,7 +229,6 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     propositionReponseD = new QLabel("D", this);
     choixPropositionD   = new QLabel("", this);
     labelChronometre    = new QLabel("00:00", this);
-    definirNomsObjets();
 }
 
 void IHMQuizzy::definirNomsObjets()
@@ -438,7 +438,6 @@ void IHMQuizzy::afficherChoixReponse()
 {
     qDebug() << Q_FUNC_INFO;
 
-    // @todo Déclencher par un signal émis par quizzy
     afficherChoixParticipants();
 }
 
