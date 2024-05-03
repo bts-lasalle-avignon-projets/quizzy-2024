@@ -213,10 +213,10 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
     layoutPropositionReponse = new QVBoxLayout();
     layoutPropositonAB       = new QHBoxLayout();
     layoutPropositonCD       = new QHBoxLayout();
-    layoutPropositionChoixA  = new QHBoxLayout(); // Nouveau layout
-    layoutPropositionChoixB  = new QHBoxLayout(); // Nouveau layout
-    layoutPropositionChoixC  = new QHBoxLayout(); // Nouveau layout
-    layoutPropositionChoixD  = new QHBoxLayout(); // Nouveau layout
+    layoutPropositionChoixA  = new QHBoxLayout();
+    layoutPropositionChoixB  = new QHBoxLayout();
+    layoutPropositionChoixC  = new QHBoxLayout();
+    layoutPropositionChoixD  = new QHBoxLayout();
     layoutChronometre        = new QHBoxLayout();
 }
 
@@ -225,13 +225,13 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     labelNombreTotal    = new QLabel("0/0", this);
     labelQuestion       = new QLabel("", this);
     propositionReponseA = new QLabel("A", this);
-    choixPropositionA   = new QLabel("Choix A", this);
+    choixPropositionA   = new QLabel("", this);
     propositionReponseB = new QLabel("B", this);
-    choixPropositionB   = new QLabel("Choix B", this);
+    choixPropositionB   = new QLabel("", this);
     propositionReponseC = new QLabel("C", this);
-    choixPropositionC   = new QLabel("Choix C", this);
+    choixPropositionC   = new QLabel("", this);
     propositionReponseD = new QLabel("D", this);
-    choixPropositionD   = new QLabel("Choix D", this);
+    choixPropositionD   = new QLabel("", this);
     labelChronometre    = new QLabel("00:00", this);
     styleFenetreJeu();
 }
