@@ -257,7 +257,7 @@ void Quizzy::initialiserCommunicationTablette()
     communicationTablette->demarrerServeur();
 }
 
-void initialiserQuiz()
+void Quizzy::initialiserQuiz()
 {
     participants.clear();
     listeQuestions.clear();
