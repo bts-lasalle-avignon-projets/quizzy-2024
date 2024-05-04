@@ -1,0 +1,16 @@
+class Participant
+!!!169514.cpp!!!	getNom() : QString
+    return nom;
+!!!169642.cpp!!!	getIdPupitre() : int
+    return idPupitre;
+!!!169770.cpp!!!	getNombreReponsesCorrectes() : uint
+    return nombreReponsesCorrectes;
+!!!169898.cpp!!!	getReponses() : QVector<int>
+    return reponses;
+!!!170026.cpp!!!	getTempsReponses() : QVector<int>
+    return tempsReponses;
+!!!170154.cpp!!!	enregistrerReponse(in reponse : int, in tempsReponse : int) : void
+    reponses.push_back(reponse);
+    tempsReponses.push_back(tempsReponse);
+!!!170282.cpp!!!	incrementerNombreReponsesCorrectes() : void
+    ++nombreReponsesCorrectes;

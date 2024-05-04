@@ -63,3 +63,19 @@ void Participant::incrementerNombreReponsesCorrectes()
 {
     ++nombreReponsesCorrectes;
 }
+
+QVector<int> Participant::getReponses() const
+{
+    return reponses;
+}
+
+void Participant::enregistrerReponse(int reponse, int tempsReponse)
+{
+    reponses.push_back(reponse);
+    tempsReponses.push_back(tempsReponse);
+}
+
+QVector<int> Participant::getTempsReponses() const
+{
+    return tempsReponses;
+}

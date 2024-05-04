@@ -24,7 +24,6 @@ IHMQuizzy::IHMQuizzy(QWidget* parent) :
     QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
 {
     qDebug() << Q_FUNC_INFO;
-
     creerFenetres();
     afficherFenetreAccueil();
     initialiserEvenements();
@@ -66,42 +65,42 @@ void IHMQuizzy::afficherFenetreResultats()
     afficherFenetre(Fenetre::FenetreResultats);
 }
 
-void IHMQuizzy::lancerQuiz()
+void IHMQuizzy::afficherDebutQuiz()
 {
-    if(quizzy->getNbQuestions() > 0)
-    {
-        afficherQuestion();
-    }
+    qDebug() << Q_FUNC_INFO;
+    messageAttente->setText("En attente des participants...");
+    afficherFenetreAccueil();
 }
 
-void IHMQuizzy::ajouterParticipant(QString pidJoueur, QString participant)
+void IHMQuizzy::afficherLancementQuiz()
 {
-    if(quizzy->ajouterParticipant(pidJoueur, participant))
-    {
-        afficherParticipant(pidJoueur, participant);
-        afficherFenetreParticipants();
-    }
+    qDebug() << Q_FUNC_INFO;
+    afficherQuestion();
 }
 
-void IHMQuizzy::ajouterNouvelleQuestion(QString     libelle,
-                                        QStringList propositions,
-                                        int         reponseValide,
-                                        int         temps)
+void IHMQuizzy::afficherPret()
 {
-    if(quizzy->getNbParticipants() > 0)
-    {
-        quizzy->ajouterQuestion(libelle, propositions, reponseValide, temps);
-        // @todo Afficher prêt à lancer le quiz
-    }
+    qDebug() << Q_FUNC_INFO;
+    infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
+}
+
+void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
+{
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
+             << nomParticipant;
+    QWidget*     widgetParticipant = new QWidget(this);
+    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
+    QLabel*      labelParticipant  = new QLabel(nomParticipant, this);
+    layoutParticipant->setContentsMargins(100, 10, 100, 10);
+    layoutParticipant->addWidget(labelParticipant);
+    layoutPrincipalParticipants->addWidget(widgetParticipant);
+
+    afficherFenetreParticipants();
 }
 
 void IHMQuizzy::demarrerQuestion()
 {
-    if(quizzy->getEtat() == Quizzy::Etat::QuizLance &&
-       quizzy->getQuestion() != nullptr)
-    {
-        initialiserChronometre();
-    }
+    initialiserChronometre();
 }
 
 void IHMQuizzy::afficherDecompteQuestion()
@@ -116,7 +115,34 @@ void IHMQuizzy::afficherDecompteQuestion()
             minuteur->stop();
             labelChronometre->setText(QString::number(0) + "s");
             labelChronometre->setStyleSheet("background-color: #f9e4b7");
+            // @fixme Si la question n'a pas de durée, il faudra créer une trame
+            // pour mettre fin à cette question ou utilise-t-on la trame $S ?
+            quizzy->terminerQuestion();
         }
+    }
+}
+
+void IHMQuizzy::afficherChoixParticipants()
+{
+    QMap<int, QStringList> choixParticipants = quizzy->getChoixParticipants();
+    for(auto it = choixParticipants.begin(); it != choixParticipants.end();
+        ++it)
+    {
+        int         numeroReponse     = it.key();
+        QStringList listeParticipants = it.value();
+        qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse
+                 << "listeParticipants" << listeParticipants;
+
+        if(listeParticipants.size() < 1)
+            continue;
+
+        QString texte = "<small>";
+        for(const QString& nomParticipant: listeParticipants)
+        {
+            texte += nomParticipant + " ";
+        }
+        texte += "</small>";
+        mettreAJourProposition(numeroReponse, texte);
     }
 }
 
@@ -141,6 +167,7 @@ void IHMQuizzy::creerFenetres()
     creerFenetreParticipants();
     creerFenetreJeu();
     creerFenetreResultats();
+    definirNomsObjets();
 }
 
 void IHMQuizzy::creerFenetreAccueil()
@@ -148,10 +175,8 @@ void IHMQuizzy::creerFenetreAccueil()
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
     titreFenetreAccueil        = new QLabel("QUIZZY", this);
-    titreFenetreAccueil->setObjectName("titreAccueil");
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
-    messageAttente = new QLabel("En attente des participants...", this);
-    messageAttente->setObjectName("messageAttente");
+    messageAttente = new QLabel("", this);
     messageAttente->setAlignment(Qt::AlignCenter);
     layoutAccueil->addWidget(titreFenetreAccueil);
     layoutAccueil->addWidget(messageAttente);
@@ -177,12 +202,19 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
 {
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
-    titreFenetreParticipants->setObjectName("titreParticipants");
+    infoQuiz = new QLabel(this);
+    infoQuiz->setFixedSize(500, 100);
+    infoQuiz->setAlignment(Qt::AlignCenter);
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
 {
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
+    layoutInfoQuiz = new QHBoxLayout;
+    layoutInfoQuiz->addStretch();
+    layoutInfoQuiz->addWidget(infoQuiz);
+    layoutInfoQuiz->addStretch();
+    layoutPrincipalParticipants->addLayout(layoutInfoQuiz);
 }
 
 void IHMQuizzy::creerFenetreJeu()
@@ -201,6 +233,10 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
     layoutPropositionReponse = new QVBoxLayout();
     layoutPropositonAB       = new QHBoxLayout();
     layoutPropositonCD       = new QHBoxLayout();
+    layoutPropositionChoixA  = new QHBoxLayout();
+    layoutPropositionChoixB  = new QHBoxLayout();
+    layoutPropositionChoixC  = new QHBoxLayout();
+    layoutPropositionChoixD  = new QHBoxLayout();
     layoutChronometre        = new QHBoxLayout();
 }
 
@@ -209,23 +245,60 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     labelNombreTotal    = new QLabel("0/0", this);
     labelQuestion       = new QLabel("", this);
     propositionReponseA = new QLabel("A", this);
+    choixPropositionA   = new QLabel("", this);
     propositionReponseB = new QLabel("B", this);
+    choixPropositionB   = new QLabel("", this);
     propositionReponseC = new QLabel("C", this);
+    choixPropositionC   = new QLabel("", this);
     propositionReponseD = new QLabel("D", this);
+    choixPropositionD   = new QLabel("", this);
     labelChronometre    = new QLabel("00:00", this);
+}
+
+void IHMQuizzy::definirNomsObjets()
+{
+    // Fenêtre Accueil
+    titreFenetreAccueil->setObjectName("titreAccueil");
+
+    // Fenêtre Participants
+    titreFenetreParticipants->setObjectName("titreParticipants");
+    infoQuiz->setObjectName("infoQuiz");
+
+    // Fenêtre jeu
+    propositionReponseA->setObjectName("propositionReponseA");
+    propositionReponseB->setObjectName("propositionReponseB");
+    propositionReponseC->setObjectName("propositionReponseC");
+    propositionReponseD->setObjectName("propositionReponseD");
+    choixPropositionA->setObjectName("choixPropositionA");
+    choixPropositionB->setObjectName("choixPropositionB");
+    choixPropositionC->setObjectName("choixPropositionC");
+    choixPropositionD->setObjectName("choixPropositionD");
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
 {
+    // En-tête Question
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
-    layoutPropositonAB->addWidget(propositionReponseA);
-    layoutPropositonAB->addWidget(propositionReponseB);
-    layoutPropositonCD->addWidget(propositionReponseC);
-    layoutPropositonCD->addWidget(propositionReponseD);
+    // Proposition A et B
+    layoutPropositionChoixA->addWidget(propositionReponseA);
+    layoutPropositionChoixA->addWidget(choixPropositionA);
+    layoutPropositonAB->addLayout(layoutPropositionChoixA);
+    layoutPropositionChoixB->addWidget(propositionReponseB);
+    layoutPropositionChoixB->addWidget(choixPropositionB);
+    layoutPropositonAB->addLayout(layoutPropositionChoixB);
     layoutPropositionReponse->addLayout(layoutPropositonAB);
+
+    // Proposition C et D
+    layoutPropositionChoixC->addWidget(propositionReponseC);
+    layoutPropositionChoixC->addWidget(choixPropositionC);
+    layoutPropositonCD->addLayout(layoutPropositionChoixC);
+    layoutPropositionChoixD->addWidget(propositionReponseD);
+    layoutPropositionChoixD->addWidget(choixPropositionD);
+    layoutPropositonCD->addLayout(layoutPropositionChoixD);
     layoutPropositionReponse->addLayout(layoutPropositonCD);
+    // Ajout Layout principal
     layoutPrincipalJeu->addLayout(layoutPropositionReponse);
     layoutChronometre->addWidget(labelChronometre);
     layoutPrincipalJeu->addLayout(layoutChronometre);
@@ -243,42 +316,54 @@ void IHMQuizzy::creerFenetreResultats()
 
 void IHMQuizzy::initialiserEvenements()
 {
+    // communicationTablette vers quizzy
+    // Trame $L
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuiz()),
             quizzy,
             SLOT(gererDebutQuiz()));
-    connect(quizzy,
-            SIGNAL(affichagePremiereQuestion()),
-            this,
-            SLOT(lancerQuiz()));
+    // Trame $I
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouveauParticipant(QString, QString)),
-            this,
+            quizzy,
             SLOT(ajouterParticipant(QString, QString)));
+    // Trame $G
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(nouvelleQuestion(QString, QStringList, int, int)),
-            this,
-            SLOT(ajouterNouvelleQuestion(QString, QStringList, int, int)));
+            quizzy,
+            SLOT(ajouterQuestion(QString, QStringList, int, int)));
+    // Trame $T
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(debutQuestion()),
-            this,
+            quizzy,
             SLOT(demarrerQuestion()));
-    // @todo Faire la connexion signal/slot des signaux émis par l'objet
-    // communicationTablette
-}
+    // Trame $U
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(choixReponse(QString, int, int)),
+            quizzy,
+            SLOT(traiterReponse(QString, int, int)));
 
-void IHMQuizzy::afficherParticipant(QString pidJoueur, QString participant)
-{
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(participant, this);
-    layoutParticipant->setContentsMargins(100, 10, 100, 10);
-    layoutParticipant->addWidget(labelParticipant);
-    layoutPrincipalParticipants->addWidget(widgetParticipant);
+    // quizzy vers ihmQuizzy (this)
+    connect(quizzy, SIGNAL(debutQuiz()), this, SLOT(afficherDebutQuiz()));
+    connect(quizzy,
+            SIGNAL(participantAjoute(QString, QString)),
+            this,
+            SLOT(afficherParticipant(QString, QString)));
+    connect(quizzy,
+            SIGNAL(lancementQuiz()),
+            this,
+            SLOT(afficherLancementQuiz()));
+    connect(quizzy, SIGNAL(questionAjoutee()), this, SLOT(afficherPret()));
+    connect(quizzy, SIGNAL(questionDemarree()), this, SLOT(demarrerQuestion()));
+    connect(quizzy,
+            SIGNAL(questionTerminee()),
+            this,
+            SLOT(afficherChoixParticipants()));
 }
 
 void IHMQuizzy::afficherQuestion()
 {
+    qDebug() << Q_FUNC_INFO;
     Question* question = quizzy->getQuestion();
     afficherNbQuestions(quizzy->getIndexQuestionActuelle() + 1,
                         quizzy->getNbQuestions());
@@ -305,13 +390,9 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setStyleSheet("background-color: #f9b7b7"); // Rouge
     propositionReponseA->setText("A. " + propositions['A']);
-    propositionReponseB->setStyleSheet("background-color: #b7f9ba"); // Vert
     propositionReponseB->setText("B. " + propositions['B']);
-    propositionReponseC->setStyleSheet("background-color: #f6f476"); // Jaune
     propositionReponseC->setText("C. " + propositions['C']);
-    propositionReponseD->setStyleSheet("background-color: #b7baf9"); // Bleu
     propositionReponseD->setText("D. " + propositions['D']);
 }
 
@@ -364,4 +445,36 @@ void IHMQuizzy::changerCouleurChronometre()
         couleur = FOND_ROUGE;
     }
     labelChronometre->setStyleSheet("background-color: " + couleur);
+}
+
+void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
+{
+    qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse << "texte"
+             << texte;
+
+    switch(numeroReponse)
+    {
+        case 1:
+            choixPropositionA->setStyleSheet(
+              "background-color: #f9b7b7; border: 3px solid red");
+            choixPropositionA->setText(choixPropositionA->text() + texte);
+            break;
+        case 2:
+            choixPropositionB->setStyleSheet(
+              "background-color: #b7f9ba; border: 3px solid red");
+            choixPropositionB->setText(choixPropositionB->text() + texte);
+            break;
+        case 3:
+            choixPropositionC->setStyleSheet(
+              "background-color: #f6f476; border: 3px solid red");
+            choixPropositionC->setText(choixPropositionC->text() + texte);
+            break;
+        case 4:
+            choixPropositionD->setStyleSheet(
+              "background-color: #b7baf9; border: 3px solid red");
+            choixPropositionD->setText(choixPropositionD->text() + texte);
+            break;
+        default:
+            break;
+    }
 }

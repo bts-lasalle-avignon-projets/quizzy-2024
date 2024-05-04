@@ -1,0 +1,113 @@
+format 224
+
+statecanvas 128042 state_ref 134698 // Initial
+  
+  xyzwh 585.1 105.6 2000 95 43
+end
+statecanvas 128170 state_ref 134826 // QuizDemarre
+  
+  xyzwh 529 245.3 2000 207 84
+end
+statecanvas 128298 state_ref 134954 // ParticipantsAjoutes
+  
+  xyzwh 405.6 430.6 2000 455 88
+end
+statecanvas 128554 state_ref 135082 // QuestionsAjoutees
+  
+  xyzwh 375.6 619.7 2000 515 81
+end
+statecanvas 128682 state_ref 135210 // QuizLance
+  
+  xyzwh 534.1 795 2000 197 82
+end
+statecanvas 128810 state_ref 135338 // QuestionDemarree
+  
+  xyzwh 532.4 965 2000 201 58
+end
+statecanvas 128938 state_ref 135466 // QuestionTerminee
+  
+  xyzwh 543.6 1106.4 2000 179 43
+end
+statecanvas 129066 state_ref 135594 // Resultats
+  
+  xyzwh 581.7 1262.1 2000 103 43
+end
+pseudostatecanvas 130474 pseudostate_ref 134698 // initial 
+   xyz 623.6 13.7 2000
+end
+transitioncanvas 129450 transition_ref 134570 // Trame $L / debuter()
+  
+  from ref 128042 z 2001 label "Trame $L / debuter()" xyz 550 185 3000 to ref 128170
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 129578 transition_ref 134698 // Trame $I / ajouterParticipant(pidJoueur, nomParticipant)
+  
+  from ref 128170 z 2001 label "Trame $I / ajouterParticipant(pidJoueur, nomParticipant)" xyz 405 369 3000 to ref 128298
+  write_horizontally default show_definition default drawing_language c++
+end
+transitioncanvas 129706 transition_ref 134826 // Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)
+  
+  from ref 128298 z 2001 label "Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)" xyz 342 559 3000 to ref 128554
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 129834 transition_ref 134954 // Trame $L / lancer()
+  
+  from ref 128554 z 2001 label "Trame $L / lancer()" xyz 557 735.5 3000 to ref 128682
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 129962 transition_ref 135082 // Trame $T / demarrerQuestion()
+  decenter_begin 488
+  
+  from ref 128682 z 2001 label "Trame $T / demarrerQuestion()" xyz 505.5 909 3000 to ref 128810
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 130090 transition_ref 135210 // timeout() du minuteur / terminerQuestion()
+  decenter_end 495
+  
+  from ref 128810 z 2001 label "timeout() du minuteur / terminerQuestion()" xyz 461 1054 3000 to ref 128938
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 130218 transition_ref 135338 // Trame $F
+  
+  from ref 128938 z 2001 label "Trame $F" xyz 593.5 1195 3000 to ref 129066
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 130602 transition_ref 135594 // Quizzy()
+  
+  from ref 130474 z 2001 label "Quizzy()" xyz 598 57 3000 to ref 128042
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 130730 transition_ref 135722 // Trame $I / ajouterParticipant(pidJoueur, nomParticipant)
+  decenter_begin 105
+  decenter_end 552
+  
+  from ref 128298 z 2001 label "Trame $I / ajouterParticipant(pidJoueur, nomParticipant)" xyz 130.5 411 3000 to point 343.2 437
+  line 130858 z 2001 to point 343.2 477.6
+  line 130986 z 2001 to ref 128298
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 131114 transition_ref 135850 // Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)
+  
+  from ref 128554 z 2001 label "Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)" xyz 40 595.5 3000 to point 347.3 619.8
+  line 131242 z 2001 to point 347.3 649.8
+  line 131370 z 2001 to ref 128554
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 131498 transition_ref 135978 // Trame $U / traiterReponse(QString pidJoueur, numeroReponse, tempsReponse)
+  decenter_begin 155
+  
+  from ref 128810 z 2001 label "Trame $U / traiterReponse(QString pidJoueur, numeroReponse, tempsReponse)" xyz 42 943 3000 to point 485.8 971
+  line 131626 z 2001 to point 485.6 990.3
+  line 131754 z 2001 to ref 128810
+  write_horizontally default show_definition default drawing_language default
+end
+transitioncanvas 132010 transition_ref 136106 // Trame $S
+  decenter_begin 483
+  decenter_end 516
+  
+  from ref 128938 z 2001 label "Trame $S" xyz 834.5 994 3000 to point 824 1123.3
+  line 132522 z 2001 to point 823.6 833.1
+  line 132394 z 2001 to ref 128682
+  write_horizontally default show_definition default drawing_language default
+end
+end

@@ -100,6 +100,8 @@ class IHMQuizzy : public QWidget
     QWidget*     fenetreParticipants;
     QLabel*      titreFenetreParticipants;
     QVBoxLayout* layoutPrincipalParticipants;
+    QHBoxLayout* layoutInfoQuiz;
+    QLabel*      infoQuiz;
     // FenetreJeu
     QWidget*     fenetreJeu;
     QLabel*      titreFenetreJeu;
@@ -108,6 +110,10 @@ class IHMQuizzy : public QWidget
     QVBoxLayout* layoutPropositionReponse;
     QHBoxLayout* layoutPropositonAB;
     QHBoxLayout* layoutPropositonCD;
+    QHBoxLayout* layoutPropositionChoixA;
+    QHBoxLayout* layoutPropositionChoixB;
+    QHBoxLayout* layoutPropositionChoixC;
+    QHBoxLayout* layoutPropositionChoixD;
     QHBoxLayout* layoutChronometre;
     QLabel*      labelNombreTotal;
     QLabel*      labelQuestion;
@@ -115,8 +121,13 @@ class IHMQuizzy : public QWidget
     QLabel*      propositionReponseB;
     QLabel*      propositionReponseC;
     QLabel*      propositionReponseD;
-    QLabel*      labelChronometre;
-    QTimer*      timer;
+    QLabel*      choixPropositionA;
+    QLabel*      choixPropositionB;
+    QLabel*      choixPropositionC;
+    QLabel*      choixPropositionD;
+
+    QLabel* labelChronometre;
+    QTimer* timer;
     // FenetreResultats
     QWidget* fenetreResultats;
     QLabel*  titreFenetreResultats;
@@ -131,10 +142,10 @@ class IHMQuizzy : public QWidget
     void creerFenetreJeu();
     void creerLayoutsFenetreJeu();
     void creerWidgetsFenetreJeu();
+    void definirNomsObjets();
     void placerWidgetsFenetreJeu();
     void creerFenetreResultats();
     void initialiserEvenements();
-    void afficherParticipant(QString pidJoueur, QString participant);
     void afficherQuestion();
     void afficherNbQuestions(unsigned int numeroQuestion,
                              unsigned int nbQuestions);
@@ -143,6 +154,7 @@ class IHMQuizzy : public QWidget
     void afficherTempsQuestion(const Question& question);
     void initialiserChronometre();
     void changerCouleurChronometre();
+    void mettreAJourProposition(int numeroReponse, QString texte);
 
   public:
     IHMQuizzy(QWidget* parent = 0);
@@ -154,14 +166,13 @@ class IHMQuizzy : public QWidget
     void afficherFenetreParticipants();
     void afficherFenetreJeu();
     void afficherFenetreResultats();
-    void lancerQuiz();
-    void ajouterParticipant(QString pidJoueur, QString participant);
-    void ajouterNouvelleQuestion(QString     libelle,
-                                 QStringList propositions,
-                                 int         reponseValide,
-                                 int         temps);
+    void afficherDebutQuiz();
+    void afficherLancementQuiz();
+    void afficherPret();
+    void afficherParticipant(QString pidJoueur, QString nomParticipant);
     void demarrerQuestion();
     void afficherDecompteQuestion();
+    void afficherChoixParticipants();
 };
 
 #endif // IHMQUIZZY_H

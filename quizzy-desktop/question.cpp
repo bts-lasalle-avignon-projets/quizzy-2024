@@ -1,6 +1,10 @@
 #include "question.h"
 
-Question::Question(QString libelle, QStringList propositions) : libelle(libelle)
+Question::Question(QString     libelle,
+                   QStringList propositions,
+                   int         reponseCorrecte) :
+    libelle(libelle),
+    reponseCorrecte(reponseCorrecte)
 {
     char indexPropositions[] = { 'A', 'B', 'C', 'D' };
     for(int i = 0; i < propositions.size(); ++i)
@@ -30,4 +34,9 @@ int Question::getDuree() const
 void Question::setDuree(int temps)
 {
     duree = temps;
+}
+
+int Question::getReponseCorrecte() const
+{
+    return reponseCorrecte;
 }
