@@ -25,9 +25,7 @@ void Quizzy::debuter(bool reset)
         if(reset)
         {
             qDebug() << Q_FUNC_INFO << "reset" << reset;
-            participants.clear();
-            listeQuestions.clear();
-            indexQuestionActuelle = INDEX_NON_DEFINI;
+            initialiserQuiz();
         }
         etat = QuizDemarre;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
@@ -257,4 +255,11 @@ void Quizzy::initialiserCommunicationTablette()
 {
     qDebug() << Q_FUNC_INFO;
     communicationTablette->demarrerServeur();
+}
+
+void initialiserQuiz()
+{
+    participants.clear();
+    listeQuestions.clear();
+    indexQuestionActuelle = INDEX_NON_DEFINI;
 }

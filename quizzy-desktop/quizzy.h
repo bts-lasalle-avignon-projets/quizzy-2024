@@ -47,6 +47,7 @@ class Quizzy : public QObject
       communicationTablette; //!< association avec CommunicationBluetooth
 
     void initialiserCommunicationTablette();
+    void initialiserQuiz();
 
   public:
     Quizzy(QObject* parent = nullptr);
