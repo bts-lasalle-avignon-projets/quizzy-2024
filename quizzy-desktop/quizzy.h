@@ -16,6 +16,11 @@ class Quizzy : public QObject
     Q_OBJECT
 
   public:
+    /**
+     * @enum Etat
+     * @brief Définit les différentes états de déroulement d'un quiz
+     *
+     */
     enum Etat
     {
         Initial,
@@ -30,12 +35,16 @@ class Quizzy : public QObject
     };
 
   private:
-    QVector<Participant*>   participants;
-    QVector<Question*>      listeQuestions;
-    QMap<int, QStringList>  choixParticipants;
-    int                     indexQuestionActuelle;
-    Etat                    etat;
-    CommunicationBluetooth* communicationTablette;
+    QVector<Participant*>
+                       participants; //!< conteneur de Participant pour le quiz
+    QVector<Question*> listeQuestions; //!< conteneur de Question pour le quiz
+    QMap<int, QStringList>
+      choixParticipants; //!< conteneur des choix des participants pour la
+                         //!< question en cours
+    int  indexQuestionActuelle; //!< le numéro de question en cours
+    Etat etat;                  //!< l'état de déroulement du quiz
+    CommunicationBluetooth*
+      communicationTablette; //!< association avec CommunicationBluetooth
 
     void initialiserCommunicationTablette();
 
