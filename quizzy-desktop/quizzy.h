@@ -90,6 +90,7 @@ class Quizzy : public QObject
     void demarrerQuestion();
     void terminerQuestion();
     void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
+    void questionSuivante();
 
   signals:
     void debutQuiz();

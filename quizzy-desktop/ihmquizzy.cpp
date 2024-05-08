@@ -342,7 +342,11 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(choixReponse(QString, int, int)),
             quizzy,
             SLOT(traiterReponse(QString, int, int)));
-
+    // Trame $S
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(questionSuivante()),
+            quizzy,
+            SLOT(questionSuivante()));
     // quizzy vers ihmQuizzy (this)
     connect(quizzy, SIGNAL(debutQuiz()), this, SLOT(afficherDebutQuiz()));
     connect(quizzy,

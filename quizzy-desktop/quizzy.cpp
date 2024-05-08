@@ -174,6 +174,21 @@ void Quizzy::terminerQuestion()
     }
 }
 
+void Quizzy::questionSuivante()
+{
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle < listeQuestions.size() - 1)
+    {
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+        etat = QuizLance;
+        effacerChoix();
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit lancementQuiz();
+    }
+}
+
 // Gestion des réponses
 void Quizzy::traiterReponse(QString pidJoueur,
                             int     numeroReponse,
