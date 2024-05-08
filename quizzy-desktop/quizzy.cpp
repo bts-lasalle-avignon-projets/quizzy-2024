@@ -174,7 +174,7 @@ void Quizzy::terminerQuestion()
     }
 }
 
-void Quizzy::questionSuivante()
+void Quizzy::passerQuestionSuivante()
 {
     if(etat == QuestionTerminee &&
        indexQuestionActuelle < listeQuestions.size() - 1)
@@ -183,9 +183,8 @@ void Quizzy::questionSuivante()
         qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
                  << indexQuestionActuelle;
         etat = QuizLance;
-        effacerChoix();
         qDebug() << Q_FUNC_INFO << "etat" << etat;
-        emit lancementQuiz();
+        emit questionSuivantePrete();
     }
 }
 

@@ -155,6 +155,7 @@ class IHMQuizzy : public QWidget
     void initialiserChronometre();
     void changerCouleurChronometre();
     void mettreAJourProposition(int numeroReponse, QString texte);
+    void effacerChoixParticipants();
 
   public:
     IHMQuizzy(QWidget* parent = 0);
@@ -173,6 +174,7 @@ class IHMQuizzy : public QWidget
     void demarrerQuestion();
     void afficherDecompteQuestion();
     void afficherChoixParticipants();
+    void afficherQuestionSuivante();
 };
 
 #endif // IHMQUIZZY_H

@@ -98,6 +98,13 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
     afficherFenetreParticipants();
 }
 
+void IHMQuizzy::afficherQuestionSuivante()
+{
+    qDebug() << Q_FUNC_INFO;
+    effacerChoixParticipants();
+    afficherQuestion();
+}
+
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -346,7 +353,7 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy->getCommunicationTablette(),
             SIGNAL(questionSuivante()),
             quizzy,
-            SLOT(questionSuivante()));
+            SLOT(passerQuestionSuivante()));
     // quizzy vers ihmQuizzy (this)
     connect(quizzy, SIGNAL(debutQuiz()), this, SLOT(afficherDebutQuiz()));
     connect(quizzy,
@@ -363,6 +370,10 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(questionTerminee()),
             this,
             SLOT(afficherChoixParticipants()));
+    connect(quizzy,
+            SIGNAL(questionSuivantePrete()),
+            this,
+            SLOT(afficherQuestionSuivante()));
 }
 
 void IHMQuizzy::afficherQuestion()
@@ -461,24 +472,36 @@ void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
         case 1:
             choixPropositionA->setStyleSheet(
               "background-color: #f9b7b7; border: 3px solid red");
-            choixPropositionA->setText(choixPropositionA->text() + texte);
+            choixPropositionA->setText(texte);
             break;
         case 2:
             choixPropositionB->setStyleSheet(
               "background-color: #b7f9ba; border: 3px solid red");
-            choixPropositionB->setText(choixPropositionB->text() + texte);
+            choixPropositionB->setText(texte);
             break;
         case 3:
             choixPropositionC->setStyleSheet(
               "background-color: #f6f476; border: 3px solid red");
-            choixPropositionC->setText(choixPropositionC->text() + texte);
+            choixPropositionC->setText(texte);
             break;
         case 4:
             choixPropositionD->setStyleSheet(
               "background-color: #b7baf9; border: 3px solid red");
-            choixPropositionD->setText(choixPropositionD->text() + texte);
+            choixPropositionD->setText(texte);
             break;
         default:
             break;
     }
+}
+
+void IHMQuizzy::effacerChoixParticipants()
+{
+    choixPropositionA->setText("");
+    choixPropositionA->setStyleSheet("");
+    choixPropositionB->setText("");
+    choixPropositionB->setStyleSheet("");
+    choixPropositionC->setText("");
+    choixPropositionC->setStyleSheet("");
+    choixPropositionD->setText("");
+    choixPropositionD->setStyleSheet("");
 }
