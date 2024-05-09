@@ -182,6 +182,7 @@ void Quizzy::passerQuestionSuivante()
         indexQuestionActuelle++;
         qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
                  << indexQuestionActuelle;
+        effacerChoix();
         etat = QuizLance;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionSuivantePrete();
