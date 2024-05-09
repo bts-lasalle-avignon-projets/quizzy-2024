@@ -187,6 +187,9 @@ void Quizzy::passerQuestionSuivante()
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionSuivantePrete();
     }
+    else if(indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+    }
 }
 
 // Gestion des réponses
