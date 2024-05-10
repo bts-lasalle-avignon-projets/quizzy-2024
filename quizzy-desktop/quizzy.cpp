@@ -168,6 +168,7 @@ void Quizzy::terminerQuestion()
 {
     if(etat == QuestionDemarree && getQuestion() != nullptr)
     {
+        // @todo Gérer les participants qui n'ont pas répondu ?
         etat = Quizzy::QuestionTerminee;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionTerminee();
@@ -186,9 +187,6 @@ void Quizzy::passerQuestionSuivante()
         etat = QuizLance;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionSuivantePrete();
-    }
-    else if(indexQuestionActuelle == listeQuestions.size() - 1)
-    {
     }
 }
 
