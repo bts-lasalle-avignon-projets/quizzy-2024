@@ -67,7 +67,6 @@ class Quizzy : public QObject
                                    int          numeroReponse,
                                    int          tempsReponse);
     void effacerChoix();
-
     // Getters
     unsigned int            getNbQuestions();
     unsigned int            getNbParticipants();
@@ -90,6 +89,7 @@ class Quizzy : public QObject
     void demarrerQuestion();
     void terminerQuestion();
     void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
+    void passerQuestionSuivante();
 
   signals:
     void debutQuiz();
@@ -98,6 +98,7 @@ class Quizzy : public QObject
     void questionAjoutee();
     void questionDemarree();
     void questionTerminee();
+    void questionSuivantePrete();
 };
 
 #endif // QUIZZY_H
