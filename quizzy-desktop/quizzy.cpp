@@ -216,6 +216,17 @@ void Quizzy::traiterReponse(QString pidJoueur,
     }
 }
 
+void Quizzy::gererFinQuiz()
+{
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        etat = Resultats;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit quizTermine();
+    }
+}
+
 // Getters
 unsigned int Quizzy::getNbQuestions()
 {
