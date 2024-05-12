@@ -82,6 +82,8 @@ class Quizzy : public QObject
     void gererDebutQuiz();
     // Gestion des participants
     void ajouterParticipant(QString pidJoueur, QString participant);
+
+    // Gestion des questions
     void ajouterQuestion(QString     libelle,
                          QStringList propositions,
                          int         reponseValide,
@@ -90,6 +92,7 @@ class Quizzy : public QObject
     void terminerQuestion();
     void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse);
     void passerQuestionSuivante();
+    void gererFinQuiz();
 
   signals:
     void debutQuiz();
@@ -99,6 +102,7 @@ class Quizzy : public QObject
     void questionDemarree();
     void questionTerminee();
     void questionSuivantePrete();
+    void quizTermine();
 };
 
 #endif // QUIZZY_H

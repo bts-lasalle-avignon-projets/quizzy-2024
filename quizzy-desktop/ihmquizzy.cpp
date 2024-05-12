@@ -354,6 +354,11 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(questionSuivante()),
             quizzy,
             SLOT(passerQuestionSuivante()));
+    // Trame $F
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(finQuiz()),
+            quizzy,
+            SLOT(gererFinQuiz()));
     // quizzy vers ihmQuizzy (this)
     connect(quizzy, SIGNAL(debutQuiz()), this, SLOT(afficherDebutQuiz()));
     connect(quizzy,
@@ -374,6 +379,10 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(questionSuivantePrete()),
             this,
             SLOT(afficherQuestionSuivante()));
+    connect(quizzy,
+            SIGNAL(quizTermine()),
+            this,
+            SLOT(afficherFenetreResultats()));
 }
 
 void IHMQuizzy::afficherQuestion()
