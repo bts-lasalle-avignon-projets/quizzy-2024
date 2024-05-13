@@ -107,12 +107,10 @@ void IHMQuizzy::afficherQuestionSuivante()
 
 void IHMQuizzy::afficherResultats()
 {
-    qDebug() << Q_FUNC_INFO;
     QVector<Participant*> participants = quizzy->getParticipants();
     unsigned int          nbQuestions  = quizzy->getNbQuestions();
-
-    QVBoxLayout* layoutPrincipalResultat =
-      static_cast<QVBoxLayout*>(fenetreResultats->layout());
+    qDebug() << Q_FUNC_INFO << "nbParticipants" << participants.size()
+             << "nbQuestions" << nbQuestions;
 
     for(Participant* participant: participants)
     {
@@ -134,6 +132,7 @@ void IHMQuizzy::afficherResultats()
         layoutParticipantResultat->addWidget(resultatParticipant);
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
+
     afficherFenetreResultats();
 }
 

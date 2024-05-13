@@ -124,9 +124,8 @@ class IHMQuizzy : public QWidget
     QLabel*      choixPropositionB;
     QLabel*      choixPropositionC;
     QLabel*      choixPropositionD;
-
-    QLabel* labelChronometre;
-    QTimer* timer;
+    QLabel*      labelChronometre;
+    QTimer*      timer;
     // FenetreResultats
     QWidget*     fenetreResultats;
     QVBoxLayout* layoutPrincipalResultat;
