@@ -238,6 +238,11 @@ unsigned int Quizzy::getNbParticipants()
     return participants.size();
 }
 
+QVector<Participant*> Quizzy::getParticipants()
+{
+    return participants;
+}
+
 Question* Quizzy::getQuestion()
 {
     if(listeQuestions.isEmpty())

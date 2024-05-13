@@ -105,6 +105,19 @@ void IHMQuizzy::afficherQuestionSuivante()
     afficherQuestion();
 }
 
+void IHMQuizzy::afficherResultats()
+{
+    qDebug() << Q_FUNC_INFO;
+    QVector<Participant*> participants = quizzy->getParticipants();
+    for(Participant* participant: participants)
+    {
+        qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
+        // @todo créer les QLabel pour le nom et le résultat
+        // (nombreReponsesCorrectes / nbQuestions)
+    }
+    afficherFenetreResultats();
+}
+
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -379,10 +392,7 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(questionSuivantePrete()),
             this,
             SLOT(afficherQuestionSuivante()));
-    connect(quizzy,
-            SIGNAL(quizTermine()),
-            this,
-            SLOT(afficherFenetreResultats()));
+    connect(quizzy, SIGNAL(quizTermine()), this, SLOT(afficherResultats()));
 }
 
 void IHMQuizzy::afficherQuestion()
