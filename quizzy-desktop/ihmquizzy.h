@@ -128,8 +128,12 @@ class IHMQuizzy : public QWidget
     QLabel* labelChronometre;
     QTimer* timer;
     // FenetreResultats
-    QWidget* fenetreResultats;
-    QLabel*  titreFenetreResultats;
+    QWidget*     fenetreResultats;
+    QVBoxLayout* layoutPrincipalResultat;
+    QHBoxLayout* layoutParticipantResultat;
+    QLabel*      titreFenetreResultats;
+    QLabel*      nomParticipant;
+    QLabel*      resultatParticipant;
 
     void initialiserFenetres();
     void creerFenetres();

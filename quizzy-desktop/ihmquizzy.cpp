@@ -109,11 +109,30 @@ void IHMQuizzy::afficherResultats()
 {
     qDebug() << Q_FUNC_INFO;
     QVector<Participant*> participants = quizzy->getParticipants();
+    unsigned int          nbQuestions  = quizzy->getNbQuestions();
+
+    QVBoxLayout* layoutPrincipalResultat =
+      static_cast<QVBoxLayout*>(fenetreResultats->layout());
+
     for(Participant* participant: participants)
     {
         qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
-        // @todo créer les QLabel pour le nom et le résultat
-        // (nombreReponsesCorrectes / nbQuestions)
+
+        layoutParticipantResultat = new QHBoxLayout;
+
+        nomParticipant = new QLabel(this);
+        nomParticipant->setText(participant->getNom());
+
+        resultatParticipant = new QLabel(this);
+        unsigned int reponsesCorrectes =
+          participant->getNombreReponsesCorrectes();
+        QString resultat = QString::number(reponsesCorrectes) + "/" +
+                           QString::number(nbQuestions);
+        resultatParticipant->setText(resultat);
+
+        layoutParticipantResultat->addWidget(nomParticipant);
+        layoutParticipantResultat->addWidget(resultatParticipant);
+        layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
     afficherFenetreResultats();
 }
@@ -293,6 +312,9 @@ void IHMQuizzy::definirNomsObjets()
     choixPropositionB->setObjectName("choixPropositionB");
     choixPropositionC->setObjectName("choixPropositionC");
     choixPropositionD->setObjectName("choixPropositionD");
+
+    // Fenêtre Résultats
+    titreFenetreResultats->setObjectName("titreResultats");
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
@@ -326,10 +348,12 @@ void IHMQuizzy::placerWidgetsFenetreJeu()
 
 void IHMQuizzy::creerFenetreResultats()
 {
-    fenetreResultats             = new QWidget(this);
-    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreResultats);
-    titreFenetreResultats        = new QLabel("Résultats", this);
-    layoutPrincipal->addWidget(titreFenetreResultats);
+    fenetreResultats        = new QWidget(this);
+    layoutPrincipalResultat = new QVBoxLayout(fenetreResultats);
+    titreFenetreResultats   = new QLabel("Résultats", this);
+    titreFenetreResultats->setAlignment(Qt::AlignCenter);
+
+    layoutPrincipalResultat->addWidget(titreFenetreResultats);
 
     fenetres->addWidget(fenetreResultats);
 }
