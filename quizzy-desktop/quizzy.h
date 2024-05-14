@@ -70,6 +70,7 @@ class Quizzy : public QObject
     // Getters
     unsigned int            getNbQuestions();
     unsigned int            getNbParticipants();
+    QVector<Participant*>   getParticipants();
     Question*               getQuestion();
     Etat                    getEtat() const;
     QMap<int, QStringList>  getChoixParticipants() const;

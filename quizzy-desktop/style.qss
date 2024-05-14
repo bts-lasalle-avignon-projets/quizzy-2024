@@ -13,7 +13,7 @@ QLabel
 }
 
 #titreAccueil {
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;
 }
 
@@ -23,6 +23,11 @@ QLabel
 }
 
 #titreParticipants {
+    font-size: 40px;
+    text-align: center;
+}
+
+#titreResultats {
     font-size: 40px;
     text-align: center;
 }

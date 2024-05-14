@@ -105,6 +105,37 @@ void IHMQuizzy::afficherQuestionSuivante()
     afficherQuestion();
 }
 
+void IHMQuizzy::afficherResultats()
+{
+    QVector<Participant*> participants = quizzy->getParticipants();
+    unsigned int          nbQuestions  = quizzy->getNbQuestions();
+    qDebug() << Q_FUNC_INFO << "nbParticipants" << participants.size()
+             << "nbQuestions" << nbQuestions;
+
+    for(Participant* participant: participants)
+    {
+        qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
+
+        layoutParticipantResultat = new QHBoxLayout;
+
+        nomParticipant = new QLabel(this);
+        nomParticipant->setText(participant->getNom());
+
+        resultatParticipant = new QLabel(this);
+        unsigned int reponsesCorrectes =
+          participant->getNombreReponsesCorrectes();
+        QString resultat = QString::number(reponsesCorrectes) + "/" +
+                           QString::number(nbQuestions);
+        resultatParticipant->setText(resultat);
+
+        layoutParticipantResultat->addWidget(nomParticipant);
+        layoutParticipantResultat->addWidget(resultatParticipant);
+        layoutPrincipalResultat->addLayout(layoutParticipantResultat);
+    }
+
+    afficherFenetreResultats();
+}
+
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -280,6 +311,9 @@ void IHMQuizzy::definirNomsObjets()
     choixPropositionB->setObjectName("choixPropositionB");
     choixPropositionC->setObjectName("choixPropositionC");
     choixPropositionD->setObjectName("choixPropositionD");
+
+    // Fenêtre Résultats
+    titreFenetreResultats->setObjectName("titreResultats");
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
@@ -313,10 +347,12 @@ void IHMQuizzy::placerWidgetsFenetreJeu()
 
 void IHMQuizzy::creerFenetreResultats()
 {
-    fenetreResultats             = new QWidget(this);
-    QVBoxLayout* layoutPrincipal = new QVBoxLayout(fenetreResultats);
-    titreFenetreResultats        = new QLabel("Résultats", this);
-    layoutPrincipal->addWidget(titreFenetreResultats);
+    fenetreResultats        = new QWidget(this);
+    layoutPrincipalResultat = new QVBoxLayout(fenetreResultats);
+    titreFenetreResultats   = new QLabel("Résultats", this);
+    titreFenetreResultats->setAlignment(Qt::AlignCenter);
+
+    layoutPrincipalResultat->addWidget(titreFenetreResultats);
 
     fenetres->addWidget(fenetreResultats);
 }
@@ -379,10 +415,7 @@ void IHMQuizzy::initialiserEvenements()
             SIGNAL(questionSuivantePrete()),
             this,
             SLOT(afficherQuestionSuivante()));
-    connect(quizzy,
-            SIGNAL(quizTermine()),
-            this,
-            SLOT(afficherFenetreResultats()));
+    connect(quizzy, SIGNAL(quizTermine()), this, SLOT(afficherResultats()));
 }
 
 void IHMQuizzy::afficherQuestion()
