@@ -2,7 +2,7 @@
 
 [![qt-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment)
 
-# Le projet QUIZZY 2024
+# Le projet QUIZZY 2024 (Version 0.2)
 
 - [Le projet QUIZZY 2024](#le-projet-quizzy-2024)
   - [Présentation](#présentation)
@@ -86,7 +86,7 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ## Tickets Jira
 
-![Tickets Jira](images/Jira_v0.1.png)
+![Tickets Jira](images/Jira_v0.2.png)
 
 ## Documentation du code
 
@@ -106,11 +106,11 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ### Quizzy-mobile (Java/Android)
 
-![Android diagramme de classes](images/Android_v0.1_diagramme_classes.png)
+![Android diagramme de classes](images/Android_v0.2_diagramme_classes.png)
 
 ### Quizzy-desktop (C++/Qt)
 
-![Qt diagramme de classes](images/Qt_v0.1_diagramme_classes.png)
+![Qt diagramme de classes](images/Qt_v0.2_diagramme_classes.png)
 
 ## Protocole
 
@@ -125,10 +125,10 @@ Nom des périphériques Bluetooth :
 |------|--------|-------------|---------|
 | Lancer un quiz| `$L\n`| Signaler le début d’un quiz| `$L\n` |
 | Indiquer un participant au quiz | `$I;PID;NOM DU JOUEUR\n` | PID: string (l’identifiant du pupitre) <br> NOM (ou pseudo) DU JOUEUR: string | `$I;P1;Robert\n`<br>Joueur ‘Robert’ avec UID ‘4615’ |
-| Envoyer une question | `$Q;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n`| LIBELLE : string (une question) <br> R1, R2, R3 et R4 : string (propositions) <br> NUMERO_REP_VALIDE : int (1 à 4) <br> TEMPS : int (en secondes, si 0 alors la question n’a pas de temps limite) | `$Q;Quelle est le meilleur OS ?;Linux;Windows;Mac;Minitel;4;10\n`<br>La réponse valide est la n°4, le Minitel |
+| Envoyer une question | `$G;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n`| LIBELLE : string (une question) <br> R1, R2, R3 et R4 : string (propositions) <br> NUMERO_REP_VALIDE : int (1 à 4) <br> TEMPS : int (en secondes, si 0 alors la question n’a pas de temps limite) | `$G;Quelle est le meilleur OS ?;Linux;Windows;Mac;Minitel;4;10\n`<br>La réponse valide est la n°4, le Minitel |
 | Signaler le démarrage (top) d’une question | `$T\n`| Afficher le démarrage du chronomètre | `$T\n` |
-| Indiquer la réponse choisie par un joueur | `$R;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n` | PID_JOUEUR: string <br> NUMÉRO_REPONSE : 1 à 4 <br> TEMPS_RÉPONSE : en ms | `$R;P1;1;3500\n`<br>Choix réponse n°1 pour joueur du pupitre 1 en 3500 ms |
-| Afficher la réponse | `$A\n` | Afficher la réponse à la question actuelle | `$A\n` |
+| Indiquer la réponse choisie par un joueur | `$U;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n` | PID_JOUEUR: string <br> NUMÉRO_REPONSE : 1 à 4 <br> TEMPS_RÉPONSE : en ms | `$U;P1;1;3500\n`<br>Choix réponse n°1 pour joueur du pupitre 1 en 3500 ms |
+| Afficher la réponse | `$H\n` | Afficher la réponse à la question actuelle | `$H\n` |
 | Passer à la question suivante | `$S\n`| Afficher question suivante| `$S\n` |
 | Revenir à la question précédente | `$P\n`| Afficher question précédente| `$P\n` |
 | Finir un quiz | `$F\n`| Signaler la fin d’un quiz | `$F\n` |
@@ -138,8 +138,8 @@ Nom des périphériques Bluetooth :
 | Type | Format | Description | Exemple |
 |------|--------|-------------|---------|
 | Indiquer le numéro de question et le temps alloué pour répondre | `$Q;NUMERO_QUESTION;TEMPS\n`| NUMERO_QUESTION : de 1 à n <br> TEMPS QUESTION : en secondes si 0 alors la question n’a pas de temps limite | `$Q;1;30\n`<br>Question n°1<br>30 secondes pour cette question |
-| Désactiver buzzers + chronomètre | `$D;NUMERO_QUESTION\n`| Désactiver les buzzers et arrêter le chronomètre si besoin | `$D;1\n` |
 | Activer buzzers + lancer chronomètre | `$E;NUMERO_QUESTION\n` | Activer les buzzers pour ce numéro de question et lancer le chronomètre si besoin | `$E;1\n` |
+| Désactiver buzzers + chronomètre | `$D;NUMERO_QUESTION\n`| Désactiver les buzzers et arrêter le chronomètre si besoin | `$D;1\n` |
 
 ### Pupitre -> Évaluateur
 
@@ -154,15 +154,21 @@ Nom des périphériques Bluetooth :
 
 #### Page de gestion du quiz
 
-- Cette page permet de visualiser la partie en cours et de défini son état (En cours | Arrêté)
+- Cette page permet de visualiser le quiz en cours et d'influencer son déroulement
 
-![Page Quiz](images/Android_v0.1_quiz.png)
+![Page Quiz](images/Android_v0.2_quiz.png)
 
 #### Page d'association des pupitres
 
-- Cette page permet de se connecter aux pupitres et à un ou plusieurs écrans
+- Cette page permet de connecter un ou plusieurs périphériques écran ou pupitre
 
-![Page Pupitre](images/Android_v0.1_pupitre.png)
+![Page Pupitre](images/Android_v0.2_pupitre.png)
+
+#### Page de paramétrage du quiz
+
+- Cette page permet de sélectionner un thème pour le quiz à générer, le nombre de questions et d'associé chaque participant à un profil (nom + score)
+
+![Page Pupitre](images/Android_v0.2_parametres.png)
 
 ### Interface participant (Écran)
 
@@ -170,15 +176,39 @@ Nom des périphériques Bluetooth :
 
 - Cette vue permet d'afficher le déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
 
-![Page Quiz](images/Qt_v0.1_quiz.png)
+![Page Quiz](images/Qt_v0.2_quiz.png)
 
 #### Vue d'attente de participants
 
 - Cette vue permet d'afficher la liste des participants en attente du démarrage du quiz
 
-![Page Quiz](images/Qt_v0.1_attente.png)
+![Page Quiz](images/Qt_v0.2_attente.png)
 
 ## Historique des versions
+
+### Version 0.2
+
+#### Tablette
+
+- Se connecter à un périphérique Bluetooth
+- Emettre une requête vers un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Gérer les participants
+- Choisir un thème de quiz et le nombre de questions
+- Gérer un quiz
+- Afficher le déroulement du quiz
+- Calculer automatiquement le temps alloué pour répondre
+
+#### Écran
+
+- Afficher disposition des fenêtres
+- Se connecter à un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Afficher la liste des participants
+- Afficher les statistiques du quiz
+- Afficher le déroulement du quiz
 
 ### Version 0.1
 
@@ -194,15 +224,15 @@ Nom des périphériques Bluetooth :
 
 ## Recette
 
-| Fonctionalités | Oui | Non |
-|----------------|:---:|:---:|
-| Connexion Bluetooth (Android) | X |   |
-| Communication Bluetooth (Qt)  |   | X |
-| Décodage des trames           |   | X |
-| Envoyer une question          | X |   |
-| Récupérer les réponses        | X |   |
-| Afficher les questions        | X |   |
-| Afficher les propositions     | X |   |
+| Fonctionalités                | A faire | En cours | Terminé |
+|-------------------------------|:-------:|:--------:|:-------:|
+| Appairage Bluetooth           |         |          |    X    |
+| Décodage des trames           |         |          |    X    |
+| Envoi de trames               |         |          |    X    |
+| Intéraction BDD               |         |          |    X    |
+| Gestion du chronomètre        |         |          |    X    |
+| Afficher déroulement du quiz  |         |    X     |         |
+| Sauvegarde des résultats      |         |    X     |         |
 
 ## Auteurs
 
