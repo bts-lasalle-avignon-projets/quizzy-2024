@@ -57,7 +57,7 @@ public class Quiz
         return quizEnCours;
     }
 
-    public void genererQuiz(String theme, int nombreQuestions)
+    public void genererQuiz()
     {
         questions.clear();
         questions.addAll(BaseDeDonnees.getInstance().getQuestionnaire(FragmentParametres.getNombreQuestion(), FragmentParametres.getThemeChoisi()));
@@ -70,28 +70,6 @@ public class Quiz
 
     public void demarrer()
     {
-        ecrans.clear();
-        for(Peripherique peripherique:
-            GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriquesConnectes())
-        {
-            if(peripherique.getNom().startsWith("quizzy-e"))
-            {
-                ecrans.add(new Ecran(peripherique));
-            }
-        }
-        // Test Ecran
-        ecrans.add(new Ecran(null));
-        // Fin Test Ecran
-
-        for(Participant participant: participants)
-        {
-            participant.setScore(0);
-            ProtocoleInscriptionParticipant inscriptionParticipant =
-              (ProtocoleInscriptionParticipant)Protocole.getProtocole(
-                TypeProtocole.INSCRIPTION_PARTICIPANT);
-            inscriptionParticipant.genererTrame(participant.getPID(), participant.getNom());
-            inscriptionParticipant.envoyer(ecrans);
-        }
         for(Question question: questions)
         {
             ProtocoleEnvoiQuestion envoiQuestion =
@@ -111,11 +89,26 @@ public class Quiz
     public void ajouterParticipant(Participant participant)
     {
         participants.add(participant);
+        for(Ecran ecran: ecrans)
+        {
+            ProtocoleInscriptionParticipant inscriptionParticipant = (ProtocoleInscriptionParticipant)Protocole.getProtocole(TypeProtocole.INSCRIPTION_PARTICIPANT);
+            inscriptionParticipant.genererTrame(participant.getPID(), participant.getNom());
+            inscriptionParticipant.envoyer(ecran);
+        }
     }
 
     public void ajouterEcran(Ecran ecran)
     {
         ecrans.add(ecran);
+        for(Participant participant: participants)
+        {
+            ProtocoleInscriptionParticipant inscriptionParticipant = (ProtocoleInscriptionParticipant)Protocole.getProtocole(TypeProtocole.INSCRIPTION_PARTICIPANT);
+            inscriptionParticipant.genererTrame(participant.getPID(), participant.getNom());
+            inscriptionParticipant.envoyer(ecran);
+        }
+        ProtocoleLancement lancement = (ProtocoleLancement) Protocole.getProtocole(TypeProtocole.LANCEMENT);
+        lancement.genererTrame();
+        lancement.envoyer(ecran);
     }
 
     public void arreter()
@@ -128,6 +121,10 @@ public class Quiz
           (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
         desactiverBuzzers.genererTrame(indiceQuestion);
         desactiverBuzzers.envoyer(participants);
+
+        ProtocoleLancement lancement = (ProtocoleLancement) Protocole.getProtocole(TypeProtocole.LANCEMENT);
+        lancement.genererTrame();
+        lancement.envoyer(ecrans);
 
         participants.clear();
         questions.clear();

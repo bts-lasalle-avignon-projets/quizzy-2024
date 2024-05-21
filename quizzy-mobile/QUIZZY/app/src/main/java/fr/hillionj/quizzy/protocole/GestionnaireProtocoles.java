@@ -11,8 +11,10 @@ import java.util.List;
 import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
+import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 import fr.hillionj.quizzy.protocole.speciales.application.ProtocoleReceptionReponse;
+import fr.hillionj.quizzy.receveurs.speciales.Ecran;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 import fr.hillionj.quizzy.questionnaire.Quiz;
 
@@ -75,6 +77,14 @@ public class GestionnaireProtocoles
                         }
                         GestionnaireBluetooth.getGestionnaireBluetooth()
                           .ajouterPeripheriqueConnecter((int)msg.obj);
+                        Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int) msg.obj);
+                        if(peripherique.getNom().startsWith("quizzy-p"))
+                        {
+                            Quiz.getQuizEnCours().ajouterParticipant(FragmentParametres.getParticipant(peripherique));
+                        } else if(peripherique.getNom().startsWith("quizzy-e") || peripherique.getNom().equals("CV-PC-B20-01"))
+                        {
+                            Quiz.getQuizEnCours().ajouterEcran(new Ecran(peripherique));
+                        }
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
                         if (FragmentPupitre.getVueActive() != null) {
@@ -90,13 +100,13 @@ public class GestionnaireProtocoles
                         for(String trame: ((String)msg.obj).split("\n"))
                         {
                             Protocole    protocole = Protocole.traiterTrame(trame + "\n");
-                            Peripherique peripherique =
+                            Peripherique peripherique1 =
                               GestionnaireBluetooth.getGestionnaireBluetooth()
                                 .getPeripheriques()
                                 .get(msg.arg1);
                             if(protocole != null)
                             {
-                                traiterProtocoleEntrant(peripherique, protocole);
+                                traiterProtocoleEntrant(peripherique1, protocole);
                             }
                         }
                     default:

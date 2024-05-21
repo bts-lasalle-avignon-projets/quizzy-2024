@@ -87,19 +87,7 @@ public class FragmentQuiz extends Fragment
             public void onClick(View view)
             {
                 Quiz quiz = Quiz.getQuizEnCours();
-                for(Peripherique peripherique:
-                    GestionnaireBluetooth.getGestionnaireBluetooth()
-                      .getPeripheriquesConnectes())
-                {
-                    if(peripherique.getNom().startsWith("quizzy-p"))
-                    {
-                        quiz.ajouterParticipant(FragmentParametres.getParticipant(peripherique));
-                    } else if(peripherique.getNom().startsWith("quizzy-e"))
-                    {
-                        quiz.ajouterEcran(new Ecran(peripherique));
-                    }
-                }
-                quiz.genererQuiz(null, 0);
+                quiz.genererQuiz();
                 quiz.demarrer();
                 mettreAjourEtatBoutons();
             }
