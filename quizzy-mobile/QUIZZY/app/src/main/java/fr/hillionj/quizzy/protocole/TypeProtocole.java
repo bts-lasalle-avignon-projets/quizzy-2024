@@ -16,6 +16,7 @@ import fr.hillionj.quizzy.protocole.speciales.ecran.ProtocoleLancementQuestion;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleActiverBuzzers;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleDesactiverBuzzers;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleIndicationQuestion;
+import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleIndiquerResultat;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public enum TypeProtocole {
@@ -32,7 +33,8 @@ public enum TypeProtocole {
     ACTIVER_BUZZERS("E"),
     DESACTIVER_BUZZERS("D"),
     RECEPTION_REPONSE("R"),
-    ACQUITEMENT("A");
+    ACQUITEMENT("A"),
+    INDIQUER_RESULTAT("B");
 
     private String              indiceType;
     private static final String TAG = "_TypeProtocole";
@@ -90,6 +92,8 @@ public enum TypeProtocole {
                 return new ProtocoleAfficherQuestionSuivante();
             case AFFICHER_QUESTION_PRECEDENTE:
                 return new ProtocoleAfficherQuestionPrecedente();
+            case INDIQUER_RESULTAT:
+                return new ProtocoleIndiquerResultat(trame);
             default:
                 Log.d(TAG,
                       "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +

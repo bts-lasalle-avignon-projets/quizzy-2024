@@ -27,6 +27,7 @@ import fr.hillionj.quizzy.protocole.speciales.ecran.ProtocoleLancementQuestion;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleActiverBuzzers;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleDesactiverBuzzers;
 import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleIndicationQuestion;
+import fr.hillionj.quizzy.protocole.speciales.pupitre.ProtocoleIndiquerResultat;
 import fr.hillionj.quizzy.receveurs.speciales.Ecran;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 
@@ -345,11 +346,14 @@ public class Quiz
 
         boolean estVraie = false, estFausse = false;
         for (Participant participant : participants) {
-            if (participant.getNumeroReponse() == getQuestionEnCours().getNumeroBonneReponse()) {
+            boolean reponseValide = participant.getNumeroReponse() == getQuestionEnCours().getNumeroBonneReponse();
+            if (reponseValide) {
                 estVraie = true;
             } else if (participant.getNumeroReponse() != 0) {
                 estFausse = true;
             }
+            ProtocoleIndiquerResultat indiquerResultat = (ProtocoleIndiquerResultat) Protocole.getProtocole(TypeProtocole.INDIQUER_RESULTAT);
+            indiquerResultat.genererTrame(indiceQuestion, reponseValide);
         }
         if (estVraie && estFausse) {
             GestionnaireBruitage.getGestionnaireBruitage().jouerReponsesVaries();
