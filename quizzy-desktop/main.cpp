@@ -6,7 +6,7 @@
  * @brief Programme principal
  * @details Crée et affiche la fenêtre principale de l'application Quizzy
  * @author Thomas HNIZDO
- * @version 0.1
+ * @version 0.2
  *
  * @param argc
  * @param argv[]

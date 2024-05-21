@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMQuizzy
  * @author Thomas HNIZDO
- * @version 0.1
+ * @version 0.2
  */
 
 #include <QtWidgets>
