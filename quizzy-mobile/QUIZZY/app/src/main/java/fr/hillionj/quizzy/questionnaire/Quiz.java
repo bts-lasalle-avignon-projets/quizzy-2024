@@ -354,6 +354,7 @@ public class Quiz
             }
             ProtocoleIndiquerResultat indiquerResultat = (ProtocoleIndiquerResultat) Protocole.getProtocole(TypeProtocole.INDIQUER_RESULTAT);
             indiquerResultat.genererTrame(indiceQuestion, reponseValide);
+            indiquerResultat.envoyer(participant);
         }
         if (estVraie && estFausse) {
             GestionnaireBruitage.getGestionnaireBruitage().jouerReponsesVaries();
