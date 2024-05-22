@@ -1,7 +1,7 @@
 format 224
 "quizzy-desktop" // quizzy-desktop
-  revision 5
-  modified_by 42 "tv"
+  revision 6
+  modified_by 6 "thomas"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -164,17 +164,6 @@ ${items}};
 "
 	    classrelation_ref 134698 // quizzy (<unidirectional association>)
 	  b parent class_ref 134826 // Quizzy
-      end
-
-      classrelation 155562 // questions (<unidirectional association>)
-	relation 155562 --->
-	  stereotype "QVector"
-	  a role_name "questions" private
-	    comment "!< conteneur de Question pour le quiz"
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
-"
-	    classrelation_ref 155562 // questions (<unidirectional association>)
-	  b parent class_ref 134954 // Question
       end
 
       attribute 166058 "minuteur"
@@ -621,7 +610,55 @@ ${items}};
 "
       end
 
+      attribute 128006 "layoutPrincipalResultat"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128134 "layoutParticipantResultat"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       attribute 150058 "titreFenetreResultats"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128262 "nomParticipant"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128390 "resultatParticipant"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -950,6 +987,20 @@ ${body}}
 	
       end
 
+      operation 128646 "effacerChoixParticipants"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 134570 "IHMQuizzy"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -961,7 +1012,7 @@ ${body}}
 //
 //@brief Définition de la classe IHMQuizzy
 //@author Thomas HNIZDO
-//@version 0.1
+//@version 0.2
 //
 //
 //@brief Constructeur de la classe IHMQuizzy
@@ -1177,11 +1228,39 @@ ${body}}
 	
       end
 
-      classrelation 155818 // <dependency>
-	relation 155818 -_->
+      operation 128774 "afficherQuestionSuivante"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128902 "afficherResultats"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128134 // <dependency>
+	relation 128134 -_->
 	  a public
 	    cpp default "#include in source"
-	    classrelation_ref 155818 // <dependency>
+	    classrelation_ref 128134 // <dependency>
 	  b parent class_ref 148138 // Fenetre
       end
     end
@@ -1429,9 +1508,12 @@ ${body}}
       end
 
       operation 174122 "initialiserQuiz"
-	private explicit_return_type "void"
+	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1576,6 +1658,20 @@ ${body}}
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128006 "getParticipants"
+	preserve_cpp_body_indent public explicit_return_type "QVector<Participant*>"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -1732,6 +1828,7 @@ ${body}}
 	
 	
 	
+	comment " Gestion des questions"
       end
 
       operation 172970 "demarrerQuestion"
@@ -1774,6 +1871,34 @@ ${body}}
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128134 "passerQuestionSuivante"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128262 "gererFinQuiz"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -1859,11 +1984,33 @@ ${body}}
 	
       end
 
-      classrelation 155690 // <dependency>
-	relation 155690 -_->
+      operation 128390 "questionSuivantePrete"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 128518 "quizTermine"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128006 // <dependency>
+	relation 128006 -_->
 	  a public
 	    cpp default "#include in source"
-	    classrelation_ref 155690 // <dependency>
+	    classrelation_ref 128006 // <dependency>
 	  b parent class_ref 154794 // Etat
       end
     end
@@ -2838,7 +2985,6 @@ ${body}}
 	  on state_ref 134826 // QuizDemarre
 	  external 
 	end
-
       end
 
       state 134826 "QuizDemarre"
@@ -2927,7 +3073,6 @@ ${body}}
 	cpp "debutQuiz()"
       end
     end
-
   end
 
   deploymentview 134570 "quizzy-desktop"
