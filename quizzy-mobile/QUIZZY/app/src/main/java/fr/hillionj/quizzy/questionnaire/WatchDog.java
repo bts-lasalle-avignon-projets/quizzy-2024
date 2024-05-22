@@ -17,7 +17,7 @@ public class WatchDog {
     public WatchDog(Quiz quiz) {
         this.quiz = quiz;
 
-        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run()
             {
@@ -38,6 +38,11 @@ public class WatchDog {
             return;
         }
         mettreAjourBarreDeProgression();
+        verifierTempsMortApresReponse();
+        verifierTempsMortApresQuestion();
+    }
+
+    private void verifierTempsMortApresReponse() {
         Question questionEnCours = quiz.getQuestionEnCours();
         if(questionEnCours != null && quiz.getEtape() == EtapeQuiz.ATTENTE  && quiz.getTempsQuestionEnCours() >= questionEnCours.getTemps() && !quiz.estTempsMort() && !quiz.estEnPause())
         {
@@ -45,6 +50,9 @@ public class WatchDog {
             quiz.demarrerTempsMort();
             afficherSelection();
         }
+    }
+
+    private void verifierTempsMortApresQuestion() {
         if(quiz.estTempsMort() && System.currentTimeMillis() - quiz.heureDemarrageTempsMort > Quiz.tempsEntreQuestion)
         {
             if (quiz.getEtape() == EtapeQuiz.AFFICHAGE_REPONSE) {

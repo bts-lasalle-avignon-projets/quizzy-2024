@@ -20,14 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
-import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.FragmentHomeBinding;
-import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
 import fr.hillionj.quizzy.questionnaire.EtapeQuiz;
 import fr.hillionj.quizzy.questionnaire.Question;
 import fr.hillionj.quizzy.questionnaire.Quiz;
-import fr.hillionj.quizzy.receveurs.speciales.Ecran;
 import fr.hillionj.quizzy.receveurs.speciales.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -52,6 +48,17 @@ public class FragmentQuiz extends Fragment
                              ViewGroup               container,
                              Bundle                  savedInstanceState)
     {
+        View root = initialiserVue(inflater, container);
+        Log.d(TAG, "CREATE");
+        mettreAjourEtatBoutons();
+        mettreAjourDeroulement();
+
+        assicierBoutonsEtFonctionalites();
+        return root;
+    }
+
+    @NonNull
+    private View initialiserVue(@NonNull LayoutInflater inflater, ViewGroup container) {
         ModeleQuiz homeViewModel = new ViewModelProvider(this).get(ModeleQuiz.class);
 
         binding   = FragmentHomeBinding.inflate(inflater, container, false);
@@ -59,29 +66,53 @@ public class FragmentQuiz extends Fragment
 
         vueActive = this;
 
-        btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
-        btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
-        btnPauseQuiz       = root.findViewById(R.id.btn_pause);
-        btnReinitialiser   = root.findViewById(R.id.btn_reinitialiser);
-        liste_participants = root.findViewById(R.id.liste_participants);
-        if(this.adapterListeParticipants == null)
-        {
-            this.adapterListeParticipants =
-              new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-        }
-        liste_participants.setAdapter(this.adapterListeParticipants);
-        Log.d(TAG, "CREATE");
-        question         = root.findViewById(R.id.question);
-        barreProgression = root.findViewById(R.id.barreProgression);
-        barreProgression.setMax(100);
-        propositions.clear();
-        propositions.add(root.findViewById(R.id.reponse1));
-        propositions.add(root.findViewById(R.id.reponse2));
-        propositions.add(root.findViewById(R.id.reponse3));
-        propositions.add(root.findViewById(R.id.reponse4));
-        mettreAjourEtatBoutons();
-        mettreAjourDeroulement();
+        initialiserBoutons(root);
+        initialiserListeParticipants(root);
+        initialiserAffichage(root);
+        return root;
+    }
 
+    private void assicierBoutonsEtFonctionalites() {
+        associerBoutonDemarrer();
+        associerBoutonAbandonner();
+        associerBoutonPause();
+        associerBoutonReinitialiser();
+    }
+
+    private void associerBoutonReinitialiser() {
+        btnReinitialiser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().reinitialiser();
+                mettreAjourEtatBoutons();
+            }
+        });
+    }
+
+    private void associerBoutonPause() {
+        btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().basculerPause();
+                mettreAjourEtatBoutons();
+            }
+        });
+    }
+
+    private void associerBoutonAbandonner() {
+        btnAbandonnerQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().arreter();
+                mettreAjourEtatBoutons();
+            }
+        });
+    }
+
+    private void associerBoutonDemarrer() {
         btnLancerQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -92,35 +123,34 @@ public class FragmentQuiz extends Fragment
                 mettreAjourEtatBoutons();
             }
         });
+    }
 
-        btnAbandonnerQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Quiz.getQuizEnCours().arreter();
-                mettreAjourEtatBoutons();
-            }
-        });
+    private void initialiserBoutons(View root) {
+        btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
+        btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
+        btnPauseQuiz       = root.findViewById(R.id.btn_pause);
+        btnReinitialiser   = root.findViewById(R.id.btn_reinitialiser);
+    }
 
-        btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Quiz.getQuizEnCours().basculerPause();
-                mettreAjourEtatBoutons();
-            }
-        });
+    private void initialiserListeParticipants(View root) {
+        liste_participants = root.findViewById(R.id.liste_participants);
+        if(this.adapterListeParticipants == null)
+        {
+            this.adapterListeParticipants =
+              new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+        }
+    }
 
-        btnReinitialiser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Quiz.getQuizEnCours().reinitialiser();
-                mettreAjourEtatBoutons();
-            }
-        });
-
-        return root;
+    private void initialiserAffichage(View root) {
+        liste_participants.setAdapter(this.adapterListeParticipants);
+        question         = root.findViewById(R.id.question);
+        barreProgression = root.findViewById(R.id.barreProgression);
+        barreProgression.setMax(100);
+        propositions.clear();
+        propositions.add(root.findViewById(R.id.reponse1));
+        propositions.add(root.findViewById(R.id.reponse2));
+        propositions.add(root.findViewById(R.id.reponse3));
+        propositions.add(root.findViewById(R.id.reponse4));
     }
 
     public void mettreAjoutListeParticipants()
@@ -132,14 +162,11 @@ public class FragmentQuiz extends Fragment
             return;
         }
         List<Participant> liste = quiz.getParticipants();
-        if(adapterListeParticipants.getCount() != quiz.getParticipants().size())
-        {
-            adapterListeParticipants.clear();
-            for(Participant participant: liste)
-            {
-                adapterListeParticipants.add(participant.getNom());
-            }
-        }
+        verifierTailleListeParticipants(quiz, liste);
+        ajouterSuffixeAuxParticipants(liste);
+    }
+
+    private void ajouterSuffixeAuxParticipants(List<Participant> liste) {
         for(int i = 0; i < liste.size(); i++)
         {
             Participant participantAssocie = liste.get(i);
@@ -159,6 +186,17 @@ public class FragmentQuiz extends Fragment
                                         " (" + participantAssocie.getTempsReponse() + " ms)";
             }
             adapterListeParticipants.insert(affichageParticipant, i);
+        }
+    }
+
+    private void verifierTailleListeParticipants(Quiz quiz, List<Participant> liste) {
+        if(adapterListeParticipants.getCount() != quiz.getParticipants().size())
+        {
+            adapterListeParticipants.clear();
+            for(Participant participant: liste)
+            {
+                adapterListeParticipants.add(participant.getNom());
+            }
         }
     }
 
@@ -185,71 +223,72 @@ public class FragmentQuiz extends Fragment
     {
         if(Quiz.getQuizEnCours().estTermine())
         {
-            question.setText("");
-            for(TextView proposition: propositions)
-            {
-                proposition.setText("");
-                proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
-            }
+            effacerQuestionEtPropositions();
         }
         else
         {
             Question questionEnCours = Quiz.getQuizEnCours().getQuestionEnCours();
             question.setText(questionEnCours.getQuestion());
-            List<String> propositionsEnCours = questionEnCours.getReponses();
-            int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
-            for(int i = 0; i < propositionsEnCours.size(); i++)
-            {
-                propositions.get(i).setText(propositionsEnCours.get(i));
-                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() && Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
-                {
-                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
-                }
-                else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
-                {
-                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
-                }
-                else
-                {
-                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
-                }
-            }
+            mettreAjourPropositions(questionEnCours);
         }
         mettreAjourBarreDeProgression();
         mettreAjoutListeParticipants();
+    }
+
+    private void effacerQuestionEtPropositions() {
+        question.setText("");
+        for(TextView proposition: propositions)
+        {
+            proposition.setText("");
+            proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
+        }
+    }
+
+
+    private void mettreAjourPropositions(Question questionEnCours) {
+        List<String> propositionsEnCours = questionEnCours.getReponses();
+        int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
+        for(int i = 0; i < propositionsEnCours.size(); i++)
+        {
+            propositions.get(i).setText(propositionsEnCours.get(i));
+            if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() && Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
+            }
+            else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
+            }
+            else
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
+            }
+        }
     }
 
     public void mettreAjourBarreDeProgression()
     {
         if(Quiz.getQuizEnCours().estTermine())
         {
-            barreProgression.getProgressDrawable().setColorFilter(
-              Color.GRAY,
-              android.graphics.PorterDuff.Mode.SRC_IN);
+            setCouleur(Color.GRAY);
             barreProgression.setProgress(0);
-            return;
-        }
-        if(Quiz.getQuizEnCours().estTempsMort())
+        } else if(Quiz.getQuizEnCours().estTempsMort())
         {
-            barreProgression.getProgressDrawable().setColorFilter(
-              Color.RED,
-              android.graphics.PorterDuff.Mode.SRC_IN);
-            return;
+            setCouleur(Color.RED);
         }
         else if(Quiz.getQuizEnCours().estEnPause())
         {
-            barreProgression.getProgressDrawable().setColorFilter(
-              Color.YELLOW,
-              android.graphics.PorterDuff.Mode.SRC_IN);
-            return;
+            setCouleur(Color.YELLOW);
         }
         else
         {
-            barreProgression.getProgressDrawable().setColorFilter(
-              Color.CYAN,
-              android.graphics.PorterDuff.Mode.SRC_IN);
+            setCouleur(Color.CYAN);
+            barreProgression.setProgress(getProgression());
         }
-        barreProgression.setProgress(getProgression());
+    }
+
+    private void setCouleur(int color) {
+        barreProgression.getProgressDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
     public ProgressBar getBarreProgression()

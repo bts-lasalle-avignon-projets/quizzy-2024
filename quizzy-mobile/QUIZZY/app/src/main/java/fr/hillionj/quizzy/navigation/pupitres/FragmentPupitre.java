@@ -45,35 +45,29 @@ public class FragmentPupitre extends Fragment
 
     public void initialiserVue(View vue)
     {
-        btnConnecter = vue.findViewById(R.id.bouton_connecter);
-        btnConnecter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentPupitre.this.onClick(v);
-            }
-        });
-
-        btnDeconnecter = vue.findViewById(R.id.bouton_deconnecter);
-        btnDeconnecter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentPupitre.this.onClick(v);
-            }
-        });
+        initialiserBoutons(vue);
         spinnerListePeripheriques      = vue.findViewById(R.id.liste_peripheriques);
         listViewPeripheriquesConnectes = vue.findViewById(R.id.listViewPeripheriquesConnectes);
-        if(vueActive != null)
-        {
-            btnConnecter.setEnabled(vueActive.btnConnecter.isEnabled());
-            btnDeconnecter.setEnabled(vueActive.btnDeconnecter.isEnabled());
-            spinnerListePeripheriques.setEnabled(vueActive.spinnerListePeripheriques.isEnabled());
-            GestionnaireBluetooth.getGestionnaireBluetooth()
-              .mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
-            GestionnaireBluetooth.getGestionnaireBluetooth()
-              .mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
-        }
+
+        GestionnaireBluetooth gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth();
+        gestionnaireBluetooth.mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
+        gestionnaireBluetooth.mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
+    }
+
+    private void initialiserBoutons(View vue) {
+        btnConnecter = initialiserBouton(vue, R.id.bouton_connecter);
+        btnDeconnecter = initialiserBouton(vue, R.id.bouton_deconnecter);
+    }
+
+    private Button initialiserBouton(View vue, int bouton_connecter) {
+        Button bouton = vue.findViewById(bouton_connecter);
+        bouton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentPupitre.this.onClick(v);
+            }
+        });
+        return bouton;
     }
 
     @Override
@@ -90,11 +84,6 @@ public class FragmentPupitre extends Fragment
             btnConnecter.setEnabled(false);
             btnDeconnecter.setEnabled(true);
             spinnerListePeripheriques.setEnabled(true);
-        /*}
-        else if (peripheriqueSelectionne.seConnecte()) {
-            btnConnecter.setEnabled(false);
-            btnDeconnecter.setEnabled(false);
-            spinnerListePeripheriques.setEnabled(false);*/
         } else
         {
             btnConnecter.setEnabled(true);

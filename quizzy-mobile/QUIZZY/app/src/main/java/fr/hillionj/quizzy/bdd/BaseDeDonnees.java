@@ -15,8 +15,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -79,6 +82,19 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
     public List<Question> getQuestionnaire(int nombreQuestion, String theme, int tempsParQuestion)
     {
+        String query = construireRequete(nombreQuestion, theme);
+        Cursor         curseur       = sqlite.rawQuery(query, null);
+        List<Question> listeQuestion = new ArrayList<>();
+        while(curseur.moveToNext())
+        {
+            listeQuestion.add(genererQuestion(curseur, tempsParQuestion));
+        }
+        curseur.close();
+        return listeQuestion;
+    }
+
+    @NonNull
+    private String construireRequete(int nombreQuestion, String theme) {
         String query =
           "SELECT question,proposition1,proposition2,proposition3,proposition4 FROM questions";
         if(theme != null)
@@ -86,36 +102,44 @@ public class BaseDeDonnees extends SQLiteOpenHelper
             query += " WHERE theme = '" + theme + "'";
         }
         query += " ORDER BY RANDOM() LIMIT " + nombreQuestion;
-        Cursor         curseur       = sqlite.rawQuery(query, null);
-        List<Question> listeQuestion = new ArrayList<>();
-        while(curseur.moveToNext())
+        return query;
+    }
+
+    private Question genererQuestion(Cursor curseur, int tempsParQuestion) {
+        String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
+        String prop1    = curseur.getString(curseur.getColumnIndexOrThrow("proposition1"));
+        String prop2    = curseur.getString(curseur.getColumnIndexOrThrow("proposition2"));
+        String prop3    = curseur.getString(curseur.getColumnIndexOrThrow("proposition3"));
+        String prop4    = curseur.getString(curseur.getColumnIndexOrThrow("proposition4"));
+
+        List<String> propositions = getPropositions(prop1, prop2, prop3, prop4);
+
+        int tempsReponse = getTempsReponse(tempsParQuestion, question, prop1, prop2, prop3, prop4);
+
+        return new Question(question, propositions, tempsReponse);
+    }
+
+    @NonNull
+    private static List<String> getPropositions(String prop1, String prop2, String prop3, String prop4) {
+        List<String> propositions = new ArrayList<>();
+        propositions.add(prop1);
+        propositions.add(prop2);
+        propositions.add(prop3);
+        propositions.add(prop4);
+        return propositions;
+    }
+
+    private int getTempsReponse(int tempsParQuestion, String question, String prop1, String prop2, String prop3, String prop4) {
+        int tempsReponse = tempsParQuestion;
+        if(tempsReponse == -1)
         {
-            String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
-            String prop1    = curseur.getString(curseur.getColumnIndexOrThrow("proposition1"));
-            String prop2    = curseur.getString(curseur.getColumnIndexOrThrow("proposition2"));
-            String prop3    = curseur.getString(curseur.getColumnIndexOrThrow("proposition3"));
-            String prop4    = curseur.getString(curseur.getColumnIndexOrThrow("proposition4"));
-
-            List<String> propositions = new ArrayList<>();
-            propositions.add(prop1);
-            propositions.add(prop2);
-            propositions.add(prop3);
-            propositions.add(prop4);
-
-            int tempsReponse = tempsParQuestion;
-            if(tempsReponse == -1)
+            tempsReponse = (question + prop1 + prop2 + prop3 + prop4).length() / 5;
+            if(tempsReponse == 0)
             {
-                tempsReponse = (question + prop1 + prop2 + prop3 + prop4).length() / 5;
-                if(tempsReponse == 0)
-                {
-                    tempsReponse++;
-                }
+                tempsReponse++;
             }
-
-            listeQuestion.add(new Question(question, propositions, tempsReponse));
         }
-        curseur.close();
-        return listeQuestion;
+        return tempsReponse;
     }
 
     public List<String> getThemes()
@@ -167,36 +191,44 @@ public class BaseDeDonnees extends SQLiteOpenHelper
             new File(QUIZZY_CHEMIN).mkdirs();
             input         = new BufferedInputStream(source);
             output        = new BufferedOutputStream(new FileOutputStream(destination));
-            byte[] buffer = new byte[1024];
-            int length;
-            while((length = input.read(buffer)) > 0)
-            {
-                output.write(buffer, 0, length);
-            }
+            copierOctets(input, output);
         }
         finally
         {
-            if(output != null)
+            fermerLesFlux(output, input);
+        }
+    }
+
+    private void copierOctets(InputStream input, OutputStream output) throws IOException {
+        byte[] buffer = new byte[1024];
+        int length;
+        while((length = input.read(buffer)) > 0)
+        {
+            output.write(buffer, 0, length);
+        }
+    }
+
+    private void fermerLesFlux(OutputStream output, InputStream input) {
+        if(output != null)
+        {
+            try
             {
-                try
-                {
-                    output.close();
-                }
-                catch(IOException e)
-                {
-                    Log.e(TAG, e.getMessage(), e);
-                }
+                output.close();
             }
-            if(input != null)
+            catch(IOException e)
             {
-                try
-                {
-                    input.close();
-                }
-                catch(IOException e)
-                {
-                    Log.e(TAG, e.getMessage(), e);
-                }
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
+        if(input != null)
+        {
+            try
+            {
+                input.close();
+            }
+            catch(IOException e)
+            {
+                Log.e(TAG, e.getMessage(), e);
             }
         }
     }

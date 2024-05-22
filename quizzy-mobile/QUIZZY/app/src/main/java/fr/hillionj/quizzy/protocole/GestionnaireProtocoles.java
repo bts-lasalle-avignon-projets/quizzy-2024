@@ -27,6 +27,8 @@ public class GestionnaireProtocoles
     public static final int               CODE_RECEPTION_BLUETOOTH        = 35;
     public static final int               CODE_DECONNEXION_BLUETOOTH      = 34;
     public static final int               CODE_ERREUR_CONNEXION_BLUETOOTH = 36;
+    private ActivitePrincipale activite;
+
     public static GestionnaireProtocoles  getGestionnaireProtocoles()
     {
         if(gestionnaireProtocoles == null)
@@ -34,14 +36,6 @@ public class GestionnaireProtocoles
             gestionnaireProtocoles = new GestionnaireProtocoles();
         }
         return gestionnaireProtocoles;
-    }
-
-    public void envoyerProtocole(List<Peripherique> peripheriques, Protocole protocole)
-    {
-        for(Peripherique peripherique: peripheriques)
-        {
-            peripherique.envoyer(protocole.getTrame());
-        }
     }
 
     public void traiterProtocoleEntrant(Peripherique peripherique, Protocole protocole)
@@ -64,6 +58,7 @@ public class GestionnaireProtocoles
 
     public Handler initialiserHandler(ActivitePrincipale activite)
     {
+        this.activite = activite;
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg)
@@ -72,48 +67,64 @@ public class GestionnaireProtocoles
                 switch(msg.what)
                 {
                     case CODE_CONNEXION_BLUETOOTH:
-                        if (FragmentPupitre.getVueActive() != null) {
-                            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
-                        }
-                        GestionnaireBluetooth.getGestionnaireBluetooth()
-                          .ajouterPeripheriqueConnecter((int)msg.obj);
-                        Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int) msg.obj);
-                        if(peripherique.getNom().startsWith("quizzy-p"))
-                        {
-                            Quiz.getQuizEnCours().ajouterParticipant(FragmentParametres.getParticipant(peripherique));
-                        } else if(peripherique.getNom().startsWith("quizzy-e") || peripherique.getNom().equals("CV-PC-B20-01"))
-                        {
-                            Quiz.getQuizEnCours().ajouterEcran(new Ecran(peripherique));
-                        }
+                        GestionnaireProtocoles.this.traiterConnexion(msg);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
-                        if (FragmentPupitre.getVueActive() != null) {
-                            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
-                        }
-                        Toast
-                          .makeText(activite.getApplicationContext(),
-                                    "Erreur de connexion",
-                                    Toast.LENGTH_SHORT)
-                          .show();
+                        GestionnaireProtocoles.this.traiterDeconnexion();
                         break;
                     case CODE_RECEPTION_BLUETOOTH:
-                        for(String trame: ((String)msg.obj).split("\n"))
-                        {
-                            Protocole    protocole = Protocole.traiterTrame(trame + "\n");
-                            Peripherique peripherique1 =
-                              GestionnaireBluetooth.getGestionnaireBluetooth()
-                                .getPeripheriques()
-                                .get(msg.arg1);
-                            if(protocole != null)
-                            {
-                                traiterProtocoleEntrant(peripherique1, protocole);
-                            }
-                        }
+                        GestionnaireProtocoles.this.traiterReception(msg);
                     default:
                         break;
                 }
             }
         };
         return handler;
+    }
+
+    public void setActivite(ActivitePrincipale activite) {
+        this.activite = activite;
+    }
+
+    private void traiterReception(Message msg) {
+        for(String trame: ((String) msg.obj).split("\n"))
+        {
+            Protocole    protocole = Protocole.traiterTrame(trame + "\n");
+            Peripherique peripherique1 =
+              GestionnaireBluetooth.getGestionnaireBluetooth()
+                .getPeripheriques()
+                .get(msg.arg1);
+            if(protocole != null)
+            {
+                traiterProtocoleEntrant(peripherique1, protocole);
+            }
+        }
+    }
+
+    private void traiterDeconnexion() {
+        if (FragmentPupitre.getVueActive() != null) {
+            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+        }
+        Toast
+          .makeText(activite.getApplicationContext(),
+                    "Erreur de connexion",
+                    Toast.LENGTH_SHORT)
+          .show();
+    }
+
+    private void traiterConnexion(Message msg) {
+        if (FragmentPupitre.getVueActive() != null) {
+            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+        }
+        GestionnaireBluetooth.getGestionnaireBluetooth()
+          .ajouterPeripheriqueConnecter((int) msg.obj);
+        Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int) msg.obj);
+        if(peripherique.getNom().startsWith("quizzy-p"))
+        {
+            Quiz.getQuizEnCours().ajouterParticipant(FragmentParametres.getParticipant(peripherique));
+        } else if(peripherique.getNom().startsWith("quizzy-e") || peripherique.getNom().equals("CV-PC-B20-01"))
+        {
+            Quiz.getQuizEnCours().ajouterEcran(new Ecran(peripherique));
+        }
     }
 }

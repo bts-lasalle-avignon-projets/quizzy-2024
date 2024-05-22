@@ -1,6 +1,7 @@
 package fr.hillionj.quizzy.navigation.parametres;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,14 +76,16 @@ public class FragmentParametres extends Fragment
     }
 
     public void initialiserVue(View vue) {
-        btn_associer_participant = vue.findViewById(R.id.btn_associer_participant);
-        btn_creer_participant = vue.findViewById(R.id.btn_creer_participant);
-        spinner_peripheriques_connectes = vue.findViewById(R.id.spinner_peripheriques_connectes);
-        spinner_noms_participants = vue.findViewById(R.id.spinner_noms_participants);
-        spinner_themes = vue.findViewById(R.id.spinner_themes);
-        textInput_nombre_question = vue.findViewById(R.id.textInput_nombre_question);
-        textInput_nombre_question.getEditText().setText(nombreQuestion + "");
+        initialiserInterface(vue);
 
+        initialiserBoutonAssociation();
+
+        GestionnaireBluetooth.getGestionnaireBluetooth().mettreAjourSpinnerPeripheriques(spinner_peripheriques_connectes);
+
+        initialiserSpinners();
+    }
+
+    private void initialiserBoutonAssociation() {
         btn_associer_participant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,22 +94,45 @@ public class FragmentParametres extends Fragment
                 mettreAjourNomParticipant(peripherique, nomParticipant);
             }
         });
+    }
 
-        GestionnaireBluetooth.getGestionnaireBluetooth().mettreAjourSpinnerPeripheriques(spinner_peripheriques_connectes);
+    private void initialiserInterface(View vue) {
+        btn_associer_participant = vue.findViewById(R.id.btn_associer_participant);
+        btn_creer_participant = vue.findViewById(R.id.btn_creer_participant);
+        spinner_peripheriques_connectes = vue.findViewById(R.id.spinner_peripheriques_connectes);
+        spinner_noms_participants = vue.findViewById(R.id.spinner_noms_participants);
+        spinner_themes = vue.findViewById(R.id.spinner_themes);
+        textInput_nombre_question = vue.findViewById(R.id.textInput_nombre_question);
+        textInput_nombre_question.getEditText().setText(nombreQuestion + "");
+    }
 
+    private void initialiserSpinners() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, nomsParticipants);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_noms_participants.setAdapter(adapter);
         adapter.setNotifyOnChange(true);
+        initialiserComportementSpinnerParticipants();
+
+        ArrayAdapter<String> adapterTheme = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, listeThemes);
+        adapterTheme.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_themes.setAdapter(adapterTheme);
+    }
+
+    private void initialiserComportementSpinnerParticipants() {
         spinner_peripheriques_connectes.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
                     {
                         Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int) spinner_peripheriques_connectes.getSelectedItemPosition());
-                        if (estExistant(peripherique)) {
+                        if (estExistant(peripherique) && !peripherique.getNom().equals("Aucun")) {
                             Participant participant = getParticipant(peripherique);
-                            spinner_noms_participants.setSelection(nomsParticipants.indexOf(participant.getNom()));
+                            int indiceListe = nomsParticipants.indexOf(participant.getNom());
+                            if (indiceListe < 0) {
+                                spinner_noms_participants.setSelection(0);
+                            } else {
+                                spinner_noms_participants.setSelection(nomsParticipants.indexOf(participant.getNom()));
+                            }
                         } else {
                             spinner_noms_participants.setSelection(0);
                         }
@@ -117,10 +143,6 @@ public class FragmentParametres extends Fragment
                     {
                     }
                 });
-
-        ArrayAdapter<String> adapterTheme = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, listeThemes);
-        adapterTheme.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_themes.setAdapter(adapterTheme);
     }
 
     public static int getNombreQuestion() {
@@ -161,20 +183,17 @@ public class FragmentParametres extends Fragment
                 return participant;
             }
         }
-        return new Participant(peripherique.getNom(), peripherique);
+        Participant participant = new Participant(peripherique.getNom(), peripherique);
+        participants.add(participant);
+        return participant;
     }
 
     private void mettreAjourNomParticipant(Peripherique peripherique, String nom) {
-        for (Participant participant : participants) {
-            if (participant.getPeripherique() == peripherique) {
-                if (nom.equals("Aucun")) {
-                    participants.remove(participant);
-                } else{
-                    participant.setNom(nom);
-                }
-                return;
-            }
+        Participant participant = getParticipant(peripherique);
+        if (nom.equals("Aucun")) {
+            participant.setNom(peripherique.getNom());
+        } else {
+            participant.setNom(nom);
         }
-        participants.add(new Participant(nom, peripherique));
     }
 }

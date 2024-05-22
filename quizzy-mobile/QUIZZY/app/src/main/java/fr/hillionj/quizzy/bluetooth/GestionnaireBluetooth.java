@@ -43,17 +43,10 @@ public class GestionnaireBluetooth
         gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
         if(gestionnaireBluetooth.bluetoothAdapter == null)
         {
-            Toast.makeText(activite.getApplicationContext(),
-                            "Bluetooth non activé !",
-                            Toast.LENGTH_SHORT)
-                    .show();
+            creerToast(activite, "Bluetooth non activé !");
         } else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
         {
-            Toast
-                    .makeText(activite.getApplicationContext(),
-                            "Bluetooth non activé !",
-                            Toast.LENGTH_SHORT)
-                    .show();
+            creerToast(activite, "Bluetooth non activé !");
             Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activite.startActivityForResult(activeBlueTooth, 0);
         }
@@ -62,6 +55,12 @@ public class GestionnaireBluetooth
             gestionnaireBluetooth.rechercherPeripheriquesConnus();
         }
         return gestionnaireBluetooth;
+    }
+
+    private static void creerToast(AppCompatActivity activite, String message) {
+        Toast.makeText(activite.getApplicationContext(), message,
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 
     public synchronized static GestionnaireBluetooth getGestionnaireBluetooth() {
@@ -88,6 +87,10 @@ public class GestionnaireBluetooth
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerListePeripheriques.setAdapter(adapter);
         adapter.setNotifyOnChange(true);
+        definirComportementSpinner(spinnerListePeripheriques);
+    }
+
+    private void definirComportementSpinner(Spinner spinnerListePeripheriques) {
         spinnerListePeripheriques.setOnItemSelectedListener(
           new AdapterView.OnItemSelectedListener() {
               @Override
@@ -181,35 +184,23 @@ public class GestionnaireBluetooth
 
     private boolean verifierPermissions()
     {
+        List<String> permissionsManquantes = new ArrayList<>();
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH);
+        if (!permissionsManquantes.isEmpty()) {
+            ActivityCompat.requestPermissions(activite, permissionsManquantes.toArray(new String[permissionsManquantes.size()]), 1);
+        }
+        return true;
+    }
+
+    private void verifierPermission(List<String> permissionsManquantes, String permission) {
         if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
            PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(
-              activite,
-              new String[] { Manifest.permission.BLUETOOTH_CONNECT },
-              1);
-            Log.d(TAG, "verifierPermissions() request BLUETOOTH_CONNECT");
-            // return false;
+            permissionsManquantes.add(permission);
+            Log.d(TAG, "verifierPermissions() request permission");
         }
-        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_ADMIN) !=
-           PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(activite,
-                                              new String[] { Manifest.permission.BLUETOOTH_ADMIN },
-                                              1);
-            Log.d(TAG, "verifierPermissions() request BLUETOOTH_ADMIN");
-            return false;
-        }
-        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH) !=
-           PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(activite,
-                                              new String[] { Manifest.permission.BLUETOOTH },
-                                              1);
-            Log.d(TAG, "verifierPermissions() request BLUETOOTH");
-            return false;
-        }
-        return true;
     }
 
     public Peripherique getPeripheriqueSelectionne() {

@@ -55,7 +55,7 @@ public class ActivitePrincipale extends AppCompatActivity
             BaseDeDonnees.initialiser(this);
             GestionnaireBruitage.initialiser(this);
         }
-
+        GestionnaireProtocoles.getGestionnaireProtocoles().setActivite(this);
         GestionnaireBluetooth.getGestionnaireBluetooth().setActivite(this);
     }
 
