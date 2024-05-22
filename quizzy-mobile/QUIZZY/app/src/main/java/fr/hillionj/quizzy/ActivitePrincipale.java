@@ -25,6 +25,7 @@ import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
 import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 import fr.hillionj.quizzy.questionnaire.GestionnaireBruitage;
+import fr.hillionj.quizzy.questionnaire.WatchDog;
 
 /**
  * @class EcranPrincipal
@@ -51,6 +52,7 @@ public class ActivitePrincipale extends AppCompatActivity
         initialiserActivite();
 
         if (!estInitialiser()) {
+            new WatchDog();
             initialiserCommunication();
             BaseDeDonnees.initialiser(this);
             GestionnaireBruitage.initialiser(this);

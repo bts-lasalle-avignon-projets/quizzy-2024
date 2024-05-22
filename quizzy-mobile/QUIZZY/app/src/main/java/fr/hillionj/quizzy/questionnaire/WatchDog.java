@@ -5,7 +5,10 @@ import android.util.Log;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
+import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.navigation.quiz.FragmentQuiz;
+import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused"})
 public class WatchDog {
@@ -14,8 +17,8 @@ public class WatchDog {
 
     private static final String TAG = "_WatchDog";
 
-    public WatchDog(Quiz quiz) {
-        this.quiz = quiz;
+    public WatchDog() {
+        this.quiz = Quiz.getQuizEnCours();
 
         Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(new Runnable() {
             @Override
@@ -31,6 +34,14 @@ public class WatchDog {
                 }
             }
         }, 0, 50, TimeUnit.MILLISECONDS);
+    }
+
+    private void verifierPeripheriques() {
+        for (Peripherique peripherique : GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques()) {
+            if (peripherique.estInterrompu()) {
+                peripherique.signalerInterruption();
+            }
+        }
     }
 
     public void verifierQuiz() {

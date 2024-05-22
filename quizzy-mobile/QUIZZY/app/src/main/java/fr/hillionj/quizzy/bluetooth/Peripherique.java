@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.Message;
+import android.telecom.DisconnectCause;
 import android.util.Log;
 
 import java.io.IOException;
@@ -69,6 +70,22 @@ public class Peripherique extends Thread
         return socket != null && socket.isConnected();
     }
 
+    public boolean estInterrompu() {
+        if (!estConnecte()) {
+            return false;
+        }
+        try {
+            if (receiveStream.available() == 0) {
+                receiveStream.read();
+            }
+            sendStream.write(0);
+            sendStream.flush();
+            return false;
+        } catch (IOException e) {
+        }
+        return true;
+    }
+
     public void connecter()
     {
         Log.d(TAG,
@@ -100,7 +117,7 @@ public class Peripherique extends Thread
         }.start();
     }
 
-    private void envoyerCodeAuHandler(int what, Object obj) {
+    public void envoyerCodeAuHandler(int what, Object obj) {
         envoyerCodeAuHandler(what, obj, null);
     }
 
@@ -136,7 +153,12 @@ public class Peripherique extends Thread
         }
     }
 
-    public boolean deconnecter()
+
+    public boolean deconnecter() {
+        return deconnecter(true);
+    }
+
+    public boolean deconnecter(boolean estPrevue)
     {
         Log.d(TAG,
               "deconnecter() nom = " + getNom() + " - adresse mac = " + getAdresse() +
@@ -145,7 +167,7 @@ public class Peripherique extends Thread
         {
             tReception.arreter();
             socket.close();
-            envoyerCodeAuHandler(GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH, indicePeripherique);
+            envoyerCodeAuHandler(GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH, estPrevue, indicePeripherique);
             return true;
         }
         catch(IOException e)
@@ -166,9 +188,13 @@ public class Peripherique extends Thread
         }
         catch(IOException e)
         {
-            Log.d(TAG, "envoyer() erreur send socket");
-            e.printStackTrace();
+            Log.e(TAG, "envoyer() erreur send socket", e);
+            signalerInterruption();
         }
+    }
+
+    public void signalerInterruption() {
+        deconnecter(false);
     }
 
     private class TReception extends Thread

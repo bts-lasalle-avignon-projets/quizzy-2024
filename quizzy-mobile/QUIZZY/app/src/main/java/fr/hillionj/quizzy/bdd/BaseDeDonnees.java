@@ -120,7 +120,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     }
 
     @NonNull
-    private static List<String> getPropositions(String prop1, String prop2, String prop3, String prop4) {
+    private List<String> getPropositions(String prop1, String prop2, String prop3, String prop4) {
         List<String> propositions = new ArrayList<>();
         propositions.add(prop1);
         propositions.add(prop2);

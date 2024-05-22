@@ -98,8 +98,9 @@ public class FragmentPupitre extends Fragment
         {
             mettreAjourEtatBoutons();
         }
-        else if(v.getId() == R.id.bouton_deconnecter && GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
+        else if(v.getId() == R.id.bouton_deconnecter)
         {
+            GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter();
             mettreAjourEtatBoutons();
         }
     }

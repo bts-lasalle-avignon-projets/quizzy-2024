@@ -48,11 +48,6 @@ public class Quiz
     private static final String TAG                    = "_Quiz";
     private static final Quiz   quizEnCours            = new Quiz();
 
-    public Quiz()
-    {
-        new WatchDog(this);
-    }
-
     public static Quiz getQuizEnCours()
     {
         return quizEnCours;

@@ -6,7 +6,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
@@ -15,7 +15,6 @@ import fr.hillionj.quizzy.navigation.parametres.FragmentParametres;
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 import fr.hillionj.quizzy.protocole.speciales.application.ProtocoleReceptionReponse;
 import fr.hillionj.quizzy.receveurs.speciales.Ecran;
-import fr.hillionj.quizzy.receveurs.speciales.Participant;
 import fr.hillionj.quizzy.questionnaire.Quiz;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -24,8 +23,8 @@ public class GestionnaireProtocoles
     private static final String           TAG = "_GestionnaireProtocoles";
     private static GestionnaireProtocoles gestionnaireProtocoles;
     public static final int               CODE_CONNEXION_BLUETOOTH        = 33;
-    public static final int               CODE_RECEPTION_BLUETOOTH        = 35;
     public static final int               CODE_DECONNEXION_BLUETOOTH      = 34;
+    public static final int               CODE_RECEPTION_BLUETOOTH        = 35;
     public static final int               CODE_ERREUR_CONNEXION_BLUETOOTH = 36;
     private ActivitePrincipale activite;
 
@@ -70,10 +69,14 @@ public class GestionnaireProtocoles
                         GestionnaireProtocoles.this.traiterConnexion(msg);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
-                        GestionnaireProtocoles.this.traiterDeconnexion();
+                        GestionnaireProtocoles.this.traiterErreurConnexion(msg);
                         break;
                     case CODE_RECEPTION_BLUETOOTH:
                         GestionnaireProtocoles.this.traiterReception(msg);
+                        break;
+                    case CODE_DECONNEXION_BLUETOOTH:
+                        GestionnaireProtocoles.this.traiterDeconnexion(msg);
+                        break;
                     default:
                         break;
                 }
@@ -90,26 +93,34 @@ public class GestionnaireProtocoles
         for(String trame: ((String) msg.obj).split("\n"))
         {
             Protocole    protocole = Protocole.traiterTrame(trame + "\n");
-            Peripherique peripherique1 =
+            Peripherique peripherique =
               GestionnaireBluetooth.getGestionnaireBluetooth()
                 .getPeripheriques()
                 .get(msg.arg1);
             if(protocole != null)
             {
-                traiterProtocoleEntrant(peripherique1, protocole);
+                traiterProtocoleEntrant(peripherique, protocole);
             }
         }
     }
 
-    private void traiterDeconnexion() {
+    private void traiterDeconnexion(Message msg) {
+        Log.d(TAG, msg.obj.toString());
+        boolean estPrevue = (boolean) msg.obj;
+        Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get(msg.arg1);
+        if (!estPrevue) {
+            creerToast(activite, peripherique.getNom() + " : Connexion interrompue");
+        }
+        GestionnaireBluetooth.getGestionnaireBluetooth().retirerPeripheriqueConnecter(msg.arg1);
+        Quiz.getQuizEnCours().supprimerParticipant(FragmentParametres.getParticipant(peripherique));
+    }
+
+    private void traiterErreurConnexion(Message msg) {
         if (FragmentPupitre.getVueActive() != null) {
             FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
         }
-        Toast
-          .makeText(activite.getApplicationContext(),
-                    "Erreur de connexion",
-                    Toast.LENGTH_SHORT)
-          .show();
+        Peripherique peripherique = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int) msg.obj);
+        creerToast(activite, peripherique.getNom() + " : Erreur de connexion");
     }
 
     private void traiterConnexion(Message msg) {
@@ -126,5 +137,11 @@ public class GestionnaireProtocoles
         {
             Quiz.getQuizEnCours().ajouterEcran(new Ecran(peripherique));
         }
+    }
+
+    private void creerToast(AppCompatActivity activite, String message) {
+        Toast.makeText(activite.getApplicationContext(), message,
+                        Toast.LENGTH_SHORT)
+                .show();
     }
 }

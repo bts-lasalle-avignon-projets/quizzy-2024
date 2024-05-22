@@ -43,10 +43,10 @@ public class GestionnaireBluetooth
         gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
         if(gestionnaireBluetooth.bluetoothAdapter == null)
         {
-            creerToast(activite, "Bluetooth non activé !");
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
         } else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
         {
-            creerToast(activite, "Bluetooth non activé !");
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
             Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activite.startActivityForResult(activeBlueTooth, 0);
         }
@@ -57,7 +57,7 @@ public class GestionnaireBluetooth
         return gestionnaireBluetooth;
     }
 
-    private static void creerToast(AppCompatActivity activite, String message) {
+    private void creerToast(AppCompatActivity activite, String message) {
         Toast.makeText(activite.getApplicationContext(), message,
                         Toast.LENGTH_SHORT)
                 .show();
@@ -158,6 +158,10 @@ public class GestionnaireBluetooth
         adapterPeripheriquesConnectes.add(peripheriques.get(indicePeripherique).getNom());
     }
 
+    public void retirerPeripheriqueConnecter(int indicePeripherique) {
+        adapterPeripheriquesConnectes.remove(peripheriques.get(indicePeripherique).getNom());
+    }
+
     public boolean connecter()
     {
         if(peripherique == null)
@@ -168,18 +172,13 @@ public class GestionnaireBluetooth
         return true;
     }
 
-    public boolean deconnecter()
+    public void deconnecter()
     {
         if(peripherique != null)
         {
-            boolean succesDeconnexion = peripherique.deconnecter();
-            if(succesDeconnexion)
-            {
-                adapterPeripheriquesConnectes.remove(peripherique.getNom());
-            }
-            return succesDeconnexion;
+            peripherique.deconnecter();
         }
-        return false;
+        return;
     }
 
     private boolean verifierPermissions()
