@@ -55,46 +55,45 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         verifierBaseDeDonnes();
     }
 
-    public synchronized static BaseDeDonnees getInstance()
+    private void copierOctets(InputStream input, OutputStream output) throws IOException
     {
-        return baseDeDonnees;
-    }
-
-    public synchronized static void initialiser(Context context)
-    {
-        baseDeDonnees = new BaseDeDonnees(context);
-    }
-
-    public List<Question> getQuestionnaire(int nombreQuestion)
-    {
-        return getQuestionnaire(nombreQuestion, null, -1);
-    }
-
-    public List<Question> getQuestionnaire(int nombreQuestion, String theme)
-    {
-        return getQuestionnaire(nombreQuestion, theme, -1);
-    }
-
-    public List<Question> getQuestionnaire(int nombreQuestion, int tempsParQuestion)
-    {
-        return getQuestionnaire(nombreQuestion, null, tempsParQuestion);
-    }
-
-    public List<Question> getQuestionnaire(int nombreQuestion, String theme, int tempsParQuestion)
-    {
-        String query = construireRequete(nombreQuestion, theme);
-        Cursor         curseur       = sqlite.rawQuery(query, null);
-        List<Question> listeQuestion = new ArrayList<>();
-        while(curseur.moveToNext())
+        byte[] buffer = new byte[1024];
+        int length;
+        while((length = input.read(buffer)) > 0)
         {
-            listeQuestion.add(genererQuestion(curseur, tempsParQuestion));
+            output.write(buffer, 0, length);
         }
-        curseur.close();
-        return listeQuestion;
+    }
+
+    private void fermerLesFlux(OutputStream output, InputStream input)
+    {
+        if(output != null)
+        {
+            try
+            {
+                output.close();
+            }
+            catch(IOException e)
+            {
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
+        if(input != null)
+        {
+            try
+            {
+                input.close();
+            }
+            catch(IOException e)
+            {
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
     }
 
     @NonNull
-    private String construireRequete(int nombreQuestion, String theme) {
+    private String construireRequete(int nombreQuestion, String theme)
+    {
         String query =
           "SELECT question,proposition1,proposition2,proposition3,proposition4 FROM questions";
         if(theme != null)
@@ -105,7 +104,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         return query;
     }
 
-    private Question genererQuestion(Cursor curseur, int tempsParQuestion) {
+    private Question genererQuestion(Cursor curseur, int tempsParQuestion)
+    {
         String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
         String prop1    = curseur.getString(curseur.getColumnIndexOrThrow("proposition1"));
         String prop2    = curseur.getString(curseur.getColumnIndexOrThrow("proposition2"));
@@ -120,7 +120,8 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     }
 
     @NonNull
-    private List<String> getPropositions(String prop1, String prop2, String prop3, String prop4) {
+    private List<String> getPropositions(String prop1, String prop2, String prop3, String prop4)
+    {
         List<String> propositions = new ArrayList<>();
         propositions.add(prop1);
         propositions.add(prop2);
@@ -129,7 +130,13 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         return propositions;
     }
 
-    private int getTempsReponse(int tempsParQuestion, String question, String prop1, String prop2, String prop3, String prop4) {
+    private int getTempsReponse(int    tempsParQuestion,
+                                String question,
+                                String prop1,
+                                String prop2,
+                                String prop3,
+                                String prop4)
+    {
         int tempsReponse = tempsParQuestion;
         if(tempsReponse == -1)
         {
@@ -140,6 +147,16 @@ public class BaseDeDonnees extends SQLiteOpenHelper
             }
         }
         return tempsReponse;
+    }
+
+    public synchronized static BaseDeDonnees getInstance()
+    {
+        return baseDeDonnees;
+    }
+
+    public synchronized static void initialiser(Context context)
+    {
+        baseDeDonnees = new BaseDeDonnees(context);
     }
 
     public List<String> getThemes()
@@ -189,47 +206,13 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         try
         {
             new File(QUIZZY_CHEMIN).mkdirs();
-            input         = new BufferedInputStream(source);
-            output        = new BufferedOutputStream(new FileOutputStream(destination));
+            input  = new BufferedInputStream(source);
+            output = new BufferedOutputStream(new FileOutputStream(destination));
             copierOctets(input, output);
         }
         finally
         {
             fermerLesFlux(output, input);
-        }
-    }
-
-    private void copierOctets(InputStream input, OutputStream output) throws IOException {
-        byte[] buffer = new byte[1024];
-        int length;
-        while((length = input.read(buffer)) > 0)
-        {
-            output.write(buffer, 0, length);
-        }
-    }
-
-    private void fermerLesFlux(OutputStream output, InputStream input) {
-        if(output != null)
-        {
-            try
-            {
-                output.close();
-            }
-            catch(IOException e)
-            {
-                Log.e(TAG, e.getMessage(), e);
-            }
-        }
-        if(input != null)
-        {
-            try
-            {
-                input.close();
-            }
-            catch(IOException e)
-            {
-                Log.e(TAG, e.getMessage(), e);
-            }
         }
     }
 
@@ -247,5 +230,33 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         curseur.close();
 
         return listeParticipants;
+    }
+
+    public List<Question> getQuestionnaire(int nombreQuestion)
+    {
+        return getQuestionnaire(nombreQuestion, null, -1);
+    }
+
+    public List<Question> getQuestionnaire(int nombreQuestion, String theme)
+    {
+        return getQuestionnaire(nombreQuestion, theme, -1);
+    }
+
+    public List<Question> getQuestionnaire(int nombreQuestion, int tempsParQuestion)
+    {
+        return getQuestionnaire(nombreQuestion, null, tempsParQuestion);
+    }
+
+    public List<Question> getQuestionnaire(int nombreQuestion, String theme, int tempsParQuestion)
+    {
+        String         query         = construireRequete(nombreQuestion, theme);
+        Cursor         curseur       = sqlite.rawQuery(query, null);
+        List<Question> listeQuestion = new ArrayList<>();
+        while(curseur.moveToNext())
+        {
+            listeQuestion.add(genererQuestion(curseur, tempsParQuestion));
+        }
+        curseur.close();
+        return listeQuestion;
     }
 }

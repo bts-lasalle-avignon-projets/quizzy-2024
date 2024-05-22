@@ -39,26 +39,10 @@ public class FragmentQuiz extends Fragment
     private ArrayAdapter<String> adapterListeParticipants = null;
 
     private static final String TAG = "_FragmentQuiz";
-    public static FragmentQuiz  getVueActive()
-    {
-        return vueActive;
-    }
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup               container,
-                             Bundle                  savedInstanceState)
-    {
-        View root = initialiserVue(inflater, container);
-        Log.d(TAG, "CREATE");
-        mettreAjourEtatBoutons();
-        mettreAjourDeroulement();
-
-        assicierBoutonsEtFonctionalites();
-        return root;
-    }
 
     @NonNull
-    private View initialiserVue(@NonNull LayoutInflater inflater, ViewGroup container) {
+    private View initialiserVue(@NonNull LayoutInflater inflater, ViewGroup container)
+    {
         ModeleQuiz homeViewModel = new ViewModelProvider(this).get(ModeleQuiz.class);
 
         binding   = FragmentHomeBinding.inflate(inflater, container, false);
@@ -72,14 +56,16 @@ public class FragmentQuiz extends Fragment
         return root;
     }
 
-    private void assicierBoutonsEtFonctionalites() {
+    private void assicierBoutonsEtFonctionalites()
+    {
         associerBoutonDemarrer();
         associerBoutonAbandonner();
         associerBoutonPause();
         associerBoutonReinitialiser();
     }
 
-    private void associerBoutonReinitialiser() {
+    private void associerBoutonReinitialiser()
+    {
         btnReinitialiser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -90,7 +76,8 @@ public class FragmentQuiz extends Fragment
         });
     }
 
-    private void associerBoutonPause() {
+    private void associerBoutonPause()
+    {
         btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -101,7 +88,8 @@ public class FragmentQuiz extends Fragment
         });
     }
 
-    private void associerBoutonAbandonner() {
+    private void associerBoutonAbandonner()
+    {
         btnAbandonnerQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -112,7 +100,8 @@ public class FragmentQuiz extends Fragment
         });
     }
 
-    private void associerBoutonDemarrer() {
+    private void associerBoutonDemarrer()
+    {
         btnLancerQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -125,14 +114,16 @@ public class FragmentQuiz extends Fragment
         });
     }
 
-    private void initialiserBoutons(View root) {
-        btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
-        btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
-        btnPauseQuiz       = root.findViewById(R.id.btn_pause);
-        btnReinitialiser   = root.findViewById(R.id.btn_reinitialiser);
+    private void initialiserBoutons(View root)
+    {
+        btnLancerQuiz     = root.findViewById(R.id.btn_lancer);
+        btnAbandonnerQuiz = root.findViewById(R.id.btn_arreter);
+        btnPauseQuiz      = root.findViewById(R.id.btn_pause);
+        btnReinitialiser  = root.findViewById(R.id.btn_reinitialiser);
     }
 
-    private void initialiserListeParticipants(View root) {
+    private void initialiserListeParticipants(View root)
+    {
         liste_participants = root.findViewById(R.id.liste_participants);
         if(this.adapterListeParticipants == null)
         {
@@ -141,7 +132,8 @@ public class FragmentQuiz extends Fragment
         }
     }
 
-    private void initialiserAffichage(View root) {
+    private void initialiserAffichage(View root)
+    {
         liste_participants.setAdapter(this.adapterListeParticipants);
         question         = root.findViewById(R.id.question);
         barreProgression = root.findViewById(R.id.barreProgression);
@@ -153,20 +145,8 @@ public class FragmentQuiz extends Fragment
         propositions.add(root.findViewById(R.id.reponse4));
     }
 
-    public void mettreAjoutListeParticipants()
+    private void ajouterSuffixeAuxParticipants(List<Participant> liste)
     {
-        Quiz quiz = Quiz.getQuizEnCours();
-        if(quiz.estTermine())
-        {
-            adapterListeParticipants.clear();
-            return;
-        }
-        List<Participant> liste = quiz.getParticipants();
-        verifierTailleListeParticipants(quiz, liste);
-        ajouterSuffixeAuxParticipants(liste);
-    }
-
-    private void ajouterSuffixeAuxParticipants(List<Participant> liste) {
         for(int i = 0; i < liste.size(); i++)
         {
             Participant participantAssocie = liste.get(i);
@@ -189,7 +169,8 @@ public class FragmentQuiz extends Fragment
         }
     }
 
-    private void verifierTailleListeParticipants(Quiz quiz, List<Participant> liste) {
+    private void verifierTailleListeParticipants(Quiz quiz, List<Participant> liste)
+    {
         if(adapterListeParticipants.getCount() != quiz.getParticipants().size())
         {
             adapterListeParticipants.clear();
@@ -198,6 +179,85 @@ public class FragmentQuiz extends Fragment
                 adapterListeParticipants.add(participant.getNom());
             }
         }
+    }
+
+    private void effacerQuestionEtPropositions()
+    {
+        question.setText("");
+        for(TextView proposition: propositions)
+        {
+            proposition.setText("");
+            proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
+        }
+    }
+
+    private void mettreAjourPropositions(Question questionEnCours)
+    {
+        List<String> propositionsEnCours = questionEnCours.getReponses();
+        int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
+        for(int i = 0; i < propositionsEnCours.size(); i++)
+        {
+            propositions.get(i).setText(propositionsEnCours.get(i));
+            if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() &&
+               Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
+            }
+            else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
+            }
+            else
+            {
+                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
+            }
+        }
+    }
+
+    private void setCouleur(int color)
+    {
+        barreProgression.getProgressDrawable().setColorFilter(
+          color,
+          android.graphics.PorterDuff.Mode.SRC_IN);
+    }
+
+    private int getProgression()
+    {
+        long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
+        if(heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort())
+        {
+            return 0;
+        }
+        double tempsProgressionSecondes = Quiz.getQuizEnCours().getTempsQuestionEnCours();
+        int    pourcentageProgression =
+          (int)(tempsProgressionSecondes /
+                (double)Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
+        return pourcentageProgression;
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    public static FragmentQuiz getVueActive()
+    {
+        return vueActive;
+    }
+
+    public void mettreAjoutListeParticipants()
+    {
+        Quiz quiz = Quiz.getQuizEnCours();
+        if(quiz.estTermine())
+        {
+            adapterListeParticipants.clear();
+            return;
+        }
+        List<Participant> liste = quiz.getParticipants();
+        verifierTailleListeParticipants(quiz, liste);
+        ajouterSuffixeAuxParticipants(liste);
     }
 
     public void mettreAjourEtatBoutons()
@@ -235,35 +295,17 @@ public class FragmentQuiz extends Fragment
         mettreAjoutListeParticipants();
     }
 
-    private void effacerQuestionEtPropositions() {
-        question.setText("");
-        for(TextView proposition: propositions)
-        {
-            proposition.setText("");
-            proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
-        }
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup               container,
+                             Bundle                  savedInstanceState)
+    {
+        View root = initialiserVue(inflater, container);
+        Log.d(TAG, "CREATE");
+        mettreAjourEtatBoutons();
+        mettreAjourDeroulement();
 
-
-    private void mettreAjourPropositions(Question questionEnCours) {
-        List<String> propositionsEnCours = questionEnCours.getReponses();
-        int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
-        for(int i = 0; i < propositionsEnCours.size(); i++)
-        {
-            propositions.get(i).setText(propositionsEnCours.get(i));
-            if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort() && Quiz.getQuizEnCours().getEtape() == EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE)
-            {
-                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
-            }
-            else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
-            {
-                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
-            }
-            else
-            {
-                propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
-            }
-        }
+        assicierBoutonsEtFonctionalites();
+        return root;
     }
 
     public void mettreAjourBarreDeProgression()
@@ -272,7 +314,8 @@ public class FragmentQuiz extends Fragment
         {
             setCouleur(Color.GRAY);
             barreProgression.setProgress(0);
-        } else if(Quiz.getQuizEnCours().estTempsMort())
+        }
+        else if(Quiz.getQuizEnCours().estTempsMort())
         {
             setCouleur(Color.RED);
         }
@@ -287,33 +330,8 @@ public class FragmentQuiz extends Fragment
         }
     }
 
-    private void setCouleur(int color) {
-        barreProgression.getProgressDrawable().setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN);
-    }
-
     public ProgressBar getBarreProgression()
     {
         return barreProgression;
-    }
-
-    private int getProgression()
-    {
-        long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
-        if(heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort())
-        {
-            return 0;
-        }
-        double tempsProgressionSecondes = Quiz.getQuizEnCours().getTempsQuestionEnCours();
-        int    pourcentageProgression =
-          (int)(tempsProgressionSecondes /
-                (double)Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
-        return pourcentageProgression;
-    }
-
-    @Override
-    public void onDestroyView()
-    {
-        super.onDestroyView();
-        binding = null;
     }
 }

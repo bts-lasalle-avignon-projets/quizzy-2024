@@ -23,28 +23,81 @@ import java.util.List;
 
 import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
 
-@SuppressWarnings({ "SpellCheckingInspection", "unused" , "MissingPermission"})
+@SuppressWarnings({ "SpellCheckingInspection", "unused", "MissingPermission" })
 public class GestionnaireBluetooth
 {
+    private Handler           handler          = null;
+    private BluetoothAdapter  bluetoothAdapter = null;
+    private Peripherique      peripherique;
+    private AppCompatActivity activite;
+
+    private static final List<Peripherique> peripheriques              = new ArrayList<>();
+    private static final List<String>    noms                          = new ArrayList<>();
+    private static ArrayAdapter<String>  adapterPeripheriquesConnectes = null;
     private static final String          TAG = "_GestionnaireBluetooth"; //!< TAG pour les logs
     private static GestionnaireBluetooth gestionnaireBluetooth = null;
-    private Handler                      handler               = null;
-    private BluetoothAdapter             bluetoothAdapter      = null;
-    private Peripherique                 peripherique;
-    private static final List<Peripherique> peripheriques             = new ArrayList<>();
-    private static final List<String>   noms                          = new ArrayList<>();
-    private static ArrayAdapter<String> adapterPeripheriquesConnectes = null;
-    private AppCompatActivity    activite;
 
-    public synchronized static GestionnaireBluetooth initialiser(
-      AppCompatActivity activite,
-      Handler           handler)
+    private void creerToast(AppCompatActivity activite, String message)
+    {
+        Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void definirComportementSpinner(Spinner spinnerListePeripheriques)
+    {
+        spinnerListePeripheriques.setOnItemSelectedListener(
+          new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+              {
+                  peripherique = peripheriques.get(position);
+                  if(FragmentPupitre.getVueActive() != null)
+                  {
+                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+                  }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0)
+              {
+              }
+          });
+    }
+
+    private boolean verifierPermissions()
+    {
+        List<String> permissionsManquantes = new ArrayList<>();
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH);
+        if(!permissionsManquantes.isEmpty())
+        {
+            ActivityCompat.requestPermissions(
+              activite,
+              permissionsManquantes.toArray(new String[permissionsManquantes.size()]),
+              1);
+        }
+        return true;
+    }
+
+    private void verifierPermission(List<String> permissionsManquantes, String permission)
+    {
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            permissionsManquantes.add(permission);
+            Log.d(TAG, "verifierPermissions() request permission");
+        }
+    }
+
+    public synchronized static GestionnaireBluetooth initialiser(AppCompatActivity activite,
+                                                                 Handler           handler)
     {
         gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
         if(gestionnaireBluetooth.bluetoothAdapter == null)
         {
             gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
-        } else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
+        }
+        else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
         {
             gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
             Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -57,13 +110,8 @@ public class GestionnaireBluetooth
         return gestionnaireBluetooth;
     }
 
-    private void creerToast(AppCompatActivity activite, String message) {
-        Toast.makeText(activite.getApplicationContext(), message,
-                        Toast.LENGTH_SHORT)
-                .show();
-    }
-
-    public synchronized static GestionnaireBluetooth getGestionnaireBluetooth() {
+    public synchronized static GestionnaireBluetooth getGestionnaireBluetooth()
+    {
         return gestionnaireBluetooth;
     }
 
@@ -83,42 +131,26 @@ public class GestionnaireBluetooth
 
     public void mettreAjourSpinnerPeripheriques(Spinner spinnerListePeripheriques)
     {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
+        ArrayAdapter<String> adapter =
+          new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerListePeripheriques.setAdapter(adapter);
         adapter.setNotifyOnChange(true);
         definirComportementSpinner(spinnerListePeripheriques);
     }
 
-    private void definirComportementSpinner(Spinner spinnerListePeripheriques) {
-        spinnerListePeripheriques.setOnItemSelectedListener(
-          new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
-              {
-                  peripherique = peripheriques.get(position);
-                  if (FragmentPupitre.getVueActive() != null) {
-                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
-                  }
-              }
-
-              @Override
-              public void onNothingSelected(AdapterView<?> arg0)
-              {
-              }
-          });
-    }
-
     public void mettreAjourListViewPeripheriques(ListView listViewPeripheriquesConnectes)
     {
         if(this.adapterPeripheriquesConnectes == null)
         {
-            this.adapterPeripheriquesConnectes = new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
+            this.adapterPeripheriquesConnectes =
+              new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
         }
         listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
     }
 
-    public void setActivite(AppCompatActivity activite) {
+    public void setActivite(AppCompatActivity activite)
+    {
         this.activite = activite;
     }
 
@@ -158,7 +190,8 @@ public class GestionnaireBluetooth
         adapterPeripheriquesConnectes.add(peripheriques.get(indicePeripherique).getNom());
     }
 
-    public void retirerPeripheriqueConnecter(int indicePeripherique) {
+    public void retirerPeripheriqueConnecter(int indicePeripherique)
+    {
         adapterPeripheriquesConnectes.remove(peripheriques.get(indicePeripherique).getNom());
     }
 
@@ -181,28 +214,8 @@ public class GestionnaireBluetooth
         return;
     }
 
-    private boolean verifierPermissions()
+    public Peripherique getPeripheriqueSelectionne()
     {
-        List<String> permissionsManquantes = new ArrayList<>();
-        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
-        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
-        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH);
-        if (!permissionsManquantes.isEmpty()) {
-            ActivityCompat.requestPermissions(activite, permissionsManquantes.toArray(new String[permissionsManquantes.size()]), 1);
-        }
-        return true;
-    }
-
-    private void verifierPermission(List<String> permissionsManquantes, String permission) {
-        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
-           PackageManager.PERMISSION_GRANTED)
-        {
-            permissionsManquantes.add(permission);
-            Log.d(TAG, "verifierPermissions() request permission");
-        }
-    }
-
-    public Peripherique getPeripheriqueSelectionne() {
         return peripherique;
     }
 

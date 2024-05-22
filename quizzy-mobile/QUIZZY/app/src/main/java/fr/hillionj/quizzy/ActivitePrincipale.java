@@ -37,7 +37,7 @@ public class ActivitePrincipale extends AppCompatActivity
 {
     private static final String TAG = "_ActivitePrincipale"; //!< TAG pour les logs (cf. Logcat)
 
-    private ActivityMainBinding   binding;
+    private ActivityMainBinding binding;
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -51,7 +51,8 @@ public class ActivitePrincipale extends AppCompatActivity
 
         initialiserActivite();
 
-        if (!estInitialiser()) {
+        if(!estInitialiser())
+        {
             new WatchDog();
             initialiserCommunication();
             BaseDeDonnees.initialiser(this);
@@ -136,11 +137,13 @@ public class ActivitePrincipale extends AppCompatActivity
 
     private void initialiserCommunication()
     {
-        Handler handler = GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
+        Handler handler =
+          GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
         GestionnaireBluetooth.initialiser(this, handler);
     }
 
-    public boolean estInitialiser() {
+    public boolean estInitialiser()
+    {
         return GestionnaireBluetooth.getGestionnaireBluetooth() != null;
     }
 }
