@@ -4,7 +4,7 @@
 
 # Le projet QUIZZY 2024 (Version 0.2)
 
-- [Le projet QUIZZY 2024](#le-projet-quizzy-2024)
+- [Le projet QUIZZY 2024 (Version 0.2)](#le-projet-quizzy-2024-version-02)
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
     - [Android](#android)
@@ -29,13 +29,17 @@
     - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
       - [Page de gestion du quiz](#page-de-gestion-du-quiz)
       - [Page d'association des pupitres](#page-dassociation-des-pupitres)
+      - [Page de paramétrage du quiz](#page-de-paramétrage-du-quiz)
     - [Interface participant (Écran)](#interface-participant-écran)
       - [Vue de déroulement du quiz](#vue-de-déroulement-du-quiz)
       - [Vue d'attente de participants](#vue-dattente-de-participants)
   - [Historique des versions](#historique-des-versions)
-    - [Version 0.1](#version-01)
+    - [Version 0.2](#version-02)
       - [Tablette](#tablette)
       - [Écran](#écran)
+    - [Version 0.1](#version-01)
+      - [Tablette](#tablette-1)
+      - [Écran](#écran-1)
   - [Recette](#recette)
   - [Auteurs](#auteurs)
 
@@ -147,6 +151,8 @@ Nom des périphériques Bluetooth :
 |------|--------|-------------|---------|
 | Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n`<br>Acquitter toutes les trames de l’évaluateur|
 | Acquitter | `$A\n`| Acquitter toutes les trames de l’évaluateur | `$A\n` |
+
+| Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms <br> si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n` |
 
 ## Screenshots
 
