@@ -6,15 +6,11 @@
 
 - [Le projet QUIZZY 2024 (Version 0.2)](#le-projet-quizzy-2024-version-02)
   - [Présentation](#présentation)
-  - [Fonctionnalités](#fonctionnalités)
-    - [Android](#android)
-    - [Ecran](#ecran)
+  - [Recette](#recette)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
     - [Itération 3](#itération-3)
-  - [Tickets Jira](#tickets-jira)
-  - [Documentation du code](#documentation-du-code)
   - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
     - [Quizzy-mobile (Java/Android)](#quizzy-mobile-javaandroid)
     - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt)
@@ -27,14 +23,7 @@
     - [Pupitre -\> Évaluateur](#pupitre---évaluateur)
   - [Screenshots](#screenshots)
     - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
-      - [Page de gestion du quiz](#page-de-gestion-du-quiz)
-      - [Page d'association des pupitres](#page-dassociation-des-pupitres)
-      - [Page de paramétrage du quiz](#page-de-paramétrage-du-quiz)
     - [Interface participant (Écran)](#interface-participant-écran)
-      - [GIF](#gif)
-      - [Vue d'attente de participants](#vue-dattente-de-participants)
-      - [Vue de déroulement du quiz](#vue-de-déroulement-du-quiz)
-      - [Vue des résultats](#vue-des-résultats)
   - [Historique des versions](#historique-des-versions)
     - [Version 0.2](#version-02)
       - [Tablette](#tablette)
@@ -42,7 +31,7 @@
     - [Version 0.1](#version-01)
       - [Tablette](#tablette-1)
       - [Écran](#écran-1)
-  - [Recette](#recette)
+  - [Documentation du code](#documentation-du-code)
   - [Auteurs](#auteurs)
 
 ---
@@ -57,17 +46,17 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ![Presentatation système](images/Presentation.png)
 
-## Fonctionnalités
+## Recette
 
-### Android
-
-- Se connecter à un périphérique Bluetooth (pupitre)
-- Emettre une requête vers un périphérique Bluetooth (pupitre)
-- Recevoir une trame d'un périphérique Bluetooth (pupitre)
-
-### Ecran
-
-- Afficher les différentes fenêtres
+| Fonctionalités                | A faire | En cours | Terminé |
+|-------------------------------|:-------:|:--------:|:-------:|
+| Appairage Bluetooth           |         |          |    X    |
+| Décodage des trames           |         |          |    X    |
+| Envoi de trames               |         |          |    X    |
+| Intéraction BDD               |         |          |    X    |
+| Gestion du chronomètre        |         |          |    X    |
+| Afficher déroulement du quiz  |         |    X     |         |
+| Sauvegarde des résultats      |         |    X     |         |
 
 ## Itérations
 
@@ -78,6 +67,8 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Afficher les questions** : Les questions sont affichées à l’utilisateur.
 - **Afficher les propositions** de réponse :Afficher les 4 propositions de réponse.
 
+![Tickets Jira](images/Jira_v0.1.png)
+
 ### Itération 2
 
 - **Paramétrage partie** : L’utilisateur peut paramétrer sa partie.
@@ -85,18 +76,15 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Gestion de chronomètre** : Un chronomètre est mis en place pour limiter le temps de réponse.
 - **Affichage chronomètre** : Le chronomètre est affiché à l’utilisateur.
 
-### Itération 3
-
-- **Afficher statistiques** : Les statistiques de l’utilisateur sont affichées.
-- **Sauvegarde statistiques** : Les statistiques de l’utilisateur sont sauvegardées pour une utilisation future.
-
-## Tickets Jira
-
 ![Tickets Jira](images/Jira_v0.2.png)
 
-## Documentation du code
+### Itération 3
 
-https://btssn-lasalle-84.github.io/quizzy-2024/
+- **Afficher les statistiques** : Les statistiques de l’utilisateur sont affichées.
+- **Sauvegarder les statistiques** : Les statistiques de l’utilisateur sont sauvegardées pour une utilisation future.
+- **Configurer le mode kiosk** : La configuration de la Raspberry Pi en mode kiosk
+- **Effectuer plusieurs quiz** : La possibilité d'enchaîner plusieurs quiz
+- **Mettre en forme l'affichage** : La mise en forme pour un grand écran
 
 ## Diagramme de cas d'utilisation
 
@@ -160,47 +148,23 @@ Nom des périphériques Bluetooth :
 
 ### Interface Évaluateur (Tablette)
 
-#### Page de gestion du quiz
+![Gif Quiz Mobile](images/screenshot-quizzy-mobile.gif)
 
-- Cette page permet de visualiser le quiz en cours et d'influencer son déroulement
+Les différentes vues :
 
-![Page Quiz](images/Android_v0.2_quiz.png)
-
-#### Page d'association des pupitres
-
-- Cette page permet de connecter un ou plusieurs périphériques écran ou pupitre
-
-![Page Pupitre](images/Android_v0.2_pupitre.png)
-
-#### Page de paramétrage du quiz
-
-- Cette page permet de sélectionner un thème pour le quiz à générer, le nombre de questions et d'associé chaque participant à un profil (nom + score)
-
-![Page Pupitre](images/Android_v0.2_parametres.png)
+- visualisation du quiz en cours en pouvant gérer son déroulement
+- connexion d'un ou plusieurs périphériques écran ou pupitre
+- sélection d'un thème pour le quiz à générer, le nombre de questions et association d'un participant à un profil (nom + score)
 
 ### Interface participant (Écran)
 
-#### GIF
+![Gif Quiz Desktop](images/screenshot-quizzy-desktop.gif)
 
-![Gif Quiz](images/screenshot-quizzy.gif)
+Les différentes vues :
 
-#### Vue d'attente de participants
-
-- Cette vue permet d'afficher la liste des participants en attente du démarrage du quiz
-
-![Page Quiz](images/Qt_v0.2_attente.png)
-
-#### Vue de déroulement du quiz
-
-- Cette vue permet d'afficher le déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
-
-![Page Quiz](images/Qt_v0.2_quiz.png)
-
-#### Vue des résultats
-
-- Cette vue permet d'afficher les résultats des participants
-
-![Page Quiz](images/Qt_v0.2_resultats.png)
+- affichage de la liste des participants en attente du démarrage du quiz
+- affichage du déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
+- affichage des résultats des participants
 
 ## Historique des versions
 
@@ -240,17 +204,9 @@ Nom des périphériques Bluetooth :
 
 - Afficher disposition des fenêtres
 
-## Recette
+## Documentation du code
 
-| Fonctionalités                | A faire | En cours | Terminé |
-|-------------------------------|:-------:|:--------:|:-------:|
-| Appairage Bluetooth           |         |          |    X    |
-| Décodage des trames           |         |          |    X    |
-| Envoi de trames               |         |          |    X    |
-| Intéraction BDD               |         |          |    X    |
-| Gestion du chronomètre        |         |          |    X    |
-| Afficher déroulement du quiz  |         |    X     |         |
-| Sauvegarde des résultats      |         |    X     |         |
+https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ## Auteurs
 
