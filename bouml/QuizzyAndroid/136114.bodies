@@ -1,0 +1,149 @@
+class FragmentParametres
+!!!143538.java!!!	getNomsParticipants() : List<String>
+        List<String> nomsParticipants = new ArrayList<>();
+        nomsParticipants.add("Aucun");
+        nomsParticipants.addAll(BaseDeDonnees.getInstance().getNomsParticipants());
+        return nomsParticipants;
+!!!143666.java!!!	getThemes() : List<String>
+        List<String> listeThemes = new ArrayList<>();
+        listeThemes.add("Aléatoire");
+        listeThemes.addAll(BaseDeDonnees.getInstance().getThemes());
+        return listeThemes;
+!!!143794.java!!!	initialiserBoutonAssociation() : void
+        btn_associer_participant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                String       nomParticipant = (String)spinner_noms_participants.getSelectedItem();
+                Peripherique peripherique =
+                  GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get(
+                    (int)spinner_peripheriques_connectes.getSelectedItemPosition());
+                mettreAjourNomParticipant(peripherique, nomParticipant);
+            }
+        });
+!!!143922.java!!!	initialiserInterface(inout vue : View) : void
+        btn_associer_participant        = vue.findViewById(R.id.btn_associer_participant);
+        btn_creer_participant           = vue.findViewById(R.id.btn_creer_participant);
+        spinner_peripheriques_connectes = vue.findViewById(R.id.spinner_peripheriques_connectes);
+        spinner_noms_participants       = vue.findViewById(R.id.spinner_noms_participants);
+        spinner_themes                  = vue.findViewById(R.id.spinner_themes);
+        textInput_nombre_question       = vue.findViewById(R.id.textInput_nombre_question);
+        textInput_nombre_question.getEditText().setText(nombreQuestion + "");
+!!!144050.java!!!	initialiserSpinners() : void
+        ArrayAdapter<String> adapter =
+          new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, nomsParticipants);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_noms_participants.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
+        initialiserComportementSpinnerParticipants();
+
+        ArrayAdapter<String> adapterTheme =
+          new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, listeThemes);
+        adapterTheme.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_themes.setAdapter(adapterTheme);
+!!!144178.java!!!	initialiserComportementSpinnerParticipants() : void
+        spinner_peripheriques_connectes.setOnItemSelectedListener(
+          new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+              {
+                  Peripherique peripherique =
+                    GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get(
+                      (int)spinner_peripheriques_connectes.getSelectedItemPosition());
+                  if(estExistant(peripherique) && !peripherique.getNom().equals("Aucun"))
+                  {
+                      Participant participant = getParticipant(peripherique);
+                      int         indiceListe = nomsParticipants.indexOf(participant.getNom());
+                      if(indiceListe < 0)
+                      {
+                          spinner_noms_participants.setSelection(0);
+                      }
+                      else
+                      {
+                          spinner_noms_participants.setSelection(
+                            nomsParticipants.indexOf(participant.getNom()));
+                      }
+                  }
+                  else
+                  {
+                      spinner_noms_participants.setSelection(0);
+                  }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0)
+              {
+              }
+          });
+!!!144306.java!!!	mettreAjourNomParticipant(inout peripherique : Peripherique, in nom : String) : void
+        Participant participant = getParticipant(peripherique);
+        if(nom.equals("Aucun"))
+        {
+            participant.setNom(peripherique.getNom());
+        }
+        else
+        {
+            participant.setNom(nom);
+        }
+!!!144434.java!!!	getNombreQuestion() : int
+        return nombreQuestion;
+!!!144562.java!!!	getThemeChoisi() : String
+        if(vueActive == null || vueActive.spinner_themes.getSelectedItemPosition() == 0)
+        {
+            return null;
+        }
+        return (String)vueActive.spinner_themes.getSelectedItem();
+!!!144690.java!!!	onDestroyView() : void
+        try
+        {
+            nombreQuestion =
+              Integer.parseInt(textInput_nombre_question.getEditText().getText().toString());
+        }
+        catch(Exception e)
+        {
+            nombreQuestion = 20;
+        }
+        super.onDestroyView();
+        binding = null;
+!!!144818.java!!!	estExistant(inout peripherique : Peripherique) : boolean
+        for(Participant participant: participants)
+        {
+            if(participant.getPeripherique() == peripherique)
+            {
+                return true;
+            }
+        }
+        return false;
+!!!144946.java!!!	getParticipant(inout peripherique : Peripherique) : Participant
+        for(Participant participant: participants)
+        {
+            if(participant.getPeripherique() == peripherique)
+            {
+                return participant;
+            }
+        }
+        Participant participant = new Participant(peripherique.getNom(), peripherique);
+        participants.add(participant);
+        return participant;
+!!!145074.java!!!	getVueActive() : FragmentParametres
+        return vueActive;
+!!!145202.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModeleParametres notificationsViewModel =
+          new ViewModelProvider(this).get(ModeleParametres.class);
+
+        binding   = FragmentNotificationsBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        vueActive = this;
+        initialiserVue(root);
+
+        return root;
+!!!145330.java!!!	initialiserVue(inout vue : View) : void
+        initialiserInterface(vue);
+
+        initialiserBoutonAssociation();
+
+        GestionnaireBluetooth.getGestionnaireBluetooth().mettreAjourSpinnerPeripheriques(
+          spinner_peripheriques_connectes);
+
+        initialiserSpinners();

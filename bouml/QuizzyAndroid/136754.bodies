@@ -1,0 +1,62 @@
+class FragmentPupitre
+!!!145586.java!!!	getVueActive() : FragmentPupitre
+        return vueActive;
+!!!145714.java!!!	initialiserBoutons(inout vue : View) : void
+        btnConnecter   = initialiserBouton(vue, R.id.bouton_connecter);
+        btnDeconnecter = initialiserBouton(vue, R.id.bouton_deconnecter);
+!!!145842.java!!!	initialiserBouton(inout vue : View, in bouton_connecter : int) : Button
+        Button bouton = vue.findViewById(bouton_connecter);
+        bouton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentPupitre.this.onClick(v);
+            }
+        });
+        return bouton;
+!!!145970.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModelePupitre dashboardViewModel = new ViewModelProvider(this).get(ModelePupitre.class);
+        binding   = FragmentDashboardBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        vueActive = this;
+        initialiserVue(root);
+        return root;
+!!!146098.java!!!	initialiserVue(inout vue : View) : void
+        initialiserBoutons(vue);
+        spinnerListePeripheriques      = vue.findViewById(R.id.liste_peripheriques);
+        listViewPeripheriquesConnectes = vue.findViewById(R.id.listViewPeripheriquesConnectes);
+
+        GestionnaireBluetooth gestionnaireBluetooth =
+          GestionnaireBluetooth.getGestionnaireBluetooth();
+        gestionnaireBluetooth.mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
+        gestionnaireBluetooth.mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
+!!!146226.java!!!	onDestroyView() : void
+        super.onDestroyView();
+        binding = null;
+!!!146354.java!!!	mettreAjourEtatBoutons() : void
+        Peripherique peripheriqueSelectionne =
+          GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriqueSelectionne();
+        if(peripheriqueSelectionne.estConnecte())
+        {
+            btnConnecter.setEnabled(false);
+            btnDeconnecter.setEnabled(true);
+            spinnerListePeripheriques.setEnabled(true);
+        }
+        else
+        {
+            btnConnecter.setEnabled(true);
+            btnDeconnecter.setEnabled(false);
+            spinnerListePeripheriques.setEnabled(true);
+        }
+!!!146482.java!!!	onClick(inout v : View) : void
+        if(v.getId() == R.id.bouton_connecter &&
+           GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
+        {
+            mettreAjourEtatBoutons();
+        }
+        else if(v.getId() == R.id.bouton_deconnecter)
+        {
+            GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter();
+            mettreAjourEtatBoutons();
+        }

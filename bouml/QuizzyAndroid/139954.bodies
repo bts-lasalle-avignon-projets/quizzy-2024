@@ -1,0 +1,49 @@
+class GestionnaireBruitage
+!!!162354.java!!!	initialiser(inout activite : AppCompatActivity) : void
+        gestionnaireBruitage = new GestionnaireBruitage();
+
+        gestionnaireBruitage.bonne_reponse = MediaPlayer.create(activite, R.raw.bonne_reponse);
+        gestionnaireBruitage.mauvaise_reponse =
+          MediaPlayer.create(activite, R.raw.mauvaise_reponse);
+        gestionnaireBruitage.nouvelle_question =
+          MediaPlayer.create(activite, R.raw.nouvelle_question);
+        gestionnaireBruitage.reponses_vraies_et_fausses =
+          MediaPlayer.create(activite, R.raw.reponses_vraies_et_fausses);
+        gestionnaireBruitage.selection_reponse =
+          MediaPlayer.create(activite, R.raw.selection_reponse);
+!!!162482.java!!!	getGestionnaireBruitage() : GestionnaireBruitage
+        return gestionnaireBruitage;
+!!!162610.java!!!	jouerBonneReponse() : void
+        bonne_reponse.start();
+!!!162738.java!!!	jouerMauvaiseReponse() : void
+        mauvaise_reponse.start();
+!!!162866.java!!!	jouerReponsesVaries() : void
+        reponses_vraies_et_fausses.start();
+!!!162994.java!!!	jouerNouvelleQuestion() : void
+        nouvelle_question.start();
+!!!163122.java!!!	jouerSelectionReponse() : void
+        selection_reponse.start();
+!!!179250.java!!!	initialiser(inout activite : AppCompatActivity) : void
+        gestionnaireBruitage = new GestionnaireBruitage();
+
+        gestionnaireBruitage.bonne_reponse = MediaPlayer.create(activite, R.raw.bonne_reponse);
+        gestionnaireBruitage.mauvaise_reponse =
+          MediaPlayer.create(activite, R.raw.mauvaise_reponse);
+        gestionnaireBruitage.nouvelle_question =
+          MediaPlayer.create(activite, R.raw.nouvelle_question);
+        gestionnaireBruitage.reponses_vraies_et_fausses =
+          MediaPlayer.create(activite, R.raw.reponses_vraies_et_fausses);
+        gestionnaireBruitage.selection_reponse =
+          MediaPlayer.create(activite, R.raw.selection_reponse);
+!!!179378.java!!!	getGestionnaireBruitage() : GestionnaireBruitage
+        return gestionnaireBruitage;
+!!!179506.java!!!	jouerBonneReponse() : void
+        bonne_reponse.start();
+!!!179634.java!!!	jouerMauvaiseReponse() : void
+        mauvaise_reponse.start();
+!!!179762.java!!!	jouerReponsesVaries() : void
+        reponses_vraies_et_fausses.start();
+!!!179890.java!!!	jouerNouvelleQuestion() : void
+        nouvelle_question.start();
+!!!180018.java!!!	jouerSelectionReponse() : void
+        selection_reponse.start();

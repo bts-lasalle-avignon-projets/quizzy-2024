@@ -1,0 +1,192 @@
+format 224
+
+classcanvas 128050 class_ref 139314 // ProtocoleActiverBuzzers
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 733.73 862.45 3160
+end
+classcanvas 128178 class_ref 138418 // ProtocoleAfficherReponse
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 739.03 759.29 3119
+end
+classcanvas 128306 class_ref 139570 // ProtocoleIndicationQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 70.69 186.513 3172
+end
+classcanvas 128434 class_ref 138546 // ProtocoleEnvoiQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 731.89 462.6 3125
+end
+classcanvas 128562 class_ref 139058 // ProtocoleLancement
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 84.86 379.65 3148
+end
+classcanvas 128690 class_ref 139442 // ProtocoleDesactiverBuzzers
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 313.99 1037.48 3166
+end
+classcanvas 128818 class_ref 138162 // ProtocoleAfficherQuestionPrecedente
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 738.41 654.94 3108
+end
+classcanvas 128946 class_ref 138802 // ProtocoleIndicationReponseParticipant
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 275.89 9.261 3137
+end
+classcanvas 129074 class_ref 139698 // ProtocoleIndiquerResultat
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 80.49 938.57 3177
+end
+classcanvas 129202 class_ref 137522 // Protocole
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 352.82 364.72 3098
+end
+classcanvas 129330 class_ref 138674 // ProtocoleFinQuiz
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 576.49 992.88 3131
+end
+classcanvas 129458 class_ref 139186 // ProtocoleLancementQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 27.97 775.85 3154
+end
+classcanvas 129586 class_ref 138034 // ProtocoleReceptionReponse
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 31.71 602.18 3109
+end
+classcanvas 129714 class_ref 138290 // ProtocoleAfficherQuestionSuivante
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 547.29 193.901 3113
+end
+classcanvas 129842 class_ref 137906 // ProtocoleAcquitement
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 73.98 492.98 3104
+end
+classcanvas 129970 class_ref 138930 // ProtocoleInscriptionParticipant
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 735.3 305.27 3143
+end
+relationcanvas 130098 relation_ref 138674 // <generalisation>
+  decenter_begin 45
+  decenter_end 925
+  from ref 128050 z 3161 to point 730.5 872
+  line 130226 z 3161 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130354 relation_ref 138034 // <generalisation>
+  decenter_begin 466
+  decenter_end 974
+  from ref 129330 z 3132 to point 637.5 902
+  line 130482 z 3132 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130610 relation_ref 138162 // <generalisation>
+  from ref 128946 z 3138 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130738 relation_ref 137650 // <generalisation>
+  decenter_begin 482
+  decenter_end 34
+  from ref 129714 z 3114 to point 674.5 355
+  line 130866 z 3114 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130994 relation_ref 139058 // <generalisation>
+  decenter_begin 606
+  decenter_end 948
+  from ref 129074 z 3178 to point 194.5 889
+  line 131122 z 3178 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131250 relation_ref 137394 // <generalisation>
+  decenter_begin 478
+  decenter_end 576
+  from ref 129586 z 3110 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131378 relation_ref 137522 // <generalisation>
+  decenter_begin 483
+  decenter_end 602
+  from ref 128818 z 3109 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131506 relation_ref 138418 // <generalisation>
+  decenter_begin 947
+  decenter_end 161
+  from ref 128562 z 3149 to point 240.5 432
+  line 131634 z 3149 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131762 relation_ref 137266 // <generalisation>
+  decenter_begin 473
+  decenter_end 331
+  from ref 129842 z 3105 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131890 relation_ref 137906 // <generalisation>
+  decenter_begin 475
+  decenter_end 345
+  from ref 128434 z 3126 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132018 relation_ref 138802 // <generalisation>
+  from ref 128690 z 3167 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132146 relation_ref 138546 // <generalisation>
+  decenter_begin 962
+  decenter_end 804
+  from ref 129458 z 3155 to point 240.5 802
+  line 132274 z 3155 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132402 relation_ref 138930 // <generalisation>
+  decenter_begin 516
+  decenter_end 14
+  from ref 128306 z 3173 to point 177.5 345
+  line 132530 z 3173 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132658 relation_ref 137778 // <generalisation>
+  decenter_begin 42
+  decenter_end 772
+  from ref 128178 z 3120 to point 730.5 785
+  line 132786 z 3120 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132914 relation_ref 138290 // <generalisation>
+  decenter_begin 758
+  decenter_end 126
+  from ref 129970 z 3144 to ref 129202
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

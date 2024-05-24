@@ -1,0 +1,11 @@
+class ProtocoleActiverBuzzers
+!!!159538.java!!!	ProtocoleActiverBuzzers(in trame : String)
+        setTrame(trame);
+!!!159666.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION\n";
+!!!159794.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ACTIVER_BUZZERS;
+!!!159922.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!160050.java!!!	genererTrame(in numeroQuestion : int) : void
+        super.genererTrame(numeroQuestion + "");
