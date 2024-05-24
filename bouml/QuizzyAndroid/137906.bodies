@@ -1,0 +1,7 @@
+class ProtocoleAcquitement
+!!!153266.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!153394.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ACQUITEMENT;
+!!!153522.java!!!	genererTrame() : void
+        super.genererTrame();

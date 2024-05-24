@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.Message;
+import android.telecom.DisconnectCause;
 import android.util.Log;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import fr.hillionj.quizzy.ActivitePrincipale;
 import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
+@SuppressLint("MissingPermission")
 public class Peripherique extends Thread
 {
     private final String    TAG = "_Peripherique";
@@ -29,7 +31,66 @@ public class Peripherique extends Thread
     private OutputStream    sendStream    = null;
     private TReception      tReception;
 
-    @SuppressLint("MissingPermission")
+    private void demarrerThread()
+    {
+        new Thread() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void run()
+            {
+                try
+                {
+                    socket.connect();
+                    envoyerCodeAuHandler(GestionnaireProtocoles.CODE_CONNEXION_BLUETOOTH,
+                                         indicePeripherique);
+                    tReception.start();
+                }
+                catch(IOException e)
+                {
+                    Log.e(TAG, "connecter() erreur connect socket", e);
+                    envoyerCodeAuHandler(GestionnaireProtocoles.CODE_ERREUR_CONNEXION_BLUETOOTH,
+                                         indicePeripherique);
+                }
+            }
+        }.start();
+    }
+
+    private void envoyerCodeAuHandler(int what, Object obj, Integer arg1)
+    {
+        Message msg = Message.obtain();
+        msg.what    = what;
+        msg.obj     = obj;
+        if(arg1 != null)
+        {
+            msg.arg1 = (int)arg1;
+        }
+        handler.sendMessage(msg);
+    }
+
+    private void initialiserReception()
+    {
+        if(socket != null)
+        {
+            tReception = new TReception();
+        }
+    }
+
+    private void initialiserSocket()
+    {
+        try
+        {
+            socket = device.createRfcommSocketToServiceRecord(
+              UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            receiveStream = socket.getInputStream();
+            sendStream    = socket.getOutputStream();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            socket = null;
+        }
+    }
+
     public Peripherique(BluetoothDevice device, Handler handler, int indicePeripherique)
     {
         Log.d(TAG,
@@ -69,56 +130,49 @@ public class Peripherique extends Thread
         return socket != null && socket.isConnected();
     }
 
-    @SuppressLint("MissingPermission")
+    public boolean estInterrompu()
+    {
+        if(!estConnecte())
+        {
+            return false;
+        }
+        try
+        {
+            if(receiveStream.available() == 0)
+            {
+                receiveStream.read();
+            }
+            sendStream.write(0);
+            sendStream.flush();
+            return false;
+        }
+        catch(IOException e)
+        {
+        }
+        return true;
+    }
+
     public void connecter()
     {
         Log.d(TAG,
               "connecter() nom = " + getNom() + " - adresse mac = " + getAdresse() +
                 " - indicePeripherique = " + indicePeripherique);
-        try
-        {
-            socket = device.createRfcommSocketToServiceRecord(
-              UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
-            receiveStream = socket.getInputStream();
-            sendStream    = socket.getOutputStream();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-            socket = null;
-        }
-        if(socket != null)
-        {
-            tReception = new TReception();
-        }
-        new Thread() {
-            @SuppressLint("MissingPermission")
-            @Override
-            public void run()
-            {
-                try
-                {
-                    socket.connect();
-                    Message msg = Message.obtain();
-                    msg.what    = GestionnaireProtocoles.CODE_CONNEXION_BLUETOOTH;
-                    msg.obj     = indicePeripherique;
-                    handler.sendMessage(msg);
-                    tReception.start();
-                }
-                catch(IOException e)
-                {
-                    Log.d(TAG, "connecter() erreur connect socket");
-                    e.printStackTrace();
-                    Message msg = Message.obtain();
-                    msg.what    = GestionnaireProtocoles.CODE_ERREUR_CONNEXION_BLUETOOTH;
-                    msg.obj     = indicePeripherique;
-                    handler.sendMessage(msg);
-                }
-            }
-        }.start();
+        initialiserSocket();
+        initialiserReception();
+        demarrerThread();
+    }
+
+    public void envoyerCodeAuHandler(int what, Object obj)
+    {
+        envoyerCodeAuHandler(what, obj, null);
     }
 
     public boolean deconnecter()
+    {
+        return deconnecter(true);
+    }
+
+    public boolean deconnecter(boolean estPrevue)
     {
         Log.d(TAG,
               "deconnecter() nom = " + getNom() + " - adresse mac = " + getAdresse() +
@@ -127,25 +181,20 @@ public class Peripherique extends Thread
         {
             tReception.arreter();
             socket.close();
-            Message msg = Message.obtain();
-            msg.what    = GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH;
-            msg.obj     = indicePeripherique;
-            handler.sendMessage(msg);
+            envoyerCodeAuHandler(GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH,
+                                 estPrevue,
+                                 indicePeripherique);
             return true;
         }
         catch(IOException e)
         {
-            Log.d(TAG, "deconnecter() erreur close socket");
-            e.printStackTrace();
+            Log.e(TAG, "deconnecter() erreur close socket", e);
             return false;
         }
     }
 
     public void envoyer(String data)
     {
-        /*Log.d(TAG,
-              "envoyer() nom = " + getNom() + " - adresse mac = " + getAdresse() +
-                " - indicePeripherique = " + indicePeripherique + " - datas = " + data);*/
         if(socket == null)
             return;
         try
@@ -155,9 +204,14 @@ public class Peripherique extends Thread
         }
         catch(IOException e)
         {
-            Log.d(TAG, "envoyer() erreur send socket");
-            e.printStackTrace();
+            Log.e(TAG, "envoyer() erreur send socket", e);
+            signalerInterruption();
         }
+    }
+
+    public void signalerInterruption()
+    {
+        deconnecter(false);
     }
 
     private class TReception extends Thread
@@ -179,33 +233,9 @@ public class Peripherique extends Thread
                 {
                     if(receiveStream.available() > 0)
                     {
-                        byte buffer[] = new byte[100];
-                        int  k        = receiveStream.read(buffer, 0, 100);
-                        if(k > 0)
-                        {
-                            byte rawdata[] = new byte[k];
-                            for(int i = 0; i < k; i++)
-                                rawdata[i] = buffer[i];
-                            String data = new String(rawdata);
-                            /*Log.d(TAG,
-                                  "recevoir() nom = " + getNom() + " - adresse mac = " +
-                                    getAdresse() + " - indicePeripherique = " + indicePeripherique +
-                                    " - datas = " + data);*/
-                            Message msg = Message.obtain();
-                            msg.what    = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
-                            msg.obj     = data;
-                            msg.arg1    = indicePeripherique;
-                            handler.sendMessage(msg);
-                        }
+                        traiterReception();
                     }
-                    try
-                    {
-                        Thread.sleep(250);
-                    }
-                    catch(InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
+                    attendre(250);
                 }
                 catch(IOException e)
                 {
@@ -215,20 +245,37 @@ public class Peripherique extends Thread
             }
         }
 
-        public void arreter()
+        private void traiterReception() throws IOException
         {
-            if(fini == false)
+            byte buffer[] = new byte[100];
+            int  k        = receiveStream.read(buffer, 0, 100);
+            if(k > 0)
             {
-                fini = true;
+                byte rawdata[] = new byte[k];
+                for(int i = 0; i < k; i++)
+                    rawdata[i] = buffer[i];
+                envoyerCodeAuHandler(GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH,
+                                     new String(rawdata),
+                                     indicePeripherique);
             }
+        }
+
+        private void attendre(long millisecondes)
+        {
             try
             {
-                Thread.sleep(250);
+                Thread.sleep(millisecondes);
             }
             catch(InterruptedException e)
             {
                 e.printStackTrace();
             }
+        }
+
+        public void arreter()
+        {
+            fini = true;
+            attendre(250);
         }
     }
 }

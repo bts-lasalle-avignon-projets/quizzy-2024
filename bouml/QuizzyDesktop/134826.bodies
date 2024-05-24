@@ -2,6 +2,10 @@ class Quizzy
 !!!170794.cpp!!!	initialiserCommunicationTablette() : void
     qDebug() << Q_FUNC_INFO;
     communicationTablette->demarrerServeur();
+!!!174122.cpp!!!	initialiserQuiz() : void
+    participants.clear();
+    listeQuestions.clear();
+    indexQuestionActuelle = INDEX_NON_DEFINI;
 !!!135082.cpp!!!	Quizzy(inout parent : QObject = nullptr)
     qDebug() << Q_FUNC_INFO;
     initialiserCommunicationTablette();
@@ -72,6 +76,8 @@ class Quizzy
     return listeQuestions.size();
 !!!171690.cpp!!!	getNbParticipants() : uint
     return participants.size();
+!!!128006.cpp!!!	getParticipants() : QVector<Participant*>
+    return participants;
 !!!171818.cpp!!!	getQuestion() : Question
     if(listeQuestions.isEmpty())
         return nullptr;
@@ -144,6 +150,7 @@ class Quizzy
 !!!173098.cpp!!!	terminerQuestion() : void
     if(etat == QuestionDemarree && getQuestion() != nullptr)
     {
+        // @todo Gérer les participants qui n'ont pas répondu ?
         etat = Quizzy::QuestionTerminee;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionTerminee();
@@ -167,4 +174,24 @@ class Quizzy
                                           tempsReponse);
             }
         }
+    }
+!!!128134.cpp!!!	passerQuestionSuivante() : void
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle < listeQuestions.size() - 1)
+    {
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+        effacerChoix();
+        etat = QuizLance;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionSuivantePrete();
+    }
+!!!128262.cpp!!!	gererFinQuiz() : void
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        etat = Resultats;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit quizTermine();
     }

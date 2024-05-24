@@ -21,13 +21,35 @@ import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 public class FragmentPupitre extends Fragment
 {
     private FragmentDashboardBinding binding;
-    public Button                    btnConnecter, btnDeconnecter;
-    public Spinner                   spinnerListePeripheriques;
-    public ListView                  listViewPeripheriquesConnectes;
-    private static FragmentPupitre   vueActive = null;
-    public static FragmentPupitre    getVueActive()
+
+    private static FragmentPupitre vueActive = null;
+
+    public Button   btnConnecter, btnDeconnecter;
+    public Spinner  spinnerListePeripheriques;
+    public ListView listViewPeripheriquesConnectes;
+
+    public static FragmentPupitre getVueActive()
     {
         return vueActive;
+    }
+
+    private void initialiserBoutons(View vue)
+    {
+        btnConnecter   = initialiserBouton(vue, R.id.bouton_connecter);
+        btnDeconnecter = initialiserBouton(vue, R.id.bouton_deconnecter);
+    }
+
+    private Button initialiserBouton(View vue, int bouton_connecter)
+    {
+        Button bouton = vue.findViewById(bouton_connecter);
+        bouton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentPupitre.this.onClick(v);
+            }
+        });
+        return bouton;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,35 +67,14 @@ public class FragmentPupitre extends Fragment
 
     public void initialiserVue(View vue)
     {
-        btnConnecter = vue.findViewById(R.id.bouton_connecter);
-        btnConnecter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentPupitre.this.onClick(v);
-            }
-        });
-
-        btnDeconnecter = vue.findViewById(R.id.bouton_deconnecter);
-        btnDeconnecter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                FragmentPupitre.this.onClick(v);
-            }
-        });
+        initialiserBoutons(vue);
         spinnerListePeripheriques      = vue.findViewById(R.id.liste_peripheriques);
         listViewPeripheriquesConnectes = vue.findViewById(R.id.listViewPeripheriquesConnectes);
-        if(vueActive != null)
-        {
-            btnConnecter.setEnabled(vueActive.btnConnecter.isEnabled());
-            btnDeconnecter.setEnabled(vueActive.btnDeconnecter.isEnabled());
-            spinnerListePeripheriques.setEnabled(vueActive.spinnerListePeripheriques.isEnabled());
-            GestionnaireBluetooth.getGestionnaireBluetooth()
-              .mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
-            GestionnaireBluetooth.getGestionnaireBluetooth()
-              .mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
-        }
+
+        GestionnaireBluetooth gestionnaireBluetooth =
+          GestionnaireBluetooth.getGestionnaireBluetooth();
+        gestionnaireBluetooth.mettreAjourSpinnerPeripheriques(spinnerListePeripheriques);
+        gestionnaireBluetooth.mettreAjourListViewPeripheriques(listViewPeripheriquesConnectes);
     }
 
     @Override
@@ -83,19 +84,17 @@ public class FragmentPupitre extends Fragment
         binding = null;
     }
 
-    public void mettreAjourEtatBoutons() {
-        Peripherique peripheriqueSelectionne = GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriqueSelectionne();
+    public void mettreAjourEtatBoutons()
+    {
+        Peripherique peripheriqueSelectionne =
+          GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriqueSelectionne();
         if(peripheriqueSelectionne.estConnecte())
         {
             btnConnecter.setEnabled(false);
             btnDeconnecter.setEnabled(true);
             spinnerListePeripheriques.setEnabled(true);
-        /*}
-        else if (peripheriqueSelectionne.seConnecte()) {
-            btnConnecter.setEnabled(false);
-            btnDeconnecter.setEnabled(false);
-            spinnerListePeripheriques.setEnabled(false);*/
-        } else
+        }
+        else
         {
             btnConnecter.setEnabled(true);
             btnDeconnecter.setEnabled(false);
@@ -105,12 +104,14 @@ public class FragmentPupitre extends Fragment
 
     public void onClick(View v)
     {
-        if(v.getId() == R.id.bouton_connecter && GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
+        if(v.getId() == R.id.bouton_connecter &&
+           GestionnaireBluetooth.getGestionnaireBluetooth().connecter())
         {
             mettreAjourEtatBoutons();
         }
-        else if(v.getId() == R.id.bouton_deconnecter && GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter())
+        else if(v.getId() == R.id.bouton_deconnecter)
         {
+            GestionnaireBluetooth.getGestionnaireBluetooth().deconnecter();
             mettreAjourEtatBoutons();
         }
     }

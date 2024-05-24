@@ -1,0 +1,149 @@
+class BaseDeDonnees
+!!!136114.java!!!	BaseDeDonnees(inout context : Context)
+        super(context, QUIZZY_BDD, null, VERSION_QUIZZY_BDD);
+        Log.d(TAG, "BaseDeDonnees()");
+
+        QUIZZY_CHEMIN = "/data/data/" + context.getPackageName() + "/databases/";
+        this.context  = context;
+
+        verifierBaseDeDonnes();
+!!!136242.java!!!	copierOctets(inout input : InputStream, inout output : OutputStream) : void
+        byte[] buffer = new byte[1024];
+        int length;
+        while((length = input.read(buffer)) > 0)
+        {
+            output.write(buffer, 0, length);
+        }
+!!!136370.java!!!	fermerLesFlux(inout output : OutputStream, inout input : InputStream) : void
+        if(output != null)
+        {
+            try
+            {
+                output.close();
+            }
+            catch(IOException e)
+            {
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
+        if(input != null)
+        {
+            try
+            {
+                input.close();
+            }
+            catch(IOException e)
+            {
+                Log.e(TAG, e.getMessage(), e);
+            }
+        }
+!!!136498.java!!!	construireRequete(in nombreQuestion : int, in theme : String) : String
+        String query =
+          "SELECT question,proposition1,proposition2,proposition3,proposition4 FROM questions";
+        if(theme != null)
+        {
+            query += " WHERE theme = '" + theme + "'";
+        }
+        query += " ORDER BY RANDOM() LIMIT " + nombreQuestion;
+        return query;
+!!!136626.java!!!	genererQuestion(inout curseur : Cursor, in tempsParQuestion : int) : Question
+        String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
+        String prop1    = curseur.getString(curseur.getColumnIndexOrThrow("proposition1"));
+        String prop2    = curseur.getString(curseur.getColumnIndexOrThrow("proposition2"));
+        String prop3    = curseur.getString(curseur.getColumnIndexOrThrow("proposition3"));
+        String prop4    = curseur.getString(curseur.getColumnIndexOrThrow("proposition4"));
+
+        List<String> propositions = getPropositions(prop1, prop2, prop3, prop4);
+
+        int tempsReponse = getTempsReponse(tempsParQuestion, question, prop1, prop2, prop3, prop4);
+
+        return new Question(question, propositions, tempsReponse);
+!!!136754.java!!!	getPropositions(in prop1 : String, in prop2 : String, in prop3 : String, in prop4 : String) : List<String>
+        List<String> propositions = new ArrayList<>();
+        propositions.add(prop1);
+        propositions.add(prop2);
+        propositions.add(prop3);
+        propositions.add(prop4);
+        return propositions;
+!!!136882.java!!!	getTempsReponse(in tempsParQuestion : int, in question : String, in prop1 : String, in prop2 : String, in prop3 : String, in prop4 : String) : int
+        int tempsReponse = tempsParQuestion;
+        if(tempsReponse == -1)
+        {
+            tempsReponse = (question + prop1 + prop2 + prop3 + prop4).length() / 5;
+            if(tempsReponse == 0)
+            {
+                tempsReponse++;
+            }
+        }
+        return tempsReponse;
+!!!137010.java!!!	getInstance() : BaseDeDonnees
+        return baseDeDonnees;
+!!!137138.java!!!	initialiser(inout context : Context) : void
+        baseDeDonnees = new BaseDeDonnees(context);
+!!!137266.java!!!	getThemes() : List<String>
+        Cursor       curseur     = sqlite.rawQuery("SELECT DISTINCT theme FROM questions", null);
+        List<String> listeThemes = new ArrayList<>();
+        while(curseur.moveToNext())
+        {
+            String nom = curseur.getString(curseur.getColumnIndexOrThrow("theme"));
+            listeThemes.add(nom);
+        }
+        curseur.close();
+        return listeThemes;
+!!!137650.java!!!	verifierBaseDeDonnes() : void
+        File fichierBaseDeDonnes = new File(QUIZZY_CHEMIN + QUIZZY_BDD);
+        try
+        {
+            if(!fichierBaseDeDonnes.exists())
+            {
+                copierBaseDeDonnees(context.getAssets().open(QUIZZY_BDD), fichierBaseDeDonnes);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e(TAG, e.getMessage(), e);
+        }
+        sqlite = this.getReadableDatabase();
+!!!137778.java!!!	copierBaseDeDonnees(inout source : InputStream, inout destination : File) : void
+        InputStream  input  = null;
+        OutputStream output = null;
+        try
+        {
+            new File(QUIZZY_CHEMIN).mkdirs();
+            input  = new BufferedInputStream(source);
+            output = new BufferedOutputStream(new FileOutputStream(destination));
+            copierOctets(input, output);
+        }
+        finally
+        {
+            fermerLesFlux(output, input);
+        }
+!!!137906.java!!!	getNomsParticipants() : List<String>
+        Cursor curseur = sqlite.rawQuery("SELECT nom FROM participants ORDER BY nom ASC", null);
+
+        List<String> listeParticipants = new Vector<>();
+
+        while(curseur.moveToNext())
+        {
+            String nom = curseur.getString(curseur.getColumnIndexOrThrow("nom"));
+            listeParticipants.add(nom);
+        }
+        curseur.close();
+
+        return listeParticipants;
+!!!138034.java!!!	getQuestionnaire(in nombreQuestion : int) : Question
+        return getQuestionnaire(nombreQuestion, null, -1);
+!!!138162.java!!!	getQuestionnaire(in nombreQuestion : int, in theme : String) : Question
+        return getQuestionnaire(nombreQuestion, theme, -1);
+!!!138290.java!!!	getQuestionnaire(in nombreQuestion : int, in tempsParQuestion : int) : Question
+        return getQuestionnaire(nombreQuestion, null, tempsParQuestion);
+!!!138418.java!!!	getQuestionnaire(in nombreQuestion : int, in theme : String, in tempsParQuestion : int) : Question
+        String         query         = construireRequete(nombreQuestion, theme);
+        Cursor         curseur       = sqlite.rawQuery(query, null);
+        List<Question> listeQuestion = new ArrayList<>();
+        while(curseur.moveToNext())
+        {
+            listeQuestion.add(genererQuestion(curseur, tempsParQuestion));
+        }
+        curseur.close();
+        return listeQuestion;

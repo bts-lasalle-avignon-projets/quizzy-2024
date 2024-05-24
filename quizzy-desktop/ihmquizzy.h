@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMQuizzy
  * @author Thomas HNIZDO
- * @version 0.1
+ * @version 0.2
  */
 
 #include <QtWidgets>
@@ -23,7 +23,7 @@
  * @def VERSION_APP
  * @brief La version de l'application
  */
-#define VERSION_APP "0.1"
+#define VERSION_APP "0.2"
 
 /**
  * @def TAILLE_LARGEUR_ECRAN_MIN

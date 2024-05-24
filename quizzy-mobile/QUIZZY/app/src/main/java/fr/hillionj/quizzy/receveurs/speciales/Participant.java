@@ -20,7 +20,8 @@ public class Participant implements ReceveurProtocole
         this.peripherique = peripherique;
     }
 
-    public void setNom(String nom) {
+    public void setNom(String nom)
+    {
         this.nom = nom;
     }
 

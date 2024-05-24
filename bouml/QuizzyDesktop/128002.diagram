@@ -1,26 +1,26 @@
 format 224
 
-classcanvas 128002 class_ref 128002 // Candidat
+classcanvas 128002 class_ref 128002 // Participant
   simpleclassdiagramsettings end
   xyz 4 229.1 2000
 end
 usecasecanvas 128130 usecase_ref 128002 // Visualiser une session
-  xyzwh 185.8 235.1 3005 64 32 label_xy 146 267
+  xyzwh 185 235 3005 64 32 label_xy 146 267
 end
 usecasecanvas 128258 usecase_ref 128130 // Visualiser une question
-  xyzwh 464 182.4 3005 64 32 label_xy 427.8 217
+  xyzwh 464 182 3005 64 32 label_xy 427.8 217
 end
 usecasecanvas 128386 usecase_ref 128258 // Visualiser des propositions
-  xyzwh 254.8 38.1 3005 64 32 label_xy 200 23
+  xyzwh 254 38 3005 64 32 label_xy 200 23
 end
 usecasecanvas 128514 usecase_ref 128386 // Visualiser un compte à rebours
   xyzwh 464 22 3005 64 32 label_xy 395.3 6
 end
 usecasecanvas 128642 usecase_ref 128514 // Visualiser les résultats
-  xyzwh 464.2 315.2 3005 64 32 label_xy 423 347
+  xyzwh 464 315 3005 64 32 label_xy 423 347
 end
 usecasecanvas 128770 usecase_ref 128642 // Dialoguer avec le module de jeu
-  xyzwh 753 235.8 3005 64 32 label_xy 686.8 217
+  xyzwh 753 235 3005 64 32 label_xy 686.8 217
 end
 usecasecanvas 134274 usecase_ref 128770 // Visualiser la réponse
   xyzwh 676 49 3005 64 32 label_xy 640 34
@@ -28,24 +28,24 @@ end
 line 128898 ---- decenter_begin 349
   from ref 128002 z 3006 to ref 128130
 simplerelationcanvas 132738 simplerelation_ref 129026
-  from ref 128130 z 3006 stereotype "<<include>>" xyz 316 222.5 3000 to ref 128258
+  from ref 128130 z 3006 stereotype "<<include>>" xyz 316 222 3000 to ref 128258
 end
 simplerelationcanvas 133122 simplerelation_ref 129410
-  from ref 128130 z 3006 stereotype "<<include>>" xyz 316 289.5 3000 to ref 128642
+  from ref 128130 z 3006 stereotype "<<include>>" xyz 316 289 3000 to ref 128642
 end
 simplerelationcanvas 133250 simplerelation_ref 129538
-  from ref 128258 z 3006 stereotype "<<include>>" xyz 599 223.5 3000 to ref 128770
+  from ref 128258 z 3006 stereotype "<<include>>" xyz 599 223 3000 to ref 128770
 end
 simplerelationcanvas 133634 simplerelation_ref 129922
-  from ref 128642 z 3006 stereotype "<<include>>" xyz 599.5 288.5 3000 to ref 128770
+  from ref 128642 z 3006 stereotype "<<include>>" xyz 599 288 3000 to ref 128770
 end
 simplerelationcanvas 134018 simplerelation_ref 130050
-  from ref 128258 z 3006 stereotype "<<include>>" xyz 349.5 125 3000 to ref 128386
+  from ref 128258 z 3006 stereotype "<<include>>" xyz 349 125 3000 to ref 128386
 end
 simplerelationcanvas 134146 simplerelation_ref 130178
-  from ref 128258 z 3006 stereotype "<<include>>" xyz 455 116.5 3000 to ref 128514
+  from ref 128258 z 3006 stereotype "<<include>>" xyz 455 116 3000 to ref 128514
 end
 simplerelationcanvas 134402 simplerelation_ref 130306
-  from ref 134274 z 3006 stereotype "<<extend>>" xyz 558.5 130.5 3000 to ref 128258
+  from ref 134274 z 3006 stereotype "<<extend>>" xyz 558 130 3000 to ref 128258
 end
 end

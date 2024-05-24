@@ -1,0 +1,527 @@
+format 224
+
+classcanvas 128178 class_ref 134706 // ActivitePrincipale
+  classdiagramsettings member_max_width 0 end
+  xyz 2633.35 312.39 2000
+end
+classcanvas 128306 class_ref 135218 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  xyz 1638.27 309.027 3005
+end
+classcanvas 128818 class_ref 135474 // Question
+  classdiagramsettings member_max_width 0 end
+  xyz 1370.85 1091.53 3010
+end
+classcanvas 128946 class_ref 137138 // Quiz
+  classdiagramsettings member_max_width 0 end
+  xyz 940.708 659.33 3016
+end
+classcanvas 129714 class_ref 139826 // EtapeQuiz
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 968.322 1530.02 3022
+end
+classcanvas 129970 class_ref 139954 // GestionnaireBruitage
+  classdiagramsettings member_max_width 0 end
+  xyz 2301.74 154.668 3028
+end
+classcanvas 130866 class_ref 140210 // WatchDog
+  classdiagramsettings member_max_width 0 end
+  xyz 1274.48 648.612 3034
+end
+classcanvas 131250 class_ref 135602 // GestionnaireBluetooth
+  classdiagramsettings member_max_width 0 end
+  xyz 73.263 128.541 3040
+end
+classcanvas 131762 class_ref 135730 // Peripherique
+  classdiagramsettings member_max_width 0 end
+  color lightorange
+  xyz 530.753 95.9524 3047
+end
+classcanvas 132146 class_ref 136114 // FragmentParametres
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 205.018 1566.2 3053
+end
+classcanvas 132658 class_ref 136498 // ModeleParametres
+  classdiagramsettings member_max_width 0 end
+  xyz 1021.2 235.796 3060
+end
+classcanvas 132786 class_ref 136754 // FragmentPupitre
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 801.517 1770.4 3065
+end
+classcanvas 133298 class_ref 136882 // ModelePupitre
+  classdiagramsettings member_max_width 0 end
+  xyz 1336.08 235.796 3070
+end
+classcanvas 133426 class_ref 137010 // FragmentQuiz
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 539.24 1406.78 3075
+end
+classcanvas 133938 class_ref 137266 // ModeleQuiz
+  classdiagramsettings member_max_width 0 end
+  xyz 1202.94 235.796 3082
+end
+classcanvas 134066 class_ref 136370 // Participant
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 280.698 954.096 3070
+end
+classcanvas 134706 class_ref 140082 // Ecran
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 698.897 1034.09 3080
+end
+classcanvas 135218 class_ref 137778 // ReceveurProtocole
+  classdiagramsettings member_max_width 0 end
+  color blue
+  xyz 521.403 783.508 3087
+end
+classcanvas 135602 class_ref 137394 // GestionnaireProtocoles
+  classdiagramsettings member_max_width 0 end
+  xyz 3000 291.171 3093
+end
+classcanvas 136242 class_ref 137522 // Protocole
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  xyz 2003.44 1130 3098
+end
+classcanvas 136370 class_ref 137650 // TypeProtocole
+  classdiagramsettings member_max_width 0 end
+  color green
+  xyz 1915.52 166.514 3103
+end
+classcanvas 136498 class_ref 137906 // ProtocoleAcquitement
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1724.36 1258.98 3104
+end
+classcanvas 136754 class_ref 138034 // ProtocoleReceptionReponse
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1682.89 1368.02 3109
+end
+classcanvas 137010 class_ref 138162 // ProtocoleAfficherQuestionPrecedente
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2388.63 1420.26 3108
+end
+classcanvas 137266 class_ref 138290 // ProtocoleAfficherQuestionSuivante
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2197.51 958.901 3113
+end
+classcanvas 137522 class_ref 138418 // ProtocoleAfficherReponse
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2389.85 1525.41 3119
+end
+classcanvas 137778 class_ref 138546 // ProtocoleEnvoiQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2382.67 1228.92 3125
+end
+classcanvas 138034 class_ref 138674 // ProtocoleFinQuiz
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2226.11 1758.88 3131
+end
+classcanvas 138290 class_ref 138802 // ProtocoleIndicationReponseParticipant
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1926.23 774.261 3137
+end
+classcanvas 138546 class_ref 138930 // ProtocoleInscriptionParticipant
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2385.8 1071.95 3143
+end
+classcanvas 138802 class_ref 139058 // ProtocoleLancement
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1735.04 1145.97 3148
+end
+classcanvas 139058 class_ref 139186 // ProtocoleLancementQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1678.15 1541.73 3154
+end
+classcanvas 139314 class_ref 139314 // ProtocoleActiverBuzzers
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 2384.95 1628.77 3160
+end
+classcanvas 139570 class_ref 139442 // ProtocoleDesactiverBuzzers
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1964.33 1803.8 3166
+end
+classcanvas 139826 class_ref 139570 // ProtocoleIndicationQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1721.91 952.353 3172
+end
+classcanvas 140082 class_ref 139698 // ProtocoleIndiquerResultat
+  classdiagramsettings member_max_width 0 end
+  color lightred
+  xyz 1730.71 1704.13 3177
+end
+classcanvas 140338 class_ref 134834 // AppCompatActivity
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 2653.97 69.9641 3177
+end
+classcanvas 140594 class_ref 135346 // SQLiteOpenHelper
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 1652.05 94.5949 3183
+end
+classcanvas 140850 class_ref 135858 // Thread
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 793.412 127.981 3058
+end
+classcanvas 141106 class_ref 136242 // Fragment
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 603.384 2264.33 3081
+end
+classcanvas 141618 class_ref 136626 // ViewModel
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 1208.74 110.848 3188
+end
+classcanvas 151218 class_ref 135986 // TReception
+  classdiagramsettings member_max_width 0 end
+  color lightorange
+  xyz 761.752 298.932 2000
+end
+relationcanvas 128434 relation_ref 134834 // <unidirectional association>
+  from ref 128306 z 3006 to point 1608.36 308.976
+  line 128562 z 3006 to point 1608.36 338.364
+  line 128690 z 3006 to ref 128306
+  role_a_pos 1645 366 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129074 relation_ref 139314 // <unidirectional association>
+  decenter_begin 709
+  decenter_end 282
+  from ref 128946 z 3017 stereotype "<<List>>" xyz 1234.5 1175 3017 to ref 128818
+  role_a_pos 1291 1170 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129202 relation_ref 139826 // <unidirectional association>
+  from ref 128946 z 3017 to point 911.776 655.398
+  line 129330 z 3017 to point 911.776 685.786
+  line 129458 z 3017 to ref 128946
+  role_a_pos 948 720 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129842 relation_ref 139698 // <unidirectional association>
+  decenter_end 486
+  from ref 128946 z 3023 to ref 129714
+  role_a_pos 1022 1510 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130098 relation_ref 139186 // <unidirectional association>
+  from ref 129970 z 3029 to point 2271.13 151.079
+  line 130226 z 3029 to point 2271.13 181.467
+  line 130354 z 3029 to ref 129970
+  role_a_pos 2306 193 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130482 relation_ref 141106 // <unidirectional association>
+  from ref 129970 z 3029 to point 2271.13 151.079
+  line 130610 z 3029 to point 2271.13 181.467
+  line 130738 z 3029 to ref 129970
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130994 relation_ref 139954 // <unidirectional association>
+  decenter_begin 948
+  decenter_end 457
+  from ref 130866 z 3035 to ref 128946
+  role_a_pos 1242 970 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131378 relation_ref 135218 // <unidirectional association>
+  from ref 131250 z 3041 to point 40.0432 136.485
+  line 131506 z 3041 to point 40.0432 166.873
+  line 131634 z 3041 to ref 131250
+  role_a_pos 77 215 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131890 relation_ref 134962 // <unidirectional association>
+  decenter_begin 17
+  decenter_end 75
+  from ref 131250 z 3048 to ref 131762
+  role_a_pos 428 80 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132018 relation_ref 135090 // <unidirectional association>
+  decenter_begin 139
+  decenter_end 269
+  from ref 131250 z 3048 stereotype "<<List>>" xyz 391.5 216 3048 to ref 131762
+  role_a_pos 421 178 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132274 relation_ref 135986 // <unidirectional association>
+  from ref 132146 z 3054 to point 171.091 1567.97
+  line 132402 z 3054 to point 171.091 1598.36
+  line 132530 z 3054 to ref 132146
+  role_a_pos 214 1608 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132914 relation_ref 136370 // <unidirectional association>
+  from ref 132786 z 3066 to point 773.691 1771.93
+  line 133042 z 3066 to point 773.691 1802.32
+  line 133170 z 3066 to ref 132786
+  role_a_pos 716 1808 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133554 relation_ref 136754 // <unidirectional association>
+  from ref 133426 z 3076 to point 500.96 1402.48
+  line 133682 z 3076 to point 500.96 1431.87
+  line 133810 z 3076 to ref 133426
+  role_a_pos 553 1476 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134194 relation_ref 140466 // <unidirectional association>
+  decenter_begin 516
+  decenter_end 856
+  from ref 134066 z 3071 to point 356.618 492.043
+  line 153010 z 3071 to ref 131762
+  role_a_pos 428 480 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134322 relation_ref 139442 // <unidirectional association>
+  decenter_begin 787
+  decenter_end 921
+  from ref 128946 z 3071 stereotype "<<List>>" xyz 659.5 1253 3071 to ref 134066
+  role_a_pos 451 1243 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134578 relation_ref 135858 // <unidirectional association>
+  decenter_begin 492
+  decenter_end 488
+  from ref 132146 z 3071 stereotype "<<List>>" xyz 326.5 1439.5 3071 to ref 134066
+  role_a_pos 373 1301 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134834 relation_ref 140210 // <unidirectional association>
+  geometry VH unfixed
+  decenter_end 866
+  from ref 134706 z 3081 to point 756 485
+  line 145330 z 3081 to ref 131762
+  role_a_pos 726 485 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134962 relation_ref 139570 // <unidirectional association>
+  decenter_begin 524
+  decenter_end 164
+  from ref 128946 z 3081 stereotype "<<List>>" xyz 857 1047.5 3081 to ref 134706
+  role_a_pos 841 1020 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135346 relation_ref 140338 // <realization>
+  decenter_begin 516
+  decenter_end 517
+  from ref 134066 z 3088 to ref 135218
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135474 relation_ref 140082 // <realization>
+  decenter_end 517
+  from ref 134706 z 3088 to ref 135218
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135730 relation_ref 137010 // <unidirectional association>
+  from ref 135602 z 3094 to point 2971.95 285.346
+  line 135858 z 3094 to point 2971.95 315.734
+  line 135986 z 3094 to ref 135602
+  role_a_pos 2842 316 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136114 relation_ref 137138 // <unidirectional association>
+  from ref 135602 z 3094 to ref 128178
+  role_a_pos 2847 396 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136626 relation_ref 137266 // <generalisation>
+  decenter_begin 473
+  decenter_end 331
+  from ref 136498 z 3105 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136882 relation_ref 137394 // <generalisation>
+  decenter_begin 478
+  decenter_end 576
+  from ref 136754 z 3110 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137138 relation_ref 137522 // <generalisation>
+  decenter_begin 483
+  decenter_end 602
+  from ref 137010 z 3109 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137394 relation_ref 137650 // <generalisation>
+  decenter_begin 482
+  decenter_end 34
+  from ref 137266 z 3114 to point 2325.53 1121.19
+  line 149042 z 3114 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137650 relation_ref 137778 // <generalisation>
+  decenter_begin 42
+  decenter_end 772
+  from ref 137522 z 3120 to point 2381.89 1551.22
+  line 150322 z 3120 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137906 relation_ref 137906 // <generalisation>
+  decenter_begin 475
+  decenter_end 345
+  from ref 137778 z 3126 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138162 relation_ref 138034 // <generalisation>
+  decenter_begin 466
+  decenter_end 974
+  from ref 138034 z 3132 to point 2288.19 1668.53
+  line 151090 z 3132 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138418 relation_ref 138162 // <generalisation>
+  from ref 138290 z 3138 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138674 relation_ref 138290 // <generalisation>
+  decenter_begin 758
+  decenter_end 126
+  from ref 138546 z 3144 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138930 relation_ref 138418 // <generalisation>
+  decenter_begin 947
+  decenter_end 161
+  from ref 138802 z 3149 to point 1891.28 1198.12
+  line 150578 z 3149 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139186 relation_ref 138546 // <generalisation>
+  decenter_begin 962
+  decenter_end 804
+  from ref 139058 z 3155 to point 1891.88 1568.77
+  line 150706 z 3155 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139442 relation_ref 138674 // <generalisation>
+  decenter_begin 45
+  decenter_end 925
+  from ref 139314 z 3161 to point 2381.89 1638.35
+  line 150450 z 3161 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139698 relation_ref 138802 // <generalisation>
+  from ref 139570 z 3167 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139954 relation_ref 138930 // <generalisation>
+  decenter_begin 516
+  decenter_end 14
+  from ref 139826 z 3173 to point 1828.57 1111.4
+  line 148914 z 3173 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140210 relation_ref 139058 // <generalisation>
+  decenter_begin 606
+  decenter_end 948
+  from ref 140082 z 3178 to point 1845.42 1655.2
+  line 150834 z 3178 to ref 136242
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140466 relation_ref 134578 // <generalisation>
+  from ref 128178 z 3178 to ref 140338
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140722 relation_ref 134706 // <generalisation>
+  from ref 128306 z 3184 to ref 140594
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140978 relation_ref 135346 // <generalisation>
+  decenter_begin 150
+  from ref 131762 z 3059 to ref 140850
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141234 relation_ref 136626 // <generalisation>
+  decenter_end 531
+  from ref 133426 z 3082 to ref 141106
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141362 relation_ref 135730 // <generalisation>
+  decenter_end 531
+  from ref 132146 z 3082 to ref 141106
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141490 relation_ref 136242 // <generalisation>
+  decenter_begin 510
+  decenter_end 531
+  from ref 132786 z 3082 to ref 141106
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141746 relation_ref 136882 // <generalisation>
+  from ref 133938 z 3189 to ref 141618
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141874 relation_ref 136498 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 529
+  from ref 133298 z 3189 to point 1395 188.924
+  line 147250 z 3189 to point 1249 188.924
+  line 147378 z 3189 to ref 141618
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142002 relation_ref 136114 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 469
+  from ref 132658 z 3189 to point 1087 188.924
+  line 144306 z 3189 to point 1249 188.924
+  line 144434 z 3189 to ref 141618
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 152370 relation_ref 148146 // <generalisation>
+  decenter_begin 493
+  from ref 151218 z 3059 to ref 140850
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

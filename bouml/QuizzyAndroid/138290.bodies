@@ -1,0 +1,7 @@
+class ProtocoleAfficherQuestionSuivante
+!!!154930.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!155058.java!!!	getType() : TypeProtocole
+        return TypeProtocole.AFFICHER_QUESTION_SUIVANTE;
+!!!155186.java!!!	genererTrame() : void
+        super.genererTrame();

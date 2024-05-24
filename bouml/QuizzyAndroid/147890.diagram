@@ -1,0 +1,50 @@
+format 224
+
+classcanvas 128050 class_ref 136370 // Participant
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 246.198 89.096 3070
+end
+classcanvas 128178 class_ref 140082 // Ecran
+  classdiagramsettings member_max_width 0 end
+  color lightmagenta
+  xyz 262.397 477.09 3080
+end
+classcanvas 128306 class_ref 135730 // Peripherique
+  classdiagramsettings member_max_width 0 end
+  color lightorange
+  xyz 518.253 92.9524 3047
+end
+classcanvas 128434 class_ref 137778 // ReceveurProtocole
+  classdiagramsettings member_max_width 0 end
+  color blue
+  xyz 40.903 456.508 3087
+end
+relationcanvas 128562 relation_ref 140338 // <realization>
+  decenter_begin 516
+  decenter_end 517
+  from ref 128050 z 3088 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128690 relation_ref 140210 // <unidirectional association>
+  decenter_begin 928
+  decenter_end 852
+  from ref 128178 z 3081 to ref 128306
+  role_a_pos 425 457 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128946 relation_ref 140466 // <unidirectional association>
+  decenter_begin 516
+  decenter_end 355
+  from ref 128050 z 3071 to ref 128306
+  role_a_pos 425 232 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129202 relation_ref 140082 // <realization>
+  decenter_end 517
+  from ref 128178 z 3088 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
