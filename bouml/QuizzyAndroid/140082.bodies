@@ -1,0 +1,5 @@
+class Ecran
+!!!170034.java!!!	Ecran(inout peripherique : Peripherique)
+        this.peripherique = peripherique;
+!!!170162.java!!!	getPeripherique() : Peripherique
+        return peripherique;

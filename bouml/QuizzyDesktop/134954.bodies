@@ -1,5 +1,5 @@
 class Question
-!!!134826.cpp!!!	Question(in libelle : QString, in propositions : QStringList)
+!!!134826.cpp!!!	Question(in libelle : QString, in propositions : QStringList, in reponseCorrecte : int)
     char indexPropositions[] = { 'A', 'B', 'C', 'D' };
     for(int i = 0; i < propositions.size(); ++i)
     {
@@ -9,3 +9,9 @@ class Question
     return libelle;
 !!!157482.cpp!!!	getPropositions() : QMap<char, QString>
     return propositions;
+!!!170410.cpp!!!	getDuree() : int
+    return duree;
+!!!170538.cpp!!!	setDuree(in temps : int) : void
+    duree = temps;
+!!!170666.cpp!!!	getReponseCorrecte() : int
+    return reponseCorrecte;

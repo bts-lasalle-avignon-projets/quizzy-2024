@@ -11,14 +11,17 @@ class Question
     QStringList         participants;
     QMap<char, QString> propositions;
     int                 duree;
-    char                reponseCorrecte;
+    int                 reponseCorrecte;
 
   public:
-    Question(QString libelle, QStringList propositions);
+    Question(QString libelle, QStringList propositions, int reponseCorrecte);
     ~Question();
 
     QString             getLibelle() const;
     QMap<char, QString> getPropositions() const;
+    int                 getDuree() const;
+    void                setDuree(int temps);
+    int                 getReponseCorrecte() const;
 };
 
 #endif // QUESTION_H

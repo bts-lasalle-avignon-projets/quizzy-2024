@@ -1,7 +1,7 @@
 format 224
 "quizzy-desktop" // quizzy-desktop
-  revision 4
-  modified_by 42 "tv"
+  revision 6
+  modified_by 6 "thomas"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -166,15 +166,30 @@ ${items}};
 	  b parent class_ref 134826 // Quizzy
       end
 
-      classrelation 148266 // questions (<unidirectional association>)
-	relation 148266 --->
-	  stereotype "QVector"
-	  a role_name "questions" private
-	    comment "!< conteneur de Question pour le quiz"
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+      attribute 166058 "minuteur"
+	private explicit_type "QTimer"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	    classrelation_ref 148266 // questions (<unidirectional association>)
-	  b parent class_ref 134954 // Question
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< pour gérer le temps d'une question"
+      end
+
+      attribute 166186 "decompteQuestion"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< pour le temps d'une question"
       end
 
       attribute 149034 "fenetres"
@@ -257,6 +272,30 @@ ${items}};
 
       attribute 156714 "layoutPrincipalParticipants"
 	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166314 "layoutInfoQuiz"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166442 "infoQuiz"
+	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
@@ -353,6 +392,54 @@ ${items}};
 	MysqlColumn
       end
 
+      attribute 166570 "layoutPropositionChoixA"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166698 "layoutPropositionChoixB"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166826 "layoutPropositionChoixC"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166954 "layoutPropositionChoixD"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       attribute 157482 "layoutChronometre"
 	private explicit_type "QHBoxLayout"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
@@ -437,8 +524,68 @@ ${items}};
 	MysqlColumn
       end
 
+      attribute 167082 "choixPropositionA"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167210 "choixPropositionB"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167338 "choixPropositionC"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167466 "choixPropositionD"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       attribute 158378 "labelChronometre"
 	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167594 "timer"
+	private explicit_type "QTimer"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
@@ -463,7 +610,55 @@ ${items}};
 "
       end
 
+      attribute 128006 "layoutPrincipalResultat"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128134 "layoutParticipantResultat"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       attribute 150058 "titreFenetreResultats"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128262 "nomParticipant"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128390 "resultatParticipant"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -480,7 +675,9 @@ ${items}};
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "// Méthodes privées
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -615,6 +812,20 @@ ${body}}
 	
       end
 
+      operation 167082 "definirNomsObjets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 156842 "placerWidgetsFenetreJeu"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
@@ -643,6 +854,153 @@ ${body}}
 	
       end
 
+      operation 167210 "initialiserEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167338 "afficherQuestion"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167466 "afficherNbQuestions"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 2
+	  param in name "numeroQuestion" explicit_type "uint"
+	  param in name "nbQuestions" explicit_type "uint"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167594 "afficherLibelleQuestion"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "question" type class_ref 134954 // Question
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167722 "afficherPropositionsQuestion"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "question" type class_ref 134954 // Question
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167850 "afficherTempsQuestion"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "question" type class_ref 134954 // Question
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167978 "initialiserChronometre"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168106 "changerCouleurChronometre"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168234 "mettreAJourProposition"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 2
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "texte" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128646 "effacerChoixParticipants"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 134570 "IHMQuizzy"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -654,7 +1012,7 @@ ${body}}
 //
 //@brief Définition de la classe IHMQuizzy
 //@author Thomas HNIZDO
-//@version 0.1
+//@version 0.2
 //
 //
 //@brief Constructeur de la classe IHMQuizzy
@@ -665,7 +1023,7 @@ ${body}}
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QWidget(parent), quizzy(new Quizzy(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
 ${throw}{
 ${body}}
 "
@@ -770,13 +1128,12 @@ ${body}}
 	
       end
 
-      operation 156970 "ajouterParticipant"
+      operation 168362 "afficherDebutQuiz"
 	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 1
-	  param in name "participant" explicit_type "QString"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -785,11 +1142,96 @@ ${body}}
 	
       end
 
-      operation 157226 "ajouterLibelleQuestion"
+      operation 168490 "afficherLancementQuiz"
 	preserve_cpp_body_indent public explicit_return_type "void"
-	nparams 1
-	  param in name "question" type class_ref 134954 // Question
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168618 "afficherPret"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168746 "afficherParticipant"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "nomParticipant" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168874 "demarrerQuestion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169002 "afficherDecompteQuestion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169130 "afficherChoixParticipants"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128774 "afficherQuestionSuivante"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
   ${body}}
@@ -800,6 +1242,27 @@ ${body}}
 	
       end
 
+      operation 128902 "afficherResultats"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128134 // <dependency>
+	relation 128134 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 128134 // <dependency>
+	  b parent class_ref 148138 // Fenetre
+      end
     end
 
     class 134698 "typedef1"
@@ -846,14 +1309,152 @@ ${inlines}
 	mysql ""
       end
 
+      class 154794 "Etat"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 168362 "Initial"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 168490 "QuizDemarre"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 168618 "ParticipantsAjoutes"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 168746 "QuestionsAjoutees"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 168874 "QuizLance"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 169002 "QuestionDemarree"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 169130 "QuestionTerminee"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 169258 "Resultats"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 169386 "QuizFini"
+	  public type class_ref 154794 // Etat
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      classrelation 154794 // participants (<unidirectional association>)
+	relation 154794 --->
+	  stereotype "QVector"
+	  a role_name "participants" private
+	    comment "!< conteneur de Participant pour le quiz"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 154794 // participants (<unidirectional association>)
+	  b parent class_ref 154666 // Participant
+      end
+
       classrelation 134954 // listeQuestions (<unidirectional association>)
 	relation 134954 --->
 	  stereotype "QVector"
 	  a role_name "listeQuestions" private
+	    comment "!< conteneur de Question pour le quiz"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
 "
 	    classrelation_ref 134954 // listeQuestions (<unidirectional association>)
 	  b parent class_ref 134954 // Question
+      end
+
+      attribute 169514 "choixParticipants"
+	private explicit_type "int, QStringList"
+	stereotype "QMap"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur des choix des participants pour la"
       end
 
       attribute 135082 "indexQuestionActuelle"
@@ -866,15 +1467,58 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< question en cours
+!< le numéro de question en cours"
       end
 
-      classrelation 141610 // bluetooth (<unidirectional association>)
-	relation 141610 --->
-	  a role_name "bluetooth" private
+      classrelation 154922 // etat (<directional composition>)
+	relation 154922 *-->
+	  a role_name "etat" private
+	    comment "!< l'état de déroulement du quiz"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 154922 // etat (<directional composition>)
+	  b parent class_ref 154794 // Etat
+      end
+
+      classrelation 155050 // communicationTablette (<unidirectional association>)
+	relation 155050 --->
+	  a role_name "communicationTablette" private
+	    comment "!< association avec CommunicationBluetooth"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
-	    classrelation_ref 141610 // bluetooth (<unidirectional association>)
+	    classrelation_ref 155050 // communicationTablette (<unidirectional association>)
 	  b parent class_ref 141610 // CommunicationBluetooth
+      end
+
+      operation 170794 "initialiserCommunicationTablette"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes privées
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174122 "initialiserQuiz"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
       end
 
       operation 135082 "Quizzy"
@@ -885,8 +1529,8 @@ ${inlines}
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI),
-    bluetooth(new CommunicationBluetooth(this))
+    QObject(parent), indexQuestionActuelle(INDEX_NON_DEFINI), etat(Initial),
+    communicationTablette(new CommunicationBluetooth(this))
 ${throw}{
 ${body}}
 "
@@ -908,6 +1552,466 @@ ${body}}
 	
 	
 	
+      end
+
+      operation 170922 "debuter"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "reset" explicit_type "bool"
+	    defaultvalue "true"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion du quiz"
+      end
+
+      operation 171050 "lancer"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171178 "estParticipantActuel"
+	preserve_cpp_body_indent const public explicit_return_type "bool"
+	nparams 1
+	  param in name "pidJoueur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion des participants"
+      end
+
+      operation 171306 "traiterReponseParticipant"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 3
+	  param inout name "participant" type class_ref 154666 // Participant
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Gestion des réponses
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion des questions
+ Gestion des réponses"
+      end
+
+      operation 171434 "effacerChoix"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171562 "getNbQuestions"
+	preserve_cpp_body_indent public explicit_return_type "uint"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Getters"
+      end
+
+      operation 171690 "getNbParticipants"
+	preserve_cpp_body_indent public explicit_return_type "uint"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128006 "getParticipants"
+	preserve_cpp_body_indent public explicit_return_type "QVector<Participant*>"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171818 "getQuestion"
+	preserve_cpp_body_indent public return_type class_ref 134954 // Question
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171946 "getEtat"
+	preserve_cpp_body_indent const public return_type class_ref 154794 // Etat
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172074 "getChoixParticipants"
+	preserve_cpp_body_indent const public explicit_return_type "QMap<int, QStringList>"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172202 "getIndexQuestionActuelle"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172330 "getNomDuParticipant"
+	preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "pidJoueur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172458 "getCommunicationTablette"
+	preserve_cpp_body_indent public return_type class_ref 141610 // CommunicationBluetooth
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 154538 "slots"
+	
+	cpp "  public slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 172586 "gererDebutQuiz"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Slot Gestion du quiz
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion du quiz"
+      end
+
+      operation 172714 "ajouterParticipant"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "nomParticipant" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Slot Gestion des participants
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion des participants"
+      end
+
+      operation 172842 "ajouterQuestion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 4
+	  param in name "libelle" explicit_type "QString"
+	  param in name "propositions" explicit_type "QStringList"
+	  param in name "reponseValide" explicit_type "int"
+	  param in name "temps" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Slot Gestion des questions
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Gestion des questions"
+      end
+
+      operation 172970 "demarrerQuestion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173098 "terminerQuestion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173226 "traiterReponse"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 3
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Gestion des réponses
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128134 "passerQuestionSuivante"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128262 "gererFinQuiz"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 154666 "signals"
+	
+	cpp "  signals:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 173354 "debutQuiz"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 173482 "lancementQuiz"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 173610 "participantAjoute"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "nomParticipant" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 173738 "questionAjoutee"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 173866 "questionDemarree"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 173994 "questionTerminee"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 128390 "questionSuivantePrete"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 128518 "quizTermine"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128006 // <dependency>
+	relation 128006 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 128006 // <dependency>
+	  b parent class_ref 154794 // Etat
       end
     end
 
@@ -974,7 +2078,7 @@ ${inlines}
       end
 
       attribute 134954 "reponseCorrecte"
-	private explicit_type "char"
+	private explicit_type "int"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
@@ -987,12 +2091,15 @@ ${inlines}
 
       operation 134826 "Question"
 	preserve_cpp_body_indent public explicit_return_type ""
-	nparams 2
+	nparams 3
 	  param in name "libelle" explicit_type "QString"
 	  param in name "propositions" explicit_type "QStringList"
-	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract};
+	  param in name "reponseCorrecte" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)} : libelle(libelle)
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    libelle(libelle),
+    reponseCorrecte(reponseCorrecte)
 ${throw}{
 ${body}}
 "
@@ -1022,7 +2129,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -1036,7 +2143,50 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170410 "getDuree"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170538 "setDuree"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "temps" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170666 "getReponseCorrecte"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1059,7 +2209,7 @@ ${body}}
     end
 
     classdiagram 134570 "Diagramme de classes"
-      classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes member_max_width 0 show_relation_visibility yes end
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
 
@@ -1076,6 +2226,10 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      comment "@class CommunicationBluetooth
+@brief Déclaration de la classe CommunicationBluetooth
+@details Cette classe gère la connexion bluetooth
+"
       classrelation 141482 // <generalisation>
 	relation 141482 ---|>
 	  a public
@@ -1094,7 +2248,20 @@ ${inlines}
 	mysql ""
       end
 
-      attribute 141610 "nomAppareil"
+      attribute 165034 "appareilLocal"
+	private explicit_type "QBluetoothLocalDevice"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le périphérique Bluetooth"
+      end
+
+      attribute 165162 "nomAppareilLocal"
 	private explicit_type "QString"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
@@ -1104,10 +2271,63 @@ ${inlines}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+	comment "!< Le nom du périphérique Bluetooth"
       end
 
-      attribute 141738 "adresseAppareil"
+      attribute 165290 "adresseAppareilLocal"
 	private explicit_type "QBluetoothAddress"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'adresse MAC du périphérique Bluetooth"
+      end
+
+      attribute 165418 "serveurBluetooth"
+	private explicit_type "QBluetoothServer"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le serveur Bluetooth"
+      end
+
+      attribute 165546 "socketTablette"
+	private explicit_type "QBluetoothSocket"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< La socket de communication Bluetooth"
+      end
+
+      attribute 165674 "serviceInfo"
+	private explicit_type "QBluetoothServiceInfo"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Les informations sur le service bluetooth"
+      end
+
+      attribute 165802 "connecte"
+	private explicit_type "bool"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
@@ -1118,9 +2338,10 @@ ${inlines}
 	MysqlColumn
       end
 
-      attribute 141866 "socket"
-	private explicit_type "QBluetoothSocket"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+      attribute 165930 "formatTrame"
+	private explicit_type "QChar, int"
+	stereotype "QMap"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -1130,6 +2351,67 @@ ${inlines}
 	MysqlColumn
       end
 
+      operation 164010 "verifierTrame"
+	preserve_cpp_body_indent const private explicit_return_type "bool"
+	nparams 1
+	  param in name "trame" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes privées
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164138 "verifierChampsTrame"
+	preserve_cpp_body_indent const private explicit_return_type "bool"
+	nparams 1
+	  param in name "trame" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164266 "initialiserFormatTrame"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164394 "decoderTrame"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "trame" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 141738 "CommunicationBluetooth"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -1137,8 +2419,12 @@ ${inlines}
 	    defaultvalue "nullptr"
 	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QObject(parent)
+	cpp_def "//
+//@brief Constructeur de la classe CommunicationBluetooth
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
+    QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr)
 ${throw}{
 ${body}}
 "
@@ -1153,13 +2439,638 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+	cpp_def "//
+//@brief Destructeur de la classe Participant
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
 	
 	
 	
 	
+      end
+
+      operation 164522 "verifierBluetooth"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164650 "activerBluetooth"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164778 "lireNomAppareil"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164906 "rendreAppareilVisible"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165034 "demarrerServeur"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165162 "arreterServeur"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 154282 "slots"
+	
+	cpp "  private slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 165290 "connecterTablette"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165418 "deconnecterTablette"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 165546 "recevoirTrame"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 154410 "signals"
+	
+	cpp "  signals:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 165674 "tabletteConnectee"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 165802 "tabletteDeconnectee"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 165930 "debutQuiz"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166058 "nouveauParticipant"
+	private explicit_return_type "void"
+	nparams 2
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "nomJoueur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166186 "nouvelleQuestion"
+	private explicit_return_type "void"
+	nparams 4
+	  param in name "libelle" explicit_type "QString"
+	  param in name "propositions" explicit_type "QStringList"
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "temps" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166314 "debutQuestion"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166442 "choixReponse"
+	private explicit_return_type "void"
+	nparams 3
+	  param in name "pidJoueur" explicit_type "QString"
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166570 "bonneReponse"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166698 "questionSuivante"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166826 "questionPrecedente"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 166954 "finQuiz"
+	private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 154666 "Participant"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class Participant
+@brief Déclaration de la classe Participant
+@details Cette classe gère un participant d'un Quiz
+"
+      attribute 167722 "nom"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le nom du participant"
+      end
+
+      attribute 167850 "idPupitre"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< l'id du pupitre"
+      end
+
+      attribute 167978 "nombreReponsesCorrectes"
+	private explicit_type "uint"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le nombre de bonnes réponses"
+      end
+
+      attribute 168106 "reponses"
+	private explicit_type "int"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 168234 "tempsReponses"
+	private explicit_type "int"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< les temps de réponse"
+      end
+
+      operation 169258 "Participant"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "nom" explicit_type "QString"
+	  param in name "idPupitre" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur de la classe Participant
+//
+//@param nom le nom du paricipant
+//@param idPupitre l'id du pupitre
+//
+
+${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}${)} :
+    nom(nom), idPupitre(idPupitre), nombreReponsesCorrectes(0)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169386 "~Participant"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Participant
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169514 "getNom"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne le nom du paricipant
+//
+//@return QString le nom du paricipant
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169642 "getIdPupitre"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut idPupitre
+//
+//@return int l'id du pupitre
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169770 "getNombreReponsesCorrectes"
+	preserve_cpp_body_indent const public explicit_return_type "uint"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur de la classe IHMQuizzy
+//
+//@return int le nombre de bonnes réponses
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169898 "getReponses"
+	preserve_cpp_body_indent const public explicit_return_type "QVector<int>"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170026 "getTempsReponses"
+	preserve_cpp_body_indent const public explicit_return_type "QVector<int>"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170154 "enregistrerReponse"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "reponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170282 "incrementerNombreReponsesCorrectes"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Incrémente le nombre de bonnes réponses
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    state 134570 "deroulement"
+      stereotype "machine"
+      statediagram 141098 "diagramme etat"
+	statediagramsettings draw_all_relations yes
+	 show_activities yes region_horizontally yes drawing_language c++ end
+	size A0
+      end
+
+      state 134698 "Initial"
+	transition 134570 "Trame $L / debuter()"
+	  on state_ref 134826 // QuizDemarre
+	  external 
+	end
+      end
+
+      state 134826 "QuizDemarre"
+	  cpp_do_activity "initialiserQuiz()"
+	specification operation_ref 170922 // debuter
+	transition 134698 "Trame $I / ajouterParticipant(pidJoueur, nomParticipant)"
+	  on state_ref 134954 // ParticipantsAjoutes
+	  external 
+	end
+      end
+
+      state 134954 "ParticipantsAjoutes"
+	  cpp_do_activity "new Participant(nomParticipant, pidJoueur)"
+	transition 134826 "Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)"
+	  on state_ref 135082 // QuestionsAjoutees
+	  external 
+	end
+
+	transition 135722 "Trame $I / ajouterParticipant(pidJoueur, nomParticipant)"
+	  on state_ref 134954 // ParticipantsAjoutes
+	end
+      end
+
+      state 135082 "QuestionsAjoutees"
+	  cpp_do_activity "new Question(libelle, propositions, reponseValide)"
+	transition 134954 "Trame $L / lancer()"
+	  on state_ref 135210 // QuizLance
+	  external 
+	end
+
+	transition 135850 "Trame $G / ajouterQuestion(libelle, propositions, reponseValide, temps)"
+	  on state_ref 135082 // QuestionsAjoutees
+	end
+      end
+
+      state 135210 "QuizLance"
+	  cpp_do_activity "effacerChoix()"
+	transition 135082 "Trame $T / demarrerQuestion()"
+	  on state_ref 135338 // QuestionDemarree
+	  external 
+	end
+      end
+
+      state 135338 "QuestionDemarree"
+	transition 135210 "timeout() du minuteur / terminerQuestion()"
+	  on state_ref 135466 // QuestionTerminee
+	  external 
+	end
+
+	transition 135978 "Trame $U / traiterReponse(QString pidJoueur, numeroReponse, tempsReponse)"
+	  on state_ref 135338 // QuestionDemarree
+	end
+      end
+
+      state 135466 "QuestionTerminee"
+	transition 135338 "Trame $F"
+	  on state_ref 135594 // Resultats
+	  external 
+	end
+
+	transition 136106 "Trame $S"
+	  on state_ref 135210 // QuizLance
+	  external 
+	end
+      end
+
+      state 135594 "Resultats"
+	transition 135466 "<transition>"
+	  on state_ref 135722 // QuizFini
+	  external 
+	end
+      end
+
+      state 135722 "QuizFini"
+      end
+
+      pseudostate 134698 initial ""
+	transition 135594 "Quizzy()"
+	  on state_ref 134698 // Initial
+	  external 
+	end
+      end
+
+      stateaction 134570
+	stereotype "send-signal"
+	cpp "debutQuiz()"
       end
     end
   end
@@ -1293,6 +3204,29 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 141610 // CommunicationBluetooth
+      end
+    end
+
+    artifact 148010 "participant"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 154666 // Participant
       end
     end
   end

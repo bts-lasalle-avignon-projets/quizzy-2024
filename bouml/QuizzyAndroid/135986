@@ -1,0 +1,965 @@
+format 224
+"protocole" // quizzy::protocole
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/btssn2/Documents/Hillion/MP/MP2/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/protocole/"
+  java_package "fr.hillionj.quizzy.protocole"
+  classview 135730 "protocole"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 137394 "GestionnaireProtocoles"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 141106 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_GestionnaireProtocoles\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 137010 // gestionnaireProtocoles (<unidirectional association>)
+	relation 137010 --->
+	  a role_name "gestionnaireProtocoles" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137010 // gestionnaireProtocoles (<unidirectional association>)
+	  b parent class_ref 137394 // GestionnaireProtocoles
+      end
+
+      attribute 141234 "CODE_CONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 33"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141362 "CODE_DECONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 34"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141490 "CODE_RECEPTION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 35"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141618 "CODE_ERREUR_CONNEXION_BLUETOOTH"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 36"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 137138 // activite (<unidirectional association>)
+	relation 137138 --->
+	  a role_name "activite" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137138 // activite (<unidirectional association>)
+	  b parent class_ref 134706 // ActivitePrincipale
+      end
+
+      operation 149810 "getGestionnaireProtocoles"
+	class_operation public return_type class_ref 137394 // GestionnaireProtocoles
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149938 "traiterProtocoleEntrant"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "peripherique" type class_ref 135730 // Peripherique
+	  param inout name "protocole" type class_ref 137522 // Protocole
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150066 "initialiserHandler"
+	public explicit_return_type "Handler"
+	nparams 1
+	  param inout name "activite" type class_ref 134706 // ActivitePrincipale
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150194 "setActivite"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "activite" type class_ref 134706 // ActivitePrincipale
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150322 "traiterReception"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "msg" explicit_type "Message"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150450 "traiterDeconnexion"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "msg" explicit_type "Message"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150578 "traiterErreurConnexion"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "msg" explicit_type "Message"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150706 "traiterConnexion"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "msg" explicit_type "Message"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150834 "creerToast"
+	private explicit_return_type "void"
+	nparams 2
+	  param inout name "activite" explicit_type "AppCompatActivity"
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137522 "Protocole"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 141746 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Protocole\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 150962 "traiterTrame"
+	class_operation public return_type class_ref 137522 // Protocole
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151090 "getProtocole"
+	class_operation public return_type class_ref 137522 // Protocole
+	nparams 1
+	  param inout name "type" type class_ref 137650 // TypeProtocole
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      attribute 141874 "trame"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 151218 "getFormat"
+	abstract public explicit_return_type "String"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151346 "getType"
+	abstract public return_type class_ref 137650 // TypeProtocole
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151474 "getTrame"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151602 "setTrame"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151730 "genererTrame"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151858 "envoyer"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "receveursProtocoles" explicit_type "List<? extends ReceveurProtocole>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 151986 "envoyer"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "receveur" type class_ref 137778 // ReceveurProtocole
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152114 "estValide"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "trameComplete" explicit_type "boolean"
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152242 "estValide"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152370 "extraireDonnees"
+	protected explicit_return_type "Map<String, String>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152498 "toInt"
+	public explicit_return_type "int"
+	nparams 1
+	  param in name "string" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152626 "toLong"
+	public explicit_return_type "long"
+	nparams 1
+	  param in name "string" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 177458 "traiterTrame"
+	class_operation public return_type class_ref 137522 // Protocole
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 177586 "getProtocole"
+	class_operation public return_type class_ref 137522 // Protocole
+	nparams 1
+	  param inout name "type" type class_ref 137650 // TypeProtocole
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 177714 "getFormat"
+	abstract public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 177842 "getType"
+	abstract public return_type class_ref 137650 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 177970 "getTrame"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178098 "setTrame"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178226 "genererTrame"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178354 "envoyer"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "receveursProtocoles" explicit_type "List<? extends ReceveurProtocole>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178482 "envoyer"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "receveur" type class_ref 137778 // ReceveurProtocole
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178610 "estValide"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "trameComplete" explicit_type "boolean"
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178738 "estValide"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "" explicit_type "String...contenu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178866 "extraireDonnees"
+	protected explicit_return_type "Map<String, String>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 178994 "toInt"
+	public explicit_return_type "int"
+	nparams 1
+	  param in name "string" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 179122 "toLong"
+	public explicit_return_type "long"
+	nparams 1
+	  param in name "string" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 137650 "TypeProtocole"
+      visibility public stereotype "enum"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 142002 "LANCEMENT"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"L\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142130 "INSCRIPTION_PARTICIPANT"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"I\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142258 "ENVOI_QUESTION"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"G\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142386 "DEMARRAGE_QUESTION"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"T\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142514 "INDICATION_REPONSE_PARTICIPANT"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"U\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142642 "AFFICHER_REPONSE"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"H\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142770 "AFFICHER_QUESTION_SUIVANTE"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"S\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 142898 "AFFICHER_QUESTION_PRECEDENTE"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"P\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143026 "FIN_QUIZ"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"F\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143154 "INDICATION_QUESTION"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"Q\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143282 "ACTIVER_BUZZERS"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"E\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143410 "DESACTIVER_BUZZERS"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"D\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143538 "RECEPTION_REPONSE"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"R\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143666 "ACQUITEMENT"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"A\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143794 "INDIQUER_RESULTAT"
+	public type class_ref 137650 // TypeProtocole
+	cpp_decl ""
+	java_decl "  ${@}${name}(\"B\"),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 143922 "indiceType"
+	private explicit_type "String"
+	stereotype "attribute"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 144050 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_TypeProtocole\""
+	stereotype "attribute"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 152754 "TypeProtocole"
+	package explicit_return_type ""
+	nparams 1
+	  param in name "indiceType" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 152882 "getType"
+	class_operation public return_type class_ref 137650 // TypeProtocole
+	nparams 1
+	  param in name "indiceType" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153010 "getIndiceType"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 153138 "getProtocole"
+	public return_type class_ref 137522 // Protocole
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 135346 "protocole"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 136114 "GestionnaireProtocoles"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 136242 "Protocole"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 136370 "TypeProtocole"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+  end
+
+  package_ref 136114 // speciales
+end

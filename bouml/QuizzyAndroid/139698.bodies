@@ -1,0 +1,13 @@
+class ProtocoleIndiquerResultat
+!!!161586.java!!!	ProtocoleIndiquerResultat(in trame : String)
+        setTrame(trame);
+!!!161714.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION;RESULTAT\n";
+!!!161842.java!!!	getType() : TypeProtocole
+        return TypeProtocole.INDIQUER_RESULTAT;
+!!!161970.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!162098.java!!!	estReponseVraie() : boolean
+        return toInt(extraireDonnees().get("RESULTAT")) == 1;
+!!!162226.java!!!	genererTrame(in numeroQuestion : int, inout reponseVraie : boolean) : void
+        super.genererTrame(numeroQuestion + "", reponseVraie + "");

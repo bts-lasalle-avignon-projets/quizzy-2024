@@ -1,5 +1,197 @@
 class Quizzy
+!!!170794.cpp!!!	initialiserCommunicationTablette() : void
+    qDebug() << Q_FUNC_INFO;
+    communicationTablette->demarrerServeur();
+!!!174122.cpp!!!	initialiserQuiz() : void
+    participants.clear();
+    listeQuestions.clear();
+    indexQuestionActuelle = INDEX_NON_DEFINI;
 !!!135082.cpp!!!	Quizzy(inout parent : QObject = nullptr)
     qDebug() << Q_FUNC_INFO;
+    initialiserCommunicationTablette();
 !!!135210.cpp!!!	~Quizzy()
     qDebug() << Q_FUNC_INFO;
+!!!170922.cpp!!!	debuter(in reset : bool = true) : void
+    if(etat == Initial)
+    {
+        if(reset)
+        {
+            qDebug() << Q_FUNC_INFO << "reset" << reset;
+            initialiserQuiz();
+        }
+        etat = QuizDemarre;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit debutQuiz();
+    }
+!!!171050.cpp!!!	lancer() : void
+    if(etat == QuestionsAjoutees)
+    {
+        indexQuestionActuelle = 0;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+        etat = QuizLance;
+        effacerChoix();
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit lancementQuiz();
+    }
+!!!171178.cpp!!!	estParticipantActuel(in pidJoueur : QString) : bool
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nom"
+                     << participant->getNom() << "true";
+            return true;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "false";
+    return false;
+!!!171306.cpp!!!	traiterReponseParticipant(inout participant : Participant, in numeroReponse : int, in tempsReponse : int) : bool
+    Question* questionActuelle = getQuestion();
+    if(questionActuelle)
+    {
+        int reponseCorrecte = questionActuelle->getReponseCorrecte();
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
+                 << "nom" << participant->getNom() << "numeroReponse"
+                 << numeroReponse << "reponseCorrecte" << reponseCorrecte
+                 << "tempsReponse" << tempsReponse;
+
+        participant->enregistrerReponse(numeroReponse, tempsReponse);
+
+        if(numeroReponse == reponseCorrecte)
+        {
+            participant->incrementerNombreReponsesCorrectes();
+        }
+
+        choixParticipants[numeroReponse].append(participant->getNom());
+        return true;
+    }
+    return false;
+!!!171434.cpp!!!	effacerChoix() : void
+    for(int i = 0; i < choixParticipants.size(); ++i)
+    {
+        choixParticipants[i].clear();
+    }
+!!!171562.cpp!!!	getNbQuestions() : uint
+    return listeQuestions.size();
+!!!171690.cpp!!!	getNbParticipants() : uint
+    return participants.size();
+!!!128006.cpp!!!	getParticipants() : QVector<Participant*>
+    return participants;
+!!!171818.cpp!!!	getQuestion() : Question
+    if(listeQuestions.isEmpty())
+        return nullptr;
+    return listeQuestions[indexQuestionActuelle];
+!!!171946.cpp!!!	getEtat() : Quizzy::Etat
+    return etat;
+!!!172074.cpp!!!	getChoixParticipants() : QMap<int, QStringList>
+    return choixParticipants;
+!!!172202.cpp!!!	getIndexQuestionActuelle() : int
+    return indexQuestionActuelle;
+!!!172330.cpp!!!	getNomDuParticipant(in pidJoueur : QString) : QString
+    for(Participant* participant: participants)
+    {
+        if(participant->getIdPupitre() == pidJoueur.toInt())
+        {
+            return participant->getNom();
+        }
+    }
+    return QString();
+!!!172458.cpp!!!	getCommunicationTablette() : CommunicationBluetooth
+    return communicationTablette;
+!!!172586.cpp!!!	gererDebutQuiz() : void
+    if(etat == Initial)
+    {
+        debuter();
+    }
+    else if(etat == QuestionsAjoutees)
+    {
+        lancer();
+    }
+!!!172714.cpp!!!	ajouterParticipant(in pidJoueur : QString, in nomParticipant : QString) : void
+    if(etat == QuizDemarre || etat == ParticipantsAjoutes)
+    {
+        if(estParticipantActuel(pidJoueur))
+            return;
+
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
+                 << nomParticipant;
+        Participant* participant =
+          new Participant(nomParticipant, pidJoueur.toInt());
+        participants.push_back(participant);
+
+        etat = ParticipantsAjoutes;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+
+        emit participantAjoute(pidJoueur, nomParticipant);
+    }
+!!!172842.cpp!!!	ajouterQuestion(in libelle : QString, in propositions : QStringList, in reponseValide : int, in temps : int) : void
+    if(etat == ParticipantsAjoutes || etat == QuestionsAjoutees)
+    {
+        qDebug() << Q_FUNC_INFO << "libelle" << libelle << "propositions"
+                 << propositions << "reponseValide" << reponseValide << temps
+                 << temps;
+        Question* question = new Question(libelle, propositions, reponseValide);
+        question->setDuree(temps);
+        listeQuestions.append(question);
+
+        etat = QuestionsAjoutees;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+
+        emit questionAjoutee();
+    }
+!!!172970.cpp!!!	demarrerQuestion() : void
+    if(etat == QuizLance && getQuestion() != nullptr)
+    {
+        etat = QuestionDemarree;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionDemarree();
+    }
+!!!173098.cpp!!!	terminerQuestion() : void
+    if(etat == QuestionDemarree && getQuestion() != nullptr)
+    {
+        // @todo Gérer les participants qui n'ont pas répondu ?
+        etat = Quizzy::QuestionTerminee;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionTerminee();
+    }
+!!!173226.cpp!!!	traiterReponse(in pidJoueur : QString, in numeroReponse : int, in tempsReponse : int) : void
+    if(etat == QuestionDemarree)
+    {
+        if(!estParticipantActuel(pidJoueur))
+        {
+            return;
+        }
+
+        qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "numeroReponse"
+                 << numeroReponse << "tempsReponse" << tempsReponse;
+        for(Participant* participant: participants)
+        {
+            if(participant->getIdPupitre() == pidJoueur.toInt())
+            {
+                traiterReponseParticipant(participant,
+                                          numeroReponse,
+                                          tempsReponse);
+            }
+        }
+    }
+!!!128134.cpp!!!	passerQuestionSuivante() : void
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle < listeQuestions.size() - 1)
+    {
+        indexQuestionActuelle++;
+        qDebug() << Q_FUNC_INFO << "indexQuestionActuelle"
+                 << indexQuestionActuelle;
+        effacerChoix();
+        etat = QuizLance;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit questionSuivantePrete();
+    }
+!!!128262.cpp!!!	gererFinQuiz() : void
+    if(etat == QuestionTerminee &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        etat = Resultats;
+        qDebug() << Q_FUNC_INFO << "etat" << etat;
+        emit quizTermine();
+    }

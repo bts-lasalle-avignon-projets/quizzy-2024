@@ -1,0 +1,52 @@
+class ActivitePrincipale
+!!!134578.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
+
+        initialiserActivite();
+
+        if(!estInitialiser())
+        {
+            new WatchDog();
+            initialiserCommunication();
+            BaseDeDonnees.initialiser(this);
+            GestionnaireBruitage.initialiser(this);
+        }
+        GestionnaireProtocoles.getGestionnaireProtocoles().setActivite(this);
+        GestionnaireBluetooth.getGestionnaireBluetooth().setActivite(this);
+!!!134706.java!!!	onStart() : void
+        super.onStart();
+        Log.d(TAG, "onStart()");
+!!!134834.java!!!	onResume() : void
+        super.onResume();
+        Log.d(TAG, "onResume()");
+!!!134962.java!!!	onPause() : void
+        super.onPause();
+        Log.d(TAG, "onPause()");
+!!!135090.java!!!	onStop() : void
+        super.onStop();
+        Log.d(TAG, "onStop()");
+!!!135218.java!!!	onDestroy() : void
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
+!!!135346.java!!!	initialiserActivite() : void
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initialiserNavigation();
+!!!135474.java!!!	initialiserNavigation() : void
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration  appBarConfiguration =
+          new AppBarConfiguration
+            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+            .build();
+        NavController navController =
+          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+!!!135602.java!!!	initialiserCommunication() : void
+        Handler handler =
+          GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
+        GestionnaireBluetooth.initialiser(this, handler);
+!!!135730.java!!!	estInitialiser() : boolean
+        return GestionnaireBluetooth.getGestionnaireBluetooth() != null;

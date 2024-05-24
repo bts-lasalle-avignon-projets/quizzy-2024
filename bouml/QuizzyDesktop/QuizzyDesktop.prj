@@ -1,7 +1,7 @@
 format 224
 "QuizzyDesktop"
-  revision 5
-  modified_by 42 "tv"
+  revision 8
+  modified_by 6 "thomas"
   cpp_root_dir "../../"
 
 
@@ -71,7 +71,7 @@ format 224
       size A0
     end
 
-    class 128002 "Candidat"
+    class 128002 "Participant"
       visibility package stereotype "actor"
       cpp_decl ""
       java_decl ""

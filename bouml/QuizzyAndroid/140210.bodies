@@ -1,0 +1,189 @@
+class WatchDog
+!!!168754.java!!!	verifierPeripheriques() : void
+        for(Peripherique peripherique:
+            GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques())
+        {
+            if(peripherique.estInterrompu())
+            {
+                peripherique.signalerInterruption();
+            }
+        }
+!!!168882.java!!!	verifierQuiz() : void
+        if(FragmentQuiz.getVueActive() == null || FragmentQuiz.getVueActive().getActivity() == null)
+        {
+            return;
+        }
+        mettreAjourBarreDeProgression();
+        verifierTempsMortApresReponse();
+        verifierTempsMortApresQuestion();
+!!!169010.java!!!	verifierTempsMortApresReponse() : void
+        Question questionEnCours = quiz.getQuestionEnCours();
+        if(questionEnCours != null && quiz.getEtape() == EtapeQuiz.ATTENTE &&
+           quiz.getTempsQuestionEnCours() >= questionEnCours.getTemps() && !quiz.estTempsMort() &&
+           !quiz.estEnPause())
+        {
+            quiz.setEtape(EtapeQuiz.AFFICHAGE_REPONSE);
+            quiz.demarrerTempsMort();
+            afficherSelection();
+        }
+!!!169138.java!!!	verifierTempsMortApresQuestion() : void
+        if(quiz.estTempsMort() &&
+           System.currentTimeMillis() - quiz.heureDemarrageTempsMort > Quiz.tempsEntreQuestion)
+        {
+            if(quiz.getEtape() == EtapeQuiz.AFFICHAGE_REPONSE)
+            {
+                quiz.setEtape(EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE);
+                quiz.demarrerTempsMort();
+                afficherReponse();
+            }
+            else
+            {
+                quiz.heureDemarrageTempsMort = 0;
+                envoyerQuestionSuivante();
+            }
+        }
+!!!169266.java!!!	envoyerQuestionSuivante() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                quiz.envoyerQuestionSuivante();
+            }
+        });
+!!!169394.java!!!	mettreAjourBarreDeProgression() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
+            }
+        });
+!!!169522.java!!!	afficherReponse() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                quiz.afficherReponse();
+                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+            }
+        });
+!!!169650.java!!!	afficherSelection() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+                FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+            }
+        });
+!!!169778.java!!!	WatchDog()
+        this.quiz = Quiz.getQuizEnCours();
+
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    verifierQuiz();
+                }
+                catch(Exception e)
+                {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+            }
+        }, 0, 50, TimeUnit.MILLISECONDS);
+!!!181170.java!!!	verifierPeripheriques() : void
+        for(Peripherique peripherique:
+            GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques())
+        {
+            if(peripherique.estInterrompu())
+            {
+                peripherique.signalerInterruption();
+            }
+        }
+!!!181298.java!!!	verifierQuiz() : void
+        if(FragmentQuiz.getVueActive() == null || FragmentQuiz.getVueActive().getActivity() == null)
+        {
+            return;
+        }
+        mettreAjourBarreDeProgression();
+        verifierTempsMortApresReponse();
+        verifierTempsMortApresQuestion();
+!!!181426.java!!!	verifierTempsMortApresReponse() : void
+        Question questionEnCours = quiz.getQuestionEnCours();
+        if(questionEnCours != null && quiz.getEtape() == EtapeQuiz.ATTENTE &&
+           quiz.getTempsQuestionEnCours() >= questionEnCours.getTemps() && !quiz.estTempsMort() &&
+           !quiz.estEnPause())
+        {
+            quiz.setEtape(EtapeQuiz.AFFICHAGE_REPONSE);
+            quiz.demarrerTempsMort();
+            afficherSelection();
+        }
+!!!181554.java!!!	verifierTempsMortApresQuestion() : void
+        if(quiz.estTempsMort() &&
+           System.currentTimeMillis() - quiz.heureDemarrageTempsMort > Quiz.tempsEntreQuestion)
+        {
+            if(quiz.getEtape() == EtapeQuiz.AFFICHAGE_REPONSE)
+            {
+                quiz.setEtape(EtapeQuiz.AFFICHAGE_QUESTION_SUIVANTE);
+                quiz.demarrerTempsMort();
+                afficherReponse();
+            }
+            else
+            {
+                quiz.heureDemarrageTempsMort = 0;
+                envoyerQuestionSuivante();
+            }
+        }
+!!!181682.java!!!	envoyerQuestionSuivante() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                quiz.envoyerQuestionSuivante();
+            }
+        });
+!!!181810.java!!!	mettreAjourBarreDeProgression() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
+            }
+        });
+!!!181938.java!!!	afficherReponse() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                quiz.afficherReponse();
+                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+            }
+        });
+!!!182066.java!!!	afficherSelection() : void
+        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+                FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+            }
+        });
+!!!182194.java!!!	WatchDog()
+        this.quiz = Quiz.getQuizEnCours();
+
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    verifierQuiz();
+                }
+                catch(Exception e)
+                {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+            }
+        }, 0, 50, TimeUnit.MILLISECONDS);

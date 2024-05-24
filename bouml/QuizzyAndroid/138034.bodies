@@ -1,0 +1,15 @@
+class ProtocoleReceptionReponse
+!!!153650.java!!!	ProtocoleReceptionReponse(in trame : String)
+        setTrame(trame);
+!!!153778.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION;REPONSE;TEMPS\n";
+!!!153906.java!!!	getType() : TypeProtocole
+        return TypeProtocole.RECEPTION_REPONSE;
+!!!154034.java!!!	getTempsReponse() : long
+        return toLong(extraireDonnees().get("TEMPS"));
+!!!154162.java!!!	getNumeroReponse() : int
+        return toInt(extraireDonnees().get("REPONSE"));
+!!!154290.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!154418.java!!!	genererTrame(in numeroQuestion : int, in numeroReponse : int, in tempsReponse : int) : void
+        super.genererTrame(numeroQuestion + "", numeroReponse + "", tempsReponse + "");

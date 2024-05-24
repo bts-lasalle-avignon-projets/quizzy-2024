@@ -7,13 +7,9 @@
 package fr.hillionj.quizzy;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,29 +19,25 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.bluetooth.Peripherique;
 import fr.hillionj.quizzy.databinding.ActivityMainBinding;
-import fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre;
+import fr.hillionj.quizzy.protocole.GestionnaireProtocoles;
+import fr.hillionj.quizzy.questionnaire.GestionnaireBruitage;
+import fr.hillionj.quizzy.questionnaire.WatchDog;
 
 /**
  * @class EcranPrincipal
  * @brief L'activité principale
  */
+
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class ActivitePrincipale extends AppCompatActivity
 {
-    /**
-     * Constantes
-     */
     private static final String TAG = "_ActivitePrincipale"; //!< TAG pour les logs (cf. Logcat)
-    public final int            CODE_CONNEXION        = 33;
-    public final int            CODE_RECEPTION        = 35;
-    public final int            CODE_DECONNEXION      = 34;
-    public final int            CODE_ERREUR_CONNEXION = 36;
 
-    private ActivityMainBinding   binding;
-    private GestionnaireBluetooth gestionnaireBluetooth;
-    public Handler                handler;
+    private ActivityMainBinding binding;
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -57,20 +49,17 @@ public class ActivitePrincipale extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        initialiserActivite();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration  appBarConfiguration =
-          new AppBarConfiguration
-            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-            .build();
-        NavController navController =
-          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(handler);
+        if(!estInitialiser())
+        {
+            new WatchDog();
+            initialiserCommunication();
+            BaseDeDonnees.initialiser(this);
+            GestionnaireBruitage.initialiser(this);
+        }
+        GestionnaireProtocoles.getGestionnaireProtocoles().setActivite(this);
+        GestionnaireBluetooth.getGestionnaireBluetooth().setActivite(this);
     }
 
     /**
@@ -124,9 +113,37 @@ public class ActivitePrincipale extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
-        for(Peripherique peripherique: gestionnaireBluetooth.getPeripheriquesConnectes())
-        {
-            peripherique.deconnecter();
-        }
+    }
+
+    private void initialiserActivite()
+    {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initialiserNavigation();
+    }
+    private void initialiserNavigation()
+    {
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration  appBarConfiguration =
+          new AppBarConfiguration
+            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+            .build();
+        NavController navController =
+          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    private void initialiserCommunication()
+    {
+        Handler handler =
+          GestionnaireProtocoles.getGestionnaireProtocoles().initialiserHandler(this);
+        GestionnaireBluetooth.initialiser(this, handler);
+    }
+
+    public boolean estInitialiser()
+    {
+        return GestionnaireBluetooth.getGestionnaireBluetooth() != null;
     }
 }

@@ -21,15 +21,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         ihmquizzy.cpp \
+        participant.cpp \
         quizzy.cpp \
         question.cpp \
-    communicationbluetooth.cpp
+        communicationbluetooth.cpp
 
 HEADERS += \
         ihmquizzy.h \
+        participant.h \
         quizzy.h \
         question.h \
-    communicationbluetooth.h
+        communicationbluetooth.h
 
 RESOURCES += \
     quizzy.qrc
@@ -40,5 +42,4 @@ DISTFILES += \
 # Les defines pour la version release (sans debug)
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
 # Les defines pour la version debug
-#CONFIG(debug, debug|release):DEFINES+=TEST_FENETRE_PARTICIPANTS
 #CONFIG(debug, debug|release):DEFINES+=TEST_FENETRE_JEU

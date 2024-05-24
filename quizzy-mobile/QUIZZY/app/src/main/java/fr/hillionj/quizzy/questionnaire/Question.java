@@ -1,24 +1,32 @@
 package fr.hillionj.quizzy.questionnaire;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Question
 {
-    private String       question;
-    private List<String> reponses = new ArrayList<>();
-    private String       bonneReponse;
+    private final String question;
+    private final List<String> reponses;
+    private final int          numeroBonneReponse;
+    private final int          temps;
+    private List<Integer>      selection = new ArrayList<>();
 
-    public Question(String question, List<String> reponses)
+    public Question(String question, List<String> reponses, int temps)
     {
-        this.bonneReponse = reponses.get(0);
-        this.reponses     = reponses;
-        this.question     = question;
+        String bonneReponse = reponses.get(0);
+        this.reponses       = reponses;
+        this.question       = question;
+        this.temps          = temps;
+        Collections.shuffle(reponses);
+
+        this.numeroBonneReponse = reponses.indexOf(bonneReponse) + 1;
     }
 
-    public String getBonneReponse()
+    public int getNumeroBonneReponse()
     {
-        return bonneReponse;
+        return numeroBonneReponse;
     }
 
     public String getQuestion()
@@ -29,5 +37,28 @@ public class Question
     public List<String> getReponses()
     {
         return reponses;
+    }
+
+    public int getTemps()
+    {
+        return temps;
+    }
+
+    public boolean estSelectionnee(int numeroProposition)
+    {
+        return selection.contains(numeroProposition);
+    }
+
+    public void ajouterSelection(int numeroProposition)
+    {
+        if(!estSelectionnee(numeroProposition))
+        {
+            selection.add(numeroProposition);
+        }
+    }
+
+    public List<Integer> getSelection()
+    {
+        return selection;
     }
 }

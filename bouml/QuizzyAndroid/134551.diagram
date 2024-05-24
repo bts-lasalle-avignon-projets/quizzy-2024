@@ -6,11 +6,11 @@ classcanvas 128023 class_ref 134551 // ActivitePrincipale
 end
 classcanvas 128151 class_ref 134807 // GestionnaireBluetooth
   classdiagramsettings member_max_width 0 end
-  xyz 1212 17.8 2010
+  xyz 1315 17.8 2010
 end
 classcanvas 128791 class_ref 135063 // Peripherique
   classdiagramsettings member_max_width 0 end
-  xyz 1143.2 356.6 3005
+  xyz 1230.2 460.6 3005
 end
 classcanvas 129175 class_ref 134935 // BaseDeDonnees
   classdiagramsettings member_max_width 0 end
@@ -18,37 +18,42 @@ classcanvas 129175 class_ref 134935 // BaseDeDonnees
 end
 classcanvas 129431 class_ref 136599 // Quiz
   classdiagramsettings member_max_width 0 end
-  xyz 493 399 2000
+  xyz 504 503 2000
 end
 classcanvas 129559 class_ref 136471 // Question
   classdiagramsettings member_max_width 0 end
-  xyz 515 713 3005
+  xyz 532 817 3005
 end
 relationcanvas 128279 relation_ref 134807 // <unidirectional association>
-  from ref 128151 z 2011 to point 1182.2 27
-  line 128407 z 2011 to point 1182.2 57
+  from ref 128151 z 2011 to point 1285 27
+  line 128407 z 2011 to point 1285 57
   line 128535 z 2011 to ref 128151
-  role_a_pos 1050 49 3000 no_role_b
+  role_a_pos 1121 46 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128298 relation_ref 134698 // <unidirectional association>
+  from ref 128023 z 2001 to ref 129175
+  role_a_pos 333 79 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128663 relation_ref 134679 // <unidirectional association>
   from ref 128023 z 2011 to ref 128151
-  role_a_pos 1050 122 3000 no_role_b
+  role_a_pos 1121 168 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128919 relation_ref 134935 // <unidirectional association>
   from ref 128151 z 3006 to ref 128791
-  role_a_pos 1480 334 3000 no_role_b
+  role_a_pos 1641 434 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129047 relation_ref 135063 // <unidirectional association>
-  from ref 128151 z 3006 stereotype "<<List>>" xyz 1436.5 310.5 3006 to ref 128791
-  role_a_pos 1480 334 3000 no_role_b
+  from ref 128151 z 3006 stereotype "<<List>>" xyz 1532 373 3006 to ref 128791
+  role_a_pos 1641 434 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129687 relation_ref 136471 // <unidirectional association>
-  from ref 129431 z 3006 stereotype "<<List>>" xyz 692.5 653 3006 to ref 129559
-  role_a_pos 736 692 3000 no_role_b
+  from ref 129431 z 3006 stereotype "<<List>>" xyz 707 757 3006 to ref 129559
+  role_a_pos 798 791 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

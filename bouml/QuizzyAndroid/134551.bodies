@@ -3,20 +3,13 @@ class ActivitePrincipale
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        initialiserActivite();
+        initialiserCommunicationBluetooth();
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration  appBarConfiguration =
-          new AppBarConfiguration
-            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-            .build();
-        NavController navController =
-          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
-        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(handler);
+        // Test BDD
+        baseDeDonnees    = BaseDeDonnees.getInstance(this);
+        nomsParticipants = baseDeDonnees.getNomsParticipants();
+        Log.d(TAG, "nomsParticipants = " + nomsParticipants);
 !!!134679.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -36,3 +29,47 @@ class ActivitePrincipale
         {
             peripherique.deconnecter();
         }
+!!!128042.java!!!	initialiserActivite() : void
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initialiserNavigation();
+!!!128170.java!!!	initialiserNavigation() : void
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        AppBarConfiguration  appBarConfiguration =
+          new AppBarConfiguration
+            .Builder(R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+            .build();
+        NavController navController =
+          Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
+!!!128298.java!!!	initialiserCommunicationBluetooth() : void
+        gererHandler();
+        gestionnaireBluetooth = GestionnaireBluetooth.getGestionnaireBluetooth(this, handler);
+!!!128426.java!!!	gererHandler() : void
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                switch(msg.arg1)
+                {
+                    case CODE_CONNEXION_BLUETOOTH:
+                        FragmentPupitre.getVueActive().activerBoutonDeconnecter();
+                        GestionnaireBluetooth.getGestionnaireBluetooth(null, null)
+                          .ajouterPeripheriqueConnecter(msg.arg2);
+                        break;
+                    case CODE_ERREUR_CONNEXION_BLUETOOTH:
+                        FragmentPupitre.getVueActive().activerBoutonConnecter();
+                        Toast
+                          .makeText(getApplicationContext(),
+                                    "Erreur de connexion",
+                                    Toast.LENGTH_SHORT)
+                          .show();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };

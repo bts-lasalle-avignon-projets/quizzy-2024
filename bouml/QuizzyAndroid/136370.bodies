@@ -1,0 +1,27 @@
+class Participant
+!!!170290.java!!!	Participant(in nom : String, inout peripherique : Peripherique)
+        this.nom          = nom;
+        this.pid          = "P" + peripherique.getIndicePeripherique();
+        this.peripherique = peripherique;
+!!!170418.java!!!	setNom(in nom : String) : void
+        this.nom = nom;
+!!!170546.java!!!	getNom() : String
+        return nom;
+!!!170674.java!!!	getPeripherique() : Peripherique
+        return peripherique;
+!!!170802.java!!!	getPID() : String
+        return pid;
+!!!170930.java!!!	estRepondu() : boolean
+        return repondu;
+!!!171058.java!!!	getScore() : int
+        return score;
+!!!171186.java!!!	setScore(in score : int) : void
+        this.score = score;
+!!!171314.java!!!	setRepondu(inout repondu : boolean, in numeroReponse : int, in tempsReponse : long) : void
+        this.repondu       = repondu;
+        this.numeroReponse = numeroReponse;
+        this.tempsReponse  = tempsReponse;
+!!!171442.java!!!	getNumeroReponse() : int
+        return this.numeroReponse;
+!!!171570.java!!!	getTempsReponse() : long
+        return tempsReponse;
