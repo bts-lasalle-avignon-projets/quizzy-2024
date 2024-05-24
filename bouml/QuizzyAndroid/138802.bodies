@@ -1,0 +1,15 @@
+class ProtocoleIndicationReponseParticipant
+!!!157106.java!!!	ProtocoleIndicationReponseParticipant(in trame : String)
+        setTrame(trame);
+!!!157234.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";PID;REPONSE;TEMPS\n";
+!!!157362.java!!!	getType() : TypeProtocole
+        return TypeProtocole.INDICATION_REPONSE_PARTICIPANT;
+!!!157490.java!!!	getPID() : String
+        return extraireDonnees().get("PID");
+!!!157618.java!!!	getTempsReponse() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!157746.java!!!	getNumeroReponse() : int
+        return toInt(extraireDonnees().get("REPONSE"));
+!!!157874.java!!!	genererTrame(in pid : String, in numeroReponse : int, in tempsReponse : long) : void
+        super.genererTrame(pid, numeroReponse + "", tempsReponse + "");

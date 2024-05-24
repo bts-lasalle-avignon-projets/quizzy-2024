@@ -1,7 +1,7 @@
 format 224
 "unknown" // unknown
-  revision 1
-  modified_by 23 "tvaira"
+  revision 2
+  modified_by 50 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -31,7 +31,7 @@ format 224
    end
   
   java_dir "<unknown>"
-  classview 134679 "unknown"
+  classview 134706 "unknown"
     
     classdiagramsettings member_max_width 0 end
     
@@ -51,7 +51,7 @@ format 224
     
     activitydiagramsettings
      end
-    class 134679 "AppCompatActivity"
+    class 134834 "AppCompatActivity"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -65,7 +65,7 @@ ${members}}
       
     end
 
-    class 135191 "Thread"
+    class 135346 "SQLiteOpenHelper"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -79,7 +79,7 @@ ${members}}
       
     end
 
-    class 135575 "Fragment"
+    class 135858 "Thread"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -93,7 +93,35 @@ ${members}}
       
     end
 
-    class 135831 "ViewModel"
+    class 136242 "Fragment"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 136626 "ViewModel"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 140466 "ViewBinding"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {

@@ -1,0 +1,7 @@
+class ProtocoleLancement
+!!!158770.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!158898.java!!!	getType() : TypeProtocole
+        return TypeProtocole.LANCEMENT;
+!!!159026.java!!!	genererTrame() : void
+        super.genererTrame();

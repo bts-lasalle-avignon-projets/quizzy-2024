@@ -1,0 +1,7 @@
+class ProtocoleLancementQuestion
+!!!159154.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!159282.java!!!	getType() : TypeProtocole
+        return TypeProtocole.DEMARRAGE_QUESTION;
+!!!159410.java!!!	genererTrame() : void
+        super.genererTrame();

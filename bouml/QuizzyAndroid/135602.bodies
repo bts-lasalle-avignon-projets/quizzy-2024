@@ -1,0 +1,261 @@
+class GestionnaireBluetooth
+!!!138546.java!!!	creerToast(inout activite : AppCompatActivity, in message : String) : void
+        Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+!!!138674.java!!!	definirComportementSpinner(inout spinnerListePeripheriques : Spinner) : void
+        spinnerListePeripheriques.setOnItemSelectedListener(
+          new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+              {
+                  peripherique = peripheriques.get(position);
+                  if(FragmentPupitre.getVueActive() != null)
+                  {
+                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+                  }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0)
+              {
+              }
+          });
+!!!138802.java!!!	verifierPermissions() : boolean
+        List<String> permissionsManquantes = new ArrayList<>();
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH);
+        if(!permissionsManquantes.isEmpty())
+        {
+            ActivityCompat.requestPermissions(
+              activite,
+              permissionsManquantes.toArray(new String[permissionsManquantes.size()]),
+              1);
+        }
+        return true;
+!!!138930.java!!!	verifierPermission(inout permissionsManquantes : List<String>, in permission : String) : void
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            permissionsManquantes.add(permission);
+            Log.d(TAG, "verifierPermissions() request permission");
+        }
+!!!139058.java!!!	initialiser(inout activite : AppCompatActivity, inout handler : Handler) : GestionnaireBluetooth
+        gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
+        if(gestionnaireBluetooth.bluetoothAdapter == null)
+        {
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
+        }
+        else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
+        {
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
+            Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activite.startActivityForResult(activeBlueTooth, 0);
+        }
+        else
+        {
+            gestionnaireBluetooth.rechercherPeripheriquesConnus();
+        }
+        return gestionnaireBluetooth;
+!!!139186.java!!!	getGestionnaireBluetooth() : GestionnaireBluetooth
+        return gestionnaireBluetooth;
+!!!139314.java!!!	GestionnaireBluetooth(inout activite : AppCompatActivity, inout handler : Handler)
+        Log.d(TAG, "GestionnaireBluetooth()");
+        this.activite = activite;
+        this.handler  = handler;
+        if(!verifierPermissions())
+        {
+            bluetoothAdapter = null;
+            return;
+        }
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+!!!139442.java!!!	mettreAjourSpinnerPeripheriques(inout spinnerListePeripheriques : Spinner) : void
+        ArrayAdapter<String> adapter =
+          new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerListePeripheriques.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
+        definirComportementSpinner(spinnerListePeripheriques);
+!!!139570.java!!!	mettreAjourListViewPeripheriques(inout listViewPeripheriquesConnectes : ListView) : void
+        if(this.adapterPeripheriquesConnectes == null)
+        {
+            this.adapterPeripheriquesConnectes =
+              new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
+        }
+        listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
+!!!139698.java!!!	setActivite(inout activite : AppCompatActivity) : void
+        this.activite = activite;
+!!!139826.java!!!	rechercherPeripheriquesConnus() : void
+        for(BluetoothDevice blueDevice: bluetoothAdapter.getBondedDevices())
+        {
+            peripheriques.add(new Peripherique(blueDevice, handler, peripheriques.size()));
+            noms.add(blueDevice.getName());
+        }
+        if(peripheriques.isEmpty())
+        {
+            peripheriques.add(new Peripherique(null, handler, peripheriques.size()));
+        }
+        if(noms.isEmpty())
+        {
+            noms.add("Aucun");
+        }
+!!!139954.java!!!	getPeripheriquesConnectes() : Peripherique
+        List<Peripherique> liste = new ArrayList<>();
+        for(Peripherique peripherique: peripheriques)
+        {
+            if(peripherique.estConnecte())
+            {
+                liste.add(peripherique);
+            }
+        }
+        return liste;
+!!!140082.java!!!	ajouterPeripheriqueConnecter(in indicePeripherique : int) : void
+        adapterPeripheriquesConnectes.add(peripheriques.get(indicePeripherique).getNom());
+!!!140210.java!!!	retirerPeripheriqueConnecter(in indicePeripherique : int) : void
+        adapterPeripheriquesConnectes.remove(peripheriques.get(indicePeripherique).getNom());
+!!!140338.java!!!	connecter() : boolean
+        if(peripherique == null)
+        {
+            return false;
+        }
+        peripherique.connecter();
+        return true;
+!!!140466.java!!!	deconnecter() : void
+        if(peripherique != null)
+        {
+            peripherique.deconnecter();
+        }
+        return;
+!!!140594.java!!!	getPeripheriqueSelectionne() : Peripherique
+        return peripherique;
+!!!140722.java!!!	getPeripheriques() : Peripherique
+        return peripheriques;
+!!!175154.java!!!	creerToast(inout activite : AppCompatActivity, in message : String) : void
+        Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+!!!175282.java!!!	definirComportementSpinner(inout spinnerListePeripheriques : Spinner) : void
+        spinnerListePeripheriques.setOnItemSelectedListener(
+          new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+              {
+                  peripherique = peripheriques.get(position);
+                  if(FragmentPupitre.getVueActive() != null)
+                  {
+                      FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+                  }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0)
+              {
+              }
+          });
+!!!175410.java!!!	verifierPermissions() : boolean
+        List<String> permissionsManquantes = new ArrayList<>();
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
+        verifierPermission(permissionsManquantes, Manifest.permission.BLUETOOTH);
+        if(!permissionsManquantes.isEmpty())
+        {
+            ActivityCompat.requestPermissions(
+              activite,
+              permissionsManquantes.toArray(new String[permissionsManquantes.size()]),
+              1);
+        }
+        return true;
+!!!175538.java!!!	verifierPermission(inout permissionsManquantes : List<String>, in permission : String) : void
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            permissionsManquantes.add(permission);
+            Log.d(TAG, "verifierPermissions() request permission");
+        }
+!!!175666.java!!!	initialiser(inout activite : AppCompatActivity, inout handler : Handler) : GestionnaireBluetooth
+        gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
+        if(gestionnaireBluetooth.bluetoothAdapter == null)
+        {
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
+        }
+        else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
+        {
+            gestionnaireBluetooth.creerToast(activite, "Bluetooth non activé !");
+            Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activite.startActivityForResult(activeBlueTooth, 0);
+        }
+        else
+        {
+            gestionnaireBluetooth.rechercherPeripheriquesConnus();
+        }
+        return gestionnaireBluetooth;
+!!!175794.java!!!	getGestionnaireBluetooth() : GestionnaireBluetooth
+        return gestionnaireBluetooth;
+!!!175922.java!!!	GestionnaireBluetooth(inout activite : AppCompatActivity, inout handler : Handler)
+        Log.d(TAG, "GestionnaireBluetooth()");
+        this.activite = activite;
+        this.handler  = handler;
+        if(!verifierPermissions())
+        {
+            bluetoothAdapter = null;
+            return;
+        }
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+!!!176050.java!!!	mettreAjourSpinnerPeripheriques(inout spinnerListePeripheriques : Spinner) : void
+        ArrayAdapter<String> adapter =
+          new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerListePeripheriques.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
+        definirComportementSpinner(spinnerListePeripheriques);
+!!!176178.java!!!	mettreAjourListViewPeripheriques(inout listViewPeripheriquesConnectes : ListView) : void
+        if(this.adapterPeripheriquesConnectes == null)
+        {
+            this.adapterPeripheriquesConnectes =
+              new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
+        }
+        listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
+!!!176306.java!!!	setActivite(inout activite : AppCompatActivity) : void
+        this.activite = activite;
+!!!176434.java!!!	rechercherPeripheriquesConnus() : void
+        for(BluetoothDevice blueDevice: bluetoothAdapter.getBondedDevices())
+        {
+            peripheriques.add(new Peripherique(blueDevice, handler, peripheriques.size()));
+            noms.add(blueDevice.getName());
+        }
+        if(peripheriques.isEmpty())
+        {
+            peripheriques.add(new Peripherique(null, handler, peripheriques.size()));
+        }
+        if(noms.isEmpty())
+        {
+            noms.add("Aucun");
+        }
+!!!176562.java!!!	getPeripheriquesConnectes() : Peripherique
+        List<Peripherique> liste = new ArrayList<>();
+        for(Peripherique peripherique: peripheriques)
+        {
+            if(peripherique.estConnecte())
+            {
+                liste.add(peripherique);
+            }
+        }
+        return liste;
+!!!176690.java!!!	ajouterPeripheriqueConnecter(in indicePeripherique : int) : void
+        adapterPeripheriquesConnectes.add(peripheriques.get(indicePeripherique).getNom());
+!!!176818.java!!!	retirerPeripheriqueConnecter(in indicePeripherique : int) : void
+        adapterPeripheriquesConnectes.remove(peripheriques.get(indicePeripherique).getNom());
+!!!176946.java!!!	connecter() : boolean
+        if(peripherique == null)
+        {
+            return false;
+        }
+        peripherique.connecter();
+        return true;
+!!!177074.java!!!	deconnecter() : void
+        if(peripherique != null)
+        {
+            peripherique.deconnecter();
+        }
+        return;
+!!!177202.java!!!	getPeripheriqueSelectionne() : Peripherique
+        return peripherique;
+!!!177330.java!!!	getPeripheriques() : Peripherique
+        return peripheriques;

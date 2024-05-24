@@ -1,0 +1,101 @@
+class GestionnaireProtocoles
+!!!149810.java!!!	getGestionnaireProtocoles() : GestionnaireProtocoles
+        if(gestionnaireProtocoles == null)
+        {
+            gestionnaireProtocoles = new GestionnaireProtocoles();
+        }
+        return gestionnaireProtocoles;
+!!!149938.java!!!	traiterProtocoleEntrant(inout peripherique : Peripherique, inout protocole : Protocole) : void
+        switch(protocole.getType())
+        {
+            case RECEPTION_REPONSE:
+                Quiz.getQuizEnCours().recupererReponseSaisie(peripherique,
+                                                             (ProtocoleReceptionReponse)protocole);
+                break;
+            case ACQUITEMENT:
+                Log.d(TAG, protocole.getClass().getSimpleName());
+                break;
+            default:
+                Log.e(TAG,
+                      "Aucun protocole entrant pour " + protocole.getTrame() + " n'est trouvé");
+                break;
+        }
+!!!150066.java!!!	initialiserHandler(inout activite : ActivitePrincipale) : Handler
+        this.activite   = activite;
+        Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                switch(msg.what)
+                {
+                    case CODE_CONNEXION_BLUETOOTH:
+                        GestionnaireProtocoles.this.traiterConnexion(msg);
+                        break;
+                    case CODE_ERREUR_CONNEXION_BLUETOOTH:
+                        GestionnaireProtocoles.this.traiterErreurConnexion(msg);
+                        break;
+                    case CODE_RECEPTION_BLUETOOTH:
+                        GestionnaireProtocoles.this.traiterReception(msg);
+                        break;
+                    case CODE_DECONNEXION_BLUETOOTH:
+                        GestionnaireProtocoles.this.traiterDeconnexion(msg);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        return handler;
+!!!150194.java!!!	setActivite(inout activite : ActivitePrincipale) : void
+        this.activite = activite;
+!!!150322.java!!!	traiterReception(inout msg : Message) : void
+        for(String trame: ((String)msg.obj).split("\n"))
+        {
+            Protocole    protocole = Protocole.traiterTrame(trame + "\n");
+            Peripherique peripherique =
+              GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get(msg.arg1);
+            if(protocole != null)
+            {
+                traiterProtocoleEntrant(peripherique, protocole);
+            }
+        }
+!!!150450.java!!!	traiterDeconnexion(inout msg : Message) : void
+        Log.d(TAG, msg.obj.toString());
+        boolean      estPrevue = (boolean)msg.obj;
+        Peripherique peripherique =
+          GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get(msg.arg1);
+        if(!estPrevue)
+        {
+            creerToast(activite, peripherique.getNom() + " : Connexion interrompue");
+        }
+        GestionnaireBluetooth.getGestionnaireBluetooth().retirerPeripheriqueConnecter(msg.arg1);
+        Quiz.getQuizEnCours().supprimerParticipant(FragmentParametres.getParticipant(peripherique));
+!!!150578.java!!!	traiterErreurConnexion(inout msg : Message) : void
+        if(FragmentPupitre.getVueActive() != null)
+        {
+            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+        }
+        Peripherique peripherique =
+          GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int)msg.obj);
+        creerToast(activite, peripherique.getNom() + " : Erreur de connexion");
+!!!150706.java!!!	traiterConnexion(inout msg : Message) : void
+        if(FragmentPupitre.getVueActive() != null)
+        {
+            FragmentPupitre.getVueActive().mettreAjourEtatBoutons();
+        }
+        GestionnaireBluetooth.getGestionnaireBluetooth().ajouterPeripheriqueConnecter((int)msg.obj);
+        Peripherique peripherique =
+          GestionnaireBluetooth.getGestionnaireBluetooth().getPeripheriques().get((int)msg.obj);
+        if(peripherique.getNom().startsWith("quizzy-p"))
+        {
+            Quiz.getQuizEnCours().ajouterParticipant(
+              FragmentParametres.getParticipant(peripherique));
+        }
+        else if(peripherique.getNom().startsWith("quizzy-e") ||
+                peripherique.getNom().equals("CV-PC-B20-01"))
+        {
+            Quiz.getQuizEnCours().ajouterEcran(new Ecran(peripherique));
+        }
+!!!150834.java!!!	creerToast(inout activite : AppCompatActivity, in message : String) : void
+        Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();

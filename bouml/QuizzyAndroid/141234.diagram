@@ -1,0 +1,63 @@
+format 224
+
+classcanvas 128050 class_ref 137010 // FragmentQuiz
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 375.5 5.8 3075
+end
+classcanvas 128178 class_ref 136114 // FragmentParametres
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 41.158 166.18 3053
+end
+classcanvas 128306 class_ref 136754 // FragmentPupitre
+  classdiagramsettings member_max_width 0 end
+  color lightblue
+  xyz 637.297 370.26 3065
+end
+classcanvas 128434 class_ref 136242 // Fragment
+  classdiagramsettings member_max_width 0 end
+  color white
+  xyz 439.364 863.85 3081
+end
+relationcanvas 128562 relation_ref 136626 // <generalisation>
+  decenter_end 531
+  from ref 128050 z 3082 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128690 relation_ref 136242 // <generalisation>
+  decenter_begin 510
+  decenter_end 531
+  from ref 128306 z 3082 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128818 relation_ref 135730 // <generalisation>
+  decenter_end 531
+  from ref 128178 z 3082 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128946 relation_ref 136754 // <unidirectional association>
+  from ref 128050 z 3076 to point 345 6
+  line 129074 z 3076 to point 345 36
+  line 129202 z 3076 to ref 128050
+  role_a_pos 381 74 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129330 relation_ref 136370 // <unidirectional association>
+  from ref 128306 z 3066 to point 607 370
+  line 129458 z 3066 to point 607 400
+  line 129586 z 3066 to ref 128306
+  role_a_pos 562 406 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129714 relation_ref 135986 // <unidirectional association>
+  from ref 128178 z 3054 to point 11 166
+  line 129842 z 3054 to point 11 196
+  line 129970 z 3054 to ref 128178
+  role_a_pos 44 208 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

@@ -1,0 +1,17 @@
+class ExampleInstrumentedTest
+!!!135858.java!!!	useAppContext() : void
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("fr.hillionj.quizzy", appContext.getPackageName());
+!!!174258.java!!!	useAppContext() : void
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("fr.hillionj.quizzy", appContext.getPackageName());
+!!!174386.java!!!	useAppContext() : void
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("fr.hillionj.quizzy", appContext.getPackageName());
+!!!174898.java!!!	useAppContext() : void
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("fr.hillionj.quizzy", appContext.getPackageName());
