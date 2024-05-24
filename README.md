@@ -110,7 +110,7 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ### Quizzy-mobile (Java/Android)
 
-![Android diagramme de classes](images/Android_v0.2_diagramme_classes.png)
+![Android diagramme de classes](images/Android_v0.2_diagramme_de%20classes.png)
 
 ### Quizzy-desktop (C++/Qt)
 
@@ -120,8 +120,8 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 Nom des périphériques Bluetooth :
 
-- \"**quizzy-ecran**\" pour la Raspberry Pi et,
-- \"**quizzy-pn**\" où \"**n**\" est le numéro de pupitre
+- \"**quizzy-en**\" où \"**n**\" est le numéro de l'écran.
+- \"**quizzy-pn**\" où \"**n**\" est le numéro de pupitre.
 
 ### Évaluateur -> Interface de jeu
 
