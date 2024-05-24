@@ -31,8 +31,10 @@
       - [Page d'association des pupitres](#page-dassociation-des-pupitres)
       - [Page de paramétrage du quiz](#page-de-paramétrage-du-quiz)
     - [Interface participant (Écran)](#interface-participant-écran)
-      - [Vue de déroulement du quiz](#vue-de-déroulement-du-quiz)
+      - [GIF](#gif)
       - [Vue d'attente de participants](#vue-dattente-de-participants)
+      - [Vue de déroulement du quiz](#vue-de-déroulement-du-quiz)
+      - [Vue des résultats](#vue-des-résultats)
   - [Historique des versions](#historique-des-versions)
     - [Version 0.2](#version-02)
       - [Tablette](#tablette)
@@ -104,7 +106,7 @@ https://btssn-lasalle-84.github.io/quizzy-2024/
 
 ### Quizzy-desktop (C++/Qt)
 
-![Qt diagramme cas d'utilisation](images/Qt_v0.1_diagramme_cas_dutilisation.png)
+![Qt diagramme cas d'utilisation](images/Qt_v0.2_diagramme_cas_dutilisation.png)
 
 ## Diagramme de classes
 
@@ -178,17 +180,27 @@ Nom des périphériques Bluetooth :
 
 ### Interface participant (Écran)
 
-#### Vue de déroulement du quiz
+#### GIF
 
-- Cette vue permet d'afficher le déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
-
-![Page Quiz](images/Qt_v0.2_quiz.png)
+![Gif Quiz](images/screenshot-quizzy.gif)
 
 #### Vue d'attente de participants
 
 - Cette vue permet d'afficher la liste des participants en attente du démarrage du quiz
 
 ![Page Quiz](images/Qt_v0.2_attente.png)
+
+#### Vue de déroulement du quiz
+
+- Cette vue permet d'afficher le déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
+
+![Page Quiz](images/Qt_v0.2_quiz.png)
+
+#### Vue des résultats
+
+- Cette vue permet d'afficher les résultats des participants
+
+![Page Quiz](images/Qt_v0.2_resultats.png)
 
 ## Historique des versions
 
@@ -242,8 +254,8 @@ Nom des périphériques Bluetooth :
 
 ## Auteurs
 
-- Étudiant IR : HNIZDO Thomas <<thomas.hnizdo@gmail.com>>
-- Étudiant IR : HILLION Jules <<juleshillion@gmail.com>>
+- Étudiant IR : [HNIZDO Thomas](mailto:thomas.hnizdo@gmail.com)
+- Étudiant IR : [HILLION Jules](mailto:redisbackhere@gmail.com)
 
 ---
 ©️ LaSalle Avignon 2024
