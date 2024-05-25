@@ -52,7 +52,7 @@ bool Quizzy::estParticipantActuel(QString pidJoueur) const
 {
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nom"
                      << participant->getNom() << "true";
@@ -121,8 +121,7 @@ void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 
         qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
                  << nomParticipant;
-        Participant* participant =
-          new Participant(nomParticipant, pidJoueur.toInt());
+        Participant* participant = new Participant(nomParticipant, pidJoueur);
         participants.push_back(participant);
 
         etat = ParticipantsAjoutes;
@@ -206,7 +205,7 @@ void Quizzy::traiterReponse(QString pidJoueur,
                  << numeroReponse << "tempsReponse" << tempsReponse;
         for(Participant* participant: participants)
         {
-            if(participant->getIdPupitre() == pidJoueur.toInt())
+            if(participant->getIdPupitre() == pidJoueur)
             {
                 traiterReponseParticipant(participant,
                                           numeroReponse,
@@ -269,7 +268,7 @@ QString Quizzy::getNomDuParticipant(QString pidJoueur)
 {
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             return participant->getNom();
         }

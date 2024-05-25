@@ -27,17 +27,17 @@ class Participant
 {
   private:
     QString      nom;                     //!< le nom du participant
-    int          idPupitre;               //!< l'id du pupitre
+    QString      idPupitre;               //!< l'id du pupitre
     unsigned int nombreReponsesCorrectes; //!< le nombre de bonnes réponses
     QVector<int> reponses;
     QVector<int> tempsReponses; //!< les temps de réponse
 
   public:
-    Participant(const QString& nom, int idPupitre);
+    Participant(const QString& nom, const QString& idPupitre);
     ~Participant();
 
     QString      getNom() const;
-    int          getIdPupitre() const;
+    QString      getIdPupitre() const;
     unsigned int getNombreReponsesCorrectes() const;
     QVector<int> getReponses() const;
     QVector<int> getTempsReponses() const;
