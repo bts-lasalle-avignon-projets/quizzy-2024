@@ -135,13 +135,28 @@ void CommunicationBluetooth::recevoirTrame()
     QString trame = QString(donneesRecues);
     qDebug() << Q_FUNC_INFO << "trame" << trame;
 
-    if(verifierTrame(trame))
-    {
-        decoderTrame(trame);
-    }
+    separerTrame(trame);
 }
 
 // Méthodes privées
+
+void CommunicationBluetooth::separerTrame(QString trameRecue)
+{
+    trameRecue.replace("\\n", "\n");
+    QStringList trames = trameRecue.split("\n");
+    for(int i = 0; i < trames.size(); ++i)
+    {
+        QString trame = trames[i];
+        if(!trame.isEmpty())
+        {
+            trame.append("\n");
+            if(verifierTrame(trame))
+            {
+                decoderTrame(trame);
+            }
+        }
+    }
+}
 
 bool CommunicationBluetooth::verifierTrame(const QString& trame) const
 {

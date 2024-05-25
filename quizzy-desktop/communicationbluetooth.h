@@ -64,6 +64,7 @@ class CommunicationBluetooth : public QObject
     bool             connecte;
     QMap<QChar, int> formatTrame;
 
+    void separerTrame(QString trameRecue);
     bool verifierTrame(const QString& trame) const;
     bool verifierChampsTrame(QString trame) const;
     void initialiserFormatTrame();
