@@ -14,7 +14,7 @@
  * @param nom le nom du paricipant
  * @param idPupitre l'id du pupitre
  */
-Participant::Participant(const QString& nom, int idPupitre) :
+Participant::Participant(const QString& nom, const QString& idPupitre) :
     nom(nom), idPupitre(idPupitre), nombreReponsesCorrectes(0)
 {
 }
@@ -41,7 +41,7 @@ QString Participant::getNom() const
  *
  * @return int l'id du pupitre
  */
-int Participant::getIdPupitre() const
+QString Participant::getIdPupitre() const
 {
     return idPupitre;
 }
