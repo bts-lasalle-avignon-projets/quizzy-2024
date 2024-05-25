@@ -95,10 +95,10 @@ public class BaseDeDonnees extends SQLiteOpenHelper
     private String construireRequete(int nombreQuestion, String theme)
     {
         String query =
-          "SELECT question,proposition1,proposition2,proposition3,proposition4 FROM questions";
+          "SELECT idQuestion, question, proposition1, proposition2, proposition3, proposition4 FROM questions INNER JOIN themes ON questions.idTheme = themes.idTheme";
         if(theme != null)
         {
-            query += " WHERE theme = '" + theme + "'";
+            query += " WHERE themes.theme = \"" + theme + "\"";
         }
         query += " ORDER BY RANDOM() LIMIT " + nombreQuestion;
         return query;
@@ -106,6 +106,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
     private Question genererQuestion(Cursor curseur, int tempsParQuestion)
     {
+        String idQuestion = curseur.getString(curseur.getColumnIndexOrThrow("idQuestion"));
         String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
         String prop1    = curseur.getString(curseur.getColumnIndexOrThrow("proposition1"));
         String prop2    = curseur.getString(curseur.getColumnIndexOrThrow("proposition2"));
@@ -116,7 +117,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
         int tempsReponse = getTempsReponse(tempsParQuestion, question, prop1, prop2, prop3, prop4);
 
-        return new Question(question, propositions, tempsReponse);
+        return new Question(Integer.parseInt(idQuestion), question, propositions, tempsReponse);
     }
 
     @NonNull
@@ -161,7 +162,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
 
     public List<String> getThemes()
     {
-        Cursor       curseur     = sqlite.rawQuery("SELECT DISTINCT theme FROM questions", null);
+        Cursor       curseur     = sqlite.rawQuery("SELECT * FROM themes", null);
         List<String> listeThemes = new ArrayList<>();
         while(curseur.moveToNext())
         {

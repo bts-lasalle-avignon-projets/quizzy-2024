@@ -13,7 +13,7 @@ public class Question
     private final int          temps;
     private List<Integer>      selection = new ArrayList<>();
 
-    public Question(String question, List<String> reponses, int temps)
+    public Question(int idQuestion, String question, List<String> reponses, int temps)
     {
         String bonneReponse = reponses.get(0);
         this.reponses       = reponses;
