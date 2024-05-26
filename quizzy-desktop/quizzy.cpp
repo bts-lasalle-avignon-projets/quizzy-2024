@@ -187,6 +187,11 @@ void Quizzy::passerQuestionSuivante()
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionSuivantePrete();
     }
+    else if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
+    {
+        terminerQuestion();
+        passerQuestionSuivante();
+    }
 }
 
 // Gestion des réponses
