@@ -7,19 +7,16 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="fr.hillionj.quizzy.navigation.quiz.FragmentQuiz"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="fr.hillionj.quizzy.ihm.vues.session.FragmentQuiz"
+        android:label="@string/title_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="fr.hillionj.quizzy.navigation.pupitres.FragmentPupitre"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="fr.hillionj.quizzy.ihm.vues.pupitres.FragmentPupitre"
+        android:label="@string/title_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="fr.hillionj.quizzy.navigation.parametres.FragmentParametres"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="fr.hillionj.quizzy.ihm.vues.parametres.FragmentParametres"
+        android:label="@string/title_notifications" />
 </navigation>

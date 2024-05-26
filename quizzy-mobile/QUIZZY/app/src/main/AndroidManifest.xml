@@ -19,7 +19,7 @@
         android:theme="@style/Theme.QUIZZY"
         tools:targetApi="31">
         <activity
-            android:name=".ActivitePrincipale"
+            android:name=".Quizzy"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
