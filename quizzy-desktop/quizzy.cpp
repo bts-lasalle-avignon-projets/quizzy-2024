@@ -176,6 +176,11 @@ void Quizzy::terminerQuestion()
 
 void Quizzy::passerQuestionSuivante()
 {
+    if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
+    {
+        terminerQuestion();
+    }
+
     if(etat == QuestionTerminee &&
        indexQuestionActuelle < listeQuestions.size() - 1)
     {
@@ -186,11 +191,6 @@ void Quizzy::passerQuestionSuivante()
         etat = QuizLance;
         qDebug() << Q_FUNC_INFO << "etat" << etat;
         emit questionSuivantePrete();
-    }
-    else if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
-    {
-        terminerQuestion();
-        passerQuestionSuivante();
     }
 }
 
@@ -216,6 +216,10 @@ void Quizzy::traiterReponse(QString pidJoueur,
                                           numeroReponse,
                                           tempsReponse);
             }
+        }
+        if(getQuestion()->getDuree() == 0)
+        {
+            emit questionTerminee();
         }
     }
 }
