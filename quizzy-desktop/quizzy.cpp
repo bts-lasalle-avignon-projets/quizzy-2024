@@ -176,6 +176,11 @@ void Quizzy::terminerQuestion()
 
 void Quizzy::passerQuestionSuivante()
 {
+    if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
+    {
+        terminerQuestion();
+    }
+
     if(etat == QuestionTerminee &&
        indexQuestionActuelle < listeQuestions.size() - 1)
     {
@@ -212,11 +217,21 @@ void Quizzy::traiterReponse(QString pidJoueur,
                                           tempsReponse);
             }
         }
+
+        if(getQuestion()->getDuree() == 0)
+        {
+            emit choixParticipant();
+        }
     }
 }
 
 void Quizzy::gererFinQuiz()
 {
+    if(etat == QuestionDemarree &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        terminerQuestion();
+    }
     if(etat == QuestionTerminee &&
        indexQuestionActuelle == listeQuestions.size() - 1)
     {
