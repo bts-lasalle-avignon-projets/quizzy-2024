@@ -159,6 +159,8 @@ class IHMQuizzy : public QWidget
     void mettreAJourProposition(int numeroReponse, QString texte);
     void effacerChoixParticipants();
     void reinitialiserAffichage();
+    void effacerFenetreParticipants();
+    void effacerFenetreResultats();
 
   public:
     IHMQuizzy(QWidget* parent = 0);

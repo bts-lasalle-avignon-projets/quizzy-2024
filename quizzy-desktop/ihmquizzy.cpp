@@ -556,8 +556,14 @@ void IHMQuizzy::effacerChoixParticipants()
 void IHMQuizzy::reinitialiserAffichage()
 {
     qDebug() << Q_FUNC_INFO;
+    effacerFenetreParticipants();
+    effacerChoixParticipants();
+    effacerFenetreResultats();
+}
 
-    // Fenêtre participants
+void IHMQuizzy::effacerFenetreParticipants()
+{
+    qDebug() << Q_FUNC_INFO;
     QLayoutItem* child;
     for(int i = layoutPrincipalParticipants->count() - 1; i >= 0; --i)
     {
@@ -568,11 +574,12 @@ void IHMQuizzy::reinitialiserAffichage()
         }
     }
     infoQuiz->clear();
+}
 
-    // Fenêtre jeu
-    effacerChoixParticipants();
-
-    // Fenêtre résultat
+void IHMQuizzy::effacerFenetreResultats()
+{
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
     for(int i = layoutPrincipalResultat->count() - 1; i >= 0; --i)
     {
         child = layoutPrincipalResultat->itemAt(i);
