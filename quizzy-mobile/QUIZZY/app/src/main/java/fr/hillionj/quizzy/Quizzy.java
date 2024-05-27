@@ -29,10 +29,6 @@ public class Quizzy extends AppCompatActivity {
 
         this.parametres = Parametres.getParametres(this);
 
-        for (Participant participant : parametres.getParticipants()) {
-            Log.d("QUIZZY_" + this.getClass().getName(), "participant: " + participant.getNom());
-        }
-
         initialiserNavigation();
     }
     private void initialiserNavigation()

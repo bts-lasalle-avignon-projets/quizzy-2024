@@ -8,6 +8,7 @@ import java.util.logging.Handler;
 import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.communication.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.ihm.vues.IHM;
 import fr.hillionj.quizzy.session.Session;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
@@ -23,8 +24,9 @@ public class Parametres {
 
     private void initaliserApplication() {
         this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
-        this.session = new Session(this);
+        this.session = new Session(this, activite);
         this.participants = this.session.getBaseDeDonnees().getParticipants();
+        new IHM(this);
     }
 
     public static Parametres getParametres(AppCompatActivity activite) {
