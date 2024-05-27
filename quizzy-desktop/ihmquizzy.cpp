@@ -69,6 +69,7 @@ void IHMQuizzy::afficherDebutQuiz()
 {
     qDebug() << Q_FUNC_INFO;
     messageAttente->setText("En attente des participants...");
+    reinitialiserAffichage();
     afficherFenetreAccueil();
 }
 
@@ -550,4 +551,42 @@ void IHMQuizzy::effacerChoixParticipants()
     choixPropositionC->setStyleSheet("");
     choixPropositionD->setText("");
     choixPropositionD->setStyleSheet("");
+}
+
+void IHMQuizzy::reinitialiserAffichage()
+{
+    qDebug() << Q_FUNC_INFO;
+    effacerFenetreParticipants();
+    effacerChoixParticipants();
+    effacerFenetreResultats();
+}
+
+void IHMQuizzy::effacerFenetreParticipants()
+{
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalParticipants->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalParticipants->itemAt(i);
+        if(child->widget() != titreFenetreParticipants)
+        {
+            delete child->widget();
+        }
+    }
+    infoQuiz->clear();
+}
+
+void IHMQuizzy::effacerFenetreResultats()
+{
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalResultat->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalResultat->itemAt(i);
+        if(child->widget() != titreFenetreResultats)
+        {
+            delete child->widget();
+            delete child;
+        }
+    }
 }
