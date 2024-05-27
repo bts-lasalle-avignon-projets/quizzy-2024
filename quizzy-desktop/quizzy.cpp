@@ -109,6 +109,11 @@ void Quizzy::gererDebutQuiz()
     {
         lancer();
     }
+    else if(etat == Resultats)
+    {
+        etat = Initial;
+        debuter(true);
+    }
 }
 
 // Slot Gestion des participants
