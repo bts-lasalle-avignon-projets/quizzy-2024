@@ -101,6 +101,7 @@ class Quizzy : public QObject
     void participantAjoute(QString pidJoueur, QString nomParticipant);
     void questionAjoutee();
     void questionDemarree();
+    void choixParticipant();
     void questionTerminee();
     void questionSuivantePrete();
     void quizTermine();

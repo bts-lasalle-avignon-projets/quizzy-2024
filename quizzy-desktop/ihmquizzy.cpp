@@ -408,6 +408,10 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy, SIGNAL(questionAjoutee()), this, SLOT(afficherPret()));
     connect(quizzy, SIGNAL(questionDemarree()), this, SLOT(demarrerQuestion()));
     connect(quizzy,
+            SIGNAL(choixParticipant()),
+            this,
+            SLOT(afficherChoixParticipants()));
+    connect(quizzy,
             SIGNAL(questionTerminee()),
             this,
             SLOT(afficherChoixParticipants()));
