@@ -8,7 +8,7 @@ import fr.hillionj.quizzy.parametres.Parametres;
 public class IHM {
 
     private static IHM ihm;
-    private List<QuizzyIHM> ihmActives = new ArrayList<>();
+    private List<Object> ihmActives = new ArrayList<>();
     private Parametres parametres;
 
     public static IHM getIHM() {
@@ -21,19 +21,19 @@ public class IHM {
     }
 
     public void mettreAjourDeroulement() {
-        QuizzyIHM ihmSession = getIHMActive(FragmentQuiz.class);
+        FragmentQuiz ihmSession = (FragmentQuiz) getIHMActive(FragmentQuiz.class);
         if (ihmSession == null)
             return;
         ihmSession.mettreAjourDeroulement();
     }
 
-    public void ajouterIHM(QuizzyIHM pageIHM) {
+    public void ajouterIHM(Object pageIHM) {
         ihmActives.remove(pageIHM);
         ihmActives.add(pageIHM);
     }
 
-    private QuizzyIHM getIHMActive(Class<?> typeObjet) {
-        for (QuizzyIHM ihmActive : ihmActives) {
+    private Object getIHMActive(Class<?> typeObjet) {
+        for (Object ihmActive : ihmActives) {
             if (typeObjet.isInstance(ihmActive)) {
                 return ihmActive;
             }

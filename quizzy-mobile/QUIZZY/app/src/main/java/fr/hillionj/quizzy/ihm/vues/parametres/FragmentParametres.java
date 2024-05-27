@@ -18,9 +18,7 @@ import fr.hillionj.quizzy.ihm.spinner.Spinner;
 import fr.hillionj.quizzy.ihm.spinner.speciales.SpinnerParticipants;
 import fr.hillionj.quizzy.ihm.spinner.speciales.SpinnerPeripheriques;
 import fr.hillionj.quizzy.ihm.spinner.speciales.SpinnerThemes;
-import fr.hillionj.quizzy.ihm.vues.QuizzyIHM;
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.parametres.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class FragmentParametres extends Fragment implements QuizzyIHM
