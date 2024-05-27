@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import fr.hillionj.quizzy.databinding.FragmentDashboardBinding;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class FragmentPupitre extends Fragment implements QuizzyIHM
+public class FragmentPupitre extends Fragment
 {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup               container,

@@ -21,7 +21,7 @@ import fr.hillionj.quizzy.ihm.spinner.speciales.SpinnerThemes;
 import fr.hillionj.quizzy.parametres.Parametres;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class FragmentParametres extends Fragment implements QuizzyIHM
+public class FragmentParametres extends Fragment
 {
     private Button  btn_associer_participant, btn_creer_participant;
     private Spinner spinner_peripheriques_connectes, spinner_noms_participants, spinner_themes;
