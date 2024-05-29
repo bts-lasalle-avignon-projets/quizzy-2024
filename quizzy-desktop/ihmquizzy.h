@@ -58,6 +58,12 @@
 #define FOND_VERT  "#94fe8a"
 #define FOND_ROUGE "#fd5555"
 
+#define HAUTEUR_LABEL_LIBELLE     100
+#define HAUTEUR_LABEL_CHRONOMETRE 100
+#define LARGEUR_PROPOSITION       150
+#define HAUTEUR_PROPOSITION       150
+#define MARGE_LAYOUT_PROPOSITION  100
+
 class Quizzy;
 class Question;
 
@@ -144,6 +150,7 @@ class IHMQuizzy : public QWidget
     void creerFenetreJeu();
     void creerLayoutsFenetreJeu();
     void creerWidgetsFenetreJeu();
+    void configurerResponsiveLabels();
     void definirNomsObjets();
     void placerWidgetsFenetreJeu();
     void creerFenetreResultats();

@@ -204,6 +204,7 @@ void IHMQuizzy::creerFenetres()
     creerFenetreParticipants();
     creerFenetreJeu();
     creerFenetreResultats();
+    configurerResponsiveLabels();
     definirNomsObjets();
 }
 
@@ -292,6 +293,48 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
     labelChronometre    = new QLabel("00:00", this);
 }
 
+void IHMQuizzy::configurerResponsiveLabels()
+{
+    // Fenêtre Jeu
+    labelQuestion->setWordWrap(true);
+    propositionReponseA->setWordWrap(true);
+    propositionReponseB->setWordWrap(true);
+    propositionReponseC->setWordWrap(true);
+    propositionReponseD->setWordWrap(true);
+
+    labelNombreTotal->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+    labelNombreTotal->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    labelQuestion->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    labelQuestion->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    propositionReponseA->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseB->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseC->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseD->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+
+    propositionReponseA->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseB->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseC->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseD->setFixedHeight(HAUTEUR_PROPOSITION);
+
+    choixPropositionA->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionB->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionC->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionD->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    layoutPropositionReponse->setContentsMargins(MARGE_LAYOUT_PROPOSITION,
+                                                 0,
+                                                 MARGE_LAYOUT_PROPOSITION,
+                                                 0);
+
+    labelChronometre->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    labelChronometre->setFixedHeight(HAUTEUR_LABEL_CHRONOMETRE);
+}
+
 void IHMQuizzy::definirNomsObjets()
 {
     // Fenêtre Accueil
@@ -316,12 +359,13 @@ void IHMQuizzy::definirNomsObjets()
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
-{
-    // En-tête Question
+{ // En-tête Question
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
+
     // Proposition A et B
+    layoutPrincipalJeu->addStretch(1);
     layoutPropositionChoixA->addWidget(propositionReponseA);
     layoutPropositionChoixA->addWidget(choixPropositionA);
     layoutPropositonAB->addLayout(layoutPropositionChoixA);
@@ -338,8 +382,12 @@ void IHMQuizzy::placerWidgetsFenetreJeu()
     layoutPropositionChoixD->addWidget(choixPropositionD);
     layoutPropositonCD->addLayout(layoutPropositionChoixD);
     layoutPropositionReponse->addLayout(layoutPropositonCD);
+
     // Ajout Layout principal
     layoutPrincipalJeu->addLayout(layoutPropositionReponse);
+
+    // Chronomètre
+    layoutPrincipalJeu->addStretch(1);
     layoutChronometre->addWidget(labelChronometre);
     layoutPrincipalJeu->addLayout(layoutChronometre);
 }
