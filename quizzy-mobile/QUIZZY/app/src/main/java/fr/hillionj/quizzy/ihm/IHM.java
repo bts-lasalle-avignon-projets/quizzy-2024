@@ -1,8 +1,9 @@
 package fr.hillionj.quizzy.ihm.vues;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
-import fr.hillionj.quizzy.ihm.vues.session.FragmentQuiz;
 import fr.hillionj.quizzy.parametres.Parametres;
 
 public class IHM {
@@ -20,18 +21,12 @@ public class IHM {
         this.parametres = parametress;
     }
 
-    public void mettreAjourDeroulement() {
-        FragmentQuiz ihmSession = (FragmentQuiz) getIHMActive(FragmentQuiz.class);
-        if (ihmSession == null)
-            return;
-        ihmSession.mettreAjourDeroulement();
-    }
-
     public void ajouterIHM(Object pageIHM) {
         ihmActives.remove(pageIHM);
         ihmActives.add(pageIHM);
     }
 
+    @Nullable
     private Object getIHMActive(Class<?> typeObjet) {
         for (Object ihmActive : ihmActives) {
             if (typeObjet.isInstance(ihmActive)) {
