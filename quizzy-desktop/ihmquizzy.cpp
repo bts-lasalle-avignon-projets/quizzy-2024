@@ -154,8 +154,6 @@ void IHMQuizzy::afficherDecompteQuestion()
             minuteur->stop();
             labelChronometre->setText(QString::number(0) + "s");
             labelChronometre->setStyleSheet("background-color: #f9e4b7");
-            // @fixme Si la question n'a pas de durée, il faudra créer une trame
-            // pour mettre fin à cette question ou utilise-t-on la trame $S ?
             quizzy->terminerQuestion();
         }
     }
@@ -440,8 +438,9 @@ void IHMQuizzy::afficherNbQuestions(unsigned int numeroQuestion,
 {
     qDebug() << Q_FUNC_INFO << "numeroQuestion" << numeroQuestion
              << "nbQuestions" << nbQuestions;
-    labelNombreTotal->setText(QString("Question n°") +
-                              QString::number(numeroQuestion));
+    labelNombreTotal->setText(QString("Question ") +
+                              QString::number(numeroQuestion) + QString("/") +
+                              QString::number(nbQuestions));
 }
 
 void IHMQuizzy::afficherLibelleQuestion(const Question& question)
@@ -517,23 +516,19 @@ void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
     switch(numeroReponse)
     {
         case 1:
-            choixPropositionA->setStyleSheet(
-              "background-color: #f9b7b7; border: 3px solid red");
+            choixPropositionA->setStyleSheet("border: 3px solid red");
             choixPropositionA->setText(texte);
             break;
         case 2:
-            choixPropositionB->setStyleSheet(
-              "background-color: #b7f9ba; border: 3px solid red");
+            choixPropositionB->setStyleSheet("border: 3px solid red");
             choixPropositionB->setText(texte);
             break;
         case 3:
-            choixPropositionC->setStyleSheet(
-              "background-color: #f6f476; border: 3px solid red");
+            choixPropositionC->setStyleSheet("border: 3px solid red");
             choixPropositionC->setText(texte);
             break;
         case 4:
-            choixPropositionD->setStyleSheet(
-              "background-color: #b7baf9; border: 3px solid red");
+            choixPropositionD->setStyleSheet("border: 3px solid red");
             choixPropositionD->setText(texte);
             break;
         default:

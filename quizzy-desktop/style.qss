@@ -1,5 +1,5 @@
-QWidget {
-
+QWidget
+{
     background-color: #f9e4b7;
     padding: 20px;
 }
@@ -12,94 +12,51 @@ QLabel
     font-size: 20px;
 }
 
-#titreAccueil {
+#titreAccueil, #titreParticipants, #titreResultats
+{
     font-size: 40px;
     text-align: center;
 }
 
-#messageAttente {
+#messageAttente
+{
     font-size: 30px;
     text-align: center;
 }
 
-#titreParticipants {
-    font-size: 40px;
-    text-align: center;
-}
-
-#titreResultats {
-    font-size: 40px;
-    text-align: center;
-}
-
-#infoQuiz {
+#infoQuiz
+{
     font-size: 20px;
     text-align: center;
     color: #333;
     border: none;
 }
 
-QPushButton
+QGridLayout
 {
-    color: #fff;
-    background-color: #ff8a65;
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 20px;
+    margin: 0;
 }
 
-QPushButton:hover
+QWidget#choixPropositionA, QWidget#propositionReponseA
 {
-    background-color: #ff7043;
-}
-
-QPushButton:pressed
-{
-    background-color: #ff7043;
-}
-
-QGridLayout {
-    margin: 0px;
-}
-
-
-QWidget#choixPropositionA {
     background-color: #f9b7b7; /* Rouge */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionB {
+QWidget#choixPropositionB, QWidget#propositionReponseB
+{
     background-color: #b7f9ba; /* Vert */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionC {
+QWidget#choixPropositionC, QWidget#propositionReponseC
+{
     background-color: #f6f476; /* Jaune */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionD {
-    background-color: #b7baf9; /* Bleu */
-    border: 2px solid black;
-}
-
-QWidget#propositionReponseA {
-    background-color: #f9b7b7; /* Rouge */
-    border: 2px solid black;
-}
-
-QWidget#propositionReponseB {
-    background-color: #b7f9ba; /* Vert */
-    border: 2px solid black;
-}
-
-QWidget#propositionReponseC {
-    background-color: #f6f476; /* Jaune */
-    border: 2px solid black;
-}
-
-QWidget#propositionReponseD {
+QWidget#choixPropositionD, QWidget#propositionReponseD
+{
     background-color: #b7baf9; /* Bleu */
     border: 2px solid black;
 }

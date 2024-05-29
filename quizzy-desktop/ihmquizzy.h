@@ -41,7 +41,7 @@
  * @def PLEIN_ECRAN_RASPBERRY_PI
  * @brief Pour le mode plein écran sur la Raspberry Pi
  */
-//#define PLEIN_ECRAN_RASPBERRY_PI
+#define PLEIN_ECRAN_RASPBERRY_PI
 
 /**
  * @def TOP_SECONDE
