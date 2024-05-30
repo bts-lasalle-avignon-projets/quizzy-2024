@@ -15,12 +15,14 @@
         android:fontFamily="sans-serif-medium" />
 
     <EditText
-        android:id="@android:id/edit"
-        android:layout_width="match_parent"
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:textColor="@color/white"
-        android:textSize="14sp"
-        android:fontFamily="sans-serif"
+        android:textSize="12sp"
         android:layout_marginStart="70dp"
-        android:backgroundTint="@color/white" />
+        android:fontFamily="sans-serif"
+        android:inputType="phone"
+        />
 </LinearLayout>

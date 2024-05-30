@@ -1,6 +1,8 @@
 package fr.hillionj.quizzy.ihm.vues;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +24,7 @@ public class VueSession extends AppCompatActivity {
     private Session session;
     private TextView question, chronometre, progression;
     private TextView[] propositions;
+    private Button btn_stopper, btn_reinitialiser, btn_pause, btn_suivant, btn_precedent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,25 @@ public class VueSession extends AppCompatActivity {
         propositions[3] = findViewById(R.id.proposition4);
         chronometre = findViewById(R.id.chronometre);
         progression = findViewById(R.id.progression);
+        btn_stopper = findViewById(R.id.btn_stopper);
+        btn_pause = findViewById(R.id.btn_pause);
+        btn_reinitialiser = findViewById(R.id.btn_reinitialiser);
+        btn_suivant = findViewById(R.id.btn_suivant);
+        btn_precedent = findViewById(R.id.btn_precedent);
+
+        btn_suivant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.suivant();
+            }
+        });
+
+        btn_precedent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.precedent();
+            }
+        });
 
         Parametres.getParametres().getSession().lancer();
     }
@@ -67,5 +89,11 @@ public class VueSession extends AppCompatActivity {
         }
         chronometre.setText(String.valueOf(question.getTempsReponse()));
         progression.setText(session.getNumeroQuestion() + "/" + session.getTotalQuestions());
+        afficherBoutons();
+    }
+
+    public void afficherBoutons(){
+        btn_precedent.setEnabled(session.getNumeroQuestion() != 1);
+        btn_suivant.setEnabled(session.getNumeroQuestion() != session.getTotalQuestions());
     }
 }

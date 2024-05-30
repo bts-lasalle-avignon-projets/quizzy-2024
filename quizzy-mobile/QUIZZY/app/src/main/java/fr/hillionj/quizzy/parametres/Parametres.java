@@ -8,6 +8,7 @@ import fr.hillionj.quizzy.communication.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.session.Session;
+import fr.hillionj.quizzy.session.WatchDog;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class Parametres {
@@ -27,6 +28,7 @@ public class Parametres {
         this.participants = this.session.getBaseDeDonnees().getParticipants();
         this.themes = this.session.getBaseDeDonnees().getThemes();
         new IHM(this);
+        new WatchDog(this);
     }
 
     public static Parametres getParametres(AppCompatActivity activite) {

@@ -36,10 +36,10 @@ public class VueParticipants extends AppCompatActivity {
             return insets;
         });
 
-        IHM.getIHM().ajouterIHM(this);
-
         initialiserAttributs();
         initialiserAssociation();
+
+        IHM.getIHM().ajouterIHM(this);
     }
 
     private void initialiserAttributs() {
