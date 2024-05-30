@@ -280,17 +280,21 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
 
 void IHMQuizzy::creerWidgetsFenetreJeu()
 {
-    labelNombreTotal    = new QLabel("0/0", this);
-    labelQuestion       = new QLabel("", this);
-    propositionReponseA = new QLabel("A", this);
-    choixPropositionA   = new QLabel("", this);
-    propositionReponseB = new QLabel("B", this);
-    choixPropositionB   = new QLabel("", this);
-    propositionReponseC = new QLabel("C", this);
-    choixPropositionC   = new QLabel("", this);
-    propositionReponseD = new QLabel("D", this);
-    choixPropositionD   = new QLabel("", this);
-    labelChronometre    = new QLabel("00:00", this);
+    labelNombreTotal      = new QLabel("0/0", this);
+    labelQuestion         = new QLabel("", this);
+    idPropositionReponseA = new QLabel("A.", this);
+    propositionReponseA   = new QLabel("", this);
+    choixPropositionA     = new QLabel("", this);
+    idPropositionReponseB = new QLabel("B.", this);
+    propositionReponseB   = new QLabel("", this);
+    choixPropositionB     = new QLabel("", this);
+    idPropositionReponseC = new QLabel("C.", this);
+    propositionReponseC   = new QLabel("", this);
+    choixPropositionC     = new QLabel("", this);
+    idPropositionReponseD = new QLabel("D.", this);
+    propositionReponseD   = new QLabel("", this);
+    choixPropositionD     = new QLabel("", this);
+    labelChronometre      = new QLabel("00:00", this);
 }
 
 void IHMQuizzy::configurerResponsiveLabels()
@@ -301,6 +305,11 @@ void IHMQuizzy::configurerResponsiveLabels()
     propositionReponseB->setWordWrap(true);
     propositionReponseC->setWordWrap(true);
     propositionReponseD->setWordWrap(true);
+
+    choixPropositionA->setWordWrap(true);
+    choixPropositionB->setWordWrap(true);
+    choixPropositionC->setWordWrap(true);
+    choixPropositionD->setWordWrap(true);
 
     labelNombreTotal->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
     labelNombreTotal->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
@@ -345,6 +354,10 @@ void IHMQuizzy::definirNomsObjets()
     infoQuiz->setObjectName("infoQuiz");
 
     // Fenêtre jeu
+    idPropositionReponseA->setObjectName("idPropositionReponseA");
+    idPropositionReponseB->setObjectName("idPropositionReponseB");
+    idPropositionReponseC->setObjectName("idPropositionReponseC");
+    idPropositionReponseD->setObjectName("idPropositionReponseD");
     propositionReponseA->setObjectName("propositionReponseA");
     propositionReponseB->setObjectName("propositionReponseB");
     propositionReponseC->setObjectName("propositionReponseC");
@@ -359,25 +372,30 @@ void IHMQuizzy::definirNomsObjets()
 }
 
 void IHMQuizzy::placerWidgetsFenetreJeu()
-{ // En-tête Question
+{
+    // En-tête Question
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
 
     // Proposition A et B
     layoutPrincipalJeu->addStretch(1);
+    layoutPropositionChoixA->addWidget(idPropositionReponseA);
     layoutPropositionChoixA->addWidget(propositionReponseA);
     layoutPropositionChoixA->addWidget(choixPropositionA);
     layoutPropositonAB->addLayout(layoutPropositionChoixA);
+    layoutPropositionChoixB->addWidget(idPropositionReponseB);
     layoutPropositionChoixB->addWidget(propositionReponseB);
     layoutPropositionChoixB->addWidget(choixPropositionB);
     layoutPropositonAB->addLayout(layoutPropositionChoixB);
     layoutPropositionReponse->addLayout(layoutPropositonAB);
 
     // Proposition C et D
+    layoutPropositionChoixC->addWidget(idPropositionReponseC);
     layoutPropositionChoixC->addWidget(propositionReponseC);
     layoutPropositionChoixC->addWidget(choixPropositionC);
     layoutPropositonCD->addLayout(layoutPropositionChoixC);
+    layoutPropositionChoixD->addWidget(idPropositionReponseD);
     layoutPropositionChoixD->addWidget(propositionReponseD);
     layoutPropositionChoixD->addWidget(choixPropositionD);
     layoutPropositonCD->addLayout(layoutPropositionChoixD);
@@ -499,10 +517,10 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setText("A. " + propositions['A']);
-    propositionReponseB->setText("B. " + propositions['B']);
-    propositionReponseC->setText("C. " + propositions['C']);
-    propositionReponseD->setText("D. " + propositions['D']);
+    propositionReponseA->setText(propositions['A']);
+    propositionReponseB->setText(propositions['B']);
+    propositionReponseC->setText(propositions['C']);
+    propositionReponseD->setText(propositions['D']);
 }
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)

@@ -37,25 +37,25 @@ QGridLayout
     margin: 0;
 }
 
-QWidget#choixPropositionA, QWidget#propositionReponseA
+QWidget#choixPropositionA, QWidget#propositionReponseA, QWidget#idPropositionReponseA
 {
     background-color: #f9b7b7; /* Rouge */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionB, QWidget#propositionReponseB
+QWidget#choixPropositionB, QWidget#propositionReponseB, QWidget#idPropositionReponseB
 {
     background-color: #b7f9ba; /* Vert */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionC, QWidget#propositionReponseC
+QWidget#choixPropositionC, QWidget#propositionReponseC, QWidget#idPropositionReponseC
 {
     background-color: #f6f476; /* Jaune */
     border: 2px solid black;
 }
 
-QWidget#choixPropositionD, QWidget#propositionReponseD
+QWidget#choixPropositionD, QWidget#propositionReponseD, QWidget#idPropositionReponseD
 {
     background-color: #b7baf9; /* Bleu */
     border: 2px solid black;

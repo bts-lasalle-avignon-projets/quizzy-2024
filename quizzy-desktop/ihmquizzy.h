@@ -126,6 +126,10 @@ class IHMQuizzy : public QWidget
     QLabel*      propositionReponseB;
     QLabel*      propositionReponseC;
     QLabel*      propositionReponseD;
+    QLabel*      idPropositionReponseA;
+    QLabel*      idPropositionReponseB;
+    QLabel*      idPropositionReponseC;
+    QLabel*      idPropositionReponseD;
     QLabel*      choixPropositionA;
     QLabel*      choixPropositionB;
     QLabel*      choixPropositionC;
