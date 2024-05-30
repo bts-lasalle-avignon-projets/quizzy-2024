@@ -59,9 +59,15 @@ unsigned int Participant::getNombreReponsesCorrectes() const
 /**
  * @brief Incrémente le nombre de bonnes réponses
  */
-void Participant::incrementerNombreReponsesCorrectes()
+void Participant::incrementerNombreReponsesCorrectes(int numeroQuestion)
 {
     ++nombreReponsesCorrectes;
+    questionsCorrectes.push_back(numeroQuestion);
+}
+
+QVector<int> Participant::getQuestionsCorrectes() const
+{
+    return questionsCorrectes;
 }
 
 QVector<int> Participant::getReponses() const

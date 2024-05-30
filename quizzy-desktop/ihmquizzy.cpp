@@ -117,24 +117,45 @@ void IHMQuizzy::afficherResultats()
     {
         qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
 
-        layoutParticipantResultat = new QHBoxLayout;
+        afficherNombreBonnesReponses(participant, nbQuestions);
+        afficherNumerosQuestionsCorrectes(participant);
 
-        nomParticipant = new QLabel(this);
-        nomParticipant->setText(participant->getNom());
-
-        resultatParticipant = new QLabel(this);
-        unsigned int reponsesCorrectes =
-          participant->getNombreReponsesCorrectes();
-        QString resultat = QString::number(reponsesCorrectes) + "/" +
-                           QString::number(nbQuestions);
-        resultatParticipant->setText(resultat);
-
-        layoutParticipantResultat->addWidget(nomParticipant);
-        layoutParticipantResultat->addWidget(resultatParticipant);
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
 
     afficherFenetreResultats();
+}
+
+void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
+                                             unsigned int nbQuestions)
+{
+    layoutParticipantResultat = new QHBoxLayout;
+
+    nomParticipant = new QLabel(this);
+    nomParticipant->setText(participant->getNom());
+
+    resultatParticipant            = new QLabel(this);
+    unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
+    QString      resultat =
+      QString::number(reponsesCorrectes) + "/" + QString::number(nbQuestions);
+    resultatParticipant->setText(resultat);
+
+    layoutParticipantResultat->addWidget(nomParticipant);
+    layoutParticipantResultat->addWidget(resultatParticipant);
+}
+
+void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
+{
+    QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
+    QString      texteQuestionsCorrectes = "N°questions correctes : ";
+    for(int numeroQuestion: questionsCorrectes)
+    {
+        texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
+    }
+    QLabel* labelQuestionsCorrectes = new QLabel(this);
+    labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
+
+    layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
 }
 
 void IHMQuizzy::demarrerQuestion()

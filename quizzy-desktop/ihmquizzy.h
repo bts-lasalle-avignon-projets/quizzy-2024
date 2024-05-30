@@ -66,6 +66,7 @@
 
 class Quizzy;
 class Question;
+class Participant;
 
 /**
  * @class IHMQuizzy
@@ -172,6 +173,9 @@ class IHMQuizzy : public QWidget
     void reinitialiserAffichage();
     void effacerFenetreParticipants();
     void effacerFenetreResultats();
+    void afficherNumerosQuestionsCorrectes(Participant* participant);
+    void afficherNombreBonnesReponses(Participant* participant,
+                                      unsigned int nbQuestions);
 
   public:
     IHMQuizzy(QWidget* parent = 0);

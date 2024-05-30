@@ -72,6 +72,7 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
     if(questionActuelle)
     {
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
+        int numeroQuestion  = indexQuestionActuelle + 1;
         qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
                  << "nom" << participant->getNom() << "numeroReponse"
                  << numeroReponse << "reponseCorrecte" << reponseCorrecte
@@ -81,7 +82,7 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
 
         if(numeroReponse == reponseCorrecte)
         {
-            participant->incrementerNombreReponsesCorrectes();
+            participant->incrementerNombreReponsesCorrectes(numeroQuestion);
         }
 
         choixParticipants[numeroReponse].append(participant->getNom());
