@@ -6,9 +6,11 @@
             android:defaultValue="0"
             android:key="liste_themes"
             android:title="Thème"
+            android:layout="@layout/custom_list_preference"
             app:useSimpleSummaryProvider="true" />
         <SwitchPreference
             android:defaultValue="false"
+            android:layout="@layout/custom_switch_preference"
             android:key="switch_calcul_de_temps"
             android:title="Désactiver le calcul automatique du temps de réponse" />
         <EditTextPreference
@@ -17,6 +19,7 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Temps pour répondre"
+            android:layout="@layout/custom_edit_text_preference"
             app:dependency="switch_calcul_de_temps"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
@@ -24,7 +27,8 @@
 
         <Preference
             android:defaultValue="Default value"
-            android:key="texte_configurer_participants"
+            android:layout="@layout/custom_preference"
+            android:key="configurer_participants"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Configurer les noms" />

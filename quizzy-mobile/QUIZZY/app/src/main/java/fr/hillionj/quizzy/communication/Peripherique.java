@@ -14,6 +14,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import fr.hillionj.quizzy.ihm.IHM;
+
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 @SuppressLint("MissingPermission")
 public class Peripherique extends Thread
@@ -26,6 +28,7 @@ public class Peripherique extends Thread
     private OutputStream    sendStream    = null;
     private TReception      tReception;
     private GestionnaireBluetooth gestionnaireBluetooth;
+    private boolean seConnecte = false;
 
     private void demarrerThread()
     {
@@ -37,29 +40,32 @@ public class Peripherique extends Thread
                 try
                 {
                     socket.connect();
-                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_CONNEXION_BLUETOOTH,
-                            indicePeripherique);
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_CONNEXION_BLUETOOTH);
                     tReception.start();
                 }
                 catch(IOException e)
                 {
                     Log.e("QUIZZY_" + this.getClass().getName(), "connecter() erreur connect socket", e);
-                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_ERREUR_CONNEXION_BLUETOOTH,
-                            indicePeripherique);
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_ERREUR_CONNEXION_BLUETOOTH);
                 }
             }
         }.start();
     }
 
-    private void envoyerCodeAuHandler(int what, Object obj, Integer arg1)
+    public boolean seConnecte() {
+        return seConnecte;
+    }
+
+    public void setSeConnecte(boolean seConnecte) {
+        this.seConnecte = seConnecte;
+    }
+
+    private void envoyerCodeAuHandler(int what, Object obj)
     {
         Message msg = Message.obtain();
         msg.what    = what;
         msg.obj     = obj;
-        if(arg1 != null)
-        {
-            msg.arg1 = (int)arg1;
-        }
+        msg.arg1 = indicePeripherique;
         gestionnaireBluetooth.getHandler().sendMessage(msg);
     }
 
@@ -84,6 +90,8 @@ public class Peripherique extends Thread
         {
             Log.e("QUIZZY_" + this.getClass().getName(), "initialiserSocket() erreur init socket", e);
             socket = null;
+            seConnecte = false;
+            IHM.getIHM().mettreAjourListeParticipants();
         }
     }
 
@@ -117,14 +125,16 @@ public class Peripherique extends Thread
 
     public void connecter()
     {
+        seConnecte = true;
+        IHM.getIHM().mettreAjourListeParticipants();
         initialiserSocket();
         initialiserReception();
         demarrerThread();
     }
 
-    public void envoyerCodeAuHandler(int what, Object obj)
+    public void envoyerCodeAuHandler(int what)
     {
-        envoyerCodeAuHandler(what, obj, null);
+        envoyerCodeAuHandler(what, null);
     }
 
     public boolean deconnecter()
@@ -134,13 +144,12 @@ public class Peripherique extends Thread
 
     public boolean deconnecter(boolean estPrevue)
     {
+        IHM.getIHM().mettreAjourListeParticipants();
         try
         {
             tReception.arreter();
             socket.close();
-            envoyerCodeAuHandler(gestionnaireBluetooth.CODE_DECONNEXION_BLUETOOTH,
-                    estPrevue,
-                    indicePeripherique);
+            envoyerCodeAuHandler(gestionnaireBluetooth.CODE_DECONNEXION_BLUETOOTH, estPrevue);
             return true;
         }
         catch(IOException e)
@@ -209,9 +218,7 @@ public class Peripherique extends Thread
                 byte rawdata[] = new byte[k];
                 for(int i = 0; i < k; i++)
                     rawdata[i] = buffer[i];
-                envoyerCodeAuHandler(gestionnaireBluetooth.CODE_RECEPTION_BLUETOOTH,
-                        new String(rawdata),
-                        indicePeripherique);
+                envoyerCodeAuHandler(gestionnaireBluetooth.CODE_RECEPTION_BLUETOOTH, new String(rawdata));
             }
         }
 

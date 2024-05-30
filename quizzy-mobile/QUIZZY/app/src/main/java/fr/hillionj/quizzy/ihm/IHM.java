@@ -4,7 +4,11 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.hillionj.quizzy.ihm.vues.VueParticipants;
+import fr.hillionj.quizzy.ihm.vues.VueSession;
 import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.session.Session;
 
 public class IHM {
 
@@ -22,7 +26,12 @@ public class IHM {
     }
 
     public void ajouterIHM(Object pageIHM) {
-        ihmActives.remove(pageIHM);
+        for (Object ihmActive : ihmActives) {
+            if (pageIHM.getClass() == ihmActive.getClass()) {
+                ihmActives.remove(ihmActive);
+                break;
+            }
+        }
         ihmActives.add(pageIHM);
     }
 
@@ -34,5 +43,28 @@ public class IHM {
             }
         }
         return null;
+    }
+
+    public void mettreAjourListeParticipants() {
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourListeParticipants();
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.mettreAjourListeParticipants();
+    }
+
+    public void afficherInterface(Session session) {
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null) {
+            vueSession.setSession(session);
+            vueSession.afficherInterface();
+        }
+    }
+
+    public void afficherInterface() {
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherInterface();
     }
 }

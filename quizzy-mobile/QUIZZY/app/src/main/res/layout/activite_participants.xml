@@ -14,6 +14,7 @@
         android:id="@+id/spinner_participants"
         android:layout_width="397dp"
         android:layout_height="53dp"
+        android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,32 +24,34 @@
         app:layout_constraintVertical_bias="0.39" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_peripheriques"
         android:layout_width="397dp"
         android:layout_height="53dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/spinner_participants"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/spinner_participants"
         app:layout_constraintTop_toBottomOf="@+id/spinner_participants" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_associer"
         android:layout_width="170dp"
         android:layout_height="55dp"
         android:layout_marginTop="24dp"
         android:text="Associer"
-        app:layout_constraintEnd_toEndOf="@+id/spinner2"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_peripheriques"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/spinner2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintStart_toStartOf="@+id/spinner_peripheriques"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_peripheriques" />
 
     <ListView
-        android:id="@+id/liste_participants"
+        android:id="@+id/liste_peripheriques"
         android:layout_width="349dp"
         android:layout_height="406dp"
         android:layout_marginStart="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner2"
-        app:layout_constraintStart_toEndOf="@+id/spinner2"
-        app:layout_constraintTop_toTopOf="@+id/spinner2" />
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_peripheriques"
+        app:layout_constraintStart_toEndOf="@+id/spinner_peripheriques"
+        app:layout_constraintTop_toTopOf="@+id/spinner_peripheriques" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,11 +19,13 @@ public class Parametres {
     private Session session;
     private List<Peripherique> peripheriques;
     private List<Participant> participants;
+    private List<String> themes;
 
     private void initaliserApplication() {
         this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
         this.session = new Session(this, activite);
         this.participants = this.session.getBaseDeDonnees().getParticipants();
+        this.themes = this.session.getBaseDeDonnees().getThemes();
         new IHM(this);
     }
 
@@ -80,5 +82,18 @@ public class Parametres {
 
     public Session getSession() {
         return session;
+    }
+
+    public Participant getParticipantAssocier(Peripherique peripherique) {
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() == peripherique) {
+                return participant;
+            }
+        }
+        return null;
+    }
+
+    public List<String> getThemes() {
+        return themes;
     }
 }

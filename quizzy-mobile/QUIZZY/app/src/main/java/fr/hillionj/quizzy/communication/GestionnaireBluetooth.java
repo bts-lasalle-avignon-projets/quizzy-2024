@@ -17,6 +17,9 @@ import androidx.core.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.parametres.Parametres;
+
 @SuppressLint("MissingPermission")
 public class GestionnaireBluetooth {
 
@@ -99,18 +102,24 @@ public class GestionnaireBluetooth {
             public void handleMessage(Message msg)
             {
                 super.handleMessage(msg);
+                Peripherique peripherique = Parametres.getParametres().getPeripheriques().get(msg.arg1);
                 switch(msg.what)
                 {
                     case CODE_CONNEXION_BLUETOOTH:
+                        peripherique.setSeConnecte(false);
+                        IHM.getIHM().mettreAjourListeParticipants();
                         //traiterConnexion(msg);
                         break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
+                        peripherique.setSeConnecte(false);
+                        IHM.getIHM().mettreAjourListeParticipants();
                         //traiterErreurConnexion(msg);
                         break;
                     case CODE_RECEPTION_BLUETOOTH:
                         //traiterReception(msg);
                         break;
                     case CODE_DECONNEXION_BLUETOOTH:
+                        IHM.getIHM().mettreAjourListeParticipants();
                         //traiterDeconnexion(msg);
                         break;
                     default:

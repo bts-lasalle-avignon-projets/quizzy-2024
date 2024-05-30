@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import fr.hillionj.quizzy.bdd.BaseDeDonnees;
+import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Ecran;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.Participant;
@@ -19,6 +20,7 @@ public class Session {
     private List<Participant> participants = null;
     private List<Ecran> ecrans = null;
     private List<Question> questions = null;
+    private int indiceQuestion = 0;
     private final Map<Participant, Integer> score = new HashMap<>();
     private final GestionnaireSonore gestionnaireSonore;
 
@@ -28,17 +30,31 @@ public class Session {
         this.gestionnaireSonore = new GestionnaireSonore(activite);
     }
 
-    public void jouer() {
-        this.baseDeDonnees.getNouveauQuiz(parametres);
+    public void lancer() {
+        questions = this.baseDeDonnees.getNouveauQuiz(parametres);
+        IHM.getIHM().afficherInterface(this);
         this.participants = parametres.getParticipants();
     }
 
-    public void abandonner() {
+    public void stopper() {
 
     }
 
-    public void sauvegarder() {
+    public void suivant() {
+        indiceQuestion++;
+        envoyerQuestion();
+    }
 
+    public void precedent() {
+        indiceQuestion = indiceQuestion > 0 ? indiceQuestion - 1 : 0;
+        envoyerQuestion();
+    }
+
+    private void envoyerQuestion() {
+        IHM.getIHM().afficherInterface();
+    }
+
+    public void sauvegarder() {
     }
 
     public BaseDeDonnees getBaseDeDonnees() {
@@ -47,5 +63,17 @@ public class Session {
 
     public GestionnaireSonore getGestionnaireSonore() {
         return gestionnaireSonore;
+    }
+
+    public Question getQuestionActuelle() {
+        return questions.get(indiceQuestion);
+    }
+
+    public int getNumeroQuestion() {
+        return indiceQuestion + 1;
+    }
+
+    public int getTotalQuestions() {
+        return questions.size();
     }
 }
