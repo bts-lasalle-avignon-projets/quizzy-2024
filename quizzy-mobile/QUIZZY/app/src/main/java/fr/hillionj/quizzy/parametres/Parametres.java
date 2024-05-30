@@ -3,12 +3,10 @@ package fr.hillionj.quizzy.parametres;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
-import java.util.logging.Handler;
 
-import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.communication.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.Peripherique;
-import fr.hillionj.quizzy.ihm.vues.IHM;
+import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.session.Session;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })

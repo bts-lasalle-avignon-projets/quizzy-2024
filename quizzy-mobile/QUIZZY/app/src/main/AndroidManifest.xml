@@ -19,6 +19,13 @@
         android:theme="@style/Theme.QUIZZY"
         tools:targetApi="31">
         <activity
+            android:name=".ihm.vues.VueParticipants"
+            android:exported="false" />
+        <activity
+            android:name=".ihm.vues.VueParametres"
+            android:exported="false"
+            android:label="@string/title_activity_vue_parametres" />
+        <activity
             android:name=".Quizzy"
             android:exported="true"
             android:label="@string/app_name">

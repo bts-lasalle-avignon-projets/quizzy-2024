@@ -1,4 +1,4 @@
-package fr.hillionj.quizzy.ihm.vues;
+package fr.hillionj.quizzy.ihm;
 
 import androidx.annotation.Nullable;
 

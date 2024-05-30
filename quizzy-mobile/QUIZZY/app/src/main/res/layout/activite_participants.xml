@@ -45,8 +45,8 @@
 
     <ListView
         android:id="@+id/liste_participants"
-        android:layout_width="384dp"
-        android:layout_height="282dp"
+        android:layout_width="349dp"
+        android:layout_height="406dp"
         android:layout_marginStart="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/spinner2"
         app:layout_constraintStart_toEndOf="@+id/spinner2"

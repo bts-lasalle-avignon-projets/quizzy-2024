@@ -1,6 +1,7 @@
 package fr.hillionj.quizzy.ihm.spinner;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +13,16 @@ import java.util.Map;
 import java.util.Random;
 
 import fr.hillionj.quizzy.R;
+import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.parametres.Participant;
 
 public class ListViewParticipants extends BaseAdapter {
 
     private Context context;
-    private List<Map<String, String>> participants;
-    private List<Integer> colors; // Liste des couleurs
+    private List<Participant> participants = Parametres.getParametres().getParticipants();
 
-    public ListViewParticipants(Context context, List<Map<String, String>> participants, List<Integer> colors) {
+    public ListViewParticipants(Context context) {
         this.context = context;
-        this.participants = participants;
-        this.colors = colors;
     }
 
     @Override
@@ -31,8 +31,15 @@ public class ListViewParticipants extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return participants.get(position);
+    public Object[] getItem(int position) {
+        Participant participant  =participants.get(position);
+        String description = "Non associé";
+        int couleur = Color.RED;
+        if (participant.getPeripherique() != null) {
+            description = participant.getPeripherique().getNom();
+        }
+
+        return new Object[] {participant.getNom(), description, couleur};
     }
 
     @Override
@@ -43,19 +50,22 @@ public class ListViewParticipants extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(fr.hillionj.quizzy.R.layout.list_items, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_items, parent, false);
         }
 
-        Map<String, String> participant = participants.get(position);
-        int color = colors.get(new Random().nextInt(3));
+        Object[] objet = getItem(position);
+
+        String nom = (String) objet[0];
+        String description = (String) objet[1];
+        int couleur = (int) objet[2];
 
         TextView text1 = convertView.findViewById(R.id.text1);
         TextView text2 = convertView.findViewById(R.id.text2);
         View colorView = convertView.findViewById(R.id.couleur);
 
-        text1.setText(participant.get("text1"));
-        text2.setText(participant.get("text2"));
-        colorView.setBackgroundColor(color);
+        text1.setText(nom);
+        text2.setText(description);
+        colorView.setBackgroundColor(couleur);
 
         return convertView;
     }

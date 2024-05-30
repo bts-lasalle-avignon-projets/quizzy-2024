@@ -3,6 +3,8 @@ package fr.hillionj.quizzy.ihm.spinner.speciales;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,8 @@ import fr.hillionj.quizzy.parametres.Participant;
 
 public class SpinnerParticipants extends Spinner {
 
-    public SpinnerParticipants(View vue, int id) {
-        super(vue, id, getParticipants());
+    public SpinnerParticipants(AppCompatActivity activite, int id) {
+        super(activite, id, getParticipants());
     }
 
     private static List<String> getParticipants()

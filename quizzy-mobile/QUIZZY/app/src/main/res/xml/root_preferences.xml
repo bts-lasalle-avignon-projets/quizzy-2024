@@ -1,35 +1,32 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <PreferenceCategory app:title="@string/messages_header">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Sélection du quiz">
 
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
+            android:defaultValue="0"
+            android:key="liste_themes"
+            android:title="Thème"
             app:useSimpleSummaryProvider="true" />
-
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_calcul_de_temps"
+            android:title="Désactiver le calcul automatique du temps de réponse" />
+        <EditTextPreference
+            android:defaultValue="30"
+            android:key="entree_temps"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Temps pour répondre"
+            app:dependency="switch_calcul_de_temps"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Configurer les participants">
 
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-
+        <Preference
+            android:defaultValue="Default value"
+            android:key="texte_configurer_participants"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Configurer les noms" />
     </PreferenceCategory>
-
 </PreferenceScreen>
