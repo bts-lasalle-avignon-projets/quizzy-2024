@@ -348,12 +348,15 @@ void IHMQuizzy::definirNomsObjets()
 {
     // Fenêtre Accueil
     titreFenetreAccueil->setObjectName("titreAccueil");
+    messageAttente->setObjectName("messageAttente");
 
     // Fenêtre Participants
     titreFenetreParticipants->setObjectName("titreParticipants");
     infoQuiz->setObjectName("infoQuiz");
 
     // Fenêtre jeu
+    labelNombreTotal->setObjectName("labelNombreTotal");
+    labelQuestion->setObjectName("labelQuestion");
     idPropositionReponseA->setObjectName("idPropositionReponseA");
     idPropositionReponseB->setObjectName("idPropositionReponseB");
     idPropositionReponseC->setObjectName("idPropositionReponseC");
