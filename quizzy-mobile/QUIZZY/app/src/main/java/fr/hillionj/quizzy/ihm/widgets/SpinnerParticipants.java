@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.R;
+import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.Participant;
 
@@ -19,7 +20,7 @@ public class SpinnerParticipants extends ArrayList<String> {
     public SpinnerParticipants(AppCompatActivity activite, int id) {
         super(getParticipants());
         spinner = activite.findViewById(id);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Parametres.getParametres().getActivite(), R.layout.spinner_quizzy, this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, this);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

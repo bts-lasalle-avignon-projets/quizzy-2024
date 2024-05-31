@@ -1,6 +1,7 @@
 package fr.hillionj.quizzy.ihm;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,22 @@ public class IHM {
     private static IHM ihm;
     private List<Object> ihmActives = new ArrayList<>();
     private Parametres parametres;
+    private AppCompatActivity activiteActive = null;
 
     public static IHM getIHM() {
         return IHM.ihm;
     }
 
-    public IHM(Parametres parametress) {
+    public IHM(Parametres parametres, AppCompatActivity activiteActive) {
         IHM.ihm = this;
-        this.parametres = parametress;
+        this.activiteActive = activiteActive;
+        this.parametres = parametres;
     }
 
     public void ajouterIHM(Object pageIHM) {
+        if (pageIHM instanceof AppCompatActivity) {
+            activiteActive = (AppCompatActivity) pageIHM;
+        }
         for (Object ihmActive : ihmActives) {
             if (pageIHM.getClass() == ihmActive.getClass()) {
                 ihmActives.remove(ihmActive);
@@ -62,9 +68,23 @@ public class IHM {
         }
     }
 
-    public void afficherInterface() {
+    public AppCompatActivity getActiviteActive() {
+        return activiteActive;
+    }
+
+    public void afficherBoutons() {
         VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
         if (vueSession != null)
-            vueSession.afficherInterface();
+            vueSession.afficherBoutons();
+    }
+
+    public void afficherChrono() {
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherChrono();
+    }
+
+    public AppCompatActivity getActivite(Class<?> typeActivite) {
+        return (AppCompatActivity) getIHMActive(typeActivite);
     }
 }

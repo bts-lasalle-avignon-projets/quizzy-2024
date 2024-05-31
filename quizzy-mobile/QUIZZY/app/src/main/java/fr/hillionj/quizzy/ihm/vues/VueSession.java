@@ -1,5 +1,6 @@
 package fr.hillionj.quizzy.ihm.vues;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.text.DecimalFormat;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
@@ -25,6 +28,7 @@ public class VueSession extends AppCompatActivity {
     private TextView question, chronometre, progression;
     private TextView[] propositions;
     private Button btn_stopper, btn_reinitialiser, btn_pause, btn_suivant, btn_precedent;
+    private DecimalFormat format = new DecimalFormat("00.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +91,7 @@ public class VueSession extends AppCompatActivity {
         for (int i = 0; i < propositions.length; i++) {
             propositions[i].setText(session.getQuestionActuelle().getPropositions().get(i));
         }
-        chronometre.setText(String.valueOf(question.getTempsReponse()));
+        afficherChrono();
         progression.setText(session.getNumeroQuestion() + "/" + session.getTotalQuestions());
         afficherBoutons();
     }
@@ -95,5 +99,18 @@ public class VueSession extends AppCompatActivity {
     public void afficherBoutons(){
         btn_precedent.setEnabled(session.getNumeroQuestion() != 1);
         btn_suivant.setEnabled(session.getNumeroQuestion() != session.getTotalQuestions());
+    }
+
+    public void afficherChrono() {
+        Question question = session.getQuestionActuelle();
+        double tempsRestant = Parametres.getParametres().getSession().getTempsRestant();
+        chronometre.setText(format.format(tempsRestant).replace(',', '.'));
+        if (tempsRestant == 0.0) {
+            chronometre.setTextColor(Color.RED);
+        } else if (tempsRestant < 3.0) {
+            chronometre.setTextColor(Color.YELLOW);
+        } else {
+            chronometre.setTextColor(getResources().getColor(R.color.white));
+        }
     }
 }

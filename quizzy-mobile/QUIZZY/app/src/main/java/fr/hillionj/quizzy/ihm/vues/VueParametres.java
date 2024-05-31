@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ public class VueParametres extends AppCompatActivity {
             });
             ListPreference liste_themes = findPreference("liste_themes");
             List<String> themes = new ArrayList<>();
+
             themes.addAll(Parametres.getParametres().getThemes());
             List<String> themesValeurs = new ArrayList<>();
             for (int i = 0; i < themes.size(); i++) {

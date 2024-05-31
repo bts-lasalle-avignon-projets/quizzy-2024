@@ -1,9 +1,12 @@
 package fr.hillionj.quizzy.parametres;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import fr.hillionj.quizzy.Quizzy;
 import fr.hillionj.quizzy.communication.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
@@ -14,29 +17,19 @@ import fr.hillionj.quizzy.session.WatchDog;
 public class Parametres {
 
     private static Parametres parametres  = null;
-    private AppCompatActivity activite;
     private int nombreDeQuestions = 20;
     private String theme = null;
     private Session session;
     private List<Peripherique> peripheriques;
     private List<Participant> participants;
     private List<String> themes;
+    private Quizzy activitePrincipale;
 
-    private void initaliserApplication() {
-        this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
-        this.session = new Session(this, activite);
-        this.participants = this.session.getBaseDeDonnees().getParticipants();
-        this.themes = this.session.getBaseDeDonnees().getThemes();
-        new IHM(this);
-        new WatchDog(this);
-    }
-
-    public static Parametres getParametres(AppCompatActivity activite) {
-        if (parametres == null) {
+    public static Parametres getParametres(Quizzy activite) {
+        if (parametres == null)
             parametres = new Parametres(activite);
-        } else {
-            parametres.setActivite(activite);
-        }
+        else
+            parametres.activitePrincipale = activite;
         return parametres;
     }
 
@@ -45,13 +38,11 @@ public class Parametres {
     }
 
     public Parametres(AppCompatActivity activite) {
-        this.activite = activite;
-
-        initaliserApplication();
-    }
-
-    public void setActivite(AppCompatActivity activite) {
-        this.activite = activite;
+        this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
+        IHM ihm = new IHM(this, activite);
+        this.session = new Session(this, activite, ihm);
+        this.participants = this.session.getBaseDeDonnees().getParticipants();
+        this.themes = this.session.getBaseDeDonnees().getThemes();
     }
 
     public String getTheme() {
@@ -78,10 +69,6 @@ public class Parametres {
         this.nombreDeQuestions = nombreDeQuestions;
     }
 
-    public AppCompatActivity getActivite() {
-        return activite;
-    }
-
     public Session getSession() {
         return session;
     }
@@ -97,5 +84,9 @@ public class Parametres {
 
     public List<String> getThemes() {
         return themes;
+    }
+
+    public Quizzy getActivitePrincipale() {
+        return activitePrincipale;
     }
 }

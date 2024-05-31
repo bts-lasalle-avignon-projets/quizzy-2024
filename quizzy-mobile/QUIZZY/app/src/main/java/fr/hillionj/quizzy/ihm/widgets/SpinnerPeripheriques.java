@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 
 public class SpinnerPeripheriques extends ArrayList<String> {
@@ -19,7 +20,7 @@ public class SpinnerPeripheriques extends ArrayList<String> {
     public SpinnerPeripheriques(AppCompatActivity activite, int id) {
         super(getPeripheriques());
         spinner = activite.findViewById(id);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(Parametres.getParametres().getActivite(), R.layout.spinner_quizzy, this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, this);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
