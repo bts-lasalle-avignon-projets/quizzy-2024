@@ -147,7 +147,7 @@ void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
 void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
 {
     QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
-    QString      texteQuestionsCorrectes = "N°questions correctes : ";
+    QString      texteQuestionsCorrectes = "Numéro des questions correctes : ";
     for(int numeroQuestion: questionsCorrectes)
     {
         texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
@@ -174,7 +174,7 @@ void IHMQuizzy::afficherDecompteQuestion()
         {
             minuteur->stop();
             labelChronometre->setText(QString::number(0) + "s");
-            labelChronometre->setStyleSheet("background-color: #f9e4b7");
+            labelChronometre->setStyleSheet("background-color: #c17c51");
             quizzy->terminerQuestion();
         }
     }
@@ -233,10 +233,16 @@ void IHMQuizzy::creerFenetreAccueil()
 {
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
-    titreFenetreAccueil        = new QLabel("QUIZZY", this);
+    titreFenetreAccueil        = new QLabel(this);
+    QPixmap pixmap(CHEMIN_LOGO);
+    pixmap =
+      pixmap.scaled(QSize(LARGEUR_LOGO, HAUTEUR_LOGO), Qt::KeepAspectRatio);
+    titreFenetreAccueil->setPixmap(pixmap);
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
+
     messageAttente = new QLabel("", this);
     messageAttente->setAlignment(Qt::AlignCenter);
+
     layoutAccueil->addWidget(titreFenetreAccueil);
     layoutAccueil->addWidget(messageAttente);
     fenetres->addWidget(fenetreAccueil);

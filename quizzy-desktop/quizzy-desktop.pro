@@ -37,7 +37,8 @@ RESOURCES += \
     quizzy.qrc
 
 DISTFILES += \
-    style.qss
+    style.qss \
+    logo.png
 
 # Les defines pour la version release (sans debug)
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT

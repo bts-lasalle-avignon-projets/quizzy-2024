@@ -53,16 +53,67 @@
  * @def ECHEANCE_CHRONOMETRE
  * @brief Pour la fin du chronomètre en secondes
  */
-#define ECHEANCE_CHRONOMETRE 3
 
-#define FOND_VERT  "#94fe8a"
+#define ECHEANCE_CHRONOMETRE 3
+/**
+ * @def FOND_VERT
+ * @brief Pour la couleur restante du chronomètre
+ */
+
+#define FOND_VERT "#94fe8a"
+/**
+ * @def FOND_ROUGE
+ * @brief Pour la couleur restante du chronomètre
+ */
 #define FOND_ROUGE "#fd5555"
 
-#define HAUTEUR_LABEL_LIBELLE     100
+/**
+ * @def HAUTEUR_LABEL_LIBELLE
+ * @brief Pour la hauteur des labels libelle
+ */
+#define HAUTEUR_LABEL_LIBELLE 100
+
+/**
+ * @def HAUTEUR_LABEL_CHRONOMETRE
+ * @brief Pour la hauteur du label chronomètre
+ */
 #define HAUTEUR_LABEL_CHRONOMETRE 100
-#define LARGEUR_PROPOSITION       150
-#define HAUTEUR_PROPOSITION       150
-#define MARGE_LAYOUT_PROPOSITION  100
+
+/**
+ * @def LARGEUR_PROPOSITION
+ * @brief Pour la largeur des propositions
+ */
+#define LARGEUR_PROPOSITION 150
+
+/**
+ * @def HAUTEUR_PROPOSITION
+ * @brief Pour la hauteur des propositions
+ */
+#define HAUTEUR_PROPOSITION 150
+
+/**
+ * @def MARGE_LAYOUT_PROPOSITION
+ * @brief Pour la marge du layout proposition
+ */
+#define MARGE_LAYOUT_PROPOSITION 100
+
+/**
+ * @def CHEMIN_LOGO
+ * @brief Le chemin du logo
+ */
+#define CHEMIN_LOGO ":/image/logo.png"
+
+/**
+ * @def LARGEUR_LOGO
+ * @brief Pour la largeur du logo
+ */
+#define LARGEUR_LOGO 500
+
+/**
+ * @def HAUTEUR_LOGO
+ * @brief Pour la hauteur du logo
+ */
+#define HAUTEUR_LOGO 500
 
 class Quizzy;
 class Question;
