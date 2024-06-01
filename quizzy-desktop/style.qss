@@ -132,3 +132,20 @@ QWidget#propositionReponseD {
     color: #ffffff;
     /* Crème clair */
 }
+
+QProgressBar#chronometre {
+    background-color: lightgrey;
+    font-family: 'REM';
+    border-radius: 5px;
+    font-size: 34px;
+    border: 2px solid grey;
+    margin: 0;
+    padding: 0;
+}
+
+QProgressBar#chronometre::chunk {
+    background-color: #c17c51;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
