@@ -176,15 +176,12 @@ void IHMQuizzy::afficherDecompteQuestion()
     if(fenetres->currentIndex() == Fenetre::FenetreJeu)
     {
         changerCouleurChronometre();
-        progressBarChronometre->setValue(decompteQuestion);
-        labelChronometre->setText(QString::number(decompteQuestion) + "s");
+        compteARebours->setValue(decompteQuestion);
         decompteQuestion--;
         if(decompteQuestion < 0)
         {
             minuteur->stop();
-            progressBarChronometre->setValue(0);
-            labelChronometre->setText(QString::number(0) + "s");
-            labelChronometre->setStyleSheet("background-color: #c17c51");
+            compteARebours->setValue(0);
             quizzy->terminerQuestion();
         }
     }
@@ -317,22 +314,21 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
 
 void IHMQuizzy::creerWidgetsFenetreJeu()
 {
-    labelNombreTotal       = new QLabel("0/0", this);
-    labelQuestion          = new QLabel("", this);
-    idPropositionReponseA  = new QLabel("A.", this);
-    propositionReponseA    = new QLabel("", this);
-    choixPropositionA      = new QLabel("", this);
-    idPropositionReponseB  = new QLabel("B.", this);
-    propositionReponseB    = new QLabel("", this);
-    choixPropositionB      = new QLabel("", this);
-    idPropositionReponseC  = new QLabel("C.", this);
-    propositionReponseC    = new QLabel("", this);
-    choixPropositionC      = new QLabel("", this);
-    idPropositionReponseD  = new QLabel("D.", this);
-    propositionReponseD    = new QLabel("", this);
-    choixPropositionD      = new QLabel("", this);
-    labelChronometre       = new QLabel("00:00", this);
-    progressBarChronometre = new QProgressBar(this);
+    labelNombreTotal      = new QLabel("0/0", this);
+    labelQuestion         = new QLabel("", this);
+    idPropositionReponseA = new QLabel("A.", this);
+    propositionReponseA   = new QLabel("", this);
+    choixPropositionA     = new QLabel("", this);
+    idPropositionReponseB = new QLabel("B.", this);
+    propositionReponseB   = new QLabel("", this);
+    choixPropositionB     = new QLabel("", this);
+    idPropositionReponseC = new QLabel("C.", this);
+    propositionReponseC   = new QLabel("", this);
+    choixPropositionC     = new QLabel("", this);
+    idPropositionReponseD = new QLabel("D.", this);
+    propositionReponseD   = new QLabel("", this);
+    choixPropositionD     = new QLabel("", this);
+    compteARebours        = new QProgressBar(this);
 }
 
 void IHMQuizzy::configurerResponsiveLabels()
@@ -393,9 +389,7 @@ void IHMQuizzy::configurerResponsiveLabels()
                                                  MARGE_LAYOUT_PROPOSITION,
                                                  0);
 
-    progressBarChronometre->setAlignment(Qt::AlignCenter);
-    labelChronometre->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
-    labelChronometre->setFixedHeight(HAUTEUR_LABEL_CHRONOMETRE);
+    compteARebours->setAlignment(Qt::AlignCenter);
 }
 
 void IHMQuizzy::definirNomsObjets()
@@ -423,7 +417,7 @@ void IHMQuizzy::definirNomsObjets()
     choixPropositionB->setObjectName("choixPropositionB");
     choixPropositionC->setObjectName("choixPropositionC");
     choixPropositionD->setObjectName("choixPropositionD");
-    progressBarChronometre->setObjectName("chronometre");
+    compteARebours->setObjectName("chronometre");
     // Fenêtre Résultats
     titreFenetreResultats->setObjectName("titreResultats");
 }
@@ -463,8 +457,7 @@ void IHMQuizzy::placerWidgetsFenetreJeu()
 
     // Chronomètre
     layoutPrincipalJeu->addStretch(1);
-    layoutChronometre->addWidget(labelChronometre);
-    layoutChronometre->addWidget(progressBarChronometre);
+    layoutChronometre->addWidget(compteARebours);
     layoutPrincipalJeu->addLayout(layoutChronometre);
 }
 
@@ -585,17 +578,14 @@ void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
     if(question.getDuree() > 0)
     {
-        progressBarChronometre->setMaximum(question.getDuree());
-        progressBarChronometre->setValue(question.getDuree());
-        progressBarChronometre->setFormat("%v s");
-        progressBarChronometre->setVisible(true);
-        labelChronometre->setText(QString::number(question.getDuree()) + "s");
-        labelChronometre->setVisible(true);
+        compteARebours->setMaximum(question.getDuree());
+        compteARebours->setValue(question.getDuree());
+        compteARebours->setFormat("%v s");
+        compteARebours->setVisible(true);
     }
     else
     {
-        progressBarChronometre->setVisible(false);
-        labelChronometre->setVisible(false);
+        compteARebours->setVisible(false);
     }
 }
 void IHMQuizzy::initialiserChronometre()
@@ -633,7 +623,7 @@ void IHMQuizzy::changerCouleurChronometre()
     {
         couleur = FOND_ROUGE;
     }
-    progressBarChronometre->setStyleSheet(
+    compteARebours->setStyleSheet(
       "QProgressBar::chunk#chronometre { background-color: " + couleur + "; }");
 }
 
