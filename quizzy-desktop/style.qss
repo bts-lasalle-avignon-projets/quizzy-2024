@@ -5,28 +5,48 @@ QWidget {
 }
 
 QLabel {
-    border: 2px solid #6b4a2b;
-    /* Marron foncé */
+    border: none;
+    text-align: center;
     border-radius: 8px;
-    padding: 10px;
-    font-size: 30px;
-    background-color: #d4a373;
-    /* Saumon foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-size: 55px;
+    background-color: none;
+    font-family: 'REM';
     color: #dddddd;
-    /* Crème clair */
 }
 
-QWidget#titreAccueil,
-QWidget#titreParticipants,
+QWidget#titreAccueil {
+    background-color: none;
+    border: none;
+
+}
+
+#messageAttente {
+    font-size: 60px;
+    background-color: none;
+    border: none;
+    text-align: center;
+    font-family: 'REM';
+    color: #d4a373;
+}
+
+QWidget#titreParticipants {
+    font-size: 80px;
+    background-color: #c17c51;
+    border: none;
+    text-align: center;
+    font-family: 'REM';
+    color: #dddddd;
+}
+
+
 QWidget#titreResultats {
-    font-size: 50px;
+    font-size: 60px;
     text-align: center;
     background-color: #c17c51;
     /* Saumon moyen */
     color: #dddddd;
     /* Texte blanc */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
 }
 
 QWidget#labelNombreTotal,
@@ -36,18 +56,10 @@ QWidget#labelQuestion {
     /* Saumon moyen */
     color: #dddddd;
     /* Texte blanc */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
 }
 
-#messageAttente {
-    font-size: 30px;
-    text-align: center;
-    background-color: #d4a373;
-    /* Saumon foncé */
-    font-family: 'TeX Gyre Adventor';
-    color: #f0e0d0;
-    /* Crème clair */
-}
+
 
 #infoQuiz {
     font-size: 25px;
@@ -56,7 +68,7 @@ QWidget#labelQuestion {
     /* Gris moyen */
     border: none;
     background-color: none;
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
 }
 
 QWidget#idPropositionReponseA {
@@ -65,7 +77,7 @@ QWidget#idPropositionReponseA {
     /* Rouge saumon foncé */
     border: 2px solid #cc6666;
     /* Marron foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
     color: #ffffff;
     /* Texte blanc */
 }
@@ -76,7 +88,7 @@ QWidget#idPropositionReponseB {
     /* Vert saumon foncé */
     border: 2px solid #66cc66;
     /* Marron foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
     color: #ffffff;
     /* Texte blanc */
 }
@@ -87,7 +99,7 @@ QWidget#idPropositionReponseC {
     /* Jaune saumon foncé */
     border: 2px solid #ccc766;
     /* Marron foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
     color: #ffffff;
     /* Texte blanc */
 }
@@ -98,7 +110,7 @@ QWidget#idPropositionReponseD {
     /* Bleu saumon foncé */
     border: 2px solid #6666cc;
     /* Marron foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
     color: #ffffff;
     /* Texte blanc */
 }
@@ -116,7 +128,7 @@ QWidget#propositionReponseD {
     /* Saumon foncé */
     border: 2px solid #000000;
     /* Marron foncé */
-    font-family: 'TeX Gyre Adventor';
+    font-family: 'REM';
     color: #ffffff;
     /* Crème clair */
 }

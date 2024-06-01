@@ -1,5 +1,6 @@
 #include "ihmquizzy.h"
 #include <QApplication>
+#include <QFontDatabase>
 
 /**
  * @file main.cpp
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     IHMQuizzy    ihmQuizzy;
-
+    QFontDatabase::addApplicationFont(":/fonts/REM-Bold.ttf");
     QFile fichier(":/qss/style.qss");
     if(fichier.open(QFile::ReadOnly))
     {

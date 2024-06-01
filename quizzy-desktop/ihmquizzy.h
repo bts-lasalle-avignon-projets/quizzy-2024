@@ -157,7 +157,9 @@ class IHMQuizzy : public QWidget
     QWidget*     fenetreParticipants;
     QLabel*      titreFenetreParticipants;
     QVBoxLayout* layoutPrincipalParticipants;
+    QVBoxLayout* layoutParticipant;
     QHBoxLayout* layoutInfoQuiz;
+    QLabel*      labelParticipant;
     QLabel*      infoQuiz;
     // FenetreJeu
     QWidget*     fenetreJeu;

@@ -69,6 +69,7 @@ void IHMQuizzy::afficherDebutQuiz()
 {
     qDebug() << Q_FUNC_INFO;
     messageAttente->setText("En attente des participants...");
+    titreFenetreParticipants->setAlignment(Qt::AlignCenter);
     reinitialiserAffichage();
     afficherFenetreAccueil();
 }
@@ -89,13 +90,20 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
 {
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
              << nomParticipant;
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(nomParticipant, this);
+    QWidget* widgetParticipant = new QWidget(this);
+    layoutParticipant          = new QVBoxLayout(widgetParticipant);
+    labelParticipant           = new QLabel(nomParticipant, this);
+    labelParticipant->setAlignment(Qt::AlignCenter);
+
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
     layoutPrincipalParticipants->addWidget(widgetParticipant);
-
+    auto effetLabelParticipant =
+      new QGraphicsDropShadowEffect(labelParticipant);
+    effetLabelParticipant->setColor(Qt::black);
+    effetLabelParticipant->setBlurRadius(20);
+    effetLabelParticipant->setOffset(0);
+    labelParticipant->setGraphicsEffect(effetLabelParticipant);
     afficherFenetreParticipants();
 }
 
@@ -326,6 +334,21 @@ void IHMQuizzy::creerWidgetsFenetreJeu()
 
 void IHMQuizzy::configurerResponsiveLabels()
 {
+    // Fenêtre d'accueil
+    auto effetAccueil = new QGraphicsDropShadowEffect(messageAttente);
+    effetAccueil->setColor(Qt::black);
+    effetAccueil->setBlurRadius(20);
+    effetAccueil->setOffset(0);
+    messageAttente->setGraphicsEffect(effetAccueil);
+
+    // Fenêtre Participant
+    auto effetTitreParticipant =
+      new QGraphicsDropShadowEffect(titreFenetreParticipants);
+    effetTitreParticipant->setColor(Qt::black);
+    effetTitreParticipant->setBlurRadius(20);
+    effetTitreParticipant->setOffset(0);
+    titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
+
     // Fenêtre Jeu
     labelQuestion->setWordWrap(true);
     propositionReponseA->setWordWrap(true);
