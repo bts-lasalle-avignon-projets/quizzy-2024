@@ -2,15 +2,18 @@ package fr.hillionj.quizzy.ihm.widgets;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +59,19 @@ public class ListViewPeripheriques extends BaseAdapter {
     public Object[] getItem(int position) {
         Peripherique peripherique  =peripheriques.get(position);
         String description = "Non associé";
-        Participant participantAssocier = Parametres.getParametres().getParticipantAssocier(peripherique);
-        if (participantAssocier != null) {
-            description = participantAssocier.getNom();
+        if (Parametres.getParametres().estUnEcran(peripherique)) {
+            if (peripherique.estConnecte()) {
+                description = "Connecté";
+            } else if (peripherique.seConnecte()) {
+                description = "Connexion...";
+            } else {
+                description = "Déconnecté";
+            }
+        } else {
+            Participant participantAssocier = Parametres.getParametres().getParticipantAssocier(peripherique);
+            if (participantAssocier != null) {
+                description = participantAssocier.getNom();
+            }
         }
         int couleur = Color.RED;
         if (peripherique.estConnecte()) {
@@ -66,7 +79,11 @@ public class ListViewPeripheriques extends BaseAdapter {
         } else if (peripherique.seConnecte()) {
             couleur = Color.YELLOW;
         }
-        return new Object[] {peripherique.getNom(), description, couleur};
+        int logoPeripherique = R.drawable.bumper;
+        if (Parametres.getParametres().estUnEcran(peripherique)) {
+            logoPeripherique = R.drawable.ecran;
+        }
+        return new Object[] {peripherique.getNom(), description, couleur, logoPeripherique};
     }
 
     @Override
@@ -85,14 +102,16 @@ public class ListViewPeripheriques extends BaseAdapter {
         String nom = (String) objet[0];
         String description = (String) objet[1];
         int couleur = (int) objet[2];
+        int logoPeripherique = (int) objet[3];
 
         TextView text1 = convertView.findViewById(R.id.text1);
         TextView text2 = convertView.findViewById(R.id.text2);
-        View colorView = convertView.findViewById(R.id.couleur);
+        ImageView logo_peripherique = convertView.findViewById(R.id.logo_peripherique);
 
         text1.setText(nom);
         text2.setText(description);
-        colorView.setBackgroundColor(couleur);
+        logo_peripherique.setImageDrawable(AppCompatResources.getDrawable(context, logoPeripherique));
+        logo_peripherique.setColorFilter(couleur, PorterDuff.Mode.SRC_ATOP);
 
         return convertView;
     }

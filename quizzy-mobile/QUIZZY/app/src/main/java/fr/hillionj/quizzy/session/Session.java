@@ -28,7 +28,7 @@ public class Session {
     private BaseDeDonnees baseDeDonnees;
     private Parametres parametres;
     private List<Participant> participants = new ArrayList<>();
-    private List<Ecran> ecrans = null;
+    private List<Ecran> ecrans = new ArrayList<>();
     private List<Question> questions = null;
     private int indiceQuestion = 0;
     private long heureDebutQuestion = 0;
@@ -100,7 +100,11 @@ public class Session {
         questions = this.baseDeDonnees.getNouveauQuiz(parametres);
         this.participants = getParticipantsValides();
         ihm.mettreAjourListeParticipants();
-        this.ecrans = parametres.getEcrans();
+        for (Ecran ecran : Parametres.getParametres().getEcrans()) {
+            if (ecran.getPeripherique().estConnecte()) {
+                this.ecrans.add(ecran);
+            }
+        }
         etapeSession = EtapeSession.MARCHE;
         gestionnaireProtocoles.envoyerQuiz();
         envoyerQuestion();
@@ -140,7 +144,10 @@ public class Session {
     }
 
     private void envoyerQuestion() {
-        Log.d("QUIZZY_" + this.getClass().getName(), "envoyerQuestion()");
+        if (etapeSession == EtapeSession.PAUSE_FIN_QUESTION) {
+            etapeSession = EtapeSession.MARCHE;
+            watchDog.reprendre();
+        }
         gestionnaireProtocoles.activerBumpers();
         heureDebutQuestion = System.currentTimeMillis();
         ihm.afficherInterface();
@@ -200,6 +207,9 @@ public class Session {
     }
 
     private boolean estReponduParTous() {
+        if (participants.isEmpty()) {
+            return false;
+        }
         for (Participant participant : participants) {
             if (!getQuestionActuelle().estSelectionne(participant)) {
                 return false;
@@ -252,6 +262,9 @@ public class Session {
 
     public int getScore(Participant participant) {
         int score = 0;
+        if (questions == null) {
+            return score;
+        }
         for (Question question : questions) {
             if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
                 score++;

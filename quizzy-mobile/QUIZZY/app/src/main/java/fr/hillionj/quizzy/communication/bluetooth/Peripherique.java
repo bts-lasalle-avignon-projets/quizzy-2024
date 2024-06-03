@@ -20,7 +20,7 @@ import fr.hillionj.quizzy.ihm.IHM;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 @SuppressLint("MissingPermission")
-public class Peripherique extends Thread
+public class Peripherique
 {
     private String          nom, adresseMAC;
     private int             indicePeripherique;

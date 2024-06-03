@@ -18,6 +18,7 @@ import java.util.Objects;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.widgets.ListViewEcran;
 import fr.hillionj.quizzy.ihm.widgets.ListViewParticipants;
 import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.parametres.Parametres;
@@ -27,7 +28,8 @@ import fr.hillionj.quizzy.session.Session;
 
 public class VueSession extends AppCompatActivity {
 
-    private ListViewParticipants liste = null;
+    private ListViewParticipants listeParticipants = null;
+    private ListViewEcran listeEcrans = null;
     private Session session;
     private TextView question, chronometre, progression;
     private TextView[] propositions;
@@ -49,7 +51,8 @@ public class VueSession extends AppCompatActivity {
 
         IHM.getIHM().ajouterIHM(this);
 
-        liste = new ListViewParticipants(this, R.id.liste_participants);
+        listeParticipants = new ListViewParticipants(this, R.id.liste_participants);
+        listeEcrans = new ListViewEcran(this, R.id.liste_ecrans);
 
         setSession(Parametres.getParametres().getSession());
 
@@ -110,7 +113,8 @@ public class VueSession extends AppCompatActivity {
     }
 
     public void mettreAjourListeParticipants() {
-        liste.mettreAjour();
+        listeParticipants.mettreAjour();
+        listeEcrans.mettreAjour();
     }
 
     public void afficherInterface() {
@@ -141,8 +145,8 @@ public class VueSession extends AppCompatActivity {
     }
 
     public void afficherBoutons(){
-        btn_precedent.setEnabled(session.getNumeroQuestion() != 1);
-        btn_suivant.setEnabled(session.getNumeroQuestion() != session.getTotalQuestions());
+        btn_precedent.setEnabled(session.getNumeroQuestion() != 1 && session.getEtape() != EtapeSession.PAUSE);
+        btn_suivant.setEnabled(session.getNumeroQuestion() != session.getTotalQuestions() && session.getEtape() != EtapeSession.PAUSE);
         btn_pause.setEnabled(session.getEtape() == EtapeSession.MARCHE || session.getEtape() == EtapeSession.PAUSE);
         btn_pause.setText(session.getEtape() == EtapeSession.PAUSE ? "Reprendre" : "Pause");
     }

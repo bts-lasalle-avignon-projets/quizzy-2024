@@ -46,7 +46,7 @@ public class ListViewParticipants extends BaseAdapter {
     public Object[] getItem(int position) {
         Participant participant  = participants.get(position);
         int score = Parametres.getParametres().getSession().getScore(participant);
-        boolean estRepondu = Parametres.getParametres().getSession().getQuestionActuelle().estSelectionne(participant);
+        boolean estRepondu = estRepondu(participant);
         String description = score + " points";
         Peripherique peripherique = participant.getPeripherique();
         int logoPeripherique = R.drawable.bumper;
@@ -68,6 +68,13 @@ public class ListViewParticipants extends BaseAdapter {
         return new Object[] {participant.getNom(), description, logoPeripherique, couleur};
     }
 
+    private boolean estRepondu(Participant participant) {
+        if (Parametres.getParametres().getSession().getEtape() != EtapeSession.ARRET) {
+            return Parametres.getParametres().getSession().getQuestionActuelle().estSelectionne(participant);
+        }
+        return false;
+    }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -76,7 +83,7 @@ public class ListViewParticipants extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_items_session, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_items, parent, false);
         }
 
         Object[] objet = getItem(position);

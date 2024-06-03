@@ -60,7 +60,7 @@ public class VueParticipants extends AppCompatActivity {
             int positionSpinnerParticipant = spinner_participants.getSpinner().getSelectedItemPosition();
             int positionSpinnerPeripheriques = spinner_peripheriques.getSpinner().getSelectedItemPosition();
             Participant participant = positionSpinnerParticipant == 0 ? null : Parametres.getParametres().getParticipants().get(positionSpinnerParticipant - 1);
-            Peripherique peripherique = Parametres.getParametres().getPeripheriques().get(positionSpinnerPeripheriques);
+            Peripherique peripherique = spinner_peripheriques.getPeripheriques().get(positionSpinnerPeripheriques);
             for (Participant participant1 : Parametres.getParametres().getParticipants()) {
                 if (participant1.getPeripherique() == peripherique) {
                     participant1.setPeripherique(null);

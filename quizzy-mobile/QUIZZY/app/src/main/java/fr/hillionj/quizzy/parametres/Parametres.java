@@ -96,7 +96,13 @@ public class Parametres {
     }
 
     public List<Ecran> getEcrans() {
-        return new ArrayList<>(); //@TODO RENVOYER LES PERIPHERIQUES ECRAN
+        List<Ecran> ecrans = new ArrayList<>();
+        for (Peripherique peripherique : peripheriques) {
+            if (estUnEcran(peripherique)) {
+                ecrans.add(new Ecran(peripherique));
+            }
+        }
+        return ecrans;
     }
 
     public Session nouvelleSession() {
@@ -105,5 +111,9 @@ public class Parametres {
         if (vueSession != null)
             vueSession.setSession(session);
         return this.session;
+    }
+
+    public boolean estUnEcran(Peripherique peripherique) {
+        return !peripherique.getNom().startsWith("quizzy-p");
     }
 }
