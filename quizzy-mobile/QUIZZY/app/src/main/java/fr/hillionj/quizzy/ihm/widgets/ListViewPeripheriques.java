@@ -24,22 +24,10 @@ import fr.hillionj.quizzy.session.Session;
 public class ListViewPeripheriques extends BaseAdapter {
 
     private Context context;
-    private List<Peripherique> peripheriques;
+    private List<Peripherique> peripheriques = Parametres.getParametres().getPeripheriques();
     private ListView liste;
 
     public ListViewPeripheriques(AppCompatActivity activity, int id) {
-        this(activity, id, null);
-    }
-
-    public ListViewPeripheriques(AppCompatActivity activity, int id, Session session) {
-        if (session == null) {
-            this.peripheriques = Parametres.getParametres().getPeripheriques();
-        } else {
-            this.peripheriques = new ArrayList<>();
-            for (Participant participant : session.getParticipants()) {
-                this.peripheriques.add(participant.getPeripherique());
-            }
-        }
         this.context = activity.getApplicationContext();
         liste = activity.findViewById(id);
         liste.setOnItemClickListener(new AdapterView.OnItemClickListener() {

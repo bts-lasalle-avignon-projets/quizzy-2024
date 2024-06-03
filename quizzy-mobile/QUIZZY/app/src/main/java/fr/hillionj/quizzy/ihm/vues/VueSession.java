@@ -18,6 +18,7 @@ import java.util.Objects;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.widgets.ListViewParticipants;
 import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.session.EtapeSession;
@@ -26,7 +27,7 @@ import fr.hillionj.quizzy.session.Session;
 
 public class VueSession extends AppCompatActivity {
 
-    private ListViewPeripheriques liste = null;
+    private ListViewParticipants liste = null;
     private Session session;
     private TextView question, chronometre, progression;
     private TextView[] propositions;
@@ -48,7 +49,10 @@ public class VueSession extends AppCompatActivity {
 
         IHM.getIHM().ajouterIHM(this);
 
+        liste = new ListViewParticipants(this, R.id.liste_participants);
+
         setSession(Parametres.getParametres().getSession());
+
         question = findViewById(R.id.question);
         propositions = new TextView[4];
         propositions[0] = findViewById(R.id.proposition1);
@@ -106,11 +110,7 @@ public class VueSession extends AppCompatActivity {
     }
 
     public void mettreAjourListeParticipants() {
-        if (liste == null) {
-            liste = new ListViewPeripheriques(this, R.id.liste_participants, session);
-        } else {
-            liste.mettreAjour();
-        }
+        liste.mettreAjour();
     }
 
     public void afficherInterface() {
@@ -137,6 +137,7 @@ public class VueSession extends AppCompatActivity {
         afficherChrono();
         progression.setText(session.getNumeroQuestion() + "/" + session.getTotalQuestions());
         afficherBoutons();
+        mettreAjourListeParticipants();
     }
 
     public void afficherBoutons(){

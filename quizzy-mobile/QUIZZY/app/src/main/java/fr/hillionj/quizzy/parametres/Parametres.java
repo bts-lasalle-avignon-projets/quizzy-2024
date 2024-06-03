@@ -1,5 +1,7 @@
 package fr.hillionj.quizzy.parametres;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -27,8 +29,10 @@ public class Parametres {
     private AppCompatActivity activitePrincipale;
 
     public static Parametres getParametres(AppCompatActivity activite) {
-        if (parametres == null)
+        Log.d("QUIZZY_" + Parametres.class.getName(), "Instanciation de Parametres: " + activite);
+        if (parametres == null) {
             parametres = new Parametres(activite);
+        }
         else
             parametres.activitePrincipale = activite;
         return parametres;

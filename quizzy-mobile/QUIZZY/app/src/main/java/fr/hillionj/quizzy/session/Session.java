@@ -41,7 +41,7 @@ public class Session {
     private EtapeSession etapeSession = EtapeSession.ARRET;
 
 
-    public Session(final Session sessionPrecedente) {
+    public Session(@NonNull final Session sessionPrecedente) {
         this.parametres = sessionPrecedente.parametres;
         this.ihm = sessionPrecedente.ihm;
         this.baseDeDonnees = sessionPrecedente.baseDeDonnees;
@@ -192,11 +192,20 @@ public class Session {
     }
 
     public void verifierChrono() {
-        if (etapeSession != EtapeSession.ARRET && getTempsRestant() == 0.0) {
+        if (etapeSession != EtapeSession.ARRET && (getTempsRestant() == 0.0 || estReponduParTous())) {
             etapeSession = EtapeSession.PAUSE_FIN_QUESTION;
             ihm.afficherInterface();
             watchDog.pause(5000);
         }
+    }
+
+    private boolean estReponduParTous() {
+        for (Participant participant : participants) {
+            if (!getQuestionActuelle().estSelectionne(participant)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void reprendre() {
@@ -239,5 +248,17 @@ public class Session {
 
     public void ajouterArgument(ArgumentLancement argumentLancement) {
         arguments.add(argumentLancement);
+    }
+
+    public int getScore(Participant participant) {
+        int score = 0;
+        for (Question question : questions) {
+            if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
+                score++;
+            } else if (question != getQuestionActuelle() && question.estPropositionValide(participant)) {
+                score++;
+            }
+        }
+        return score;
     }
 }
