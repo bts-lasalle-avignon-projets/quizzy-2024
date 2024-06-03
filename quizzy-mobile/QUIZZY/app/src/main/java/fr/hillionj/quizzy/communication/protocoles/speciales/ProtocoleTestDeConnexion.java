@@ -1,10 +1,10 @@
-package fr.hillionj.quizzy.communication.protocoles.speciales.ecran;
+package fr.hillionj.quizzy.communication.protocoles.speciales;
 
 import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleFinQuiz extends Protocole
+public class ProtocoleTestDeConnexion extends Protocole
 {
     @Override
     public String getFormat()
@@ -15,7 +15,7 @@ public class ProtocoleFinQuiz extends Protocole
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.FIN_QUIZ;
+        return TypeProtocole.TEST_CONNEXION;
     }
     public void genererTrame()
     {

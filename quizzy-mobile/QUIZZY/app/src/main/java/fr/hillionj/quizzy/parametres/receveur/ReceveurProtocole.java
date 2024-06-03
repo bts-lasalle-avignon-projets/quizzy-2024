@@ -1,6 +1,6 @@
-package fr.hillionj.quizzy.parametres;
+package fr.hillionj.quizzy.parametres.receveur;
 
-import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class ReceveurProtocole {

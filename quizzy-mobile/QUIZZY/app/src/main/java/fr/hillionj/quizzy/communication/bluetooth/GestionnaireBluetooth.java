@@ -1,4 +1,4 @@
-package fr.hillionj.quizzy.communication;
+package fr.hillionj.quizzy.communication.bluetooth;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import androidx.core.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.communication.protocoles.Protocole;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 
@@ -106,17 +109,25 @@ public class GestionnaireBluetooth {
                 switch(msg.what)
                 {
                     case CODE_CONNEXION_BLUETOOTH:
-                        peripherique.setSeConnecte(false);
-                        IHM.getIHM().mettreAjourListeParticipants();
-                        //traiterConnexion(msg);
-                        break;
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
                         peripherique.setSeConnecte(false);
                         IHM.getIHM().mettreAjourListeParticipants();
-                        //traiterErreurConnexion(msg);
                         break;
                     case CODE_RECEPTION_BLUETOOTH:
-                        //traiterReception(msg);
+                        for (String trame : ((String) msg.obj).split("\n")) {
+                            Protocole protocoleRecue = Protocole.traiterTrame(trame);
+                            if (protocoleRecue == null) {
+                                continue;
+                            }
+                            Log.v("QUIZZY_" + this.getClass().getName(), "<- " + peripherique.getNom() + ": " + trame);
+                            switch (protocoleRecue.getType()) {
+                                case RECEPTION_REPONSE:
+                                    Parametres.getParametres().getSession().selectionnerProposition(Parametres.getParametres().getParticipantAssocier(peripherique), (ProtocoleReceptionReponse) protocoleRecue);
+                                    break;
+                                default:
+                                     break;
+                            }
+                        }
                         break;
                     case CODE_DECONNEXION_BLUETOOTH:
                         IHM.getIHM().mettreAjourListeParticipants();

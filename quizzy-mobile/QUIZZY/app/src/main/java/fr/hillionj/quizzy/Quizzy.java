@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.vues.VueParametres;
 import fr.hillionj.quizzy.parametres.Parametres;
 
@@ -32,8 +33,15 @@ public class Quizzy extends AppCompatActivity {
         });
 
         Parametres.getParametres(this);
+        IHM.getIHM().ajouterIHM(this);
 
         initialiserBoutons();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        IHM.getIHM().ajouterIHM(this);
     }
 
     public void initialiserBoutons() {

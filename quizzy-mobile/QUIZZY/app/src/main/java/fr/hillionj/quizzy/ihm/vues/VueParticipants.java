@@ -10,13 +10,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.ihm.widgets.SpinnerParticipants;
 import fr.hillionj.quizzy.ihm.widgets.SpinnerPeripheriques;
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.parametres.Participant;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
 public class VueParticipants extends AppCompatActivity {
 
@@ -39,6 +39,12 @@ public class VueParticipants extends AppCompatActivity {
         initialiserAttributs();
         initialiserAssociation();
 
+        IHM.getIHM().ajouterIHM(this);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
         IHM.getIHM().ajouterIHM(this);
     }
 

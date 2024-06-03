@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.parametres.Participant;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 import fr.hillionj.quizzy.session.Question;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })

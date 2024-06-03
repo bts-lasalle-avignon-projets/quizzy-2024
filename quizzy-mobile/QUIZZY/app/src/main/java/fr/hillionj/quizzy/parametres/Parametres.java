@@ -1,17 +1,18 @@
 package fr.hillionj.quizzy.parametres;
 
-import android.util.Log;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.Quizzy;
-import fr.hillionj.quizzy.communication.GestionnaireBluetooth;
-import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.communication.bluetooth.GestionnaireBluetooth;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.vues.VueSession;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 import fr.hillionj.quizzy.session.Session;
-import fr.hillionj.quizzy.session.WatchDog;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class Parametres {
@@ -19,13 +20,13 @@ public class Parametres {
     private static Parametres parametres  = null;
     private int nombreDeQuestions = 20;
     private String theme = null;
-    private Session session;
-    private List<Peripherique> peripheriques;
-    private List<Participant> participants;
-    private List<String> themes;
-    private Quizzy activitePrincipale;
+    private Session session = null;
+    private final List<Peripherique> peripheriques;
+    private final List<Participant> participants;
+    private final List<String> themes;
+    private AppCompatActivity activitePrincipale;
 
-    public static Parametres getParametres(Quizzy activite) {
+    public static Parametres getParametres(AppCompatActivity activite) {
         if (parametres == null)
             parametres = new Parametres(activite);
         else
@@ -86,7 +87,19 @@ public class Parametres {
         return themes;
     }
 
-    public Quizzy getActivitePrincipale() {
+    public AppCompatActivity getActivitePrincipale() {
         return activitePrincipale;
+    }
+
+    public List<Ecran> getEcrans() {
+        return new ArrayList<>(); //@TODO RENVOYER LES PERIPHERIQUES ECRAN
+    }
+
+    public Session nouvelleSession() {
+        this.session = new Session(this.session);
+        VueSession vueSession = (VueSession) IHM.getIHM().getActivite(VueSession.class);
+        if (vueSession != null)
+            vueSession.setSession(session);
+        return this.session;
     }
 }

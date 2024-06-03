@@ -1,9 +1,8 @@
-package fr.hillionj.quizzy.ihm.vues;
+package fr.hillionj.quizzy.ihm.popup;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.transition.ChangeBounds;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import fr.hillionj.quizzy.R;
+import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.vues.VueSession;
+import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.session.Session;
 
-public class Popup extends DialogFragment {
+public class PopupFinSession extends DialogFragment {
+
+    private final Session session;
+
+    public PopupFinSession(Session session) {
+        this.session = session;
+    }
 
     @Nullable
     @Override
@@ -24,6 +33,26 @@ public class Popup extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
-        return inflater.inflate(R.layout.pop_up, container, false);
+        setCancelable(false);
+
+        IHM.getIHM().ajouterIHM(this);
+
+        View vue = inflater.inflate(R.layout.pop_up_fin_session, container, false);
+        initialiserVue(vue);
+        return vue;
+    }
+
+    public void initialiserVue(View vue) {
+        vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
+            IHM.getIHM().fermerActivite(VueSession.class);
+            dismiss();
+        });
+        vue.findViewById(R.id.btn_relancer).setOnClickListener(v -> {
+            Session session = Parametres.getParametres().nouvelleSession();
+            if (session.estValide()) {
+                dismiss();
+                session.lancer();
+            }
+        });
     }
 }

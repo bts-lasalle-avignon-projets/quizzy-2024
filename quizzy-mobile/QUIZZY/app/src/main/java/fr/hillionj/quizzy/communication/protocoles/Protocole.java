@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.hillionj.quizzy.parametres.ReceveurProtocole;
+import fr.hillionj.quizzy.parametres.receveur.ReceveurProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public abstract class Protocole
@@ -77,10 +77,10 @@ public abstract class Protocole
 
     public void envoyer(@NonNull ReceveurProtocole receveur)
     {
-        Log.v("QUIZZY_" + this.getClass().getName(),
-                "(" + receveur.getPeripherique().getNom() + ") Envoi du Protocole " +
-                        getClass().getSimpleName() + " : " + getTrame().replace("\n", "\\n"));
-        receveur.getPeripherique().envoyer(getTrame());
+        if (receveur.getPeripherique() != null) {
+            Log.v("QUIZZY_" + this.getClass().getName(), "-> " + receveur.getPeripherique().getNom() + ": " + getTrame());
+            receveur.getPeripherique().envoyer(getTrame());
+        }
     }
 
     public boolean estValide(boolean trameComplete, String... contenu)

@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 
@@ -34,6 +35,7 @@ public class WatchDog {
     }
 
     private void loop() {
+        testerConnexion();
         if (estEnPause()) {
             etaitEnPause = true;
             return;
@@ -82,14 +84,28 @@ public class WatchDog {
         return tempsPause != 0 && (tempsPause == -1 || System.currentTimeMillis() - heureDebutTempsPause < tempsPause);
     }
 
+    public long getHeureDebutTempsPause() {
+        return heureDebutTempsPause;
+    }
+
     public void reprendre() {
         tempsPause = 0;
     }
 
     public void reprendreSession() {
+        reprendre();
         ihm.getActiviteActive().runOnUiThread(() ->
         {
             Parametres.getParametres().getSession().reprendre();
+        });
+    }
+
+    public void testerConnexion() {
+        ihm.getActiviteActive().runOnUiThread(() ->
+        {
+            for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
+                peripherique.verifierInterruption();
+            }
         });
     }
 }

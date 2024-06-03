@@ -11,7 +11,7 @@ import java.util.List;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.parametres.Participant;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
 public class SpinnerParticipants extends ArrayList<String> {
 

@@ -1,9 +1,8 @@
-package fr.hillionj.quizzy.communication;
+package fr.hillionj.quizzy.communication.bluetooth;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
@@ -14,6 +13,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import fr.hillionj.quizzy.communication.protocoles.Protocole;
+import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ProtocoleTestDeConnexion;
 import fr.hillionj.quizzy.ihm.IHM;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -29,6 +31,7 @@ public class Peripherique extends Thread
     private TReception      tReception;
     private GestionnaireBluetooth gestionnaireBluetooth;
     private boolean seConnecte = false;
+    private long heureDerniereEmission = 0;
 
     private void demarrerThread()
     {
@@ -161,17 +164,33 @@ public class Peripherique extends Thread
 
     public void envoyer(String data)
     {
+        envoyer(data, true);
+    }
+
+    public void envoyer(String data, boolean afficherException)
+    {
         if(socket == null)
             return;
         try
         {
+            heureDerniereEmission = System.currentTimeMillis();
             sendStream.write(data.getBytes());
             sendStream.flush();
         }
         catch(IOException e)
         {
-            Log.e("QUIZZY_" + this.getClass().getName(), "envoyer() erreur send socket", e);
+            if (afficherException) {
+                Log.e("QUIZZY_" + this.getClass().getName(), "envoyer() erreur send socket", e);
+            }
             signalerInterruption();
+        }
+    }
+
+    public void verifierInterruption() {
+        if (estConnecte() && System.currentTimeMillis() - heureDerniereEmission > 1000) {
+            ProtocoleTestDeConnexion testConnexion = (ProtocoleTestDeConnexion) Protocole.getProtocole(TypeProtocole.TEST_CONNEXION);
+            testConnexion.genererTrame();
+            envoyer(testConnexion.getTrame(), false);
         }
     }
 

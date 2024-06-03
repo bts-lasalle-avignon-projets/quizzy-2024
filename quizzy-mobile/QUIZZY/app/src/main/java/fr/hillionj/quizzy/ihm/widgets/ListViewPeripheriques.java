@@ -12,26 +12,43 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.parametres.Participant;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
+import fr.hillionj.quizzy.session.Session;
 
 public class ListViewPeripheriques extends BaseAdapter {
 
     private Context context;
-    private List<Peripherique> peripheriques = Parametres.getParametres().getPeripheriques();
+    private List<Peripherique> peripheriques;
     private ListView liste;
 
     public ListViewPeripheriques(AppCompatActivity activity, int id) {
+        this(activity, id, null);
+    }
+
+    public ListViewPeripheriques(AppCompatActivity activity, int id, Session session) {
+        if (session == null) {
+            this.peripheriques = Parametres.getParametres().getPeripheriques();
+        } else {
+            this.peripheriques = new ArrayList<>();
+            for (Participant participant : session.getParticipants()) {
+                this.peripheriques.add(participant.getPeripherique());
+            }
+        }
         this.context = activity.getApplicationContext();
         liste = activity.findViewById(id);
         liste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Peripherique peripherique = peripheriques.get(i);
+                if (peripherique.seConnecte()) {
+                    return;
+                }
                 if (peripherique.estConnecte()) {
                     peripherique.deconnecter();
                 } else {

@@ -30,7 +30,7 @@ public class VueParametres extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings, new SettingsFragment())
+                    .replace(R.id.settings, new SettingsFragment(this))
                     .commit();
         }
         ActionBar actionBar = getSupportActionBar();
@@ -38,13 +38,34 @@ public class VueParametres extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        IHM.getIHM().ajouterIHM(this);
+
         btn_lancer = findViewById(R.id.btn_lancer);
         btn_lancer.setOnClickListener(v -> {
-            startActivity(new Intent(this, VueSession.class));
+            if (Parametres.getParametres().getSession().estValide()) {
+                startActivity(new Intent(this, VueSession.class));
+            }
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        IHM.getIHM().ajouterIHM(this);
+    }
+
     public static class SettingsFragment extends PreferenceFragmentCompat {
+
+        private final AppCompatActivity activite;
+
+        public SettingsFragment() {
+            this.activite = null;
+        }
+
+        public SettingsFragment(AppCompatActivity activite) {
+            this.activite = activite;
+        }
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
@@ -58,9 +79,7 @@ public class VueParametres extends AppCompatActivity {
                 }
             });
             ListPreference liste_themes = findPreference("liste_themes");
-            List<String> themes = new ArrayList<>();
-
-            themes.addAll(Parametres.getParametres().getThemes());
+            List<String> themes = new ArrayList<>(Parametres.getParametres().getThemes());
             List<String> themesValeurs = new ArrayList<>();
             for (int i = 0; i < themes.size(); i++) {
                 themesValeurs.add(String.valueOf(i));

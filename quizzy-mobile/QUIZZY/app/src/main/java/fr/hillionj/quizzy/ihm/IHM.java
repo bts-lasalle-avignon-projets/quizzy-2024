@@ -1,11 +1,15 @@
 package fr.hillionj.quizzy.ihm;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.ihm.popup.PopupNonConnecte;
 import fr.hillionj.quizzy.ihm.vues.VueParticipants;
 import fr.hillionj.quizzy.ihm.vues.VueSession;
 import fr.hillionj.quizzy.parametres.Parametres;
@@ -17,6 +21,16 @@ public class IHM {
     private List<Object> ihmActives = new ArrayList<>();
     private Parametres parametres;
     private AppCompatActivity activiteActive = null;
+
+    @Nullable
+    private Object getIHMActive(Class<?> typeObjet) {
+        for (Object ihmActive : ihmActives) {
+            if (typeObjet.isInstance(ihmActive)) {
+                return ihmActive;
+            }
+        }
+        return null;
+    }
 
     public static IHM getIHM() {
         return IHM.ihm;
@@ -30,6 +44,7 @@ public class IHM {
 
     public void ajouterIHM(Object pageIHM) {
         if (pageIHM instanceof AppCompatActivity) {
+            Log.d("RED_", "Activite active: " + pageIHM.toString());
             activiteActive = (AppCompatActivity) pageIHM;
         }
         for (Object ihmActive : ihmActives) {
@@ -41,16 +56,6 @@ public class IHM {
         ihmActives.add(pageIHM);
     }
 
-    @Nullable
-    private Object getIHMActive(Class<?> typeObjet) {
-        for (Object ihmActive : ihmActives) {
-            if (typeObjet.isInstance(ihmActive)) {
-                return ihmActive;
-            }
-        }
-        return null;
-    }
-
     public void mettreAjourListeParticipants() {
         VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
         if (vueParticipants != null)
@@ -58,12 +63,14 @@ public class IHM {
         VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
         if (vueSession != null)
             vueSession.mettreAjourListeParticipants();
+        PopupNonConnecte nonConnecte = (PopupNonConnecte) getIHMActive(PopupNonConnecte.class);
+        if (nonConnecte != null)
+            nonConnecte.mettreAjourEtatBoutons();
     }
 
-    public void afficherInterface(Session session) {
+    public void afficherInterface() {
         VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
         if (vueSession != null) {
-            vueSession.setSession(session);
             vueSession.afficherInterface();
         }
     }
@@ -86,5 +93,23 @@ public class IHM {
 
     public AppCompatActivity getActivite(Class<?> typeActivite) {
         return (AppCompatActivity) getIHMActive(typeActivite);
+    }
+
+    public void fermerActivite(Class<?> typeActivite) {
+        Object activite = getIHMActive(typeActivite);
+        if (activite instanceof AppCompatActivity) {
+            ((AppCompatActivity)activite).finish();
+        }
+    }
+
+    public void fermerPopups() {
+        for (Object ihmActive : ihmActives) {
+            if (ihmActive instanceof DialogFragment) {
+                try {
+                    ((DialogFragment)ihmActive).dismiss();
+                } catch (Exception ignored) {
+                }
+            }
+        }
     }
 }

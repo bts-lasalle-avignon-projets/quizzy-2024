@@ -2,7 +2,11 @@ package fr.hillionj.quizzy.session;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class Question
@@ -11,7 +15,7 @@ public class Question
     private final List<String> propositions;
     private final int          numeroBonneReponse;
     private final int          temps;
-    private List<Integer>      selection = new ArrayList<>();
+    private Map<Participant, Integer> selection = new HashMap<>();
 
     public Question(int idQuestion, String question, List<String> propositions, int temps)
     {
@@ -46,19 +50,15 @@ public class Question
 
     public boolean estSelectionnee(int numeroProposition)
     {
-        return selection.contains(numeroProposition);
+        return selection.containsValue(numeroProposition);
     }
 
-    public void ajouterSelection(int numeroProposition)
-    {
-        if(!estSelectionnee(numeroProposition))
-        {
-            selection.add(numeroProposition);
-        }
+    public boolean estSelectionne(Participant participant) {
+        return selection.containsKey(participant);
     }
 
-    public List<Integer> getSelection()
+    public void ajouterSelection(Participant participant, int numeroProposition)
     {
-        return selection;
+        selection.put(participant, numeroProposition);
     }
 }

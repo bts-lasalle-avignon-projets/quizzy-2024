@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.communication.Peripherique;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 

@@ -17,27 +17,27 @@
         app:srcCompat="@android:drawable/stat_sys_warning"/>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/titre_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="25dp"
-        android:text="Session terminée"
-
+        android:text="Participants non configuré"
         android:textAlignment="center"
+
         android:textColor="@color/white"
+        android:textSize="25dp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
+        android:layout_weight="1"
         android:text="Que voulez-vous faire ?"
         android:textAlignment="center"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,19 +46,19 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_relancer"
+            android:id="@+id/btn_deconnecter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Relancer" />
+            android:text="Déconnecter" />
 
         <Button
-            android:id="@+id/btn_configurer_popup_aucun_participant"
+            android:id="@+id/btn_configurer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="Sauvegarder" />
+            android:text="Configurer" />
     </LinearLayout>
 
     <Button
@@ -66,6 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Quiiter" />
+        android:text="Annuler" />
 
 </LinearLayout>

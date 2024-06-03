@@ -13,17 +13,20 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 import fr.hillionj.quizzy.R;
+import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.session.EtapeSession;
 import fr.hillionj.quizzy.session.Question;
 import fr.hillionj.quizzy.session.Session;
 
 public class VueSession extends AppCompatActivity {
 
-    private ListViewPeripheriques liste;
+    private ListViewPeripheriques liste = null;
     private Session session;
     private TextView question, chronometre, progression;
     private TextView[] propositions;
@@ -41,11 +44,11 @@ public class VueSession extends AppCompatActivity {
             return insets;
         });
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         IHM.getIHM().ajouterIHM(this);
 
-        liste = new ListViewPeripheriques(this, R.id.liste_participants);
+        setSession(Parametres.getParametres().getSession());
         question = findViewById(R.id.question);
         propositions = new TextView[4];
         propositions[0] = findViewById(R.id.proposition1);
@@ -74,15 +77,40 @@ public class VueSession extends AppCompatActivity {
             }
         });
 
-        Parametres.getParametres().getSession().lancer();
+        btn_stopper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.stopper();
+            }
+        });
+
+        btn_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (session.getEtape() == EtapeSession.MARCHE) {
+                    session.pause();
+                } else if (session.getEtape() == EtapeSession.PAUSE) {
+                    session.reprendre();
+                }
+                afficherBoutons();
+            }
+        });
+
+        session.lancer();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        IHM.getIHM().ajouterIHM(this);
     }
 
     public void mettreAjourListeParticipants() {
-        liste.mettreAjour();
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
+        if (liste == null) {
+            liste = new ListViewPeripheriques(this, R.id.liste_participants, session);
+        } else {
+            liste.mettreAjour();
+        }
     }
 
     public void afficherInterface() {
@@ -90,6 +118,21 @@ public class VueSession extends AppCompatActivity {
         this.question.setText(question.getQuestion());
         for (int i = 0; i < propositions.length; i++) {
             propositions[i].setText(session.getQuestionActuelle().getPropositions().get(i));
+            if (session.getEtape() == EtapeSession.PAUSE_FIN_QUESTION) {
+                if (question.getNumeroBonneReponse() - 1 == i) {
+                    propositions[i].setBackgroundResource(R.drawable.proposition_vraie);
+                } else if (question.estSelectionnee(i)) {
+                    propositions[i].setBackgroundResource(R.drawable.proposition_selectionee);
+                } else {
+                    propositions[i].setBackgroundResource(R.drawable.proposition);
+                }
+            } else {
+                if (question.estSelectionnee(i)) {
+                    propositions[i].setBackgroundResource(R.drawable.proposition_selectionee);
+                } else {
+                    propositions[i].setBackgroundResource(R.drawable.proposition);
+                }
+            }
         }
         afficherChrono();
         progression.setText(session.getNumeroQuestion() + "/" + session.getTotalQuestions());
@@ -99,10 +142,14 @@ public class VueSession extends AppCompatActivity {
     public void afficherBoutons(){
         btn_precedent.setEnabled(session.getNumeroQuestion() != 1);
         btn_suivant.setEnabled(session.getNumeroQuestion() != session.getTotalQuestions());
+        btn_pause.setEnabled(session.getEtape() == EtapeSession.MARCHE || session.getEtape() == EtapeSession.PAUSE);
+        btn_pause.setText(session.getEtape() == EtapeSession.PAUSE ? "Reprendre" : "Pause");
     }
 
     public void afficherChrono() {
-        Question question = session.getQuestionActuelle();
+        if (session.getEtape() == EtapeSession.ARRET) {
+            return;
+        }
         double tempsRestant = Parametres.getParametres().getSession().getTempsRestant();
         chronometre.setText(format.format(tempsRestant).replace(',', '.'));
         if (tempsRestant == 0.0) {
@@ -112,5 +159,9 @@ public class VueSession extends AppCompatActivity {
         } else {
             chronometre.setTextColor(getResources().getColor(R.color.white));
         }
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

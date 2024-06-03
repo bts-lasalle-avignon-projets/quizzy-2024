@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.communication.protocoles;
 
 import android.util.Log;
 
+import fr.hillionj.quizzy.communication.protocoles.speciales.ProtocoleTestDeConnexion;
 import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleAcquitement;
 import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
 import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherQuestionPrecedente;
@@ -20,6 +21,7 @@ import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleIn
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public enum TypeProtocole {
+    TEST_CONNEXION("0"),
     LANCEMENT("L"),
     INSCRIPTION_PARTICIPANT("I"),
     ENVOI_QUESTION("G"),
@@ -37,7 +39,6 @@ public enum TypeProtocole {
     INDIQUER_RESULTAT("B");
 
     private String              indiceType;
-    private static final String TAG = "_TypeProtocole";
 
     TypeProtocole(String indiceType)
     {
@@ -94,8 +95,10 @@ public enum TypeProtocole {
                 return new ProtocoleAfficherQuestionPrecedente();
             case INDIQUER_RESULTAT:
                 return new ProtocoleIndiquerResultat(trame);
+            case TEST_CONNEXION:
+                return new ProtocoleTestDeConnexion();
             default:
-                Log.d(TAG,
+                Log.d("QUIZZY_" + this.getClass().getName(),
                       "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +
                         (trame == null ? "null" : trame));
                 break;
