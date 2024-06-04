@@ -4,9 +4,9 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleIndicationQuestion extends Protocole
+public class ActiverBumpers extends Protocole
 {
-    public ProtocoleIndicationQuestion(String trame)
+    public ActiverBumpers(String trame)
     {
         setTrame(trame);
     }
@@ -14,18 +14,13 @@ public class ProtocoleIndicationQuestion extends Protocole
     @Override
     public String getFormat()
     {
-        return "$" + getType().getIndiceType() + ";QUESTION;TEMPS\n";
+        return "$" + getType().getIndiceType() + ";QUESTION\n";
     }
 
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.INDICATION_QUESTION;
-    }
-
-    public int getTempsReponse()
-    {
-        return toInt(extraireDonnees().get("TEMPS"));
+        return TypeProtocole.ACTIVER_BUMPERS;
     }
 
     public int getNumeroQuestion()
@@ -33,8 +28,8 @@ public class ProtocoleIndicationQuestion extends Protocole
         return toInt(extraireDonnees().get("QUESTION"));
     }
 
-    public void genererTrame(int numeroQuestion, int tempsAlloue)
+    public void genererTrame(int numeroQuestion)
     {
-        super.genererTrame(numeroQuestion + "", tempsAlloue + "");
+        super.genererTrame(numeroQuestion + "");
     }
 }

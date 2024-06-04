@@ -4,7 +4,7 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleAfficherQuestionPrecedente extends Protocole
+public class LancementSession extends Protocole
 {
     @Override
     public String getFormat()
@@ -15,7 +15,7 @@ public class ProtocoleAfficherQuestionPrecedente extends Protocole
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.AFFICHER_QUESTION_PRECEDENTE;
+        return TypeProtocole.LANCEMENT_SESSION;
     }
 
     public void genererTrame()

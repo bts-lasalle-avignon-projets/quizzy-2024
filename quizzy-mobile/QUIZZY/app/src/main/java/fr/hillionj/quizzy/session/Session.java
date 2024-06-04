@@ -1,26 +1,24 @@
 package fr.hillionj.quizzy.session;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.communication.protocoles.GestionnaireProtocoles;
-import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.ReceptionReponse;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.popup.PopupFinSession;
 import fr.hillionj.quizzy.parametres.ArgumentLancement;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
+import fr.hillionj.quizzy.session.contenu.Question;
+import fr.hillionj.quizzy.session.contenu.Theme;
 import fr.hillionj.quizzy.son.GestionnaireSonore;
 
 public class Session {
@@ -155,9 +153,10 @@ public class Session {
         gestionnaireProtocoles.activerBumpers();
         heureDebutQuestion = System.currentTimeMillis();
         ihm.afficherInterface();
+        gestionnaireSonore.jouerNouvelleQuestion();
     }
 
-    public void selectionnerProposition(Participant participant, @NonNull ProtocoleReceptionReponse receptionReponse) {
+    public void selectionnerProposition(Participant participant, @NonNull ReceptionReponse receptionReponse) {
         if (etapeSession == EtapeSession.ARRET) {
             return;
         }
@@ -168,6 +167,7 @@ public class Session {
         gestionnaireProtocoles.desactiverBumpers(participant);
         gestionnaireProtocoles.indiquerReponse(participant, receptionReponse);
         ihm.afficherInterface();
+        gestionnaireSonore.jouerSelectionReponse();
     }
 
     private boolean estSelectionne(Participant participant, @NonNull Question question) {
@@ -214,10 +214,12 @@ public class Session {
         if (etapeSession != EtapeSession.ARRET && (getTempsRestant() == 0.0 || estReponduParTous())) {
             etapeSession = EtapeSession.PAUSE_FIN_QUESTION;
             ihm.afficherInterface();
+            gestionnaireSonore.jouerFinQuestion(this);
             watchDog.pause(5000);
         }
     }
 
+    // TODO Reactiver à la prise en charge de la trame AfficherReponse par le logiciel Ecran
     private boolean estReponduParTous() {
         //if (participants.isEmpty()) {
             return false;

@@ -2,7 +2,6 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,14 +16,12 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.widgets.ListViewEcran;
 import fr.hillionj.quizzy.ihm.widgets.ListViewParticipants;
-import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.session.EtapeSession;
-import fr.hillionj.quizzy.session.Question;
+import fr.hillionj.quizzy.session.contenu.Question;
 import fr.hillionj.quizzy.session.Session;
 
 public class VueSession extends AppCompatActivity {

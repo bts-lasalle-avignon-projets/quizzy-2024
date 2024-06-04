@@ -2,9 +2,7 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -21,7 +19,7 @@ import java.util.List;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.session.Theme;
+import fr.hillionj.quizzy.session.contenu.Theme;
 
 public class VueParametres extends AppCompatActivity {
 

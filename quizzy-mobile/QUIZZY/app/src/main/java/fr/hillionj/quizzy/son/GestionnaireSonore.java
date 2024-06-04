@@ -5,6 +5,9 @@ import android.media.MediaPlayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.hillionj.quizzy.R;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
+import fr.hillionj.quizzy.session.Session;
+import fr.hillionj.quizzy.session.contenu.Question;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public class GestionnaireSonore
@@ -26,17 +29,17 @@ public class GestionnaireSonore
                 MediaPlayer.create(activite, R.raw.selection_reponse);
     }
 
-    public void jouerBonneReponse()
+    private void jouerBonneReponse()
     {
         bonne_reponse.start();
     }
 
-    public void jouerMauvaiseReponse()
+    private void jouerMauvaiseReponse()
     {
         mauvaise_reponse.start();
     }
 
-    public void jouerReponsesVaries()
+    private void jouerReponsesVaries()
     {
         reponses_vraies_et_fausses.start();
     }
@@ -49,5 +52,31 @@ public class GestionnaireSonore
     public void jouerSelectionReponse()
     {
         selection_reponse.start();
+    }
+
+    public void jouerFinQuestion(Session session)
+    {
+        Question question = session.getQuestionActuelle();
+        boolean bonneReponse = false;
+        boolean mauvaiseReponse = false;
+
+        for (Participant participant : session.getParticipants()) {
+            if (!question.estSelectionne(participant)) {
+                continue;
+            }
+            if (question.estPropositionValide(participant)) {
+                bonneReponse = true;
+            } else {
+                mauvaiseReponse = true;
+            }
+        }
+
+        if (bonneReponse && mauvaiseReponse) {
+            jouerReponsesVaries();
+        } else if (bonneReponse) {
+            jouerBonneReponse();
+        } else {
+            jouerMauvaiseReponse();
+        }
     }
 }

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.hillionj.quizzy.Quizzy;
 import fr.hillionj.quizzy.communication.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
@@ -16,7 +15,7 @@ import fr.hillionj.quizzy.ihm.vues.VueSession;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 import fr.hillionj.quizzy.session.Session;
-import fr.hillionj.quizzy.session.Theme;
+import fr.hillionj.quizzy.session.contenu.Theme;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class Parametres {

@@ -1,25 +1,23 @@
 package fr.hillionj.quizzy.communication.protocoles;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherQuestionPrecedente;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherQuestionSuivante;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleEnvoiQuestion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleFinQuiz;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleIndicationReponseParticipant;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleInscriptionParticipant;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleLancement;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleLancementQuestion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleActiverBuzzers;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleDesactiverBuzzers;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleIndicationQuestion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.ReceptionReponse;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.AfficherQuestionPrecedente;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.AfficherQuestionSuivante;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerQuestion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.FinSession;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerSelectionParticipant;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerParticipant;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.LancementSession;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.DemarrerChrono;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ActiverBumpers;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.DesactiverBumpers;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.EnregistrerTempsQuestion;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
-import fr.hillionj.quizzy.session.Question;
+import fr.hillionj.quizzy.session.contenu.Question;
 import fr.hillionj.quizzy.session.Session;
 
 public class GestionnaireProtocoles {
@@ -32,9 +30,9 @@ public class GestionnaireProtocoles {
 
     public void envoyerQuiz() {
         for (Question question : session.getQuestions()) {
-            ProtocoleEnvoiQuestion envoiQuestion = (ProtocoleEnvoiQuestion) Protocole.getProtocole(TypeProtocole.ENVOI_QUESTION);
-            envoiQuestion.genererTrame(question);
-            envoiQuestion.envoyer(session.getEcrans());
+            EnregistrerQuestion enregistrerQuestion = (EnregistrerQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_QUESTION);
+            enregistrerQuestion.genererTrame(question);
+            enregistrerQuestion.envoyer(session.getEcrans());
         }
     }
 
@@ -45,17 +43,17 @@ public class GestionnaireProtocoles {
 
     public void activerBumpers(Participant participant) {
         Question question = session.getQuestionActuelle();
-        ProtocoleIndicationQuestion indicationQuestion = (ProtocoleIndicationQuestion) Protocole.getProtocole(TypeProtocole.INDICATION_QUESTION);
+        EnregistrerTempsQuestion indicationQuestion = (EnregistrerTempsQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_TEMPS_QUESTION);
         indicationQuestion.genererTrame(session.getNumeroQuestion(), question.getTempsReponse());
         indicationQuestion.envoyer(participant);
 
-        ProtocoleActiverBuzzers activerBuzzers = (ProtocoleActiverBuzzers) Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+        ActiverBumpers activerBuzzers = (ActiverBumpers) Protocole.getProtocole(TypeProtocole.ACTIVER_BUMPERS);
         activerBuzzers.genererTrame(session.getNumeroQuestion());
         activerBuzzers.envoyer(participant);
     }
 
     public void desactiverBumpers(Participant participant) {
-        ProtocoleDesactiverBuzzers desactiverBuzzers = (ProtocoleDesactiverBuzzers) Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        DesactiverBumpers desactiverBuzzers = (DesactiverBumpers) Protocole.getProtocole(TypeProtocole.DESACTIVER_BUMPERS);
         desactiverBuzzers.genererTrame(session.getNumeroQuestion());
         desactiverBuzzers.envoyer(participant);
     }
@@ -66,7 +64,7 @@ public class GestionnaireProtocoles {
     }
 
     public void indiquerLancement(Ecran ecran) {
-        ProtocoleLancement lancement = (ProtocoleLancement) Protocole.getProtocole(TypeProtocole.LANCEMENT);
+        LancementSession lancement = (LancementSession) Protocole.getProtocole(TypeProtocole.LANCEMENT_SESSION);
         lancement.genererTrame();
         lancement.envoyer(ecran);
     }
@@ -77,7 +75,7 @@ public class GestionnaireProtocoles {
     }
 
     public void ajouterParticipant(Ecran ecran, @NonNull Participant participant) {
-        ProtocoleInscriptionParticipant inscriptionParticipant = (ProtocoleInscriptionParticipant) Protocole.getProtocole(TypeProtocole.INSCRIPTION_PARTICIPANT);
+        EnregistrerParticipant inscriptionParticipant = (EnregistrerParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_PARTICIPANT);
         inscriptionParticipant.genererTrame(participant.getNom() /*TODO METTRE PID*/, participant.getNom());
         inscriptionParticipant.envoyer(ecran);
     }
@@ -108,7 +106,7 @@ public class GestionnaireProtocoles {
     }
 
     public void finSession(Ecran ecran) {
-        ProtocoleFinQuiz finQuiz = (ProtocoleFinQuiz) Protocole.getProtocole(TypeProtocole.FIN_QUIZ);
+        FinSession finQuiz = (FinSession) Protocole.getProtocole(TypeProtocole.FIN_SESSION);
         finQuiz.genererTrame();
         finQuiz.envoyer(ecran);
     }
@@ -119,7 +117,7 @@ public class GestionnaireProtocoles {
     }
 
     public void questionSuivante(Ecran ecran) {
-        ProtocoleAfficherQuestionSuivante questionSuivante = (ProtocoleAfficherQuestionSuivante) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
+        AfficherQuestionSuivante questionSuivante = (AfficherQuestionSuivante) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
         questionSuivante.genererTrame();
         questionSuivante.envoyer(ecran);
     }
@@ -130,7 +128,7 @@ public class GestionnaireProtocoles {
     }
 
     public void questionPrecedente(Ecran ecran) {
-        ProtocoleAfficherQuestionPrecedente questionPrecedente = (ProtocoleAfficherQuestionPrecedente) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
+        AfficherQuestionPrecedente questionPrecedente = (AfficherQuestionPrecedente) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
         questionPrecedente.genererTrame();
         questionPrecedente.envoyer(ecran);
     }
@@ -141,18 +139,18 @@ public class GestionnaireProtocoles {
     }
 
     public void demarrerChrono(Ecran ecran) {
-        ProtocoleLancementQuestion lancementQuestion = (ProtocoleLancementQuestion) Protocole.getProtocole(TypeProtocole.DEMARRAGE_QUESTION);
+        DemarrerChrono lancementQuestion = (DemarrerChrono) Protocole.getProtocole(TypeProtocole.DEMARRER_CHRONO);
         lancementQuestion.genererTrame();
         lancementQuestion.envoyer(ecran);
     }
 
-    public void indiquerReponse(Participant participant, ProtocoleReceptionReponse receptionReponse) {
+    public void indiquerReponse(Participant participant, ReceptionReponse receptionReponse) {
         for (Ecran ecran : session.getEcrans())
             indiquerReponse(ecran, participant, receptionReponse);
     }
 
-    public void indiquerReponse(Ecran ecran, Participant participant, ProtocoleReceptionReponse receptionReponse) {
-        ProtocoleIndicationReponseParticipant indicationReponseParticipant = (ProtocoleIndicationReponseParticipant) Protocole.getProtocole(TypeProtocole.INDICATION_REPONSE_PARTICIPANT);
+    public void indiquerReponse(Ecran ecran, Participant participant, ReceptionReponse receptionReponse) {
+        EnregistrerSelectionParticipant indicationReponseParticipant = (EnregistrerSelectionParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_SELECTION_PARTICIPANT);
         indicationReponseParticipant.genererTrame(participant.getNom(), receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
         indicationReponseParticipant.envoyer(ecran);
     }

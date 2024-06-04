@@ -1,4 +1,4 @@
-package fr.hillionj.quizzy.session;
+package fr.hillionj.quizzy.session.contenu;
 
 import androidx.annotation.NonNull;
 

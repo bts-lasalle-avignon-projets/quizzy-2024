@@ -4,7 +4,7 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleFinQuiz extends Protocole
+public class DemarrerChrono extends Protocole
 {
     @Override
     public String getFormat()
@@ -15,8 +15,9 @@ public class ProtocoleFinQuiz extends Protocole
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.FIN_QUIZ;
+        return TypeProtocole.DEMARRER_CHRONO;
     }
+
     public void genererTrame()
     {
         super.genererTrame();

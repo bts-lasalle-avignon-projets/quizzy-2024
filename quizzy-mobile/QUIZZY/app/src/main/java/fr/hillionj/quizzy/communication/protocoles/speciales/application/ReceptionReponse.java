@@ -4,9 +4,9 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleReceptionReponse extends Protocole
+public class ReceptionReponse extends Protocole
 {
-    public ProtocoleReceptionReponse(String trame)
+    public ReceptionReponse(String trame)
     {
         setTrame(trame);
     }

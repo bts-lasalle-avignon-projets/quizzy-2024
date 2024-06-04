@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.popup.PopupCredits;
+import fr.hillionj.quizzy.ihm.popup.PopupNonConfigurer;
 import fr.hillionj.quizzy.ihm.vues.VueParametres;
 import fr.hillionj.quizzy.parametres.Parametres;
 
@@ -52,6 +54,12 @@ public class Quizzy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Quizzy.this, VueParametres.class));
+            }
+        });
+        btn_credits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new PopupCredits().show(getSupportFragmentManager(), "PopupCredits");
             }
         });
     }

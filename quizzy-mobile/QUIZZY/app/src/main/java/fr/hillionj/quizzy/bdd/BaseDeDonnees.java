@@ -9,10 +9,8 @@ package fr.hillionj.quizzy.bdd;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -25,9 +23,9 @@ import java.util.Locale;
 
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
-import fr.hillionj.quizzy.session.Question;
+import fr.hillionj.quizzy.session.contenu.Question;
 import fr.hillionj.quizzy.session.Session;
-import fr.hillionj.quizzy.session.Theme;
+import fr.hillionj.quizzy.session.contenu.Theme;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class BaseDeDonnees extends SQLiteOpenHelper

@@ -4,9 +4,9 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleInscriptionParticipant extends Protocole
+public class EnregistrerParticipant extends Protocole
 {
-    public ProtocoleInscriptionParticipant(String trame)
+    public EnregistrerParticipant(String trame)
     {
         setTrame(trame);
     }
@@ -19,7 +19,7 @@ public class ProtocoleInscriptionParticipant extends Protocole
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.INSCRIPTION_PARTICIPANT;
+        return TypeProtocole.ENREGISTRER_PARTICIPANT;
     }
 
     public String getNom()

@@ -20,11 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.hillionj.quizzy.communication.protocoles.Protocole;
-import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.ReceptionReponse;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
-import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
 @SuppressLint("MissingPermission")
 public class GestionnaireBluetooth {
@@ -131,7 +130,7 @@ public class GestionnaireBluetooth {
                             Log.v("QUIZZY_" + this.getClass().getName(), "<- " + peripherique.getNom() + ": " + trame);
                             switch (protocoleRecue.getType()) {
                                 case RECEPTION_REPONSE:
-                                    Parametres.getParametres().getSession().selectionnerProposition(Parametres.getParametres().getParticipantAssocier(peripherique), (ProtocoleReceptionReponse) protocoleRecue);
+                                    Parametres.getParametres().getSession().selectionnerProposition(Parametres.getParametres().getParticipantAssocier(peripherique), (ReceptionReponse) protocoleRecue);
                                     break;
                                 default:
                                      break;

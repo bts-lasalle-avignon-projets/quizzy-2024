@@ -2,41 +2,41 @@ package fr.hillionj.quizzy.communication.protocoles;
 
 import android.util.Log;
 
-import fr.hillionj.quizzy.communication.protocoles.speciales.ProtocoleTestDeConnexion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleAcquitement;
-import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherQuestionPrecedente;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherQuestionSuivante;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleAfficherReponse;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleEnvoiQuestion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleFinQuiz;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleIndicationReponseParticipant;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleInscriptionParticipant;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleLancement;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.ProtocoleLancementQuestion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleActiverBuzzers;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleDesactiverBuzzers;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleIndicationQuestion;
-import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ProtocoleIndiquerResultat;
+import fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.Acquitement;
+import fr.hillionj.quizzy.communication.protocoles.speciales.application.ReceptionReponse;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.AfficherQuestionPrecedente;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.AfficherQuestionSuivante;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.AfficherReponse;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerQuestion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.FinSession;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerSelectionParticipant;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.EnregistrerParticipant;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.LancementSession;
+import fr.hillionj.quizzy.communication.protocoles.speciales.ecran.DemarrerChrono;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ActiverBumpers;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.DesactiverBumpers;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.EnregistrerTempsQuestion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.EnregistrerResultat;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
 public enum TypeProtocole {
     TEST_CONNEXION("0"),
-    LANCEMENT("L"),
-    INSCRIPTION_PARTICIPANT("I"),
-    ENVOI_QUESTION("G"),
-    DEMARRAGE_QUESTION("T"),
-    INDICATION_REPONSE_PARTICIPANT("U"),
+    LANCEMENT_SESSION("L"),
+    ENREGISTRER_PARTICIPANT("I"),
+    ENREGISTRER_QUESTION("G"),
+    DEMARRER_CHRONO("T"),
+    ENREGISTRER_SELECTION_PARTICIPANT("U"),
     AFFICHER_REPONSE("H"),
     AFFICHER_QUESTION_SUIVANTE("S"),
     AFFICHER_QUESTION_PRECEDENTE("P"),
-    FIN_QUIZ("F"),
-    INDICATION_QUESTION("Q"),
-    ACTIVER_BUZZERS("E"),
-    DESACTIVER_BUZZERS("D"),
+    FIN_SESSION("F"),
+    ENREGISTRER_TEMPS_QUESTION("Q"),
+    ACTIVER_BUMPERS("E"),
+    DESACTIVER_BUMPERS("D"),
     RECEPTION_REPONSE("R"),
     ACQUITEMENT("A"),
-    INDIQUER_RESULTAT("B");
+    ENREGISTRER_RESULTAT("B");
 
     private String              indiceType;
 
@@ -65,38 +65,38 @@ public enum TypeProtocole {
     {
         switch(this)
         {
-            case LANCEMENT:
-                return new ProtocoleLancement();
-            case INSCRIPTION_PARTICIPANT:
-                return new ProtocoleInscriptionParticipant(trame);
-            case ENVOI_QUESTION:
-                return new ProtocoleEnvoiQuestion(trame);
-            case DEMARRAGE_QUESTION:
-                return new ProtocoleLancementQuestion();
-            case INDICATION_REPONSE_PARTICIPANT:
-                return new ProtocoleIndicationReponseParticipant(trame);
+            case LANCEMENT_SESSION:
+                return new LancementSession();
+            case ENREGISTRER_PARTICIPANT:
+                return new EnregistrerParticipant(trame);
+            case ENREGISTRER_QUESTION:
+                return new EnregistrerQuestion(trame);
+            case DEMARRER_CHRONO:
+                return new DemarrerChrono();
+            case ENREGISTRER_SELECTION_PARTICIPANT:
+                return new EnregistrerSelectionParticipant(trame);
             case ACQUITEMENT:
-                return new ProtocoleAcquitement();
-            case FIN_QUIZ:
-                return new ProtocoleFinQuiz();
-            case ACTIVER_BUZZERS:
-                return new ProtocoleActiverBuzzers(trame);
+                return new Acquitement();
+            case FIN_SESSION:
+                return new FinSession();
+            case ACTIVER_BUMPERS:
+                return new ActiverBumpers(trame);
             case AFFICHER_REPONSE:
-                return new ProtocoleAfficherReponse();
+                return new AfficherReponse();
             case RECEPTION_REPONSE:
-                return new ProtocoleReceptionReponse(trame);
-            case DESACTIVER_BUZZERS:
-                return new ProtocoleDesactiverBuzzers(trame);
-            case INDICATION_QUESTION:
-                return new ProtocoleIndicationQuestion(trame);
+                return new ReceptionReponse(trame);
+            case DESACTIVER_BUMPERS:
+                return new DesactiverBumpers(trame);
+            case ENREGISTRER_TEMPS_QUESTION:
+                return new EnregistrerTempsQuestion(trame);
             case AFFICHER_QUESTION_SUIVANTE:
-                return new ProtocoleAfficherQuestionSuivante();
+                return new AfficherQuestionSuivante();
             case AFFICHER_QUESTION_PRECEDENTE:
-                return new ProtocoleAfficherQuestionPrecedente();
-            case INDIQUER_RESULTAT:
-                return new ProtocoleIndiquerResultat(trame);
+                return new AfficherQuestionPrecedente();
+            case ENREGISTRER_RESULTAT:
+                return new EnregistrerResultat(trame);
             case TEST_CONNEXION:
-                return new ProtocoleTestDeConnexion();
+                return new VerifierConnexion();
             default:
                 Log.d("QUIZZY_" + this.getClass().getName(),
                       "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +

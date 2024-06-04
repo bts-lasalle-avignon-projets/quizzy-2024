@@ -15,7 +15,7 @@ import java.util.UUID;
 
 import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
-import fr.hillionj.quizzy.communication.protocoles.speciales.ProtocoleTestDeConnexion;
+import fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion;
 import fr.hillionj.quizzy.ihm.IHM;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
@@ -188,7 +188,7 @@ public class Peripherique
 
     public void verifierInterruption() {
         if (estConnecte() && System.currentTimeMillis() - heureDerniereEmission > 1000) {
-            ProtocoleTestDeConnexion testConnexion = (ProtocoleTestDeConnexion) Protocole.getProtocole(TypeProtocole.TEST_CONNEXION);
+            VerifierConnexion testConnexion = (VerifierConnexion) Protocole.getProtocole(TypeProtocole.TEST_CONNEXION);
             testConnexion.genererTrame();
             envoyer(testConnexion.getTrame(), false);
         }

@@ -6,12 +6,12 @@ import java.util.Map;
 
 import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.TypeProtocole;
-import fr.hillionj.quizzy.session.Question;
+import fr.hillionj.quizzy.session.contenu.Question;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused" })
-public class ProtocoleEnvoiQuestion extends Protocole
+public class EnregistrerQuestion extends Protocole
 {
-    public ProtocoleEnvoiQuestion(String trame)
+    public EnregistrerQuestion(String trame)
     {
         setTrame(trame);
     }
@@ -25,7 +25,7 @@ public class ProtocoleEnvoiQuestion extends Protocole
     @Override
     public TypeProtocole getType()
     {
-        return TypeProtocole.ENVOI_QUESTION;
+        return TypeProtocole.ENREGISTRER_QUESTION;
     }
 
     public String getLibelle()
