@@ -13,6 +13,11 @@ public class Participant extends ReceveurProtocole {
         this.nom = nom;
     }
 
+    public Participant(final String nom, final Peripherique peripherique) {
+        this.nom = nom;
+        setPeripherique(peripherique);
+    }
+
     public String getNom() {
         return nom;
     }

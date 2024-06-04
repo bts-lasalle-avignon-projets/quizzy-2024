@@ -68,6 +68,7 @@ public class VueParticipants extends AppCompatActivity {
             }
             if (participant != null) {
                 participant.setPeripherique(peripherique);
+                Parametres.getParametres().getSession().getGestionnaireProtocoles().ajouterParticipant(participant);
             }
             mettreAjourListeParticipants();
         });

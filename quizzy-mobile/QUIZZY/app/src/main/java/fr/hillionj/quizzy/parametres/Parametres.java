@@ -20,7 +20,7 @@ import fr.hillionj.quizzy.session.Session;
 public class Parametres {
 
     private static Parametres parametres  = null;
-    private int nombreDeQuestions = 20;
+    private int nombreDeQuestions = 3;
     private String theme = null;
     private Session session = null;
     private final List<Peripherique> peripheriques;

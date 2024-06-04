@@ -51,6 +51,7 @@ public class PopupFinSession extends DialogFragment {
             Session session = Parametres.getParametres().nouvelleSession();
             if (session.estValide()) {
                 dismiss();
+                session.getGestionnaireProtocoles().preparerRelancement();
                 session.lancer();
             }
         });

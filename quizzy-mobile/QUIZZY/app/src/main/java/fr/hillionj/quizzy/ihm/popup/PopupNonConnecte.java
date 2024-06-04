@@ -38,7 +38,7 @@ public class PopupNonConnecte extends DialogFragment {
 
     public PopupNonConnecte(Session session) {
         for (Participant participant : Parametres.getParametres().getParticipants()) {
-            if (participant.getPeripherique() != null && !participant.getPeripherique().seConnecte() && !participant.getPeripherique().seConnecte()) {
+            if (participant.getPeripherique() != null && !participant.getPeripherique().seConnecte() && !participant.getPeripherique().estConnecte()) {
                 this.peripherique = participant.getPeripherique();
                 break;
             }

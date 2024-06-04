@@ -71,6 +71,9 @@ public class Session {
     @Nullable
     public ArgumentLancement getArgumentManquant() {
         for (Peripherique peripherique : parametres.getPeripheriques()) {
+            if (Parametres.getParametres().estUnEcran(peripherique)) {
+                continue;
+            }
             Participant participant = parametres.getParticipantAssocier(peripherique);
             if (!peripherique.estConnecte() && !peripherique.seConnecte() && participant != null && !estArgument(ArgumentLancement.NON_CONNECTER)) {
                 return ArgumentLancement.NON_CONNECTER;
@@ -91,11 +94,6 @@ public class Session {
     }
 
     public void lancer() {
-        try {
-            Integer.parseInt("a");
-        } catch (Exception e) {
-            Log.e("RED_", e.getMessage(), e);
-        }
         ihm.fermerPopups();
         questions = this.baseDeDonnees.getNouveauQuiz(parametres);
         this.participants = getParticipantsValides();
@@ -107,6 +105,7 @@ public class Session {
         }
         etapeSession = EtapeSession.MARCHE;
         gestionnaireProtocoles.envoyerQuiz();
+        gestionnaireProtocoles.indiquerLancement();
         envoyerQuestion();
     }
 
@@ -116,7 +115,7 @@ public class Session {
         for (Peripherique peripherique : parametres.getPeripheriques()) {
             Participant participant = parametres.getParticipantAssocier(peripherique);
             if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && estArgument(ArgumentLancement.NON_CONFIGURER)) {
-                listeParticipants.add(participant);
+                listeParticipants.add(new Participant(peripherique.getNom(), peripherique));
             } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant != null) {
                 listeParticipants.add(participant);
             }
@@ -126,6 +125,7 @@ public class Session {
 
     public void stopper() {
         etapeSession = EtapeSession.ARRET;
+        gestionnaireProtocoles.finSession();
         new PopupFinSession(this).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupFinSession");
     }
 
@@ -135,11 +135,13 @@ public class Session {
             return;
         }
         indiceQuestion++;
+        gestionnaireProtocoles.questionSuivante();
         envoyerQuestion();
     }
 
     public void precedent() {
         indiceQuestion = indiceQuestion > 0 ? indiceQuestion - 1 : 0;
+        gestionnaireProtocoles.questionPrecedente();
         envoyerQuestion();
     }
 
@@ -148,17 +150,22 @@ public class Session {
             etapeSession = EtapeSession.MARCHE;
             watchDog.reprendre();
         }
+        gestionnaireProtocoles.demarrerChrono();
         gestionnaireProtocoles.activerBumpers();
         heureDebutQuestion = System.currentTimeMillis();
         ihm.afficherInterface();
     }
 
     public void selectionnerProposition(Participant participant, @NonNull ProtocoleReceptionReponse receptionReponse) {
+        if (etapeSession == EtapeSession.ARRET) {
+            return;
+        }
         Question question = questions.get(receptionReponse.getNumeroQuestion() - 1);
         if (!estSelectionne(participant, question)) {
             question.ajouterSelection(participant, receptionReponse.getNumeroReponse() - 1);
         }
         gestionnaireProtocoles.desactiverBumpers(participant);
+        gestionnaireProtocoles.indiquerReponse(participant, receptionReponse);
         ihm.afficherInterface();
     }
 
@@ -176,6 +183,10 @@ public class Session {
 
     public GestionnaireSonore getGestionnaireSonore() {
         return gestionnaireSonore;
+    }
+
+    public GestionnaireProtocoles getGestionnaireProtocoles() {
+        return gestionnaireProtocoles;
     }
 
     public Question getQuestionActuelle() {
@@ -207,15 +218,15 @@ public class Session {
     }
 
     private boolean estReponduParTous() {
-        if (participants.isEmpty()) {
+        //if (participants.isEmpty()) {
             return false;
-        }
+        /*}
         for (Participant participant : participants) {
             if (!getQuestionActuelle().estSelectionne(participant)) {
                 return false;
             }
         }
-        return true;
+        return true;*/
     }
 
     public void reprendre() {

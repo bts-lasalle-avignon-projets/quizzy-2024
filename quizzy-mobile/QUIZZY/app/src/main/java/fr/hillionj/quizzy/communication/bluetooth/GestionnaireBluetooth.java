@@ -12,6 +12,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -22,6 +23,8 @@ import fr.hillionj.quizzy.communication.protocoles.Protocole;
 import fr.hillionj.quizzy.communication.protocoles.speciales.application.ProtocoleReceptionReponse;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
+import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
 @SuppressLint("MissingPermission")
 public class GestionnaireBluetooth {
@@ -98,6 +101,7 @@ public class GestionnaireBluetooth {
         Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @NonNull
     private Handler initialiserHandler()
     {
         Handler handler = new Handler(Looper.getMainLooper()) {
@@ -109,6 +113,11 @@ public class GestionnaireBluetooth {
                 switch(msg.what)
                 {
                     case CODE_CONNEXION_BLUETOOTH:
+                        peripherique.setSeConnecte(false);
+                        IHM.getIHM().mettreAjourListeParticipants();
+                        if (Parametres.getParametres().estUnEcran(peripherique)) {
+                            Parametres.getParametres().getSession().getGestionnaireProtocoles().preparerRelancement(new Ecran(peripherique));
+                        }
                     case CODE_ERREUR_CONNEXION_BLUETOOTH:
                         peripherique.setSeConnecte(false);
                         IHM.getIHM().mettreAjourListeParticipants();

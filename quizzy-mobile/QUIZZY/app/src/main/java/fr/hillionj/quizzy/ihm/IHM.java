@@ -44,7 +44,9 @@ public class IHM {
 
     public void ajouterIHM(Object pageIHM) {
         if (pageIHM instanceof AppCompatActivity) {
-            Log.d("RED_", "Activite active: " + pageIHM.toString());
+            if (getActiviteActive() instanceof VueSession && (!(pageIHM instanceof VueSession))) {
+                Parametres.getParametres().nouvelleSession();
+            }
             activiteActive = (AppCompatActivity) pageIHM;
         }
         for (Object ihmActive : ihmActives) {
