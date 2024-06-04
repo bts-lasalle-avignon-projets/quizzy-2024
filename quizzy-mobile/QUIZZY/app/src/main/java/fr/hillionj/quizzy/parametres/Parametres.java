@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.parametres;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -21,13 +22,15 @@ import fr.hillionj.quizzy.session.Theme;
 public class Parametres {
 
     private static Parametres parametres  = null;
-    private int nombreDeQuestions = 3;
+    private int nombreDeQuestions = 20;
     private Theme theme = null;
     private Session session = null;
     private final List<Peripherique> peripheriques;
     private final List<Participant> participants;
     private final List<Theme> themes;
     private AppCompatActivity activitePrincipale;
+    private boolean calulAutomatiqueDuTempsDeReponse = false;
+    private int tempsReponse = 30;
 
     public static Parametres getParametres(AppCompatActivity activite) {
         Log.d("QUIZZY_" + Parametres.class.getName(), "Instanciation de Parametres: " + activite);
@@ -114,7 +117,23 @@ public class Parametres {
         return this.session;
     }
 
-    public boolean estUnEcran(Peripherique peripherique) {
+    public boolean estUnEcran(@NonNull Peripherique peripherique) {
         return !peripherique.getNom().startsWith("quizzy-p");
+    }
+
+    public void setCalulAutomatiqueDuTempsDeReponse(boolean calulAutomatiqueDuTempsDeReponse) {
+        this.calulAutomatiqueDuTempsDeReponse = calulAutomatiqueDuTempsDeReponse;
+    }
+
+    public boolean estCalulAutomatiqueDuTempsDeReponse() {
+        return calulAutomatiqueDuTempsDeReponse;
+    }
+
+    public void setTempsReponse(int tempsReponse) {
+        this.tempsReponse = tempsReponse;
+    }
+
+    public int getTempsReponse() {
+        return tempsReponse;
     }
 }

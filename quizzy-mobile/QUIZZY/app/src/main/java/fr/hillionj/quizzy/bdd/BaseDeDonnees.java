@@ -56,7 +56,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         List<String> propositions = Arrays.asList(prop1, prop2, prop3, prop4);
 
         int nombreCarateres = (question + prop1 + prop2 + prop3 + prop4).length();
-        int tempsReponse = getTempsReponse(-1, nombreCarateres);
+        int tempsReponse = Parametres.getParametres().estCalulAutomatiqueDuTempsDeReponse() ? getTempsReponse(-1, nombreCarateres) : Parametres.getParametres().getTempsReponse();
 
         return new Question(idQuestion, question, propositions, tempsReponse);
     }

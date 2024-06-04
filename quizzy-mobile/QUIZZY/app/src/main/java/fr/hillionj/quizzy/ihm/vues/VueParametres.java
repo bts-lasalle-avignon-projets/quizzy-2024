@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +73,8 @@ public class VueParametres extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
-            Preference configurer_participants = findPreference("configurer_participants");
 
+            Preference configurer_participants = findPreference("configurer_participants");
             configurer_participants.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
@@ -79,6 +82,43 @@ public class VueParametres extends AppCompatActivity {
                     return true;
                 }
             });
+
+            EditTextPreference entree_temps = findPreference("entree_temps");
+            Parametres.getParametres().setTempsReponse(Integer.parseInt(entree_temps.getText()));
+            entree_temps.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    try {
+                        Parametres.getParametres().setTempsReponse(Integer.parseInt(newValue.toString()));
+                    } catch (Exception exception) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
+            SwitchPreference switch_calcul_de_temps = findPreference("switch_calcul_de_temps");
+            Parametres.getParametres().setCalulAutomatiqueDuTempsDeReponse(switch_calcul_de_temps.isChecked());
+            if (Parametres.getParametres().estCalulAutomatiqueDuTempsDeReponse()) {
+                entree_temps.setLayoutResource(R.layout.custom_edit_text_preference_disabled);
+            } else {
+                entree_temps.setLayoutResource(R.layout.custom_edit_text_preference);
+            }
+            entree_temps.setEnabled(!Parametres.getParametres().estCalulAutomatiqueDuTempsDeReponse());
+            switch_calcul_de_temps.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    Parametres.getParametres().setCalulAutomatiqueDuTempsDeReponse((boolean) newValue);
+                    entree_temps.setEnabled(!((boolean) newValue));
+                    if ((boolean) newValue) {
+                        entree_temps.setLayoutResource(R.layout.custom_edit_text_preference_disabled);
+                    } else {
+                        entree_temps.setLayoutResource(R.layout.custom_edit_text_preference);
+                    }
+                    return true;
+                }
+            });
+
             ListPreference liste_themes = findPreference("liste_themes");
 
             List<String> themes = new ArrayList<>();

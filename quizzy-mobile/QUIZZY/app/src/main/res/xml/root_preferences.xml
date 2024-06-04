@@ -10,17 +10,16 @@
             app:useSimpleSummaryProvider="true" />
         <SwitchPreference
             android:defaultValue="false"
-            android:layout="@layout/custom_switch_preference"
             android:key="switch_calcul_de_temps"
-            android:title="Désactiver le calcul automatique du temps de réponse" />
+            android:layout="@layout/custom_switch_preference"
+            android:title="Calculer automatiquement le temps de réponse" />
         <EditTextPreference
             android:defaultValue="30"
             android:key="entree_temps"
+            android:layout="@layout/custom_edit_text_preference"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Temps pour répondre"
-            android:layout="@layout/custom_edit_text_preference"
-            app:dependency="switch_calcul_de_temps"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Configurer les participants">
