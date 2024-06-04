@@ -125,6 +125,8 @@ void IHMQuizzy::afficherResultats()
     {
         qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
 
+        layoutParticipantResultat = new QHBoxLayout;
+
         afficherNombreBonnesReponses(participant, nbQuestions);
         afficherNumerosQuestionsCorrectes(participant);
 
@@ -137,15 +139,13 @@ void IHMQuizzy::afficherResultats()
 void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
                                              unsigned int nbQuestions)
 {
-    layoutParticipantResultat = new QHBoxLayout;
-
     nomParticipant = new QLabel(this);
     nomParticipant->setText(participant->getNom());
 
     resultatParticipant            = new QLabel(this);
     unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
-    QString      resultat =
-      QString::number(reponsesCorrectes) + "/" + QString::number(nbQuestions);
+    QString resultat = "Score : " + QString::number(reponsesCorrectes) + "/" +
+                       QString::number(nbQuestions);
     resultatParticipant->setText(resultat);
 
     layoutParticipantResultat->addWidget(nomParticipant);
@@ -155,7 +155,7 @@ void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
 void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
 {
     QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
-    QString      texteQuestionsCorrectes = "Numéro des questions correctes : ";
+    QString      texteQuestionsCorrectes = "Numéro questions correctes : ";
     for(int numeroQuestion: questionsCorrectes)
     {
         texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
@@ -165,7 +165,6 @@ void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
 
     layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
 }
-
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -699,7 +698,20 @@ void IHMQuizzy::effacerFenetreResultats()
         child = layoutPrincipalResultat->itemAt(i);
         if(child->widget() != titreFenetreResultats)
         {
-            delete child->widget();
+            if(child->widget() != nullptr)
+            {
+                delete child->widget();
+            }
+            else if(child->layout() != nullptr)
+            {
+                QLayout*     layout = child->layout();
+                QLayoutItem* item;
+                while((item = layout->takeAt(0)) != nullptr)
+                {
+                    delete item->widget();
+                    delete item;
+                }
+            }
             delete child;
         }
     }
