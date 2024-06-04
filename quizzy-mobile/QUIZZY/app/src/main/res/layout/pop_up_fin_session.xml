@@ -53,7 +53,7 @@
             android:text="Relancer" />
 
         <Button
-            android:id="@+id/btn_configurer_popup_aucun_participant"
+            android:id="@+id/btn_sauvegarder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

@@ -18,6 +18,7 @@ import java.util.List;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
+import fr.hillionj.quizzy.session.Theme;
 
 public class VueParametres extends AppCompatActivity {
 
@@ -79,13 +80,26 @@ public class VueParametres extends AppCompatActivity {
                 }
             });
             ListPreference liste_themes = findPreference("liste_themes");
-            List<String> themes = new ArrayList<>(Parametres.getParametres().getThemes());
+
+            List<String> themes = new ArrayList<>();
+            for (Theme theme : Parametres.getParametres().getThemes()) {
+                themes.add(theme.getNom());
+            }
             List<String> themesValeurs = new ArrayList<>();
             for (int i = 0; i < themes.size(); i++) {
                 themesValeurs.add(String.valueOf(i));
             }
             liste_themes.setEntries(themes.toArray(new String[0]));
             liste_themes.setEntryValues(themesValeurs.toArray(new String[0]));
+            Parametres.getParametres().setTheme(Parametres.getParametres().getThemes().get(Integer.parseInt(liste_themes.getValue())));
+
+            liste_themes.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    Parametres.getParametres().setTheme(Parametres.getParametres().getThemes().get(Integer.parseInt(newValue.toString())));
+                    return true;
+                }
+            });
         }
     }
 }

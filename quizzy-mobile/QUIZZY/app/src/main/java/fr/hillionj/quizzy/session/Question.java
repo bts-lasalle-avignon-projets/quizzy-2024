@@ -17,10 +17,12 @@ public class Question
     private final List<String> propositions;
     private final int          numeroBonneReponse;
     private final int          temps;
+    private final int idQuestion;
     private Map<Participant, Integer> selection = new HashMap<>();
 
     public Question(int idQuestion, String question, @NonNull List<String> propositions, int temps)
     {
+        this.idQuestion = idQuestion;
         String bonneReponse = propositions.get(0);
         this.propositions       = propositions;
         this.question       = question;
@@ -69,5 +71,9 @@ public class Question
             return false;
         }
         return selection.get(participant) == numeroBonneReponse - 1;
+    }
+
+    public int getIdQuestion() {
+        return idQuestion;
     }
 }

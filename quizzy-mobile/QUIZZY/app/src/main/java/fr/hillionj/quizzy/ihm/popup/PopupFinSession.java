@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,7 +43,7 @@ public class PopupFinSession extends DialogFragment {
         return vue;
     }
 
-    public void initialiserVue(View vue) {
+    public void initialiserVue(@NonNull View vue) {
         vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
             IHM.getIHM().fermerActivite(VueSession.class);
             dismiss();
@@ -54,6 +55,11 @@ public class PopupFinSession extends DialogFragment {
                 session.getGestionnaireProtocoles().preparerRelancement();
                 session.lancer();
             }
+        });
+        Button btn_sauvegarder = vue.findViewById(R.id.btn_sauvegarder);
+        btn_sauvegarder.setOnClickListener(v -> {
+            session.sauvegarder();
+            btn_sauvegarder.setEnabled(false);
         });
     }
 }

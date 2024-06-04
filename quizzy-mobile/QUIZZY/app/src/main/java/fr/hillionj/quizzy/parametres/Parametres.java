@@ -15,17 +15,18 @@ import fr.hillionj.quizzy.ihm.vues.VueSession;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Ecran;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 import fr.hillionj.quizzy.session.Session;
+import fr.hillionj.quizzy.session.Theme;
 
 @SuppressWarnings({ "SpellCheckingInspection", "unused", "SdCardPath" })
 public class Parametres {
 
     private static Parametres parametres  = null;
     private int nombreDeQuestions = 3;
-    private String theme = null;
+    private Theme theme = null;
     private Session session = null;
     private final List<Peripherique> peripheriques;
     private final List<Participant> participants;
-    private final List<String> themes;
+    private final List<Theme> themes;
     private AppCompatActivity activitePrincipale;
 
     public static Parametres getParametres(AppCompatActivity activite) {
@@ -50,7 +51,7 @@ public class Parametres {
         this.themes = this.session.getBaseDeDonnees().getThemes();
     }
 
-    public String getTheme() {
+    public Theme getTheme() {
         return theme;
     }
 
@@ -66,7 +67,7 @@ public class Parametres {
         return participants;
     }
 
-    public void setTheme(String theme) {
+    public void setTheme(Theme theme) {
         this.theme = theme;
     }
 
@@ -87,7 +88,7 @@ public class Parametres {
         return null;
     }
 
-    public List<String> getThemes() {
+    public List<Theme> getThemes() {
         return themes;
     }
 

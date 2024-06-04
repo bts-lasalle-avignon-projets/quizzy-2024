@@ -32,13 +32,13 @@ public class Session {
     private List<Question> questions = null;
     private int indiceQuestion = 0;
     private long heureDebutQuestion = 0;
-    private final Map<Participant, Integer> score = new HashMap<>();
     private final GestionnaireSonore gestionnaireSonore;
     private final GestionnaireProtocoles gestionnaireProtocoles;
     private final WatchDog watchDog;
     private final IHM ihm;
     private List<ArgumentLancement> arguments = new ArrayList<>();
     private EtapeSession etapeSession = EtapeSession.ARRET;
+    private Theme theme = null;
 
 
     public Session(@NonNull final Session sessionPrecedente) {
@@ -95,6 +95,7 @@ public class Session {
 
     public void lancer() {
         ihm.fermerPopups();
+        this.theme = parametres.getTheme();
         questions = this.baseDeDonnees.getNouveauQuiz(parametres);
         this.participants = getParticipantsValides();
         ihm.mettreAjourListeParticipants();
@@ -115,7 +116,7 @@ public class Session {
         for (Peripherique peripherique : parametres.getPeripheriques()) {
             Participant participant = parametres.getParticipantAssocier(peripherique);
             if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && estArgument(ArgumentLancement.NON_CONFIGURER)) {
-                listeParticipants.add(new Participant(peripherique.getNom(), peripherique));
+                listeParticipants.add(new Participant(-1, peripherique.getNom(), peripherique));
             } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant != null) {
                 listeParticipants.add(participant);
             }
@@ -174,7 +175,7 @@ public class Session {
     }
 
     public void sauvegarder() {
-
+        baseDeDonnees.sauvegarder(this);
     }
 
     public BaseDeDonnees getBaseDeDonnees() {
@@ -284,5 +285,9 @@ public class Session {
             }
         }
         return score;
+    }
+
+    public Theme getTheme() {
+        return theme;
     }
 }
