@@ -37,7 +37,7 @@ class Quizzy
 !!!171178.cpp!!!	estParticipantActuel(in pidJoueur : QString) : bool
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nom"
                      << participant->getNom() << "true";
@@ -51,6 +51,7 @@ class Quizzy
     if(questionActuelle)
     {
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
+        int numeroQuestion  = indexQuestionActuelle + 1;
         qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
                  << "nom" << participant->getNom() << "numeroReponse"
                  << numeroReponse << "reponseCorrecte" << reponseCorrecte
@@ -60,7 +61,7 @@ class Quizzy
 
         if(numeroReponse == reponseCorrecte)
         {
-            participant->incrementerNombreReponsesCorrectes();
+            participant->incrementerNombreReponsesCorrectes(numeroQuestion);
         }
 
         choixParticipants[numeroReponse].append(participant->getNom());
@@ -91,7 +92,7 @@ class Quizzy
 !!!172330.cpp!!!	getNomDuParticipant(in pidJoueur : QString) : QString
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             return participant->getNom();
         }
@@ -108,6 +109,11 @@ class Quizzy
     {
         lancer();
     }
+    else if(etat == Resultats)
+    {
+        etat = Initial;
+        debuter(true);
+    }
 !!!172714.cpp!!!	ajouterParticipant(in pidJoueur : QString, in nomParticipant : QString) : void
     if(etat == QuizDemarre || etat == ParticipantsAjoutes)
     {
@@ -116,8 +122,7 @@ class Quizzy
 
         qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
                  << nomParticipant;
-        Participant* participant =
-          new Participant(nomParticipant, pidJoueur.toInt());
+        Participant* participant = new Participant(nomParticipant, pidJoueur);
         participants.push_back(participant);
 
         etat = ParticipantsAjoutes;
@@ -167,15 +172,25 @@ class Quizzy
                  << numeroReponse << "tempsReponse" << tempsReponse;
         for(Participant* participant: participants)
         {
-            if(participant->getIdPupitre() == pidJoueur.toInt())
+            if(participant->getIdPupitre() == pidJoueur)
             {
                 traiterReponseParticipant(participant,
                                           numeroReponse,
                                           tempsReponse);
             }
         }
+
+        if(getQuestion()->getDuree() == 0)
+        {
+            emit choixParticipant();
+        }
     }
 !!!128134.cpp!!!	passerQuestionSuivante() : void
+    if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
+    {
+        terminerQuestion();
+    }
+
     if(etat == QuestionTerminee &&
        indexQuestionActuelle < listeQuestions.size() - 1)
     {
@@ -188,6 +203,11 @@ class Quizzy
         emit questionSuivantePrete();
     }
 !!!128262.cpp!!!	gererFinQuiz() : void
+    if(etat == QuestionDemarree &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        terminerQuestion();
+    }
     if(etat == QuestionTerminee &&
        indexQuestionActuelle == listeQuestions.size() - 1)
     {

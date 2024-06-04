@@ -14,14 +14,21 @@ class IHMQuizzy
     creerFenetreParticipants();
     creerFenetreJeu();
     creerFenetreResultats();
+    configurerResponsiveLabels();
     definirNomsObjets();
 !!!148522.cpp!!!	creerFenetreAccueil() : void
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
-    titreFenetreAccueil        = new QLabel("QUIZZY", this);
+    titreFenetreAccueil        = new QLabel(this);
+    QPixmap pixmap(CHEMIN_LOGO);
+    pixmap =
+      pixmap.scaled(QSize(LARGEUR_LOGO, HAUTEUR_LOGO), Qt::KeepAspectRatio);
+    titreFenetreAccueil->setPixmap(pixmap);
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
+
     messageAttente = new QLabel("", this);
     messageAttente->setAlignment(Qt::AlignCenter);
+
     layoutAccueil->addWidget(titreFenetreAccueil);
     layoutAccueil->addWidget(messageAttente);
     fenetres->addWidget(fenetreAccueil);
@@ -65,26 +72,95 @@ class IHMQuizzy
     layoutPropositionChoixD  = new QHBoxLayout();
     layoutChronometre        = new QHBoxLayout();
 !!!156714.cpp!!!	creerWidgetsFenetreJeu() : void
-    labelNombreTotal    = new QLabel("0/0", this);
-    labelQuestion       = new QLabel("", this);
-    propositionReponseA = new QLabel("A", this);
-    choixPropositionA   = new QLabel("", this);
-    propositionReponseB = new QLabel("B", this);
-    choixPropositionB   = new QLabel("", this);
-    propositionReponseC = new QLabel("C", this);
-    choixPropositionC   = new QLabel("", this);
-    propositionReponseD = new QLabel("D", this);
-    choixPropositionD   = new QLabel("", this);
-    labelChronometre    = new QLabel("00:00", this);
+    labelNombreTotal      = new QLabel("0/0", this);
+    labelQuestion         = new QLabel("", this);
+    idPropositionReponseA = new QLabel("A.", this);
+    propositionReponseA   = new QLabel("", this);
+    choixPropositionA     = new QLabel("", this);
+    idPropositionReponseB = new QLabel("B.", this);
+    propositionReponseB   = new QLabel("", this);
+    choixPropositionB     = new QLabel("", this);
+    idPropositionReponseC = new QLabel("C.", this);
+    propositionReponseC   = new QLabel("", this);
+    choixPropositionC     = new QLabel("", this);
+    idPropositionReponseD = new QLabel("D.", this);
+    propositionReponseD   = new QLabel("", this);
+    choixPropositionD     = new QLabel("", this);
+    compteARebours        = new QProgressBar(this);
+!!!128258.cpp!!!	configurerResponsiveLabels() : void
+    // Fenêtre d'accueil
+    auto effetAccueil = new QGraphicsDropShadowEffect(messageAttente);
+    effetAccueil->setColor(Qt::black);
+    effetAccueil->setBlurRadius(20);
+    effetAccueil->setOffset(0);
+    messageAttente->setGraphicsEffect(effetAccueil);
+
+    // Fenêtre Participant
+    auto effetTitreParticipant =
+      new QGraphicsDropShadowEffect(titreFenetreParticipants);
+    effetTitreParticipant->setColor(Qt::black);
+    effetTitreParticipant->setBlurRadius(20);
+    effetTitreParticipant->setOffset(0);
+    titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
+
+    // Fenêtre Jeu
+    labelQuestion->setWordWrap(true);
+    propositionReponseA->setWordWrap(true);
+    propositionReponseB->setWordWrap(true);
+    propositionReponseC->setWordWrap(true);
+    propositionReponseD->setWordWrap(true);
+
+    choixPropositionA->setWordWrap(true);
+    choixPropositionB->setWordWrap(true);
+    choixPropositionC->setWordWrap(true);
+    choixPropositionD->setWordWrap(true);
+
+    labelNombreTotal->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+    labelNombreTotal->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    labelQuestion->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    labelQuestion->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    propositionReponseA->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseB->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseC->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseD->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+
+    propositionReponseA->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseB->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseC->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseD->setFixedHeight(HAUTEUR_PROPOSITION);
+
+    choixPropositionA->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionB->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionC->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionD->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    layoutPropositionReponse->setContentsMargins(MARGE_LAYOUT_PROPOSITION,
+                                                 0,
+                                                 MARGE_LAYOUT_PROPOSITION,
+                                                 0);
+
+    compteARebours->setAlignment(Qt::AlignCenter);
 !!!167082.cpp!!!	definirNomsObjets() : void
     // Fenêtre Accueil
     titreFenetreAccueil->setObjectName("titreAccueil");
+    messageAttente->setObjectName("messageAttente");
 
     // Fenêtre Participants
     titreFenetreParticipants->setObjectName("titreParticipants");
     infoQuiz->setObjectName("infoQuiz");
 
     // Fenêtre jeu
+    labelNombreTotal->setObjectName("labelNombreTotal");
+    labelQuestion->setObjectName("labelQuestion");
+    idPropositionReponseA->setObjectName("idPropositionReponseA");
+    idPropositionReponseB->setObjectName("idPropositionReponseB");
+    idPropositionReponseC->setObjectName("idPropositionReponseC");
+    idPropositionReponseD->setObjectName("idPropositionReponseD");
     propositionReponseA->setObjectName("propositionReponseA");
     propositionReponseB->setObjectName("propositionReponseB");
     propositionReponseC->setObjectName("propositionReponseC");
@@ -93,7 +169,7 @@ class IHMQuizzy
     choixPropositionB->setObjectName("choixPropositionB");
     choixPropositionC->setObjectName("choixPropositionC");
     choixPropositionD->setObjectName("choixPropositionD");
-
+    compteARebours->setObjectName("chronometre");
     // Fenêtre Résultats
     titreFenetreResultats->setObjectName("titreResultats");
 !!!156842.cpp!!!	placerWidgetsFenetreJeu() : void
@@ -101,26 +177,36 @@ class IHMQuizzy
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
+
     // Proposition A et B
+    layoutPrincipalJeu->addStretch(1);
+    layoutPropositionChoixA->addWidget(idPropositionReponseA);
     layoutPropositionChoixA->addWidget(propositionReponseA);
     layoutPropositionChoixA->addWidget(choixPropositionA);
     layoutPropositonAB->addLayout(layoutPropositionChoixA);
+    layoutPropositionChoixB->addWidget(idPropositionReponseB);
     layoutPropositionChoixB->addWidget(propositionReponseB);
     layoutPropositionChoixB->addWidget(choixPropositionB);
     layoutPropositonAB->addLayout(layoutPropositionChoixB);
     layoutPropositionReponse->addLayout(layoutPropositonAB);
 
     // Proposition C et D
+    layoutPropositionChoixC->addWidget(idPropositionReponseC);
     layoutPropositionChoixC->addWidget(propositionReponseC);
     layoutPropositionChoixC->addWidget(choixPropositionC);
     layoutPropositonCD->addLayout(layoutPropositionChoixC);
+    layoutPropositionChoixD->addWidget(idPropositionReponseD);
     layoutPropositionChoixD->addWidget(propositionReponseD);
     layoutPropositionChoixD->addWidget(choixPropositionD);
     layoutPropositonCD->addLayout(layoutPropositionChoixD);
     layoutPropositionReponse->addLayout(layoutPropositonCD);
+
     // Ajout Layout principal
     layoutPrincipalJeu->addLayout(layoutPropositionReponse);
-    layoutChronometre->addWidget(labelChronometre);
+
+    // Chronomètre
+    layoutPrincipalJeu->addStretch(1);
+    layoutChronometre->addWidget(compteARebours);
     layoutPrincipalJeu->addLayout(layoutChronometre);
 !!!148906.cpp!!!	creerFenetreResultats() : void
     fenetreResultats        = new QWidget(this);
@@ -181,6 +267,10 @@ class IHMQuizzy
     connect(quizzy, SIGNAL(questionAjoutee()), this, SLOT(afficherPret()));
     connect(quizzy, SIGNAL(questionDemarree()), this, SLOT(demarrerQuestion()));
     connect(quizzy,
+            SIGNAL(choixParticipant()),
+            this,
+            SLOT(afficherChoixParticipants()));
+    connect(quizzy,
             SIGNAL(questionTerminee()),
             this,
             SLOT(afficherChoixParticipants()));
@@ -201,25 +291,28 @@ class IHMQuizzy
 !!!167466.cpp!!!	afficherNbQuestions(in numeroQuestion : uint, in nbQuestions : uint) : void
     qDebug() << Q_FUNC_INFO << "numeroQuestion" << numeroQuestion
              << "nbQuestions" << nbQuestions;
-    labelNombreTotal->setText(QString("Question n°") +
-                              QString::number(numeroQuestion));
+    labelNombreTotal->setText(QString("Question ") +
+                              QString::number(numeroQuestion) + QString("/") +
+                              QString::number(nbQuestions));
 !!!167594.cpp!!!	afficherLibelleQuestion(in question : Question) : void
     labelQuestion->setText(question.getLibelle());
 !!!167722.cpp!!!	afficherPropositionsQuestion(in question : Question) : void
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setText("A. " + propositions['A']);
-    propositionReponseB->setText("B. " + propositions['B']);
-    propositionReponseC->setText("C. " + propositions['C']);
-    propositionReponseD->setText("D. " + propositions['D']);
+    propositionReponseA->setText(propositions['A']);
+    propositionReponseB->setText(propositions['B']);
+    propositionReponseC->setText(propositions['C']);
+    propositionReponseD->setText(propositions['D']);
 !!!167850.cpp!!!	afficherTempsQuestion(in question : Question) : void
     if(question.getDuree() > 0)
     {
-        labelChronometre->setText(QString::number(question.getDuree()) + "s");
-        labelChronometre->setVisible(true);
+        compteARebours->setMaximum(question.getDuree());
+        compteARebours->setValue(question.getDuree());
+        compteARebours->setFormat("%v s");
+        compteARebours->setVisible(true);
     }
     else
     {
-        labelChronometre->setVisible(false);
+        compteARebours->setVisible(false);
     }
 !!!167978.cpp!!!	initialiserChronometre() : void
     decompteQuestion = quizzy->getQuestion()->getDuree();
@@ -252,7 +345,8 @@ class IHMQuizzy
     {
         couleur = FOND_ROUGE;
     }
-    labelChronometre->setStyleSheet("background-color: " + couleur);
+    compteARebours->setStyleSheet(
+      "QProgressBar::chunk#chronometre { background-color: " + couleur + "; }");
 !!!168234.cpp!!!	mettreAJourProposition(in numeroReponse : int, in texte : QString) : void
     qDebug() << Q_FUNC_INFO << "numeroReponse" << numeroReponse << "texte"
              << texte;
@@ -260,23 +354,19 @@ class IHMQuizzy
     switch(numeroReponse)
     {
         case 1:
-            choixPropositionA->setStyleSheet(
-              "background-color: #f9b7b7; border: 3px solid red");
+            choixPropositionA->setStyleSheet("border: 3px solid red");
             choixPropositionA->setText(texte);
             break;
         case 2:
-            choixPropositionB->setStyleSheet(
-              "background-color: #b7f9ba; border: 3px solid red");
+            choixPropositionB->setStyleSheet("border: 3px solid red");
             choixPropositionB->setText(texte);
             break;
         case 3:
-            choixPropositionC->setStyleSheet(
-              "background-color: #f6f476; border: 3px solid red");
+            choixPropositionC->setStyleSheet("border: 3px solid red");
             choixPropositionC->setText(texte);
             break;
         case 4:
-            choixPropositionD->setStyleSheet(
-              "background-color: #b7baf9; border: 3px solid red");
+            choixPropositionD->setStyleSheet("border: 3px solid red");
             choixPropositionD->setText(texte);
             break;
         default:
@@ -291,6 +381,60 @@ class IHMQuizzy
     choixPropositionC->setStyleSheet("");
     choixPropositionD->setText("");
     choixPropositionD->setStyleSheet("");
+!!!128386.cpp!!!	reinitialiserAffichage() : void
+    qDebug() << Q_FUNC_INFO;
+    effacerFenetreParticipants();
+    effacerChoixParticipants();
+    effacerFenetreResultats();
+!!!128514.cpp!!!	effacerFenetreParticipants() : void
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalParticipants->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalParticipants->itemAt(i);
+        if(child->widget() != titreFenetreParticipants)
+        {
+            delete child->widget();
+        }
+    }
+    infoQuiz->clear();
+!!!128642.cpp!!!	effacerFenetreResultats() : void
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalResultat->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalResultat->itemAt(i);
+        if(child->widget() != titreFenetreResultats)
+        {
+            delete child->widget();
+            delete child;
+        }
+    }
+!!!128770.cpp!!!	afficherNumerosQuestionsCorrectes(inout participant : Participant) : void
+    QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
+    QString      texteQuestionsCorrectes = "Numéro des questions correctes : ";
+    for(int numeroQuestion: questionsCorrectes)
+    {
+        texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
+    }
+    QLabel* labelQuestionsCorrectes = new QLabel(this);
+    labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
+
+    layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
+!!!128898.cpp!!!	afficherNombreBonnesReponses(inout participant : Participant, in nbQuestions : uint) : void
+    layoutParticipantResultat = new QHBoxLayout;
+
+    nomParticipant = new QLabel(this);
+    nomParticipant->setText(participant->getNom());
+
+    resultatParticipant            = new QLabel(this);
+    unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
+    QString      resultat =
+      QString::number(reponsesCorrectes) + "/" + QString::number(nbQuestions);
+    resultatParticipant->setText(resultat);
+
+    layoutParticipantResultat->addWidget(nomParticipant);
+    layoutParticipantResultat->addWidget(resultatParticipant);
 !!!134570.cpp!!!	IHMQuizzy(inout parent : QWidget = 0)
     qDebug() << Q_FUNC_INFO;
     creerFenetres();
@@ -317,6 +461,8 @@ class IHMQuizzy
 !!!168362.cpp!!!	afficherDebutQuiz() : void
     qDebug() << Q_FUNC_INFO;
     messageAttente->setText("En attente des participants...");
+    titreFenetreParticipants->setAlignment(Qt::AlignCenter);
+    reinitialiserAffichage();
     afficherFenetreAccueil();
 !!!168490.cpp!!!	afficherLancementQuiz() : void
     qDebug() << Q_FUNC_INFO;
@@ -327,13 +473,20 @@ class IHMQuizzy
 !!!168746.cpp!!!	afficherParticipant(in pidJoueur : QString, in nomParticipant : QString) : void
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
              << nomParticipant;
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(nomParticipant, this);
+    QWidget* widgetParticipant = new QWidget(this);
+    layoutParticipant          = new QVBoxLayout(widgetParticipant);
+    labelParticipant           = new QLabel(nomParticipant, this);
+    labelParticipant->setAlignment(Qt::AlignCenter);
+
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
     layoutPrincipalParticipants->addWidget(widgetParticipant);
-
+    auto effetLabelParticipant =
+      new QGraphicsDropShadowEffect(labelParticipant);
+    effetLabelParticipant->setColor(Qt::black);
+    effetLabelParticipant->setBlurRadius(20);
+    effetLabelParticipant->setOffset(0);
+    labelParticipant->setGraphicsEffect(effetLabelParticipant);
     afficherFenetreParticipants();
 !!!168874.cpp!!!	demarrerQuestion() : void
     initialiserChronometre();
@@ -341,15 +494,12 @@ class IHMQuizzy
     if(fenetres->currentIndex() == Fenetre::FenetreJeu)
     {
         changerCouleurChronometre();
-        labelChronometre->setText(QString::number(decompteQuestion) + "s");
+        compteARebours->setValue(decompteQuestion);
         decompteQuestion--;
         if(decompteQuestion < 0)
         {
             minuteur->stop();
-            labelChronometre->setText(QString::number(0) + "s");
-            labelChronometre->setStyleSheet("background-color: #f9e4b7");
-            // @fixme Si la question n'a pas de durée, il faudra créer une trame
-            // pour mettre fin à cette question ou utilise-t-on la trame $S ?
+            compteARebours->setValue(0);
             quizzy->terminerQuestion();
         }
     }
@@ -388,20 +538,9 @@ class IHMQuizzy
     {
         qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
 
-        layoutParticipantResultat = new QHBoxLayout;
+        afficherNombreBonnesReponses(participant, nbQuestions);
+        afficherNumerosQuestionsCorrectes(participant);
 
-        nomParticipant = new QLabel(this);
-        nomParticipant->setText(participant->getNom());
-
-        resultatParticipant = new QLabel(this);
-        unsigned int reponsesCorrectes =
-          participant->getNombreReponsesCorrectes();
-        QString resultat = QString::number(reponsesCorrectes) + "/" +
-                           QString::number(nbQuestions);
-        resultatParticipant->setText(resultat);
-
-        layoutParticipantResultat->addWidget(nomParticipant);
-        layoutParticipantResultat->addWidget(resultatParticipant);
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
 
