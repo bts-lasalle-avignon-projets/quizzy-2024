@@ -3,6 +3,7 @@ package fr.hillionj.quizzy.ihm.popup;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,11 @@ public class PopupFinSession extends DialogFragment {
             if (session.estValide()) {
                 dismiss();
                 session.getGestionnaireProtocoles().preparerRelancement();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 session.lancer();
             }
         });

@@ -46,6 +46,7 @@ public class IHM {
     public void ajouterIHM(Object pageIHM) {
         if (pageIHM instanceof AppCompatActivity) {
             if (getActiviteActive() instanceof VueSession && (!(pageIHM instanceof VueSession))) {
+                Parametres.getParametres().getSession().getGestionnaireProtocoles().preparerRelancement();
                 Parametres.getParametres().nouvelleSession();
             }
             activiteActive = (AppCompatActivity) pageIHM;

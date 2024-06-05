@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.preference.SwitchPreference;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.Quizzy;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;

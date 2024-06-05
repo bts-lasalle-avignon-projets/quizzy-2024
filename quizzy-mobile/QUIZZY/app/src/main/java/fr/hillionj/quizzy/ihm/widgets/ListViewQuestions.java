@@ -92,9 +92,9 @@ public class ListViewQuestions extends BaseAdapter {
                     ((TextView) colonne_participant.getChildAt(i)).setBackgroundColor(context.getResources().getColor(R.color.dark_red));
                 }
             } else if (question.estPropositionValide(participant)) {
-                ((TextView) colonne_participant.getChildAt(i)).setText("0");
-            } else {
                 ((TextView) colonne_participant.getChildAt(i)).setText("1");
+            } else {
+                ((TextView) colonne_participant.getChildAt(i)).setText("0");
             }
             ((TextView) colonne_participant.getChildAt(i)).setTextColor(convertView.getResources().getColor(R.color.white));
             ((TextView) colonne_participant.getChildAt(i)).setTextSize(21);
