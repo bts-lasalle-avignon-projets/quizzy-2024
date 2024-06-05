@@ -24,6 +24,14 @@ public class PopupFinSession extends DialogFragment {
 
     private final Session session;
 
+    public PopupFinSession() {
+        PopupFinSession popup = (PopupFinSession) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null)
+            this.session = popup.session;
+        else
+            this.session = null;
+    }
+
     public PopupFinSession(Session session) {
         this.session = session;
     }
@@ -37,7 +45,9 @@ public class PopupFinSession extends DialogFragment {
         }
         setCancelable(false);
 
-        IHM.getIHM().ajouterIHM(this);
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
 
         View vue = inflater.inflate(R.layout.pop_up_fin_session, container, false);
         initialiserVue(vue);
@@ -45,6 +55,10 @@ public class PopupFinSession extends DialogFragment {
     }
 
     public void initialiserVue(@NonNull View vue) {
+        if (session == null) {
+            dismiss();
+            return;
+        }
         vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
             IHM.getIHM().fermerActivite(VueSession.class);
             dismiss();

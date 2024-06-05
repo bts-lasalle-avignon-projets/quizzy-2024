@@ -47,7 +47,7 @@ public class VueParametres extends AppCompatActivity {
         btn_lancer = findViewById(R.id.btn_lancer);
         btn_lancer.setOnClickListener(v -> {
             if (Parametres.getParametres().getSession().estValide()) {
-                startActivity(new Intent(this, VueSession.class));
+                IHM.getIHM().demarrerActivite(this, this, VueSession.class);
             }
         });
     }

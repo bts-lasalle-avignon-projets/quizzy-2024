@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -101,7 +102,13 @@ public class VueSession extends AppCompatActivity {
             }
         });
 
-        session.lancer();
+        boolean estRecree = getIntent() == null || getIntent().getExtras() == null || getIntent().getExtras().getBoolean("estRecree", true);
+        if (!estRecree) {
+            getIntent().removeExtra("estRecree");
+            session.lancer();
+        } else {
+            afficherInterface();
+        }
     }
 
     @Override

@@ -16,18 +16,20 @@ import androidx.fragment.app.DialogFragment;
 
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
-import fr.hillionj.quizzy.ihm.vues.VueParametres;
-import fr.hillionj.quizzy.ihm.vues.VueParticipants;
-import fr.hillionj.quizzy.ihm.vues.VueSession;
 import fr.hillionj.quizzy.ihm.widgets.ListViewHistorique;
-import fr.hillionj.quizzy.parametres.ArgumentLancement;
-import fr.hillionj.quizzy.parametres.Parametres;
-import fr.hillionj.quizzy.session.Session;
 
 public class PopupHistorique extends DialogFragment {
 
     private AppCompatActivity activite;
     private ListViewHistorique historique;
+
+    public PopupHistorique() {
+        PopupHistorique popup = (PopupHistorique) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null)
+            this.activite = popup.activite;
+        else
+            this.activite = null;
+    }
 
     public PopupHistorique(AppCompatActivity activite) {
         this.activite = activite;
@@ -41,7 +43,9 @@ public class PopupHistorique extends DialogFragment {
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
 
-        IHM.getIHM().ajouterIHM(this);
+        if (activite != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
 
         View vue = inflater.inflate(R.layout.popup_historique, container, false);
         initialiserVue(vue);
@@ -49,6 +53,10 @@ public class PopupHistorique extends DialogFragment {
     }
 
     public void initialiserVue(View vue) {
+        if (activite == null) {
+            dismiss();
+            return;
+        }
         historique = new ListViewHistorique(activite, vue, R.id.btn_liste_sessions);
         vue.findViewById(R.id.btn_fermer).setOnClickListener(v -> {
             dismiss();

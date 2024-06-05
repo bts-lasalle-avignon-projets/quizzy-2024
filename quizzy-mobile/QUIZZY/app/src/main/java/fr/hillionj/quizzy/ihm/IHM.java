@@ -1,14 +1,18 @@
 package fr.hillionj.quizzy.ihm;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.ihm.popup.PopupAucunParticipant;
 import fr.hillionj.quizzy.ihm.popup.PopupHistorique;
 import fr.hillionj.quizzy.ihm.popup.PopupNonConnecte;
 import fr.hillionj.quizzy.ihm.vues.VueParticipants;
@@ -24,7 +28,7 @@ public class IHM {
     private AppCompatActivity activiteActive = null;
 
     @Nullable
-    private Object getIHMActive(Class<?> typeObjet) {
+    public Object getIHMActive(Class<?> typeObjet) {
         for (Object ihmActive : ihmActives) {
             if (typeObjet.isInstance(ihmActive)) {
                 return ihmActive;
@@ -74,9 +78,8 @@ public class IHM {
 
     public void afficherInterface() {
         VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
-        if (vueSession != null) {
+        if (vueSession != null)
             vueSession.afficherInterface();
-        }
     }
 
     public AppCompatActivity getActiviteActive() {
@@ -121,5 +124,17 @@ public class IHM {
         PopupHistorique popupHistorique = (PopupHistorique) getIHMActive(PopupHistorique.class);
         if (popupHistorique != null)
             popupHistorique.mettreAjourHistorique();
+    }
+
+    public void demarrerActivite(Object lanceur, Context contexte, Class<?> typeActivite) {
+        Intent intent = new Intent(contexte, typeActivite);
+        if (VueSession.class.isAssignableFrom(typeActivite)) {
+            intent.putExtra("estRecree", false);
+        }
+        if (lanceur instanceof Fragment) {
+            ((Fragment) lanceur).startActivity(intent);
+        } else {
+            ((AppCompatActivity) lanceur).startActivity(intent);
+        }
     }
 }
