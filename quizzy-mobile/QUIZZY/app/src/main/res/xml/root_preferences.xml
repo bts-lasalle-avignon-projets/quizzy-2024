@@ -1,0 +1,35 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="Sélection du quiz">
+
+        <ListPreference
+            android:defaultValue="0"
+            android:key="liste_themes"
+            android:title="Thème"
+            android:layout="@layout/custom_list_preference"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_calcul_de_temps"
+            android:layout="@layout/custom_switch_preference"
+            android:title="Calculer automatiquement le temps de réponse" />
+        <EditTextPreference
+            android:defaultValue="30"
+            android:key="entree_temps"
+            android:layout="@layout/custom_edit_text_preference"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Temps pour répondre"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Configurer les participants">
+
+        <Preference
+            android:defaultValue="Default value"
+            android:layout="@layout/custom_preference"
+            android:key="configurer_participants"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Configurer les noms" />
+    </PreferenceCategory>
+</PreferenceScreen>
