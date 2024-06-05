@@ -71,25 +71,25 @@
  * @def HAUTEUR_LABEL_LIBELLE
  * @brief Pour la hauteur des labels libelle
  */
-#define HAUTEUR_LABEL_LIBELLE 100
+#define HAUTEUR_LABEL_LIBELLE 200
 
 /**
- * @def HAUTEUR_LABEL_CHRONOMETRE
+ * @def HAUTEUR_COMPTE_A_REBOURS
  * @brief Pour la hauteur du label chronomètre
  */
-#define HAUTEUR_LABEL_CHRONOMETRE 100
+#define HAUTEUR_COMPTE_A_REBOURS 100
 
 /**
  * @def LARGEUR_PROPOSITION
  * @brief Pour la largeur des propositions
  */
-#define LARGEUR_PROPOSITION 150
+#define LARGEUR_PROPOSITION 160
 
 /**
  * @def HAUTEUR_PROPOSITION
  * @brief Pour la hauteur des propositions
  */
-#define HAUTEUR_PROPOSITION 150
+#define HAUTEUR_PROPOSITION 160
 
 /**
  * @def MARGE_LAYOUT_PROPOSITION
@@ -114,6 +114,20 @@
  * @brief Pour la hauteur du logo
  */
 #define HAUTEUR_LOGO 500
+
+/**
+ * @def HAUTEUR_TITRE
+ * @brief Pour la hauteur des titres
+ */
+#define HAUTEUR_TITRE 200
+
+/**
+ * @def CONTOUR_FLOUE_LABEL
+ * @brief Pour les contontours des labels
+ */
+#define CONTOUR_FLOUE_LABEL 20
+
+
 
 class Quizzy;
 class Question;
@@ -197,6 +211,7 @@ class IHMQuizzy : public QWidget
     QLabel*      titreFenetreResultats;
     QLabel*      nomParticipant;
     QLabel*      resultatParticipant;
+    QLabel* labelQuestionsCorrectes;
 
     void initialiserFenetres();
     void creerFenetres();

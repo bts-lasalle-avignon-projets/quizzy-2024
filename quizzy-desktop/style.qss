@@ -51,7 +51,7 @@ QWidget#titreResultats {
 
 QWidget#labelNombreTotal,
 QWidget#labelQuestion {
-    font-size: 34px;
+    font-size: 40px;
     background-color: #c17c51;
     /* Saumon moyen */
     color: #dddddd;
@@ -126,7 +126,7 @@ QWidget#propositionReponseD {
     font-size: 30px;
     background-color: #d4a373;
     /* Saumon foncé */
-    border: 2px solid #000000;
+    border: 2px solid #d4a373;
     /* Marron foncé */
     font-family: 'REM';
     color: #ffffff;
@@ -137,8 +137,7 @@ QProgressBar#chronometre {
     background-color: lightgrey;
     font-family: 'REM';
     border-radius: 5px;
-    font-size: 34px;
-    border: 2px solid grey;
+    font-size: 40px;
     margin: 0;
     padding: 0;
 }
@@ -146,6 +145,7 @@ QProgressBar#chronometre {
 QProgressBar#chronometre::chunk {
     background-color: #c17c51;
     border: none;
+    border-radius: 5px;
     margin: 0;
     padding: 0;
 }

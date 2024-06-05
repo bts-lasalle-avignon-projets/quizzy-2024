@@ -93,17 +93,20 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
     QWidget* widgetParticipant = new QWidget(this);
     layoutParticipant          = new QVBoxLayout(widgetParticipant);
     labelParticipant           = new QLabel(nomParticipant, this);
-    labelParticipant->setAlignment(Qt::AlignCenter);
 
+    labelParticipant->setAlignment(Qt::AlignCenter);
+    layoutParticipant->setAlignment(Qt::AlignTop);
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
     layoutPrincipalParticipants->addWidget(widgetParticipant);
+
     auto effetLabelParticipant =
       new QGraphicsDropShadowEffect(labelParticipant);
     effetLabelParticipant->setColor(Qt::black);
-    effetLabelParticipant->setBlurRadius(20);
+    effetLabelParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetLabelParticipant->setOffset(0);
     labelParticipant->setGraphicsEffect(effetLabelParticipant);
+
     afficherFenetreParticipants();
 }
 
@@ -129,6 +132,7 @@ void IHMQuizzy::afficherResultats()
 
         afficherNombreBonnesReponses(participant, nbQuestions);
         afficherNumerosQuestionsCorrectes(participant);
+        labelQuestionsCorrectes->setWordWrap(true);
 
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
@@ -155,16 +159,16 @@ void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
 void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
 {
     QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
-    QString      texteQuestionsCorrectes = "Numéro questions correctes : ";
+    QString      texteQuestionsCorrectes = "Questions correctes : ";
     for(int numeroQuestion: questionsCorrectes)
     {
-        texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
+        texteQuestionsCorrectes += "N°" + QString::number(numeroQuestion) + " ";
     }
-    QLabel* labelQuestionsCorrectes = new QLabel(this);
+    labelQuestionsCorrectes = new QLabel(this);
     labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
 
     layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
-}
+}   
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -335,17 +339,19 @@ void IHMQuizzy::configurerResponsiveLabels()
     // Fenêtre d'accueil
     auto effetAccueil = new QGraphicsDropShadowEffect(messageAttente);
     effetAccueil->setColor(Qt::black);
-    effetAccueil->setBlurRadius(20);
+    effetAccueil->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetAccueil->setOffset(0);
     messageAttente->setGraphicsEffect(effetAccueil);
 
     // Fenêtre Participant
+    titreFenetreParticipants->setFixedHeight(HAUTEUR_TITRE);
     auto effetTitreParticipant =
       new QGraphicsDropShadowEffect(titreFenetreParticipants);
     effetTitreParticipant->setColor(Qt::black);
-    effetTitreParticipant->setBlurRadius(20);
+    effetTitreParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetTitreParticipant->setOffset(0);
     titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
+
 
     // Fenêtre Jeu
     labelQuestion->setWordWrap(true);
@@ -388,7 +394,15 @@ void IHMQuizzy::configurerResponsiveLabels()
                                                  MARGE_LAYOUT_PROPOSITION,
                                                  0);
 
+    compteARebours->setFixedHeight(HAUTEUR_COMPTE_A_REBOURS);
+
     compteARebours->setAlignment(Qt::AlignCenter);
+    QSizePolicy sizePolicy = compteARebours->sizePolicy();
+    sizePolicy.setRetainSizeWhenHidden(true);
+    compteARebours->setSizePolicy(sizePolicy);
+
+    // Fenêtre des résultats
+    titreFenetreResultats->setFixedHeight(HAUTEUR_TITRE);
 }
 
 void IHMQuizzy::definirNomsObjets()
