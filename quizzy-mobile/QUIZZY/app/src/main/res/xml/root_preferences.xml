@@ -21,6 +21,14 @@
             android:singleLine="true"
             android:title="Temps pour répondre"
             app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:defaultValue="20"
+            android:key="entree_nombre_de_questions"
+            android:layout="@layout/custom_edit_text_preference"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Nombre de questions"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Configurer les participants">
 

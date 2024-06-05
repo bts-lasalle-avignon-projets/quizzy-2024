@@ -81,6 +81,20 @@ public class VueParametres extends AppCompatActivity {
                 }
             });
 
+            EditTextPreference entree_nombre_de_questions = findPreference("entree_nombre_de_questions");
+            Parametres.getParametres().setNombreDeQuestions(Integer.parseInt(entree_nombre_de_questions.getText()));
+            entree_nombre_de_questions.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    try {
+                        Parametres.getParametres().setNombreDeQuestions(Integer.parseInt(newValue.toString()));
+                    } catch (Exception exception) {
+                        return false;
+                    }
+                    return true;
+                }
+            });
+
             EditTextPreference entree_temps = findPreference("entree_temps");
             Parametres.getParametres().setTempsReponse(Integer.parseInt(entree_temps.getText()));
             entree_temps.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
