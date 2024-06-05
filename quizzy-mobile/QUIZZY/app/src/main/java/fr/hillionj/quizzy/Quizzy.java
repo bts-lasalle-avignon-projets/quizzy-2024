@@ -13,13 +13,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.ihm.popup.PopupCredits;
+import fr.hillionj.quizzy.ihm.popup.PopupHistorique;
 import fr.hillionj.quizzy.ihm.popup.PopupNonConfigurer;
+import fr.hillionj.quizzy.ihm.vues.VueHistorique;
 import fr.hillionj.quizzy.ihm.vues.VueParametres;
 import fr.hillionj.quizzy.parametres.Parametres;
 
 public class Quizzy extends AppCompatActivity {
 
-    private Button btn_demarrer, btn_credits;
+    private Button btn_demarrer, btn_credits, btn_historique;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class Quizzy extends AppCompatActivity {
     public void initialiserBoutons() {
         btn_demarrer = findViewById(R.id.btn_demarrer);
         btn_credits = findViewById(R.id.btn_credits);
+        btn_historique = findViewById(R.id.btn_historique);
 
         btn_demarrer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +63,12 @@ public class Quizzy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new PopupCredits().show(getSupportFragmentManager(), "PopupCredits");
+            }
+        });
+        btn_historique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PopupHistorique(Quizzy.this).show(getSupportFragmentManager(), "PopupHistorique");
             }
         });
     }

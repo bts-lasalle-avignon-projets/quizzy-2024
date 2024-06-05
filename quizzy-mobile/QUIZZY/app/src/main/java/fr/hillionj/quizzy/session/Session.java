@@ -23,8 +23,8 @@ import fr.hillionj.quizzy.son.GestionnaireSonore;
 
 public class Session {
 
-    private BaseDeDonnees baseDeDonnees;
-    private Parametres parametres;
+    private final BaseDeDonnees baseDeDonnees;
+    private final Parametres parametres;
     private List<Participant> participants = new ArrayList<>();
     private List<Ecran> ecrans = new ArrayList<>();
     private List<Question> questions = null;
@@ -37,7 +37,21 @@ public class Session {
     private List<ArgumentLancement> arguments = new ArrayList<>();
     private EtapeSession etapeSession = EtapeSession.ARRET;
     private Theme theme = null;
+    private String horodatage;
+    private int idEvaluation;
 
+    public Session(final int idEvaluation, final String horodatage, final List<Question> questions, final List<Participant> participants) {
+        this.idEvaluation = idEvaluation;
+        this.participants = participants;
+        this.questions = questions;
+        this.horodatage = horodatage;
+        this.parametres = null;
+        this.ihm = null;
+        this.baseDeDonnees = null;
+        this.gestionnaireSonore = null;
+        this.gestionnaireProtocoles = null;
+        this.watchDog = null;
+    }
 
     public Session(@NonNull final Session sessionPrecedente) {
         this.parametres = sessionPrecedente.parametres;
@@ -48,10 +62,10 @@ public class Session {
         this.watchDog = sessionPrecedente.watchDog;
     }
 
-    public Session(final Parametres parametres, @NonNull AppCompatActivity activite, IHM ihm) {
+    public Session(final Parametres parametres, @NonNull AppCompatActivity activite, IHM ihm, BaseDeDonnees baseDeDonnees) {
         this.parametres = parametres;
         this.ihm = ihm;
-        this.baseDeDonnees = new BaseDeDonnees(activite.getApplicationContext());
+        this.baseDeDonnees = baseDeDonnees;
         this.gestionnaireSonore = new GestionnaireSonore(activite);
         this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
         this.watchDog = new WatchDog(ihm);
@@ -178,14 +192,6 @@ public class Session {
         baseDeDonnees.sauvegarder(this);
     }
 
-    public BaseDeDonnees getBaseDeDonnees() {
-        return baseDeDonnees;
-    }
-
-    public GestionnaireSonore getGestionnaireSonore() {
-        return gestionnaireSonore;
-    }
-
     public GestionnaireProtocoles getGestionnaireProtocoles() {
         return gestionnaireProtocoles;
     }
@@ -291,5 +297,13 @@ public class Session {
 
     public Theme getTheme() {
         return theme;
+    }
+
+    public String getHorodatage() {
+        return this.horodatage;
+    }
+
+    public int getIdEvaluation() {
+        return idEvaluation;
     }
 }

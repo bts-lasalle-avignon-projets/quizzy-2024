@@ -19,6 +19,9 @@
         android:theme="@style/Theme.QUIZZY"
         tools:targetApi="31">
         <activity
+            android:name=".ihm.vues.VueHistorique"
+            android:exported="false" />
+        <activity
             android:name=".ihm.vues.VueSession"
             android:exported="false" />
         <activity

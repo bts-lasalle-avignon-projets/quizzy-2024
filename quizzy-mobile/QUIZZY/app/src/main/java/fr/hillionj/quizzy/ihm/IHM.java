@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.ihm.popup.PopupHistorique;
 import fr.hillionj.quizzy.ihm.popup.PopupNonConnecte;
 import fr.hillionj.quizzy.ihm.vues.VueParticipants;
 import fr.hillionj.quizzy.ihm.vues.VueSession;
@@ -113,5 +114,11 @@ public class IHM {
                 }
             }
         }
+    }
+
+    public void mettreAjourHistorique() {
+        PopupHistorique popupHistorique = (PopupHistorique) getIHMActive(PopupHistorique.class);
+        if (popupHistorique != null)
+            popupHistorique.mettreAjourHistorique();
     }
 }

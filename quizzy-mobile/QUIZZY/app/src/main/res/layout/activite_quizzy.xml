@@ -31,14 +31,24 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/btn_credits"
+        android:id="@+id/btn_historique"
         android:layout_width="234dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
-        android:text="Crédits"
+        android:text="Historique"
         app:layout_constraintEnd_toEndOf="@+id/btn_demarrer"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_demarrer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_demarrer" />
+
+    <Button
+        android:id="@+id/btn_credits"
+        android:layout_width="234dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="92dp"
+        android:text="Crédits"
+        app:layout_constraintEnd_toEndOf="@+id/btn_historique"
+        app:layout_constraintStart_toStartOf="@+id/btn_historique"
         app:layout_constraintTop_toBottomOf="@+id/btn_demarrer" />
 
     <TextView
