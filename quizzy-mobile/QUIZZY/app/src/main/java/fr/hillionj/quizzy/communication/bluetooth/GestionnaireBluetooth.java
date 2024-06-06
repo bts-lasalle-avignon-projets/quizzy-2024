@@ -139,7 +139,6 @@ public class GestionnaireBluetooth {
                         break;
                     case CODE_DECONNEXION_BLUETOOTH:
                         IHM.getIHM().mettreAjourListeParticipants();
-                        //traiterDeconnexion(msg);
                         break;
                     default:
                         break;

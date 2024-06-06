@@ -11,7 +11,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -236,5 +235,14 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         sqlite.execSQL("DELETE FROM reponses WHERE idEvaluation = " + session.getIdEvaluation());
         sqlite.execSQL("DELETE FROM quiz WHERE idEvaluation = " + session.getIdEvaluation());
         sqlite.execSQL("DELETE FROM evaluations WHERE idEvaluation = " + session.getIdEvaluation());
+    }
+
+    public Participant creerParticipant(String nom) {
+        sqlite.execSQL("INSERT INTO participants (nom) VALUES ('" + nom + "')");
+
+        Cursor       curseur     = sqlite.rawQuery("SELECT idParticipant FROM participants WHERE nom = '" + nom + "'", null);
+        curseur.moveToNext();
+        int idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow("idParticipant"));
+        return new Participant(idParticipant, nom);
     }
 }

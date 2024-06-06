@@ -13,16 +13,13 @@ import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
 import fr.hillionj.quizzy.parametres.receveur.speciales.Participant;
 
-public class SpinnerParticipants extends ArrayList<String> {
+public class SpinnerParticipants {
 
     private Spinner spinner;
 
     public SpinnerParticipants(AppCompatActivity activite, int id) {
-        super(getParticipants());
         spinner = activite.findViewById(id);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, this);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        mettreAjourSpinnerParticipants();
     }
 
     private static List<String> getParticipants()
@@ -37,5 +34,11 @@ public class SpinnerParticipants extends ArrayList<String> {
 
     public Spinner getSpinner() {
         return spinner;
+    }
+
+    public void mettreAjourSpinnerParticipants() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, getParticipants());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 }

@@ -32,9 +32,9 @@ public class Parametres {
     private AppCompatActivity activitePrincipale;
     private boolean calulAutomatiqueDuTempsDeReponse = false;
     private int tempsReponse = 30;
+    private boolean testerLaConnexion = true;
 
     public static Parametres getParametres(AppCompatActivity activite) {
-        Log.d("QUIZZY_" + Parametres.class.getName(), "Instanciation de Parametres: " + activite);
         if (parametres == null) {
             parametres = new Parametres(activite);
         }
@@ -141,5 +141,22 @@ public class Parametres {
 
     public BaseDeDonnees getBaseDeDonnees() {
         return baseDeDonnees;
+    }
+
+    public boolean estTesterLaConnexion() {
+        return this.testerLaConnexion;
+    }
+
+    public void setTesterLaConnexion(boolean testerLaConnexion) {
+        this.testerLaConnexion = testerLaConnexion;
+    }
+
+    public Participant getParticipant(String nom) {
+        for (Participant participant : participants) {
+            if (participant.getNom().equals(nom)) {
+                return participant;
+            }
+        }
+        return null;
     }
 }

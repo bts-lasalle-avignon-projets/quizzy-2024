@@ -1,6 +1,7 @@
 package fr.hillionj.quizzy.ihm.vues;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
+import fr.hillionj.quizzy.ihm.popup.PopupAucunParticipant;
+import fr.hillionj.quizzy.ihm.popup.PopupCreerParticipant;
 import fr.hillionj.quizzy.ihm.widgets.ListViewPeripheriques;
 import fr.hillionj.quizzy.ihm.widgets.SpinnerParticipants;
 import fr.hillionj.quizzy.ihm.widgets.SpinnerPeripheriques;
@@ -23,7 +26,7 @@ public class VueParticipants extends AppCompatActivity {
     private ListViewPeripheriques liste_participants;
     private SpinnerParticipants spinner_participants;
     private SpinnerPeripheriques spinner_peripheriques;
-    private Button btn_associer;
+    private Button btn_associer, btn_creer_participant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class VueParticipants extends AppCompatActivity {
 
     private void initialiserAttributs() {
         btn_associer = findViewById(R.id.btn_associer);
+        btn_creer_participant = findViewById(R.id.btn_creer_participant);
         spinner_participants = new SpinnerParticipants(this, R.id.spinner_participants);
         spinner_peripheriques = new SpinnerPeripheriques(this, R.id.spinner_peripheriques);
         liste_participants = new ListViewPeripheriques(this, R.id.liste_peripheriques);
@@ -72,9 +76,19 @@ public class VueParticipants extends AppCompatActivity {
             }
             mettreAjourListeParticipants();
         });
+        btn_creer_participant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PopupCreerParticipant().show(getSupportFragmentManager(), "PopupCreerParticipant");
+            }
+        });
     }
 
     public void mettreAjourListeParticipants() {
         liste_participants.mettreAjour();
+    }
+
+    public void mettreAjourSpinnerParticipants() {
+        spinner_participants.mettreAjourSpinnerParticipants();
     }
 }

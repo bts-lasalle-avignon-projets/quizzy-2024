@@ -154,6 +154,16 @@ public class VueParametres extends AppCompatActivity {
                     return true;
                 }
             });
+
+            SwitchPreference switch_tester_ta_connexion = findPreference("switch_tester_ta_connexion");
+            Parametres.getParametres().setTesterLaConnexion(switch_tester_ta_connexion.isChecked());
+            switch_tester_ta_connexion.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    Parametres.getParametres().setTesterLaConnexion((boolean) newValue);
+                    return true;
+                }
+            });
         }
     }
 }

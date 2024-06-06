@@ -39,5 +39,10 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Configurer les noms" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="switch_tester_ta_connexion"
+            android:layout="@layout/custom_switch_preference"
+            android:title="Tester la connexion en continue" />
     </PreferenceCategory>
 </PreferenceScreen>

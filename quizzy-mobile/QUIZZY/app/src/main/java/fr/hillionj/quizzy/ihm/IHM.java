@@ -137,4 +137,10 @@ public class IHM {
             ((AppCompatActivity) lanceur).startActivity(intent);
         }
     }
+
+    public void mettreAjourSpinnerParticipants() {
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourSpinnerParticipants();
+    }
 }
