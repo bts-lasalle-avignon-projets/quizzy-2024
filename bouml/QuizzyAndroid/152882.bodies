@@ -1,0 +1,60 @@
+class PopupNonConfigurer
+!!!215218.java!!!	PopupNonConfigurer()
+        PopupNonConfigurer popup = (PopupNonConfigurer) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null) {
+            this.peripherique = popup.peripherique;
+            this.session = popup.session;
+        } else {
+            this.session = null;
+        }
+!!!215346.java!!!	PopupNonConfigurer(inout session : Session)
+
+        this.session = session;
+!!!215474.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+        setCancelable(false);
+
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
+
+        View vue = inflater.inflate(R.layout.popup_non_configurer, container, false);
+        initialiserVue(vue);
+        return vue;
+!!!215602.java!!!	initialiserVue(inout vue : View) : void
+        if (session == null) {
+            dismiss();
+            return;
+        }
+        ((TextView)vue.findViewById(R.id.titre_popup)).setText(peripherique.getNom() + " non configuré");
+        vue.findViewById(R.id.btn_deconnecter).setOnClickListener(v -> {
+            peripherique.deconnecter();
+            dismiss();
+            if (session.estValide()) {
+                if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
+                    session.lancer();
+                } else {
+                    IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueSession.class);
+                }
+            }
+        });
+        vue.findViewById(R.id.btn_configurer).setOnClickListener(v -> {
+            IHM.getIHM().fermerPopups();
+            if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
+                IHM.getIHM().fermerActivite(VueSession.class);
+            }
+            startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueParticipants.class));
+        });
+        vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
+            dismiss();
+        });
+!!!215730.java!!!	getPeripherique() : Peripherique
+        for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
+            if (peripherique.estConnecte() && Parametres.getParametres().getParticipantAssocier(peripherique) == null) {
+                return peripherique;
+            }
+        }
+        return null;

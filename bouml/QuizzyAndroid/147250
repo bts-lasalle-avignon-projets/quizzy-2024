@@ -1,0 +1,5364 @@
+format 224
+"databinding" // quizzy::databinding
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "Documents/Eleos/QUIZZY/app/build/generated/data_binding_base_class_source_out/debug/out/fr/hillionj/quizzy/databinding/"
+  java_package "fr.hillionj.quizzy.databinding"
+  classview 152242 "databinding"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 157746 "ActivityMainBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 165810 // <realization>
+	relation 165810 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 165810 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 172466 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 172594 "container"
+	const_attribute public explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 172722 "navView"
+	const_attribute public explicit_type "BottomNavigationView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 238130 "ActivityMainBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "container" explicit_type "ConstraintLayout"
+	  param inout name "navView" explicit_type "BottomNavigationView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 238258 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 238386 "inflate"
+	class_operation public return_type class_ref 157746 // ActivityMainBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 238514 "inflate"
+	class_operation public return_type class_ref 157746 // ActivityMainBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 238642 "bind"
+	class_operation public return_type class_ref 157746 // ActivityMainBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 158002 "FragmentDashboardBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 165938 // <realization>
+	relation 165938 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 165938 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 172850 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 172978 "boutonConnecter"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173106 "boutonDeconnecter"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173234 "listViewPeripheriquesConnectes"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173362 "listePeripheriques"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173490 "textView"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 238770 "FragmentDashboardBinding"
+	private explicit_return_type ""
+	nparams 6
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "boutonConnecter" explicit_type "Button"
+	  param inout name "boutonDeconnecter" explicit_type "Button"
+	  param inout name "listViewPeripheriquesConnectes" explicit_type "ListView"
+	  param inout name "listePeripheriques" explicit_type "Spinner"
+	  param inout name "textView" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 238898 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239026 "inflate"
+	class_operation public return_type class_ref 158002 // FragmentDashboardBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239154 "inflate"
+	class_operation public return_type class_ref 158002 // FragmentDashboardBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239282 "bind"
+	class_operation public return_type class_ref 158002 // FragmentDashboardBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 158130 "FragmentHomeBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 166066 // <realization>
+	relation 166066 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 166066 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 173618 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173746 "barreProgression"
+	const_attribute public explicit_type "ProgressBar"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 173874 "btnArreter"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174002 "btnLancer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174130 "btnPause"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174258 "btnReinitialiser"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174386 "listeParticipants"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174514 "question"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174642 "reponse1"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174770 "reponse2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 174898 "reponse3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175026 "reponse4"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 239410 "FragmentHomeBinding"
+	private explicit_return_type ""
+	nparams 12
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "barreProgression" explicit_type "ProgressBar"
+	  param inout name "btnArreter" explicit_type "Button"
+	  param inout name "btnLancer" explicit_type "Button"
+	  param inout name "btnPause" explicit_type "Button"
+	  param inout name "btnReinitialiser" explicit_type "Button"
+	  param inout name "listeParticipants" explicit_type "ListView"
+	  param inout name "question" explicit_type "TextView"
+	  param inout name "reponse1" explicit_type "TextView"
+	  param inout name "reponse2" explicit_type "TextView"
+	  param inout name "reponse3" explicit_type "TextView"
+	  param inout name "reponse4" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}, @NonNull ${t7} ${p7}, @NonNull ${t8} ${p8}, @NonNull ${t9} ${p9}, @NonNull ${t10} ${p10}, @NonNull ${t11} ${p11}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 239538 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239666 "inflate"
+	class_operation public return_type class_ref 158130 // FragmentHomeBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239794 "inflate"
+	class_operation public return_type class_ref 158130 // FragmentHomeBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 239922 "bind"
+	class_operation public return_type class_ref 158130 // FragmentHomeBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 158258 "FragmentNotificationsBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 166194 // <realization>
+	relation 166194 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 166194 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 175154 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175282 "btnAssocierParticipant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175410 "btnCreerParticipant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175538 "spinnerNomsParticipants"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175666 "spinnerPeripheriquesConnectes"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175794 "spinnerThemes"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 175922 "textInputNomParticipant"
+	const_attribute public explicit_type "TextInputLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 176050 "textInputNombreQuestion"
+	const_attribute public explicit_type "TextInputLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 176178 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 240050 "FragmentNotificationsBinding"
+	private explicit_return_type ""
+	nparams 9
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "btnAssocierParticipant" explicit_type "Button"
+	  param inout name "btnCreerParticipant" explicit_type "Button"
+	  param inout name "spinnerNomsParticipants" explicit_type "Spinner"
+	  param inout name "spinnerPeripheriquesConnectes" explicit_type "Spinner"
+	  param inout name "spinnerThemes" explicit_type "Spinner"
+	  param inout name "textInputNomParticipant" explicit_type "TextInputLayout"
+	  param inout name "textInputNombreQuestion" explicit_type "TextInputLayout"
+	  param inout name "textView2" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}, @NonNull ${t7} ${p7}, @NonNull ${t8} ${p8}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 240178 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 240306 "inflate"
+	class_operation public return_type class_ref 158258 // FragmentNotificationsBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 240434 "inflate"
+	class_operation public return_type class_ref 158258 // FragmentNotificationsBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 240562 "bind"
+	class_operation public return_type class_ref 158258 // FragmentNotificationsBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 162994 "ActiviteHistoriqueBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172210 // <realization>
+	relation 172210 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172210 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 187186 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 187314 "listeResultats"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 187442 "main"
+	const_attribute public explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 266674 "ActiviteHistoriqueBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "listeResultats" explicit_type "ListView"
+	  param inout name "main" explicit_type "ConstraintLayout"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 266802 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 266930 "inflate"
+	class_operation public return_type class_ref 162994 // ActiviteHistoriqueBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 267058 "inflate"
+	class_operation public return_type class_ref 162994 // ActiviteHistoriqueBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 267186 "bind"
+	class_operation public return_type class_ref 162994 // ActiviteHistoriqueBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163122 "ActiviteParametresBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172338 // <realization>
+	relation 172338 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172338 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 187570 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 187698 "btnLancer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 187826 "settings"
+	const_attribute public explicit_type "FrameLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 267314 "ActiviteParametresBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "btnLancer" explicit_type "Button"
+	  param inout name "settings" explicit_type "FrameLayout"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 267442 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 267570 "inflate"
+	class_operation public return_type class_ref 163122 // ActiviteParametresBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 267698 "inflate"
+	class_operation public return_type class_ref 163122 // ActiviteParametresBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 267826 "bind"
+	class_operation public return_type class_ref 163122 // ActiviteParametresBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163250 "ActiviteParticipantsBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172466 // <realization>
+	relation 172466 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172466 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 187954 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188082 "btnAssocier"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188210 "btnCreerParticipant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188338 "listePeripheriques"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188466 "main"
+	const_attribute public explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188594 "spinnerParticipants"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188722 "spinnerPeripheriques"
+	const_attribute public explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 267954 "ActiviteParticipantsBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "btnAssocier" explicit_type "Button"
+	  param inout name "btnCreerParticipant" explicit_type "Button"
+	  param inout name "listePeripheriques" explicit_type "ListView"
+	  param inout name "main" explicit_type "ConstraintLayout"
+	  param inout name "spinnerParticipants" explicit_type "Spinner"
+	  param inout name "spinnerPeripheriques" explicit_type "Spinner"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 268082 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 268210 "inflate"
+	class_operation public return_type class_ref 163250 // ActiviteParticipantsBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 268338 "inflate"
+	class_operation public return_type class_ref 163250 // ActiviteParticipantsBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 268466 "bind"
+	class_operation public return_type class_ref 163250 // ActiviteParticipantsBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163378 "ActiviteQuizzyBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172594 // <realization>
+	relation 172594 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172594 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 188850 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 188978 "btnCredits"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189106 "btnDemarrer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189234 "btnHistorique"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189362 "imageView2"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189490 "main"
+	const_attribute public explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189618 "textView"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 268594 "ActiviteQuizzyBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "btnCredits" explicit_type "Button"
+	  param inout name "btnDemarrer" explicit_type "Button"
+	  param inout name "btnHistorique" explicit_type "Button"
+	  param inout name "imageView2" explicit_type "ImageView"
+	  param inout name "main" explicit_type "ConstraintLayout"
+	  param inout name "textView" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 268722 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 268850 "inflate"
+	class_operation public return_type class_ref 163378 // ActiviteQuizzyBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 268978 "inflate"
+	class_operation public return_type class_ref 163378 // ActiviteQuizzyBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 269106 "bind"
+	class_operation public return_type class_ref 163378 // ActiviteQuizzyBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163506 "ActiviteSessionBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172722 // <realization>
+	relation 172722 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172722 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 189746 "rootView"
+	const_attribute private explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 189874 "btnPause"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190002 "btnPrecedent"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190130 "btnReinitialiser"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190258 "btnStopper"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190386 "btnSuivant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190514 "chronometre"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190642 "linearLayout"
+	const_attribute public explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190770 "linearLayout2"
+	const_attribute public explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 190898 "listeEcrans"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191026 "listeParticipants"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191154 "main"
+	const_attribute public explicit_type "ConstraintLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191282 "progression"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191410 "proposition1"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191538 "proposition2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191666 "proposition3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191794 "proposition4"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 191922 "question"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 269234 "ActiviteSessionBinding"
+	private explicit_return_type ""
+	nparams 18
+	  param inout name "rootView" explicit_type "ConstraintLayout"
+	  param inout name "btnPause" explicit_type "Button"
+	  param inout name "btnPrecedent" explicit_type "Button"
+	  param inout name "btnReinitialiser" explicit_type "Button"
+	  param inout name "btnStopper" explicit_type "Button"
+	  param inout name "btnSuivant" explicit_type "Button"
+	  param inout name "chronometre" explicit_type "TextView"
+	  param inout name "linearLayout" explicit_type "LinearLayout"
+	  param inout name "linearLayout2" explicit_type "LinearLayout"
+	  param inout name "listeEcrans" explicit_type "ListView"
+	  param inout name "listeParticipants" explicit_type "ListView"
+	  param inout name "main" explicit_type "ConstraintLayout"
+	  param inout name "progression" explicit_type "TextView"
+	  param inout name "proposition1" explicit_type "TextView"
+	  param inout name "proposition2" explicit_type "TextView"
+	  param inout name "proposition3" explicit_type "TextView"
+	  param inout name "proposition4" explicit_type "TextView"
+	  param inout name "question" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}, @NonNull ${t7} ${p7}, @NonNull ${t8} ${p8}, @NonNull ${t9} ${p9}, @NonNull ${t10} ${p10}, @NonNull ${t11} ${p11}, @NonNull ${t12} ${p12}, @NonNull ${t13} ${p13}, @NonNull ${t14} ${p14}, @NonNull ${t15} ${p15}, @NonNull ${t16} ${p16}, @NonNull ${t17} ${p17}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 269362 "getRoot"
+	public explicit_return_type "ConstraintLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 269490 "inflate"
+	class_operation public return_type class_ref 163506 // ActiviteSessionBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 269618 "inflate"
+	class_operation public return_type class_ref 163506 // ActiviteSessionBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 269746 "bind"
+	class_operation public return_type class_ref 163506 // ActiviteSessionBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163634 "CustomEditTextPreferenceBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172850 // <realization>
+	relation 172850 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172850 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 192050 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192178 "summary"
+	const_attribute public explicit_type "EditText"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192306 "title"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 269874 "CustomEditTextPreferenceBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "summary" explicit_type "EditText"
+	  param inout name "title" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 270002 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 270130 "inflate"
+	class_operation public return_type class_ref 163634 // CustomEditTextPreferenceBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 270258 "inflate"
+	class_operation public return_type class_ref 163634 // CustomEditTextPreferenceBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 270386 "bind"
+	class_operation public return_type class_ref 163634 // CustomEditTextPreferenceBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163762 "CustomEditTextPreferenceDisabledBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 172978 // <realization>
+	relation 172978 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 172978 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 192434 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192562 "summary"
+	const_attribute public explicit_type "EditText"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192690 "title"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 270514 "CustomEditTextPreferenceDisabledBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "summary" explicit_type "EditText"
+	  param inout name "title" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 270642 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 270770 "inflate"
+	class_operation public return_type class_ref 163762 // CustomEditTextPreferenceDisabledBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 270898 "inflate"
+	class_operation public return_type class_ref 163762 // CustomEditTextPreferenceDisabledBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 271026 "bind"
+	class_operation public return_type class_ref 163762 // CustomEditTextPreferenceDisabledBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 163890 "CustomListPreferenceBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173106 // <realization>
+	relation 173106 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173106 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 192818 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 192946 "summary"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 193074 "title"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 271154 "CustomListPreferenceBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "summary" explicit_type "TextView"
+	  param inout name "title" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 271282 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 271410 "inflate"
+	class_operation public return_type class_ref 163890 // CustomListPreferenceBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 271538 "inflate"
+	class_operation public return_type class_ref 163890 // CustomListPreferenceBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 271666 "bind"
+	class_operation public return_type class_ref 163890 // CustomListPreferenceBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164018 "CustomPreferenceBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173234 // <realization>
+	relation 173234 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173234 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 193202 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 193330 "summary"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 193458 "title"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 271794 "CustomPreferenceBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "summary" explicit_type "TextView"
+	  param inout name "title" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 271922 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272050 "inflate"
+	class_operation public return_type class_ref 164018 // CustomPreferenceBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272178 "inflate"
+	class_operation public return_type class_ref 164018 // CustomPreferenceBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272306 "bind"
+	class_operation public return_type class_ref 164018 // CustomPreferenceBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164146 "CustomSwitchPreferenceBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173362 // <realization>
+	relation 173362 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173362 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 193586 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 193714 "switchWidget"
+	const_attribute public explicit_type "Switch"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 193842 "title"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 272434 "CustomSwitchPreferenceBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "switchWidget" explicit_type "Switch"
+	  param inout name "title" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 272562 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272690 "inflate"
+	class_operation public return_type class_ref 164146 // CustomSwitchPreferenceBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272818 "inflate"
+	class_operation public return_type class_ref 164146 // CustomSwitchPreferenceBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 272946 "bind"
+	class_operation public return_type class_ref 164146 // CustomSwitchPreferenceBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164274 "ListItemsBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173490 // <realization>
+	relation 173490 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173490 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 193970 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194098 "logoPeripherique"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194226 "text1"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194354 "text2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 273074 "ListItemsBinding"
+	private explicit_return_type ""
+	nparams 4
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "logoPeripherique" explicit_type "ImageView"
+	  param inout name "text1" explicit_type "TextView"
+	  param inout name "text2" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 273202 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 273330 "inflate"
+	class_operation public return_type class_ref 164274 // ListItemsBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 273458 "inflate"
+	class_operation public return_type class_ref 164274 // ListItemsBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 273586 "bind"
+	class_operation public return_type class_ref 164274 // ListItemsBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164402 "ListItemsHistoriqueBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173618 // <realization>
+	relation 173618 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173618 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 194482 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194610 "btnSupprimerSession"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194738 "btnVoirSession"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194866 "text1"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 194994 "text2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 195122 "text3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 273714 "ListItemsHistoriqueBinding"
+	private explicit_return_type ""
+	nparams 6
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnSupprimerSession" explicit_type "Button"
+	  param inout name "btnVoirSession" explicit_type "Button"
+	  param inout name "text1" explicit_type "TextView"
+	  param inout name "text2" explicit_type "TextView"
+	  param inout name "text3" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 273842 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 273970 "inflate"
+	class_operation public return_type class_ref 164402 // ListItemsHistoriqueBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 274098 "inflate"
+	class_operation public return_type class_ref 164402 // ListItemsHistoriqueBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 274226 "bind"
+	class_operation public return_type class_ref 164402 // ListItemsHistoriqueBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164530 "ListItemsQuestionsBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173746 // <realization>
+	relation 173746 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173746 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 195250 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 195378 "colonneParticipant"
+	const_attribute public explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 195506 "text1"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 274354 "ListItemsQuestionsBinding"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "colonneParticipant" explicit_type "LinearLayout"
+	  param inout name "text1" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 274482 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 274610 "inflate"
+	class_operation public return_type class_ref 164530 // ListItemsQuestionsBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 274738 "inflate"
+	class_operation public return_type class_ref 164530 // ListItemsQuestionsBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 274866 "bind"
+	class_operation public return_type class_ref 164530 // ListItemsQuestionsBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164658 "PopupAucunParticipantBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 173874 // <realization>
+	relation 173874 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 173874 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 195634 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 195762 "btnAnnuler"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 195890 "btnConfigurerPopupAucunParticipant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196018 "btnContinuer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196146 "imageView"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196274 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196402 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 274994 "PopupAucunParticipantBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnAnnuler" explicit_type "Button"
+	  param inout name "btnConfigurerPopupAucunParticipant" explicit_type "Button"
+	  param inout name "btnContinuer" explicit_type "Button"
+	  param inout name "imageView" explicit_type "ImageView"
+	  param inout name "textView2" explicit_type "TextView"
+	  param inout name "textView3" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 275122 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 275250 "inflate"
+	class_operation public return_type class_ref 164658 // PopupAucunParticipantBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 275378 "inflate"
+	class_operation public return_type class_ref 164658 // PopupAucunParticipantBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 275506 "bind"
+	class_operation public return_type class_ref 164658 // PopupAucunParticipantBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164786 "PopupCreditsBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174002 // <realization>
+	relation 174002 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174002 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 196530 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196658 "btnFermer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196786 "imageView3"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 196914 "imageView4"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197042 "textView10"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197170 "textView11"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197298 "textView12"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197426 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197554 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197682 "textView4"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197810 "textView5"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 197938 "textView6"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198066 "textView7"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198194 "textView8"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198322 "textView9"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 275634 "PopupCreditsBinding"
+	private explicit_return_type ""
+	nparams 15
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnFermer" explicit_type "Button"
+	  param inout name "imageView3" explicit_type "ImageView"
+	  param inout name "imageView4" explicit_type "ImageView"
+	  param inout name "textView10" explicit_type "TextView"
+	  param inout name "textView11" explicit_type "TextView"
+	  param inout name "textView12" explicit_type "TextView"
+	  param inout name "textView2" explicit_type "TextView"
+	  param inout name "textView3" explicit_type "TextView"
+	  param inout name "textView4" explicit_type "TextView"
+	  param inout name "textView5" explicit_type "TextView"
+	  param inout name "textView6" explicit_type "TextView"
+	  param inout name "textView7" explicit_type "TextView"
+	  param inout name "textView8" explicit_type "TextView"
+	  param inout name "textView9" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}, @NonNull ${t7} ${p7}, @NonNull ${t8} ${p8}, @NonNull ${t9} ${p9}, @NonNull ${t10} ${p10}, @NonNull ${t11} ${p11}, @NonNull ${t12} ${p12}, @NonNull ${t13} ${p13}, @NonNull ${t14} ${p14}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 275762 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 275890 "inflate"
+	class_operation public return_type class_ref 164786 // PopupCreditsBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 276018 "inflate"
+	class_operation public return_type class_ref 164786 // PopupCreditsBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 276146 "bind"
+	class_operation public return_type class_ref 164786 // PopupCreditsBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 164914 "PopupCreerParticipantBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174130 // <realization>
+	relation 174130 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174130 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 198450 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198578 "btnAnnuler"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198706 "btnCreerParticipant"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198834 "entreeNomParticipant"
+	const_attribute public explicit_type "EditText"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 198962 "imageView"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199090 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199218 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199346 "texteErreurCreerParticipant"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 276274 "PopupCreerParticipantBinding"
+	private explicit_return_type ""
+	nparams 8
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnAnnuler" explicit_type "Button"
+	  param inout name "btnCreerParticipant" explicit_type "Button"
+	  param inout name "entreeNomParticipant" explicit_type "EditText"
+	  param inout name "imageView" explicit_type "ImageView"
+	  param inout name "textView2" explicit_type "TextView"
+	  param inout name "textView3" explicit_type "TextView"
+	  param inout name "texteErreurCreerParticipant" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}, @NonNull ${t7} ${p7}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 276402 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 276530 "inflate"
+	class_operation public return_type class_ref 164914 // PopupCreerParticipantBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 276658 "inflate"
+	class_operation public return_type class_ref 164914 // PopupCreerParticipantBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 276786 "bind"
+	class_operation public return_type class_ref 164914 // PopupCreerParticipantBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 165042 "PopUpFinSessionBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174258 // <realization>
+	relation 174258 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174258 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 199474 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199602 "btnAnnuler"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199730 "btnRelancer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199858 "btnSauvegarder"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 199986 "imageView"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200114 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200242 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 276914 "PopUpFinSessionBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnAnnuler" explicit_type "Button"
+	  param inout name "btnRelancer" explicit_type "Button"
+	  param inout name "btnSauvegarder" explicit_type "Button"
+	  param inout name "imageView" explicit_type "ImageView"
+	  param inout name "textView2" explicit_type "TextView"
+	  param inout name "textView3" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 277042 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 277170 "inflate"
+	class_operation public return_type class_ref 165042 // PopUpFinSessionBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 277298 "inflate"
+	class_operation public return_type class_ref 165042 // PopUpFinSessionBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 277426 "bind"
+	class_operation public return_type class_ref 165042 // PopUpFinSessionBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 165170 "PopupHistoriqueBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174386 // <realization>
+	relation 174386 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174386 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 200370 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200498 "btnFermer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200626 "btnListeSessions"
+	const_attribute public explicit_type "ListView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200754 "textView2"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 200882 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 277554 "PopupHistoriqueBinding"
+	private explicit_return_type ""
+	nparams 5
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnFermer" explicit_type "Button"
+	  param inout name "btnListeSessions" explicit_type "ListView"
+	  param inout name "textView2" explicit_type "TextView"
+	  param inout name "textView3" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 277682 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 277810 "inflate"
+	class_operation public return_type class_ref 165170 // PopupHistoriqueBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 277938 "inflate"
+	class_operation public return_type class_ref 165170 // PopupHistoriqueBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 278066 "bind"
+	class_operation public return_type class_ref 165170 // PopupHistoriqueBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 165298 "PopupNonConfigurerBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174514 // <realization>
+	relation 174514 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174514 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 201010 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201138 "btnAnnuler"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201266 "btnConfigurer"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201394 "btnDeconnecter"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201522 "imageView"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201650 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 201778 "titrePopup"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 278194 "PopupNonConfigurerBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnAnnuler" explicit_type "Button"
+	  param inout name "btnConfigurer" explicit_type "Button"
+	  param inout name "btnDeconnecter" explicit_type "Button"
+	  param inout name "imageView" explicit_type "ImageView"
+	  param inout name "textView3" explicit_type "TextView"
+	  param inout name "titrePopup" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 278322 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 278450 "inflate"
+	class_operation public return_type class_ref 165298 // PopupNonConfigurerBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 278578 "inflate"
+	class_operation public return_type class_ref 165298 // PopupNonConfigurerBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 278706 "bind"
+	class_operation public return_type class_ref 165298 // PopupNonConfigurerBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 165426 "PopupNonConnecteBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174642 // <realization>
+	relation 174642 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174642 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 201906 "rootView"
+	const_attribute private explicit_type "LinearLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202034 "btnAnnuler"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202162 "btnConnecter"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202290 "btnDissocier"
+	const_attribute public explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202418 "imageView"
+	const_attribute public explicit_type "ImageView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202546 "textView3"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 202674 "titrePopup"
+	const_attribute public explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 278834 "PopupNonConnecteBinding"
+	private explicit_return_type ""
+	nparams 7
+	  param inout name "rootView" explicit_type "LinearLayout"
+	  param inout name "btnAnnuler" explicit_type "Button"
+	  param inout name "btnConnecter" explicit_type "Button"
+	  param inout name "btnDissocier" explicit_type "Button"
+	  param inout name "imageView" explicit_type "ImageView"
+	  param inout name "textView3" explicit_type "TextView"
+	  param inout name "titrePopup" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}, @NonNull ${t1} ${p1}, @NonNull ${t2} ${p2}, @NonNull ${t3} ${p3}, @NonNull ${t4} ${p4}, @NonNull ${t5} ${p5}, @NonNull ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 278962 "getRoot"
+	public explicit_return_type "LinearLayout"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279090 "inflate"
+	class_operation public return_type class_ref 165426 // PopupNonConnecteBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279218 "inflate"
+	class_operation public return_type class_ref 165426 // PopupNonConnecteBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279346 "bind"
+	class_operation public return_type class_ref 165426 // PopupNonConnecteBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+
+    class 165554 "SpinnerQuizzyBinding"
+      visibility public 
+      cpp_decl ""
+      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 174770 // <realization>
+	relation 174770 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 174770 // <realization>
+	  b parent class_ref 157874 // ViewBinding
+      end
+
+      attribute 202802 "rootView"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	java_annotation "@NonNull
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 279474 "SpinnerQuizzyBinding"
+	private explicit_return_type ""
+	nparams 1
+	  param inout name "rootView" explicit_type "TextView"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 279602 "getRoot"
+	public explicit_return_type "TextView"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279730 "inflate"
+	class_operation public return_type class_ref 165554 // SpinnerQuizzyBinding
+	nparams 1
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279858 "inflate"
+	class_operation public return_type class_ref 165554 // SpinnerQuizzyBinding
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param inout name "attachToParent" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 279986 "bind"
+	class_operation public return_type class_ref 165554 // SpinnerQuizzyBinding
+	nparams 1
+	  param inout name "rootView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 145330 "databinding"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 155442 "ActivityMainBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 157746 // ActivityMainBinding
+      end
+    end
+
+    artifact 155570 "FragmentDashboardBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 158002 // FragmentDashboardBinding
+      end
+    end
+
+    artifact 155698 "FragmentHomeBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 158130 // FragmentHomeBinding
+      end
+    end
+
+    artifact 155826 "FragmentNotificationsBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.textfield.TextInputLayout;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 158258 // FragmentNotificationsBinding
+      end
+    end
+
+    artifact 160178 "ActiviteHistoriqueBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 162994 // ActiviteHistoriqueBinding
+      end
+    end
+
+    artifact 160306 "ActiviteParametresBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163122 // ActiviteParametresBinding
+      end
+    end
+
+    artifact 160434 "ActiviteParticipantsBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163250 // ActiviteParticipantsBinding
+      end
+    end
+
+    artifact 160562 "ActiviteQuizzyBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163378 // ActiviteQuizzyBinding
+      end
+    end
+
+    artifact 160690 "ActiviteSessionBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163506 // ActiviteSessionBinding
+      end
+    end
+
+    artifact 160818 "CustomEditTextPreferenceBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163634 // CustomEditTextPreferenceBinding
+      end
+    end
+
+    artifact 160946 "CustomEditTextPreferenceDisabledBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163762 // CustomEditTextPreferenceDisabledBinding
+      end
+    end
+
+    artifact 161074 "CustomListPreferenceBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 163890 // CustomListPreferenceBinding
+      end
+    end
+
+    artifact 161202 "CustomPreferenceBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164018 // CustomPreferenceBinding
+      end
+    end
+
+    artifact 161330 "CustomSwitchPreferenceBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164146 // CustomSwitchPreferenceBinding
+      end
+    end
+
+    artifact 161458 "ListItemsBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164274 // ListItemsBinding
+      end
+    end
+
+    artifact 161586 "ListItemsHistoriqueBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164402 // ListItemsHistoriqueBinding
+      end
+    end
+
+    artifact 161714 "ListItemsQuestionsBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164530 // ListItemsQuestionsBinding
+      end
+    end
+
+    artifact 161842 "PopupAucunParticipantBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164658 // PopupAucunParticipantBinding
+      end
+    end
+
+    artifact 161970 "PopupCreditsBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164786 // PopupCreditsBinding
+      end
+    end
+
+    artifact 162098 "PopupCreerParticipantBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 164914 // PopupCreerParticipantBinding
+      end
+    end
+
+    artifact 162226 "PopUpFinSessionBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 165042 // PopUpFinSessionBinding
+      end
+    end
+
+    artifact 162354 "PopupHistoriqueBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 165170 // PopupHistoriqueBinding
+      end
+    end
+
+    artifact 162482 "PopupNonConfigurerBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 165298 // PopupNonConfigurerBinding
+      end
+    end
+
+    artifact 162610 "PopupNonConnecteBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+import java.lang.String;
+${definition}"
+      associated_elems
+	class_ref 165426 // PopupNonConnecteBinding
+      end
+    end
+
+    artifact 162738 "SpinnerQuizzyBinding"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+import fr.hillionj.quizzy.R;
+import java.lang.NullPointerException;
+import java.lang.Override;
+${definition}"
+      associated_elems
+	class_ref 165554 // SpinnerQuizzyBinding
+      end
+    end
+  end
+end

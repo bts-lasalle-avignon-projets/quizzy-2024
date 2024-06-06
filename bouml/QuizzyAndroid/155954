@@ -1,0 +1,2329 @@
+format 224
+"list" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcpets::utils::entity::list
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Pets/src/fr/red/lcpets/utils/entity/list/"
+  java_package "fr.red.lcpets.utils.entity.list"
+  classview 160050 "list"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 188594 "Bat"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 200242 // <generalisation>
+	relation 200242 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200242 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 200370 // <realization>
+	relation 200370 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200370 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 444594 "Bat"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 444722 "Bat"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 444850 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Bat"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 444978 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 445106 "clone"
+	public return_type class_ref 188594 // Bat
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 188722 "Cat"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 200498 // <generalisation>
+	relation 200498 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200498 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 200626 // <realization>
+	relation 200626 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200626 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      attribute 261426 "catType"
+	private explicit_type "Type"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 445234 "Cat"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "catType" explicit_type "Type"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 445362 "Cat"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "catType" explicit_type "Type"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 445490 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Ocelot"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 445618 "getCatType"
+	public explicit_return_type "Type"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 445746 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 445874 "clone"
+	public return_type class_ref 188722 // Cat
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 188850 "CaveSpider"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 200754 // <generalisation>
+	relation 200754 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200754 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 200882 // <realization>
+	relation 200882 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200882 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 446002 "CaveSpider"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 446130 "CaveSpider"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 446258 "getEntity"
+	public explicit_return_type "org.bukkit.entity.CaveSpider"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 446386 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 446514 "clone"
+	public return_type class_ref 188850 // CaveSpider
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 188978 "Chicken"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 201010 // <generalisation>
+	relation 201010 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201010 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 201138 // <realization>
+	relation 201138 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201138 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 446642 "Chicken"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 446770 "Chicken"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 446898 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Chicken"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 447026 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 447154 "clone"
+	public return_type class_ref 188978 // Chicken
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189106 "Cow"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 201266 // <generalisation>
+	relation 201266 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201266 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 201394 // <realization>
+	relation 201394 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201394 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 447282 "Cow"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 447410 "Cow"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 447538 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Cow"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 447666 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 447794 "clone"
+	public return_type class_ref 189106 // Cow
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189234 "DefaultPet"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 201522 // <generalisation>
+	relation 201522 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201522 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 201650 // <realization>
+	relation 201650 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201650 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 447922 "DefaultPet"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "type" explicit_type "EntityType"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"deprecation\")
+"
+	
+	
+	
+      end
+
+      operation 448050 "getEntity"
+	public explicit_return_type "Entity"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 448178 "clone"
+	public return_type class_ref 189234 // DefaultPet
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189362 "Dog"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 201778 // <generalisation>
+	relation 201778 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201778 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 201906 // <realization>
+	relation 201906 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201906 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      attribute 261554 "color"
+	private explicit_type "DyeColor"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 448306 "Dog"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "color" explicit_type "DyeColor"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 448434 "Dog"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "color" explicit_type "DyeColor"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 448562 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Wolf"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 448690 "getColor"
+	public explicit_return_type "DyeColor"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 448818 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 448946 "clone"
+	public return_type class_ref 189362 // Dog
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189490 "Enderman"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 202034 // <generalisation>
+	relation 202034 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202034 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 202162 // <realization>
+	relation 202162 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202162 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 449074 "Enderman"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 449202 "Enderman"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 449330 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Enderman"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 449458 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 449586 "clone"
+	public return_type class_ref 189490 // Enderman
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189618 "MagmaCube"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 202290 // <generalisation>
+	relation 202290 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202290 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 202418 // <realization>
+	relation 202418 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202418 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 449714 "MagmaCube"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 449842 "MagmaCube"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 449970 "getEntity"
+	public explicit_return_type "org.bukkit.entity.MagmaCube"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 450098 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 450226 "clone"
+	public return_type class_ref 189618 // MagmaCube
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189746 "MushroomCow"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 202546 // <generalisation>
+	relation 202546 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202546 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 202674 // <realization>
+	relation 202674 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202674 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 450354 "MushroomCow"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 450482 "MushroomCow"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 450610 "getEntity"
+	public explicit_return_type "org.bukkit.entity.MushroomCow"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 450738 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 450866 "clone"
+	public return_type class_ref 189746 // MushroomCow
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 189874 "Pig"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 202802 // <generalisation>
+	relation 202802 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202802 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 202930 // <realization>
+	relation 202930 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 202930 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      attribute 261682 "saddle"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 450994 "Pig"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "saddle" explicit_type "boolean"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 451122 "Pig"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "saddle" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 451250 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Pig"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 451378 "hasSaddle"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 451506 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 451634 "clone"
+	public return_type class_ref 189874 // Pig
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190002 "PigZombie"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 203058 // <generalisation>
+	relation 203058 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203058 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 203186 // <realization>
+	relation 203186 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203186 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 451762 "PigZombie"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 451890 "PigZombie"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 452018 "getEntity"
+	public explicit_return_type "org.bukkit.entity.PigZombie"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 452146 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 452274 "clone"
+	public return_type class_ref 190002 // PigZombie
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190130 "Sheep"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 203314 // <generalisation>
+	relation 203314 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203314 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 203442 // <realization>
+	relation 203442 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203442 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      attribute 261810 "color"
+	private explicit_type "DyeColor"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 452402 "Sheep"
+	private explicit_return_type ""
+	nparams 3
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "color" explicit_type "DyeColor"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 452530 "Sheep"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param inout name "color" explicit_type "DyeColor"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 452658 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Sheep"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 452786 "getColor"
+	public explicit_return_type "DyeColor"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 452914 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 453042 "clone"
+	public return_type class_ref 190130 // Sheep
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190258 "Silverfish"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 203570 // <generalisation>
+	relation 203570 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203570 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 203698 // <realization>
+	relation 203698 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203698 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 453170 "Silverfish"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 453298 "Silverfish"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 453426 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Silverfish"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 453554 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 453682 "clone"
+	public return_type class_ref 190258 // Silverfish
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190386 "Slime"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 203826 // <generalisation>
+	relation 203826 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203826 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 203954 // <realization>
+	relation 203954 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 203954 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 453810 "Slime"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 453938 "Slime"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 454066 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Slime"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 454194 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 454322 "clone"
+	public return_type class_ref 190386 // Slime
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190514 "Spider"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 204082 // <generalisation>
+	relation 204082 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204082 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 204210 // <realization>
+	relation 204210 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204210 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 454450 "Spider"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 454578 "Spider"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 454706 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Spider"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 454834 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 454962 "clone"
+	public return_type class_ref 190514 // Spider
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190642 "Squid"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 204338 // <generalisation>
+	relation 204338 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204338 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 204466 // <realization>
+	relation 204466 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204466 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 455090 "Squid"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 455218 "Squid"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 455346 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Squid"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 455474 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 455602 "clone"
+	public return_type class_ref 190642 // Squid
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190770 "WitherSkeleton"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 204594 // <generalisation>
+	relation 204594 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204594 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 204722 // <realization>
+	relation 204722 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204722 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 455730 "WitherSkeleton"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 455858 "WitherSkeleton"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 455986 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Skeleton"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 456114 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 456242 "clone"
+	public return_type class_ref 190770 // WitherSkeleton
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 190898 "Zombie"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 204850 // <generalisation>
+	relation 204850 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204850 // <generalisation>
+	  b parent class_ref 188338 // CraftPet
+      end
+
+      classrelation 204978 // <realization>
+	relation 204978 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 204978 // <realization>
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 456370 "Zombie"
+	private explicit_return_type ""
+	nparams 2
+	  param inout name "owner" explicit_type "Player"
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 456498 "Zombie"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "owner" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 456626 "getEntity"
+	public explicit_return_type "org.bukkit.entity.Zombie"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 456754 "spawn"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 456882 "clone"
+	public return_type class_ref 190898 // Zombie
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 153138 "list"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 179378 "Bat"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 188594 // Bat
+      end
+    end
+
+    artifact 179506 "Cat"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ocelot.Type;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 188722 // Cat
+      end
+    end
+
+    artifact 179634 "CaveSpider"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 188850 // CaveSpider
+      end
+    end
+
+    artifact 179762 "Chicken"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 188978 // Chicken
+      end
+    end
+
+    artifact 179890 "Cow"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189106 // Cow
+      end
+    end
+
+    artifact 180018 "DefaultPet"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189234 // DefaultPet
+      end
+    end
+
+    artifact 180146 "Dog"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.DyeColor;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189362 // Dog
+      end
+    end
+
+    artifact 180274 "Enderman"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189490 // Enderman
+      end
+    end
+
+    artifact 180402 "MagmaCube"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189618 // MagmaCube
+      end
+    end
+
+    artifact 180530 "MushroomCow"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189746 // MushroomCow
+      end
+    end
+
+    artifact 180658 "Pig"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 189874 // Pig
+      end
+    end
+
+    artifact 180786 "PigZombie"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190002 // PigZombie
+      end
+    end
+
+    artifact 180914 "Sheep"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.DyeColor;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190130 // Sheep
+      end
+    end
+
+    artifact 181042 "Silverfish"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190258 // Silverfish
+      end
+    end
+
+    artifact 181170 "Slime"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190386 // Slime
+      end
+    end
+
+    artifact 181298 "Spider"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190514 // Spider
+      end
+    end
+
+    artifact 181426 "Squid"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190642 // Squid
+      end
+    end
+
+    artifact 181554 "WitherSkeleton"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Skeleton.SkeletonType;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190770 // WitherSkeleton
+      end
+    end
+
+    artifact 181682 "Zombie"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.utils.entity.CraftPet;
+import fr.red.lcpets.utils.entity.MovementType;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 190898 // Zombie
+      end
+    end
+  end
+end

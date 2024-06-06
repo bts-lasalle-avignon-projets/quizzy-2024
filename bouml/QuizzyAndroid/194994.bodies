@@ -1,0 +1,42 @@
+class LifeRadio
+!!!499250.java!!!	getRadio() : RadioSongPlayer
+		return radio;
+!!!499378.java!!!	getInstance() : LifeRadio
+		return instance;
+!!!499506.java!!!	onEnable() : void
+		instance = this;
+		loadConfig();
+		
+		CraftMenu.init(this);
+		RadioMenu.init();
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Join(), this);
+		
+		getCommand("radio").setExecutor(new RadioCommand());
+!!!499634.java!!!	loadConfig() : void
+		ConfigManager.saveDefaultConfigs(this);
+		List<Song> songs = new ArrayList<>();
+		ConfigurationSection cs = ConfigManager.CONFIG.getConfig().getConfigurationSection("songs");
+		for (String st : cs.getKeys(false)) {
+			Song song = NBSDecoder.parse(new File(getDataFolder(), cs.getString(st + ".file")));
+			String name = cs.getString(st + ".item.name");
+			String author = cs.getString(st + ".item.author");
+			new fr.red.lcradio.utils.Song(song, name, author);
+			songs.add(song);
+		}
+		Playlist playlist = new Playlist(songs.toArray(new Song[songs.size()]));
+		radio = new RadioSongPlayer(playlist);
+		radio.setVolume((byte) 15);
+		radio.setRandom(true);
+		radio.setRepeatMode(RepeatMode.ALL);
+		radio.setPlaying(true);
+		radio.playSong(new Random().nextInt(songs.size()));
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			NoteBlockAPI.stopPlaying(pll);
+			radio.addPlayer(pll);
+		}
+!!!499762.java!!!	onDisable() : void
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			NoteBlockAPI.stopPlaying(pll);
+		}

@@ -1,0 +1,20 @@
+class GameGui
+!!!342962.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		updateMenu();
+		gameMenu.open((Player)sender);
+		return false;
+!!!343090.java!!!	updateMenu() : void
+		gameMenu.getContent().clear();
+		gameMenu.getSubMenus().clear();
+		for (Game g : Game.all) {
+			if (!(g instanceof HGGames)) {
+				continue;
+			}
+			HGGames game = (HGGames) g;
+			ItemStack it = game.getItem();
+			gameMenu.addItem(it);
+			gameMenu.addSub(it, game.getMenu());
+		}

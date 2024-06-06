@@ -1,0 +1,782 @@
+format 224
+"popup" // quizzy::ihm::popup
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/btssn2/Documents/Hillion/MP/MP2/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/ihm/popup/"
+  java_package "fr.hillionj.quizzy.ihm.popup"
+  classview 151346 "popup"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 151986 "PopupAucunParticipant"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 157746 // <generalisation>
+	relation 157746 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 157746 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      classrelation 157874 // session (<unidirectional association>)
+	relation 157874 --->
+	  a role_name "session" const_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 157874 // session (<unidirectional association>)
+	  b parent class_ref 148402 // Session
+      end
+
+      operation 213042 "PopupAucunParticipant"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 213170 "PopupAucunParticipant"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 213298 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 213426 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 152242 "PopupCredits"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158002 // <generalisation>
+	relation 158002 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 158002 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      operation 213554 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 213682 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 152370 "PopupCreerParticipant"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158130 // <generalisation>
+	relation 158130 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 158130 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      operation 213810 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 213938 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 152498 "PopupFinSession"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158258 // <generalisation>
+	relation 158258 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 158258 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      classrelation 158386 // session (<unidirectional association>)
+	relation 158386 --->
+	  a role_name "session" const_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158386 // session (<unidirectional association>)
+	  b parent class_ref 148402 // Session
+      end
+
+      operation 214066 "PopupFinSession"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 214194 "PopupFinSession"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 214322 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 214450 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 152626 "PopupHistorique"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158514 // <generalisation>
+	relation 158514 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 158514 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      attribute 163762 "activite"
+	private explicit_type "AppCompatActivity"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 158642 // historique (<unidirectional association>)
+	relation 158642 --->
+	  a role_name "historique" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158642 // historique (<unidirectional association>)
+	  b parent class_ref 152754 // ListViewHistorique
+      end
+
+      operation 214578 "PopupHistorique"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 214706 "PopupHistorique"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "activite" explicit_type "AppCompatActivity"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 214834 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 214962 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 215090 "mettreAjourHistorique"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 152882 "PopupNonConfigurer"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 158770 // <generalisation>
+	relation 158770 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 158770 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      classrelation 158898 // session (<unidirectional association>)
+	relation 158898 --->
+	  a role_name "session" const_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158898 // session (<unidirectional association>)
+	  b parent class_ref 148402 // Session
+      end
+
+      classrelation 159026 // peripherique (<unidirectional association>)
+	relation 159026 --->
+	  a role_name "peripherique" init_value " null" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 159026 // peripherique (<unidirectional association>)
+	  b parent class_ref 148786 // Peripherique
+      end
+
+      operation 215218 "PopupNonConfigurer"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 215346 "PopupNonConfigurer"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 215474 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 215602 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 215730 "getPeripherique"
+	private return_type class_ref 148786 // Peripherique
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 153010 "PopupNonConnecte"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 159154 // <generalisation>
+	relation 159154 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 159154 // <generalisation>
+	  b parent class_ref 152114 // DialogFragment
+      end
+
+      classrelation 159282 // session (<unidirectional association>)
+	relation 159282 --->
+	  a role_name "session" const_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 159282 // session (<unidirectional association>)
+	  b parent class_ref 148402 // Session
+      end
+
+      classrelation 159410 // peripherique (<unidirectional association>)
+	relation 159410 --->
+	  a role_name "peripherique" init_value " null" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 159410 // peripherique (<unidirectional association>)
+	  b parent class_ref 148786 // Peripherique
+      end
+
+      attribute 163890 "estAfficher"
+	private explicit_type "boolean"
+	init_value " true"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164018 "btn_connecter"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 215858 "PopupNonConnecte"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 215986 "PopupNonConnecte"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 216114 "onCreateView"
+	public explicit_return_type "View"
+	nparams 3
+	  param inout name "inflater" explicit_type "LayoutInflater"
+	  param inout name "container" explicit_type "ViewGroup"
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, @Nullable ${t1} ${p1}, @Nullable ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Nullable
+@Override
+"
+	
+	
+	
+      end
+
+      operation 216242 "initialiserVue"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "vue" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 216370 "mettreAjourEtatBoutons"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 216498 "onDismiss"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "dialog" explicit_type "DialogInterface"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 216626 "getPeripherique"
+	private return_type class_ref 148786 // Peripherique
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 143922 "popup"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 149554 "PopupAucunParticipant"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 149682 "PopupCredits"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 149810 "PopupCreerParticipant"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 149938 "PopupFinSession"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150066 "PopupHistorique"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150194 "PopupNonConfigurer"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150322 "PopupNonConnecte"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+  end
+end

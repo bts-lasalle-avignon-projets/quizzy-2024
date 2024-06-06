@@ -1,0 +1,19 @@
+class QuitCommand
+!!!343474.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		quit((Player) sender, true);
+		return true;
+!!!343602.java!!!	quit(inout p : Player, inout message : boolean) : boolean
+		if (Game.from(p, HGGames.class) == null) {
+			if (message) {
+				p.sendMessage("§8> §cVous n'êtes pas en partie");
+			}
+			return false;
+		}
+		Join.goSpawn(p);
+		if (message) {
+			p.sendMessage("§8> §aVous avez quitté la partie");
+		}
+		return true;

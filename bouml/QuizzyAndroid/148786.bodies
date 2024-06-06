@@ -1,0 +1,227 @@
+class Peripherique
+!!!193458.java!!!	demarrerThread() : void
+        new Thread() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void run()
+            {
+                try
+                {
+                    socket.connect();
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_CONNEXION_BLUETOOTH);
+                    tReception.start();
+                }
+                catch(IOException e)
+                {
+                    Log.e("QUIZZY_" + this.getClass().getName(), "connecter() erreur connect socket", e);
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_ERREUR_CONNEXION_BLUETOOTH);
+                }
+            }
+        }.start();
+!!!193586.java!!!	seConnecte() : boolean
+        return seConnecte;
+!!!193714.java!!!	setSeConnecte(inout seConnecte : boolean) : void
+        this.seConnecte = seConnecte;
+!!!193842.java!!!	envoyerCodeAuHandler(in what : int, inout obj : Object) : void
+        Message msg = Message.obtain();
+        msg.what    = what;
+        msg.obj     = obj;
+        msg.arg1 = indicePeripherique;
+        gestionnaireBluetooth.getHandler().sendMessage(msg);
+!!!193970.java!!!	initialiserReception() : void
+        if(socket != null)
+        {
+            tReception = new TReception();
+        }
+!!!194098.java!!!	initialiserSocket() : void
+        try
+        {
+            socket = device.createRfcommSocketToServiceRecord(
+                    UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            receiveStream = socket.getInputStream();
+            sendStream    = socket.getOutputStream();
+        }
+        catch(IOException e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), "initialiserSocket() erreur init socket", e);
+            socket = null;
+            seConnecte = false;
+            IHM.getIHM().mettreAjourListeParticipants();
+        }
+!!!194226.java!!!	Peripherique(inout gestionnaireBluetooth : GestionnaireBluetooth, inout device : BluetoothDevice, in indicePeripherique : int)
+        this.gestionnaireBluetooth = gestionnaireBluetooth;
+        this.device             = device;
+        this.indicePeripherique = indicePeripherique;
+        this.nom     = device.getName();
+        this.adresseMAC = device.getAddress();
+!!!194354.java!!!	getNom() : String
+        return nom;
+!!!194482.java!!!	getAdresse() : String
+        return adresseMAC;
+!!!194610.java!!!	getIndicePeripherique() : int
+        return indicePeripherique;
+!!!194738.java!!!	estConnecte() : boolean
+        return socket != null && socket.isConnected();
+!!!194866.java!!!	connecter() : void
+        seConnecte = true;
+        IHM.getIHM().mettreAjourListeParticipants();
+        initialiserSocket();
+        initialiserReception();
+        demarrerThread();
+!!!194994.java!!!	envoyerCodeAuHandler(in what : int) : void
+        envoyerCodeAuHandler(what, null);
+!!!195122.java!!!	deconnecter() : boolean
+        return deconnecter(true);
+!!!195250.java!!!	deconnecter(inout estPrevue : boolean) : boolean
+        IHM.getIHM().mettreAjourListeParticipants();
+        try
+        {
+            tReception.arreter();
+            socket.close();
+            envoyerCodeAuHandler(gestionnaireBluetooth.CODE_DECONNEXION_BLUETOOTH, estPrevue);
+            return true;
+        }
+        catch(IOException e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), "deconnecter() erreur close socket", e);
+            return false;
+        }
+!!!195378.java!!!	envoyer(in data : String) : void
+        envoyer(data, true);
+!!!195506.java!!!	envoyer(in data : String, inout afficherException : boolean) : void
+        if(socket == null)
+            return;
+        try
+        {
+            heureDerniereEmission = System.currentTimeMillis();
+            sendStream.write(data.getBytes());
+            sendStream.flush();
+        }
+        catch(IOException e)
+        {
+            if (afficherException) {
+                Log.e("QUIZZY_" + this.getClass().getName(), "envoyer() erreur send socket", e);
+            }
+            signalerInterruption();
+        }
+!!!195634.java!!!	verifierInterruption() : void
+        if (estConnecte() && System.currentTimeMillis() - heureDerniereEmission > 1000) {
+            VerifierConnexion testConnexion = (VerifierConnexion) Protocole.getProtocole(TypeProtocole.TEST_CONNEXION);
+            testConnexion.genererTrame();
+            envoyer(testConnexion.getTrame(), false);
+        }
+!!!195762.java!!!	signalerInterruption() : void
+        deconnecter(false);
+!!!518962.java!!!	demarrerThread() : void
+        new Thread() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void run()
+            {
+                try
+                {
+                    socket.connect();
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_CONNEXION_BLUETOOTH);
+                    tReception.start();
+                }
+                catch(IOException e)
+                {
+                    Log.e("QUIZZY_" + this.getClass().getName(), "connecter() erreur connect socket", e);
+                    envoyerCodeAuHandler(gestionnaireBluetooth.CODE_ERREUR_CONNEXION_BLUETOOTH);
+                }
+            }
+        }.start();
+!!!519090.java!!!	seConnecte() : boolean
+        return seConnecte;
+!!!519218.java!!!	setSeConnecte(inout seConnecte : boolean) : void
+        this.seConnecte = seConnecte;
+!!!519346.java!!!	envoyerCodeAuHandler(in what : int, inout obj : Object) : void
+        Message msg = Message.obtain();
+        msg.what    = what;
+        msg.obj     = obj;
+        msg.arg1 = indicePeripherique;
+        gestionnaireBluetooth.getHandler().sendMessage(msg);
+!!!519474.java!!!	initialiserReception() : void
+        if(socket != null)
+        {
+            tReception = new TReception();
+        }
+!!!519602.java!!!	initialiserSocket() : void
+        try
+        {
+            socket = device.createRfcommSocketToServiceRecord(
+                    UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            receiveStream = socket.getInputStream();
+            sendStream    = socket.getOutputStream();
+        }
+        catch(IOException e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), "initialiserSocket() erreur init socket", e);
+            socket = null;
+            seConnecte = false;
+            IHM.getIHM().mettreAjourListeParticipants();
+        }
+!!!519730.java!!!	Peripherique(inout gestionnaireBluetooth : GestionnaireBluetooth, inout device : BluetoothDevice, in indicePeripherique : int)
+        this.gestionnaireBluetooth = gestionnaireBluetooth;
+        this.device             = device;
+        this.indicePeripherique = indicePeripherique;
+        this.nom     = device.getName();
+        this.adresseMAC = device.getAddress();
+!!!519858.java!!!	getNom() : String
+        return nom;
+!!!519986.java!!!	getAdresse() : String
+        return adresseMAC;
+!!!520114.java!!!	getIndicePeripherique() : int
+        return indicePeripherique;
+!!!520242.java!!!	estConnecte() : boolean
+        return socket != null && socket.isConnected();
+!!!520370.java!!!	connecter() : void
+        seConnecte = true;
+        IHM.getIHM().mettreAjourListeParticipants();
+        initialiserSocket();
+        initialiserReception();
+        demarrerThread();
+!!!520498.java!!!	envoyerCodeAuHandler(in what : int) : void
+        envoyerCodeAuHandler(what, null);
+!!!520626.java!!!	deconnecter() : boolean
+        return deconnecter(true);
+!!!520754.java!!!	deconnecter(inout estPrevue : boolean) : boolean
+        IHM.getIHM().mettreAjourListeParticipants();
+        try
+        {
+            tReception.arreter();
+            socket.close();
+            envoyerCodeAuHandler(gestionnaireBluetooth.CODE_DECONNEXION_BLUETOOTH, estPrevue);
+            return true;
+        }
+        catch(IOException e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), "deconnecter() erreur close socket", e);
+            return false;
+        }
+!!!520882.java!!!	envoyer(in data : String) : void
+        envoyer(data, true);
+!!!521010.java!!!	envoyer(in data : String, inout afficherException : boolean) : void
+        if(socket == null)
+            return;
+        try
+        {
+            heureDerniereEmission = System.currentTimeMillis();
+            sendStream.write(data.getBytes());
+            sendStream.flush();
+        }
+        catch(IOException e)
+        {
+            if (afficherException) {
+                Log.e("QUIZZY_" + this.getClass().getName(), "envoyer() erreur send socket", e);
+            }
+            signalerInterruption();
+        }
+!!!521138.java!!!	verifierInterruption() : void
+        if (estConnecte() && System.currentTimeMillis() - heureDerniereEmission > 1000) {
+            VerifierConnexion testConnexion = (VerifierConnexion) Protocole.getProtocole(TypeProtocole.TEST_CONNEXION);
+            testConnexion.genererTrame();
+            envoyer(testConnexion.getTrame(), false);
+        }
+!!!521266.java!!!	signalerInterruption() : void
+        deconnecter(false);

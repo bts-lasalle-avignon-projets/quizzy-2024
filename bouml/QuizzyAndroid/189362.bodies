@@ -1,0 +1,26 @@
+class Dog
+!!!448306.java!!!	Dog(inout owner : Player, inout color : DyeColor, in id : int)
+		super(owner, EntityType.WOLF, "Chien de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+		
+		this.color = color;
+!!!448434.java!!!	Dog(inout owner : Player, inout color : DyeColor)
+		super(owner, EntityType.WOLF, "Chien de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+		
+		this.color = color;
+!!!448562.java!!!	getEntity() : org.bukkit.entity.Wolf
+		return (org.bukkit.entity.Wolf) entity;
+!!!448690.java!!!	getColor() : DyeColor
+		return color;
+!!!448818.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setAngry(false);
+		if (color != null) {
+			getEntity().setCollarColor(color);
+		}
+		getEntity().setTamed(true);
+		getEntity().setOwner(getOwner());
+		getEntity().setSitting(false);
+!!!448946.java!!!	clone(inout player : Player) : Dog
+		return new Dog(player, color, getID());

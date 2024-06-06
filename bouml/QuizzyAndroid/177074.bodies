@@ -1,0 +1,60 @@
+class Game
+!!!358322.java!!!	Game(in name : String)
+		this.name = name;
+		all.add(this);
+!!!358450.java!!!	getNewWorldName(in prefix : String, in number : int, in numberSize : int) : String
+		String nameLevel = number + "";
+		int levelSize = nameLevel.length();
+		for (int i = 0; i < numberSize - levelSize; i++) {
+			nameLevel = '0' + nameLevel;
+		}
+		return prefix + nameLevel;
+!!!358578.java!!!	getWorld() : World
+		return world;
+!!!358706.java!!!	setWorld(inout world : World) : void
+		this.world = world;
+!!!358834.java!!!	getName() : String
+		return name;
+!!!358962.java!!!	getPlayers() : List<Player>
+		return players;
+!!!359346.java!!!	getState() : Game::State
+		return state;
+!!!359474.java!!!	from(inout p : Player, inout class_ : Class<? extends Game>) : Game
+		for (Game game : all) {
+	        if (!class_.isInstance(game)) {
+	        	continue;
+	        }
+			if (game.players.contains(p)) {
+				return game;
+			}
+		}
+		return null;
+!!!359602.java!!!	from(inout sign : Sign, inout class_ : Class<? extends Game>) : Game
+	    for (Game game : all) {
+	        if (!class_.isInstance(game)) {
+	        	continue;
+	        }
+	        if (game instanceof SignModule && ((SignModule) game).getSign().equals(sign)) {
+                return game;
+	        }
+	    }
+	    return null;
+!!!359730.java!!!	from(inout world : World, inout class_ : Class<? extends Game>) : Game
+		for (Game game : all) {
+	        if (!class_.isInstance(game)) {
+	        	continue;
+	        }
+			if (game.world != null && game.world.equals(world)) {
+				return game;
+			}
+		}
+		return null;
+!!!359858.java!!!	leavePlayer(inout p : Player) : void
+		for (Game game : all) {
+			if (game.players.contains(p)) {
+				game.players.remove(p);
+			}
+			if (game.spectators.contains(p)) {
+				game.spectators.remove(p);
+			}
+		}

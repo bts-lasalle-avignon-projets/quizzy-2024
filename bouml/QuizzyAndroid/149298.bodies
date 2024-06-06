@@ -1,0 +1,3 @@
+class Ecran
+!!!227634.java!!!	Ecran(inout peripherique : Peripherique)
+        setPeripherique(peripherique);

@@ -1,0 +1,27 @@
+class SQLRegister
+!!!484402.java!!!	SQLRegister(in name : String, inout type : ConnectSQL::TableType, in position : int)
+			setName(name);
+			setType(type);
+			setPosition(position);
+!!!484530.java!!!	getName() : String
+			return name;
+!!!484658.java!!!	setName(in name : String) : void
+			this.name = name;
+!!!484786.java!!!	getType() : ConnectSQL::TableType
+			return type;
+!!!484914.java!!!	setType(inout type : ConnectSQL::TableType) : void
+			this.type = type;
+!!!485042.java!!!	toString() : String
+			String type = null;
+			if (getType() == TableType.STRING) {
+				type = "VARCHAR";
+			} else if (getType() == TableType.INT) {
+				type = "INT";
+			} else {
+				return null;
+			}
+			return getName() + " " + type + "(100)";
+!!!485170.java!!!	getPosition() : int
+			return position;
+!!!485298.java!!!	setPosition(in position : int) : void
+			this.position = position;

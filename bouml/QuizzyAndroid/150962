@@ -1,0 +1,133 @@
+format 224
+"team" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcbattlesheep::team
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_BattleSheep_II/src/fr/red/lcbattlesheep/team/"
+  java_package "fr.red.lcbattlesheep.team"
+  classview 155058 "team"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 172850 "InteractTeam"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 183858 // <realization>
+	relation 183858 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 183858 // <realization>
+	  b parent class_ref 166322 // Listener
+      end
+
+      operation 324018 "onInteract"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "PlayerInteractEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 324146 "onDamageBy"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "EntityDamageByEntityEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 148018 "team"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 168242 "InteractTeam"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import fr.red.lcbattlesheep.utils.GAME;
+import fr.red.lcbattlesheep.utils.GAME.State;
+import fr.red.lcbattlesheep.utils.GAME.Team;
+${definition}"
+      associated_elems
+	class_ref 172850 // InteractTeam
+      end
+    end
+  end
+end

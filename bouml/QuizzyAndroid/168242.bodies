@@ -1,0 +1,31 @@
+class EventCancelled
+!!!295346.java!!!	a(inout w : World) : boolean
+		return w.getName().equalsIgnoreCase("lobby") || w.getName().equalsIgnoreCase("wait");
+!!!295474.java!!!	OnBreak(inout e : BlockBreakEvent) : void
+		if (a(e.getPlayer().getWorld())) {
+			e.setCancelled(true);
+		}
+!!!295602.java!!!	OnDamage(inout e : EntityDamageEvent) : void
+		if (a(e.getEntity().getWorld())) {
+			e.setCancelled(true);
+		}
+!!!295730.java!!!	OnPlace(inout e : BlockPlaceEvent) : void
+		if (a(e.getPlayer().getWorld())) {
+			e.setCancelled(true);
+		}
+!!!295858.java!!!	OnWeather(inout e : WeatherChangeEvent) : void
+		if (a(e.getWorld())) {
+			e.setCancelled(true);
+		}
+!!!295986.java!!!	OnFood(inout e : FoodLevelChangeEvent) : void
+		if (a(e.getEntity().getWorld())) {
+			e.setCancelled(true);
+		}
+!!!296114.java!!!	OnDrop(inout e : PlayerDropItemEvent) : void
+		if (a(e.getPlayer().getWorld())) {
+			e.setCancelled(true);
+		}
+!!!296242.java!!!	OnPickup(inout e : PlayerPickupItemEvent) : void
+		if (a(e.getPlayer().getWorld())) {
+			e.setCancelled(true);
+		}

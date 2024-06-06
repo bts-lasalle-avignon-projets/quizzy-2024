@@ -1,0 +1,13 @@
+class CaveSpider
+!!!446002.java!!!	CaveSpider(inout owner : Player, in id : int)
+		super(owner, EntityType.CAVE_SPIDER, "Araignée de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!446130.java!!!	CaveSpider(inout owner : Player)
+		super(owner, EntityType.CAVE_SPIDER, "Araignée de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!446258.java!!!	getEntity() : org.bukkit.entity.CaveSpider
+		return (org.bukkit.entity.CaveSpider) entity;
+!!!446386.java!!!	spawn() : void
+		super.spawn();
+!!!446514.java!!!	clone(inout player : Player) : CaveSpider
+		return new CaveSpider(player, getID());

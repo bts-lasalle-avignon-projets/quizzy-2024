@@ -1,0 +1,31 @@
+class Agui
+!!!284082.java!!!	Agui()
+		Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
+!!!284210.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		Player p = (Player) sender;
+		if (!p.hasPermission("life.admin")) {
+			return false;
+		}
+		p.openInventory(main);
+		return false;
+!!!284338.java!!!	getMain() : Inventory
+		Inventory inv = Bukkit.createInventory(null, 9, "Menu Administrateur");
+		inv.addItem(new ItemBuilder(Material.WOOL, (byte) 14).name("Moutons public"));
+		return inv;
+!!!284466.java!!!	OnInteract(inout e : InventoryClickEvent) : void
+		Player p = (Player) e.getWhoClicked();
+		String st = e.getCurrentItem() != null && e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().hasDisplayName() ? e.getCurrentItem().getItemMeta().getDisplayName() : null;
+		if (st == null) {
+			return;
+		}
+		e.setCancelled(true);
+		if (st.equalsIgnoreCase("Moutons public")) {
+			IPage.IPageManager.openFirstPage(p, sheep);
+		} else if (st.equalsIgnoreCase("Moutons privé")) {
+			IPage.IPageManager.openFirstPage(p, sheep);
+		} else {
+			e.setCancelled(false);
+		}

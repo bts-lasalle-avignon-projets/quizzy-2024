@@ -1,0 +1,9 @@
+class Stay
+!!!319410.java!!!	getAttackCount() : int
+		return 0;
+!!!319538.java!!!	getAwaitEnable() : int
+		return 0;
+!!!319666.java!!!	getAwaitDisable() : int
+		return 0;
+!!!319794.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.STAY;

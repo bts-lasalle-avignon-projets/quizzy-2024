@@ -1,0 +1,21 @@
+class PetRemoveEvent
+!!!478258.java!!!	PetRemoveEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+!!!478386.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!478514.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!478642.java!!!	getPlayer() : Player
+		return player;
+!!!478770.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!478898.java!!!	getEntity() : Entity
+		return entity;
+!!!479026.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!479154.java!!!	getPet() : CraftPet
+		return pet;
+!!!479282.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;

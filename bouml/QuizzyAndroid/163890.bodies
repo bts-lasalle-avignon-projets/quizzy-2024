@@ -1,0 +1,36 @@
+class CustomListPreferenceBinding
+!!!271154.java!!!	CustomListPreferenceBinding(inout rootView : LinearLayout, inout summary : TextView, inout title : TextView)
+    this.rootView = rootView;
+    this.summary = summary;
+    this.title = title;
+!!!271282.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!271410.java!!!	inflate(inout inflater : LayoutInflater) : CustomListPreferenceBinding
+    return inflate(inflater, null, false);
+!!!271538.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : CustomListPreferenceBinding
+    View root = inflater.inflate(R.layout.custom_list_preference, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!271666.java!!!	bind(inout rootView : View) : CustomListPreferenceBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = android.R.id.summary;
+      TextView summary = ViewBindings.findChildViewById(rootView, id);
+      if (summary == null) {
+        break missingId;
+      }
+
+      id = android.R.id.title;
+      TextView title = ViewBindings.findChildViewById(rootView, id);
+      if (title == null) {
+        break missingId;
+      }
+
+      return new CustomListPreferenceBinding((LinearLayout) rootView, summary, title);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

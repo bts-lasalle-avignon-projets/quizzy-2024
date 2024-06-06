@@ -1,0 +1,65 @@
+class PopUpFinSessionBinding
+!!!276914.java!!!	PopUpFinSessionBinding(inout rootView : LinearLayout, inout btnAnnuler : Button, inout btnRelancer : Button, inout btnSauvegarder : Button, inout imageView : ImageView, inout textView2 : TextView, inout textView3 : TextView)
+    this.rootView = rootView;
+    this.btnAnnuler = btnAnnuler;
+    this.btnRelancer = btnRelancer;
+    this.btnSauvegarder = btnSauvegarder;
+    this.imageView = imageView;
+    this.textView2 = textView2;
+    this.textView3 = textView3;
+!!!277042.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!277170.java!!!	inflate(inout inflater : LayoutInflater) : PopUpFinSessionBinding
+    return inflate(inflater, null, false);
+!!!277298.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : PopUpFinSessionBinding
+    View root = inflater.inflate(R.layout.pop_up_fin_session, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!277426.java!!!	bind(inout rootView : View) : PopUpFinSessionBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_annuler;
+      Button btnAnnuler = ViewBindings.findChildViewById(rootView, id);
+      if (btnAnnuler == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_relancer;
+      Button btnRelancer = ViewBindings.findChildViewById(rootView, id);
+      if (btnRelancer == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_sauvegarder;
+      Button btnSauvegarder = ViewBindings.findChildViewById(rootView, id);
+      if (btnSauvegarder == null) {
+        break missingId;
+      }
+
+      id = R.id.imageView;
+      ImageView imageView = ViewBindings.findChildViewById(rootView, id);
+      if (imageView == null) {
+        break missingId;
+      }
+
+      id = R.id.textView2;
+      TextView textView2 = ViewBindings.findChildViewById(rootView, id);
+      if (textView2 == null) {
+        break missingId;
+      }
+
+      id = R.id.textView3;
+      TextView textView3 = ViewBindings.findChildViewById(rootView, id);
+      if (textView3 == null) {
+        break missingId;
+      }
+
+      return new PopUpFinSessionBinding((LinearLayout) rootView, btnAnnuler, btnRelancer,
+          btnSauvegarder, imageView, textView2, textView3);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

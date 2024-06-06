@@ -1,0 +1,16 @@
+class PetInventoryOpenEvent
+!!!472370.java!!!	PetInventoryOpenEvent(inout player : Player)
+		setPlayer(player);
+		setCancelled(false);
+!!!472498.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!472626.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!472754.java!!!	getPlayer() : Player
+		return player;
+!!!472882.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!473010.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!473138.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;

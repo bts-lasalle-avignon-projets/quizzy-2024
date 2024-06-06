@@ -1,0 +1,681 @@
+format 224
+"vues" // quizzy::ihm::vues
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/btssn2/Documents/Hillion/MP/MP2/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/ihm/vues/"
+  java_package "fr.hillionj.quizzy.ihm.vues"
+  classview 151602 "vues"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 153138 "VueHistorique"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 159538 // <generalisation>
+	relation 159538 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 159538 // <generalisation>
+	  b parent class_ref 147506 // AppCompatActivity
+      end
+
+      operation 216754 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@Nullable ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 153266 "VueParametres"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 159666 // <generalisation>
+	relation 159666 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 159666 // <generalisation>
+	  b parent class_ref 147506 // AppCompatActivity
+      end
+
+      attribute 164146 "btn_lancer"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 216882 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 217010 "onRestart"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      class 153394 "SettingsFragment"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 159794 // <generalisation>
+	  relation 159794 ---|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 159794 // <generalisation>
+	    b parent class_ref 153522 // PreferenceFragmentCompat
+	end
+
+	attribute 164274 "activite"
+	  const_attribute private explicit_type "AppCompatActivity"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 217138 "SettingsFragment"
+	  public explicit_return_type ""
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 217266 "SettingsFragment"
+	  public explicit_return_type ""
+	  nparams 1
+	    param inout name "activite" explicit_type "AppCompatActivity"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 217394 "onCreatePreferences"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param inout name "savedInstanceState" explicit_type "Bundle"
+	    param in name "rootKey" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	end
+      end
+    end
+
+    class 153650 "VueParticipants"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 159922 // <generalisation>
+	relation 159922 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 159922 // <generalisation>
+	  b parent class_ref 147506 // AppCompatActivity
+      end
+
+      classrelation 160050 // liste_participants (<unidirectional association>)
+	relation 160050 --->
+	  a role_name "liste_participants" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160050 // liste_participants (<unidirectional association>)
+	  b parent class_ref 153778 // ListViewPeripheriques
+      end
+
+      classrelation 160178 // spinner_participants (<unidirectional association>)
+	relation 160178 --->
+	  a role_name "spinner_participants" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160178 // spinner_participants (<unidirectional association>)
+	  b parent class_ref 153906 // SpinnerParticipants
+      end
+
+      classrelation 160306 // spinner_peripheriques (<unidirectional association>)
+	relation 160306 --->
+	  a role_name "spinner_peripheriques" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160306 // spinner_peripheriques (<unidirectional association>)
+	  b parent class_ref 154034 // SpinnerPeripheriques
+      end
+
+      attribute 164402 "btn_associer"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164530 "btn_creer_participant"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 217522 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 217650 "onRestart"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 217778 "initialiserAttributs"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 217906 "initialiserAssociation"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 218034 "mettreAjourListeParticipants"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 218162 "mettreAjourSpinnerParticipants"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 154162 "VueSession"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 160434 // <generalisation>
+	relation 160434 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 160434 // <generalisation>
+	  b parent class_ref 147506 // AppCompatActivity
+      end
+
+      classrelation 160562 // listeParticipants (<unidirectional association>)
+	relation 160562 --->
+	  a role_name "listeParticipants" init_value " null" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160562 // listeParticipants (<unidirectional association>)
+	  b parent class_ref 154290 // ListViewParticipants
+      end
+
+      classrelation 160690 // listeEcrans (<unidirectional association>)
+	relation 160690 --->
+	  a role_name "listeEcrans" init_value " null" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160690 // listeEcrans (<unidirectional association>)
+	  b parent class_ref 154418 // ListViewEcran
+      end
+
+      classrelation 160818 // session (<unidirectional association>)
+	relation 160818 --->
+	  a role_name "session" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 160818 // session (<unidirectional association>)
+	  b parent class_ref 148402 // Session
+      end
+
+      attribute 164658 "question"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164786 "chronometre"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164914 "progression"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165042 "propositions"
+	private explicit_type "TextView"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165170 "btn_stopper"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165298 "btn_reinitialiser"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165426 "btn_pause"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165554 "btn_suivant"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165682 "btn_precedent"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165810 "format"
+	private explicit_type "DecimalFormat"
+	init_value " new DecimalFormat(\"00.00\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 218290 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 218418 "onRestart"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 218546 "mettreAjourListeParticipants"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 218674 "afficherInterface"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 218802 "afficherBoutons"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 218930 "afficherChrono"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 219058 "setSession"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 144050 "vues"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 150450 "VueHistorique"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150578 "VueParametres"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150706 "VueParticipants"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+
+    artifact 150834 "VueSession"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+  end
+end

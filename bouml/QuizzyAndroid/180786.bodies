@@ -1,0 +1,31 @@
+class InjectionManager
+!!!387378.java!!!	init() : void
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			inject(pll);
+		}
+		Bukkit.getPluginManager().registerEvents(new InjectionManager(), LangManager.getInstance());
+!!!387506.java!!!	onJoin(inout event : PlayerJoinEvent) : void
+		Player player = event.getPlayer();
+		inject(player);
+!!!387634.java!!!	inject(inout player : Player) : void
+		EntityPlayer entityPlayer = ((CraftPlayer)player).getHandle();
+		
+		PlayerConnection playerConnection = entityPlayer.playerConnection;
+		
+		NetworkManager networkManager = null;
+		
+		try {
+			Field field = PlayerConnection.class.getDeclaredField("networkManager");
+			field.setAccessible(true);
+			networkManager = (NetworkManager) field.get(playerConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Channel channel = networkManager.channel;
+		
+		if (channel.pipeline().get("LifeHandler")!=null) {
+			channel.pipeline().remove("LifeHandler");
+		}
+		
+		channel.pipeline().addBefore("packet_handler", "LifeHandler", new PacketHandler(player));

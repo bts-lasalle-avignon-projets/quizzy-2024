@@ -1,0 +1,109 @@
+class Protocole
+!!!249394.java!!!	traiterTrame(in trame : String) : Protocole
+        if(trame == null)
+        {
+            return null;
+        }
+        String        indiceTypeProtocole = trame.split(";")[0].replace("$", "").replace("\n", "");
+        TypeProtocole type                = TypeProtocole.getType(indiceTypeProtocole);
+        if(type == null)
+        {
+            return null;
+        }
+        return type.getProtocole(trame);
+!!!249522.java!!!	getProtocole(inout type : TypeProtocole) : Protocole
+        return type.getProtocole(null);
+!!!249906.java!!!	getTrame() : String
+        return trame;
+!!!250034.java!!!	setTrame(in trame : String) : void
+        this.trame = trame;
+!!!250162.java!!!	genererTrame(inout  : String...contenu) : void
+        if(!estValide(false, contenu))
+        {
+            setTrame(null);
+            return;
+        }
+        StringBuilder sb = new StringBuilder("$" + getType().getIndiceType());
+        if(contenu != null)
+        {
+            for(String st: contenu)
+            {
+                sb.append(";" + st);
+            }
+        }
+        sb.append("\n");
+        setTrame(sb.toString());
+!!!250290.java!!!	envoyer(inout receveursProtocoles : List<? extends ReceveurProtocole>) : void
+        for(ReceveurProtocole receveur: receveursProtocoles)
+        {
+            envoyer(receveur);
+        }
+!!!250418.java!!!	envoyer(inout receveur : ReceveurProtocole) : void
+        if(receveur.getPeripherique() == null)
+        {
+            Log.i(TAG,
+                  "(quizzy-e1) Envoi du Protocole " + getClass().getSimpleName() + " : " +
+                    getTrame().replace("\n", "\\n"));
+        }
+        else
+        {
+            Log.v(TAG,
+                  "(" + receveur.getPeripherique().getNom() + ") Envoi du Protocole " +
+                    getClass().getSimpleName() + " : " + getTrame().replace("\n", "\\n"));
+            receveur.getPeripherique().envoyer(getTrame());
+        }
+!!!250546.java!!!	estValide(inout trameComplete : boolean, inout  : String...contenu) : boolean
+        int nombreArgumentsRequis = getFormat().split(";").length;
+        if(nombreArgumentsRequis == 1 && contenu == null)
+        {
+            return true;
+        }
+        int nombreArgumentsActuel = contenu == null ? 0 : contenu.length;
+        if(!trameComplete)
+        {
+            nombreArgumentsRequis--;
+        }
+        return nombreArgumentsRequis == nombreArgumentsActuel;
+!!!250674.java!!!	estValide(inout  : String...contenu) : boolean
+        return estValide(true, contenu);
+!!!250802.java!!!	extraireDonnees() : Map<String, String>
+        if(!estValide(getTrame().split(";")))
+        {
+            return null;
+        }
+        Map<String, String> donnees = new HashMap<>();
+        String[] cles               = getFormat().replace("$", "").replace("\n", "").split(";");
+        String[] arguments          = getTrame().replace("$", "").replace("\n", "").split(";");
+        for(int i = 1; i < arguments.length; i++)
+        {
+            donnees.put(cles[i], arguments[i]);
+        }
+        return donnees;
+!!!250930.java!!!	toInt(in string : String) : int
+        int integer = 0;
+        try
+        {
+            if(string != null)
+            {
+                integer = Integer.parseInt(string);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return integer;
+!!!251058.java!!!	toLong(in string : String) : long
+        long longInt = 0;
+        try
+        {
+            if(string != null)
+            {
+                longInt = Long.parseLong(string);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return longInt;

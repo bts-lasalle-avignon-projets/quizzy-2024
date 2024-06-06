@@ -1,0 +1,70 @@
+class CraftPet
+!!!487474.java!!!	CraftPet(in ID : int, inout entity : EntityType, in name : String, inout follow : boolean, inout attack : boolean, inout color : DyeColor, inout cattype : Type, inout carrot : boolean, inout villager : boolean, in resetName : String)
+		setID(ID);
+		setType(entity);
+		setName(name);
+		setFollow(follow);
+		setAttack(attack);
+		setColor(color);
+		setCattype(cattype);
+		setResetName(resetName);
+		setCarrot(carrot);
+		setVillager(villager);
+!!!487602.java!!!	getType() : EntityType
+		return entity;
+!!!487730.java!!!	setType(inout entity : EntityType) : void
+		this.entity = entity;
+!!!487858.java!!!	isFollow() : boolean
+		return follow;
+!!!487986.java!!!	setFollow(inout follow : boolean) : void
+		this.follow = follow;
+!!!488114.java!!!	isAttack() : boolean
+		return attack;
+!!!488242.java!!!	setAttack(inout attack : boolean) : void
+		this.attack = attack;
+!!!488370.java!!!	getColor() : DyeColor
+		return color;
+!!!488498.java!!!	setColor(inout color : DyeColor) : void
+		this.color = color;
+!!!488626.java!!!	getResetName() : String
+		return resetName;
+!!!488754.java!!!	setResetName(in resetName : String) : void
+		this.resetName = resetName;
+!!!488882.java!!!	getName() : String
+		return name;
+!!!489010.java!!!	setName(in name : String) : void
+		this.name = name;
+!!!489138.java!!!	getCattype() : Type
+		return cattype;
+!!!489266.java!!!	setCattype(inout cattype : Type) : void
+		this.cattype = cattype;
+!!!489394.java!!!	isCarrot() : boolean
+		return carrot;
+!!!489522.java!!!	setCarrot(inout carrot : boolean) : void
+		this.carrot = carrot;
+!!!489650.java!!!	isVillager() : boolean
+		return villager;
+!!!489778.java!!!	setVillager(inout villager : boolean) : void
+		this.villager = villager;
+!!!489906.java!!!	getPetOfType(inout type : EntityType) : CraftPet
+		for (PetsRegister r : PetsRegister.getPets()) {
+			for (CraftPet p : r.getContents()) {
+				if (p.getType() == type) {
+					return p;
+				}
+			}
+		}
+		return null;
+!!!490034.java!!!	getPetOfID(in id : int) : CraftPet
+		for (PetsRegister r : PetsRegister.getPets()) {
+			for (CraftPet p : r.getContents()) {
+				if (p.getID() == id) {
+					return p;
+				}
+			}
+		}
+		return null;
+!!!490162.java!!!	getID() : int
+		return ID;
+!!!490290.java!!!	setID(in iD : int) : void
+		ID = iD;

@@ -1,0 +1,13 @@
+class EnregistrerResultat
+!!!209586.java!!!	EnregistrerResultat(in trame : String)
+        setTrame(trame);
+!!!209714.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION;RESULTAT\n";
+!!!209842.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENREGISTRER_RESULTAT;
+!!!209970.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!210098.java!!!	estReponseVraie() : boolean
+        return toInt(extraireDonnees().get("RESULTAT")) == 1;
+!!!210226.java!!!	genererTrame(in numeroQuestion : int, inout reponseVraie : boolean) : void
+        super.genererTrame(numeroQuestion + "", reponseVraie + "");

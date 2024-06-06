@@ -1,0 +1,13 @@
+class Bean
+!!!236978.java!!!	isBooleanProperty() : boolean
+        return booleanProperty;
+!!!237106.java!!!	setBooleanProperty(inout booleanProperty : boolean) : void
+        this.booleanProperty = booleanProperty;
+!!!237234.java!!!	getIntProperty() : int
+        return intProperty;
+!!!237362.java!!!	setIntProperty(in intProperty : int) : void
+        this.intProperty = intProperty;
+!!!237490.java!!!	getStringProperty() : String
+        return stringProperty;
+!!!237618.java!!!	setStringProperty(in stringProperty : String) : void
+        this.stringProperty = stringProperty;

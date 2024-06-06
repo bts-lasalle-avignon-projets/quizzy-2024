@@ -1,0 +1,59 @@
+class MapReplacer
+!!!336306.java!!!	MapReplacer(inout source : File, in target : String)
+			this.source = source;
+			this.target = target;
+!!!336434.java!!!	execute() : World
+			unloadWorld(Bukkit.getWorld(target));
+			deleteWorld(new File(target));
+			copyWorld(source, new File(target));
+			return loadWorld(target);
+!!!336562.java!!!	copyWorld(inout source : File, inout target : File) : void
+			try {
+				ArrayList<String> ignore = new ArrayList<>(Arrays.asList("uid.dat", "session.dat"));
+				if (!ignore.contains(source.getName())) {
+					if (source.isDirectory()) {
+						if (!target.exists())
+							target.mkdirs();
+						String[] files = source.list();
+						assert files != null;
+						for (String file : files) {
+							File srcFile = new File(source, file);
+							File destFile = new File(target, file);
+							copyWorld(srcFile, destFile);
+						}
+					} else {
+						InputStream in = new FileInputStream(source);
+						OutputStream out = new FileOutputStream(target);
+						byte[] buffer = new byte[1024];
+						int length;
+						while ((length = in.read(buffer)) > 0)
+							out.write(buffer, 0, length);
+						in.close();
+						out.close();
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+!!!336690.java!!!	deleteWorld(inout path : File) : void
+			if (path.exists()) {
+				File[] files = path.listFiles();
+				for (int i = 0; i < files.length; i++) {
+					if (files[i].isDirectory()) {
+						deleteWorld(files[i]);
+					} else {
+						files[i].delete();
+					}
+				}
+				path.delete();
+			}
+			
+!!!336818.java!!!	unloadWorld(inout world : World) : void
+			if (world != null) {
+				for (Player pll : world.getPlayers()) {
+					Join.Spawn(pll, false);
+				}
+				Bukkit.unloadWorld(world, false);
+			}
+!!!336946.java!!!	loadWorld(in name : String) : World
+			return name != null ? new WorldCreator(name).createWorld() : null;

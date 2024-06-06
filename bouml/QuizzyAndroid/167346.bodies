@@ -1,0 +1,48 @@
+class SQLAccess
+!!!289074.java!!!	SQLAccess(inout adress : SQL::SQLConnection, in table : String, in primarykey : String)
+			this.table = table;
+			this.primarykey = primarykey;
+			this.adress = adress;
+			this.methods = new Methods(adress, this);
+			columns.add(new Column(primarykey, null, 1, TableType.STRING));
+!!!289202.java!!!	addColumn(in name : String, in defaultkey : String) : void
+			columns.add(new Column(name, defaultkey, next, TableType.STRING));
+			next++;
+!!!289330.java!!!	addColumn(in name : String, in defaultkey : int) : void
+			columns.add(new Column(name, defaultkey, next, TableType.INT));
+			next++;
+!!!289458.java!!!	addColumn(in name : String, inout defaultkey : Blob) : void
+			columns.add(new Column(name, defaultkey, next, TableType.BLOB));
+			next++;
+!!!289586.java!!!	addColumn(in name : String, inout defaultkey : boolean) : void
+			columns.add(new Column(name, defaultkey, next, TableType.BOOLEAN));
+			next++;
+!!!289714.java!!!	addColumn(in name : String, inout type : SQL::TableType) : void
+			columns.add(new Column(name, null, next, type));
+			next++;
+!!!289842.java!!!	create() : void
+			list = "";
+			undefined = "";
+			formats = "";
+			for (int i = 0; i < columns.size(); i++) {
+				Column c = columns.get(i);
+				list += c.name;
+				undefined += "?";
+				formats += c.format();
+				if (i != columns.size() - 1) {
+					list += ",";
+					undefined += ",";
+					formats += ",";
+				}
+			}
+			try {
+				methods.createTable();
+				adress.when_tablecreation.run();
+			} catch (Exception e) {
+				adress.error = e.getMessage();
+				adress.when_errored.run();
+			}
+!!!289970.java!!!	getMethods() : SQL::Methods
+			return methods;
+!!!290098.java!!!	getConnection() : SQL::SQLConnection
+			return adress;

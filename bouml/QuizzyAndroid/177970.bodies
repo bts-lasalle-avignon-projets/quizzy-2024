@@ -1,0 +1,3 @@
+class BackupWorldModule
+!!!361906.java!!!	generateWorld(inout source : File, in target : String) : World
+		return new MapReplacer(source, target).execute();

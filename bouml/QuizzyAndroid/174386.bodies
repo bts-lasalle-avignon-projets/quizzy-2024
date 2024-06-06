@@ -1,0 +1,84 @@
+class Main
+!!!342322.java!!!	getInstance() : Main
+		return instance;
+!!!342450.java!!!	onEnable() : void
+		instance = this;
+		loadConfig();
+		CraftMenu.init(this);
+		Bukkit.getWorld("lobby").setStorm(false);
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Join(), this);
+		pm.registerEvents(new SignEvent(), this);
+		pm.registerEvents(new Cancelled(), this);
+		pm.registerEvents(new KitEvent(), this);
+		
+		getCommand("hub").setExecutor(new HubCommand());
+		getCommand("quit").setExecutor(new QuitCommand());
+		getCommand("ggui").setExecutor(new GameGui());
+		
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+		
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			Join.goSpawn(pll);
+		}
+		
+		for (Entity ent : Bukkit.getWorld("lobby").getEntities()) {
+			if (!(ent instanceof Player) && !(ent instanceof ArmorStand) && ent.getCustomName() == null) {
+				ent.remove();
+			}
+		}
+		
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				for (Game g : Game.all) {
+					if (!(g instanceof HGGames)) {
+						continue;
+					}
+					HGGames game = (HGGames)g;
+					game.reduceTimer();
+					if (game.getState() == State.WAITING) {
+						if (game.getTimer() == 0 && game.getPlayers().size() < min_players) {
+							game.resetTimer();
+						} else if (game.getTimer() > 60 && game.getPlayers().size() >= min_players) {
+							game.setTimer(60);
+						} else if (game.getTimer() == 0) {
+							game.startGame();
+						}
+					}
+					game.getScoreboard().getObjective(DisplaySlot.SIDEBAR).setDisplayName("§3Etape: " + game.getStep().getName());
+					game.getScoreboard().getObjective(DisplaySlot.SIDEBAR).getScore("§6Commence dans:").setScore(game.getTimer());
+					game.getScoreboard().getObjective(DisplaySlot.SIDEBAR).getScore("§aJoueurs:").setScore(game.getPlayers().size());
+					game.updateSign();
+				}
+			}
+		}.runTaskTimer(this, 0, 20);
+!!!342578.java!!!	loadConfig() : void
+		ConfigManager.saveDefaultConfigs(this);
+		FileConfiguration config = ConfigManager.CONFIG.getConfig();
+		for (String st : config.getKeys(false)) {
+			Sign sign = (Sign) getLocation("lobby;" + config.getString(st + ".location")).getBlock().getState();
+			boolean open = config.getBoolean(st + ".open");
+			new HGGames(sign, open);
+		}
+!!!342706.java!!!	getLocation(in location : String) : Location
+		String[] l = location.split(";");
+		World world = Bukkit.getWorld(l[0]);
+		double x = Double.parseDouble(l[1]);
+		double y = Double.parseDouble(l[2]);
+		double z = Double.parseDouble(l[3]);
+		float yaw = 0;
+		float pitch = 0;
+		if (l.length > 4) {
+			yaw = Float.parseFloat(l[4]);
+			pitch = Float.parseFloat(l[5]);
+		}
+		return new Location(world, x, y, z, yaw, pitch);
+!!!342834.java!!!	onDisable() : void
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			Join.goSpawn(pll);
+		}
+		for (Game game : Game.all) {
+			Bukkit.unloadWorld(game.getWorld(), false);
+		}

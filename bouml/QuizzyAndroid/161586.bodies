@@ -1,0 +1,7 @@
+class ProtocoleFinQuiz
+!!!255154.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!255282.java!!!	getType() : TypeProtocole
+        return TypeProtocole.FIN_QUIZ;
+!!!255410.java!!!	genererTrame() : void
+        super.genererTrame();

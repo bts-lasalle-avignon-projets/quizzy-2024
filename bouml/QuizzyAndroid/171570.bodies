@@ -1,0 +1,29 @@
+class Potion
+!!!315314.java!!!	Potion(inout effect : PotionEffectType, in duration : int, in amplifier : int, in radius : int)
+		this.radius = radius;
+		this.potion = new PotionEffect(effect, duration * 20 - 1, amplifier - 1, true, true);
+!!!315442.java!!!	getAttackCount() : int
+		return 30;
+!!!315570.java!!!	getAwaitEnable() : int
+		return 0;
+!!!315698.java!!!	getAwaitDisable() : int
+		return 0;
+!!!315826.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.POTION;
+!!!315954.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!316082.java!!!	Attack(inout info : SheepInfo) : void
+		Cuboid is = radius == 0 ? info.getGame().getIsland(info.getSheep().getLocation()) : null;
+		List<Player> list = is != null ? is.getPlayers() : info.getGame().getPlayers();
+		for (Player pll : list) {
+			if (info.getGame().getSpectators().contains(pll) || !pll.getWorld().equals(info.getSheep().getWorld()) || (radius != 0 && pll.getLocation().distance(info.getSheep().getLocation()) > radius)) {
+				continue;
+			}
+			for (PotionEffect po : pll.getActivePotionEffects()) {
+				if (po.getType() == potion.getType()) {
+					pll.removePotionEffect(po.getType());
+					break;
+				}
+			}
+			pll.addPotionEffect(potion);
+		}

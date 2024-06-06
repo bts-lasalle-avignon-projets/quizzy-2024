@@ -1,0 +1,13 @@
+class Chicken
+!!!446642.java!!!	Chicken(inout owner : Player, in id : int)
+		super(owner, EntityType.CHICKEN, "Poulet de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+!!!446770.java!!!	Chicken(inout owner : Player)
+		super(owner, EntityType.CHICKEN, "Poulet de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+!!!446898.java!!!	getEntity() : org.bukkit.entity.Chicken
+		return (org.bukkit.entity.Chicken) entity;
+!!!447026.java!!!	spawn() : void
+		super.spawn();
+!!!447154.java!!!	clone(inout player : Player) : Chicken
+		return new Chicken(player, getID());

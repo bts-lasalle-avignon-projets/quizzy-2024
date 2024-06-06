@@ -1,0 +1,14 @@
+class SheepPage
+!!!294706.java!!!	SheepPage()
+		calculateContents();
+!!!294834.java!!!	getTemplateTitle() : String
+		return "§8Liste des moutons";
+!!!294962.java!!!	getContents() : List<ItemStack>
+		return contents;
+!!!295090.java!!!	calculateContents() : void
+		getContents().clear();
+		for (SheepInfo i : SheepInfo.base) {
+			getContents().add(i.getItem());
+		}
+!!!295218.java!!!	getPages() : List<Inventory>
+		return pages;

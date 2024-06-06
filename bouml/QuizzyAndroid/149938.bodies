@@ -1,0 +1,7 @@
+class VerifierConnexion
+!!!201650.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!201778.java!!!	getType() : TypeProtocole
+        return TypeProtocole.TEST_CONNEXION;
+!!!201906.java!!!	genererTrame() : void
+        super.genererTrame();

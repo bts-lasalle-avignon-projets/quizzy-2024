@@ -1,0 +1,158 @@
+class Main
+!!!283442.java!!!	getInstance() : Main
+		return instance;
+!!!283570.java!!!	onEnable() : void
+		instance = this;
+		ConfigManager.saveDefaultConfigs(this);
+		loadConfig();
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Join(), this);
+		pm.registerEvents(new SheepShoot(), this);
+		pm.registerEvents(new SignClic(), this);
+		pm.registerEvents(new GameEvent(), this);
+		pm.registerEvents(new EventCancelled(), this);
+		pm.registerEvents(new InteractTeam(), this);
+		
+		getCommand("ggui").setExecutor(new Ggui());
+		getCommand("agui").setExecutor(new Agui());
+		getCommand("lobby").setExecutor(new Quit());
+		getCommand("hub").setExecutor(new Quit());
+		getCommand("spawn").setExecutor(new Quit());
+		getCommand("leave").setExecutor(new Quit());
+		getCommand("quit").setExecutor(new Quit());
+		
+		getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+!!!283698.java!!!	loadConfig() : void
+		new WorldCreator("wait").createWorld().setAutoSave(false);
+		ConfigurationSection sheep = ConfigManager.CONFIG.getConfig().getConfigurationSection("sheep");
+		ConfigurationSection backup = ConfigManager.CONFIG.getConfig().getConfigurationSection("backup");
+		ConfigurationSection games = ConfigManager.CONFIG.getConfig().getConfigurationSection("games");
+		for (String st : sheep.getKeys(false)) {
+			String name  = sheep.getString(st + ".name");
+			int life  = sheep.getInt(st + ".life");
+			int data  = sheep.getInt(st + ".data");
+			List<PowerSheep> powers = new ArrayList<>();
+			for (String s : sheep.getStringList(st + ".powers")) {
+				powers.add(getPower(s));
+			}
+			new SheepInfo(name, life, powers, new ItemBuilder(Material.WOOL, (byte) data).name(name));
+		}
+		for (String st : backup.getKeys(false)) {
+			String location  = backup.getString(st + ".location");
+			String name  = backup.getString(st + ".name");
+			int size  = backup.getInt(st + ".size");
+			List<Team> teams = new ArrayList<>();
+			for (TeamType type : TeamType.values()) {
+				List<String> l = backup.getStringList(st + ".spawnpoints." + type.toString());
+				if (l == null) {
+					continue;
+				}
+				List<Location> list = new ArrayList<>();
+				for (String s : l) {
+					list.add(getLocation("lobby" + ";" + s));
+				}
+				Location pos1 = getLocation("lobby" + ";" + backup.getString(st + ".island." + type.toString() + ".1"));
+				Location pos2 = getLocation("lobby" + ";" + backup.getString(st + ".island." + type.toString() + ".2"));
+				Cuboid island = new Cuboid(pos1, pos2);
+				teams.add(new Team(type, list, island));
+			}
+			Location pos1 = getLocation("lobby" + ";" + backup.getString(st + ".bonus.1"));
+			Location pos2 = getLocation("lobby" + ";" + backup.getString(st + ".bonus.2"));
+			Cuboid bonus = new Cuboid(pos1, pos2);
+			new BackupGestionary(location, teams, size, name, bonus);
+		}
+		for (String st : games.getKeys(false)) {
+			String name = games.getString(st + ".name");
+			String bg = games.getString(st + ".backup");
+			Sign sign = (Sign) getLocation(games.getString(st + ".sign")).getBlock().getState();
+			boolean open = games.getBoolean(st + ".open");
+			new GAME(name, bg, sign, open) {@Override public void setup() {}};
+		}
+!!!283826.java!!!	getLocation(in st : String) : Location
+		String[] l = st.split(";");
+		World w = Bukkit.getWorld(l[0]);
+		double x = Double.parseDouble(l[1]);
+		double y = Double.parseDouble(l[2]);
+		double z = Double.parseDouble(l[3]);
+		float yaw = l.length > 4 ? (float) Double.parseDouble(l[4]) : 0;
+		float pitch = l.length > 4 ? (float) Double.parseDouble(l[5]) : 0;
+		return new Location(w, x, y, z, yaw, pitch);
+!!!283954.java!!!	getPower(in st : String) : PowerSheep
+		String[] l = st.replaceAll("\\]", "").split("\\[");
+		String index = l[0];
+		String[] args = l.length == 2 ? l[1].split(":") : null;
+		switch (PowerType.valueOf(index)) {
+		case BLINK:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			int arg2 = args != null && args.length > 1 ? Integer.parseInt(args[1]) : 0;
+			return new Blink(arg1, arg2);}
+		case BLINK_PROGRESS:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			int arg2 = args != null && args.length > 1 ? Integer.parseInt(args[1]) : 0;
+			return new BlinkProgression(arg1, arg2);}
+		case DUPLICATE:
+			return new Duplicate();
+		case EXPLODE:
+			return new Explode(false);
+		case THANOS:
+			return new Thanos();
+		case STAY:
+			return new Stay();
+		case BROADCAST:{
+			String arg1 = args != null && args.length > 0 ? args[0] : null;
+			return new Broadcast(arg1);}
+		case BURN:
+			return new Explode(true);
+		case CHASE:
+			return new Chase();
+		case DISTORTION:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new Distortion(arg1);}
+		case EARTHQUAKE:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new EarthQuake(arg1);}
+		case FRAGMENTATION:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new Fragmentation(arg1);}
+		case GALACTIC:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new Galactic(arg1);}
+		case ICE:
+			return new Ice();
+		case PARTICLE:{
+			String arg1 = args != null && args.length > 0 ? args[0] : null;
+			return new Particle(EnumParticle.valueOf(arg1));}
+		case POTION:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			int arg2 = args != null && args.length > 1 ? Integer.parseInt(args[1]) : 0;
+			int arg3 = args != null && args.length > 2 ? Integer.parseInt(args[2]) : 0;
+			int arg4 = args != null && args.length > 3 ? Integer.parseInt(args[3]) : 0;
+			return new Potion(PotionEffectType.getById(arg1), arg2, arg3, arg4);}
+		case RC:
+			return new RC();
+		case RIDE:
+			return new Ride();
+		case STORM:
+			return new Storm();
+		case STRIKELIGHTNING:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new StrikeLightning(arg1);}
+		case SWAP:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			int arg2 = args != null && args.length > 1 ? Integer.parseInt(args[1]) : 0;
+			return new Swap(arg1, arg2);}
+		case RARE:
+			return new Rare();
+		case INVINCIBLE:
+			return new Invincible();
+		case NIGHT:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			return new Night(arg1 == 1);}
+		case NODROP:
+			return new NoDrop();
+		case RAMBOW:{
+			int arg1 = args != null && args.length > 0 ? Integer.parseInt(args[0]) : 0;
+			int arg2 = args != null && args.length > 1 ? Integer.parseInt(args[1]) : 0;
+			return new Rambow(arg1, arg2);}
+		}
+		return null;

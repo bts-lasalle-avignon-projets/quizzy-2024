@@ -1,0 +1,3 @@
+class MapDaterAPI
+!!!402866.java!!!	getWorld(in world : String) : World
+		return MapDaterRegister.get(world);

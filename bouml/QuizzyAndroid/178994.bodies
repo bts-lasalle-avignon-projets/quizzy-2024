@@ -1,0 +1,21 @@
+class Kit
+!!!367410.java!!!	Kit(in name : String, inout item : ItemStack)
+			this.name = name;
+			this.item = item;
+!!!367538.java!!!	from(inout item : ItemStack) : HGGames::Kit
+			for (Kit kit : values()) {
+				if (kit.getItem() == item) {
+					return kit;
+				}
+			}
+			return null;
+!!!367666.java!!!	getItem() : ItemStack
+			return item;
+!!!367794.java!!!	getName() : String
+			return name;
+!!!367922.java!!!	getItems() : List<ItemStack>
+			List<ItemStack> list = new ArrayList<>();
+			for (Kit kit : values()) {
+				list.add(kit.getItem());
+			}
+			return list;

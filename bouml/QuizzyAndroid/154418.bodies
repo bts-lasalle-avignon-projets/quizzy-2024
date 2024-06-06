@@ -1,0 +1,41 @@
+class ListViewEcran
+!!!219186.java!!!	ListViewEcran(inout activity : AppCompatActivity, in id : int)
+        this.context = activity.getApplicationContext();
+        liste = activity.findViewById(id);
+        mettreAjour();
+!!!219314.java!!!	getCount() : int
+        return ecrans.size();
+!!!219442.java!!!	getItem(in position : int) : Object
+        Ecran ecran = ecrans.get(position);
+        int couleur = Color.GREEN;
+        return new Object[] {ecran.getPeripherique().getNom(), couleur};
+!!!219570.java!!!	getItemId(in position : int) : long
+        return position;
+!!!219698.java!!!	getView(in position : int, inout convertView : View, inout parent : ViewGroup) : View
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_items, parent, false);
+        }
+
+        Object[] objet = getItem(position);
+
+        String nom = (String) objet[0];
+        int couleur = (int) objet[1];
+
+        TextView text1 = convertView.findViewById(R.id.text1);
+        TextView text2 = convertView.findViewById(R.id.text2);
+        ImageView logo_peripherique = convertView.findViewById(R.id.logo_peripherique);
+
+        text1.setText(nom);
+        text2.setText("");
+        logo_peripherique.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ecran));
+        logo_peripherique.setColorFilter(couleur, PorterDuff.Mode.SRC_ATOP);
+
+        return convertView;
+!!!219826.java!!!	mettreAjour() : void
+        this.ecrans.clear();
+        for (Ecran ecran : Parametres.getParametres().getEcrans()) {
+            if (ecran.getPeripherique() != null && ecran.getPeripherique().estConnecte()) {
+                this.ecrans.add(ecran);
+            }
+        }
+        liste.setAdapter(this);

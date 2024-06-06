@@ -1,0 +1,19 @@
+class SpinnerQuizzyBinding
+!!!279474.java!!!	SpinnerQuizzyBinding(inout rootView : TextView)
+    this.rootView = rootView;
+!!!279602.java!!!	getRoot() : TextView
+    return rootView;
+!!!279730.java!!!	inflate(inout inflater : LayoutInflater) : SpinnerQuizzyBinding
+    return inflate(inflater, null, false);
+!!!279858.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : SpinnerQuizzyBinding
+    View root = inflater.inflate(R.layout.spinner_quizzy, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!279986.java!!!	bind(inout rootView : View) : SpinnerQuizzyBinding
+    if (rootView == null) {
+      throw new NullPointerException("rootView");
+    }
+
+    return new SpinnerQuizzyBinding((TextView) rootView);

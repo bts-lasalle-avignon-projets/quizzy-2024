@@ -1,0 +1,14 @@
+class TeamType
+!!!335666.java!!!	TeamType(in prefix : String, in name : String, inout color : Color, in data : int)
+			this.prefix = prefix;
+			this.name = name;
+			this.color = color;
+			this.item = new ItemBuilder(Material.getMaterial(351), (byte) data).name(prefix + name);
+!!!335794.java!!!	getPrefix() : String
+			return prefix;
+!!!335922.java!!!	getName() : String
+			return name;
+!!!336050.java!!!	getColor() : Color
+			return color;
+!!!336178.java!!!	getItem() : ItemStack
+			return item;

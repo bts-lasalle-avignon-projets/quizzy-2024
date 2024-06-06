@@ -1,0 +1,23 @@
+class ScoreboardModule
+!!!360498.java!!!	createScoreboard() : Scoreboard
+		Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		Objective ob = scoreboard.registerNewObjective("scoreboard", "dummy");
+		ob.setDisplaySlot(DisplaySlot.SIDEBAR);
+		return scoreboard;
+!!!360626.java!!!	setTitle(inout scoreboard : Scoreboard, in title : String) : void
+		getObjective(scoreboard).setDisplayName(title);
+!!!360754.java!!!	getObjective(inout scoreboard : Scoreboard) : Objective
+		return scoreboard.getObjective(DisplaySlot.SIDEBAR);
+!!!360882.java!!!	setDefaultScoreboard(inout p : Player) : void
+		p.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+!!!369458.java!!!	createScoreboard() : Scoreboard
+		Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		Objective ob = scoreboard.registerNewObjective("scoreboard", "dummy");
+		ob.setDisplaySlot(DisplaySlot.SIDEBAR);
+		return scoreboard;
+!!!369586.java!!!	setTitle(inout scoreboard : Scoreboard, in title : String) : void
+		getObjective(scoreboard).setDisplayName(title);
+!!!369714.java!!!	getObjective(inout scoreboard : Scoreboard) : Objective
+		return scoreboard.getObjective(DisplaySlot.SIDEBAR);
+!!!369842.java!!!	setDefaultScoreboard(inout p : Player) : void
+		p.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());

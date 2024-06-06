@@ -1,0 +1,13 @@
+class Zombie
+!!!456370.java!!!	Zombie(inout owner : Player, in id : int)
+		super(owner, EntityType.ZOMBIE, "Zombie de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!456498.java!!!	Zombie(inout owner : Player)
+		super(owner, EntityType.ZOMBIE, "Zombie de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!456626.java!!!	getEntity() : org.bukkit.entity.Zombie
+		return (org.bukkit.entity.Zombie) entity;
+!!!456754.java!!!	spawn() : void
+		super.spawn();
+!!!456882.java!!!	clone(inout player : Player) : Zombie
+		return new Zombie(player, getID());

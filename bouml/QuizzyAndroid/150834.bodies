@@ -1,0 +1,28 @@
+class EnregistrerQuestion
+!!!205618.java!!!	EnregistrerQuestion(in trame : String)
+        setTrame(trame);
+!!!205746.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";LIBELLE;PROP1;PROP2;PROP3;PROP4;REPONSE;TEMPS\n";
+!!!205874.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENREGISTRER_QUESTION;
+!!!206002.java!!!	getLibelle() : String
+        return extraireDonnees().get("LIBELLE");
+!!!206130.java!!!	getPropositions() : List<String>
+        List<String>        propositions = new ArrayList<>();
+        Map<String, String> donnees      = extraireDonnees();
+        for(int i = 1; i <= 4; i++)
+        {
+            propositions.add(donnees.get("PROP" + i));
+        }
+        return propositions;
+!!!206258.java!!!	getTemps() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!206386.java!!!	getNumeroReponse() : int
+        return toInt(extraireDonnees().get("REPONSE"));
+!!!206514.java!!!	genererTrame(inout question : Question) : void
+        List<String> arguments = new ArrayList<>();
+        arguments.add(question.getQuestion());
+        arguments.addAll(question.getPropositions());
+        arguments.add(question.getNumeroBonneReponse() + "");
+        arguments.add(question.getTempsReponse() + "");
+        super.genererTrame(arguments.toArray(arguments.toArray(new String[0])));

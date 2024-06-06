@@ -1,0 +1,7 @@
+class FinSession
+!!!207538.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!207666.java!!!	getType() : TypeProtocole
+        return TypeProtocole.FIN_SESSION;
+!!!207794.java!!!	genererTrame() : void
+        super.genererTrame();

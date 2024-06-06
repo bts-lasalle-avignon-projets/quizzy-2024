@@ -1,0 +1,32 @@
+class ActivityMainBinding
+!!!238130.java!!!	ActivityMainBinding(inout rootView : ConstraintLayout, inout container : ConstraintLayout, inout navView : BottomNavigationView)
+    this.rootView = rootView;
+    this.container = container;
+    this.navView = navView;
+!!!238258.java!!!	getRoot() : ConstraintLayout
+    return rootView;
+!!!238386.java!!!	inflate(inout inflater : LayoutInflater) : ActivityMainBinding
+    return inflate(inflater, null, false);
+!!!238514.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : ActivityMainBinding
+    View root = inflater.inflate(R.layout.activity_main, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!238642.java!!!	bind(inout rootView : View) : ActivityMainBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      ConstraintLayout container = (ConstraintLayout) rootView;
+
+      id = R.id.nav_view;
+      BottomNavigationView navView = ViewBindings.findChildViewById(rootView, id);
+      if (navView == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((ConstraintLayout) rootView, container, navView);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,0 +1,189 @@
+format 224
+"lcmapdater" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcmapdater
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_MapDater/src/fr/red/lcmapdater/"
+  java_package "fr.red.lcmapdater"
+  classview 157874 "lcmapdater"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 183346 "Main"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 194482 // <generalisation>
+	relation 194482 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 194482 // <generalisation>
+	  b parent class_ref 165810 // JavaPlugin
+      end
+
+      classrelation 194610 // instance (<unidirectional association>)
+	relation 194610 --->
+	  a role_name "instance" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 194610 // instance (<unidirectional association>)
+	  b parent class_ref 183346 // Main
+      end
+
+      operation 402226 "getInstance"
+	class_operation public return_type class_ref 183346 // Main
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 402354 "onEnable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 402482 "onDisable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 402610 "reload"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 402738 "load"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "current" explicit_type "Date"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"deprecation\")
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 150962 "lcmapdater"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 175282 "Main"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.plugin.java.JavaPlugin;
+import fr.red.lcmapdater.commands.Reload;
+import fr.red.lcmapdater.config.ConfigManager;
+import fr.red.lcmapdater.scripts.ScripType;
+import fr.red.lcmapdater.utils.MapDate;
+import fr.red.lcmapdater.utils.MapDaterRegister;
+${definition}"
+      associated_elems
+	class_ref 183346 // Main
+      end
+    end
+  end
+
+  package_ref 153906 // api
+
+  package_ref 154034 // commands
+
+  package_ref 154162 // config
+
+  package_ref 154290 // scripts
+
+  package_ref 154546 // utils
+end

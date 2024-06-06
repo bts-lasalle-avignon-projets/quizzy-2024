@@ -1,0 +1,49 @@
+class BackupGestionary
+!!!331570.java!!!	BackupGestionary(in location : String, inout teams : List<Team>, in size : int, in signname : String, inout bonus : Cuboid)
+			this.size = size;
+			this.bonus = bonus;
+			this.signname = signname;
+			String[] l = location.split("/");
+			setName(l[l.length - 1]);
+			setTeams(teams);
+			setFile(new File(location));
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			
+			list.add(this);
+!!!331698.java!!!	from(in name : String) : GAME::BackupGestionary
+			for (BackupGestionary bg : list) {
+				if (bg.getName().equalsIgnoreCase(name)) {
+					return bg;
+				}
+			}
+			return null;
+!!!331826.java!!!	getNewWorldName() : String
+			count++;
+			if (count < 10) {
+				return name + "0" + count;
+			}
+			return name + count;
+!!!331954.java!!!	getName() : String
+			return name;
+!!!332082.java!!!	setName(in name : String) : void
+			this.name = name;
+!!!332210.java!!!	getCount() : int
+			return count;
+!!!332338.java!!!	setCount(in count : int) : void
+			this.count = count;
+!!!332466.java!!!	getFile() : File
+			return file;
+!!!332594.java!!!	setFile(inout file : File) : void
+			this.file = file;
+!!!332722.java!!!	getTeams() : GAME::Team
+			return teams;
+!!!332850.java!!!	setTeams(inout teams : List<Team>) : void
+			this.teams = teams;
+!!!332978.java!!!	getSignName() : String
+			return signname;
+!!!333106.java!!!	getSize() : int
+			return size;
+!!!333234.java!!!	getBonus() : Cuboid
+			return bonus;

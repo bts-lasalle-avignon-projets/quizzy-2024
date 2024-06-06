@@ -1,0 +1,33 @@
+class SpinnerParticipants
+!!!223154.java!!!	SpinnerParticipants(inout activite : AppCompatActivity, in id : int)
+        spinner = activite.findViewById(id);
+        mettreAjourSpinnerParticipants();
+!!!223282.java!!!	getParticipants() : List<String>
+        List<String> nomsParticipants = new ArrayList<>();
+        nomsParticipants.add("Aucun");
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            nomsParticipants.add(participant.getNom());
+        }
+        return nomsParticipants;
+!!!223410.java!!!	getSpinner() : Spinner
+        return spinner;
+!!!223538.java!!!	mettreAjourSpinnerParticipants() : void
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, getParticipants());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+!!!528178.java!!!	SpinnerParticipants(inout activite : AppCompatActivity, in id : int)
+        spinner = activite.findViewById(id);
+        mettreAjourSpinnerParticipants();
+!!!528306.java!!!	getParticipants() : List<String>
+        List<String> nomsParticipants = new ArrayList<>();
+        nomsParticipants.add("Aucun");
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            nomsParticipants.add(participant.getNom());
+        }
+        return nomsParticipants;
+!!!528434.java!!!	getSpinner() : Spinner
+        return spinner;
+!!!528562.java!!!	mettreAjourSpinnerParticipants() : void
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(IHM.getIHM().getActiviteActive(), R.layout.spinner_quizzy, getParticipants());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);

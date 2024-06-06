@@ -1,0 +1,20 @@
+class Sheep
+!!!452402.java!!!	Sheep(inout owner : Player, inout color : DyeColor, in id : int)
+		super(owner, EntityType.SHEEP, "Mouton de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+		this.color = color;
+!!!452530.java!!!	Sheep(inout owner : Player, inout color : DyeColor)
+		super(owner, EntityType.SHEEP, "Mouton de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+		this.color = color;
+!!!452658.java!!!	getEntity() : org.bukkit.entity.Sheep
+		return (org.bukkit.entity.Sheep) entity;
+!!!452786.java!!!	getColor() : DyeColor
+		return color;
+!!!452914.java!!!	spawn() : void
+		super.spawn();
+		if (color != null) {
+			getEntity().setColor(color);
+		}
+!!!453042.java!!!	clone(inout player : Player) : Sheep
+		return new Sheep(player, color, getID());

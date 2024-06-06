@@ -1,0 +1,22 @@
+class EarthQuake
+!!!307250.java!!!	EarthQuake(in attack : int)
+		this.attack = attack;
+!!!307378.java!!!	getAttackCount() : int
+		return attack;
+!!!307506.java!!!	getAwaitEnable() : int
+		return 3;
+!!!307634.java!!!	getAwaitDisable() : int
+		return 0;
+!!!307762.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.EARTHQUAKE;
+!!!307890.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!308018.java!!!	Attack(inout info : SheepInfo) : void
+		Cuboid is = info.getGame().getIsland(info.getSheep().getLocation());
+		if (is == null) {
+			return;
+		}
+		for (Player pll : is.getPlayers()) {
+			pll.setVelocity(new Vector().setY(0.25));
+			pll.playSound(pll.getLocation(), Sound.IRONGOLEM_HIT, 1, 1);
+		}

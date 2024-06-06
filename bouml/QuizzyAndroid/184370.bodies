@@ -1,0 +1,46 @@
+class Christmas
+!!!406066.java!!!	start(inout world : World) : void
+		w = world;
+		stop = false;
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				if (stop || !Bukkit.getWorlds().contains(world)) {
+					cancel();
+					return;
+				}
+				for (Player pll : world.getPlayers()) {
+					Cuboid c = new Cuboid(pll.getLocation().clone().add(24, 0, 24), pll.getLocation().clone().add(-50, 20, -50));
+					snow(pll, c.getRandomLocation());
+				}
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!406194.java!!!	snow(inout p : Player, inout loc : Location) : void
+		if (hasBlockOver(loc)) {
+			return;
+		}
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				loc.add(new Random().nextDouble() - new Random().nextDouble(), -0.25, new Random().nextDouble() - new Random().nextDouble());
+				if ((loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != Material.BARRIER) || stop || !Bukkit.getWorlds().contains(w) || !p.getWorld().equals(loc.getWorld()) ||loc.distance(p.getLocation()) > 120 || loc.getY() <= 0 || !p.isOnline()) {
+					cancel();
+					return;
+				}
+				ParticleAPI.PlayParticle(loc, EnumParticle.FIREWORKS_SPARK, false, Arrays.asList(p));
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 2);
+!!!406322.java!!!	hasBlockOver(inout location : Location) : boolean
+		Location loc = location.clone();
+		for (int y = loc.getBlockY() + 1; y < 256 && y > 0; y++) {
+			loc.setY(y);
+			if (loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != Material.BARRIER) {
+				return true;
+			}
+		}
+		return false;
+!!!406450.java!!!	stop() : void
+		stop = true;
+!!!406578.java!!!	reset(inout w : World) : void
+		

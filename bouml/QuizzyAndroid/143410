@@ -1,0 +1,599 @@
+format 224
+"bdd" // quizzy::bdd
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/home/btssn2/Documents/Hillion/MP/MP2/quizzy-2024/quizzy-mobile/QUIZZY/app/src/main/java/fr/hillionj/quizzy/bdd/"
+  java_package "fr.hillionj.quizzy.bdd"
+  classview 149682 "bdd"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 147634 "BaseDeDonnees"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\", \"SdCardPath\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 154802 // <generalisation>
+	relation 154802 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 154802 // <generalisation>
+	  b parent class_ref 147762 // SQLiteOpenHelper
+      end
+
+      attribute 158514 "nomFichier"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"quizzy.db\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158642 "sqlite"
+	const_attribute private explicit_type "SQLiteDatabase"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 189234 "BaseDeDonnees"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "context" explicit_type "Context"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 189362 "genererQuestion"
+	private return_type class_ref 147890 // Question
+	nparams 1
+	  param inout name "curseur" explicit_type "Cursor"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 189490 "getTempsReponse"
+	private explicit_return_type "int"
+	nparams 2
+	  param in name "tempsParQuestion" explicit_type "int"
+	  param in name "nombreCarateres" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 189618 "construireRequete"
+	private explicit_return_type "String"
+	nparams 1
+	  param inout name "parametres" type class_ref 148018 // Parametres
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+"
+	
+	
+	
+      end
+
+      operation 189746 "getNouveauQuiz"
+	public return_type class_ref 147890 // Question
+	nparams 1
+	  param inout name "parametres" type class_ref 148018 // Parametres
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 189874 "getParticipants"
+	public return_type class_ref 148146 // Participant
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190002 "getThemes"
+	public return_type class_ref 148274 // Theme
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190130 "onCreate"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "db" explicit_type "SQLiteDatabase"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 190258 "onUpgrade"
+	public explicit_return_type "void"
+	nparams 3
+	  param inout name "db" explicit_type "SQLiteDatabase"
+	  param in name "oldVersion" explicit_type "int"
+	  param in name "newVersion" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 190386 "sauvegarder"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190514 "getIdNouvelleEvaluation"
+	private explicit_return_type "int"
+	nparams 1
+	  param in name "idTheme" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190642 "getHistorique"
+	public return_type class_ref 148402 // Session
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190770 "getEvaluations"
+	private explicit_return_type "List<Object[]>"
+	nparams 1
+	  param in name "argumentSupplementaire" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 190898 "getSession"
+	public return_type class_ref 148402 // Session
+	nparams 1
+	  param in name "idEvaluation" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191026 "getSession"
+	private return_type class_ref 148402 // Session
+	nparams 3
+	  param in name "idEvaluation" explicit_type "int"
+	  param in name "idTheme" explicit_type "int"
+	  param in name "horodatage" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191154 "getParticipants"
+	private return_type class_ref 148146 // Participant
+	nparams 1
+	  param in name "idEvaluation" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191282 "getParticipantDepuisID"
+	private return_type class_ref 148146 // Participant
+	nparams 2
+	  param in name "idParticipant" explicit_type "int"
+	  param inout name "participants" explicit_type "List<Participant>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191410 "getQuestions"
+	private return_type class_ref 147890 // Question
+	nparams 1
+	  param in name "idEvaluation" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191538 "supprimerSession"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "session" type class_ref 148402 // Session
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191666 "creerParticipant"
+	public return_type class_ref 148146 // Participant
+	nparams 1
+	  param in name "nom" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 148530 "CopieurBDD"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\", \"SdCardPath\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 158770 "cheminDossier"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158898 "nomFichier"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159026 "context"
+	const_attribute private explicit_type "Context"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 191794 "CopieurBDD"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "nomFichier" explicit_type "String"
+	  param in name "context" explicit_type "Context"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, @NonNull final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 191922 "copierOctets"
+	private explicit_return_type "void"
+	nparams 2
+	  param inout name "input" explicit_type "InputStream"
+	  param inout name "output" explicit_type "OutputStream"
+	nexceptions 1
+	  explicit_exception "IOException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 192050 "fermerLesFlux"
+	private explicit_return_type "void"
+	nparams 2
+	  param inout name "output" explicit_type "OutputStream"
+	  param inout name "input" explicit_type "InputStream"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 192178 "verifier"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 192306 "copierBaseDeDonnees"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "source" explicit_type "InputStream"
+	  param inout name "destination" explicit_type "File"
+	nexceptions 1
+	  explicit_exception "IOException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 518322 "CopieurBDD"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "nomFichier" explicit_type "String"
+	  param in name "context" explicit_type "Context"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}, @NonNull final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 518450 "copierOctets"
+	private explicit_return_type "void"
+	nparams 2
+	  param inout name "input" explicit_type "InputStream"
+	  param inout name "output" explicit_type "OutputStream"
+	nexceptions 1
+	  explicit_exception "IOException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 518578 "fermerLesFlux"
+	private explicit_return_type "void"
+	nparams 2
+	  param inout name "output" explicit_type "OutputStream"
+	  param inout name "input" explicit_type "InputStream"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 518706 "verifier"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 518834 "copierBaseDeDonnees"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "source" explicit_type "InputStream"
+	  param inout name "destination" explicit_type "File"
+	nexceptions 1
+	  explicit_exception "IOException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 142898 "bdd"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 146482 "BaseDeDonnees"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+      comment "@author Thierry VAIRA
+@author Jules HILLION
+@file BaseDeDonnees.java
+@brief La classe assurant la gestion de la base de données SQLite
+"
+    end
+
+    artifact 146610 "CopieurBDD"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      associated_elems
+      end
+    end
+  end
+end

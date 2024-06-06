@@ -1,0 +1,23 @@
+class ConfigAccess
+!!!495282.java!!!	ConfigAccess(in fileName : String)
+		this.fileName = fileName;
+!!!495410.java!!!	getConfig() : FileConfiguration
+		return config;
+!!!495538.java!!!	getFileName() : String
+		return fileName;
+!!!495666.java!!!	saveDefaultConfig() : void
+		file = new File(Main.getInstance().getDataFolder(), fileName + ".yml");
+		if (!file.exists()) {
+			Main.getInstance().saveResource(fileName + ".yml", false);
+		}
+		config = YamlConfiguration.loadConfiguration(file);
+		Bukkit.getConsoleSender().sendMessage("§7[§cHub #1§7] §c" + fileName + ".yml §7loaded !");
+!!!495794.java!!!	saveConfig() : void
+		try {
+			config.save(file);
+			reloadConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+!!!495922.java!!!	reloadConfig() : void
+		config = YamlConfiguration.loadConfiguration(file);

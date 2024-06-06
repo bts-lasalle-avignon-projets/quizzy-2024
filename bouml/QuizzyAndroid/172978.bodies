@@ -1,0 +1,8 @@
+class State
+!!!331186.java!!!	State(in prefix : String, in data : int)
+			this.prefix = prefix;
+			this.data = data;
+!!!331314.java!!!	getPrefix() : String
+			return prefix;
+!!!331442.java!!!	getData() : int
+			return data;

@@ -1,0 +1,27 @@
+class Ride
+!!!318642.java!!!	getAttackCount() : int
+		return 0;
+!!!318770.java!!!	getAwaitEnable() : int
+		return 0;
+!!!318898.java!!!	getAwaitDisable() : int
+		return 0;
+!!!319026.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.RIDE;
+!!!319154.java!!!	Enable(inout info : SheepInfo) : void
+		if (info.getShooter().getVehicle() != info.getSheep()) {
+			info.getSheep().setPassenger(info.getShooter());
+		}
+		new BukkitRunnable() {@Override public void run() {
+			if (info.getSheep().isDead()) {
+				cancel();
+				return;
+			}
+			if (info.getSheep().getPassenger() == null) {
+				return;
+			}
+			Vector v = info.getShooter().getLocation().getDirection().clone().multiply(3);
+			Location loc = info.getShooter().getEyeLocation().clone().add(v);
+			Cycles.target(info.getSheep(), loc, 2.5);
+		}}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!319282.java!!!	Attack(inout info : SheepInfo) : void
+		

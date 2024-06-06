@@ -1,0 +1,101 @@
+class FragmentHomeBinding
+!!!239410.java!!!	FragmentHomeBinding(inout rootView : ConstraintLayout, inout barreProgression : ProgressBar, inout btnArreter : Button, inout btnLancer : Button, inout btnPause : Button, inout btnReinitialiser : Button, inout listeParticipants : ListView, inout question : TextView, inout reponse1 : TextView, inout reponse2 : TextView, inout reponse3 : TextView, inout reponse4 : TextView)
+    this.rootView = rootView;
+    this.barreProgression = barreProgression;
+    this.btnArreter = btnArreter;
+    this.btnLancer = btnLancer;
+    this.btnPause = btnPause;
+    this.btnReinitialiser = btnReinitialiser;
+    this.listeParticipants = listeParticipants;
+    this.question = question;
+    this.reponse1 = reponse1;
+    this.reponse2 = reponse2;
+    this.reponse3 = reponse3;
+    this.reponse4 = reponse4;
+!!!239538.java!!!	getRoot() : ConstraintLayout
+    return rootView;
+!!!239666.java!!!	inflate(inout inflater : LayoutInflater) : FragmentHomeBinding
+    return inflate(inflater, null, false);
+!!!239794.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : FragmentHomeBinding
+    View root = inflater.inflate(R.layout.fragment_home, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!239922.java!!!	bind(inout rootView : View) : FragmentHomeBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.barreProgression;
+      ProgressBar barreProgression = ViewBindings.findChildViewById(rootView, id);
+      if (barreProgression == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_arreter;
+      Button btnArreter = ViewBindings.findChildViewById(rootView, id);
+      if (btnArreter == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_lancer;
+      Button btnLancer = ViewBindings.findChildViewById(rootView, id);
+      if (btnLancer == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_pause;
+      Button btnPause = ViewBindings.findChildViewById(rootView, id);
+      if (btnPause == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_reinitialiser;
+      Button btnReinitialiser = ViewBindings.findChildViewById(rootView, id);
+      if (btnReinitialiser == null) {
+        break missingId;
+      }
+
+      id = R.id.liste_participants;
+      ListView listeParticipants = ViewBindings.findChildViewById(rootView, id);
+      if (listeParticipants == null) {
+        break missingId;
+      }
+
+      id = R.id.question;
+      TextView question = ViewBindings.findChildViewById(rootView, id);
+      if (question == null) {
+        break missingId;
+      }
+
+      id = R.id.reponse1;
+      TextView reponse1 = ViewBindings.findChildViewById(rootView, id);
+      if (reponse1 == null) {
+        break missingId;
+      }
+
+      id = R.id.reponse2;
+      TextView reponse2 = ViewBindings.findChildViewById(rootView, id);
+      if (reponse2 == null) {
+        break missingId;
+      }
+
+      id = R.id.reponse3;
+      TextView reponse3 = ViewBindings.findChildViewById(rootView, id);
+      if (reponse3 == null) {
+        break missingId;
+      }
+
+      id = R.id.reponse4;
+      TextView reponse4 = ViewBindings.findChildViewById(rootView, id);
+      if (reponse4 == null) {
+        break missingId;
+      }
+
+      return new FragmentHomeBinding((ConstraintLayout) rootView, barreProgression, btnArreter,
+          btnLancer, btnPause, btnReinitialiser, listeParticipants, question, reponse1, reponse2,
+          reponse3, reponse4);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

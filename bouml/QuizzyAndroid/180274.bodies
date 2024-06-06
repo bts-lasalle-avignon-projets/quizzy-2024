@@ -1,0 +1,58 @@
+class LangCommand
+!!!384946.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (sender instanceof Player) {
+			((Player)sender).openInventory(getInventory((Player) sender));
+		}
+		return false;
+!!!385074.java!!!	onTabComplete(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : List<String>
+		
+		return Arrays.asList();
+!!!385202.java!!!	centerItems(inout inventory : Inventory, inout it : List<ItemStack>) : void
+        int startSlot = (inventory.getSize() - it.size()) / 2;
+        for (int i = 0; i < it.size(); i++) {
+        	if (i == 4 && it.size() % 2 != 0) {
+        		i++;
+        	}
+            inventory.setItem(startSlot + i, it.get(i));
+        }
+!!!385330.java!!!	getInventory(inout p : Player) : Inventory
+    	if (!p.hasPermission("life.admin")) {
+    		return inventory;
+    	}
+		Inventory inv = Bukkit.createInventory(null, inventory.getSize(), inventory.getTitle());
+		for (int i = 0; i < inventory.getSize(); i++) {
+			ItemStack it = inventory.getContents()[i];
+			if (it != null) {
+				inv.setItem(i, it);
+			}
+		}
+		inv.setItem(8, resetItem);
+		return inv;
+!!!385458.java!!!	getInventory() : Inventory
+		Inventory inv = Bukkit.createInventory(null, 9, "Choose your Language");
+		Methods translations_items = Methods.from("translations_items");
+		List<ItemStack> it = new ArrayList<>();
+		try {
+			for (String code : translations_items.lines()) {
+				ItemBuilder ib = new ItemBuilder(Material.SKULL_ITEM, (byte) 3);
+				String skull = translations_items.getString(code, "SKULL");
+				if (skull != null) {
+					ib.skullTextue(skull);
+				}
+				String title = translations_items.getString(code, "TITLE");
+				if (title != null) {
+					ib.name(title);
+				}
+				String description = translations_items.getString(code, "DESCRIPTION");
+				if (description != null) {
+					ib.lore(Arrays.asList(description));
+				}
+				it.add(ib);
+				itemByCode.put(ib.getItemMeta().getDisplayName(), code);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		centerItems(inv, it);
+		it.clear();
+		return inv;

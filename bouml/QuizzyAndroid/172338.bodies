@@ -1,0 +1,39 @@
+class Storm
+!!!320178.java!!!	getAttackCount() : int
+		return 0;
+!!!320306.java!!!	getAwaitEnable() : int
+		return 0;
+!!!320434.java!!!	getAwaitDisable() : int
+		return 0;
+!!!320562.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.STORM;
+!!!320690.java!!!	Enable(inout info : SheepInfo) : void
+		World w = info.getLaunchPoint().getWorld();
+		if (!w.hasStorm()) {
+			w.setStorm(true);
+		}
+		
+		new BukkitRunnable() { @Override public void run() {
+			if (info.getSheep().isDead()) {
+				boolean b = false;
+				if (w.hasStorm()) {
+					for (Entity ent : info.getLaunchPoint().getWorld().getEntities()) {
+						if (!(ent instanceof Sheep) || ((Sheep) ent).equals(info.getSheep())) {
+							continue;
+						}
+						SheepInfo i = SheepInfo.from((Sheep) ent);
+						if (i != null && !i.getSheep().isDead() && i.hasPower(PowerType.STORM)) {
+							b = true;
+							break;
+						}
+					}
+					if (!b) {
+						w.setStorm(false);
+					}
+				}
+				cancel();
+				return;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 5);
+!!!320818.java!!!	Attack(inout info : SheepInfo) : void
+		

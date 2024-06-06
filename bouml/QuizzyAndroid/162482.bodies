@@ -1,0 +1,13 @@
+class ProtocoleIndicationQuestion
+!!!259250.java!!!	ProtocoleIndicationQuestion(in trame : String)
+        setTrame(trame);
+!!!259378.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION;TEMPS\n";
+!!!259506.java!!!	getType() : TypeProtocole
+        return TypeProtocole.INDICATION_QUESTION;
+!!!259634.java!!!	getTempsReponse() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!259762.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!259890.java!!!	genererTrame(in numeroQuestion : int, in tempsAlloue : int) : void
+        super.genererTrame(numeroQuestion + "", tempsAlloue + "");

@@ -1,0 +1,57 @@
+class LifePets
+!!!416562.java!!!	getInstance() : LifePets
+		return instance;
+!!!416690.java!!!	onEnable() : void
+		instance = this;
+		ConfigManager.saveDefaultConfigs(this);
+		loadConfig();
+		loadSQL();
+		CraftMenu.init(this);
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Join(), this);
+		pm.registerEvents(new Cancelled(), this);
+		
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			Join.registerPets(pll);
+		}
+		
+		getCommand("pets").setExecutor(new PetCommand());
+!!!416818.java!!!	loadConfig() : void
+		PetCommand.buildPetMenu();
+		FileConfiguration config = ConfigManager.CONFIG.getConfig();
+		for (String st : config.getKeys(false)) {
+			EntityType type =  EntityType.valueOf(config.getString(st + ".type"));
+			ItemStack item = new ItemBuilder(Material.MONSTER_EGG, (byte) type.getTypeId()).name(config.getString(st + ".displayname"));
+			int slot = config.getInt(st + ".slot");
+			Inventory inv = Bukkit.createInventory(null, 9, config.getString(st + ".inventory.title"));
+			IMenu menu = PetAPI.getMenu().addSubMenu(slot, item, inv);
+			for (String s : config.getConfigurationSection(st + ".inventory").getKeys(false)) {
+				if (s.equalsIgnoreCase("title")) {
+					continue;
+				}
+				String displayname = config.getString(st + ".inventory." + s + ".displayname");
+				String argument = config.getString(st + ".inventory." + s + ".argument");
+				ItemStack it = new ItemBuilder(item).name(displayname);
+				inv.addItem(it);
+				PetAPI.getMenu().addPet(menu, type, it, argument);
+			}
+		}
+!!!416946.java!!!	loadSQL() : void
+		SQL sql = new SQL(this, -1);
+		SQLConnection c = sql.adress(ConfigManager.MYSQL.getConfig());
+		c.WhenConnected(() -> {
+			Bukkit.getConsoleSender().sendMessage("§cLife§bPets §7> §aDatabase connected");
+		}).WhenErrored(() -> {
+			Bukkit.getConsoleSender().sendMessage("§cLife§bPets §7> §cDatabase ERROR: " + c.getError());
+		});
+		c.connect(false);
+		SQLAccess a = sql.access("pets", "NAME");
+		a.addColumn("ID", 0);
+		a.addColumn("CUSTOMNAME", (String) null);
+		a.addColumn("AUTOSPAWN", "false");
+		a.create();
+!!!417074.java!!!	onDisable() : void
+		for (PlayerPetProfile pet : PlayerPetProfile.list) {
+			pet.dispawnAll();
+		}

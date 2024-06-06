@@ -1,0 +1,244 @@
+format 224
+"param" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lclangmanager::param
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_LangManager/src/fr/red/lclangmanager/param/"
+  java_package "fr.red.lclangmanager.param"
+  classview 157618 "param"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 182066 "InventoryClick"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 192434 // <realization>
+	relation 192434 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 192434 // <realization>
+	  b parent class_ref 166322 // Listener
+      end
+
+      classrelation 192562 // methods (<unidirectional association>)
+	relation 192562 --->
+	  a role_name "methods" init_value " Methods.from(\"translations_player\")" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 192562 // methods (<unidirectional association>)
+	  b parent class_ref 182194 // Methods
+      end
+
+      operation 390322 "onClick"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryClickEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+    end
+
+    class 182322 "Join"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 192690 // <realization>
+	relation 192690 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 192690 // <realization>
+	  b parent class_ref 166322 // Listener
+      end
+
+      attribute 244146 "playerLang"
+	class_attribute public explicit_type "Player, String"
+	init_value " new HashMap<>()"
+	stereotype "Map"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 192818 // methods (<unidirectional association>)
+	relation 192818 --->
+	  a role_name "methods" init_value " Methods.from(\"translations_player\")" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 192818 // methods (<unidirectional association>)
+	  b parent class_ref 182194 // Methods
+      end
+
+      operation 390450 "onJoin"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "PlayerJoinEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler(priority = EventPriority.MONITOR)
+"
+	
+	
+	
+      end
+
+      operation 390578 "getPlayerLanguage"
+	class_operation private explicit_return_type "void"
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 390706 "onQuit"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "PlayerQuitEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 390834 "getLangOfAll"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 150578 "param"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 174642 "InventoryClick"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import fr.red.lclangmanager.commands.LangCommand;
+import fr.red.lclangmanager.sql.SQL.Methods;
+${definition}"
+      associated_elems
+	class_ref 182066 // InventoryClick
+      end
+    end
+
+    artifact 174770 "Join"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.HashMap;
+import java.util.Map;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import fr.red.lclangmanager.api.LifeLangAPI;
+import fr.red.lclangmanager.sql.SQL.Methods;
+${definition}"
+      associated_elems
+	class_ref 182322 // Join
+      end
+    end
+  end
+end

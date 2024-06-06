@@ -1,0 +1,15 @@
+class EnregistrerSelectionParticipant
+!!!206642.java!!!	EnregistrerSelectionParticipant(in trame : String)
+        setTrame(trame);
+!!!206770.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";PID;REPONSE;TEMPS\n";
+!!!206898.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENREGISTRER_SELECTION_PARTICIPANT;
+!!!207026.java!!!	getPID() : String
+        return extraireDonnees().get("PID");
+!!!207154.java!!!	getTempsReponse() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!207282.java!!!	getNumeroReponse() : int
+        return toInt(extraireDonnees().get("REPONSE"));
+!!!207410.java!!!	genererTrame(in pid : String, in numeroReponse : int, in tempsReponse : long) : void
+        super.genererTrame(pid, numeroReponse + "", tempsReponse + "");

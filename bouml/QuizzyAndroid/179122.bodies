@@ -1,0 +1,102 @@
+class HGWorldGenerator
+!!!368050.java!!!	generateWorlds(in number : int) : void
+		File backup_folder = new File("backup_worlds/");
+		MapReplacer.deleteWorld(backup_folder);
+		backup_folder.mkdir();
+		for (int i = 0; i < number; i++) {
+			int worldnb = i + 1;
+			String world_name = "backup_hunger" + (worldnb < 10 ? "0" + worldnb : worldnb);
+			World world = new WorldCreator(world_name).createWorld();
+			Location spawn = findSpawn(world);
+			boolean isValid = isValid(spawn.clone().add(0, -1, 0));
+			if (isValid) {
+				System.out.println("Generation of the plate for '" + world_name + "'");
+				generatePlate(world, spawn);
+			} else {
+				System.out.println("-- Invalid world ! Attempt to new Generation --");
+				i--;
+			}
+			System.out.println("Unload of '" + world_name + "'");
+			Bukkit.unloadWorld(world, true);
+			if (isValid) {
+				System.out.println("Copy of '" + world_name + "' vers 'backup_worlds/" + world_name + "'");
+				MapReplacer.copyWorld(new File(world_name), new File("backup_worlds/" + world_name));
+			}
+			System.out.println("Removing of '" + world_name + "'");
+			MapReplacer.deleteWorld(new File(world_name));
+		}
+!!!368178.java!!!	isValid(inout spawnBlock : Location) : boolean
+		Material mat = spawnBlock.getBlock().getType();
+		if (mat == Material.WATER || mat == Material.STATIONARY_WATER) {
+			return false;
+		}
+		int yBase = spawnBlock.getBlockY() - 1;
+		int totalBlocks = 0;
+		double totalDifference = 0;
+		for (int x = -circle_size; x <= circle_size; x++) {
+			for (int z = -circle_size; z <= circle_size; z++) {
+				Location loc = new Location(spawnBlock.getWorld(), x, spawnBlock.getY(), z);
+				if (spawnBlock.distance(loc) > circle_size) {
+					continue;
+				}
+				totalBlocks++;
+				for (int y = 255; y > 0; y--) {
+					loc.setY(y);
+					if (loc.getBlock().getType() != Material.AIR) {
+						if (y > yBase) {
+							totalDifference += (double) Math.abs(yBase - y) / 4.0;
+						} else {
+							totalDifference += (double) Math.abs(yBase - y);
+						}
+						break;
+					}
+				}
+			}
+		}
+		double difference = (double) totalDifference / (double) totalBlocks;
+		return difference < 3;
+!!!368306.java!!!	generatePlate(inout world : World, inout spawn : Location) : void
+		int underGroundExtend = 30; //Profondeur du plateau (DIRT)
+		int blockNbHorizontalExtention = 1; //Taille des marches en blocs
+		boolean end = false;
+		int extend = underGroundExtend * blockNbHorizontalExtention;
+		for (int y = 255; y > 0 && !end; y--) {
+			for (int x = -circle_size - extend; x <= circle_size + extend && !end; x++) {
+				for (int z = -circle_size - extend; z <= circle_size + extend && !end; z++) {
+					Location loc = new Location(world, x, y, z);
+					boolean isGrassLvl = y == spawn.getBlockY() - 1;
+					boolean isDirtLvl = y >= spawn.getBlockY() - underGroundExtend && y <= spawn.getBlockY() - 2;
+					boolean isOver = y > spawn.getBlockY() - 1;
+					boolean isUnder = y < spawn.getBlockY() - underGroundExtend;
+					
+					int distanceMax = isUnder || isGrassLvl || isDirtLvl ? circle_size + (spawn.getBlockY() - 1 - y) * blockNbHorizontalExtention : circle_size;
+					double distance = loc.distance(spawn);
+					if (isOver || distanceMax < circle_size) {
+						Location loc2 = loc.clone();
+						loc2.setY(spawn.getY());
+						distance = loc2.distance(spawn);
+					}
+					if (distance > distanceMax) {
+						continue;
+					}
+					if (isGrassLvl && loc.getBlock().getType() != Material.GRASS) {
+						loc.getBlock().setType(Material.GRASS);
+					} else if (isDirtLvl && (loc.getBlock().getType() == Material.WATER || loc.getBlock().getType() == Material.STATIONARY_WATER || loc.getBlock().getType() == Material.AIR || loc.getBlock().getType() == Material.LONG_GRASS || loc.getBlock().getType() == Material.YELLOW_FLOWER || loc.getBlock().getType() == Material.BROWN_MUSHROOM || loc.getBlock().getType() == Material.RED_ROSE || loc.getBlock().getType() == Material.DEAD_BUSH || loc.getBlock().getType() == Material.RED_MUSHROOM)) {
+						loc.getBlock().setType(Material.DIRT);
+					} else if (isOver && loc.getBlock().getType() != Material.AIR) {
+						loc.getBlock().setType(Material.AIR);
+					} else if (isUnder) {
+						end = true;
+					}
+				}
+			}
+		}
+!!!368434.java!!!	findSpawn(inout world : World) : Location
+		int y = 255;
+		for(;y > 0; y--) {
+			Material mat = world.getBlockAt(0, y, 0).getType();
+			if (mat != Material.AIR && mat != Material.LOG && mat != Material.LOG_2 && mat != Material.LEAVES && mat != Material.LEAVES_2 && mat != Material.CACTUS) {
+				break;
+			}
+		}
+		return new Location(world, 0.5, y + 1, 0.5, 0, 0);

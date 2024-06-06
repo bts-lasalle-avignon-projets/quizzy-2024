@@ -1,0 +1,9 @@
+class SheepExeption
+!!!341810.java!!!	SheepExeption()
+		super();
+!!!341938.java!!!	SheepExeption(in string : String)
+		super(string);
+!!!342066.java!!!	SheepExeption(inout arg0 : Throwable)
+		super(arg0);
+!!!342194.java!!!	SheepExeption(in string : String, inout arg0 : Throwable)
+		super(string, arg0);

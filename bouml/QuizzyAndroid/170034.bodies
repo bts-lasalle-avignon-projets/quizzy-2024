@@ -1,0 +1,37 @@
+class Distortion
+!!!305330.java!!!	Distortion(in attack : int)
+		this.attack = attack;
+		double d = (double) radius / (double) 2;
+		distance = d != (int) d ? ((int) d) + 1 : (int) d;
+!!!305458.java!!!	getAttackCount() : int
+		return attack;
+!!!305586.java!!!	getAwaitEnable() : int
+		return 0;
+!!!305714.java!!!	getAwaitDisable() : int
+		return 0;
+!!!305842.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.DISTORTION;
+!!!305970.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!306098.java!!!	Attack(inout info : SheepInfo) : void
+		Location loc1 = info.getSheep().getLocation().clone().add(distance, distance, distance);
+		Location loc2 = info.getSheep().getLocation().clone().add(-distance, -distance, -distance);
+		Cuboid c = new Cuboid(loc1, loc2);
+		Block b = null;
+		for (int i = 0; i < 10; i++) {
+			Location r = c.getRandomLocation();
+			if (r.getBlock().getType() != Material.AIR) {
+				b = r.getBlock();
+				break;
+			}
+		}
+		if (b == null) {
+			return;
+		}
+		FallingBlock fb = b.getWorld().spawnFallingBlock(b.getLocation(), b.getType(), b.getData());
+		b.setType(Material.AIR);
+		Random r = new Random();
+		fb.setVelocity(new Vector(r.nextDouble(), r.nextDouble(), r.nextDouble()));
+		for (Player pll : info.getSheep().getWorld().getPlayers()) {
+			pll.playSound(b.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 2);
+		}

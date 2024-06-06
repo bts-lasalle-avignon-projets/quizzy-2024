@@ -1,0 +1,107 @@
+class Peripherique
+!!!243506.java!!!	Peripherique(inout device : BluetoothDevice, inout handler : Handler, in indicePeripherique : int)
+        Log.d(TAG,
+              "Peripherique() nom = " + device.getName() + " - adresse mac = " +
+                device.getAddress() + " - indicePeripherique = " + indicePeripherique);
+        this.device             = device;
+        this.handler            = handler;
+        this.indicePeripherique = indicePeripherique;
+        if(device != null)
+        {
+            this.nom     = device.getName();
+            this.adresse = device.getAddress();
+        }
+        else
+        {
+            this.nom     = "Aucun";
+            this.adresse = "";
+        }
+!!!243634.java!!!	getNom() : String
+        return nom;
+!!!243762.java!!!	getAdresse() : String
+        return adresse;
+!!!243890.java!!!	getIndicePeripherique() : int
+        return indicePeripherique;
+!!!244018.java!!!	estConnecte() : boolean
+        return socket != null && socket.isConnected();
+!!!244146.java!!!	connecter() : void
+        Log.d(TAG,
+              "connecter() nom = " + getNom() + " - adresse mac = " + getAdresse() +
+                " - indicePeripherique = " + indicePeripherique);
+        try
+        {
+            socket = device.createRfcommSocketToServiceRecord(
+              UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+            receiveStream = socket.getInputStream();
+            sendStream    = socket.getOutputStream();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            socket = null;
+        }
+        if(socket != null)
+        {
+            tReception = new TReception();
+        }
+        new Thread() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void run()
+            {
+                try
+                {
+                    socket.connect();
+                    Message msg = Message.obtain();
+                    msg.what    = GestionnaireProtocoles.CODE_CONNEXION_BLUETOOTH;
+                    msg.obj     = indicePeripherique;
+                    handler.sendMessage(msg);
+                    tReception.start();
+                }
+                catch(IOException e)
+                {
+                    Log.d(TAG, "connecter() erreur connect socket");
+                    e.printStackTrace();
+                    Message msg = Message.obtain();
+                    msg.what    = GestionnaireProtocoles.CODE_ERREUR_CONNEXION_BLUETOOTH;
+                    msg.obj     = indicePeripherique;
+                    handler.sendMessage(msg);
+                }
+            }
+        }.start();
+!!!244274.java!!!	deconnecter() : boolean
+        Log.d(TAG,
+              "deconnecter() nom = " + getNom() + " - adresse mac = " + getAdresse() +
+                " - indicePeripherique = " + indicePeripherique);
+        try
+        {
+            tReception.arreter();
+            socket.close();
+            Message msg = Message.obtain();
+            msg.what    = GestionnaireProtocoles.CODE_DECONNEXION_BLUETOOTH;
+            msg.obj     = indicePeripherique;
+            handler.sendMessage(msg);
+            return true;
+        }
+        catch(IOException e)
+        {
+            Log.d(TAG, "deconnecter() erreur close socket");
+            e.printStackTrace();
+            return false;
+        }
+!!!244402.java!!!	envoyer(in data : String) : void
+        /*Log.d(TAG,
+              "envoyer() nom = " + getNom() + " - adresse mac = " + getAdresse() +
+                " - indicePeripherique = " + indicePeripherique + " - datas = " + data);*/
+        if(socket == null)
+            return;
+        try
+        {
+            sendStream.write(data.getBytes());
+            sendStream.flush();
+        }
+        catch(IOException e)
+        {
+            Log.d(TAG, "envoyer() erreur send socket");
+            e.printStackTrace();
+        }

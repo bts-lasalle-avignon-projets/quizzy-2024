@@ -1,0 +1,21 @@
+class PotionBuilder
+!!!354866.java!!!	PotionBuilder(inout type : PotionType, in seconds : int, in power : int)
+			setType(type.getEffectType());
+			setDuration(seconds*20);
+			setAmplifier(power - 1);
+!!!354994.java!!!	PotionBuilder(inout type : PotionEffectType, in seconds : int, in power : int)
+			setType(type);
+			setDuration(seconds*20);
+			setAmplifier(power - 1);
+!!!355122.java!!!	getType() : PotionEffectType
+			return type;
+!!!355250.java!!!	setType(inout type : PotionEffectType) : void
+			this.type = type;
+!!!355378.java!!!	getDuration() : int
+			return duration;
+!!!355506.java!!!	setDuration(in duration : int) : void
+			this.duration = duration;
+!!!355634.java!!!	getAmplifier() : int
+			return amplifier;
+!!!355762.java!!!	setAmplifier(in amplifier : int) : void
+			this.amplifier = amplifier;

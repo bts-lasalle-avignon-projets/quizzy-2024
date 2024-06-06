@@ -1,0 +1,44 @@
+class Quit
+!!!284722.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		Player p = (Player) sender;
+		boolean soft = cmd.getName().equalsIgnoreCase("quit") || cmd.getName().equalsIgnoreCase("leave") || cmd.getName().equalsIgnoreCase("spawn");
+		boolean spawn = cmd.getName().equalsIgnoreCase("spawn");
+		if (p.getWorld().getName().equalsIgnoreCase("lobby")) {
+			if (spawn) {
+				p.teleport(Join.getSpawn());
+				p.sendMessage("§7BattleSheep §e> §aTéléportation au spawn..");
+			} else if (soft) {
+				p.sendMessage("§7BattleSheep §e> §cVous n'êtes pas en partie");
+			} else {
+				sendToHUB(p);
+			}
+		} else {
+			GAME game = GAME.from(p);
+			if (game != null) {
+				game.removePlayer(p);
+			}
+			p.teleport(Join.getSpawn());
+			p.sendMessage("§7BattleSheep §e> §aVous avez quitté la partie");
+			for (Player pll : Bukkit.getOnlinePlayers()) {
+				if (pll.getWorld().equals(p.getWorld())) {
+					pll.showPlayer(p);
+					p.showPlayer(pll);
+				} else {
+					pll.hidePlayer(p);
+					p.hidePlayer(pll);
+				}
+			}
+		}
+		return true;
+!!!284850.java!!!	sendToHUB(inout p : Player) : void
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		try {
+			out.writeUTF("Command");
+			out.writeUTF("gotohub " + p.getName());
+		} catch (Exception e1) {
+		}
+		p.sendPluginMessage(Main.getInstance(), "BungeeCord", b.toByteArray());

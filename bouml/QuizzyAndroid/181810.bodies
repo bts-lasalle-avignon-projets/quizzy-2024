@@ -1,0 +1,40 @@
+class PacketItemStack
+!!!389554.java!!!	editInventoryContent(inout msg : PacketPlayOutWindowItems, inout handler : PacketHandler) : boolean
+		ItemStack[] items = (ItemStack[]) PacketUtils.getPrivate(msg, "b");
+		for (ItemStack it : items) {
+			updateItem(it, handler);
+		}
+		return true;
+!!!389682.java!!!	editItem(inout msg : PacketPlayOutSetSlot, inout handler : PacketHandler) : boolean
+		ItemStack item = (ItemStack) PacketUtils.getPrivate(msg, "c");
+		updateItem(item, handler);
+		return true;
+!!!389810.java!!!	updateItem(inout item : ItemStack, inout handler : PacketHandler) : void
+		if (item == null) {
+			return;
+		}
+		String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), item.getName());
+		setDisplayName(item, extractedMessage);
+		NBTTagList lore = getLore(item);
+		for (int i = 0; lore != null && i < lore.size(); i++) {
+			extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), lore.getString(i));
+			lore.a(i, new NBTTagString(extractedMessage));
+		}
+!!!389938.java!!!	getLore(inout item : ItemStack) : NBTTagList
+		if (item == null || !item.hasTag()) {
+			return null;
+		}
+		NBTTagCompound display = item.getTag().getCompound("display");
+		if (display == null) {
+			return null;
+		}
+		NBTTagCompound lore_compound = display.getCompound("Lore");
+		if (lore_compound == null) {
+			return null;
+		}
+        return display.getList("Lore", 8);
+!!!390066.java!!!	setDisplayName(inout item : ItemStack, in name : String) : ItemStack
+		if (item != null) {
+			item.c(name);
+		}
+		return item;

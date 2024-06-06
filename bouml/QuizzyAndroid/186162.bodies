@@ -1,0 +1,13 @@
+class Join
+!!!418482.java!!!	onJoin(inout e : PlayerJoinEvent) : void
+		Bukkit.getScheduler().runTaskLater(LifePets.getInstance(), () -> {
+			registerPets(e.getPlayer());
+		}, 5);
+!!!418610.java!!!	registerPets(inout p : Player) : void
+		if (!p.isOnline()) {
+			return;
+		}
+		PlayerPetProfile.from(p);
+!!!418738.java!!!	onQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		PlayerPetProfile.from(p).destroy();

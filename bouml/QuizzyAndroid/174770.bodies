@@ -1,0 +1,21 @@
+class HubCommand
+!!!343218.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		Player p = (Player) sender;
+		if (QuitCommand.quit(p, false)) {
+			p.sendMessage("§8> §aVous avez quitté la partie");
+		} else {
+			sendToHUB(p);
+		}
+		return true;
+!!!343346.java!!!	sendToHUB(inout p : Player) : void
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		DataOutputStream out = new DataOutputStream(b);
+		try {
+			out.writeUTF("Command");
+			out.writeUTF("gotohub " + p.getName());
+		} catch (Exception e1) {
+		}
+		p.sendPluginMessage(Main.getInstance(), "BungeeCord", b.toByteArray());

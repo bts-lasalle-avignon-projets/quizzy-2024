@@ -1,0 +1,26 @@
+class Question
+!!!260018.java!!!	Question(in question : String, inout reponses : List<String>, in temps : int)
+        String bonneReponse = reponses.get(0);
+        this.reponses       = reponses;
+        this.question       = question;
+        this.temps          = temps;
+        Collections.shuffle(reponses);
+
+        this.numeroBonneReponse = reponses.indexOf(bonneReponse) + 1;
+!!!260146.java!!!	getNumeroBonneReponse() : int
+        return numeroBonneReponse;
+!!!260274.java!!!	getQuestion() : String
+        return question;
+!!!260402.java!!!	getReponses() : List<String>
+        return reponses;
+!!!260530.java!!!	getTemps() : int
+        return temps;
+!!!260658.java!!!	estSelectionnee(in numeroProposition : int) : boolean
+        return selection.contains(numeroProposition);
+!!!260786.java!!!	ajouterSelection(in numeroProposition : int) : void
+        if(!estSelectionnee(numeroProposition))
+        {
+            selection.add(numeroProposition);
+        }
+!!!260914.java!!!	getSelection() : List<Integer>
+        return selection;

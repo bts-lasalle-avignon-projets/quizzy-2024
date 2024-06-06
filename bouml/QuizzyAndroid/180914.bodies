@@ -1,0 +1,30 @@
+class PacketHandler
+!!!387762.java!!!	PacketHandler(inout player : Player)
+		this.player = player;
+!!!387890.java!!!	getPlayer() : Player
+		return player;
+!!!388018.java!!!	write(inout ctx : ChannelHandlerContext, inout msg : Object, inout promise : ChannelPromise) : void
+		//String type = msg.getClass().getSimpleName();
+		if (!editPacket(msg)) {
+			return;
+		}
+		super.write(ctx, msg, promise);
+!!!388146.java!!!	editPacket(inout msg : Object) : boolean
+		if (msg instanceof PacketPlayOutChat) {
+			return PacketChat.editChat((PacketPlayOutChat) msg, this);
+		} else if (msg instanceof PacketPlayOutSpawnEntityLiving) {
+			return PacketBossBar.editBossBar((PacketPlayOutSpawnEntityLiving) msg, this);
+		} else if (msg instanceof PacketPlayOutOpenWindow) {
+			return PacketInventory.editInventory((PacketPlayOutOpenWindow) msg, this);
+		} else if (msg instanceof PacketPlayOutWindowItems) {
+			return PacketItemStack.editInventoryContent((PacketPlayOutWindowItems) msg, this);
+		} else if (msg instanceof PacketPlayOutSetSlot) {
+			return PacketItemStack.editItem((PacketPlayOutSetSlot) msg, this);
+		} else if (msg instanceof PacketPlayOutEntityMetadata) {
+			return PacketHologram.editHologram((PacketPlayOutEntityMetadata) msg, this);
+		} else if (msg instanceof PacketPlayOutUpdateSign) {
+			return PacketSign.editSign((PacketPlayOutUpdateSign) msg, this);
+		}
+		return true;
+!!!388274.java!!!	channelRead(inout ctx : ChannelHandlerContext, inout msg : Object) : void
+		super.channelRead(ctx, msg);

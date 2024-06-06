@@ -1,0 +1,15 @@
+class PigZombie
+!!!451762.java!!!	PigZombie(inout owner : Player, in id : int)
+		super(owner, EntityType.PIG_ZOMBIE, "Pigmen de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!451890.java!!!	PigZombie(inout owner : Player)
+		super(owner, EntityType.PIG_ZOMBIE, "Pigmen de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!452018.java!!!	getEntity() : org.bukkit.entity.PigZombie
+		return (org.bukkit.entity.PigZombie) entity;
+!!!452146.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setAnger(0);
+		getEntity().setAngry(false);
+!!!452274.java!!!	clone(inout player : Player) : PigZombie
+		return new PigZombie(player, getID());

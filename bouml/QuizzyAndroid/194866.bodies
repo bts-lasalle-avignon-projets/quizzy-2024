@@ -1,0 +1,16 @@
+class MessageBuilder
+!!!497330.java!!!	MessageBuilder(in path : String)
+		this.path = path;
+!!!497458.java!!!	getString(inout withColor : boolean) : String
+		FileConfiguration fileConfiguration = ConfigManager.MESSAGES.getConfig();
+		return withColor ? fileConfiguration.getString(path).replace("&", "§") : fileConfiguration.getString(path);
+!!!497586.java!!!	getStringList(inout withColor : boolean) : List<String>
+		FileConfiguration fileConfiguration = ConfigManager.MESSAGES.getConfig();
+		List<String> stringList = new ArrayList<>();
+		
+		if (withColor) {
+			fileConfiguration.getStringList(path).forEach(s -> stringList.add(s.replace("&", "§")));
+		} else {
+			stringList.addAll(fileConfiguration.getStringList(path));
+		}
+		return stringList;

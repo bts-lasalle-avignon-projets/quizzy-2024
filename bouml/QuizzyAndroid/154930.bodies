@@ -1,0 +1,13 @@
+class ArgumentLancement
+!!!224178.java!!!	envoyerPopup(inout session : Session, inout ihm : IHM) : void
+        switch (this) {
+            case NON_CONNECTER:
+                new PopupNonConnecte(session).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupNonConnecte");
+                break;
+            case AUCUN_PARTICIPANT:
+                new PopupAucunParticipant(session).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupAucunParticipant");
+                break;
+            case NON_CONFIGURER:
+                new PopupNonConfigurer(session).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupNonConfigurer");
+                break;
+        }

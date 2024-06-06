@@ -1,0 +1,40 @@
+class Song
+!!!512946.java!!!	Song(inout song : com.xxmicloxx.NoteBlockAPI.model.Song, in name : String, in author : String)
+		this.song = song;
+		this.name = name;
+		this.author = author;
+		
+		all.add(this);
+!!!513074.java!!!	getSong() : com.xxmicloxx.NoteBlockAPI.model.Song
+		return song;
+!!!513202.java!!!	getName() : String
+		return name;
+!!!513330.java!!!	getAuthor() : String
+		return author;
+!!!513458.java!!!	getItem(inout playing : boolean) : ItemStack
+		ItemBuilder ib = new ItemBuilder(Material.SKULL_ITEM, (byte) 3);
+		String play_argument = playing ? "TEXT.RADIO.SONG.STATE.RUN" : "";
+		ib.name(LifeLangAPI.parseMessage("TEXT.RADIO.SONG.STATE", new String[] {name, play_argument})).lore(Arrays.asList(LifeLangAPI.parseMessage("TEXT.RADIO.SONG.AUTHOR", new String[] {author})));
+		if (playing) {
+			ib.skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdkZjNjMjhlZjY2NWI1YjEyOGY0MDkwZGY2ZTRiYmNhMjRlZjQ0NGI1N2YyMTVkZTkxNWQ4OGQ1YzQyZmUxOCJ9fX0=");
+		} else {
+			ib.skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGNlZWI3N2Q0ZDI1NzI0YTljYWYyYzdjZGYyZDg4Mzk5YjE0MTdjNmI5ZmY1MjEzNjU5YjY1M2JlNDM3NmUzIn19fQ==");
+		}
+		return ib;
+!!!513586.java!!!	from(inout item : ItemStack) : Song
+		String[] l;
+		String name = item.hasItemMeta() && item.getItemMeta().hasDisplayName() && (l = LifeLangAPI.getArgs(item.getItemMeta().getDisplayName())).length > 0 ? l[0] : "";
+		String author = item.hasItemMeta() && item.getItemMeta().hasLore() && (l = LifeLangAPI.getArgs(item.getItemMeta().getLore().get(0))).length > 0 ? l[0] : "";
+		for (Song song : all) {
+			if (song.getAuthor().equalsIgnoreCase(author) && song.getName().equalsIgnoreCase(name)) {
+				return song;
+			}
+		}
+		return null;
+!!!513714.java!!!	from(inout s : com.xxmicloxx.NoteBlockAPI.model.Song) : Song
+		for (Song song : all) {
+			if (song.getSong() == s) {
+				return song;
+			}
+		}
+		return null;

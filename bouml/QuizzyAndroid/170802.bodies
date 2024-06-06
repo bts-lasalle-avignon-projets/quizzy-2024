@@ -1,0 +1,45 @@
+class Galactic
+!!!309938.java!!!	Galactic(in attack : int)
+		this.attack = attack;
+!!!310066.java!!!	getAttackCount() : int
+		return attack;
+!!!310194.java!!!	getAwaitEnable() : int
+		return 1;
+!!!310322.java!!!	getAwaitDisable() : int
+		return 0;
+!!!310450.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.GALACTIC;
+!!!310578.java!!!	Enable(inout info : SheepInfo) : void
+		location = info.getSheep().getLocation().clone();
+		new BukkitRunnable() {int wait = getAwaitEnable();@Override public void run() {
+			if (!info.getSheep().isDead()) {
+				location = info.getSheep().getLocation().clone();
+			}
+			if (wait == 0 || (!info.getSheep().isDead() && info.getSheep().isOnGround())) {
+				cancel();
+				if (location == null) {
+					return;
+				}
+				Cycles.DefaultCycle(info, Galactic.this, true, 20);
+			}
+			if (wait > 0) {
+				info.resetLife();
+				wait--;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 20);
+!!!310706.java!!!	Attack(inout info : SheepInfo) : void
+		Random r = new Random();
+		int x = r.nextInt(15) + 15;
+		int z = r.nextInt(15) + 15;
+		Fireball fb = (Fireball) location.getWorld().spawnEntity(location.clone().add(r.nextBoolean() ? x : -x, 50, r.nextBoolean() ? z : -z), EntityType.FIREBALL);
+		Vector v = location.toVector().subtract(fb.getLocation().toVector());
+		fb.setYield(5);
+		fb.setDirection(v);
+		fb.setVelocity(v.multiply(0.00005));
+		new BukkitRunnable() {@Override public void run() {
+			if (fb.isDead()) {
+				cancel();
+				return;
+			}
+			ParticleAPI.PlayParticle(fb.getLocation(), EnumParticle.EXPLOSION_HUGE, false, info.getGame().getPlayers());
+		}}.runTaskTimer(Main.getInstance(), 0, 2);

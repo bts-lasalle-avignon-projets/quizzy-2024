@@ -1,0 +1,14 @@
+class Slime
+!!!453810.java!!!	Slime(inout owner : Player, in id : int)
+		super(owner, EntityType.SLIME, "Slime de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!453938.java!!!	Slime(inout owner : Player)
+		super(owner, EntityType.SLIME, "Slime de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!454066.java!!!	getEntity() : org.bukkit.entity.Slime
+		return (org.bukkit.entity.Slime) entity;
+!!!454194.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setSize(1);
+!!!454322.java!!!	clone(inout player : Player) : Slime
+		return new Slime(player, getID());

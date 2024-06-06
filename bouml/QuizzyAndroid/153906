@@ -1,0 +1,235 @@
+format 224
+"api" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcmapdater::api
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_MapDater/src/fr/red/lcmapdater/api/"
+  java_package "fr.red.lcmapdater.api"
+  classview 158002 "api"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 183474 "MapDaterAPI"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 402866 "getWorld"
+	class_operation public explicit_return_type "World"
+	nparams 1
+	  param in name "world" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 183602 "MapDaterSwitchEvent"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 194738 // <generalisation>
+	relation 194738 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 194738 // <generalisation>
+	  b parent class_ref 179506 // Event
+      end
+
+      attribute 249394 "from"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 249522 "to"
+	private explicit_type "World"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 402994 "MapDaterSwitchEvent"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "from" explicit_type "String"
+	  param inout name "to" explicit_type "World"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      attribute 249650 "HANDLERS"
+	class_attribute const_attribute private explicit_type "HandlerList"
+	init_value " new HandlerList()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 403122 "getHandlers"
+	public explicit_return_type "HandlerList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 403250 "getHandlerList"
+	class_operation public explicit_return_type "HandlerList"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 403378 "getFrom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 403506 "getTo"
+	public explicit_return_type "World"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 151090 "api"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 175410 "MapDaterAPI"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.World;
+import fr.red.lcmapdater.utils.MapDaterRegister;
+${definition}"
+      associated_elems
+	class_ref 183474 // MapDaterAPI
+      end
+    end
+
+    artifact 175538 "MapDaterSwitchEvent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.World;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+${definition}"
+      associated_elems
+	class_ref 183602 // MapDaterSwitchEvent
+      end
+    end
+  end
+end

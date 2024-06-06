@@ -1,0 +1,116 @@
+format 224
+"commands" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcradio::commands
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Radio/src/fr/red/lcradio/commands/"
+  java_package "fr.red.lcradio.commands"
+  classview 160818 "commands"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 195122 "RadioCommand"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 211122 // <realization>
+	relation 211122 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 211122 // <realization>
+	  b parent class_ref 166194 // CommandExecutor
+      end
+
+      operation 499890 "onCommand"
+	public explicit_return_type "boolean"
+	nparams 4
+	  param inout name "sender" explicit_type "CommandSender"
+	  param inout name "cmd" explicit_type "Command"
+	  param in name "msg" explicit_type "String"
+	  param inout name "args" explicit_type "String"
+	multiplicity "[]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3}[] ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 153906 "commands"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 185522 "RadioCommand"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import fr.red.lcradio.utils.RadioMenu;
+${definition}"
+      associated_elems
+	class_ref 195122 // RadioCommand
+      end
+    end
+  end
+end

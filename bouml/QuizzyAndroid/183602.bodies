@@ -1,0 +1,12 @@
+class MapDaterSwitchEvent
+!!!402994.java!!!	MapDaterSwitchEvent(in from : String, inout to : World)
+		this.from = from;
+		this.to = to;
+!!!403122.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!403250.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!403378.java!!!	getFrom() : String
+		return from;
+!!!403506.java!!!	getTo() : World
+		return to;

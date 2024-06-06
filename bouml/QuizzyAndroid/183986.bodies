@@ -1,0 +1,21 @@
+class ConfigManager
+!!!404530.java!!!	ConfigManager(inout configAccess : ConfigAccess)
+		this.configAccess = configAccess;
+!!!404658.java!!!	saveDefaultConfig(inout plugin : Plugin) : void
+		configAccess.saveDefaultConfig(plugin);
+!!!404786.java!!!	saveConfig() : void
+		configAccess.saveConfig();
+!!!404914.java!!!	reloadConfig() : void
+		configAccess.reloadConfig();
+!!!405042.java!!!	getName() : String
+		return configAccess.getFileName();
+!!!405170.java!!!	getConfig() : FileConfiguration
+		return configAccess.getConfig();
+!!!405298.java!!!	saveDefaultConfigs(inout plugin : Plugin) : void
+		for (ConfigManager cm : values()) {
+			cm.saveDefaultConfig(plugin);
+		}
+!!!405426.java!!!	saveConfigs() : void
+		for (ConfigManager cm : values()) {
+			cm.saveConfig();
+		}

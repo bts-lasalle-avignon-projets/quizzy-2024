@@ -1,0 +1,708 @@
+format 224
+"menu" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcpets::utils::menu
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Pets/src/fr/red/lcpets/utils/menu/"
+  java_package "fr.red.lcpets.utils.menu"
+  package_ref 155570 // list
+
+  classview 159666 "menu"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 187570 "CraftMenu"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 258866 "inventory"
+	private explicit_type "Inventory"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 258994 "clones"
+	private explicit_type "Inventory"
+	init_value " new ArrayList<>()"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 198194 // subInventories (<unidirectional association>)
+	relation 198194 --->
+	  stereotype "Map"
+	  a role_name "subInventories" init_value " new HashMap<>()" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<ItemStack, ${type}> ${name}${value};
+"
+	    classrelation_ref 198194 // subInventories (<unidirectional association>)
+	  b parent class_ref 187698 // IMenu
+      end
+
+      classrelation 198322 // menu (<unidirectional association>)
+	relation 198322 --->
+	  a role_name "menu" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198322 // menu (<unidirectional association>)
+	  b parent class_ref 187698 // IMenu
+      end
+
+      classrelation 198450 // parent (<unidirectional association>)
+	relation 198450 --->
+	  a role_name "parent" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198450 // parent (<unidirectional association>)
+	  b parent class_ref 187698 // IMenu
+      end
+
+      classrelation 198578 // list (<unidirectional association>)
+	relation 198578 --->
+	  stereotype "List"
+	  a role_name "list" init_value " new ArrayList<>()" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 198578 // list (<unidirectional association>)
+	  b parent class_ref 187570 // CraftMenu
+      end
+
+      operation 428978 "init"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "plugin" explicit_type "Plugin"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429106 "CraftMenu"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "inventory" explicit_type "Inventory"
+	  param inout name "parent" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429234 "open"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429362 "getParent"
+	public return_type class_ref 187698 // IMenu
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429490 "setParent"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "parent" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429618 "getMenu"
+	public return_type class_ref 187698 // IMenu
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429746 "setMenu"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "menu" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 429874 "getInventory"
+	public explicit_return_type "Inventory"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430002 "getTitle"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430130 "isSame"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430258 "hasSubMenu"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "menu" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430386 "removeClone"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430514 "isClone"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430642 "clone"
+	public explicit_return_type "Inventory"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430770 "from"
+	class_operation public return_type class_ref 187698 // IMenu
+	nparams 1
+	  param inout name "inventory" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 430898 "from"
+	public return_type class_ref 187698 // IMenu
+	nparams 1
+	  param inout name "item" explicit_type "ItemStack"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431026 "addSub"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "item" explicit_type "ItemStack"
+	  param inout name "menu" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 187698 "IMenu"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 431154 "getInventory"
+	public explicit_return_type "Inventory"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431282 "getTitle"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431410 "open"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431538 "getParent"
+	public return_type class_ref 187698 // IMenu
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431666 "addSub"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "item" explicit_type "ItemStack"
+	  param inout name "menu" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431794 "isSame"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 431922 "hasSubMenu"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "menu" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432050 "onClick"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryClickEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432178 "onOpen"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryOpenEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432306 "onClose"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryCloseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432434 "isClone"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432562 "clone"
+	public explicit_return_type "Inventory"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 432690 "removeClone"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 191026 "MenuEvent"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 205106 // <realization>
+	relation 205106 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 205106 // <realization>
+	  b parent class_ref 166322 // Listener
+      end
+
+      operation 457010 "onClick"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryClickEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 457138 "onOpen"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryOpenEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 457266 "onClose"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" explicit_type "InventoryCloseEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 457394 "onContentClick"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "e" type class_ref 191154 // MenuClickContentEvent
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@EventHandler
+"
+	
+	
+	
+      end
+
+      operation 457522 "clickOnAction"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "p" explicit_type "Player"
+	  param inout name "item" explicit_type "ItemStack"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 457650 "clickOnPet"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "p" explicit_type "Player"
+	  param inout name "pet" type class_ref 187826 // Pet
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 152626 "menu"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 178098 "CraftMenu"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+${definition}"
+      associated_elems
+	class_ref 187570 // CraftMenu
+      end
+    end
+
+    artifact 178226 "IMenu"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+${definition}"
+      associated_elems
+	class_ref 187698 // IMenu
+      end
+    end
+
+    artifact 181810 "MenuEvent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.ItemStack;
+import fr.red.lcpets.api.PetAPI;
+import fr.red.lcpets.commands.PetCommand;
+import fr.red.lcpets.utils.PlayerPetProfile;
+import fr.red.lcpets.utils.entity.Pet;
+import fr.red.lcpets.utils.menu.api.MenuClickContentEvent;
+${definition}"
+      associated_elems
+	class_ref 191026 // MenuEvent
+      end
+    end
+  end
+
+  package_ref 156082 // api
+end

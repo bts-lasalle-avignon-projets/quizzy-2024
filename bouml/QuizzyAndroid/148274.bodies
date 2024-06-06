@@ -1,0 +1,15 @@
+class Theme
+!!!235442.java!!!	Theme(in idTheme : int, in nom : String)
+        this.idTheme = idTheme;
+        this.nom = nom;
+!!!235570.java!!!	getNom() : String
+        return nom;
+!!!235698.java!!!	getIdTheme() : int
+        return idTheme;
+!!!539186.java!!!	Theme(in idTheme : int, in nom : String)
+        this.idTheme = idTheme;
+        this.nom = nom;
+!!!539314.java!!!	getNom() : String
+        return nom;
+!!!539442.java!!!	getIdTheme() : int
+        return idTheme;

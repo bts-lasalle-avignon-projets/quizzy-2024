@@ -1,0 +1,220 @@
+class Halloween
+!!!406706.java!!!	start(inout world : World) : void
+		stop = false;
+		w = world;
+		initTimer(world);
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				if (stop || !Bukkit.getWorlds().contains(world)) {
+					cancel();
+					return;
+				}
+				for (Player pll : world.getPlayers()) {
+					ParticleAPI.PlayParticle(pll.getLocation(), EnumParticle.REDSTONE, true, null);
+				}
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 2);
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				if (stop || !Bukkit.getWorlds().contains(world)) {
+					cancel();
+					return;
+				}
+				for (Player pll : world.getPlayers()) {
+					Cuboid c = new Cuboid(pll.getLocation().clone().add(50, 0, 50), pll.getLocation().clone().add(-50, 20, -50));
+					Location loc = c.getRandomLocation();
+					for (int i = 0; i < 5; i++) {
+						ParticleAPI.PlayParticle(loc, EnumParticle.LAVA, false, Arrays.asList(pll));
+					}
+				}
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 3);
+		enable();
+!!!406834.java!!!	reset(inout w : World) : void
+		this.w = w;
+		stop();
+!!!406962.java!!!	stop() : void
+		for (Entity ent : w.getEntities()) {
+			if (ent.getCustomName() != null && ent.getCustomName().equalsIgnoreCase("GHOST")) {
+				ent.remove();
+			}
+		}
+		stop = true;
+!!!407090.java!!!	enable() : void
+		new BukkitRunnable() {
+			Map<Player, Map<Bat, Integer>> bats = new HashMap<>();
+			List<Player> testp = new ArrayList<>();
+			List<Bat> test = new ArrayList<>();
+			@Override
+			public void run() {
+				if (stop || !Bukkit.getWorlds().contains(w)) {
+					cancel();
+					return;
+				}
+				testp.addAll(bats.keySet());
+				for (Player pll : w.getPlayers()) {
+					if (!testp.contains(pll)) {
+						bats.put(pll, new HashMap<>());
+						testp.add(pll);
+					}
+				}
+				for (Player pll : testp) {
+					if (!w.getPlayers().contains(pll) || !pll.isOnline()) {
+						destroy(pll, bats.get(pll).keySet());
+						bats.get(pll).clear();
+						bats.remove(pll);
+						continue;
+					}
+					Cuboid c = new Cuboid(pll.getLocation().clone().add(5, 5, 5), pll.getLocation().clone().add(-5, 0, -5));
+					test.addAll(bats.get(pll).keySet());
+					int count = 0;
+					for (Bat b : test) {
+						if (new Random().nextInt(400) == 0) {
+							switch (new Random().nextInt(3)) {
+							case 0:
+								pll.playSound(b.getLocation(), Sound.GHAST_SCREAM, 1, new Random().nextInt(5));
+								break;
+							case 1:
+								pll.playSound(b.getLocation(), Sound.GHAST_SCREAM2, 1, new Random().nextInt(5));
+								break;
+							case 2:
+								pll.playSound(b.getLocation(), Sound.GHAST_MOAN, 1, new Random().nextInt(5));
+								break;
+							}
+						}
+						count++;
+						int time = bats.get(pll).get(b);
+						if (!c.isIn(b.getLocation())) {
+							time++;
+							if (time > 20*15) {
+								time = 0;
+								teleport(pll, c, b);
+							} else {
+								Vector v = pll.getLocation().subtract(b.getLocation()).toVector().normalize();
+								b.setVelocity(v);
+							}
+						} else if (time > 0) {
+							time = 0;
+						} else {
+							continue;
+						}
+						bats.get(pll).remove(b);
+						if (!b.isDead() && b.getPassenger() != null) {
+							bats.get(pll).put(b, time);
+						} else {
+							if (b.getPassenger() != null) {
+								b.getPassenger().remove();
+							}
+						}
+					}
+					test.clear();
+					for (int i = count; i < 2; i++) {
+						bats.get(pll).put(randomArmor(pll, c.getRandomLocation()), 0);
+					}
+				}
+				testp.clear();
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!407218.java!!!	destroy(inout p : Player, inout set : Set<Bat>) : void
+		for (Entity ent : w.getEntities()) {
+			if (ent.getCustomName() != null && ent.getCustomName().equalsIgnoreCase("GHOST")) {
+				for (int i = 0; i < 5; i++) {
+					ParticleAPI.PlayParticle(ent.getLocation(), EnumParticle.CLOUD, true, null);
+				}
+				p.playSound(ent.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 0);
+				ent.remove();
+			}
+		}
+!!!407346.java!!!	teleport(inout p : Player, inout c : Cuboid, inout bat : Bat) : void
+		for (int i = 0; i < 5; i++) {
+			ParticleAPI.PlayParticle(bat.getLocation(), EnumParticle.CLOUD, true, null);
+		}
+		p.playSound(bat.getLocation(), Sound.ENDERMAN_TELEPORT, 1, 0);
+		Location loc = c.getRandomLocation();
+		for (int i = 0; i < 5; i++) {
+			ParticleAPI.PlayParticle(loc, EnumParticle.CLOUD, true, null);
+		}
+		p.playSound(loc, Sound.ENDERMAN_TELEPORT, 1, 0);
+		p.playSound(loc, Sound.ENDERMAN_SCREAM, 1, 0);
+		Entity r = bat.getPassenger();
+		if (r != null) {
+			r.leaveVehicle();
+		}
+		bat.teleport(loc);
+		if (r != null) {
+			r.teleport(bat);
+			bat.setPassenger(r);
+		}
+!!!407474.java!!!	randomArmor(inout p : Player, inout loc : Location) : Bat
+		Bat bat = (Bat) w.spawnEntity(loc, EntityType.BAT);
+		bat.setCustomName("GHOST");
+		bat.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, Integer.MAX_VALUE, true, false), true);
+		noSound(bat);
+		ArmorStand armor = (ArmorStand) w.spawnEntity(loc, EntityType.ARMOR_STAND);
+		armor.setVisible(false);
+		armor.setSmall(true);
+		armor.setCustomName("GHOST");
+		bat.setPassenger(armor);
+		switch (new Random().nextInt(4)) {
+		case 0:
+			armor.setHelmet(new ItemBuilder(Material.SKULL_ITEM, (byte) 3).skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2VhMWI4ZGQzNWYzNTZjYjY2YzY4MmVlYTc5MWRmODg0NDcyODFjNmQwMDZiODJjZjg1M2Q2OTQ1ZmY2YWRkNyJ9fX0="));
+			break;
+		case 1:
+			armor.setHelmet(new ItemBuilder(Material.SKULL_ITEM, (byte) 3).skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTM0YTM2NzUyZmYxNjAzNTAwZDJiMDNhMDBlZjc4M2RmZTA5OGRkNGY3N2Q4MmI4MzcwODBiOWUxYzExM2IxZCJ9fX0="));
+			armor.setChestplate(new ItemBuilder(Material.LEATHER_CHESTPLATE).color(Color.fromBGR(25, 25, 25)));
+			break;
+		case 2:
+			armor.setHelmet(new ItemBuilder(Material.SKULL_ITEM, (byte) 3).skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWI1Njc1OTU1YTEzMzkwMmEzMWQ0ZWQzMTIwYTJlNmE3NDc4YjZhYzEzNWI0ZTExZGYyYWE4MTM0NmQ3YzNmMCJ9fX0="));
+			armor.setChestplate(new ItemBuilder(Material.LEATHER_CHESTPLATE).color(Color.fromBGR(70, 50, 30)));
+			break;
+		case 3:
+			armor.setHelmet(new ItemBuilder(Material.SKULL_ITEM, (byte) 3).skullTextue("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWMzM2VkNTQ1YTg0MmM0NTZiYmI1MTRiNDVlNzdkZDU2YjZmOTU0Y2Q3ODNmOWEyNzc2YWZhMzg0ZmRiMmNmNyJ9fX0="));
+			armor.setChestplate(new ItemBuilder(Material.LEATHER_CHESTPLATE).color(Color.fromBGR(203, 161, 155)));
+			break;
+		}
+		return bat;
+!!!407602.java!!!	noSound(inout ent : Entity) : void
+		net.minecraft.server.v1_8_R3.Entity znms = ((CraftEntity) ent).getHandle();
+        NBTTagCompound ztag = new NBTTagCompound();
+        znms.c(ztag);
+        ztag.setBoolean("Silent", true);
+        znms.f(ztag);
+!!!407730.java!!!	initTimer(inout world : World) : void
+		new BukkitRunnable() {
+			Date current = MapDaterRegister.getCurrent();
+			int hour = current.getHours();
+			int min = current.getMinutes();
+			int sec = current.getSeconds();
+			long coefficent = 0;
+			@Override
+			public void run() {
+				if (stop || !Bukkit.getWorlds().contains(world)) {
+					cancel();
+					return;
+				}
+				if (sec >= 60) {
+					sec = 0;
+					min++;
+					if (min >= 60) {
+						min = 0;
+						hour++;
+					}
+					if (hour >= 24) {
+						hour = 0;
+						current = MapDaterRegister.getCurrent();
+						hour = current.getHours();
+						min = current.getMinutes();
+						sec = current.getSeconds();
+					}
+				}
+				sec++;
+				
+				coefficent = (long) ((float) hour + ((float) min / (float) 60) + ((float) sec / (float) 3600)) * 1000;
+				coefficent -= 7000;
+				coefficent = coefficent < 0 ? 24000 + coefficent : coefficent;
+				world.setTime(coefficent);
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 20);

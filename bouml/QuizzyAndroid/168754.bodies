@@ -1,0 +1,40 @@
+class SignClic
+!!!297266.java!!!	OnInteract(inout e : PlayerInteractEvent) : void
+		Player p = e.getPlayer();
+		if (e.getClickedBlock() == null || e.getClickedBlock().getType() != Material.WALL_SIGN || GAME.from(p) != null) {
+			return;
+		}
+		GAME game = GAME.from((Sign) e.getClickedBlock().getState());
+		if (game == null) {
+			return;
+		}
+		switch (game.getState()) {
+		case END:
+			if (game.isOpen()) {
+				p.sendMessage("§7BattleSheep §e> §cCette partie redémarre");
+			} else {
+				p.sendMessage("§7BattleSheep §e> §cCette partie est désactivée");
+			}
+			return;
+		case RUN:
+			p.sendMessage("§7BattleSheep §e> §6Cette partie est déjà en cours");
+			return;
+		case WAIT:
+			game.addPlayer(p, false, null);
+			for (Player pll : Bukkit.getOnlinePlayers()) {
+				if (game.getPlayers().contains(pll)) {
+					pll.showPlayer(p);
+					p.showPlayer(pll);
+				} else {
+					pll.hidePlayer(p);
+					p.hidePlayer(pll);
+				}
+			}
+			p.teleport(new Location(Bukkit.getWorld("wait"), 1254.5, 66, 1278.5, 0, 0));
+			p.getInventory().clear();
+			for (Team team : game.getTeams()) {
+				p.getInventory().addItem(team.getItem());
+			}
+			game.update();
+			break;
+		}

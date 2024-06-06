@@ -1,0 +1,22 @@
+class SimpleMenu
+!!!432818.java!!!	SimpleMenu(inout inventory : Inventory)
+		super(inventory, null);
+		setMenu(this);
+!!!432946.java!!!	SimpleMenu(inout inventory : Inventory, inout parent : IMenu)
+		super(inventory, parent);
+		setMenu(this);
+!!!433074.java!!!	onClick(inout e : InventoryClickEvent) : void
+		e.setCancelled(true);
+		IMenu sub = from(e.getCurrentItem());
+		Player p = (Player) e.getWhoClicked();
+		if (sub != null) {
+			e.setCancelled(true);
+			sub.open(p);
+		} else {
+			MenuClickContentEvent event = new MenuClickContentEvent(p, this, e.getCurrentItem(), e.getAction(), e.getSlot());
+			Bukkit.getPluginManager().callEvent(event);
+		}
+!!!433202.java!!!	onOpen(inout e : InventoryOpenEvent) : void
+		
+!!!433330.java!!!	onClose(inout e : InventoryCloseEvent) : void
+		

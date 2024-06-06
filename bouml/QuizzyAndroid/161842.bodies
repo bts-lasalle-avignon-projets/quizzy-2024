@@ -1,0 +1,13 @@
+class ProtocoleInscriptionParticipant
+!!!256434.java!!!	ProtocoleInscriptionParticipant(in trame : String)
+        setTrame(trame);
+!!!256562.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";PID;NOM\n";
+!!!256690.java!!!	getType() : TypeProtocole
+        return TypeProtocole.INSCRIPTION_PARTICIPANT;
+!!!256818.java!!!	getNom() : String
+        return extraireDonnees().get("NOM");
+!!!256946.java!!!	getPID() : String
+        return extraireDonnees().get("PID");
+!!!257074.java!!!	genererTrame(in pid : String, in nom : String) : void
+        super.genererTrame(pid, nom);

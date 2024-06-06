@@ -1,0 +1,264 @@
+format 224
+"application" // quizzy::protocole::speciales::application
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "Documents/Eleos/QUIZZY/app/src/main/java/fr/hillionj/quizzy/protocole/speciales/application/"
+  java_package "fr.hillionj.quizzy.protocole.speciales.application"
+  classview 153266 "application"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 160690 "ProtocoleAcquitement"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 169394 // <generalisation>
+	relation 169394 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 169394 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 251698 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 251826 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 251954 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 160818 "ProtocoleReceptionReponse"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 169522 // <generalisation>
+	relation 169522 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 169522 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 252082 "ProtocoleReceptionReponse"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 252210 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 252338 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 252466 "getTempsReponse"
+	public explicit_return_type "long"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 252594 "getNumeroReponse"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 252722 "getNumeroQuestion"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 252850 "genererTrame"
+	public explicit_return_type "void"
+	nparams 3
+	  param in name "numeroQuestion" explicit_type "int"
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 146098 "application"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 157618 "ProtocoleAcquitement"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 160690 // ProtocoleAcquitement
+      end
+    end
+
+    artifact 157746 "ProtocoleReceptionReponse"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 160818 // ProtocoleReceptionReponse
+      end
+    end
+  end
+end
