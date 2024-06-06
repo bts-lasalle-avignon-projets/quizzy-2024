@@ -38,7 +38,7 @@ public class Session {
     private EtapeSession etapeSession = EtapeSession.ARRET;
     private Theme theme = null;
     private String horodatage;
-    private int idEvaluation;
+    private final int idEvaluation;
 
     public Session(final int idEvaluation, final String horodatage, final List<Question> questions, final List<Participant> participants) {
         this.idEvaluation = idEvaluation;
@@ -60,6 +60,7 @@ public class Session {
         this.gestionnaireSonore = sessionPrecedente.gestionnaireSonore;
         this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
         this.watchDog = sessionPrecedente.watchDog;
+        this.idEvaluation = -1;
     }
 
     public Session(final Parametres parametres, @NonNull AppCompatActivity activite, IHM ihm, BaseDeDonnees baseDeDonnees) {
@@ -69,6 +70,7 @@ public class Session {
         this.gestionnaireSonore = new GestionnaireSonore(activite);
         this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
         this.watchDog = new WatchDog(ihm);
+        this.idEvaluation = -1;
     }
 
     public boolean estValide() {
@@ -286,10 +288,12 @@ public class Session {
             return score;
         }
         for (Question question : questions) {
-            if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
-                score++;
-            } else if (question != getQuestionActuelle() && question.estPropositionValide(participant)) {
-                score++;
+            if (question.estPropositionValide(participant)) {
+                if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION) {
+                    score++;
+                } else if (question != getQuestionActuelle() || idEvaluation != -1) {
+                    score++;
+                }
             }
         }
         return score;
