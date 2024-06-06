@@ -91,10 +91,19 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
              << nomParticipant;
     QWidget* widgetParticipant = new QWidget(this);
-    layoutParticipant          = new QVBoxLayout(widgetParticipant);
+    layoutParticipant          = new QHBoxLayout(widgetParticipant);
     labelParticipant           = new QLabel(nomParticipant, this);
+    labelLogoParticipant       = new QLabel(this);
 
-    labelParticipant->setAlignment(Qt::AlignCenter);
+    QPixmap logoParticipant(CHEMIN_LOGO_PARTICIPANT);
+    logoParticipant = logoParticipant.scaled(
+      QSize(LARGEUR_LOGO_PARTICIPANT, HAUTEUR_LOGO_PARTICIPANT),
+      Qt::KeepAspectRatio);
+
+    labelLogoParticipant->setPixmap(logoParticipant);
+    labelLogoParticipant->setAlignment(Qt::AlignRight);
+
+    layoutParticipant->addWidget(labelLogoParticipant);
     layoutParticipant->setAlignment(Qt::AlignTop);
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
@@ -159,16 +168,16 @@ void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
 void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
 {
     QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
-    QString      texteQuestionsCorrectes = "Questions correctes : ";
+    QString      texteQuestionsCorrectes = "Questions correctes   ";
     for(int numeroQuestion: questionsCorrectes)
     {
-        texteQuestionsCorrectes += "N°" + QString::number(numeroQuestion) + " ";
+        texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
     }
     labelQuestionsCorrectes = new QLabel(this);
     labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
 
     layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
-}   
+}
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -351,7 +360,6 @@ void IHMQuizzy::configurerResponsiveLabels()
     effetTitreParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetTitreParticipant->setOffset(0);
     titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
-
 
     // Fenêtre Jeu
     labelQuestion->setWordWrap(true);

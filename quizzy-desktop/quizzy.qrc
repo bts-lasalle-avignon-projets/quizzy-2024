@@ -5,6 +5,9 @@
     <qresource prefix="/image">
         <file>logo.png</file>
     </qresource>
+    <qresource prefix="/image">
+        <file>logoParticipant.png</file>
+    </qresource>
     <qresource prefix="/fonts">
         <file>REM-Bold.ttf</file>
     </qresource>

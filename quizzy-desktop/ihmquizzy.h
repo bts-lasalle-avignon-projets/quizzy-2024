@@ -104,6 +104,12 @@
 #define CHEMIN_LOGO ":/image/logo.png"
 
 /**
+ * @def CHEMIN_LOGO_PARTICIPANT
+ * @brief Le chemin du logo participant
+ */
+#define CHEMIN_LOGO_PARTICIPANT ":/image/logoParticipant.png"
+
+/**
  * @def LARGEUR_LOGO
  * @brief Pour la largeur du logo
  */
@@ -116,6 +122,18 @@
 #define HAUTEUR_LOGO 500
 
 /**
+ * @def LARGEUR_LOGO_PARTICIPANT
+ * @brief Pour la largeur du logo participant
+ */
+#define LARGEUR_LOGO_PARTICIPANT 80
+
+/**
+ * @def HAUTEUR_LOGO_PARTICIPANT
+ * @brief Pour la hauteur du logo participant
+ */
+#define HAUTEUR_LOGO_PARTICIPANT 80
+
+/**
  * @def HAUTEUR_TITRE
  * @brief Pour la hauteur des titres
  */
@@ -126,8 +144,6 @@
  * @brief Pour les contontours des labels
  */
 #define CONTOUR_FLOUE_LABEL 20
-
-
 
 class Quizzy;
 class Question;
@@ -171,9 +187,10 @@ class IHMQuizzy : public QWidget
     QWidget*     fenetreParticipants;
     QLabel*      titreFenetreParticipants;
     QVBoxLayout* layoutPrincipalParticipants;
-    QVBoxLayout* layoutParticipant;
+    QHBoxLayout* layoutParticipant;
     QHBoxLayout* layoutInfoQuiz;
     QLabel*      labelParticipant;
+    QLabel*      labelLogoParticipant;
     QLabel*      infoQuiz;
     // FenetreJeu
     QWidget*      fenetreJeu;
@@ -211,7 +228,7 @@ class IHMQuizzy : public QWidget
     QLabel*      titreFenetreResultats;
     QLabel*      nomParticipant;
     QLabel*      resultatParticipant;
-    QLabel* labelQuestionsCorrectes;
+    QLabel*      labelQuestionsCorrectes;
 
     void initialiserFenetres();
     void creerFenetres();

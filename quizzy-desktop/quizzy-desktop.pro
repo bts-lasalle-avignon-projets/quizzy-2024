@@ -39,6 +39,7 @@ RESOURCES += \
 DISTFILES +=  \
     style.qss \
     logo.png  \
+    logoParticipant.png\
     REM-Bold.ttf
 
 # Les defines pour la version release (sans debug)
