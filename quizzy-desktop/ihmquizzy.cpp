@@ -83,7 +83,9 @@ void IHMQuizzy::afficherLancementQuiz()
 void IHMQuizzy::afficherPret()
 {
     qDebug() << Q_FUNC_INFO;
-    infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
+    QPixmap pixmap(CHEMIN_PLAY_VERT);
+    infoQuiz->setPixmap(
+      pixmap.scaled(LARGEUR_LOGO_PLAY, HAUTEUR_LOGO_PLAY, Qt::KeepAspectRatio));
 }
 
 void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
@@ -157,7 +159,7 @@ void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
 
     resultatParticipant            = new QLabel(this);
     unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
-    QString resultat = "Score : " + QString::number(reponsesCorrectes) + "/" +
+    QString resultat = "Score " + QString::number(reponsesCorrectes) + "/" +
                        QString::number(nbQuestions);
     resultatParticipant->setText(resultat);
 
@@ -287,14 +289,14 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
     infoQuiz = new QLabel(this);
-    infoQuiz->setFixedSize(500, 100);
+    infoQuiz->setFixedSize(LARGEUR_INFO_QUIZ, HAUTEUR_INFO_QUIZ);
     infoQuiz->setAlignment(Qt::AlignCenter);
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
 {
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
-    layoutInfoQuiz = new QHBoxLayout;
+    layoutInfoQuiz = new QHBoxLayout();
     layoutInfoQuiz->addStretch();
     layoutInfoQuiz->addWidget(infoQuiz);
     layoutInfoQuiz->addStretch();

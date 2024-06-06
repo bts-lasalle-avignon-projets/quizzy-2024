@@ -110,6 +110,42 @@
 #define CHEMIN_LOGO_PARTICIPANT ":/image/logoParticipant.png"
 
 /**
+ * @def CHEMIN_PLAY_VERT
+ * @brief Le chemin du play vert
+ */
+#define CHEMIN_PLAY_VERT ":/image/play_vert.png"
+
+/**
+ * @def CHEMIN_PLAY_ROUGE
+ * @brief Le chemin du play rouge
+ */
+#define CHEMIN_PLAY_ROUGE ":/image/play_rouge.png"
+
+/**
+ * @def LARGEUR_LOGO_PLAY
+ * @brief Pour la largeur du logo play
+ */
+#define LARGEUR_LOGO_PLAY 80
+
+/**
+ * @def HAUTEUR_LOGO_PLAY
+ * @brief Pour la hauteur du logo play
+ */
+#define HAUTEUR_LOGO_PLAY 80
+
+/**
+ * @def LARGEUR_INFO_QUIZ
+ * @brief Pour la largeur de infoQuiz
+ */
+#define LARGEUR_INFO_QUIZ 500
+
+/**
+ * @def HAUTEUR_INFO_QUIZ
+ * @brief Pour la hauteur de infoQuiz
+ */
+#define HAUTEUR_INFO_QUIZ 150
+
+/**
  * @def LARGEUR_LOGO
  * @brief Pour la largeur du logo
  */

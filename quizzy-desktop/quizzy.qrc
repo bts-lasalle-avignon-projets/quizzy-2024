@@ -7,6 +7,8 @@
     </qresource>
     <qresource prefix="/image">
         <file>logoParticipant.png</file>
+        <file>play_rouge.png</file>
+        <file>play_vert.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>REM-Bold.ttf</file>
