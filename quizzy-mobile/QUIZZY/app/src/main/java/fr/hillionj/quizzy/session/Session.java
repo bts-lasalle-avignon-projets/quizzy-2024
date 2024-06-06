@@ -1,5 +1,7 @@
 package fr.hillionj.quizzy.session;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -214,7 +216,10 @@ public class Session {
         if (getQuestionActuelle() == null) {
             return 0.0;
         }
-        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - (((double) System.currentTimeMillis() - (double) heureDebutQuestion) / 1000.0);
+        long differenceTempsDebut = System.currentTimeMillis() - heureDebutQuestion;
+        long differenceTempsPause = etapeSession == EtapeSession.PAUSE || etapeSession == EtapeSession.PAUSE_FIN_QUESTION ? (System.currentTimeMillis() - watchDog.getHeureDebutTempsPause()) : 0;
+        differenceTempsDebut -= differenceTempsPause;
+        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - ((double) differenceTempsDebut / 1000.0);
         return Math.max(tempsRestant, 0.0);
     }
 
