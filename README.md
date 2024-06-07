@@ -2,9 +2,9 @@
 
 [![qt-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment)
 
-# Le projet QUIZZY 2024 (Version 0.2)
+# Le projet QUIZZY 2024 (Version 1.0)
 
-- [Le projet QUIZZY 2024 (Version 0.2)](#le-projet-quizzy-2024-version-02)
+- [Le projet QUIZZY 2024 (Version 1.0)](#le-projet-quizzy-2024-version-10)
   - [Présentation](#présentation)
   - [Recette](#recette)
   - [Itérations](#itérations)
@@ -25,12 +25,15 @@
     - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
     - [Interface participant (Écran)](#interface-participant-écran)
   - [Historique des versions](#historique-des-versions)
-    - [Version 0.2](#version-02)
+    - [Version 1.0](#version-10)
       - [Tablette](#tablette)
       - [Écran](#écran)
-    - [Version 0.1](#version-01)
+    - [Version 0.2](#version-02)
       - [Tablette](#tablette-1)
       - [Écran](#écran-1)
+    - [Version 0.1](#version-01)
+      - [Tablette](#tablette-2)
+      - [Écran](#écran-2)
   - [Documentation du code](#documentation-du-code)
   - [Auteurs](#auteurs)
 
@@ -55,8 +58,8 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 | Envoi de trames               |         |          |    X    |
 | Intéraction BDD               |         |          |    X    |
 | Gestion du chronomètre        |         |          |    X    |
-| Afficher déroulement du quiz  |         |    X     |         |
-| Sauvegarde des résultats      |         |    X     |         |
+| Afficher déroulement du quiz  |         |          |    X    |
+| Sauvegarde des résultats      |         |          |    X    |
 
 ## Itérations
 
@@ -76,7 +79,7 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Gestion de chronomètre** : Un chronomètre est mis en place pour limiter le temps de réponse.
 - **Affichage chronomètre** : Le chronomètre est affiché à l’utilisateur.
 
-![Tickets Jira](images/Jira_v1.0.png)
+![Tickets Jira](images/Jira_v0.2.png)
 
 ### Itération 3
 
@@ -85,6 +88,8 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Configurer le mode kiosk** : La configuration de la Raspberry Pi en mode kiosk
 - **Effectuer plusieurs quiz** : La possibilité d'enchaîner plusieurs quiz
 - **Mettre en forme l'affichage** : La mise en forme pour un grand écran
+
+![Tickets Jira](images/Jira_v1.0.png)
 
 ## Diagramme de cas d'utilisation
 
@@ -134,6 +139,7 @@ Nom des périphériques Bluetooth :
 | Indiquer le numéro de question et le temps alloué pour répondre | `$Q;NUMERO_QUESTION;TEMPS\n`| NUMERO_QUESTION : de 1 à n <br> TEMPS QUESTION : en secondes si 0 alors la question n’a pas de temps limite | `$Q;1;30\n`<br>Question n°1<br>30 secondes pour cette question |
 | Activer buzzers + lancer chronomètre | `$E;NUMERO_QUESTION\n` | Activer les buzzers pour ce numéro de question et lancer le chronomètre si besoin | `$E;1\n` |
 | Désactiver buzzers + chronomètre | `$D;NUMERO_QUESTION\n`| Désactiver les buzzers et arrêter le chronomètre si besoin | `$D;1\n` |
+| Indiquer résultat | `$B;NUMERO_QUESTION;RESULTAT\n` | NUMERO_QUESTION : de 1 à n <br> RESULTAT: <br> 1 (vraie) ou 0 (faux) | `$B;1;0\n` |
 
 ### Pupitre -> Évaluateur
 
@@ -141,8 +147,6 @@ Nom des périphériques Bluetooth :
 |------|--------|-------------|---------|
 | Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n`<br>Acquitter toutes les trames de l’évaluateur|
 | Acquitter | `$A\n`| Acquitter toutes les trames de l’évaluateur | `$A\n` |
-
-| Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms <br> si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n` |
 
 ## Screenshots
 
@@ -181,6 +185,37 @@ Les différentes vues :
 - affichage des résultats des participants
 
 ## Historique des versions
+
+### Version 1.0
+
+#### Tablette
+
+- Nouvelle IHM
+- Se connecter à un périphérique Bluetooth
+- Emettre une trame vers un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Afficher le déroulement de la session
+- Associer les participants à un profil
+- Vérifier en continue les connexions aux périphériques
+- Paramétrer un quiz et une session
+- Calculer automatiquement le temps alloué pour répondre
+- Gérer une session
+- Sauvegarder une session
+- Afficher l'historique des sessions sauvegardées
+- Visualiser une session sauvegardée
+- Supprimer une session sauvegardée
+- Créer un participant
+
+#### Écran
+
+- Afficher disposition des fenêtres
+- Se connecter à un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Afficher la liste des participants
+- Afficher les statistiques du quiz
+- Afficher le déroulement du quiz
 
 ### Version 0.2
 
