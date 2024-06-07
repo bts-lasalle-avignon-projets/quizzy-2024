@@ -41,6 +41,7 @@ DISTFILES +=  \
     logo.png  \
     logoParticipant.png \
     play_rouge.png \
+    play_orange.png.png \
     play_vert.png \
     REM-Bold.ttf
 

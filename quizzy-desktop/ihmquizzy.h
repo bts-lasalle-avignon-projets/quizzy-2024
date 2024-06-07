@@ -116,6 +116,12 @@
 #define CHEMIN_PLAY_VERT ":/image/play_vert.png"
 
 /**
+ * @def CHEMIN_PLAY_ORANGE
+ * @brief Le chemin du play orange
+ */
+#define CHEMIN_PLAY_ORANGE ":/image/play_orange.png"
+
+/**
  * @def CHEMIN_PLAY_ROUGE
  * @brief Le chemin du play rouge
  */
@@ -208,11 +214,21 @@ class IHMQuizzy : public QWidget
         FenetreResultats,
         NbEcrans
     };
+    enum EtatAttente
+    {
+        Connexion = 0,
+        Session,
+        Participants,
+        NbEtats
+    };
 
   private:
-    Quizzy* quizzy;           //!< association vers la classe Quizzy
-    QTimer* minuteur;         //!< pour gérer le temps d'une question
-    int     decompteQuestion; //!< pour le temps d'une question
+    Quizzy*     quizzy;           //!< association vers la classe Quizzy
+    QTimer*     minuteur;         //!< pour gérer le temps d'une question
+    int         decompteQuestion; //!< pour le temps d'une question
+    bool        connecte;
+    bool        pret;
+    EtatAttente etatAttente;
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     // FenetreAccueil
@@ -317,6 +333,8 @@ class IHMQuizzy : public QWidget
     void afficherChoixParticipants();
     void afficherQuestionSuivante();
     void afficherResultats();
+    void afficherConnexion();
+    void afficherDeconnexion();
 };
 
 #endif // IHMQUIZZY_H

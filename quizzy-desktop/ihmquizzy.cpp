@@ -21,7 +21,8 @@
  * fenêtre principale de l'application
  */
 IHMQuizzy::IHMQuizzy(QWidget* parent) :
-    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this)),
+    connecte(false), pret(false), etatAttente(EtatAttente::Connexion)
 {
     qDebug() << Q_FUNC_INFO;
     creerFenetres();
@@ -68,8 +69,10 @@ void IHMQuizzy::afficherFenetreResultats()
 void IHMQuizzy::afficherDebutQuiz()
 {
     qDebug() << Q_FUNC_INFO;
-    messageAttente->setText("En attente des participants...");
+    etatAttente = EtatAttente::Participants;
+    messageAttente->setText("En attente des participants ...");
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
+    pret = false;
     reinitialiserAffichage();
     afficherFenetreAccueil();
 }
@@ -83,9 +86,14 @@ void IHMQuizzy::afficherLancementQuiz()
 void IHMQuizzy::afficherPret()
 {
     qDebug() << Q_FUNC_INFO;
-    QPixmap pixmap(CHEMIN_PLAY_VERT);
-    infoQuiz->setPixmap(
-      pixmap.scaled(LARGEUR_LOGO_PLAY, HAUTEUR_LOGO_PLAY, Qt::KeepAspectRatio));
+    if(connecte)
+    {
+        pret = true;
+        QPixmap pixmap(CHEMIN_PLAY_VERT);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio));
+    }
 }
 
 void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
@@ -149,6 +157,65 @@ void IHMQuizzy::afficherResultats()
     }
 
     afficherFenetreResultats();
+}
+
+void IHMQuizzy::afficherConnexion()
+{
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = true;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Connexion)
+        {
+            etatAttente = EtatAttente::Session;
+            messageAttente->setText("En attente de session ...");
+        }
+        else if(etatAttente == EtatAttente::Session)
+        {
+            etatAttente = EtatAttente::Participants;
+            messageAttente->setText("En attente des participants ...");
+        }
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        if(pret)
+        {
+            QPixmap pixmap(CHEMIN_PLAY_VERT);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio));
+        }
+        else
+        {
+            QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio));
+        }
+    }
+}
+
+void IHMQuizzy::afficherDeconnexion()
+{
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = false;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Session)
+            etatAttente = EtatAttente::Connexion;
+        else if(etatAttente == EtatAttente::Participants)
+            etatAttente = EtatAttente::Session;
+        messageAttente->setText("En attente de connexion ...");
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio));
+    }
 }
 
 void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
@@ -262,6 +329,7 @@ void IHMQuizzy::creerFenetreAccueil()
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
 
     messageAttente = new QLabel("", this);
+    messageAttente->setText("En attente de connexion ...");
     messageAttente->setAlignment(Qt::AlignCenter);
 
     layoutAccueil->addWidget(titreFenetreAccueil);
@@ -291,15 +359,18 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
     infoQuiz = new QLabel(this);
     infoQuiz->setFixedSize(LARGEUR_INFO_QUIZ, HAUTEUR_INFO_QUIZ);
     infoQuiz->setAlignment(Qt::AlignCenter);
+    QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+    infoQuiz->setPixmap(
+      pixmap.scaled(LARGEUR_LOGO_PLAY, HAUTEUR_LOGO_PLAY, Qt::KeepAspectRatio));
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
 {
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
     layoutInfoQuiz = new QHBoxLayout();
-    layoutInfoQuiz->addStretch();
+    // layoutInfoQuiz->addStretch();
     layoutInfoQuiz->addWidget(infoQuiz);
-    layoutInfoQuiz->addStretch();
+    // layoutInfoQuiz->addStretch();
     layoutPrincipalParticipants->addLayout(layoutInfoQuiz);
 }
 
@@ -355,6 +426,7 @@ void IHMQuizzy::configurerResponsiveLabels()
     messageAttente->setGraphicsEffect(effetAccueil);
 
     // Fenêtre Participant
+    layoutPrincipalParticipants->setAlignment(Qt::AlignTop);
     titreFenetreParticipants->setFixedHeight(HAUTEUR_TITRE);
     auto effetTitreParticipant =
       new QGraphicsDropShadowEffect(titreFenetreParticipants);
@@ -498,6 +570,15 @@ void IHMQuizzy::creerFenetreResultats()
 
 void IHMQuizzy::initialiserEvenements()
 {
+    // communicationTablette vers ihmQuizzy
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteConnectee()),
+            this,
+            SLOT(afficherConnexion()));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteDeconnectee()),
+            this,
+            SLOT(afficherDeconnexion()));
     // communicationTablette vers quizzy
     // Trame $L
     connect(quizzy->getCommunicationTablette(),
@@ -711,6 +792,20 @@ void IHMQuizzy::effacerFenetreParticipants()
         }
     }
     infoQuiz->clear();
+    if(connecte)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio));
+    }
+    else
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio));
+    }
 }
 
 void IHMQuizzy::effacerFenetreResultats()

@@ -13,7 +13,8 @@
  * @brief Constructeur de la classe CommunicationBluetooth
  */
 CommunicationBluetooth::CommunicationBluetooth(QObject* parent) :
-    QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr)
+    QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr),
+    connecte(false)
 {
     qDebug() << Q_FUNC_INFO;
 
@@ -112,6 +113,7 @@ void CommunicationBluetooth::connecterTablette()
 
     if(!socketTablette)
         return;
+    connecte = true;
     connect(socketTablette,
             SIGNAL(disconnected()),
             this,
@@ -123,8 +125,12 @@ void CommunicationBluetooth::connecterTablette()
 
 void CommunicationBluetooth::deconnecterTablette()
 {
-    qDebug() << Q_FUNC_INFO;
-    emit tabletteDeconnectee();
+    if(connecte)
+    {
+        qDebug() << Q_FUNC_INFO;
+        connecte = false;
+        emit tabletteDeconnectee();
+    }
 }
 
 void CommunicationBluetooth::recevoirTrame()
