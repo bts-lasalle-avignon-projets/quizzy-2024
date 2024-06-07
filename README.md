@@ -19,6 +19,7 @@
     - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt-1)
       - [Diagramme des classes](#diagramme-des-classes)
       - [Diagramme des classes simplifié](#diagramme-des-classes-simplifié)
+  - [Base de données](#base-de-données)
   - [Protocole](#protocole)
     - [Évaluateur -\> Interface de jeu](#évaluateur---interface-de-jeu)
     - [Évaluateur -\> Pupitre](#évaluateur---pupitre)
@@ -118,6 +119,20 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 #### Diagramme des classes simplifié
 
 ![Qt diagramme de classes](images/DC_relation_Quizzy_Desktop1.0.png)
+
+## Base de données
+
+![base de donees](/images/Android_v1.0_stucture_bdd.png)
+
+Détails de la structure :
+
+- 'quiz' contient la liste des questions posées durant une session
+- 'questions' contient la liste des toutes les questions avec ses propositions existantes
+- 'reponses' contient la liste des bonnes et mauvaises reponses des participants par rapport aux questions de chaque sessions
+- 'evaluations' contient la liste de toutes les sessions sauvegardées avec leur horodatage
+- 'themes' contient la liste des themes de questions existantes
+- 'participants' contient la liste des participants
+- 'resultats' contient la liste des score de participants par session
 
 ## Protocole
 
