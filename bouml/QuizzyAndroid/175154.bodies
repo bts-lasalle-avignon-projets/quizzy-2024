@@ -1,0 +1,38 @@
+class Join
+!!!345394.java!!!	onJoin(inout e : PlayerJoinEvent) : void
+		e.getPlayer().teleport(spawn);
+		goSpawn(e.getPlayer());
+!!!345522.java!!!	goSpawn(inout p : Player) : void
+		goSpawn(p, true);
+!!!345650.java!!!	goSpawn(inout p : Player, inout remove : boolean) : void
+		if (remove) {
+			Game.leavePlayer(p);
+		}
+		if (p.isOnline()) {
+			p.getInventory().clear();
+			p.setGameMode(GameMode.SURVIVAL);
+			if (!p.getWorld().equals(spawn.getWorld())) {
+				if (SignEvent.location_save.containsKey(p)) {
+					p.teleport(SignEvent.location_save.get(p));
+					SignEvent.location_save.remove(p);
+				} else {
+					p.teleport(spawn);
+				}
+			}
+			p.getInventory().setHeldItemSlot(4);
+			p.setHealth(20);
+			p.setLevel(0);
+			p.setFoodLevel(20);
+			p.getInventory().setItem(0, new ItemBuilder(Material.MAGMA_CREAM).name("§6Masquer les joueurs"));
+			p.getInventory().setItem(1, new ItemBuilder(Material.EMERALD).name("§bBoutique"));
+			p.getInventory().setItem(7, new ItemBuilder(Material.MONSTER_EGG, (byte) EntityType.BLAZE.getTypeId()).name("§6Familiers"));
+			p.getInventory().setItem(8, new ItemBuilder(Material.ENCHANTED_BOOK).name("§cRègles"));
+			p.setFlying(false);
+			p.setAllowFlight(false);
+			p.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+		}
+!!!345778.java!!!	onQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		if (SignEvent.location_save.containsKey(p)) {
+			SignEvent.location_save.remove(p);
+		}

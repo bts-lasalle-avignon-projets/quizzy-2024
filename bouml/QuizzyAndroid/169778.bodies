@@ -1,0 +1,18 @@
+class Broadcast
+!!!303538.java!!!	Broadcast(in broadcast : String)
+		this.broadcast = broadcast;
+!!!303666.java!!!	getAttackCount() : int
+		return 0;
+!!!303794.java!!!	getAwaitEnable() : int
+		return 0;
+!!!303922.java!!!	getAwaitDisable() : int
+		return 0;
+!!!304050.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.BROADCAST;
+!!!304178.java!!!	Enable(inout info : SheepInfo) : void
+		for (Player pll : info.getGame().getPlayers()) {
+			pll.sendMessage(broadcast.replace("%team%", info.getTeam().getType().getPrefix()).replace("%player%", info.getShooter().getName()).replace("%sheep%", info.getName()));
+			pll.playSound(pll.getLocation(), Sound.WITHER_SPAWN, 1, 1);
+		}
+!!!304306.java!!!	Attack(inout info : SheepInfo) : void
+		

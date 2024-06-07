@@ -1,0 +1,11 @@
+class Participant
+!!!227762.java!!!	Participant(in idParticipant : int, in nom : String)
+        this.idParticipant = idParticipant;
+        this.nom = nom;
+!!!227890.java!!!	Participant(in idParticipant : int, in nom : String, in peripherique : Peripherique)
+        this.nom = nom;
+        setPeripherique(peripherique);
+!!!228018.java!!!	getNom() : String
+        return nom;
+!!!228146.java!!!	getIdParticipant() : int
+        return idParticipant;

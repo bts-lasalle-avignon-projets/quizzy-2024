@@ -1,0 +1,58 @@
+class LangManager
+!!!383666.java!!!	getInstance() : LangManager
+		return instance;
+!!!383794.java!!!	onEnable() : void
+		instance = this;
+		ConfigManager.saveDefaultConfigs(this);
+		initSQL();
+		registerLocaleTranslations();
+		InjectionManager.init();
+		Join.getLangOfAll();
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new Join(), this);
+		pm.registerEvents(new InventoryClick(), this);
+		
+		getCommand("lang").setExecutor(new LangCommand());
+!!!383922.java!!!	registerLocaleTranslations() : void
+		FileConfiguration config = ConfigManager.LOCALE.getConfig();
+		for (String key : config.getKeys(true)) {
+			String text = config.getString(key);
+			if (text != null && text.contains("MemorySection")) {
+				continue;
+			}
+			new TextRegister(key, text);
+		}
+!!!384050.java!!!	initSQL() : void
+		SQL sql = new SQL(this, -1);
+		SQLConnection c = sql.adress(ConfigManager.MYSQL.getConfig());
+		c.WhenConnected(() -> {
+			Bukkit.getConsoleSender().sendMessage("§cLang §7> §aDatabase connected");
+		}).WhenDisconnected(() -> {
+			Bukkit.getConsoleSender().sendMessage("§cLang §7> §6Database disconnected");
+		}).WhenErrored(() -> {
+			Bukkit.getConsoleSender().sendMessage("§cLang §7> §cMYSQL error: " + c.getError());
+		});
+		c.connect(false);
+		SQLAccess a = sql.access("translations", "UID");
+		a.addColumn("TEXT", TableType.STRING);
+		a.create();
+		registerRemoteTranslations(a);
+		SQLAccess b = sql.access("translations_items", "CODE");
+		b.addColumn("SKULL", TableType.STRING);
+		b.addColumn("TITLE", TableType.STRING);
+		b.addColumn("DESCRIPTION", TableType.STRING);
+		b.create();
+		SQLAccess d = sql.access("translations_player", "UUID");
+		d.addColumn("NAME", TableType.STRING);
+		d.addColumn("CODE", TableType.STRING);
+		d.create();
+!!!384178.java!!!	registerRemoteTranslations(inout a : SQL::SQLAccess) : void
+		try {
+			for (String key : a.getMethods().lines()) {
+				String text = a.getMethods().getString(key, "TEXT");
+				new TextRegister(key, text);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}

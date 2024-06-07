@@ -1,0 +1,8 @@
+class Step
+!!!367026.java!!!	Step(in name : String, in timer : int)
+			this.name = name;
+			this.timer = timer;
+!!!367154.java!!!	getName() : String
+			return name;
+!!!367282.java!!!	getTimer() : int
+			return timer;

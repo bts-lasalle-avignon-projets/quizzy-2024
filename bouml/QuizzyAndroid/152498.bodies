@@ -1,0 +1,50 @@
+class PopupFinSession
+!!!214066.java!!!	PopupFinSession()
+        PopupFinSession popup = (PopupFinSession) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null)
+            this.session = popup.session;
+        else
+            this.session = null;
+!!!214194.java!!!	PopupFinSession(inout session : Session)
+        this.session = session;
+!!!214322.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+        setCancelable(false);
+
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
+
+        View vue = inflater.inflate(R.layout.pop_up_fin_session, container, false);
+        initialiserVue(vue);
+        return vue;
+!!!214450.java!!!	initialiserVue(inout vue : View) : void
+        if (session == null) {
+            dismiss();
+            return;
+        }
+        vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
+            IHM.getIHM().fermerActivite(VueSession.class);
+            dismiss();
+        });
+        vue.findViewById(R.id.btn_relancer).setOnClickListener(v -> {
+            Session session = Parametres.getParametres().nouvelleSession();
+            if (session.estValide()) {
+                dismiss();
+                session.getGestionnaireProtocoles().preparerRelancement();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                session.lancer();
+            }
+        });
+        Button btn_sauvegarder = vue.findViewById(R.id.btn_sauvegarder);
+        btn_sauvegarder.setOnClickListener(v -> {
+            session.sauvegarder();
+            btn_sauvegarder.setEnabled(false);
+        });

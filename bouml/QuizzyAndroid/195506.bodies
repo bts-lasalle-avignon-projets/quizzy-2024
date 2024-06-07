@@ -1,0 +1,8 @@
+class Join
+!!!501810.java!!!	onJoin(inout e : PlayerJoinEvent) : void
+		Player p = e.getPlayer();
+		NoteBlockAPI.stopPlaying(p);
+		LifeRadio.getRadio().addPlayer(p);
+!!!501938.java!!!	onQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		NoteBlockAPI.stopPlaying(p);

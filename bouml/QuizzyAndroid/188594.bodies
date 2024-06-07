@@ -1,0 +1,14 @@
+class Bat
+!!!444594.java!!!	Bat(inout owner : Player, in id : int)
+		super(owner, EntityType.BAT, "Chauve-souris de %player%", null, MovementType.VECTOR, id);
+		setPet(this);
+!!!444722.java!!!	Bat(inout owner : Player)
+		super(owner, EntityType.BAT, "Chauve-souris de %player%", null, MovementType.VECTOR);
+		setPet(this);
+!!!444850.java!!!	getEntity() : org.bukkit.entity.Bat
+		return (org.bukkit.entity.Bat) entity;
+!!!444978.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setAwake(true);
+!!!445106.java!!!	clone(inout player : Player) : Bat
+		return new Bat(player, getID());

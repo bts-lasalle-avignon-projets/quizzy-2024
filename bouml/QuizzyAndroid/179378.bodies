@@ -1,0 +1,69 @@
+class MenuEvent
+!!!375346.java!!!	onClick(inout e : InventoryClickEvent) : void
+		IMenu menu = CraftMenu.from(e.getClickedInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onClick(e);
+!!!375474.java!!!	onOpen(inout e : InventoryOpenEvent) : void
+		IMenu menu = CraftMenu.from(e.getInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onOpen(e);
+		HGGames game = from(menu);
+		if (game == null) {
+			return;
+		}
+		game.updateMenu(game.getMenu());
+!!!375602.java!!!	onClose(inout e : InventoryCloseEvent) : void
+		IMenu menu = CraftMenu.from(e.getInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onClose(e);
+		if (menu.isClone(e.getInventory())) {
+			menu.removeClone(e.getInventory());
+		}
+		HGGames game = from(menu);
+		if (game == null || !game.getMenu().hasSubMenu(menu)) {
+			return;
+		}
+		game.getMenu().open((Player) e.getPlayer());
+!!!375730.java!!!	onContentClick(inout e : MenuClickContentEvent) : void
+		e.setCancelled(true);
+		HGGames game = from(e.getMenu());
+		if (game == null) {
+			return;
+		}
+		String name = e.getItem().hasItemMeta() ? e.getItem().getItemMeta().getDisplayName() : null;
+		if (name == null) {
+			return;
+		}
+		if (game.getMenu().equals(e.getMenu())) {
+			if (e.getSlot() == 0) {
+				game.setOpen(!game.isOpen());
+				if (game.isOpen()) {
+					game.initGame();
+				} else {
+					game.endGame();
+				}
+			} else if (e.getSlot() == 4 && game.getState() == State.WAITING) {
+				game.startGame(true);
+			}
+		}
+		game.updateMenu(game.getMenu());
+!!!375858.java!!!	from(inout iMenu : IMenu) : HGGames
+		if (iMenu.equals(GameGui.gameMenu)) {
+			return null;
+		}
+		for (Game g : Game.all) {
+			if (!(g instanceof HGGames)) {
+				continue;
+			}
+			HGGames game = (HGGames) g;
+			if (game.getMenu().equals(iMenu) || game.getMenu().hasSubMenu(iMenu)) {
+				return game;
+			}
+		}
+		return null;

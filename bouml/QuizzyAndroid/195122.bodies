@@ -1,0 +1,6 @@
+class RadioCommand
+!!!499890.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (sender instanceof Player) {
+			((Player)sender).openInventory(RadioMenu.get((Player) sender).getInventory());
+		}
+		return false;

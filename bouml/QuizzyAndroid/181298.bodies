@@ -1,0 +1,12 @@
+class PacketBossBar
+!!!388914.java!!!	editBossBar(inout msg : PacketPlayOutSpawnEntityLiving, inout handler : PacketHandler) : boolean
+		DataWatcher data = (DataWatcher) PacketUtils.getPrivate(msg, "l");
+		Entity entity = (Entity) PacketUtils.getPrivate(data, "a");
+		if (!(entity instanceof EntityWither)) {
+			return true;
+		}
+		EntityWither wither = (EntityWither) entity;
+		String name = wither.getCustomName();
+		String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), name);
+		entity.setCustomName(extractedMessage);
+		return true;

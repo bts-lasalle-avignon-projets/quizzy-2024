@@ -25,6 +25,14 @@ public class PopupAucunParticipant extends DialogFragment {
 
     private final Session session;
 
+    public PopupAucunParticipant() {
+        PopupAucunParticipant popup = (PopupAucunParticipant) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null)
+            this.session = popup.session;
+        else
+            this.session = null;
+    }
+
     public PopupAucunParticipant(Session session) {
         this.session = session;
     }
@@ -38,12 +46,20 @@ public class PopupAucunParticipant extends DialogFragment {
         }
         setCancelable(false);
 
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
+
         View vue = inflater.inflate(R.layout.popup_aucun_participant, container, false);
         initialiserVue(vue);
         return vue;
     }
 
     public void initialiserVue(View vue) {
+        if (session == null) {
+            dismiss();
+            return;
+        }
         vue.findViewById(R.id.btn_continuer).setOnClickListener(v -> {
             session.ajouterArgument(ArgumentLancement.AUCUN_PARTICIPANT);
             dismiss();
@@ -51,7 +67,7 @@ public class PopupAucunParticipant extends DialogFragment {
                 if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
                     session.lancer();
                 } else {
-                    startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueSession.class));
+                    IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueSession.class);
                 }
             }
         });
@@ -60,7 +76,7 @@ public class PopupAucunParticipant extends DialogFragment {
             if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
                 IHM.getIHM().fermerActivite(VueSession.class);
             }
-            startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueParticipants.class));
+            IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueParticipants.class);
         });
         vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
             dismiss();

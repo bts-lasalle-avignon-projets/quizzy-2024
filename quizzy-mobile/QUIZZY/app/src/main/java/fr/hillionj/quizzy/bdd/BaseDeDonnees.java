@@ -130,7 +130,7 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         for (Question question : session.getQuestions()) {
             sqlite.execSQL("INSERT INTO quiz (idEvaluation, idQuestion, points, temps) VALUES (" + idEvaluation + ", " + question.getIdQuestion() + ", 1, " + question.getTempsReponse() + ")");
             for (Participant participant : session.getParticipants()) {
-                sqlite.execSQL("INSERT INTO quiz (idEvaluation, idParticipant, idQuestion, temps, correct) VALUES (" + idEvaluation + ", " + participant.getIdParticipant() + ", " + question.getIdQuestion() + ", " + question.getIdQuestion() + ", " + question.estPropositionValide(participant) + ")");
+                sqlite.execSQL("INSERT INTO reponses (idEvaluation, idParticipant, idQuestion, temps, correct) VALUES (" + idEvaluation + ", " + participant.getIdParticipant() + ", " + question.getIdQuestion() + ", " + question.getIdQuestion() + ", " + question.estPropositionValide(participant) + ")");
             }
         }
         for (Participant participant : session.getParticipants()) {
@@ -147,5 +147,102 @@ public class BaseDeDonnees extends SQLiteOpenHelper
         List<Theme> listeThemes = new ArrayList<>();
         curseur.moveToNext();
         return curseur.getInt(curseur.getColumnIndexOrThrow("idEvaluation"));
+    }
+
+    public List<Session> getHistorique() {
+        List<Session> sessions = new ArrayList<>();
+        for(Object[] evaluation : getEvaluations("")) {
+            int idEvaluation = (int) evaluation[0];
+            int idTheme = (int) evaluation[1];
+            String horodatage = (String) evaluation[2];
+            sessions.add(getSession(idEvaluation, idTheme, horodatage));
+        }
+        return sessions;
+    }
+
+    private List<Object[]> getEvaluations(String argumentSupplementaire) {
+        List<Object[]> evaluations = new ArrayList<>();
+        Cursor       curseur     = sqlite.rawQuery("SELECT * FROM evaluations" + argumentSupplementaire, null);
+        while(curseur.moveToNext())
+        {
+            int idEvaluation = curseur.getInt(curseur.getColumnIndexOrThrow("idEvaluation"));
+            int idTheme = curseur.getInt(curseur.getColumnIndexOrThrow("idTheme"));
+            String horodatage = curseur.getString(curseur.getColumnIndexOrThrow("horodatage"));
+            evaluations.add(new Object[] { idEvaluation, idTheme, horodatage });
+        }
+        curseur.close();
+        return evaluations;
+    }
+
+    public Session getSession(int idEvaluation) {
+        Object[] evaluation = getEvaluations(" WHERE idEvaluation = '" + idEvaluation + "'").get(0);
+        return getSession(idEvaluation, (int) evaluation[1], (String) evaluation[2]);
+    }
+
+    private Session getSession(int idEvaluation, int idTheme, String horodatage) {
+        List<Participant> particpants = getParticipants(idEvaluation);
+        List<Question> questions = getQuestions(idEvaluation);
+        for (Question question : questions) {
+            Cursor curseur = sqlite.rawQuery("SELECT * FROM reponses WHERE reponses.idEvaluation = " + idEvaluation + " AND reponses.idQuestion = " + question.getIdQuestion(), null);
+            while(curseur.moveToNext()) {
+                int idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow("idParticipant"));
+                int temps = curseur.getInt(curseur.getColumnIndexOrThrow("temps"));
+                boolean correct = curseur.getInt(curseur.getColumnIndexOrThrow("correct")) == 1;
+                Participant participant = getParticipantDepuisID(idParticipant, particpants);
+                if (correct) {
+                    question.ajouterSelection(participant, 0);
+                }
+            }
+        }
+        return new Session(idEvaluation, horodatage, questions, particpants);
+    }
+
+    private List<Participant> getParticipants(int idEvaluation) {
+        List<Participant> participants = new ArrayList<>();
+        Cursor curseur = sqlite.rawQuery("SELECT resultats.idParticipant, participants.nom FROM resultats INNER JOIN participants ON resultats.idParticipant = participants.idParticipant WHERE resultats.idEvaluation = " + idEvaluation, null);
+        while(curseur.moveToNext()) {
+            int idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow("idParticipant"));
+            String nom = curseur.getString(curseur.getColumnIndexOrThrow("nom"));
+            participants.add(new Participant(idParticipant, nom));
+        }
+
+        return participants;
+    }
+
+    private Participant getParticipantDepuisID(int idParticipant, List<Participant> participants) {
+        for(Participant participant : participants) {
+            if(participant.getIdParticipant() == idParticipant) {
+                return participant;
+            }
+        }
+        return null;
+    }
+
+    private List<Question> getQuestions(int idEvaluation) {
+        List<Question> questions = new ArrayList<>();
+        Cursor curseur = sqlite.rawQuery("SELECT questions.question, quiz.* FROM quiz INNER JOIN questions ON questions.idQuestion = quiz.idQuestion WHERE quiz.idEvaluation = " + idEvaluation, null);
+        while(curseur.moveToNext()) {
+            int idQuestion = curseur.getInt(curseur.getColumnIndexOrThrow("idQuestion"));
+            String question = curseur.getString(curseur.getColumnIndexOrThrow("question"));
+            int temps = curseur.getInt(curseur.getColumnIndexOrThrow("temps"));
+            questions.add(new Question(idQuestion, question, null, temps));
+        }
+        return questions;
+    }
+
+    public void supprimerSession(Session session) {
+        sqlite.execSQL("DELETE FROM resultats WHERE idEvaluation = " + session.getIdEvaluation());
+        sqlite.execSQL("DELETE FROM reponses WHERE idEvaluation = " + session.getIdEvaluation());
+        sqlite.execSQL("DELETE FROM quiz WHERE idEvaluation = " + session.getIdEvaluation());
+        sqlite.execSQL("DELETE FROM evaluations WHERE idEvaluation = " + session.getIdEvaluation());
+    }
+
+    public Participant creerParticipant(String nom) {
+        sqlite.execSQL("INSERT INTO participants (nom) VALUES ('" + nom + "')");
+
+        Cursor       curseur     = sqlite.rawQuery("SELECT idParticipant FROM participants WHERE nom = '" + nom + "'", null);
+        curseur.moveToNext();
+        int idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow("idParticipant"));
+        return new Participant(idParticipant, nom);
     }
 }

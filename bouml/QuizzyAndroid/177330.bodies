@@ -1,0 +1,148 @@
+class HGGames
+!!!364082.java!!!	HGGames(inout sign : Sign, inout open : boolean)
+		super("§f#Hunger " + (all.size() + 1));
+		this.sign = sign;
+		this.world_name = getNewWorldName("hunger", all.size() + 1, 2);
+		this.scoreboard = createScoreboard();
+		this.open = open;
+		this.state = open ? State.WAITING : State.OFF;
+		this.menu = craftMenu(9, name);
+		this.menu.addSub(return_item, GameGui.gameMenu);
+		this.kitMenu = craftKitMenu(Kit.getItems());
+		if (all.size() == 1) {
+			Inventory inv = Bukkit.createInventory(null, 54, "testiboule");
+			getKitMenu().getViews().put(inv, 0);
+			getKitMenu().getPage(0, inv);
+			getKitMenu().getPage(1, inv);
+		}
+		sign.setLine(0, name);
+		initGame();
+!!!364210.java!!!	initGame() : void
+		this.step = Step.WAITING;
+		this.state = this.open ? State.WAITING : State.OFF;
+		resetTimer();
+		if (this.open) {
+			this.world = generateRandomWorld(world_name);
+			this.spawnPoint = HGWorldGenerator.findSpawn(world);
+		}
+		updateSign();
+		GameGui.updateMenu();
+!!!364338.java!!!	startGame(inout force : boolean) : void
+		if (!open) {
+			return;
+		}
+		for (Player pll : getPlayers()) {
+			pll.teleport(getRandomSpawnPoint());
+			pll.getInventory().clear();
+			pll.setFlying(false);
+			pll.setAllowFlight(false);
+			pll.setFireTicks(0);
+		}
+		state = State.RUN;
+		step = Step.INVINCIBLE;
+		resetTimer();
+		updateSign();
+		GameGui.updateMenu();
+!!!364466.java!!!	endGame() : void
+		state = open ? State.END : State.OFF;
+		step = Step.WAITING;
+		for (Player pll : getPlayers()) {
+			Join.goSpawn(pll, false);
+		}
+		getPlayers().clear();
+		spectators.clear();
+		if (getWorld() != null) {
+			Bukkit.unloadWorld(world, false);
+			setWorld(null);
+		}
+		updateSign();
+		GameGui.updateMenu();
+!!!364594.java!!!	join(inout p : Player) : void
+		join(p, false);
+!!!364722.java!!!	join(inout p : Player, inout force : boolean) : boolean
+		if (!force) {
+			switch (getState()) {
+			case WAITING:
+				break;
+			case RUN:
+				p.sendMessage("§8> §cCette partie est déjà en cours");
+				return false;
+			case END:
+				p.sendMessage("§8> §cCette partie est déjà en cours");
+				return false;
+			case OFF:
+				p.sendMessage("§8> §cCette partie est fermée");
+				return false;
+			}
+			if (SignEvent.location_save.containsKey(p)) {
+				SignEvent.location_save.remove(p);
+			}
+			SignEvent.location_save.put(p, p.getLocation().clone());
+		}
+		if (!getPlayers().contains(p)) {
+			getPlayers().add(p);
+		}
+		p.getInventory().clear();
+		p.getInventory().setHeldItemSlot(0);
+		p.getInventory().setItem(0, kit_selector_item);
+		p.teleport(getRandomSpawnPoint());
+		p.setAllowFlight(true);
+		p.setScoreboard(getScoreboard());
+		updateSign();
+		return true;
+!!!364850.java!!!	updateSign() : void
+		switch (state) {
+		case WAITING:
+			sign.setLine(1, "§fDémarre dans");
+			sign.setLine(2, "§0" + getCleanMessage(timer, "MM §fmin §0SS §fsec"));
+			break;
+		case RUN:
+			sign.setLine(1, "§cLa partie est");
+			sign.setLine(2, "§cen cours.");
+			break;
+		case END:
+			sign.setLine(1, "§cLa partie");
+			sign.setLine(2, "§credémarre.");
+			break;
+		case OFF:
+			sign.setLine(1, "");
+			sign.setLine(2, "");
+			break;
+		}
+		sign.setLine(3, "§e§l" + ( state == State.OFF ? "- Joueurs" : (players.size() - spectators.size()) + " Joueurs"));
+		sign.update(true, true);
+!!!364978.java!!!	getStep() : HGGames::Step
+		return step;
+!!!365106.java!!!	getRandomSpawnPoint() : Location
+		return spawnPoint.clone().add(rnd(), 0, rnd());
+!!!365234.java!!!	rnd() : int
+		Random r = new Random();
+		return r.nextBoolean() ? r.nextInt(HGWorldGenerator.circle_size) : -r.nextInt(HGWorldGenerator.circle_size);
+!!!365362.java!!!	getTimer() : int
+		return timer;
+!!!365490.java!!!	getScoreboard() : Scoreboard
+		return scoreboard;
+!!!365618.java!!!	reduceTimer() : void
+		if (timer > 0) {
+			timer--;
+		}
+!!!365746.java!!!	resetTimer() : void
+		this.timer = step.getTimer();
+!!!365874.java!!!	setTimer(in timer : int) : void
+		this.timer = timer;
+!!!366002.java!!!	removeScoreboard(inout p : Player) : void
+		setDefaultScoreboard(null);
+!!!366130.java!!!	getSign() : Sign
+		return sign;
+!!!366258.java!!!	setOpen(inout open : boolean) : void
+		this.open = open;
+!!!366386.java!!!	isOpen() : boolean
+		return this.open;
+!!!366514.java!!!	getMenu() : IMenu
+		return menu;
+!!!366642.java!!!	startGame() : void
+		startGame(false);
+!!!366770.java!!!	getItem() : ItemStack
+		return state.clone(false).name(getName()).lore(state == State.OFF ? null : Arrays.asList("§eJoueurs: §b" + getPlayers().size(), "§eEtape: §b" + step.getName()));
+!!!366898.java!!!	getKitMenu() : HGKitMenu
+		return kitMenu;

@@ -46,6 +46,17 @@
         app:layout_constraintStart_toStartOf="@+id/spinner_peripheriques"
         app:layout_constraintTop_toBottomOf="@+id/spinner_peripheriques" />
 
+    <Button
+        android:id="@+id/btn_creer_participant"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="24dp"
+        android:text="Créer un participant"
+        app:layout_constraintEnd_toEndOf="@+id/btn_associer"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_associer"
+        app:layout_constraintTop_toBottomOf="@+id/btn_associer" />
+
     <ListView
         android:id="@+id/liste_peripheriques"
         android:layout_width="349dp"

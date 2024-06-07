@@ -1,0 +1,28 @@
+class Fragmentation
+!!!309042.java!!!	Fragmentation(in number : int)
+		this.number = number;
+!!!309170.java!!!	getAttackCount() : int
+		return 1;
+!!!309298.java!!!	getAwaitEnable() : int
+		return 0;
+!!!309426.java!!!	getAwaitDisable() : int
+		return 0;
+!!!309554.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.FRAGMENTATION;
+!!!309682.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!309810.java!!!	Attack(inout info : SheepInfo) : void
+		double pi = Math.PI*2/number;
+		for (int i = 0; i < number; i++) {
+			double x = Math.sin(pi*(i+1));
+			double z = Math.cos(pi*(i+1));
+			Sheep s = SheepInfo.getSheep(info.getName(), info.getColor(), info.getSheep().getLocation());
+			s.setBaby();
+			s.setVelocity(info.getSheep().getLocation().clone().add(x, 0, z).toVector().subtract(info.getSheep().getLocation().clone().toVector()).normalize());
+			SheepInfo si = info.clone(info.getGame(), info.getTeam(), s, 1, info.getShooter(), false);
+			explode.Enable(si);
+		}
+		for (Player pll : info.getGame().getPlayers()) {
+			pll.playSound(info.getSheep().getLocation(), Sound.WITHER_SHOOT, 1, 1);
+		}
+		info.getSheep().remove();

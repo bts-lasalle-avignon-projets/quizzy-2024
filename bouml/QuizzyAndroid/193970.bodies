@@ -1,0 +1,65 @@
+class CancelledPets
+!!!486706.java!!!	OnDamage(inout e : EntityDamageEvent) : void
+		if (!PetManager.pets.containsValue(e.getEntity())) {
+			return;
+		}
+		e.setCancelled(true);
+!!!486834.java!!!	OnJoin(inout e : PlayerJoinEvent) : void
+		try {
+			sql.createSection(e.getPlayer().getName());
+		} catch (Exception e1) {
+		}
+		Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+			Stats stat = Stats.getStats(e.getPlayer());
+			if (stat.isAutoSpawn()) {
+				CraftPet pet = CraftPet.getPetOfID(stat.getID());
+				if (pet == null) {
+					return;
+				}
+				PetManager.SpawnPet(e.getPlayer(), pet);
+				PetManager.toggleFollow(e.getPlayer(), PetManager.pets.get(e.getPlayer()), false);
+			}
+		}, 10);
+!!!486962.java!!!	OnQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		Stats stat = Stats.getNULLStats(p);
+		Stats.removePlayer(stat);
+!!!487090.java!!!	OnChunkLoad(inout e : ChunkLoadEvent) : void
+		for (Entity ent : e.getChunk().getEntities()) {
+			if (ent instanceof Player || ent instanceof ArmorStand || !ent.isCustomNameVisible()) {
+				continue;
+			}
+			ent.remove();
+		}
+!!!487218.java!!!	OnChunkUnload(inout e : ChunkUnloadEvent) : void
+		for (Entity ent : e.getChunk().getEntities()) {
+			if (PetManager.pets.containsValue(ent)) {
+				continue;
+			}
+			Player p = getOwner(ent);
+			if (p == null || !Bukkit.getOnlinePlayers().contains(p)) {
+				continue;
+			}
+			if (p.getWorld() == ent.getWorld()) {
+				PetChangeWorldEvent event = new PetChangeWorldEvent(p, ent, CraftPet.getPetOfType(ent.getType()), p.getWorld());
+				Bukkit.getPluginManager().callEvent(event);
+				if (event.isCancelled()) {
+					continue;
+				}
+			} else {
+				PetMovingToOwnerEvent event = new PetMovingToOwnerEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+				Bukkit.getPluginManager().callEvent(event);
+				if (event.isCancelled()) {
+					continue;
+				}
+			}
+			ent.teleport(p);
+		}
+		e.setCancelled(true);
+!!!487346.java!!!	getOwner(inout ent : Entity) : Player
+		for (Player pll : PetManager.pets.keySet()) {
+			if (ent == PetManager.pets.get(pll)) {
+				return pll;
+			}
+		}
+		return null;

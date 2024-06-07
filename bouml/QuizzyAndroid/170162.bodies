@@ -1,0 +1,57 @@
+class Duplicate
+!!!306226.java!!!	getAttackCount() : int
+		return 5;
+!!!306354.java!!!	getAwaitEnable() : int
+		return 5;
+!!!306482.java!!!	getAwaitDisable() : int
+		return 5;
+!!!306610.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.DUPLICATE;
+!!!306738.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!306866.java!!!	Attack(inout info : SheepInfo) : void
+		Location pos1 = info.getSheep().getLocation().clone().add(-10, -3, -10);
+		Location pos2 = info.getSheep().getLocation().clone().add(10, 3, 10);
+		Cuboid cuboid = new Cuboid(pos1, pos2);
+		Sheep s = SheepInfo.getSheep(info.getName(), DyeColor.getByWoolData(info.getItem().getData().getData()), info.getSheep().getLocation());
+		SheepInfo i = info.clone(info.getGame(), info.getTeam(), s, info.getShooter(), false);
+		s.setBaby();
+		s.setVelocity(randomVector());
+		s.getWorld().playSound(s.getLocation(), Sound.CHICKEN_EGG_POP, 10, 1);
+		for (PowerSheep ps : i.getPowers()) {
+			if (ps.getType() == PowerType.DUPLICATE) {
+				continue;
+			}
+			ps.Enable(i);
+		}
+		Location loc = getBlock(cuboid);
+		if (loc == null) {
+			return;
+		}
+		new BukkitRunnable() {@Override public void run() {
+			if (s.isDead()) {
+				cancel();
+				return;
+			}
+			Cycles.target(s, loc, 1.75);
+		}}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!306994.java!!!	getBlock(inout cuboid : Cuboid) : Location
+		Location loc = null;
+		boolean found = false;
+		for (int i = 0; i < 10; i++) {
+			if (found) {
+				break;
+			}
+			Location l = cuboid.getRandomLocation();
+			for (int y = cuboid.getPoint2().getBlockY(); y >= cuboid.getPoint1().getBlockY(); y--) {
+				if (l.getWorld().getBlockAt(l.getBlockX(), y, l.getBlockZ()).getType() != Material.AIR) {
+					l.setY(y + 1);
+					loc = l;
+					found = true;
+					break;
+				}
+			}
+		}
+		return loc;
+!!!307122.java!!!	randomVector() : Vector
+		return new Vector((Math.random() - 0.5) / 5.0, 0.3, (Math.random() - 0.5) / 5.0).multiply(2.0);

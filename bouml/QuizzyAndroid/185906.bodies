@@ -1,0 +1,63 @@
+class PetCommand
+!!!417586.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		Player p = (Player) sender;
+		if (args.length == 0) {
+			PetAPI.openInventory(p);
+			return true;
+		} else if (args.length > 0 && args.length < 3) {
+			if (args.length == 1) {
+				p.sendMessage("§cUsage: /pet name <nom> OU /pet name reset");
+			} else {
+				
+			}
+			return true;
+		}
+		p.sendMessage("§cUsage: /pet OU /pet name <nom> OU /pet name reset");
+		return false;
+!!!417714.java!!!	onTabComplete(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : List<String>
+		if (args.length == 1) {
+			return Arrays.asList("name");
+		} else if (args.length == 2 && args[0].equalsIgnoreCase("name")) {
+			List<String> list = getPlayers();
+			list.add("reset");
+			return getList(args[1], list);
+		}
+		return Arrays.asList();
+!!!417842.java!!!	getList(in arg : String, inout words : List<String>) : List<String>
+		List<String> list = new ArrayList<>();
+		for (String st : words) {
+			if (st.startsWith(arg)) {
+				list.add(st);
+			}
+		}
+		return list;
+!!!417970.java!!!	getPlayers() : List<String>
+		List<String> list = new ArrayList<>();
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			list.add(pll.getName());
+		}
+		return list;
+!!!418098.java!!!	buildPetMenu() : void
+		Inventory inv = Bukkit.createInventory(null, 45, "ITEM.PETS.INVENTORY.TITLE.NAME");
+		inv.setItem(0, new ItemBuilder(Material.IRON_SWORD, (byte) 0).name("ITEM.PETS.INVENTORY.FACTION.NAME").lore(Arrays.asList("ITEM.PETS.INVENTORY.FACTION.LORE.1", "ITEM.PETS.INVENTORY.FACTION.LORE.2")));
+		inv.setItem(1, new ItemBuilder(Material.getMaterial(58), (byte) 0).name("ITEM.PETS.INVENTORY.CREATIVE.NAME").lore(Arrays.asList("ITEM.PETS.INVENTORY.CREATIVE.LORE.1", "ITEM.PETS.INVENTORY.CREATIVE.LORE.2")));
+		inv.setItem(2, new ItemBuilder(Material.LONG_GRASS, (byte) 1).name("ITEM.PETS.INVENTORY.SKYBLOCK.NAME").lore(Arrays.asList("ITEM.PETS.INVENTORY.SKYBLOCK.LORE.1", "ITEM.PETS.INVENTORY.SKYBLOCK.LORE.2")));
+		inv.setItem(3, new ItemBuilder(Material.SPECKLED_MELON, (byte) 0).name("ITEM.PETS.INVENTORY.HUNGERGAMES.NAME").lore(Arrays.asList("ITEM.PETS.INVENTORY.HUNGERGAMES.LORE.1", "ITEM.PETS.INVENTORY.HUNGERGAMES.LORE.2")));
+		inv.setItem(4, new ItemBuilder(Material.MONSTER_EGG, (byte) EntityType.BLAZE.getTypeId()).name("ITEM.PETS.INVENTORY.PETS.NAME").lore(Arrays.asList("ITEM.PETS.INVENTORY.PETS.LORE.1", "ITEM.PETS.INVENTORY.PETS.LORE.2", "ITEM.PETS.INVENTORY.PETS.LORE.3")));
+		for (int i = 9; i < 18; i++) {
+			inv.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, (byte) 0).name("§r"));
+		}
+		inv.setItem(34, new ItemBuilder(Material.TNT, (byte) 0).name("ITEM.PETS.INVENTORY.ATTACK.NAME"));
+		inv.setItem(35, new ItemBuilder(Material.MAGMA_CREAM, (byte) 0).name("ITEM.PETS.INVENTORY.DELETE.NAME"));
+		inv.setItem(43, new ItemBuilder(Material.NAME_TAG, (byte) 0).name("ITEM.PETS.INVENTORY.RENAME.NAME"));
+		inv.setItem(44, new ItemBuilder(Material.EMERALD, (byte) 0).name("ITEM.PETS.INVENTORY.FOLLOW.NAME"));
+		petMenu = new PetMenu(inv);
+!!!480818.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		PetInventory.OpenInventory((Player) sender);
+		return true;

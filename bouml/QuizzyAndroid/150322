@@ -1,0 +1,1291 @@
+format 224
+"mysql" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcbattlesheep::mysql
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_BattleSheep_II/src/fr/red/lcbattlesheep/mysql/"
+  java_package "fr.red.lcbattlesheep.mysql"
+  classview 154418 "mysql"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 167090 "SQL"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      class 167218 "SQLConnection"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 204082 "connection"
+	  private explicit_type "Connection"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204210 "timeout"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204338 "plugin"
+	  private explicit_type "Plugin"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204466 "adress"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204594 "port"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204722 "database"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204850 "username"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 204978 "password"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205106 "when_connected"
+	  private explicit_type "Runnable"
+	  init_value " () -> {}"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205234 "when_disconnected"
+	  private explicit_type "Runnable"
+	  init_value " () -> {}"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205362 "when_errored"
+	  private explicit_type "Runnable"
+	  init_value " () -> {}"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205490 "when_tablecreation"
+	  private explicit_type "Runnable"
+	  init_value " () -> {}"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205618 "error"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 177714 // sql (<unidirectional association>)
+	  relation 177714 --->
+	    a role_name "sql" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 177714 // sql (<unidirectional association>)
+	    b parent class_ref 167090 // SQL
+	end
+
+	operation 287794 "SQLConnection"
+	  public explicit_return_type ""
+	  nparams 6
+	    param inout name "sql" type class_ref 167090 // SQL
+	    param in name "adress" explicit_type "String"
+	    param in name "port" explicit_type "int"
+	    param in name "database" explicit_type "String"
+	    param in name "username" explicit_type "String"
+	    param in name "password" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 287922 "update"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288050 "connect"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "async" explicit_type "boolean"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288178 "disconnect"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288306 "async"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "run" explicit_type "Runnable"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288434 "WhenConnected"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "run" explicit_type "Runnable"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288562 "WhenDisconnected"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "run" explicit_type "Runnable"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288690 "WhenErrored"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "run" explicit_type "Runnable"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288818 "WhenTableCreation"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 1
+	    param inout name "run" explicit_type "Runnable"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 288946 "getError"
+	  public explicit_return_type "String"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      classrelation 177330 // connection (<unidirectional association>)
+	relation 177330 --->
+	  a role_name "connection" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177330 // connection (<unidirectional association>)
+	  b parent class_ref 167218 // SQLConnection
+      end
+
+      class 167346 "SQLAccess"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 206258 "table"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206386 "primarykey"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 177842 // columns (<unidirectional association>)
+	  relation 177842 --->
+	    stereotype "List"
+	    a role_name "columns" init_value " new ArrayList<>()" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	      classrelation_ref 177842 // columns (<unidirectional association>)
+	    b parent class_ref 167730 // Column
+	end
+
+	classrelation 177970 // methods (<unidirectional association>)
+	  relation 177970 --->
+	    a role_name "methods" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 177970 // methods (<unidirectional association>)
+	    b parent class_ref 167474 // Methods
+	end
+
+	attribute 206514 "list"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206642 "undefined"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206770 "formats"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206898 "next"
+	  private explicit_type "int"
+	  init_value " 2"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 178098 // adress (<unidirectional association>)
+	  relation 178098 --->
+	    a role_name "adress" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 178098 // adress (<unidirectional association>)
+	    b parent class_ref 167218 // SQLConnection
+	end
+
+	operation 289074 "SQLAccess"
+	  public explicit_return_type ""
+	  nparams 3
+	    param inout name "adress" type class_ref 167218 // SQLConnection
+	    param in name "table" explicit_type "String"
+	    param in name "primarykey" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289202 "addColumn"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "name" explicit_type "String"
+	    param in name "defaultkey" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289330 "addColumn"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "name" explicit_type "String"
+	    param in name "defaultkey" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289458 "addColumn"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "name" explicit_type "String"
+	    param inout name "defaultkey" explicit_type "Blob"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289586 "addColumn"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "name" explicit_type "String"
+	    param inout name "defaultkey" explicit_type "boolean"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289714 "addColumn"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "name" explicit_type "String"
+	    param inout name "type" type class_ref 167602 // TableType
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289842 "create"
+	  public explicit_return_type "void"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 289970 "getMethods"
+	  public return_type class_ref 167474 // Methods
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290098 "getConnection"
+	  public return_type class_ref 167218 // SQLConnection
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      classrelation 177458 // access (<unidirectional association>)
+	relation 177458 --->
+	  stereotype "List"
+	  a role_name "access" init_value " new ArrayList<>()" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 177458 // access (<unidirectional association>)
+	  b parent class_ref 167346 // SQLAccess
+      end
+
+      attribute 203698 "plugin"
+	private explicit_type "Plugin"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 203826 "timeout"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 203954 "database"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 177586 // list (<unidirectional association>)
+	relation 177586 --->
+	  stereotype "List"
+	  a role_name "list" init_value " new ArrayList<>()" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 177586 // list (<unidirectional association>)
+	  b parent class_ref 167090 // SQL
+      end
+
+      operation 286770 "SQL"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "plugin" explicit_type "Plugin"
+	  param in name "timeout" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 286898 "adress"
+	public return_type class_ref 167218 // SQLConnection
+	nparams 5
+	  param in name "adress" explicit_type "String"
+	  param in name "port" explicit_type "int"
+	  param in name "database" explicit_type "String"
+	  param in name "username" explicit_type "String"
+	  param in name "password" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 287026 "adress"
+	public return_type class_ref 167218 // SQLConnection
+	nparams 1
+	  param inout name "config" explicit_type "FileConfiguration"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 287154 "access"
+	public return_type class_ref 167346 // SQLAccess
+	nparams 2
+	  param in name "table" explicit_type "String"
+	  param in name "primarykey" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 287282 "getConnection"
+	public return_type class_ref 167218 // SQLConnection
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 167474 "Methods"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 178354 // adress (<unidirectional association>)
+	  relation 178354 --->
+	    a role_name "adress" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 178354 // adress (<unidirectional association>)
+	    b parent class_ref 167218 // SQLConnection
+	end
+
+	classrelation 178482 // access (<unidirectional association>)
+	  relation 178482 --->
+	    a role_name "access" private
+	      comment "private boolean async = false;
+private boolean pending = false;
+private List<Runnable> pendinglist = new ArrayList<>();
+"
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 178482 // access (<unidirectional association>)
+	    b parent class_ref 167346 // SQLAccess
+	end
+
+	operation 290482 "Methods"
+	  public explicit_return_type ""
+	  nparams 2
+	    param inout name "adress" type class_ref 167218 // SQLConnection
+	    param inout name "access" type class_ref 167346 // SQLAccess
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290610 "getAccess"
+	  public return_type class_ref 167346 // SQLAccess
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290738 "exec"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "command" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290866 "execResult"
+	  public explicit_return_type "Object"
+	  nparams 2
+	    param in name "command" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290994 "exec"
+	  public explicit_return_type "void"
+	  nparams 2
+	    param in name "command" explicit_type "String"
+	    param inout name "object" explicit_type "Object"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291122 "exists"
+	  public explicit_return_type "boolean"
+	  nparams 1
+	    param in name "key" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291250 "lines"
+	  public explicit_return_type "List<String>"
+	  nparams 0
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291378 "createLine"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "line" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291506 "createTable"
+	  public explicit_return_type "void"
+	  nparams 0
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291634 "removeLine"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "line" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291762 "setInt"
+	  public explicit_return_type "void"
+	  nparams 3
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	    param in name "arg0" explicit_type "int"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 291890 "getInt"
+	  public explicit_return_type "int"
+	  nparams 2
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292018 "setString"
+	  public explicit_return_type "void"
+	  nparams 3
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	    param in name "arg0" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292146 "getString"
+	  public explicit_return_type "String"
+	  nparams 2
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292274 "setBoolean"
+	  public explicit_return_type "void"
+	  nparams 3
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	    param inout name "arg0" explicit_type "boolean"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292402 "getBoolean"
+	  public explicit_return_type "boolean"
+	  nparams 2
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292530 "setBlob"
+	  public explicit_return_type "void"
+	  nparams 3
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	    param inout name "arg0" explicit_type "InputStream"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292658 "getBlob"
+	  public explicit_return_type "Blob"
+	  nparams 2
+	    param in name "key" explicit_type "String"
+	    param in name "column" explicit_type "String"
+	  nexceptions 1
+	    explicit_exception "Exception"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 292786 "from"
+	  class_operation public return_type class_ref 167474 // Methods
+	  nparams 1
+	    param in name "table" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 287410 "from"
+	class_operation public return_type class_ref 167474 // Methods
+	nparams 2
+	  param inout name "config" explicit_type "FileConfiguration"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 287538 "from"
+	class_operation public return_type class_ref 167474 // Methods
+	nparams 2
+	  param in name "database" explicit_type "String"
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 287666 "from"
+	public return_type class_ref 167346 // SQLAccess
+	nparams 1
+	  param in name "table" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 167602 "TableType"
+	visibility public stereotype "enum"
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 205746 "STRING"
+	  public type class_ref 167602 // TableType
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 205874 "INT"
+	  public type class_ref 167602 // TableType
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206002 "BLOB"
+	  public type class_ref 167602 // TableType
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 206130 "BOOLEAN"
+	  public type class_ref 167602 // TableType
+	  cpp_decl ""
+	  java_decl "  ${@}${name}${value},${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 167730 "Column"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 207026 "name"
+	  private explicit_type "String"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 178226 // type (<unidirectional association>)
+	  relation 178226 --->
+	    a role_name "type" private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	      classrelation_ref 178226 // type (<unidirectional association>)
+	    b parent class_ref 167602 // TableType
+	end
+
+	attribute 207154 "defaultkey"
+	  private explicit_type "Object"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 207282 "position"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 290226 "Column"
+	  public explicit_return_type ""
+	  nparams 4
+	    param in name "name" explicit_type "String"
+	    param inout name "defaultkey" explicit_type "Object"
+	    param in name "position" explicit_type "int"
+	    param inout name "type" type class_ref 167602 // TableType
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 290354 "format"
+	  public explicit_return_type "String"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+    end
+  end
+
+  deploymentview 147250 "mysql"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 163634 "SQL"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+${definition}"
+      associated_elems
+	class_ref 167090 // SQL
+      end
+    end
+  end
+end

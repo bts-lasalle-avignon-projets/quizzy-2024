@@ -1,0 +1,34 @@
+class Invincible
+!!!311730.java!!!	Invincible()
+		if (enable) {
+			return;
+		}
+		enable = true;
+		Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
+!!!311858.java!!!	getAttackCount() : int
+		return 0;
+!!!311986.java!!!	getAwaitEnable() : int
+		return 0;
+!!!312114.java!!!	getAwaitDisable() : int
+		return 0;
+!!!312242.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.INVINCIBLE;
+!!!312370.java!!!	Enable(inout info : SheepInfo) : void
+		list.add(info.getSheep());
+		new BukkitRunnable() {@Override public void run() {
+			if (!list.contains(info.getSheep())) {
+				cancel();
+				return;
+			}
+			if (info.getSheep().isDead()) {
+				list.remove(info.getSheep());
+				cancel();
+				return;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 5);
+!!!312498.java!!!	Attack(inout info : SheepInfo) : void
+		
+!!!312626.java!!!	OnDamage(inout e : EntityDamageEvent) : void
+		if (e.getEntity() instanceof Sheep && list.contains((Sheep) e.getEntity()) && e.getCause() != DamageCause.VOID) {
+			e.setCancelled(true);
+		}

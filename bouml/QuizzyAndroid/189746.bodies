@@ -1,0 +1,13 @@
+class MushroomCow
+!!!450354.java!!!	MushroomCow(inout owner : Player, in id : int)
+		super(owner, EntityType.MUSHROOM_COW, "Mushroom de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+!!!450482.java!!!	MushroomCow(inout owner : Player)
+		super(owner, EntityType.MUSHROOM_COW, "Mushroom de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+!!!450610.java!!!	getEntity() : org.bukkit.entity.MushroomCow
+		return (org.bukkit.entity.MushroomCow) entity;
+!!!450738.java!!!	spawn() : void
+		super.spawn();
+!!!450866.java!!!	clone(inout player : Player) : MushroomCow
+		return new MushroomCow(player, getID());

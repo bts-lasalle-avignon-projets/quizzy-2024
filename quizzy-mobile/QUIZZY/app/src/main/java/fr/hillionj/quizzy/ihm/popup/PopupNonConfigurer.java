@@ -31,13 +31,18 @@ public class PopupNonConfigurer extends DialogFragment {
     private final Session session;
     private Peripherique peripherique = null;
 
-    public PopupNonConfigurer(Session session) {
-        for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
-            if (peripherique.estConnecte() && Parametres.getParametres().getParticipantAssocier(peripherique) == null) {
-                this.peripherique = peripherique;
-                break;
-            }
+    public PopupNonConfigurer() {
+        PopupNonConfigurer popup = (PopupNonConfigurer) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null) {
+            this.peripherique = popup.peripherique;
+            this.session = popup.session;
+        } else {
+            this.session = null;
         }
+    }
+
+    public PopupNonConfigurer(Session session) {
+        this.peripherique = getPeripherique();
         this.session = session;
     }
 
@@ -51,7 +56,9 @@ public class PopupNonConfigurer extends DialogFragment {
         }
         setCancelable(false);
 
-        IHM.getIHM().ajouterIHM(this);
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
 
         View vue = inflater.inflate(R.layout.popup_non_configurer, container, false);
         initialiserVue(vue);
@@ -59,6 +66,10 @@ public class PopupNonConfigurer extends DialogFragment {
     }
 
     public void initialiserVue(@NonNull View vue) {
+        if (session == null) {
+            dismiss();
+            return;
+        }
         ((TextView)vue.findViewById(R.id.titre_popup)).setText(peripherique.getNom() + " non configuré");
         vue.findViewById(R.id.btn_deconnecter).setOnClickListener(v -> {
             peripherique.deconnecter();
@@ -67,7 +78,7 @@ public class PopupNonConfigurer extends DialogFragment {
                 if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
                     session.lancer();
                 } else {
-                    startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueSession.class));
+                    IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueSession.class);
                 }
             }
         });
@@ -81,5 +92,14 @@ public class PopupNonConfigurer extends DialogFragment {
         vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
             dismiss();
         });
+    }
+
+    private Peripherique getPeripherique() {
+        for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
+            if (peripherique.estConnecte() && Parametres.getParametres().getParticipantAssocier(peripherique) == null) {
+                return peripherique;
+            }
+        }
+        return null;
     }
 }

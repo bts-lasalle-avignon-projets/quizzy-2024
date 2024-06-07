@@ -1,0 +1,121 @@
+class CopieurBDD
+!!!191794.java!!!	CopieurBDD(in nomFichier : String, in context : Context)
+        this.nomFichier = nomFichier;
+        this.cheminDossier = "/data/data/" + context.getPackageName() + "/databases/";
+        this.context  = context;
+!!!191922.java!!!	copierOctets(inout input : InputStream, inout output : OutputStream) : void
+        byte[] buffer = new byte[1024];
+        int length;
+        while((length = input.read(buffer)) > 0)
+        {
+            output.write(buffer, 0, length);
+        }
+!!!192050.java!!!	fermerLesFlux(inout output : OutputStream, inout input : InputStream) : void
+        if(output != null)
+        {
+            try
+            {
+                output.close();
+            }
+            catch(IOException e)
+            {
+                Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }
+        if(input != null)
+        {
+            try
+            {
+                input.close();
+            }
+            catch(IOException e) {
+                Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }
+!!!192178.java!!!	verifier() : void
+        File fichierBaseDeDonnes = new File(cheminDossier + nomFichier);
+        try
+        {
+            if(!fichierBaseDeDonnes.exists())
+            {
+                copierBaseDeDonnees(context.getAssets().open(nomFichier), fichierBaseDeDonnes);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+!!!192306.java!!!	copierBaseDeDonnees(inout source : InputStream, inout destination : File) : void
+        InputStream  input  = null;
+        OutputStream output = null;
+        try
+        {
+            new File(cheminDossier).mkdirs();
+            input  = new BufferedInputStream(source);
+            output = new BufferedOutputStream(new FileOutputStream(destination));
+            copierOctets(input, output);
+        }
+        finally
+        {
+            fermerLesFlux(output, input);
+        }
+!!!518322.java!!!	CopieurBDD(in nomFichier : String, in context : Context)
+        this.nomFichier = nomFichier;
+        this.cheminDossier = "/data/data/" + context.getPackageName() + "/databases/";
+        this.context  = context;
+!!!518450.java!!!	copierOctets(inout input : InputStream, inout output : OutputStream) : void
+        byte[] buffer = new byte[1024];
+        int length;
+        while((length = input.read(buffer)) > 0)
+        {
+            output.write(buffer, 0, length);
+        }
+!!!518578.java!!!	fermerLesFlux(inout output : OutputStream, inout input : InputStream) : void
+        if(output != null)
+        {
+            try
+            {
+                output.close();
+            }
+            catch(IOException e)
+            {
+                Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }
+        if(input != null)
+        {
+            try
+            {
+                input.close();
+            }
+            catch(IOException e) {
+                Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }
+!!!518706.java!!!	verifier() : void
+        File fichierBaseDeDonnes = new File(cheminDossier + nomFichier);
+        try
+        {
+            if(!fichierBaseDeDonnes.exists())
+            {
+                copierBaseDeDonnees(context.getAssets().open(nomFichier), fichierBaseDeDonnes);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+!!!518834.java!!!	copierBaseDeDonnees(inout source : InputStream, inout destination : File) : void
+        InputStream  input  = null;
+        OutputStream output = null;
+        try
+        {
+            new File(cheminDossier).mkdirs();
+            input  = new BufferedInputStream(source);
+            output = new BufferedOutputStream(new FileOutputStream(destination));
+            copierOctets(input, output);
+        }
+        finally
+        {
+            fermerLesFlux(output, input);
+        }

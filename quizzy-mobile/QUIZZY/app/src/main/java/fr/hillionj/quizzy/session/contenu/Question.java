@@ -23,13 +23,16 @@ public class Question
     public Question(int idQuestion, String question, @NonNull List<String> propositions, int temps)
     {
         this.idQuestion = idQuestion;
-        String bonneReponse = propositions.get(0);
         this.propositions       = propositions;
         this.question       = question;
         this.temps          = temps;
-        Collections.shuffle(propositions);
-
-        this.numeroBonneReponse = propositions.indexOf(bonneReponse) + 1;
+        if (propositions != null) {
+            String bonneReponse = propositions.get(0);
+            Collections.shuffle(propositions);
+            this.numeroBonneReponse = propositions.indexOf(bonneReponse) + 1;
+        } else {
+            this.numeroBonneReponse = -1;
+        }
     }
 
     public int getNumeroBonneReponse()
@@ -70,7 +73,7 @@ public class Question
         if (!selection.containsKey(participant)) {
             return false;
         }
-        return selection.get(participant) == numeroBonneReponse - 1;
+        return numeroBonneReponse == -1 || selection.get(participant) == numeroBonneReponse - 1;
     }
 
     public int getIdQuestion() {

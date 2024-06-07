@@ -1,0 +1,11 @@
+class Reload
+!!!403634.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (args.length == 1 && args[0].equalsIgnoreCase("reload") && sender.hasPermission("mapdater.reload")) {
+			Main.getInstance().reload();
+			sender.sendMessage("§aConfiguration rechargée");
+		} else if (!sender.hasPermission("mapdater.reload")) {
+			sender.sendMessage("§cVous n'avez pas la permission");
+		} else {
+			sender.sendMessage("§cTapez /map reload");
+		}
+		return false;

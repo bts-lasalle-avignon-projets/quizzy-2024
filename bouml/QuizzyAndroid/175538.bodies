@@ -1,0 +1,11 @@
+class SignEvent
+!!!346162.java!!!	onClick(inout e : PlayerInteractEvent) : void
+		Player p = e.getPlayer();
+		if (e.getClickedBlock() == null || !(e.getClickedBlock().getState() instanceof Sign)) {
+			return;
+		}
+		HGGames game = (HGGames) Game.from((Sign) e.getClickedBlock().getState(), HGGames.class);
+		if (game == null) {
+			return;
+		}
+		game.join(p);

@@ -14,12 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import fr.hillionj.quizzy.R;
-import fr.hillionj.quizzy.ihm.IHM;
-import fr.hillionj.quizzy.ihm.vues.VueParametres;
-import fr.hillionj.quizzy.ihm.vues.VueParticipants;
-import fr.hillionj.quizzy.ihm.vues.VueSession;
-import fr.hillionj.quizzy.parametres.ArgumentLancement;
-import fr.hillionj.quizzy.session.Session;
 
 public class PopupCredits extends DialogFragment {
 

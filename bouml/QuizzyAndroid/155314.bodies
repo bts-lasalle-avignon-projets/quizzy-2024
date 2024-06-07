@@ -1,0 +1,137 @@
+class WatchDog
+!!!232626.java!!!	WatchDog(inout ihm : IHM)
+        this.ihm = ihm;
+        scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleWithFixedDelay(() -> {
+            try
+            {
+                loop();
+            }
+            catch(Exception e)
+            {
+                Log.e("QUIZZ_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }, 0, tempsPeriode, TimeUnit.MILLISECONDS);
+!!!232754.java!!!	loop() : void
+        if (Parametres.getParametres().estTesterLaConnexion()) {
+            testerConnexion();
+        }
+        if (estEnPause()) {
+            etaitEnPause = true;
+            return;
+        }
+        if (etaitEnPause) {
+            reprendreSession();
+            etaitEnPause  = false;
+        }
+        afficherChrono();
+!!!232882.java!!!	afficherBoutons() : void
+        ihm.getActiviteActive().runOnUiThread(() -> {
+            ihm.afficherBoutons();
+        });
+!!!233010.java!!!	afficherChrono() : void
+        ihm.getActiviteActive().runOnUiThread(() -> {
+            Parametres.getParametres().getSession().verifierChrono();
+            ihm.afficherChrono();
+        });
+!!!233138.java!!!	arreter() : void
+        scheduler.shutdown();
+        try {
+            if (!scheduler.awaitTermination(1, TimeUnit.SECONDS)) {
+                scheduler.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            scheduler.shutdownNow();
+        }
+!!!233266.java!!!	pause() : void
+        pause(-1);
+!!!233394.java!!!	pause(in millis : long) : void
+        tempsPause = millis;
+        heureDebutTempsPause = System.currentTimeMillis();
+!!!233522.java!!!	estEnPause() : boolean
+        return tempsPause != 0 && (tempsPause == -1 || System.currentTimeMillis() - heureDebutTempsPause < tempsPause);
+!!!233650.java!!!	getHeureDebutTempsPause() : long
+        return heureDebutTempsPause;
+!!!233778.java!!!	reprendre() : void
+        tempsPause = 0;
+!!!233906.java!!!	reprendreSession() : void
+        reprendre();
+        ihm.getActiviteActive().runOnUiThread(() ->
+        {
+            Parametres.getParametres().getSession().reprendre();
+        });
+!!!234034.java!!!	testerConnexion() : void
+        ihm.getActiviteActive().runOnUiThread(() ->
+        {
+            for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
+                peripherique.verifierInterruption();
+            }
+        });
+!!!536370.java!!!	WatchDog(inout ihm : IHM)
+        this.ihm = ihm;
+        scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleWithFixedDelay(() -> {
+            try
+            {
+                loop();
+            }
+            catch(Exception e)
+            {
+                Log.e("QUIZZ_" + this.getClass().getName(), e.getMessage(), e);
+            }
+        }, 0, tempsPeriode, TimeUnit.MILLISECONDS);
+!!!536498.java!!!	loop() : void
+        if (Parametres.getParametres().estTesterLaConnexion()) {
+            testerConnexion();
+        }
+        if (estEnPause()) {
+            etaitEnPause = true;
+            return;
+        }
+        if (etaitEnPause) {
+            reprendreSession();
+            etaitEnPause  = false;
+        }
+        afficherChrono();
+!!!536626.java!!!	afficherBoutons() : void
+        ihm.getActiviteActive().runOnUiThread(() -> {
+            ihm.afficherBoutons();
+        });
+!!!536754.java!!!	afficherChrono() : void
+        ihm.getActiviteActive().runOnUiThread(() -> {
+            Parametres.getParametres().getSession().verifierChrono();
+            ihm.afficherChrono();
+        });
+!!!536882.java!!!	arreter() : void
+        scheduler.shutdown();
+        try {
+            if (!scheduler.awaitTermination(1, TimeUnit.SECONDS)) {
+                scheduler.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            scheduler.shutdownNow();
+        }
+!!!537010.java!!!	pause() : void
+        pause(-1);
+!!!537138.java!!!	pause(in millis : long) : void
+        tempsPause = millis;
+        heureDebutTempsPause = System.currentTimeMillis();
+!!!537266.java!!!	estEnPause() : boolean
+        return tempsPause != 0 && (tempsPause == -1 || System.currentTimeMillis() - heureDebutTempsPause < tempsPause);
+!!!537394.java!!!	getHeureDebutTempsPause() : long
+        return heureDebutTempsPause;
+!!!537522.java!!!	reprendre() : void
+        tempsPause = 0;
+!!!537650.java!!!	reprendreSession() : void
+        reprendre();
+        ihm.getActiviteActive().runOnUiThread(() ->
+        {
+            Parametres.getParametres().getSession().reprendre();
+        });
+!!!537778.java!!!	testerConnexion() : void
+        ihm.getActiviteActive().runOnUiThread(() ->
+        {
+            for (Peripherique peripherique : Parametres.getParametres().getPeripheriques()) {
+                peripherique.verifierInterruption();
+            }
+        });

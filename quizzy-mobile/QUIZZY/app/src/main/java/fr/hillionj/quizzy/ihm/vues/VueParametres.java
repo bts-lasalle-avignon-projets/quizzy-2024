@@ -2,6 +2,7 @@ package fr.hillionj.quizzy.ihm.vues;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.preference.SwitchPreference;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.Quizzy;
 import fr.hillionj.quizzy.R;
 import fr.hillionj.quizzy.ihm.IHM;
 import fr.hillionj.quizzy.parametres.Parametres;
@@ -45,7 +47,7 @@ public class VueParametres extends AppCompatActivity {
         btn_lancer = findViewById(R.id.btn_lancer);
         btn_lancer.setOnClickListener(v -> {
             if (Parametres.getParametres().getSession().estValide()) {
-                startActivity(new Intent(this, VueSession.class));
+                IHM.getIHM().demarrerActivite(this, this, VueSession.class);
             }
         });
     }
@@ -77,6 +79,20 @@ public class VueParametres extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(@NonNull Preference preference) {
                     getActivity().startActivity(new Intent(getActivity(), VueParticipants.class));
+                    return true;
+                }
+            });
+
+            EditTextPreference entree_nombre_de_questions = findPreference("entree_nombre_de_questions");
+            Parametres.getParametres().setNombreDeQuestions(Integer.parseInt(entree_nombre_de_questions.getText()));
+            entree_nombre_de_questions.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    try {
+                        Parametres.getParametres().setNombreDeQuestions(Integer.parseInt(newValue.toString()));
+                    } catch (Exception exception) {
+                        return false;
+                    }
                     return true;
                 }
             });
@@ -135,6 +151,16 @@ public class VueParametres extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
                     Parametres.getParametres().setTheme(Parametres.getParametres().getThemes().get(Integer.parseInt(newValue.toString())));
+                    return true;
+                }
+            });
+
+            SwitchPreference switch_tester_ta_connexion = findPreference("switch_tester_ta_connexion");
+            Parametres.getParametres().setTesterLaConnexion(switch_tester_ta_connexion.isChecked());
+            switch_tester_ta_connexion.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                    Parametres.getParametres().setTesterLaConnexion((boolean) newValue);
                     return true;
                 }
             });

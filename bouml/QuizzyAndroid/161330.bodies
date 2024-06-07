@@ -1,0 +1,28 @@
+class ProtocoleEnvoiQuestion
+!!!254130.java!!!	ProtocoleEnvoiQuestion(in trame : String)
+        setTrame(trame);
+!!!254258.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";LIBELLE;PROP1;PROP2;PROP3;PROP4;REPONSE;TEMPS\n";
+!!!254386.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENVOI_QUESTION;
+!!!254514.java!!!	getLibelle() : String
+        return extraireDonnees().get("LIBELLE");
+!!!254642.java!!!	getPropositions() : List<String>
+        List<String>        propositions = new ArrayList<>();
+        Map<String, String> donnees      = extraireDonnees();
+        for(int i = 1; i <= 4; i++)
+        {
+            propositions.add(donnees.get("PROP" + i));
+        }
+        return propositions;
+!!!254770.java!!!	getTemps() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!254898.java!!!	getNumeroReponse() : int
+        return toInt(extraireDonnees().get("REPONSE"));
+!!!255026.java!!!	genererTrame(inout question : Question) : void
+        List<String> arguments = new ArrayList<>();
+        arguments.add(question.getQuestion());
+        arguments.addAll(question.getReponses());
+        arguments.add(question.getNumeroBonneReponse() + "");
+        arguments.add(question.getTemps() + "");
+        super.genererTrame(arguments.toArray(arguments.toArray(new String[0])));

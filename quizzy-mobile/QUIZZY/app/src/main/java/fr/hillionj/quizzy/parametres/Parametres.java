@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.hillionj.quizzy.bdd.BaseDeDonnees;
 import fr.hillionj.quizzy.communication.bluetooth.GestionnaireBluetooth;
 import fr.hillionj.quizzy.communication.bluetooth.Peripherique;
 import fr.hillionj.quizzy.ihm.IHM;
@@ -21,7 +22,8 @@ import fr.hillionj.quizzy.session.contenu.Theme;
 public class Parametres {
 
     private static Parametres parametres  = null;
-    private int nombreDeQuestions = 20;
+    private final BaseDeDonnees baseDeDonnees;
+    private int nombreDeQuestions = 5                    ;
     private Theme theme = null;
     private Session session = null;
     private final List<Peripherique> peripheriques;
@@ -30,9 +32,9 @@ public class Parametres {
     private AppCompatActivity activitePrincipale;
     private boolean calulAutomatiqueDuTempsDeReponse = false;
     private int tempsReponse = 30;
+    private boolean testerLaConnexion = true;
 
     public static Parametres getParametres(AppCompatActivity activite) {
-        Log.d("QUIZZY_" + Parametres.class.getName(), "Instanciation de Parametres: " + activite);
         if (parametres == null) {
             parametres = new Parametres(activite);
         }
@@ -48,9 +50,10 @@ public class Parametres {
     public Parametres(AppCompatActivity activite) {
         this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
         IHM ihm = new IHM(this, activite);
-        this.session = new Session(this, activite, ihm);
-        this.participants = this.session.getBaseDeDonnees().getParticipants();
-        this.themes = this.session.getBaseDeDonnees().getThemes();
+        this.baseDeDonnees = new BaseDeDonnees(activite.getApplicationContext());
+        this.session = new Session(this, activite, ihm, baseDeDonnees);
+        this.participants = this.baseDeDonnees.getParticipants();
+        this.themes = this.baseDeDonnees.getThemes();
     }
 
     public Theme getTheme() {
@@ -134,5 +137,26 @@ public class Parametres {
 
     public int getTempsReponse() {
         return tempsReponse;
+    }
+
+    public BaseDeDonnees getBaseDeDonnees() {
+        return baseDeDonnees;
+    }
+
+    public boolean estTesterLaConnexion() {
+        return this.testerLaConnexion;
+    }
+
+    public void setTesterLaConnexion(boolean testerLaConnexion) {
+        this.testerLaConnexion = testerLaConnexion;
+    }
+
+    public Participant getParticipant(String nom) {
+        for (Participant participant : participants) {
+            if (participant.getNom().equals(nom)) {
+                return participant;
+            }
+        }
+        return null;
     }
 }

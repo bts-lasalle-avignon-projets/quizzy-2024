@@ -1,0 +1,37 @@
+class ConnectSQL
+!!!480946.java!!!	Connect(inout plugin : Plugin, inout configuration : FileConfiguration) : void
+		if (lock) {
+			return;
+		}
+		lock = true;
+		Bukkit.getScheduler().runTaskLater(plugin, () -> {
+			lock = false;
+		}, 10*20);
+		String host = configuration.getString("mysql.host");
+		int port = configuration.getInt("mysql.port");
+		String database = configuration.getString("mysql.database");
+		String username = configuration.getString("mysql.username");
+		String password = configuration.getString("mysql.password");
+		Disconnect(SQLFunc.getConnection());
+		try {
+			synchronized (plugin) {
+				if (SQLFunc.getConnection() != null && !SQLFunc.getConnection().isClosed()) {
+					return;
+				}
+				Class.forName("com.mysql.jdbc.Driver");
+				SQLFunc.setConnection(DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password));
+				Bukkit.getConsoleSender().sendMessage(SQLManager.getPrefix() + "§aDatabase connected");
+				
+				SQLManager.createTable();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Bukkit.getConsoleSender().sendMessage(SQLManager.getPrefix() + "§cCannot connect to database !");
+			return;
+		}
+!!!481074.java!!!	Disconnect(inout connection : Connection) : void
+		try {
+			connection.close();
+			Bukkit.getConsoleSender().sendMessage(SQLManager.getPrefix() + "§aSucessfuly disconnected");
+		} catch (Exception e) {
+		}

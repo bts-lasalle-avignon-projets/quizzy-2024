@@ -1,0 +1,53 @@
+class BlinkProgression
+!!!302514.java!!!	BlinkProgression(in enable : int, in disable : int)
+		this.enable = enable;
+		this.disable = disable;
+!!!302642.java!!!	getAttackCount() : int
+		return 0;
+!!!302770.java!!!	getAwaitEnable() : int
+		return enable;
+!!!302898.java!!!	getAwaitDisable() : int
+		return disable;
+!!!303026.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.BLINK_PROGRESS;
+!!!303154.java!!!	Enable(inout info : SheepInfo) : void
+		double multiplier = ((double) info.getBasedLife() * (double) 20 - (double) getAwaitEnable() * (double) 20 - (double) getAwaitDisable() * (double) 20) / (double) 3;
+		new BukkitRunnable() {
+			int interval = 0;
+			int wait = getAwaitEnable() * 20;
+			boolean b = false;
+			@Override
+			public void run() {
+				if (wait > 0) {
+					wait--;
+					return;
+				}
+				if (info.getSheep().isDead()) {
+					cancel();
+					return;
+				}
+				double current = ((double) info.getLife() * (double) 20 - (double) getAwaitDisable() * (double) 20) / (double) 3;
+				if (current < 0) {
+					info.getSheep().setColor(info.getColor());
+					cancel();
+					return;
+				}
+				if (interval >= getInterval(current, multiplier)) {
+					interval = 0;
+					b = !b;
+					info.getSheep().setColor(b ? DyeColor.WHITE : info.getColor());
+				} else {
+					interval++;
+				}
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!303282.java!!!	getInterval(in current : double, in multiplier : double) : int
+		if (current >= multiplier / (double) 3 * (double) 2) {
+			return 12;
+		} else if (current >= multiplier / (double) 3) {
+			return 6;
+		} else {
+			return 2;
+		}
+!!!303410.java!!!	Attack(inout info : SheepInfo) : void
+		

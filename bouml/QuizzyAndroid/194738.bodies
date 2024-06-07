@@ -1,0 +1,13 @@
+class ConfigManager
+!!!496050.java!!!	ConfigManager(inout configAccess : ConfigAccess)
+		this.configAccess = configAccess;
+!!!496178.java!!!	saveDefaultConfig() : void
+		configAccess.saveDefaultConfig();
+!!!496306.java!!!	saveConfig() : void
+		configAccess.saveConfig();
+!!!496434.java!!!	reloadConfig() : void
+		configAccess.reloadConfig();
+!!!496562.java!!!	getName() : String
+		return configAccess.getFileName();
+!!!496690.java!!!	getConfig() : FileConfiguration
+		return configAccess.getConfig();

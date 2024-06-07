@@ -1,0 +1,126 @@
+class PetInventory
+!!!490418.java!!!	OpenInventory(inout p : Player) : void
+		PetInventoryOpenEvent event = new PetInventoryOpenEvent(p);
+		Bukkit.getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			return;
+		}
+		Inventory inv = Bukkit.createInventory(null, 45, "§8>> §cFamiliers");
+		inv.setItem(0, ib.addItem("§cBoutique Faction", Arrays.asList("§7Cliquez pour voir la", "§7boutique du Faction"), Material.IRON_SWORD, 0));
+		inv.setItem(1, ib.addItem("§dBoutique Créatif", Arrays.asList("§7Cliquez pour voir la", "§7boutique du Créatif"), Material.getMaterial(58), 0));
+		inv.setItem(2, ib.addItem("§bBoutique Skyblock", Arrays.asList("§7Cliquez pour voir la", "§7boutique du Skyblock"), Material.LONG_GRASS, 1));
+		inv.setItem(3, ib.addItem("§3Boutique HungerGames", Arrays.asList("§7Cliquez pour voir la", "§7boutique du HungerGames"), Material.SPECKLED_MELON, 0));
+		inv.setItem(4, ib.addItem("§cFamiliers", Arrays.asList("§7Achetez un mignon petit", "§7familier et transportez", "§7le partout !"), Material.MONSTER_EGG, EntityType.BLAZE.getTypeId()));
+		for (int i = 9; i < 18; i++) {
+			inv.setItem(i, ib.addItem("§r", null, Material.STAINED_GLASS_PANE, 0));
+		}
+		for (PetsRegister r : PetsRegister.getPets()) {
+			inv.setItem(r.getSlot(), r.getItem(p));
+		}
+		inv.setItem(34, ib.addItem("§cAttaque !", null, Material.TNT, 0));
+		inv.setItem(35, ib.addItem("§cSupprimer", null, Material.MAGMA_CREAM, 0));
+		inv.setItem(43, ib.addItem("§bRenommer", null, Material.NAME_TAG, 0));
+		inv.setItem(44, ib.addItem("§aSuivre / Rester", null, Material.EMERALD, 0));
+		p.openInventory(inv);
+!!!490546.java!!!	OpenPetInventory(inout e : InventoryClickEvent) : void
+		Player p = (Player) e.getWhoClicked();
+		Inventory inv = e.getClickedInventory();
+		if (inv == null || !inv.getTitle().equalsIgnoreCase("§8>> §cFamiliers")) {
+			return;
+		}
+		ItemStack it = e.getCurrentItem();
+		if (it == null || !it.hasItemMeta() || !it.getItemMeta().hasDisplayName()) {
+			return;
+		}
+		e.setCancelled(true);
+		if (it.getType() == Material.IRON_SWORD) {
+			p.sendMessage(new MessageBuilder("pets.ShopFaction").getString(true));
+		} else if (it.getType() == Material.getMaterial(58)) {
+			p.sendMessage(new MessageBuilder("pets.ShopCreative").getString(true));
+		} else if (it.getType() == Material.LONG_GRASS) {
+			p.sendMessage(new MessageBuilder("pets.ShopSkyblock").getString(true));
+		} else if (it.getType() == Material.SPECKLED_MELON) {
+			p.sendMessage(new MessageBuilder("pets.ShopHungerGames").getString(true));
+		} else if (it.getItemMeta().getDisplayName().equalsIgnoreCase("§cFamiliers")) {
+			p.sendMessage(new MessageBuilder("pets.ShopPets").getString(true));
+		} else if (it.getItemMeta().getDisplayName().equalsIgnoreCase("§cAttaque !")) {
+			if (!verification(p, true, false)) {
+				return;
+			}
+			PetManager.toogleAttack(p, PetManager.pets.get(p));
+			return;
+		} else if (it.getItemMeta().getDisplayName().equalsIgnoreCase("§cSupprimer")) {
+			if (!verification(p, false, false)) {
+				return;
+			}
+			PetManager.removePet(p, PetManager.pets.get(p));
+			return;
+		} else if (it.getItemMeta().getDisplayName().equalsIgnoreCase("§bRenommer")) {
+			if (!verification(p, false, false)) {
+				return;
+			}
+			p.sendMessage(new MessageBuilder("pets.ChangeNameCommand").getString(true));
+			return;
+		} else if (it.getItemMeta().getDisplayName().equalsIgnoreCase("§aSuivre / Rester")) {
+			if (!verification(p, false, true)) {
+				return;
+			}
+			if (PetManager.attack.contains(p)) {
+				p.sendMessage(new MessageBuilder("pets.AttackingPet").getString(true));
+				return;
+			}
+			PetManager.toggleFollow(p, PetManager.pets.get(p), true);
+			return;
+		} else if (it.getType() != Material.MONSTER_EGG) {
+			return;
+		}
+		PetsRegister r = PetsRegister.getPetsOfName(it.getItemMeta().getDisplayName());
+		if (r == null) {
+			return;
+		}
+		p.openInventory(r.getInventory());
+!!!490674.java!!!	verification(inout p : Player, inout attack : boolean, inout follow : boolean) : boolean
+		if (!PetManager.pets.containsKey(p)) {
+			p.sendMessage(new MessageBuilder("pets.NoPresentPet").getString(true));
+			return false;
+		}
+		CraftPet pet = CraftPet.getPetOfType(PetManager.pets.get(p).getType());
+		if (pet == null) {
+			return false;
+		}
+		if ((attack && !pet.isAttack()) || (follow && !pet.isFollow())) {
+			p.sendMessage(new MessageBuilder("pets.NotEnableOption").getString(true));
+			return false;
+		}
+		return true;
+!!!490802.java!!!	OnClic(inout e : InventoryClickEvent) : void
+		Player p = (Player) e.getWhoClicked();
+		Inventory inv = e.getClickedInventory();
+		if (inv == null || !inv.getTitle().startsWith("§r§r")) {
+			return;
+		}
+		ItemStack it = e.getCurrentItem();
+		if (it == null || !it.hasItemMeta() || !it.getItemMeta().hasDisplayName()) {
+			return;
+		}
+		e.setCancelled(true);
+		if (it.getType() == Material.REDSTONE_TORCH_ON) {
+			OpenInventory(p);
+		} else if (it.getType() != Material.MONSTER_EGG) {
+			return;
+		}
+		PetsRegister r = PetsRegister.getPetsOfTitle(inv.getTitle());
+		if (r == null) {
+			return;
+		}
+		CraftPet pet = r.getPetOfName(it.getItemMeta().getDisplayName());
+		if (pet == null) {
+			return;
+		}
+		if (!p.hasPermission(r.getPermission())) {
+			p.sendMessage(new MessageBuilder("pets.NotHaveClickedPet").getString(true));
+			return;
+		}
+		Stats stat = Stats.getStats(p);
+		stat.setID(pet.getID());
+		PetManager.SpawnPet(p, pet);

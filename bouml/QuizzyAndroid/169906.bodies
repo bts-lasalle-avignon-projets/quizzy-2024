@@ -1,0 +1,58 @@
+class Chase
+!!!304434.java!!!	getAttackCount() : int
+		return 0;
+!!!304562.java!!!	getAwaitEnable() : int
+		return 0;
+!!!304690.java!!!	getAwaitDisable() : int
+		return 0;
+!!!304818.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.CHASE;
+!!!304946.java!!!	Enable(inout info : SheepInfo) : void
+		new BukkitRunnable() {boolean activate = true;int cool = 8;boolean b = true;@Override public void run() {
+			if (info.getSheep().isDead()) {
+				cancel();
+				return;
+			}
+			Player target = getTarget(info);
+			if (target == null) {
+				return;
+			}
+			if (activate && target.getLocation().distance(info.getSheep().getLocation()) <= 1.25) {
+				activate = false;
+				new Blink(0, 0).Enable(info);
+			}
+			if (!activate) {
+				b = !b;
+				info.getSheep().setColor(b ? info.getColor() : DyeColor.WHITE);
+				if (cool > 0) {
+					cool--;
+				} else {
+					info.getSheep().getWorld().createExplosion(info.getSheep().getLocation(), 5);
+					info.getSheep().remove();
+					cancel();
+					return;	
+				}
+			}
+			Cycles.target(info.getSheep(), target.getLocation(), 1.75);
+		}}.runTaskTimer(Main.getInstance(), 0, 5);
+!!!305074.java!!!	Attack(inout info : SheepInfo) : void
+		
+!!!305202.java!!!	getTarget(inout info : SheepInfo) : Player
+		Player p = null;
+		double distance = Double.MAX_VALUE;
+		for (Team t : info.getGame().getTeams()) {
+			if (t == info.getTeam()) {
+				continue;
+			}
+			for (Player pll : t.getPlayers()) {
+				if (!pll.getWorld().equals(info.getSheep().getWorld()) || pll.getLocation().distance(info.getSheep().getLocation()) >= 20) {
+					continue;
+				}
+				double d = pll.getLocation().distance(info.getSheep().getLocation());
+				if (d < distance) {
+					p = pll;
+					distance = d;
+				}
+			}
+		}
+		return p;

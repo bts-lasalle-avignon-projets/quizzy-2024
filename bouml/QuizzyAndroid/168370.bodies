@@ -1,0 +1,21 @@
+class GameEvent
+!!!296370.java!!!	OnWeather(inout e : WeatherChangeEvent) : void
+		try {
+			Integer.parseInt("a");
+		} catch (Exception e2) {
+			boolean b = false;
+			for (StackTraceElement s : e2.getStackTrace()) {
+				if (s.getClassName().contains("fr.red") && !s.getClassName().equals("fr.red.lcbattlesheep.param.GameEvent")) {
+					b = true;
+					break;
+				}
+			}
+			if (!b) {
+				e.setCancelled(true);
+			}
+		}
+!!!296498.java!!!	OnDamage(inout e : EntityDamageEvent) : void
+		if (!(e.getEntity() instanceof Sheep) || e.getCause() != DamageCause.FALL) {
+			return;
+		}
+		e.setCancelled(true);

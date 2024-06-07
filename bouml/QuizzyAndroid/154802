@@ -1,0 +1,279 @@
+format 224
+"api" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcpets::api
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Pets/src/fr/red/lcpets/api/"
+  java_package "fr.red.lcpets.api"
+  classview 158898 "api"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 185650 "PetAPI"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 417202 "openInventory"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 417330 "removePet"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Deprecated
+"
+	
+	
+	
+      end
+
+      operation 417458 "getMenu"
+	class_operation public return_type class_ref 185778 // PetMenu
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462258 "openInventory"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462386 "getPetEntityOfPlayer"
+	class_operation public explicit_return_type "Entity"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462514 "getPetOfPlayer"
+	class_operation public return_type class_ref 191538 // CraftPet
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462642 "hasPet"
+	class_operation public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462770 "removePet"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 462898 "TemporaryRenamePet"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param inout name "player" explicit_type "Player"
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 463026 "PermanentRenamePet"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param inout name "player" explicit_type "Player"
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 463154 "TemporaryResetNamePet"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param inout name "player" explicit_type "Player"
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 463282 "PermanentResetNamePet"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param inout name "player" explicit_type "Player"
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 463410 "ToggleAttack"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 463538 "ToggleFollow"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 151986 "api"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 177330 "PetAPI"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.system.CraftPet;
+import fr.red.lcpets.system.PetInventory;
+import fr.red.lcpets.system.PetManager;
+import fr.red.lcpets.utils.Stats;
+${definition}"
+      associated_elems
+	class_ref 185650 // PetAPI
+      end
+    end
+  end
+
+  package_ref 156338 // events
+end

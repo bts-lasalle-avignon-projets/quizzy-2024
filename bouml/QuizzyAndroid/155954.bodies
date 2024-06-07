@@ -1,0 +1,7 @@
+class NativeCallBack
+!!!237874.java!!!	getAnswer() : int
+        return 42;
+!!!238002.java!!!	main(inout args : String [[]]) : void
+        int answer = new NativeCallBack().computeAnswer();
+
+        System.out.println("The answer is " + answer);

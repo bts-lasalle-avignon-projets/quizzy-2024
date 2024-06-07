@@ -1,0 +1,15 @@
+class Explode
+!!!308146.java!!!	Explode(inout fire : boolean)
+		this.fire = fire;
+!!!308274.java!!!	getAttackCount() : int
+		return 1;
+!!!308402.java!!!	getAwaitEnable() : int
+		return 0;
+!!!308530.java!!!	getAwaitDisable() : int
+		return 0;
+!!!308658.java!!!	getType() : PowerSheep::PowerType
+		return fire ? PowerType.BURN : PowerType.EXPLODE;
+!!!308786.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!308914.java!!!	Attack(inout info : SheepInfo) : void
+		info.getSheep().getWorld().createExplosion(info.getSheep().getLocation(), 5, fire);

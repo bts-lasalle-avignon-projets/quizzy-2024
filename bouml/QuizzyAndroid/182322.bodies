@@ -1,0 +1,30 @@
+class Join
+!!!390450.java!!!	onJoin(inout e : PlayerJoinEvent) : void
+		Player p = e.getPlayer();
+		getPlayerLanguage(p);
+!!!390578.java!!!	getPlayerLanguage(inout p : Player) : void
+		String code = null;
+		try {
+			if (!methods.exists(p.getUniqueId().toString())) {
+				methods.createLine(p.getUniqueId().toString());
+			}
+			code = methods.getString(p.getUniqueId().toString(), "CODE");
+			methods.setString(p.getUniqueId().toString(), "NAME", p.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			p.sendMessage("§8>> §cImpossible de récupérer la langue de votre jeu");
+		}
+		if (code == null) {
+			code = "FR";
+			LifeLangAPI.openLangMenu(p);
+		}
+		playerLang.put(p, code);
+!!!390706.java!!!	onQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		if (playerLang.containsKey(p)) {
+			playerLang.remove(p);
+		}
+!!!390834.java!!!	getLangOfAll() : void
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			getPlayerLanguage(pll);
+		}

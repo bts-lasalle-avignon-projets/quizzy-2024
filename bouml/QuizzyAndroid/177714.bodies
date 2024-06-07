@@ -1,0 +1,43 @@
+class TimerModule
+!!!361650.java!!!	getMessage(in timer : int, in pattern : String) : String
+		int hours = timer / 3600;
+		int minutes = (timer % 3600) / 60;
+		int seconds = timer % 60;
+		return pattern.replace("HH", hours + "").replace("MM", minutes + "").replace("SS", seconds + "");
+!!!361778.java!!!	getCleanMessage(in timer : int, in pattern : String) : String
+		int hours = timer / 3600;
+		int minutes = (timer % 3600) / 60;
+		int seconds = timer % 60;
+		String newPattern = pattern;
+		if (hours == 0) {
+			if (newPattern.contains("MM")) {
+				newPattern = "MM" + newPattern.split("MM")[1];
+			}
+			if (minutes == 0) {
+				if (newPattern.contains("SS")) {
+					newPattern = "SS" + newPattern.split("SS")[1];
+				}
+			}
+		}
+		return newPattern.replace("HH", hours + "").replace("MM", minutes + "").replace("SS", seconds + "");
+!!!370994.java!!!	getMessage(in timer : int, in pattern : String) : String
+		int hours = timer / 3600;
+		int minutes = (timer % 3600) / 60;
+		int seconds = timer % 60;
+		return pattern.replace("HH", hours + "").replace("MM", minutes + "").replace("SS", seconds + "");
+!!!371122.java!!!	getCleanMessage(in timer : int, in pattern : String) : String
+		int hours = timer / 3600;
+		int minutes = (timer % 3600) / 60;
+		int seconds = timer % 60;
+		String newPattern = pattern;
+		if (hours == 0) {
+			if (newPattern.contains("MM")) {
+				newPattern = "MM" + newPattern.split("MM")[1];
+			}
+			if (minutes == 0) {
+				if (newPattern.contains("SS")) {
+					newPattern = "SS" + newPattern.split("SS")[1];
+				}
+			}
+		}
+		return newPattern.replace("HH", hours + "").replace("MM", minutes + "").replace("SS", seconds + "");

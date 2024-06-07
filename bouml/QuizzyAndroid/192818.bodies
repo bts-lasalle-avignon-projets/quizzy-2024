@@ -1,0 +1,31 @@
+class PetNameResetEvent
+!!!476594.java!!!	PetNameResetEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet, in name : String)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+		setCancelled(false);
+		setName(name);
+!!!476722.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!476850.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!476978.java!!!	getPlayer() : Player
+		return player;
+!!!477106.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!477234.java!!!	getEntity() : Entity
+		return entity;
+!!!477362.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!477490.java!!!	getPet() : CraftPet
+		return pet;
+!!!477618.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;
+!!!477746.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!477874.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;
+!!!478002.java!!!	getName() : String
+		return name;
+!!!478130.java!!!	setName(in name : String) : void
+		this.name = name;

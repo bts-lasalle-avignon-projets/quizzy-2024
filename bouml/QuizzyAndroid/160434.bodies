@@ -1,0 +1,52 @@
+class TypeProtocole
+!!!251186.java!!!	TypeProtocole(in indiceType : String)
+        this.indiceType = indiceType;
+!!!251314.java!!!	getType(in indiceType : String) : TypeProtocole
+        for(TypeProtocole type: values())
+        {
+            if(type.getIndiceType().equals(indiceType))
+            {
+                return type;
+            }
+        }
+        return null;
+!!!251442.java!!!	getIndiceType() : String
+        return indiceType;
+!!!251570.java!!!	getProtocole(in trame : String) : Protocole
+        switch(this)
+        {
+            case LANCEMENT:
+                return new ProtocoleLancement();
+            case INSCRIPTION_PARTICIPANT:
+                return new ProtocoleInscriptionParticipant(trame);
+            case ENVOI_QUESTION:
+                return new ProtocoleEnvoiQuestion(trame);
+            case DEMARRAGE_QUESTION:
+                return new ProtocoleLancementQuestion();
+            case INDICATION_REPONSE_PARTICIPANT:
+                return new ProtocoleIndicationReponseParticipant(trame);
+            case ACQUITEMENT:
+                return new ProtocoleAcquitement();
+            case FIN_QUIZ:
+                return new ProtocoleFinQuiz();
+            case ACTIVER_BUZZERS:
+                return new ProtocoleActiverBuzzers(trame);
+            case AFFICHER_REPONSE:
+                return new ProtocoleAfficherReponse();
+            case RECEPTION_REPONSE:
+                return new ProtocoleReceptionReponse(trame);
+            case DESACTIVER_BUZZERS:
+                return new ProtocoleDesactiverBuzzers(trame);
+            case INDICATION_QUESTION:
+                return new ProtocoleIndicationQuestion(trame);
+            case AFFICHER_QUESTION_SUIVANTE:
+                return new ProtocoleAfficherQuestionSuivante();
+            case AFFICHER_QUESTION_PRECEDENTE:
+                return new ProtocoleAfficherQuestionPrecedente();
+            default:
+                Log.d(TAG,
+                      "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +
+                        (trame == null ? "null" : trame));
+                break;
+        }
+        return null;

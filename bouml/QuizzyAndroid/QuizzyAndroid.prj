@@ -1,6 +1,6 @@
 format 224
 "QuizzyAndroid"
-  revision 11
+  revision 12
   modified_by 50 "btssn2"
   java_root_dir "../../"
 
@@ -398,48 +398,39 @@ format 224
     end
   end
 
-  package_ref 134578 // quizzy
+  package_ref 143154 // quizzy
 
-  package_ref 134706 // unknown
+  package_ref 143282 // unknown
 
-  classview 142898 "Diagramme de classes"
+  package_ref 145714 // Android
+
+  package_ref 149042 // eclipse-workspace
+
+  usecaseview 134706 "Diagramme de classes"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
     
     classdiagramsettings member_max_width 0 end
     
     classcompositediagramsettings end
     
-    collaborationdiagramsettings end
-    
     objectdiagramsettings end
     
     objectcompositediagramsettings end
     
-    sequencediagramsettings end
-    
     statediagramsettings
      end
     
-    
     activitydiagramsettings
      end
-    classdiagram 134706 "Genreral"
-      classdiagramsettings draw_all_relations no member_max_width 0 end
-      size E-Landscape
+    classdiagram 154418 "General"
+      classdiagramsettings member_max_width 0 end
+      size 4247x5677
     end
 
-    classdiagram 141234 "IHM"
-      classdiagramsettings member_max_width 0 end
-      size A3
-    end
-
-    classdiagram 141362 "Protocoles"
-      classdiagramsettings member_max_width 0 end
-      size A3
-    end
-
-    classdiagram 147890 "Type de périphériques"
-      classdiagramsettings member_max_width 0 end
-      size A4
-    end
   end
 end

@@ -1,0 +1,85 @@
+class Swap
+!!!321842.java!!!	Swap(in enable : int, in disable : int)
+		this.enable = enable;
+		this.disable = disable;
+!!!321970.java!!!	getAttackCount() : int
+		return 1;
+!!!322098.java!!!	getAwaitEnable() : int
+		return enable;
+!!!322226.java!!!	getAwaitDisable() : int
+		return disable;
+!!!322354.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.SWAP;
+!!!322482.java!!!	Enable(inout info : SheepInfo) : void
+		new BukkitRunnable() {int await = getAwaitEnable();int wait = 5;Player target = null;@Override public void run() {
+			if (await > 0) {
+				await--;
+				return;
+			}
+			if (info.getSheep().isDead() || !isValid(info.getShooter(), info)) {
+				cancel();
+				return;
+			}
+			target = target == null ? getTarget(info) : target;
+			if (target == null || !isValid(target, info)) {
+				target = null;
+				wait = 5;
+				return;
+			}
+			if (wait <= 0) {
+				Location loc1 = target.getLocation().clone();
+				Location loc2 = info.getShooter().getLocation().clone();
+				target.teleport(loc2);
+				info.getShooter().teleport(loc1);
+				removeEffect(target, info);
+				cancel();
+				return;
+			}
+			if (wait > 0) {
+				effect(info.getShooter());
+				effect(target);
+				wait--;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 20);
+!!!322610.java!!!	Attack(inout info : SheepInfo) : void
+		
+!!!322738.java!!!	effect(inout p : Player) : void
+		if (p.hasPotionEffect(PotionEffectType.CONFUSION)) {
+			return;
+		}
+		p.addPotionEffect(potion);
+!!!322866.java!!!	getTarget(inout info : SheepInfo) : Player
+		Cuboid is = info.getGame().getIsland(info.getSheep().getLocation());
+		if (is == null) {
+			return null;
+		}
+		List<Player> list = is.getPlayers();
+		if (list.contains(info.getShooter())) {
+			list.remove(info.getShooter());
+		}
+		if (list.isEmpty()) {
+			return null;
+		}
+		Collections.shuffle(list);
+		Player p = null;
+		for (Player pll : list) {
+			if (isValid(pll, info) && !info.getTeam().getPlayers().contains(p)) {
+				p = pll;
+				break;
+			}
+		}
+		list.clear();
+		return p;
+!!!322994.java!!!	isValid(inout target : Player, inout info : SheepInfo) : boolean
+		if (!info.getGame().getPlayers().contains(target) || info.getGame().getSpectators().contains(target)) {
+			removeEffect(target, info);
+			return false;
+		}
+		return true;
+!!!323122.java!!!	removeEffect(inout target : Player, inout info : SheepInfo) : void
+		if (target.isOnline() && target.hasPotionEffect(PotionEffectType.CONFUSION)) {
+			target.removePotionEffect(PotionEffectType.CONFUSION);
+		}
+		if (info.getShooter().isOnline() && info.getShooter().hasPotionEffect(PotionEffectType.CONFUSION)) {
+			info.getShooter().removePotionEffect(PotionEffectType.CONFUSION);
+		}

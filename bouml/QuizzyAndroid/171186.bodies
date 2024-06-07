@@ -1,0 +1,41 @@
+class Night
+!!!312754.java!!!	Night(inout continue_after_death : boolean)
+		this.continue_after_death = continue_after_death;
+!!!312882.java!!!	getAttackCount() : int
+		return 0;
+!!!313010.java!!!	getAwaitEnable() : int
+		return 0;
+!!!313138.java!!!	getAwaitDisable() : int
+		return 0;
+!!!313266.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.NIGHT;
+!!!313394.java!!!	Enable(inout info : SheepInfo) : void
+		World w = info.getLaunchPoint().getWorld();
+		w.setTime(15000);
+		
+		new BukkitRunnable() { @Override public void run() {
+			if (info.getSheep().isDead()) {
+				boolean b = false;
+				if (continue_after_death && info.getLife() <= 0) {
+					b = true;
+				} else {
+					for (Entity ent : info.getLaunchPoint().getWorld().getEntities()) {
+						if (!(ent instanceof Sheep) || ((Sheep) ent).equals(info.getSheep())) {
+							continue;
+						}
+						SheepInfo i = SheepInfo.from((Sheep) ent);
+						if (i != null && !i.getSheep().isDead() && i.hasPower(PowerType.NIGHT)) {
+							b = true;
+							break;
+						}
+					}
+				}
+				if (!b) {
+					w.setTime(6000);
+				}
+				cancel();
+				return;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 5);
+!!!313522.java!!!	Attack(inout info : SheepInfo) : void
+		

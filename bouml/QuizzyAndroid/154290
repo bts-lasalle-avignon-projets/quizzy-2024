@@ -1,0 +1,186 @@
+format 224
+"scripts" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcmapdater::scripts
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_MapDater/src/fr/red/lcmapdater/scripts/"
+  java_package "fr.red.lcmapdater.scripts"
+  classview 158386 "scripts"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 184114 "MapScript"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 405554 "start"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "world" explicit_type "World"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 405682 "stop"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 405810 "reset"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "w" explicit_type "World"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 184242 "ScripType"
+      visibility public stereotype "enum"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 250290 "HUB_HALLOWEEN"
+	public type class_ref 184242 // ScripType
+	cpp_decl ""
+	java_decl "  ${@}${name}${value},${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 250418 "HUB_CHRISTMAS"
+	public type class_ref 184242 // ScripType
+	cpp_decl ""
+	java_decl "  ${@}${name}${value},${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 405938 "getScript"
+	public return_type class_ref 184114 // MapScript
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 151474 "scripts"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 176050 "MapScript"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.World;
+${definition}"
+      associated_elems
+	class_ref 184114 // MapScript
+      end
+    end
+
+    artifact 176178 "ScripType"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.red.lcmapdater.scripts.classes.Christmas;
+import fr.red.lcmapdater.scripts.classes.Halloween;
+${definition}"
+      associated_elems
+	class_ref 184242 // ScripType
+      end
+    end
+  end
+
+  package_ref 154418 // classes
+end

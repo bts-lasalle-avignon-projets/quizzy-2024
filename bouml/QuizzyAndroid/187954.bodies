@@ -1,0 +1,101 @@
+class PlayerPetProfile
+!!!434482.java!!!	PlayerPetProfile(inout player : Player)
+		this.player = player;
+		try {
+			m.createLine(player.getName());
+			String[] customNames = m.getString(player.getName(), "CUSTOMNAME").split(";");
+			List<Integer> ids = getRemoteIDs();
+			getRemoteAutoSpawns();
+			for (int i = 0; i < ids.size(); i++) {
+				Pet pet = PetAPI.getMenu().getPetFrom(ids.get(i));
+				if (pet != null) {
+					pet = pet.clone(player);
+					pets.add(pet);
+					pet.setCustomName(customNames[i]);
+					pet.setFollow(player);
+				}
+			}
+			System.out.println(Arrays.asList(customNames));
+			spawnAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		list.add(this);
+!!!434610.java!!!	getRemoteIDs() : List<Integer>
+		List<Integer> ids = new ArrayList<Integer>();
+		String id = m.getString(player.getName(), "ID");
+		if (id != null) {
+			for (String st : id.split(";")) {
+				if (!st.isEmpty()) {
+					ids.add(Integer.parseInt(st));
+				}
+			}
+		}
+		return ids;
+!!!434738.java!!!	getRemoteAutoSpawns() : void
+		String spawn = m.getString(player.getName(), "AUTOSPAWN");
+		if (spawn != null) {
+			for (String st : spawn.split(";")) {
+				if (!st.isEmpty()) {
+					autospawns.add(st.equalsIgnoreCase("true"));
+				}
+			}
+		}
+!!!434866.java!!!	destroy() : void
+		dispawnAll();
+		save();
+		list.remove(this);
+		autospawns.clear();
+		pets.clear();
+		player = null;
+!!!434994.java!!!	save() : void
+		StringBuilder id = new StringBuilder();
+		StringBuilder name = new StringBuilder();
+		StringBuilder spawn = new StringBuilder();
+		for (int i = 0; i < pets.size(); i++) {
+			Pet pet = pets.get(i);
+			id.append(pet.getID());
+			name.append(pet.hasCustomName() ? pet.getName() : "null");
+			spawn.append(autospawns.get(i) ? "true" : "false");
+			if (i != pets.size() - 1) {
+				id.append(";");
+				name.append(";");
+				spawn.append(";");
+			}
+		}
+!!!435122.java!!!	getPets() : Pet
+		return pets;
+!!!435250.java!!!	hasPet() : boolean
+		return !this.pets.isEmpty();
+!!!435378.java!!!	hasAlivePet() : boolean
+		for (Pet pet : pets) {
+			if (pet.isAlive()) {
+				return true;
+			}
+		}
+		return false;
+!!!435506.java!!!	addPet(inout pet : Pet) : void
+		this.pets.add(pet);
+!!!435634.java!!!	getPlayer() : Player
+		return player;
+!!!435762.java!!!	dispawnAll() : void
+		for (Pet pet : pets) {
+			if (pet.isAlive()) {
+				pet.dispawn();
+			}
+		}
+!!!435890.java!!!	spawnAll() : void
+		for (int i = 0; i < pets.size(); i++) {
+			Pet pet = pets.get(i);
+			if (autospawns.get(i) && !pet.isAlive()) {
+				pet.spawn();
+			}
+		}
+!!!436018.java!!!	from(inout player : Player) : PlayerPetProfile
+		for (PlayerPetProfile ps : list) {
+			if (ps.getPlayer().equals(player)) {
+				return ps;
+			}
+		}
+		return new PlayerPetProfile(player);

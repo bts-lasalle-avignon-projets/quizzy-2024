@@ -1,0 +1,26 @@
+class PetSpawnEvent
+!!!479410.java!!!	PetSpawnEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+		setCancelled(false);
+!!!479538.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!479666.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!479794.java!!!	getPlayer() : Player
+		return player;
+!!!479922.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!480050.java!!!	getEntity() : Entity
+		return entity;
+!!!480178.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!480306.java!!!	getPet() : CraftPet
+		return pet;
+!!!480434.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;
+!!!480562.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!480690.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;

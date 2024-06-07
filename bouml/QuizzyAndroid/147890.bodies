@@ -1,0 +1,67 @@
+class Question
+!!!234162.java!!!	Question(in idQuestion : int, in question : String, inout propositions : List<String>, in temps : int)
+        this.idQuestion = idQuestion;
+        this.propositions       = propositions;
+        this.question       = question;
+        this.temps          = temps;
+        if (propositions != null) {
+            String bonneReponse = propositions.get(0);
+            Collections.shuffle(propositions);
+            this.numeroBonneReponse = propositions.indexOf(bonneReponse) + 1;
+        } else {
+            this.numeroBonneReponse = -1;
+        }
+!!!234290.java!!!	getNumeroBonneReponse() : int
+        return numeroBonneReponse;
+!!!234418.java!!!	getQuestion() : String
+        return question;
+!!!234546.java!!!	getPropositions() : List<String>
+        return propositions;
+!!!234674.java!!!	getTempsReponse() : int
+        return temps;
+!!!234802.java!!!	estSelectionnee(in numeroProposition : int) : boolean
+        return selection.containsValue(numeroProposition);
+!!!234930.java!!!	estSelectionne(inout participant : Participant) : boolean
+        return selection.containsKey(participant) && selection.get(participant) != -1;
+!!!235058.java!!!	ajouterSelection(inout participant : Participant, in numeroProposition : int) : void
+        selection.put(participant, numeroProposition);
+!!!235186.java!!!	estPropositionValide(inout participant : Participant) : boolean
+        if (!selection.containsKey(participant)) {
+            return false;
+        }
+        return numeroBonneReponse == -1 || selection.get(participant) == numeroBonneReponse - 1;
+!!!235314.java!!!	getIdQuestion() : int
+        return idQuestion;
+!!!537906.java!!!	Question(in idQuestion : int, in question : String, inout propositions : List<String>, in temps : int)
+        this.idQuestion = idQuestion;
+        this.propositions       = propositions;
+        this.question       = question;
+        this.temps          = temps;
+        if (propositions != null) {
+            String bonneReponse = propositions.get(0);
+            Collections.shuffle(propositions);
+            this.numeroBonneReponse = propositions.indexOf(bonneReponse) + 1;
+        } else {
+            this.numeroBonneReponse = -1;
+        }
+!!!538034.java!!!	getNumeroBonneReponse() : int
+        return numeroBonneReponse;
+!!!538162.java!!!	getQuestion() : String
+        return question;
+!!!538290.java!!!	getPropositions() : List<String>
+        return propositions;
+!!!538418.java!!!	getTempsReponse() : int
+        return temps;
+!!!538546.java!!!	estSelectionnee(in numeroProposition : int) : boolean
+        return selection.containsValue(numeroProposition);
+!!!538674.java!!!	estSelectionne(inout participant : Participant) : boolean
+        return selection.containsKey(participant) && selection.get(participant) != -1;
+!!!538802.java!!!	ajouterSelection(inout participant : Participant, in numeroProposition : int) : void
+        selection.put(participant, numeroProposition);
+!!!538930.java!!!	estPropositionValide(inout participant : Participant) : boolean
+        if (!selection.containsKey(participant)) {
+            return false;
+        }
+        return numeroBonneReponse == -1 || selection.get(participant) == numeroBonneReponse - 1;
+!!!539058.java!!!	getIdQuestion() : int
+        return idQuestion;

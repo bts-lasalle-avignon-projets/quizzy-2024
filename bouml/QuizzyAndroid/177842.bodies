@@ -1,0 +1,6 @@
+class RandomBackupWorldModule
+!!!362802.java!!!	generateRandomWorld(in target : String) : World
+		return new MapReplacer(getRandomWorld(), target).execute();
+!!!362930.java!!!	getRandomWorld() : File
+		File[] l = new File(BackupWorldModule.FOLDER_NAME).listFiles();
+		return l[new Random().nextInt(l.length)];

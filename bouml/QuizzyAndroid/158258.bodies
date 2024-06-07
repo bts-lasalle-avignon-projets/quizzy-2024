@@ -1,0 +1,80 @@
+class FragmentNotificationsBinding
+!!!240050.java!!!	FragmentNotificationsBinding(inout rootView : ConstraintLayout, inout btnAssocierParticipant : Button, inout btnCreerParticipant : Button, inout spinnerNomsParticipants : Spinner, inout spinnerPeripheriquesConnectes : Spinner, inout spinnerThemes : Spinner, inout textInputNomParticipant : TextInputLayout, inout textInputNombreQuestion : TextInputLayout, inout textView2 : TextView)
+    this.rootView = rootView;
+    this.btnAssocierParticipant = btnAssocierParticipant;
+    this.btnCreerParticipant = btnCreerParticipant;
+    this.spinnerNomsParticipants = spinnerNomsParticipants;
+    this.spinnerPeripheriquesConnectes = spinnerPeripheriquesConnectes;
+    this.spinnerThemes = spinnerThemes;
+    this.textInputNomParticipant = textInputNomParticipant;
+    this.textInputNombreQuestion = textInputNombreQuestion;
+    this.textView2 = textView2;
+!!!240178.java!!!	getRoot() : ConstraintLayout
+    return rootView;
+!!!240306.java!!!	inflate(inout inflater : LayoutInflater) : FragmentNotificationsBinding
+    return inflate(inflater, null, false);
+!!!240434.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : FragmentNotificationsBinding
+    View root = inflater.inflate(R.layout.fragment_notifications, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!240562.java!!!	bind(inout rootView : View) : FragmentNotificationsBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_associer_participant;
+      Button btnAssocierParticipant = ViewBindings.findChildViewById(rootView, id);
+      if (btnAssocierParticipant == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_creer_participant;
+      Button btnCreerParticipant = ViewBindings.findChildViewById(rootView, id);
+      if (btnCreerParticipant == null) {
+        break missingId;
+      }
+
+      id = R.id.spinner_noms_participants;
+      Spinner spinnerNomsParticipants = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerNomsParticipants == null) {
+        break missingId;
+      }
+
+      id = R.id.spinner_peripheriques_connectes;
+      Spinner spinnerPeripheriquesConnectes = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerPeripheriquesConnectes == null) {
+        break missingId;
+      }
+
+      id = R.id.spinner_themes;
+      Spinner spinnerThemes = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerThemes == null) {
+        break missingId;
+      }
+
+      id = R.id.textInput_nom_participant;
+      TextInputLayout textInputNomParticipant = ViewBindings.findChildViewById(rootView, id);
+      if (textInputNomParticipant == null) {
+        break missingId;
+      }
+
+      id = R.id.textInput_nombre_question;
+      TextInputLayout textInputNombreQuestion = ViewBindings.findChildViewById(rootView, id);
+      if (textInputNombreQuestion == null) {
+        break missingId;
+      }
+
+      id = R.id.textView2;
+      TextView textView2 = ViewBindings.findChildViewById(rootView, id);
+      if (textView2 == null) {
+        break missingId;
+      }
+
+      return new FragmentNotificationsBinding((ConstraintLayout) rootView, btnAssocierParticipant,
+          btnCreerParticipant, spinnerNomsParticipants, spinnerPeripheriquesConnectes,
+          spinnerThemes, textInputNomParticipant, textInputNombreQuestion, textView2);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

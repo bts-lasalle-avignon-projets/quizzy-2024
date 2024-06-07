@@ -1,0 +1,40 @@
+class Blink
+!!!301618.java!!!	Blink(in enable : int, in disable : int)
+		this.enable = enable;
+		this.disable = disable;
+!!!301746.java!!!	getAttackCount() : int
+		return 0;
+!!!301874.java!!!	getAwaitEnable() : int
+		return enable;
+!!!302002.java!!!	getAwaitDisable() : int
+		return disable;
+!!!302130.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.BLINK;
+!!!302258.java!!!	Enable(inout info : SheepInfo) : void
+		new BukkitRunnable() {
+			int wait = getAwaitEnable() * 2;
+			int disabletime = (int) info.getBasedLife() * 2 - getAwaitDisable() * 2;
+			boolean b = false;
+			@Override
+			public void run() {
+				if (wait > 0) {
+					wait--;
+					disabletime--;
+					return;
+				}
+				if (disabletime <= 0) {
+					cancel();
+					info.getSheep().setColor(info.getColor());
+					return;
+				}
+				if (info.getSheep().isDead()) {
+					cancel();
+					return;
+				}
+				disabletime--;
+				b = !b;
+				info.getSheep().setColor(b ? DyeColor.WHITE : info.getColor());
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 10);
+!!!302386.java!!!	Attack(inout info : SheepInfo) : void
+		

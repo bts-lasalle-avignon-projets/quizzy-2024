@@ -1,0 +1,54 @@
+class PopupCreerParticipant
+!!!213810.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+        setCancelable(false);
+
+        View vue = inflater.inflate(R.layout.popup_creer_participant, container, false);
+        initialiserVue(vue);
+        return vue;
+!!!213938.java!!!	initialiserVue(inout vue : View) : void
+        TextView texte_erreur_creer_participant = vue.findViewById(R.id.texte_erreur_creer_participant);
+        Button btn_creer_participant = vue.findViewById(R.id.btn_creer_participant);
+        EditText editText = vue.findViewById(R.id.entree_nom_participant);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String nom = charSequence.toString();
+                if (nom.length() > 0) {
+                    Participant participantAvecLeMemeNom = Parametres.getParametres().getParticipant(nom);
+                    if (participantAvecLeMemeNom != null) {
+                        btn_creer_participant.setEnabled(false);
+                        texte_erreur_creer_participant.setVisibility(View.VISIBLE);
+                        texte_erreur_creer_participant.setText("Erreur : Ce nom est déjà utilisé");
+                    } else {
+                        btn_creer_participant.setEnabled(true);
+                        texte_erreur_creer_participant.setVisibility(View.INVISIBLE);
+                    }
+                } else {
+                    btn_creer_participant.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        btn_creer_participant.setOnClickListener(v -> {
+            String nom = editText.getText().toString();
+            Participant participant = Parametres.getParametres().getBaseDeDonnees().creerParticipant(nom);
+            Parametres.getParametres().getParticipants().add(participant);
+            IHM.getIHM().mettreAjourSpinnerParticipants();
+            dismiss();
+        });
+
+        vue.findViewById(R.id.btn_annuler).setOnClickListener(v -> {
+            dismiss();
+        });

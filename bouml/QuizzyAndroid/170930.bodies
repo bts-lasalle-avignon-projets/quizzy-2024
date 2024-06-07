@@ -1,0 +1,38 @@
+class Ice
+!!!310834.java!!!	Ice()
+		double d = (double) radius / (double) 2;
+		distance = d != (int) d ? ((int) d) + 1 : (int) d;
+!!!310962.java!!!	getAttackCount() : int
+		return 1;
+!!!311090.java!!!	getAwaitEnable() : int
+		return 0;
+!!!311218.java!!!	getAwaitDisable() : int
+		return 0;
+!!!311346.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.ICE;
+!!!311474.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!311602.java!!!	Attack(inout info : SheepInfo) : void
+		Location loc1 = info.getSheep().getLocation().clone().add(distance, distance, distance);
+		Location loc2 = info.getSheep().getLocation().clone().add(-distance, distance, -distance);
+		Cuboid c = new Cuboid(loc1, loc2);
+		for (Block b : c.blockList()) {
+			Location loc = b.getLocation().clone();
+			for (int y = 255; y >= 0; y--) {
+				loc.setY(y);
+				if (loc.getBlock().getType() != Material.AIR) {
+					loc.setY(y + 1);
+					loc.getBlock().setType(Material.SNOW);;
+					break;
+				}
+			}
+		}
+		for (Entity ent : info.getSheep().getNearbyEntities(radius, radius, radius)) {
+			if (!(ent instanceof Player)) {
+				continue;
+			}
+			Player p = (Player) ent;
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*11, 1, true), true);
+			p.playSound(info.getSheep().getLocation(), Sound.FIZZ, 1, 1);
+			p.playSound(info.getSheep().getLocation(), Sound.DIG_SNOW, 1, 2);
+		}

@@ -1,0 +1,55 @@
+class IPageManager
+!!!293426.java!!!	openFirstPage(inout p : Player, inout page : IPage) : void
+			if (page.getPages().isEmpty()) {
+				return;
+			}
+			p.openInventory(page.getPages().get(0));
+!!!293554.java!!!	updatePages(inout page : IPage) : void
+			int current = 0;
+			int count = 1;
+			while(page.getContents().size() > (current = newPage(page, current, count))) {
+				count++;
+			}
+			for (int i = 0; i < page.getPages().size(); i++) {
+				if (i == count - 1) {
+					page.getPages().remove(i);
+					i--;
+				}
+				Inventory inv = page.getPages().get(i);
+				inv.setItem(45, new ItemBuilder(Material.INK_SACK, (byte) (i == 0 ? 8 : 10)).name("§7Page précédente"));
+				inv.setItem(53, new ItemBuilder(Material.INK_SACK, (byte) (i + 1 >= page.getPages().size() ? 8 : 10)).name("§7Page suivante"));
+			}
+!!!293682.java!!!	newPage(inout page : IPage, in c : int, in count : int) : int
+			int current = c;
+			Inventory inv = count - 1 > page.getPages().size() ? Bukkit.createInventory(null, 54, page.getTemplateTitle().replace("%count%", "" + count)) : page.getPages().get(count - 1);
+			for (int i = 0; i < (page.getContents().size() <= current + 45 ? page.getContents().size() : 45); i++) {
+				inv.setItem(i, page.getContents().get(current));
+				current++;
+			}
+			page.getPages().add(inv);
+			return current;
+!!!293810.java!!!	from(inout inv : Inventory) : Object
+			for (IPage page : list) {
+				int indexOf = page.getPages().contains(inv) ? page.getPages().indexOf(inv) : -1;
+				if (indexOf == -1) {
+					continue;
+				}
+				return new Object[] {page, indexOf};
+			}
+			return null;
+!!!293938.java!!!	onSwitchPage(inout e : InventoryClickEvent) : void
+			Player p = (Player) e.getWhoClicked();
+			Inventory inv = e.getClickedInventory();
+			if (inv == null) {
+				return;
+			}
+			ItemStack it = e.getCurrentItem();
+			if (it == null) {
+				return;
+			}
+			Object[] o = from(inv);
+			if (o == null) {
+				return;
+			}
+			IPage page = (IPage) o[0];
+			int indexOf = (Integer) o[1];

@@ -1,0 +1,26 @@
+class VueParametres
+!!!216882.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activite_parametres);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.settings, new SettingsFragment(this))
+                    .commit();
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        IHM.getIHM().ajouterIHM(this);
+
+        btn_lancer = findViewById(R.id.btn_lancer);
+        btn_lancer.setOnClickListener(v -> {
+            if (Parametres.getParametres().getSession().estValide()) {
+                IHM.getIHM().demarrerActivite(this, this, VueSession.class);
+            }
+        });
+!!!217010.java!!!	onRestart() : void
+        super.onRestart();
+        IHM.getIHM().ajouterIHM(this);

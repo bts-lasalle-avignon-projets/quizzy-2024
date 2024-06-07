@@ -1,0 +1,31 @@
+class PetChangeWorldEvent
+!!!466482.java!!!	PetChangeWorldEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet, inout target : World)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+		setTarget(target);
+		setCancelled(false);
+!!!466610.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!466738.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!466866.java!!!	getPlayer() : Player
+		return player;
+!!!466994.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!467122.java!!!	getEntity() : Entity
+		return entity;
+!!!467250.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!467378.java!!!	getPet() : CraftPet
+		return pet;
+!!!467506.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;
+!!!467634.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!467762.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;
+!!!467890.java!!!	getTarget() : World
+		return target;
+!!!468018.java!!!	setTarget(inout target : World) : void
+		this.target = target;

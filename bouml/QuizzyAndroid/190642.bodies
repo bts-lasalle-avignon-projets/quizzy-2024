@@ -1,0 +1,13 @@
+class Squid
+!!!455090.java!!!	Squid(inout owner : Player, in id : int)
+		super(owner, EntityType.SQUID, "Poulpe de %player%", null, MovementType.VECTOR, id);
+		setPet(this);
+!!!455218.java!!!	Squid(inout owner : Player)
+		super(owner, EntityType.SQUID, "Poulpe de %player%", null, MovementType.VECTOR);
+		setPet(this);
+!!!455346.java!!!	getEntity() : org.bukkit.entity.Squid
+		return (org.bukkit.entity.Squid) entity;
+!!!455474.java!!!	spawn() : void
+		super.spawn();
+!!!455602.java!!!	clone(inout player : Player) : Squid
+		return new Squid(player, getID());

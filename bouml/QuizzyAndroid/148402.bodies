@@ -1,0 +1,393 @@
+class Session
+!!!228274.java!!!	Session(in idEvaluation : int, in horodatage : String, in questions : List<Question>, in participants : List<Participant>)
+        this.idEvaluation = idEvaluation;
+        this.participants = participants;
+        this.questions = questions;
+        this.horodatage = horodatage;
+        this.parametres = null;
+        this.ihm = null;
+        this.baseDeDonnees = null;
+        this.gestionnaireSonore = null;
+        this.gestionnaireProtocoles = null;
+        this.watchDog = null;
+!!!228402.java!!!	Session(in sessionPrecedente : Session)
+        this.parametres = sessionPrecedente.parametres;
+        this.ihm = sessionPrecedente.ihm;
+        this.baseDeDonnees = sessionPrecedente.baseDeDonnees;
+        this.gestionnaireSonore = sessionPrecedente.gestionnaireSonore;
+        this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
+        this.watchDog = sessionPrecedente.watchDog;
+!!!228530.java!!!	Session(in parametres : Parametres, inout activite : AppCompatActivity, inout ihm : IHM, inout baseDeDonnees : BaseDeDonnees)
+        this.parametres = parametres;
+        this.ihm = ihm;
+        this.baseDeDonnees = baseDeDonnees;
+        this.gestionnaireSonore = new GestionnaireSonore(activite);
+        this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
+        this.watchDog = new WatchDog(ihm);
+!!!228658.java!!!	estValide() : boolean
+        ArgumentLancement argumentManquant = getArgumentManquant();
+        if (argumentManquant != null) {
+            argumentManquant.envoyerPopup(this, ihm);
+            return false;
+        }
+        return true;
+!!!228786.java!!!	getArgumentManquant() : ArgumentLancement
+        for (Peripherique peripherique : parametres.getPeripheriques()) {
+            if (Parametres.getParametres().estUnEcran(peripherique)) {
+                continue;
+            }
+            Participant participant = parametres.getParticipantAssocier(peripherique);
+            if (!peripherique.estConnecte() && !peripherique.seConnecte() && participant != null && !estArgument(ArgumentLancement.NON_CONNECTER)) {
+                return ArgumentLancement.NON_CONNECTER;
+            } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && !estArgument(ArgumentLancement.NON_CONFIGURER)) {
+                return ArgumentLancement.NON_CONFIGURER;
+            }
+        }
+        return getParticipantsValides().isEmpty() && !estArgument(ArgumentLancement.AUCUN_PARTICIPANT) ? ArgumentLancement.AUCUN_PARTICIPANT : null;
+!!!228914.java!!!	estArgument(inout argumentLancement : ArgumentLancement) : boolean
+        for (ArgumentLancement argument : arguments) {
+            if (argument == argumentLancement) {
+                return true;
+            }
+        }
+        return false;
+!!!229042.java!!!	lancer() : void
+        ihm.fermerPopups();
+        this.theme = parametres.getTheme();
+        questions = this.baseDeDonnees.getNouveauQuiz(parametres);
+        this.participants = getParticipantsValides();
+        ihm.mettreAjourListeParticipants();
+        for (Ecran ecran : Parametres.getParametres().getEcrans()) {
+            if (ecran.getPeripherique().estConnecte()) {
+                this.ecrans.add(ecran);
+            }
+        }
+        etapeSession = EtapeSession.MARCHE;
+        gestionnaireProtocoles.envoyerQuiz();
+        gestionnaireProtocoles.indiquerLancement();
+        envoyerQuestion();
+!!!229170.java!!!	getParticipantsValides() : Participant
+        List<Participant> listeParticipants = new ArrayList<>();
+        for (Peripherique peripherique : parametres.getPeripheriques()) {
+            Participant participant = parametres.getParticipantAssocier(peripherique);
+            if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && estArgument(ArgumentLancement.NON_CONFIGURER)) {
+                listeParticipants.add(new Participant(-1, peripherique.getNom(), peripherique));
+            } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant != null) {
+                listeParticipants.add(participant);
+            }
+        }
+        return listeParticipants;
+!!!229298.java!!!	stopper() : void
+        etapeSession = EtapeSession.ARRET;
+        gestionnaireProtocoles.finSession();
+        new PopupFinSession(this).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupFinSession");
+!!!229426.java!!!	suivant() : void
+        if (indiceQuestion + 1 >= questions.size()) {
+            stopper();
+            return;
+        }
+        indiceQuestion++;
+        gestionnaireProtocoles.questionSuivante();
+        envoyerQuestion();
+!!!229554.java!!!	precedent() : void
+        indiceQuestion = indiceQuestion > 0 ? indiceQuestion - 1 : 0;
+        gestionnaireProtocoles.questionPrecedente();
+        envoyerQuestion();
+!!!229682.java!!!	envoyerQuestion() : void
+        if (etapeSession == EtapeSession.PAUSE_FIN_QUESTION) {
+            etapeSession = EtapeSession.MARCHE;
+            watchDog.reprendre();
+        }
+        gestionnaireProtocoles.demarrerChrono();
+        gestionnaireProtocoles.activerBumpers();
+        heureDebutQuestion = System.currentTimeMillis();
+        ihm.afficherInterface();
+        gestionnaireSonore.jouerNouvelleQuestion();
+!!!229810.java!!!	selectionnerProposition(inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        if (etapeSession == EtapeSession.ARRET) {
+            return;
+        }
+        Question question = questions.get(receptionReponse.getNumeroQuestion() - 1);
+        if (!estSelectionne(participant, question)) {
+            question.ajouterSelection(participant, receptionReponse.getNumeroReponse() - 1);
+        }
+        gestionnaireProtocoles.desactiverBumpers(participant);
+        gestionnaireProtocoles.indiquerReponse(participant, receptionReponse);
+        ihm.afficherInterface();
+        gestionnaireSonore.jouerSelectionReponse();
+!!!229938.java!!!	estSelectionne(inout participant : Participant, inout question : Question) : boolean
+        return question.estSelectionne(participant);
+!!!230066.java!!!	sauvegarder() : void
+        baseDeDonnees.sauvegarder(this);
+!!!230194.java!!!	getGestionnaireProtocoles() : GestionnaireProtocoles
+        return gestionnaireProtocoles;
+!!!230322.java!!!	getQuestionActuelle() : Question
+        return questions == null || indiceQuestion >= questions.size() ? null : questions.get(indiceQuestion);
+!!!230450.java!!!	getNumeroQuestion() : int
+        return indiceQuestion + 1;
+!!!230578.java!!!	getTotalQuestions() : int
+        return questions.size();
+!!!230706.java!!!	getTempsRestant() : double
+        if (getQuestionActuelle() == null) {
+            return 0.0;
+        }
+        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - (((double) System.currentTimeMillis() - (double) heureDebutQuestion) / 1000.0);
+        return Math.max(tempsRestant, 0.0);
+!!!230834.java!!!	verifierChrono() : void
+        if (etapeSession != EtapeSession.ARRET && (getTempsRestant() == 0.0 || estReponduParTous())) {
+            etapeSession = EtapeSession.PAUSE_FIN_QUESTION;
+            ihm.afficherInterface();
+            gestionnaireSonore.jouerFinQuestion(this);
+            watchDog.pause(5000);
+        }
+!!!230962.java!!!	estReponduParTous() : boolean
+        //if (participants.isEmpty()) {
+            return false;
+        /*}
+        for (Participant participant : participants) {
+            if (!getQuestionActuelle().estSelectionne(participant)) {
+                return false;
+            }
+        }
+        return true;*/
+!!!231090.java!!!	reprendre() : void
+        EtapeSession derniereEtape = etapeSession;
+        if (etapeSession != EtapeSession.ARRET) {
+            etapeSession = EtapeSession.MARCHE;
+        }
+        if (derniereEtape == EtapeSession.PAUSE_FIN_QUESTION) {
+            suivant();
+        } else if (derniereEtape == EtapeSession.PAUSE) {
+            heureDebutQuestion += System.currentTimeMillis() - watchDog.getHeureDebutTempsPause();
+            watchDog.reprendre();
+        }
+!!!231218.java!!!	pause() : void
+        etapeSession = EtapeSession.PAUSE;
+        watchDog.pause();
+!!!231346.java!!!	getEcrans() : Ecran
+        return ecrans;
+!!!231474.java!!!	getParticipants() : Participant
+        return participants;
+!!!231602.java!!!	getQuestions() : Question
+        return questions;
+!!!231730.java!!!	getEtape() : EtapeSession
+        return etapeSession;
+!!!231858.java!!!	getArguments() : ArgumentLancement
+        return arguments;
+!!!231986.java!!!	ajouterArgument(inout argumentLancement : ArgumentLancement) : void
+        arguments.add(argumentLancement);
+!!!232114.java!!!	getScore(inout participant : Participant) : int
+        int score = 0;
+        if (questions == null) {
+            return score;
+        }
+        for (Question question : questions) {
+            if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
+                score++;
+            } else if (question != getQuestionActuelle() && question.estPropositionValide(participant)) {
+                score++;
+            }
+        }
+        return score;
+!!!232242.java!!!	getTheme() : Theme
+        return theme;
+!!!232370.java!!!	getHorodatage() : String
+        return this.horodatage;
+!!!232498.java!!!	getIdEvaluation() : int
+        return idEvaluation;
+!!!532018.java!!!	Session(in idEvaluation : int, in horodatage : String, in questions : List<Question>, in participants : List<Participant>)
+        this.idEvaluation = idEvaluation;
+        this.participants = participants;
+        this.questions = questions;
+        this.horodatage = horodatage;
+        this.parametres = null;
+        this.ihm = null;
+        this.baseDeDonnees = null;
+        this.gestionnaireSonore = null;
+        this.gestionnaireProtocoles = null;
+        this.watchDog = null;
+!!!532146.java!!!	Session(in sessionPrecedente : Session)
+        this.parametres = sessionPrecedente.parametres;
+        this.ihm = sessionPrecedente.ihm;
+        this.baseDeDonnees = sessionPrecedente.baseDeDonnees;
+        this.gestionnaireSonore = sessionPrecedente.gestionnaireSonore;
+        this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
+        this.watchDog = sessionPrecedente.watchDog;
+!!!532274.java!!!	Session(in parametres : Parametres, inout activite : AppCompatActivity, inout ihm : IHM, inout baseDeDonnees : BaseDeDonnees)
+        this.parametres = parametres;
+        this.ihm = ihm;
+        this.baseDeDonnees = baseDeDonnees;
+        this.gestionnaireSonore = new GestionnaireSonore(activite);
+        this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
+        this.watchDog = new WatchDog(ihm);
+!!!532402.java!!!	estValide() : boolean
+        ArgumentLancement argumentManquant = getArgumentManquant();
+        if (argumentManquant != null) {
+            argumentManquant.envoyerPopup(this, ihm);
+            return false;
+        }
+        return true;
+!!!532530.java!!!	getArgumentManquant() : ArgumentLancement
+        for (Peripherique peripherique : parametres.getPeripheriques()) {
+            if (Parametres.getParametres().estUnEcran(peripherique)) {
+                continue;
+            }
+            Participant participant = parametres.getParticipantAssocier(peripherique);
+            if (!peripherique.estConnecte() && !peripherique.seConnecte() && participant != null && !estArgument(ArgumentLancement.NON_CONNECTER)) {
+                return ArgumentLancement.NON_CONNECTER;
+            } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && !estArgument(ArgumentLancement.NON_CONFIGURER)) {
+                return ArgumentLancement.NON_CONFIGURER;
+            }
+        }
+        return getParticipantsValides().isEmpty() && !estArgument(ArgumentLancement.AUCUN_PARTICIPANT) ? ArgumentLancement.AUCUN_PARTICIPANT : null;
+!!!532658.java!!!	estArgument(inout argumentLancement : ArgumentLancement) : boolean
+        for (ArgumentLancement argument : arguments) {
+            if (argument == argumentLancement) {
+                return true;
+            }
+        }
+        return false;
+!!!532786.java!!!	lancer() : void
+        ihm.fermerPopups();
+        this.theme = parametres.getTheme();
+        questions = this.baseDeDonnees.getNouveauQuiz(parametres);
+        this.participants = getParticipantsValides();
+        ihm.mettreAjourListeParticipants();
+        for (Ecran ecran : Parametres.getParametres().getEcrans()) {
+            if (ecran.getPeripherique().estConnecte()) {
+                this.ecrans.add(ecran);
+            }
+        }
+        etapeSession = EtapeSession.MARCHE;
+        gestionnaireProtocoles.envoyerQuiz();
+        gestionnaireProtocoles.indiquerLancement();
+        envoyerQuestion();
+!!!532914.java!!!	getParticipantsValides() : Participant
+        List<Participant> listeParticipants = new ArrayList<>();
+        for (Peripherique peripherique : parametres.getPeripheriques()) {
+            Participant participant = parametres.getParticipantAssocier(peripherique);
+            if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant == null && estArgument(ArgumentLancement.NON_CONFIGURER)) {
+                listeParticipants.add(new Participant(-1, peripherique.getNom(), peripherique));
+            } else if ((peripherique.estConnecte() || peripherique.seConnecte()) && participant != null) {
+                listeParticipants.add(participant);
+            }
+        }
+        return listeParticipants;
+!!!533042.java!!!	stopper() : void
+        etapeSession = EtapeSession.ARRET;
+        gestionnaireProtocoles.finSession();
+        new PopupFinSession(this).show(ihm.getActiviteActive().getSupportFragmentManager(), "PopupFinSession");
+!!!533170.java!!!	suivant() : void
+        if (indiceQuestion + 1 >= questions.size()) {
+            stopper();
+            return;
+        }
+        indiceQuestion++;
+        gestionnaireProtocoles.questionSuivante();
+        envoyerQuestion();
+!!!533298.java!!!	precedent() : void
+        indiceQuestion = indiceQuestion > 0 ? indiceQuestion - 1 : 0;
+        gestionnaireProtocoles.questionPrecedente();
+        envoyerQuestion();
+!!!533426.java!!!	envoyerQuestion() : void
+        if (etapeSession == EtapeSession.PAUSE_FIN_QUESTION) {
+            etapeSession = EtapeSession.MARCHE;
+            watchDog.reprendre();
+        }
+        gestionnaireProtocoles.demarrerChrono();
+        gestionnaireProtocoles.activerBumpers();
+        heureDebutQuestion = System.currentTimeMillis();
+        ihm.afficherInterface();
+        gestionnaireSonore.jouerNouvelleQuestion();
+!!!533554.java!!!	selectionnerProposition(inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        if (etapeSession == EtapeSession.ARRET) {
+            return;
+        }
+        Question question = questions.get(receptionReponse.getNumeroQuestion() - 1);
+        if (!estSelectionne(participant, question)) {
+            question.ajouterSelection(participant, receptionReponse.getNumeroReponse() - 1);
+        }
+        gestionnaireProtocoles.desactiverBumpers(participant);
+        gestionnaireProtocoles.indiquerReponse(participant, receptionReponse);
+        ihm.afficherInterface();
+        gestionnaireSonore.jouerSelectionReponse();
+!!!533682.java!!!	estSelectionne(inout participant : Participant, inout question : Question) : boolean
+        return question.estSelectionne(participant);
+!!!533810.java!!!	sauvegarder() : void
+        baseDeDonnees.sauvegarder(this);
+!!!533938.java!!!	getGestionnaireProtocoles() : GestionnaireProtocoles
+        return gestionnaireProtocoles;
+!!!534066.java!!!	getQuestionActuelle() : Question
+        return questions == null || indiceQuestion >= questions.size() ? null : questions.get(indiceQuestion);
+!!!534194.java!!!	getNumeroQuestion() : int
+        return indiceQuestion + 1;
+!!!534322.java!!!	getTotalQuestions() : int
+        return questions.size();
+!!!534450.java!!!	getTempsRestant() : double
+        if (getQuestionActuelle() == null) {
+            return 0.0;
+        }
+        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - (((double) System.currentTimeMillis() - (double) heureDebutQuestion) / 1000.0);
+        return Math.max(tempsRestant, 0.0);
+!!!534578.java!!!	verifierChrono() : void
+        if (etapeSession != EtapeSession.ARRET && (getTempsRestant() == 0.0 || estReponduParTous())) {
+            etapeSession = EtapeSession.PAUSE_FIN_QUESTION;
+            ihm.afficherInterface();
+            gestionnaireSonore.jouerFinQuestion(this);
+            watchDog.pause(5000);
+        }
+!!!534706.java!!!	estReponduParTous() : boolean
+        //if (participants.isEmpty()) {
+            return false;
+        /*}
+        for (Participant participant : participants) {
+            if (!getQuestionActuelle().estSelectionne(participant)) {
+                return false;
+            }
+        }
+        return true;*/
+!!!534834.java!!!	reprendre() : void
+        EtapeSession derniereEtape = etapeSession;
+        if (etapeSession != EtapeSession.ARRET) {
+            etapeSession = EtapeSession.MARCHE;
+        }
+        if (derniereEtape == EtapeSession.PAUSE_FIN_QUESTION) {
+            suivant();
+        } else if (derniereEtape == EtapeSession.PAUSE) {
+            heureDebutQuestion += System.currentTimeMillis() - watchDog.getHeureDebutTempsPause();
+            watchDog.reprendre();
+        }
+!!!534962.java!!!	pause() : void
+        etapeSession = EtapeSession.PAUSE;
+        watchDog.pause();
+!!!535090.java!!!	getEcrans() : Ecran
+        return ecrans;
+!!!535218.java!!!	getParticipants() : Participant
+        return participants;
+!!!535346.java!!!	getQuestions() : Question
+        return questions;
+!!!535474.java!!!	getEtape() : EtapeSession
+        return etapeSession;
+!!!535602.java!!!	getArguments() : ArgumentLancement
+        return arguments;
+!!!535730.java!!!	ajouterArgument(inout argumentLancement : ArgumentLancement) : void
+        arguments.add(argumentLancement);
+!!!535858.java!!!	getScore(inout participant : Participant) : int
+        int score = 0;
+        if (questions == null) {
+            return score;
+        }
+        for (Question question : questions) {
+            if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
+                score++;
+            } else if (question != getQuestionActuelle() && question.estPropositionValide(participant)) {
+                score++;
+            }
+        }
+        return score;
+!!!535986.java!!!	getTheme() : Theme
+        return theme;
+!!!536114.java!!!	getHorodatage() : String
+        return this.horodatage;
+!!!536242.java!!!	getIdEvaluation() : int
+        return idEvaluation;

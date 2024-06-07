@@ -1,0 +1,157 @@
+class Parametres
+!!!224306.java!!!	getParametres(inout activite : AppCompatActivity) : Parametres
+        if (parametres == null) {
+            parametres = new Parametres(activite);
+        }
+        else
+            parametres.activitePrincipale = activite;
+        return parametres;
+!!!224434.java!!!	getParametres() : Parametres
+        return parametres;
+!!!224562.java!!!	Parametres(inout activite : AppCompatActivity)
+        this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
+        IHM ihm = new IHM(this, activite);
+        this.baseDeDonnees = new BaseDeDonnees(activite.getApplicationContext());
+        this.session = new Session(this, activite, ihm, baseDeDonnees);
+        this.participants = this.baseDeDonnees.getParticipants();
+        this.themes = this.baseDeDonnees.getThemes();
+!!!224690.java!!!	getTheme() : Theme
+        return theme;
+!!!224818.java!!!	getNombreDeQuestions() : int
+        return nombreDeQuestions;
+!!!224946.java!!!	getPeripheriques() : Peripherique
+        return peripheriques;
+!!!225074.java!!!	getParticipants() : Participant
+        return participants;
+!!!225202.java!!!	setTheme(inout theme : Theme) : void
+        this.theme = theme;
+!!!225330.java!!!	setNombreDeQuestions(in nombreDeQuestions : int) : void
+        this.nombreDeQuestions = nombreDeQuestions;
+!!!225458.java!!!	getSession() : Session
+        return session;
+!!!225586.java!!!	getParticipantAssocier(inout peripherique : Peripherique) : Participant
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() == peripherique) {
+                return participant;
+            }
+        }
+        return null;
+!!!225714.java!!!	getThemes() : Theme
+        return themes;
+!!!225842.java!!!	getActivitePrincipale() : AppCompatActivity
+        return activitePrincipale;
+!!!225970.java!!!	getEcrans() : Ecran
+        List<Ecran> ecrans = new ArrayList<>();
+        for (Peripherique peripherique : peripheriques) {
+            if (estUnEcran(peripherique)) {
+                ecrans.add(new Ecran(peripherique));
+            }
+        }
+        return ecrans;
+!!!226098.java!!!	nouvelleSession() : Session
+        this.session = new Session(this.session);
+        VueSession vueSession = (VueSession) IHM.getIHM().getActivite(VueSession.class);
+        if (vueSession != null)
+            vueSession.setSession(session);
+        return this.session;
+!!!226226.java!!!	estUnEcran(inout peripherique : Peripherique) : boolean
+        return !peripherique.getNom().startsWith("quizzy-p");
+!!!226354.java!!!	setCalulAutomatiqueDuTempsDeReponse(inout calulAutomatiqueDuTempsDeReponse : boolean) : void
+        this.calulAutomatiqueDuTempsDeReponse = calulAutomatiqueDuTempsDeReponse;
+!!!226482.java!!!	estCalulAutomatiqueDuTempsDeReponse() : boolean
+        return calulAutomatiqueDuTempsDeReponse;
+!!!226610.java!!!	setTempsReponse(in tempsReponse : int) : void
+        this.tempsReponse = tempsReponse;
+!!!226738.java!!!	getTempsReponse() : int
+        return tempsReponse;
+!!!226866.java!!!	getBaseDeDonnees() : BaseDeDonnees
+        return baseDeDonnees;
+!!!226994.java!!!	estTesterLaConnexion() : boolean
+        return this.testerLaConnexion;
+!!!227122.java!!!	setTesterLaConnexion(inout testerLaConnexion : boolean) : void
+        this.testerLaConnexion = testerLaConnexion;
+!!!227250.java!!!	getParticipant(in nom : String) : Participant
+        for (Participant participant : participants) {
+            if (participant.getNom().equals(nom)) {
+                return participant;
+            }
+        }
+        return null;
+!!!528690.java!!!	getParametres(inout activite : AppCompatActivity) : Parametres
+        if (parametres == null) {
+            parametres = new Parametres(activite);
+        }
+        else
+            parametres.activitePrincipale = activite;
+        return parametres;
+!!!528818.java!!!	getParametres() : Parametres
+        return parametres;
+!!!528946.java!!!	Parametres(inout activite : AppCompatActivity)
+        this.peripheriques = new GestionnaireBluetooth(activite).initialiser(activite);
+        IHM ihm = new IHM(this, activite);
+        this.baseDeDonnees = new BaseDeDonnees(activite.getApplicationContext());
+        this.session = new Session(this, activite, ihm, baseDeDonnees);
+        this.participants = this.baseDeDonnees.getParticipants();
+        this.themes = this.baseDeDonnees.getThemes();
+!!!529074.java!!!	getTheme() : Theme
+        return theme;
+!!!529202.java!!!	getNombreDeQuestions() : int
+        return nombreDeQuestions;
+!!!529330.java!!!	getPeripheriques() : Peripherique
+        return peripheriques;
+!!!529458.java!!!	getParticipants() : Participant
+        return participants;
+!!!529586.java!!!	setTheme(inout theme : Theme) : void
+        this.theme = theme;
+!!!529714.java!!!	setNombreDeQuestions(in nombreDeQuestions : int) : void
+        this.nombreDeQuestions = nombreDeQuestions;
+!!!529842.java!!!	getSession() : Session
+        return session;
+!!!529970.java!!!	getParticipantAssocier(inout peripherique : Peripherique) : Participant
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() == peripherique) {
+                return participant;
+            }
+        }
+        return null;
+!!!530098.java!!!	getThemes() : Theme
+        return themes;
+!!!530226.java!!!	getActivitePrincipale() : AppCompatActivity
+        return activitePrincipale;
+!!!530354.java!!!	getEcrans() : Ecran
+        List<Ecran> ecrans = new ArrayList<>();
+        for (Peripherique peripherique : peripheriques) {
+            if (estUnEcran(peripherique)) {
+                ecrans.add(new Ecran(peripherique));
+            }
+        }
+        return ecrans;
+!!!530482.java!!!	nouvelleSession() : Session
+        this.session = new Session(this.session);
+        VueSession vueSession = (VueSession) IHM.getIHM().getActivite(VueSession.class);
+        if (vueSession != null)
+            vueSession.setSession(session);
+        return this.session;
+!!!530610.java!!!	estUnEcran(inout peripherique : Peripherique) : boolean
+        return !peripherique.getNom().startsWith("quizzy-p");
+!!!530738.java!!!	setCalulAutomatiqueDuTempsDeReponse(inout calulAutomatiqueDuTempsDeReponse : boolean) : void
+        this.calulAutomatiqueDuTempsDeReponse = calulAutomatiqueDuTempsDeReponse;
+!!!530866.java!!!	estCalulAutomatiqueDuTempsDeReponse() : boolean
+        return calulAutomatiqueDuTempsDeReponse;
+!!!530994.java!!!	setTempsReponse(in tempsReponse : int) : void
+        this.tempsReponse = tempsReponse;
+!!!531122.java!!!	getTempsReponse() : int
+        return tempsReponse;
+!!!531250.java!!!	getBaseDeDonnees() : BaseDeDonnees
+        return baseDeDonnees;
+!!!531378.java!!!	estTesterLaConnexion() : boolean
+        return this.testerLaConnexion;
+!!!531506.java!!!	setTesterLaConnexion(inout testerLaConnexion : boolean) : void
+        this.testerLaConnexion = testerLaConnexion;
+!!!531634.java!!!	getParticipant(in nom : String) : Participant
+        for (Participant participant : participants) {
+            if (participant.getNom().equals(nom)) {
+                return participant;
+            }
+        }
+        return null;

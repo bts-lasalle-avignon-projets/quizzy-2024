@@ -1,0 +1,904 @@
+format 224
+"ecran" // quizzy::protocole::speciales::ecran
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "Documents/Eleos/QUIZZY/app/src/main/java/fr/hillionj/quizzy/protocole/speciales/ecran/"
+  java_package "fr.hillionj.quizzy.protocole.speciales.ecran"
+  classview 153394 "ecran"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 160946 "ProtocoleAfficherQuestionPrecedente"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 169650 // <generalisation>
+	relation 169650 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 169650 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 252978 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 253106 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 253234 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161074 "ProtocoleAfficherQuestionSuivante"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 169778 // <generalisation>
+	relation 169778 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 169778 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 253362 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 253490 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 253618 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161202 "ProtocoleAfficherReponse"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 169906 // <generalisation>
+	relation 169906 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 169906 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 253746 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 253874 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 254002 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161330 "ProtocoleEnvoiQuestion"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170034 // <generalisation>
+	relation 170034 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170034 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 254130 "ProtocoleEnvoiQuestion"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 254258 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 254386 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 254514 "getLibelle"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 254642 "getPropositions"
+	public explicit_return_type "List<String>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 254770 "getTemps"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 254898 "getNumeroReponse"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 255026 "genererTrame"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "question" type class_ref 161458 // Question
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161586 "ProtocoleFinQuiz"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170162 // <generalisation>
+	relation 170162 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170162 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 255154 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 255282 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 255410 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161714 "ProtocoleIndicationReponseParticipant"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170290 // <generalisation>
+	relation 170290 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170290 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 255538 "ProtocoleIndicationReponseParticipant"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 255666 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 255794 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 255922 "getPID"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 256050 "getTempsReponse"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 256178 "getNumeroReponse"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 256306 "genererTrame"
+	public explicit_return_type "void"
+	nparams 3
+	  param in name "pid" explicit_type "String"
+	  param in name "numeroReponse" explicit_type "int"
+	  param in name "tempsReponse" explicit_type "long"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161842 "ProtocoleInscriptionParticipant"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170418 // <generalisation>
+	relation 170418 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170418 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 256434 "ProtocoleInscriptionParticipant"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "trame" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 256562 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 256690 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 256818 "getNom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 256946 "getPID"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 257074 "genererTrame"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "pid" explicit_type "String"
+	  param in name "nom" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 161970 "ProtocoleLancement"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170546 // <generalisation>
+	relation 170546 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170546 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 257202 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 257330 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 257458 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 162098 "ProtocoleLancementQuestion"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      java_annotation "@SuppressWarnings({ \"SpellCheckingInspection\", \"unused\" })
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 170674 // <generalisation>
+	relation 170674 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 170674 // <generalisation>
+	  b parent class_ref 160306 // Protocole
+      end
+
+      operation 257586 "getFormat"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 257714 "getType"
+	public return_type class_ref 160434 // TypeProtocole
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 257842 "genererTrame"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 146226 "ecran"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 157874 "ProtocoleAfficherQuestionPrecedente"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 160946 // ProtocoleAfficherQuestionPrecedente
+      end
+    end
+
+    artifact 158002 "ProtocoleAfficherQuestionSuivante"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161074 // ProtocoleAfficherQuestionSuivante
+      end
+    end
+
+    artifact 158130 "ProtocoleAfficherReponse"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161202 // ProtocoleAfficherReponse
+      end
+    end
+
+    artifact 158258 "ProtocoleEnvoiQuestion"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+import fr.hillionj.quizzy.questionnaire.Question;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+${definition}"
+      associated_elems
+	class_ref 161330 // ProtocoleEnvoiQuestion
+      end
+    end
+
+    artifact 158386 "ProtocoleFinQuiz"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161586 // ProtocoleFinQuiz
+      end
+    end
+
+    artifact 158514 "ProtocoleIndicationReponseParticipant"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161714 // ProtocoleIndicationReponseParticipant
+      end
+    end
+
+    artifact 158642 "ProtocoleInscriptionParticipant"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161842 // ProtocoleInscriptionParticipant
+      end
+    end
+
+    artifact 158770 "ProtocoleLancement"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 161970 // ProtocoleLancement
+      end
+    end
+
+    artifact 158898 "ProtocoleLancementQuestion"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.hillionj.quizzy.protocole.Protocole;
+import fr.hillionj.quizzy.protocole.TypeProtocole;
+${definition}"
+      associated_elems
+	class_ref 162098 // ProtocoleLancementQuestion
+      end
+    end
+  end
+end

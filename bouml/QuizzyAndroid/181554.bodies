@@ -1,0 +1,22 @@
+class PacketHologram
+!!!389170.java!!!	editHologram(inout msg : PacketPlayOutEntityMetadata, inout handler : PacketHandler) : boolean
+		List<DataWatcher.WatchableObject> item = new ArrayList<>();
+		for (DataWatcher.WatchableObject wo : (List<DataWatcher.WatchableObject>) PacketUtils.getPrivate(msg, "b")) {
+			if (wo.b() == null || !(wo.b() instanceof String)) {
+				item.add(wo);
+				continue;
+			}
+			String message = (String) wo.b();
+			String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), message);
+			if (extractedMessage != null) {
+				item.add(cloneObject(wo, extractedMessage));
+			} else {
+				item.add(wo);
+			}
+		}
+		PacketUtils.setPrivate(msg, "b", item);
+		return true;
+!!!389298.java!!!	cloneObject(inout object : DataWatcher.WatchableObject, in name : String) : DataWatcher.WatchableObject
+		DataWatcher.WatchableObject data = new DataWatcher.WatchableObject(object.c(), object.a(), name);
+		data.a(object.d());
+		return data;

@@ -1,0 +1,50 @@
+class PacketUtils
+!!!388402.java!!!	getPrivate(inout classType : Object, in varName : String) : Object
+		try {
+			Field field = classType.getClass().getDeclaredField(varName);
+			field.setAccessible(true);
+			return field.get(classType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+!!!388530.java!!!	setPrivate(inout classType : Object, in varName : String, inout overrideObject : Object) : void
+		try {
+			Field field = classType.getClass().getDeclaredField(varName);
+			field.setAccessible(true);
+			field.set(classType, overrideObject);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+!!!388658.java!!!	getMessage(inout ic : IChatBaseComponent) : String
+		String message = "";
+		ChatModifier cm = ic.getChatModifier();
+		if (cm.isBold()) {
+			message += "§l";
+		}
+		if (cm.isItalic()) {
+			message += "§o";
+		}
+		if (cm.isUnderlined()) {
+			message += "§n";
+		}
+		if (cm.isStrikethrough()) {
+			message += "§m";
+		}
+		EnumChatFormat ec = ic.getChatModifier().getColor();
+		if (ec != null) {
+			message += ic.getChatModifier().getColor().toString();
+		}
+		message += ic.getText();
+		if (cm.isRandom()) {
+			message += "§k";
+		}
+		return message;
+!!!388786.java!!!	getMessage(inout chat : ChatComponentText) : String
+		String message = chat.getText();
+		if (message.isEmpty()) {
+			for (IChatBaseComponent ic : chat.a()) {
+				message += getMessage(ic);
+			}
+		}
+		return message;

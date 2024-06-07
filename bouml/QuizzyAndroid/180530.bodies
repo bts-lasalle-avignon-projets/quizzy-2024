@@ -1,0 +1,21 @@
+class ConfigAccess
+!!!385586.java!!!	ConfigAccess(in fileName : String)
+		this.fileName = fileName;
+!!!385714.java!!!	getConfig() : FileConfiguration
+		return config;
+!!!385842.java!!!	getFileName() : String
+		return fileName;
+!!!385970.java!!!	saveDefaultConfig(inout plugin : Plugin) : void
+		file = new File(plugin.getDataFolder(), fileName + ".yml");
+		if (!file.exists()) {
+			plugin.saveResource(fileName + ".yml", false);
+		}
+		config = YamlConfiguration.loadConfiguration(file);
+!!!386098.java!!!	saveConfig() : void
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+!!!386226.java!!!	reloadConfig() : void
+		config = YamlConfiguration.loadConfiguration(file);

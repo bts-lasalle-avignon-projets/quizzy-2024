@@ -1,0 +1,66 @@
+class Team
+!!!333362.java!!!	Team(inout type : GAME::TeamType, inout spawnpoints : List<Location>, inout island : Cuboid)
+			setType(type);
+			setSpawnpoints(spawnpoints);
+			setIsland(island);
+!!!333490.java!!!	sendObjective(inout scoreboard : Scoreboard, inout objective : Objective) : void
+			String index = getType().getPrefix() + "Equipe " + getType().getName().toLowerCase();
+			org.bukkit.scoreboard.Team team = scoreboard.registerNewTeam(getType().getName().toLowerCase());
+			team.addEntry(index);
+			team.setSuffix("");
+			team.setPrefix("");
+			objective.getScore(index).setScore(0);
+			new BukkitRunnable() {
+				
+				@Override
+				public void run() {
+					objective.getScore(index).setScore(players.size());
+				}
+			}.runTaskTimer(Main.getInstance(), 0, 5);
+!!!333618.java!!!	clone() : GAME::Team
+			List<Location> list = new ArrayList<>();
+			for (Location loc : spawnpoints) {
+				list.add(loc.clone());
+			}
+			return new Team(type, list, island);
+!!!333746.java!!!	remove(inout p : Player) : void
+			if (hasPlayer(p)) {
+				getPlayers().remove(p);
+			}
+!!!333874.java!!!	add(inout p : Player) : void
+			getPlayers().add(p);
+!!!334002.java!!!	hasPlayer(inout p : Player) : boolean
+			return getPlayers().contains(p);
+!!!334130.java!!!	sendMessage(in message : String) : void
+			for (Player pll : getPlayers()) {
+				pll.sendMessage(message);
+			}
+!!!334258.java!!!	canBeJoined(inout game : GAME, inout current : GAME::Team) : boolean
+			for (Team t : game.getTeams()) {
+				int difference = getPlayers().size() - t.getPlayers().size();
+				difference = current != null && current == t ? difference - 1 : difference;
+				if (difference > 1) {
+					return false;
+				}
+			}
+			return true;
+!!!334386.java!!!	getItem() : ItemStack
+			return type.getItem();
+!!!334514.java!!!	getName() : String
+			return type.getPrefix() + type.getName();
+!!!334642.java!!!	getPlayers() : List<Player>
+			return players;
+!!!334770.java!!!	setPlayers(inout players : List<Player>) : void
+			this.players = players;
+!!!334898.java!!!	getSpawnpoints() : List<Location>
+			return spawnpoints;
+!!!335026.java!!!	setSpawnpoints(inout spawnpoints : List<Location>) : void
+			this.spawnpoints = spawnpoints;
+!!!335154.java!!!	getType() : GAME::TeamType
+			return type;
+!!!335282.java!!!	setType(inout type : GAME::TeamType) : void
+			this.type = type;
+!!!335410.java!!!	getIsland() : Cuboid
+			return island;
+!!!335538.java!!!	setIsland(inout island : Cuboid) : void
+			this.island = island;

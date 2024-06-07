@@ -36,13 +36,19 @@ public class PopupNonConnecte extends DialogFragment {
 
     private Button btn_connecter;
 
-    public PopupNonConnecte(Session session) {
-        for (Participant participant : Parametres.getParametres().getParticipants()) {
-            if (participant.getPeripherique() != null && !participant.getPeripherique().seConnecte() && !participant.getPeripherique().estConnecte()) {
-                this.peripherique = participant.getPeripherique();
-                break;
-            }
+    public PopupNonConnecte() {
+        PopupNonConnecte popup = (PopupNonConnecte) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null) {
+            this.peripherique = popup.peripherique;
+            this.session = popup.session;
+            this.estAfficher = popup.estAfficher;
+        } else {
+            this.session = null;
         }
+    }
+
+    public PopupNonConnecte(Session session) {
+        this.peripherique = getPeripherique();
         this.session = session;
     }
 
@@ -56,13 +62,19 @@ public class PopupNonConnecte extends DialogFragment {
         setCancelable(false);
         View vue = inflater.inflate(R.layout.popup_non_connecte, container, false);
 
-        IHM.getIHM().ajouterIHM(this);
+        if (session != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
 
         initialiserVue(vue);
         return vue;
     }
 
     public void initialiserVue(@NonNull View vue) {
+        if (session == null) {
+            dismiss();
+            return;
+        }
         ((TextView)vue.findViewById(R.id.titre_popup)).setText(peripherique.getNom() + " non connecté");
         btn_connecter = vue.findViewById(R.id.btn_connecter);
         btn_connecter.setOnClickListener(v -> {
@@ -70,17 +82,13 @@ public class PopupNonConnecte extends DialogFragment {
             mettreAjourEtatBoutons();
         });
         vue.findViewById(R.id.btn_dissocier).setOnClickListener(v -> {
-            for (Participant participant : Parametres.getParametres().getParticipants()) {
-                if (participant.getPeripherique() != null && !participant.getPeripherique().estConnecte() && !participant.getPeripherique().seConnecte()) {
-                    participant.setPeripherique(null);
-                }
-            }
+            Parametres.getParametres().getParticipantAssocier(peripherique).setPeripherique(null);
             dismiss();
             if (session.estValide()) {
                 if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
                     session.lancer();
                 } else {
-                    startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueSession.class));
+                    IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueSession.class);
                 }
             }
         });
@@ -100,7 +108,7 @@ public class PopupNonConnecte extends DialogFragment {
                 if (IHM.getIHM().getActiviteActive() instanceof VueSession) {
                     session.lancer();
                 } else {
-                    startActivity(new Intent(IHM.getIHM().getActivite(VueParametres.class), VueSession.class));
+                    IHM.getIHM().demarrerActivite(this, IHM.getIHM().getActivite(VueParametres.class), VueSession.class);
                 }
             }
         }
@@ -110,5 +118,14 @@ public class PopupNonConnecte extends DialogFragment {
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         estAfficher = false;
+    }
+
+    private Peripherique getPeripherique() {
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() != null && !participant.getPeripherique().seConnecte() && !participant.getPeripherique().estConnecte()) {
+                return participant.getPeripherique();
+            }
+        }
+        return null;
     }
 }

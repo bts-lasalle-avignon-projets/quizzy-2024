@@ -1,0 +1,146 @@
+class GestionnaireBluetooth
+!!!241970.java!!!	initialiser(inout activite : AppCompatActivity, inout handler : Handler) : GestionnaireBluetooth
+        gestionnaireBluetooth = new GestionnaireBluetooth(activite, handler);
+        if(gestionnaireBluetooth.bluetoothAdapter == null)
+        {
+            Toast.makeText(activite.getApplicationContext(),
+                            "Bluetooth non activé !",
+                            Toast.LENGTH_SHORT)
+                    .show();
+        } else if(!gestionnaireBluetooth.bluetoothAdapter.isEnabled())
+        {
+            Toast
+                    .makeText(activite.getApplicationContext(),
+                            "Bluetooth non activé !",
+                            Toast.LENGTH_SHORT)
+                    .show();
+            Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activite.startActivityForResult(activeBlueTooth, 0);
+        }
+        else
+        {
+            gestionnaireBluetooth.rechercherPeripheriquesConnus();
+        }
+        return gestionnaireBluetooth;
+!!!242098.java!!!	getGestionnaireBluetooth() : GestionnaireBluetooth
+        return gestionnaireBluetooth;
+!!!242226.java!!!	GestionnaireBluetooth(inout activite : AppCompatActivity, inout handler : Handler)
+        Log.d(TAG, "GestionnaireBluetooth()");
+        this.activite = activite;
+        this.handler  = handler;
+        if(!verifierPermissions())
+        {
+            bluetoothAdapter = null;
+            return;
+        }
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+!!!242354.java!!!	mettreAjourSpinnerPeripheriques(inout spinnerListePeripheriques : Spinner) : void
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activite, android.R.layout.simple_spinner_item, noms);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerListePeripheriques.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
+        spinnerListePeripheriques.setOnItemSelectedListener(
+          new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id)
+              {
+                  peripherique = peripheriques.get(position);
+                  if (FragmentPupitre.getVueActive() != null) {
+                      if(peripherique.estConnecte())
+                      {
+                          FragmentPupitre.getVueActive().activerBoutonDeconnecter();
+                      }
+                      else
+                      {
+                          FragmentPupitre.getVueActive().activerBoutonConnecter();
+                      }
+                  }
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> arg0)
+              {
+              }
+          });
+!!!242482.java!!!	mettreAjourListViewPeripheriques(inout listViewPeripheriquesConnectes : ListView) : void
+        if(this.adapterPeripheriquesConnectes == null)
+        {
+            this.adapterPeripheriquesConnectes = new ArrayAdapter<>(activite, android.R.layout.simple_list_item_1);
+        }
+        listViewPeripheriquesConnectes.setAdapter(this.adapterPeripheriquesConnectes);
+!!!242610.java!!!	rechercherPeripheriquesConnus() : void
+        for(BluetoothDevice blueDevice: bluetoothAdapter.getBondedDevices())
+        {
+            peripheriques.add(new Peripherique(blueDevice, handler, peripheriques.size()));
+            noms.add(blueDevice.getName());
+        }
+        if(peripheriques.isEmpty())
+        {
+            peripheriques.add(new Peripherique(null, handler, peripheriques.size()));
+        }
+        if(noms.isEmpty())
+        {
+            noms.add("Aucun");
+        }
+!!!242738.java!!!	getPeripheriquesConnectes() : Peripherique
+        List<Peripherique> liste = new ArrayList<>();
+        for(Peripherique peripherique: peripheriques)
+        {
+            if(peripherique.estConnecte())
+            {
+                liste.add(peripherique);
+            }
+        }
+        return liste;
+!!!242866.java!!!	ajouterPeripheriqueConnecter(in indicePeripherique : int) : void
+        adapterPeripheriquesConnectes.add(peripheriques.get(indicePeripherique).getNom());
+!!!242994.java!!!	connecter() : boolean
+        if(peripherique == null)
+        {
+            return false;
+        }
+        peripherique.connecter();
+        return true;
+!!!243122.java!!!	deconnecter() : boolean
+        if(peripherique != null)
+        {
+            boolean succesDeconnexion = peripherique.deconnecter();
+            if(succesDeconnexion)
+            {
+                adapterPeripheriquesConnectes.remove(peripherique.getNom());
+            }
+            return succesDeconnexion;
+        }
+        return false;
+!!!243250.java!!!	verifierPermissions() : boolean
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_CONNECT) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(
+              activite,
+              new String[] { Manifest.permission.BLUETOOTH_CONNECT },
+              1);
+            Log.d(TAG, "verifierPermissions() request BLUETOOTH_CONNECT");
+            // return false;
+        }
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH_ADMIN) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(activite,
+                                              new String[] { Manifest.permission.BLUETOOTH_ADMIN },
+                                              1);
+            Log.d(TAG, "verifierPermissions() request BLUETOOTH_ADMIN");
+            return false;
+        }
+        if(ActivityCompat.checkSelfPermission(activite, Manifest.permission.BLUETOOTH) !=
+           PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(activite,
+                                              new String[] { Manifest.permission.BLUETOOTH },
+                                              1);
+            Log.d(TAG, "verifierPermissions() request BLUETOOTH");
+            return false;
+        }
+        return true;
+!!!243378.java!!!	getPeripheriques() : Peripherique
+        return peripheriques;

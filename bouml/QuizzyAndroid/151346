@@ -1,0 +1,675 @@
+format 224
+"utils" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lchungergames::utils
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "Téléchargements/LC_HungerGames/src/fr/red/lchungergames/utils/"
+  java_package "fr.red.lchungergames.utils"
+  package_ref 151474 // menu
+
+  classview 155954 "utils"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 176434 "ItemBuilder"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 188082 // <generalisation>
+	relation 188082 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 188082 // <generalisation>
+	  b parent class_ref 173618 // ItemStack
+      end
+
+      operation 352562 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "mat" explicit_type "Material"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initializes the builder with the given {@link Material}
+
+@param mat the {@link Material} to start the builder from
+@since 1.0
+"
+      end
+
+      operation 352690 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "material" explicit_type "Material"
+	  param in name "data" explicit_type "byte"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 352818 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "is" explicit_type "ItemStack"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Inits the builder with the given {@link ItemStack}
+
+@param is the {@link ItemStack} to start the builder from
+@since 1.0
+"
+      end
+
+      operation 352946 "amount"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "amount" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the amount of the {@link ItemStack}
+
+@param amount the new amount to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 353074 "skullOwner"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "owner" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 353202 "skullTextue"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "url" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 353330 "name"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the display name of the {@link ItemStack}
+
+@param name the new display name to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 353458 "lore"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "text" explicit_type "List<String>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds a new line to the lore of the {@link ItemStack}
+
+@param text the new line to add
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 353586 "durability"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "durability" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the durability of the {@link ItemStack}
+
+@param durability the new durability to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 353714 "enchantment"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 2
+	  param in name "enchantment" explicit_type "Enchantment"
+	  param in name "level" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds an {@link Enchantment} with the given level to the {@link ItemStack}
+
+@param enchantment the enchantment to add
+@param level       the level of the enchantment
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 353842 "flag"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "flag" explicit_type "ItemFlag"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 353970 "enchantment"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "enchantment" explicit_type "Enchantment"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds an {@link Enchantment} with the level 1 to the {@link ItemStack}
+
+@param enchantment the enchantment to add
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 354098 "unbreakable"
+	public explicit_return_type "ItemStack"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 354226 "type"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param in name "material" explicit_type "Material"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the {@link Material} of the {@link ItemStack}
+
+@param material the new material to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 354354 "clearLore"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Clears the lore of the {@link ItemStack}
+
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 354482 "clearEnchantments"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Clears the list of {@link Enchantment}s of the {@link ItemStack}
+
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 354610 "color"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 1
+	  param inout name "color" explicit_type "Color"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Sets the {@link Color} of a part of leather armor
+
+@param color the {@link Color} to use
+@return this builder for chaining
+@since 1.1
+"
+      end
+
+      operation 354738 "createPotion"
+	public return_type class_ref 176434 // ItemBuilder
+	nparams 2
+	  param inout name "list" explicit_type "List<PotionBuilder>"
+	  param inout name "splash" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 176562 "PotionBuilder"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 226482 "type"
+	  private explicit_type "PotionEffectType"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 226610 "duration"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 226738 "amplifier"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 354866 "PotionBuilder"
+	  public explicit_return_type ""
+	  nparams 3
+	    param inout name "type" explicit_type "PotionType"
+	    param in name "seconds" explicit_type "int"
+	    param in name "power" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 354994 "PotionBuilder"
+	  public explicit_return_type ""
+	  nparams 3
+	    param inout name "type" explicit_type "PotionEffectType"
+	    param in name "seconds" explicit_type "int"
+	    param in name "power" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355122 "getType"
+	  public explicit_return_type "PotionEffectType"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355250 "setType"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "type" explicit_type "PotionEffectType"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355378 "getDuration"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355506 "setDuration"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "duration" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355634 "getAmplifier"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 355762 "setAmplifier"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "amplifier" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      class 176690 "EnchantBuilder"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 226866 "enchantment"
+	  private explicit_type "Enchantment"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 226994 "level"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 355890 "EnchantBuilder"
+	  public explicit_return_type ""
+	  nparams 2
+	    param inout name "enchantment" explicit_type "Enchantment"
+	    param in name "level" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 356018 "getEnchantment"
+	  public explicit_return_type "Enchantment"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 356146 "setEnchantment"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "enchantment" explicit_type "Enchantment"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 356274 "getLevel"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 356402 "setLevel"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "level" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+    end
+  end
+
+  deploymentview 148786 "utils"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 170162 "ItemBuilder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+${definition}"
+      associated_elems
+	class_ref 176434 // ItemBuilder
+      end
+    end
+  end
+
+  package_ref 152114 // config
+
+  package_ref 152242 // game
+end

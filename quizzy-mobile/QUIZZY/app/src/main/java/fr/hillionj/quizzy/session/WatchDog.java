@@ -35,7 +35,9 @@ public class WatchDog {
     }
 
     private void loop() {
-        testerConnexion();
+        if (Parametres.getParametres().estTesterLaConnexion()) {
+            testerConnexion();
+        }
         if (estEnPause()) {
             etaitEnPause = true;
             return;

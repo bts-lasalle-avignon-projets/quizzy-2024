@@ -1,0 +1,96 @@
+class GestionnaireBluetooth
+!!!192434.java!!!	GestionnaireBluetooth(inout activite : AppCompatActivity)
+        this.handler = initialiserHandler();
+        if(!verifierPermissions(activite)) {
+            bluetoothAdapter = null;
+            return;
+        }
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter == null || !bluetoothAdapter.isEnabled())
+        {
+            creerToast(activite, "Bluetooth non activé !");
+            if (!bluetoothAdapter.isEnabled()) {
+                Intent activeBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                activite.startActivityForResult(activeBlueTooth, 0);
+            }
+        }
+!!!192562.java!!!	initialiser(inout activite : AppCompatActivity) : Peripherique
+        if (bluetoothAdapter != null && bluetoothAdapter.isEnabled())
+        {
+            return rechercherPeripheriquesConnus();
+        }
+        return new ArrayList<>();
+!!!192690.java!!!	rechercherPeripheriquesConnus() : Peripherique
+        List<Peripherique> list = new ArrayList<>();
+        for(BluetoothDevice blueDevice: bluetoothAdapter.getBondedDevices())
+        {
+            list.add(new Peripherique(this, blueDevice, list.size()));
+        }
+        return list;
+!!!192818.java!!!	verifierPermissions(inout activite : AppCompatActivity) : boolean
+        List<String> permissionsManquantes = new ArrayList<>();
+        verifierPermission(activite, permissionsManquantes, Manifest.permission.BLUETOOTH_CONNECT);
+        verifierPermission(activite, permissionsManquantes, Manifest.permission.BLUETOOTH_ADMIN);
+        verifierPermission(activite, permissionsManquantes, Manifest.permission.BLUETOOTH);
+        if(!permissionsManquantes.isEmpty())
+        {
+            ActivityCompat.requestPermissions(
+                    activite,
+                    permissionsManquantes.toArray(new String[permissionsManquantes.size()]),
+                    1);
+            return false;
+        }
+        return true;
+!!!192946.java!!!	verifierPermission(inout activite : AppCompatActivity, inout permissionsManquantes : List<String>, in permission : String) : void
+        if (ActivityCompat.checkSelfPermission(activite, permission) != PackageManager.PERMISSION_GRANTED)
+        {
+            permissionsManquantes.add(permission);
+        }
+!!!193074.java!!!	creerToast(inout activite : AppCompatActivity, in message : String) : void
+        Toast.makeText(activite.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+!!!193202.java!!!	initialiserHandler() : Handler
+        Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                super.handleMessage(msg);
+                Peripherique peripherique = Parametres.getParametres().getPeripheriques().get(msg.arg1);
+                switch(msg.what)
+                {
+                    case CODE_CONNEXION_BLUETOOTH:
+                        peripherique.setSeConnecte(false);
+                        IHM.getIHM().mettreAjourListeParticipants();
+                        if (Parametres.getParametres().estUnEcran(peripherique)) {
+                            Parametres.getParametres().getSession().getGestionnaireProtocoles().preparerRelancement(new Ecran(peripherique));
+                        }
+                    case CODE_ERREUR_CONNEXION_BLUETOOTH:
+                        peripherique.setSeConnecte(false);
+                        IHM.getIHM().mettreAjourListeParticipants();
+                        break;
+                    case CODE_RECEPTION_BLUETOOTH:
+                        for (String trame : ((String) msg.obj).split("\n")) {
+                            Protocole protocoleRecue = Protocole.traiterTrame(trame);
+                            if (protocoleRecue == null) {
+                                continue;
+                            }
+                            Log.v("QUIZZY_" + this.getClass().getName(), "<- " + peripherique.getNom() + ": " + trame);
+                            switch (protocoleRecue.getType()) {
+                                case RECEPTION_REPONSE:
+                                    Parametres.getParametres().getSession().selectionnerProposition(Parametres.getParametres().getParticipantAssocier(peripherique), (ReceptionReponse) protocoleRecue);
+                                    break;
+                                default:
+                                     break;
+                            }
+                        }
+                        break;
+                    case CODE_DECONNEXION_BLUETOOTH:
+                        IHM.getIHM().mettreAjourListeParticipants();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        return handler;
+!!!193330.java!!!	getHandler() : Handler
+        return handler;

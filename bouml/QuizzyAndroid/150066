@@ -1,0 +1,247 @@
+format 224
+"pages" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcbattlesheep::pages
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_BattleSheep_II/src/fr/red/lcbattlesheep/pages/"
+  java_package "fr.red.lcbattlesheep.pages"
+  classview 154162 "pages"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 166450 "IPage"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 292914 "getTemplateTitle"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 293042 "getContents"
+	public explicit_return_type "List<ItemStack>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 293170 "calculateContents"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 293298 "getPages"
+	public explicit_return_type "List<Inventory>"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 167858 "IPageManager"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 178610 // <realization>
+	  relation 178610 -_-|>
+	    a public
+	      java "${type}"
+	      classrelation_ref 178610 // <realization>
+	    b parent class_ref 166322 // Listener
+	end
+
+	classrelation 178738 // list (<unidirectional association>)
+	  relation 178738 --->
+	    stereotype "List"
+	    a role_name "list" init_value " new ArrayList<>()" class_relation private
+	      java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	      classrelation_ref 178738 // list (<unidirectional association>)
+	    b parent class_ref 166450 // IPage
+	end
+
+	operation 293426 "openFirstPage"
+	  class_operation public explicit_return_type "void"
+	  nparams 2
+	    param inout name "p" explicit_type "Player"
+	    param inout name "page" type class_ref 166450 // IPage
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 293554 "updatePages"
+	  class_operation public explicit_return_type "void"
+	  nparams 1
+	    param inout name "page" type class_ref 166450 // IPage
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 293682 "newPage"
+	  class_operation private explicit_return_type "int"
+	  nparams 3
+	    param inout name "page" type class_ref 166450 // IPage
+	    param in name "c" explicit_type "int"
+	    param in name "count" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 293810 "from"
+	  class_operation public explicit_return_type "Object"
+	  nparams 1
+	    param inout name "inv" explicit_type "Inventory"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type}[] ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 293938 "onSwitchPage"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "e" explicit_type "InventoryClickEvent"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@EventHandler
+"
+	  
+	  
+	  
+	end
+      end
+    end
+  end
+
+  deploymentview 147378 "pages"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 163762 "IPage"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import fr.red.lcbattlesheep.utils.ItemBuilder;
+${definition}"
+      associated_elems
+	class_ref 166450 // IPage
+      end
+    end
+  end
+
+  package_ref 150450 // interfaces
+end

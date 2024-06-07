@@ -1,0 +1,11 @@
+class DesactiverBumpers
+!!!208946.java!!!	DesactiverBumpers(in trame : String)
+        setTrame(trame);
+!!!209074.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION\n";
+!!!209202.java!!!	getType() : TypeProtocole
+        return TypeProtocole.DESACTIVER_BUMPERS;
+!!!209330.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!209458.java!!!	genererTrame(in numeroQuestion : int) : void
+        super.genererTrame(numeroQuestion + "");

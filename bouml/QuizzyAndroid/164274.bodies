@@ -1,0 +1,43 @@
+class ListItemsBinding
+!!!273074.java!!!	ListItemsBinding(inout rootView : LinearLayout, inout logoPeripherique : ImageView, inout text1 : TextView, inout text2 : TextView)
+    this.rootView = rootView;
+    this.logoPeripherique = logoPeripherique;
+    this.text1 = text1;
+    this.text2 = text2;
+!!!273202.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!273330.java!!!	inflate(inout inflater : LayoutInflater) : ListItemsBinding
+    return inflate(inflater, null, false);
+!!!273458.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : ListItemsBinding
+    View root = inflater.inflate(R.layout.list_items, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!273586.java!!!	bind(inout rootView : View) : ListItemsBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.logo_peripherique;
+      ImageView logoPeripherique = ViewBindings.findChildViewById(rootView, id);
+      if (logoPeripherique == null) {
+        break missingId;
+      }
+
+      id = R.id.text1;
+      TextView text1 = ViewBindings.findChildViewById(rootView, id);
+      if (text1 == null) {
+        break missingId;
+      }
+
+      id = R.id.text2;
+      TextView text2 = ViewBindings.findChildViewById(rootView, id);
+      if (text2 == null) {
+        break missingId;
+      }
+
+      return new ListItemsBinding((LinearLayout) rootView, logoPeripherique, text1, text2);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,0 +1,7 @@
+class DemarrerChrono
+!!!204466.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!204594.java!!!	getType() : TypeProtocole
+        return TypeProtocole.DEMARRER_CHRONO;
+!!!204722.java!!!	genererTrame() : void
+        super.genererTrame();

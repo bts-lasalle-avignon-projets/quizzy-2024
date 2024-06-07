@@ -1,0 +1,46 @@
+format 224
+"red" // eclipse-workspace::LC_BattleSheep_II::src::fr::red
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_BattleSheep_II/src/fr/red/"
+  java_package "fr.red"
+  package_ref 149682 // lcbattlesheep
+
+  package_ref 151090 // lchungergames
+
+  package_ref 152498 // lclangmanager
+
+  package_ref 153778 // lcmapdater
+
+  package_ref 154674 // lcpets
+
+  package_ref 156594 // lcradio
+end

@@ -1,0 +1,99 @@
+class PetMenu
+!!!433458.java!!!	PetMenu(inout inventory : Inventory)
+		this(inventory, null);
+!!!433586.java!!!	PetMenu(inout inventory : Inventory, inout parent : IMenu)
+		super(inventory, parent);
+!!!433714.java!!!	addSubMenu(in slot : int, inout item : ItemStack, inout inv : Inventory) : IMenu
+		getInventory().setItem(slot, item);
+		IMenu menu = new SimpleMenu(inv, this);
+		addSub(item, menu);
+		return menu;
+!!!433842.java!!!	addPet(inout menu : IMenu, inout type : EntityType, inout it : ItemStack, in argument : String) : void
+		availablePets.put(it, getPet(type, argument));
+!!!433970.java!!!	getPetFrom(inout item : ItemStack) : Pet
+		for (ItemStack it : availablePets.keySet()) {
+			if (it.isSimilar(item)) {
+				return availablePets.get(it);
+			}
+		}
+		return null;
+!!!434098.java!!!	getPetFrom(in id : int) : Pet
+		for (Pet pet : availablePets.values()) {
+			if (pet.getID() == id) {
+				return pet;
+			}
+		}
+		return null;
+!!!434226.java!!!	from(inout entity : Entity) : Pet
+		for (PlayerPetProfile pro : PlayerPetProfile.list) {
+			for (Pet pet : pro.getPets()) {
+				if (pet.getEntity() != null && pet.getEntity().equals(entity)) {
+					return pet;
+				}
+			}
+		}
+		return null;
+!!!434354.java!!!	getPet(inout type : EntityType, in argument : String) : Pet
+		switch (type) {
+		case SHEEP: {
+			DyeColor color = argument != null ? DyeColor.valueOf(argument) : null;
+			return new Sheep(null, color);
+		}
+		case OCELOT:{
+			Type catType = argument != null ? Type.valueOf(argument) : null;
+			return new Cat(null, catType);
+		}
+		case WOLF:{
+			DyeColor color = argument != null ? DyeColor.valueOf(argument) : null;
+			return new Dog(null, color);
+		}
+		case PIG:{
+			boolean saddle = argument != null ? Boolean.parseBoolean(argument) : false;
+			return new Pig(null, saddle);
+		}
+		case CHICKEN:{
+			return new Chicken(null);
+		}
+		case COW:{
+			return new Cow(null);
+		}
+		case MUSHROOM_COW:{
+			return new MushroomCow(null);
+		}
+		case SQUID:{
+			return new Squid(null);
+		}
+		case SLIME:{
+			return new Slime(null);
+		}
+		case SPIDER:{
+			return new Spider(null);
+		}
+		case ZOMBIE:{
+			return new Zombie(null);
+		}
+		case CAVE_SPIDER:{
+			return new CaveSpider(null);
+		}
+		case SILVERFISH:{
+			return new Silverfish(null);
+		}
+		case BAT:{
+			return new Bat(null);
+		}
+		case ENDERMAN:{
+			return new Enderman(null);
+		}
+		case MAGMA_CUBE:{
+			return new MagmaCube(null);
+		}
+		case PIG_ZOMBIE:{
+			return new PigZombie(null);
+		}
+		case SKELETON:{
+			return new WitherSkeleton(null);
+		}
+		default:
+			break;
+		}
+		return new DefaultPet(null, type);

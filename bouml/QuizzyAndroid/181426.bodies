@@ -1,0 +1,13 @@
+class PacketChat
+!!!389042.java!!!	editChat(inout msg : PacketPlayOutChat, inout handler : PacketHandler) : boolean
+		Object packet = PacketUtils.getPrivate(msg, "a");
+		if (!(packet instanceof ChatComponentText)) {
+			return true;
+		}
+		String message = PacketUtils.getMessage((ChatComponentText) packet);
+		String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), message);
+		if (extractedMessage == null) {
+			return true;
+		}
+		PacketUtils.setPrivate(msg, "a", new ChatMessage(extractedMessage));
+		return true;

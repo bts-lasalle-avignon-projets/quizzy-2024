@@ -1,0 +1,15 @@
+class Cancelled
+!!!418226.java!!!	onTarget(inout e : EntityTargetEvent) : void
+		Pet pet = PetAPI.getMenu().from(e.getEntity());
+		if (pet == null) {
+			return;
+		}
+		Player target = CraftPet.following.containsKey(pet) ? (Player) CraftPet.following.get(pet) : null;
+		if (target == null || !target.equals(e.getTarget())) {
+			e.setCancelled(true);
+		}
+!!!418354.java!!!	onDamage(inout e : EntityDamageEvent) : void
+		Pet pet = PetAPI.getMenu().from(e.getEntity());
+		if (pet != null) {
+			e.setCancelled(true);
+		}

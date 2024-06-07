@@ -1,0 +1,75 @@
+class PetsRegister
+!!!492722.java!!!	PetsRegister(inout entity : EntityType, in name : String, in slot : int, in permission : String, inout inventory : Inventory, inout enchant : boolean)
+		setType(entity);
+		setName(name);
+		setPermission(permission);
+		setInventory(inventory);
+		setSlot(slot);
+		setEnchant(enchant);
+
+		pets.add(this);
+!!!492850.java!!!	getType() : EntityType
+		return entity;
+!!!492978.java!!!	setType(inout entity : EntityType) : void
+		this.entity = entity;
+!!!493106.java!!!	getPermission() : String
+		return permission;
+!!!493234.java!!!	setPermission(in permission : String) : void
+		this.permission = permission;
+!!!493362.java!!!	getInventory() : Inventory
+		return inventory;
+!!!493490.java!!!	setInventory(inout inventory : Inventory) : void
+		this.inventory = inventory;
+!!!493618.java!!!	getName() : String
+		return name;
+!!!493746.java!!!	setName(in name : String) : void
+		this.name = name;
+!!!493874.java!!!	getContents() : CraftPet
+		return contents;
+!!!494002.java!!!	setContents(inout contents : List<CraftPet>) : void
+		this.contents = contents;
+!!!494130.java!!!	getPets() : PetsRegister
+		return pets;
+!!!494258.java!!!	getPetsOfName(in name : String) : PetsRegister
+		for (PetsRegister r : getPets()) {
+			if (r.getName().equalsIgnoreCase(name)) {
+				return r;
+			}
+		}
+		return null;
+!!!494386.java!!!	getPetsOfTitle(in title : String) : PetsRegister
+		for (PetsRegister r : getPets()) {
+			if (r.getInventory().getTitle().equalsIgnoreCase(title)) {
+				return r;
+			}
+		}
+		return null;
+!!!494514.java!!!	getSlot() : int
+		return slot;
+!!!494642.java!!!	setSlot(in slot : int) : void
+		this.slot = slot;
+!!!494770.java!!!	getItem(inout p : Player) : ItemStack
+		if (p.hasPermission(getPermission())) {
+			if (isEnchant()) {
+				return new ItemBuilder().addEnchantItem(getName(), Arrays.asList("§aObjet débloqué !"), Material.MONSTER_EGG, getType().getTypeId());
+			} else {
+				return new ItemBuilder().addItem(getName(), Arrays.asList("§aObjet débloqué !"), Material.MONSTER_EGG, getType().getTypeId());
+			}
+		} else {
+			if (isEnchant()) {
+				return new ItemBuilder().addEnchantItem(getName(), Arrays.asList("§7Achetez votre petit §afamilier", "§7et soutenez notre §6serveur", "§7sur §a§nLifeKraft.fr§b !"), Material.MONSTER_EGG, getType().getTypeId());
+			} else {
+				return new ItemBuilder().addItem(getName(), Arrays.asList("§7Achetez votre petit §afamilier", "§7et soutenez notre §6serveur", "§7sur §a§nLifeKraft.fr§b !"), Material.MONSTER_EGG, getType().getTypeId());
+			}
+		}
+!!!494898.java!!!	getPetOfName(in name : String) : CraftPet
+		for (CraftPet p : getContents()) {
+			if (p.getName().equalsIgnoreCase(name)) {
+				return p;
+			}
+		}
+		return null;
+!!!495026.java!!!	isEnchant() : boolean
+		return enchant;
+!!!495154.java!!!	setEnchant(inout enchant : boolean) : void
+		this.enchant = enchant;

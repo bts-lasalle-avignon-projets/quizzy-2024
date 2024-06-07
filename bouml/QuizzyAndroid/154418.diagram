@@ -1,0 +1,1605 @@
+format 224
+
+classcanvas 128050 class_ref 147378 // Quizzy
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 158130 // btn_demarrer
+    attribute_ref 158258 // btn_credits
+    attribute_ref 158386 // btn_historique
+  hidden_operations
+    operation_ref 188850 // onCreate
+    operation_ref 188978 // onRestart
+    operation_ref 189106 // initialiserBoutons
+  xyz 269.8 456.5 2000
+end
+classcanvas 128178 class_ref 147634 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 158514 // nomFichier
+    attribute_ref 158642 // sqlite
+  hidden_operations
+    operation_ref 189234 // BaseDeDonnees
+    operation_ref 189362 // genererQuestion
+    operation_ref 189490 // getTempsReponse
+    operation_ref 189618 // construireRequete
+    operation_ref 189746 // getNouveauQuiz
+    operation_ref 189874 // getParticipants
+    operation_ref 190002 // getThemes
+    operation_ref 190130 // onCreate
+    operation_ref 190258 // onUpgrade
+    operation_ref 190386 // sauvegarder
+    operation_ref 190514 // getIdNouvelleEvaluation
+    operation_ref 190642 // getHistorique
+    operation_ref 190770 // getEvaluations
+    operation_ref 190898 // getSession
+    operation_ref 191026 // getSession
+    operation_ref 191154 // getParticipants
+    operation_ref 191282 // getParticipantDepuisID
+    operation_ref 191410 // getQuestions
+    operation_ref 191538 // supprimerSession
+    operation_ref 191666 // creerParticipant
+  xyz 1135.9 1134.3 2005
+end
+classcanvas 128434 class_ref 147890 // Question
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 170546 // question
+    attribute_ref 170674 // propositions
+    attribute_ref 170802 // numeroBonneReponse
+    attribute_ref 170930 // temps
+    attribute_ref 171058 // idQuestion
+  hidden_operations
+    operation_ref 234162 // Question
+    operation_ref 234290 // getNumeroBonneReponse
+    operation_ref 234418 // getQuestion
+    operation_ref 234546 // getPropositions
+    operation_ref 234674 // getTempsReponse
+    operation_ref 234802 // estSelectionnee
+    operation_ref 234930 // estSelectionne
+    operation_ref 235058 // ajouterSelection
+    operation_ref 235186 // estPropositionValide
+    operation_ref 235314 // getIdQuestion
+    operation_ref 537906 // Question
+    operation_ref 538034 // getNumeroBonneReponse
+    operation_ref 538162 // getQuestion
+    operation_ref 538290 // getPropositions
+    operation_ref 538418 // getTempsReponse
+    operation_ref 538546 // estSelectionnee
+    operation_ref 538674 // estSelectionne
+    operation_ref 538802 // ajouterSelection
+    operation_ref 538930 // estPropositionValide
+    operation_ref 539058 // getIdQuestion
+  xyz 1445.3 436.5 2015
+end
+classcanvas 128562 class_ref 148274 // Theme
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 171186 // idTheme
+    attribute_ref 171314 // nom
+  hidden_operations
+    operation_ref 235442 // Theme
+    operation_ref 235570 // getNom
+    operation_ref 235698 // getIdTheme
+    operation_ref 539186 // Theme
+    operation_ref 539314 // getNom
+    operation_ref 539442 // getIdTheme
+  xyz 1382 1213.2 2000
+end
+classcanvas 128690 class_ref 148402 // Session
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 169394 // indiceQuestion
+    attribute_ref 169522 // heureDebutQuestion
+    attribute_ref 169650 // horodatage
+    attribute_ref 169778 // idEvaluation
+  hidden_operations
+    operation_ref 228274 // Session
+    operation_ref 228402 // Session
+    operation_ref 228530 // Session
+    operation_ref 228658 // estValide
+    operation_ref 228786 // getArgumentManquant
+    operation_ref 228914 // estArgument
+    operation_ref 229042 // lancer
+    operation_ref 229170 // getParticipantsValides
+    operation_ref 229298 // stopper
+    operation_ref 229426 // suivant
+    operation_ref 229554 // precedent
+    operation_ref 229682 // envoyerQuestion
+    operation_ref 229810 // selectionnerProposition
+    operation_ref 229938 // estSelectionne
+    operation_ref 230066 // sauvegarder
+    operation_ref 230194 // getGestionnaireProtocoles
+    operation_ref 230322 // getQuestionActuelle
+    operation_ref 230450 // getNumeroQuestion
+    operation_ref 230578 // getTotalQuestions
+    operation_ref 230706 // getTempsRestant
+    operation_ref 230834 // verifierChrono
+    operation_ref 230962 // estReponduParTous
+    operation_ref 231090 // reprendre
+    operation_ref 231218 // pause
+    operation_ref 231346 // getEcrans
+    operation_ref 231474 // getParticipants
+    operation_ref 231602 // getQuestions
+    operation_ref 231730 // getEtape
+    operation_ref 231858 // getArguments
+    operation_ref 231986 // ajouterArgument
+    operation_ref 232114 // getScore
+    operation_ref 232242 // getTheme
+    operation_ref 232370 // getHorodatage
+    operation_ref 232498 // getIdEvaluation
+    operation_ref 532018 // Session
+    operation_ref 532146 // Session
+    operation_ref 532274 // Session
+    operation_ref 532402 // estValide
+    operation_ref 532530 // getArgumentManquant
+    operation_ref 532658 // estArgument
+    operation_ref 532786 // lancer
+    operation_ref 532914 // getParticipantsValides
+    operation_ref 533042 // stopper
+    operation_ref 533170 // suivant
+    operation_ref 533298 // precedent
+    operation_ref 533426 // envoyerQuestion
+    operation_ref 533554 // selectionnerProposition
+    operation_ref 533682 // estSelectionne
+    operation_ref 533810 // sauvegarder
+    operation_ref 533938 // getGestionnaireProtocoles
+    operation_ref 534066 // getQuestionActuelle
+    operation_ref 534194 // getNumeroQuestion
+    operation_ref 534322 // getTotalQuestions
+    operation_ref 534450 // getTempsRestant
+    operation_ref 534578 // verifierChrono
+    operation_ref 534706 // estReponduParTous
+    operation_ref 534834 // reprendre
+    operation_ref 534962 // pause
+    operation_ref 535090 // getEcrans
+    operation_ref 535218 // getParticipants
+    operation_ref 535346 // getQuestions
+    operation_ref 535474 // getEtape
+    operation_ref 535602 // getArguments
+    operation_ref 535730 // ajouterArgument
+    operation_ref 535858 // getScore
+    operation_ref 535986 // getTheme
+    operation_ref 536114 // getHorodatage
+    operation_ref 536242 // getIdEvaluation
+  xyz 425.9 1733.2 3005
+end
+classcanvas 129458 class_ref 155058 // EtapeSession
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 168882 // ARRET
+    attribute_ref 169010 // MARCHE
+    attribute_ref 169138 // PAUSE
+    attribute_ref 169266 // PAUSE_FIN_QUESTION
+  xyz 815.9 705.4 3011
+end
+classcanvas 129714 class_ref 155314 // WatchDog
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 169906 // tempsPeriode
+    attribute_ref 170034 // heureDebutTempsPause
+    attribute_ref 170162 // tempsPause
+    attribute_ref 170290 // scheduler
+    attribute_ref 170418 // etaitEnPause
+  hidden_operations
+    operation_ref 232626 // WatchDog
+    operation_ref 232754 // loop
+    operation_ref 232882 // afficherBoutons
+    operation_ref 233010 // afficherChrono
+    operation_ref 233138 // arreter
+    operation_ref 233266 // pause
+    operation_ref 233394 // pause
+    operation_ref 233522 // estEnPause
+    operation_ref 233650 // getHeureDebutTempsPause
+    operation_ref 233778 // reprendre
+    operation_ref 233906 // reprendreSession
+    operation_ref 234034 // testerConnexion
+    operation_ref 536370 // WatchDog
+    operation_ref 536498 // loop
+    operation_ref 536626 // afficherBoutons
+    operation_ref 536754 // afficherChrono
+    operation_ref 536882 // arreter
+    operation_ref 537010 // pause
+    operation_ref 537138 // pause
+    operation_ref 537266 // estEnPause
+    operation_ref 537394 // getHeureDebutTempsPause
+    operation_ref 537522 // reprendre
+    operation_ref 537650 // reprendreSession
+    operation_ref 537778 // testerConnexion
+  xyz 1235.7 1256.5 3017
+end
+classcanvas 129970 class_ref 148018 // Parametres
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 167986 // nombreDeQuestions
+    attribute_ref 168114 // activitePrincipale
+    attribute_ref 168242 // calulAutomatiqueDuTempsDeReponse
+    attribute_ref 168370 // tempsReponse
+    attribute_ref 168498 // testerLaConnexion
+  hidden_operations
+    operation_ref 224306 // getParametres
+    operation_ref 224434 // getParametres
+    operation_ref 224562 // Parametres
+    operation_ref 224690 // getTheme
+    operation_ref 224818 // getNombreDeQuestions
+    operation_ref 224946 // getPeripheriques
+    operation_ref 225074 // getParticipants
+    operation_ref 225202 // setTheme
+    operation_ref 225330 // setNombreDeQuestions
+    operation_ref 225458 // getSession
+    operation_ref 225586 // getParticipantAssocier
+    operation_ref 225714 // getThemes
+    operation_ref 225842 // getActivitePrincipale
+    operation_ref 225970 // getEcrans
+    operation_ref 226098 // nouvelleSession
+    operation_ref 226226 // estUnEcran
+    operation_ref 226354 // setCalulAutomatiqueDuTempsDeReponse
+    operation_ref 226482 // estCalulAutomatiqueDuTempsDeReponse
+    operation_ref 226610 // setTempsReponse
+    operation_ref 226738 // getTempsReponse
+    operation_ref 226866 // getBaseDeDonnees
+    operation_ref 226994 // estTesterLaConnexion
+    operation_ref 227122 // setTesterLaConnexion
+    operation_ref 227250 // getParticipant
+    operation_ref 528690 // getParametres
+    operation_ref 528818 // getParametres
+    operation_ref 528946 // Parametres
+    operation_ref 529074 // getTheme
+    operation_ref 529202 // getNombreDeQuestions
+    operation_ref 529330 // getPeripheriques
+    operation_ref 529458 // getParticipants
+    operation_ref 529586 // setTheme
+    operation_ref 529714 // setNombreDeQuestions
+    operation_ref 529842 // getSession
+    operation_ref 529970 // getParticipantAssocier
+    operation_ref 530098 // getThemes
+    operation_ref 530226 // getActivitePrincipale
+    operation_ref 530354 // getEcrans
+    operation_ref 530482 // nouvelleSession
+    operation_ref 530610 // estUnEcran
+    operation_ref 530738 // setCalulAutomatiqueDuTempsDeReponse
+    operation_ref 530866 // estCalulAutomatiqueDuTempsDeReponse
+    operation_ref 530994 // setTempsReponse
+    operation_ref 531122 // getTempsReponse
+    operation_ref 531250 // getBaseDeDonnees
+    operation_ref 531378 // estTesterLaConnexion
+    operation_ref 531506 // setTesterLaConnexion
+    operation_ref 531634 // getParticipant
+  xyz 1520.6 1239.8 3023
+end
+classcanvas 131762 class_ref 154930 // ArgumentLancement
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 167602 // NON_CONNECTER
+    attribute_ref 167730 // NON_CONFIGURER
+    attribute_ref 167858 // AUCUN_PARTICIPANT
+  hidden_operations
+    operation_ref 224178 // envoyerPopup
+  xyz 775.4 606.5 3028
+end
+classcanvas 132018 class_ref 148146 // Participant
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 168626 // idParticipant
+    attribute_ref 168754 // nom
+  hidden_operations
+    operation_ref 227762 // Participant
+    operation_ref 227890 // Participant
+    operation_ref 228018 // getNom
+    operation_ref 228146 // getIdParticipant
+  xyz 1480.4 855.4 3029
+end
+classcanvas 132658 class_ref 149298 // Ecran
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 227634 // Ecran
+  xyz 472.8 298.7 3034
+end
+classcanvas 133042 class_ref 149810 // ReceveurProtocole
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 227378 // getPeripherique
+    operation_ref 227506 // setPeripherique
+    operation_ref 283058 // getPeripherique
+    operation_ref 283186 // setPeripherique
+    operation_ref 531762 // getPeripherique
+    operation_ref 531890 // setPeripherique
+  xyz 2495.8 855.4 3040
+end
+classcanvas 133426 class_ref 148658 // GestionnaireBluetooth
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 159154 // CODE_CONNEXION_BLUETOOTH
+    attribute_ref 159282 // CODE_DECONNEXION_BLUETOOTH
+    attribute_ref 159410 // CODE_RECEPTION_BLUETOOTH
+    attribute_ref 159538 // CODE_ERREUR_CONNEXION_BLUETOOTH
+    attribute_ref 159666 // bluetoothAdapter
+    attribute_ref 159794 // handler
+  hidden_operations
+    operation_ref 192434 // GestionnaireBluetooth
+    operation_ref 192562 // initialiser
+    operation_ref 192690 // rechercherPeripheriquesConnus
+    operation_ref 192818 // verifierPermissions
+    operation_ref 192946 // verifierPermission
+    operation_ref 193074 // creerToast
+    operation_ref 193202 // initialiserHandler
+    operation_ref 193330 // getHandler
+  xyz 2418.3 1864.3 3035
+end
+classcanvas 133554 class_ref 148786 // Peripherique
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 159922 // nom
+    attribute_ref 160050 // adresseMAC
+    attribute_ref 160178 // indicePeripherique
+    attribute_ref 160306 // device
+    attribute_ref 160434 // socket
+    attribute_ref 160562 // receiveStream
+    attribute_ref 160690 // sendStream
+    attribute_ref 160818 // seConnecte
+    attribute_ref 160946 // heureDerniereEmission
+  hidden_operations
+    operation_ref 193458 // demarrerThread
+    operation_ref 193586 // seConnecte
+    operation_ref 193714 // setSeConnecte
+    operation_ref 193842 // envoyerCodeAuHandler
+    operation_ref 193970 // initialiserReception
+    operation_ref 194098 // initialiserSocket
+    operation_ref 194226 // Peripherique
+    operation_ref 194354 // getNom
+    operation_ref 194482 // getAdresse
+    operation_ref 194610 // getIndicePeripherique
+    operation_ref 194738 // estConnecte
+    operation_ref 194866 // connecter
+    operation_ref 194994 // envoyerCodeAuHandler
+    operation_ref 195122 // deconnecter
+    operation_ref 195250 // deconnecter
+    operation_ref 195378 // envoyer
+    operation_ref 195506 // envoyer
+    operation_ref 195634 // verifierInterruption
+    operation_ref 195762 // signalerInterruption
+    operation_ref 518962 // demarrerThread
+    operation_ref 519090 // seConnecte
+    operation_ref 519218 // setSeConnecte
+    operation_ref 519346 // envoyerCodeAuHandler
+    operation_ref 519474 // initialiserReception
+    operation_ref 519602 // initialiserSocket
+    operation_ref 519730 // Peripherique
+    operation_ref 519858 // getNom
+    operation_ref 519986 // getAdresse
+    operation_ref 520114 // getIndicePeripherique
+    operation_ref 520242 // estConnecte
+    operation_ref 520370 // connecter
+    operation_ref 520498 // envoyerCodeAuHandler
+    operation_ref 520626 // deconnecter
+    operation_ref 520754 // deconnecter
+    operation_ref 520882 // envoyer
+    operation_ref 521010 // envoyer
+    operation_ref 521138 // verifierInterruption
+    operation_ref 521266 // signalerInterruption
+  xyz 2451.2 1785.4 3046
+end
+classcanvas 134322 class_ref 149170 // GestionnaireProtocoles
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 196530 // GestionnaireProtocoles
+    operation_ref 196658 // envoyerQuiz
+    operation_ref 196786 // activerBumpers
+    operation_ref 196914 // activerBumpers
+    operation_ref 197042 // desactiverBumpers
+    operation_ref 197170 // desactiverBumpers
+    operation_ref 197298 // indiquerLancement
+    operation_ref 197426 // indiquerLancement
+    operation_ref 197554 // ajouterParticipant
+    operation_ref 197682 // ajouterParticipant
+    operation_ref 197810 // preparerRelancement
+    operation_ref 197938 // preparerRelancement
+    operation_ref 198066 // finSession
+    operation_ref 198194 // finSession
+    operation_ref 198322 // questionSuivante
+    operation_ref 198450 // questionSuivante
+    operation_ref 198578 // questionPrecedente
+    operation_ref 198706 // questionPrecedente
+    operation_ref 198834 // demarrerChrono
+    operation_ref 198962 // demarrerChrono
+    operation_ref 199090 // indiquerReponse
+    operation_ref 199218 // indiquerReponse
+    operation_ref 280242 // GestionnaireProtocoles
+    operation_ref 280370 // envoyerQuiz
+    operation_ref 280498 // activerBumpers
+    operation_ref 280626 // activerBumpers
+    operation_ref 280754 // desactiverBumpers
+    operation_ref 280882 // desactiverBumpers
+    operation_ref 281010 // indiquerLancement
+    operation_ref 281138 // indiquerLancement
+    operation_ref 281266 // ajouterParticipant
+    operation_ref 281394 // ajouterParticipant
+    operation_ref 281522 // preparerRelancement
+    operation_ref 281650 // preparerRelancement
+    operation_ref 281778 // finSession
+    operation_ref 281906 // finSession
+    operation_ref 282034 // questionSuivante
+    operation_ref 282162 // questionSuivante
+    operation_ref 282290 // questionPrecedente
+    operation_ref 282418 // questionPrecedente
+    operation_ref 282546 // demarrerChrono
+    operation_ref 282674 // demarrerChrono
+    operation_ref 282802 // indiquerReponse
+    operation_ref 282930 // indiquerReponse
+    operation_ref 521650 // GestionnaireProtocoles
+    operation_ref 521778 // envoyerQuiz
+    operation_ref 521906 // activerBumpers
+    operation_ref 522034 // activerBumpers
+    operation_ref 522162 // desactiverBumpers
+    operation_ref 522290 // desactiverBumpers
+    operation_ref 522418 // indiquerLancement
+    operation_ref 522546 // indiquerLancement
+    operation_ref 522674 // ajouterParticipant
+    operation_ref 522802 // ajouterParticipant
+    operation_ref 522930 // preparerRelancement
+    operation_ref 523058 // preparerRelancement
+    operation_ref 523186 // finSession
+    operation_ref 523314 // finSession
+    operation_ref 523442 // questionSuivante
+    operation_ref 523570 // questionSuivante
+    operation_ref 523698 // questionPrecedente
+    operation_ref 523826 // questionPrecedente
+    operation_ref 523954 // demarrerChrono
+    operation_ref 524082 // demarrerChrono
+    operation_ref 524210 // indiquerReponse
+    operation_ref 524338 // indiquerReponse
+  xyz 734.2 527.6 3052
+end
+classcanvas 134834 class_ref 149554 // Protocole
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 161202 // trame
+  hidden_operations
+    operation_ref 199346 // getFormat
+    operation_ref 199474 // getType
+    operation_ref 199602 // traiterTrame
+    operation_ref 199730 // getProtocole
+    operation_ref 199858 // getTrame
+    operation_ref 199986 // setTrame
+    operation_ref 200114 // genererTrame
+    operation_ref 200242 // envoyer
+    operation_ref 200370 // envoyer
+    operation_ref 200498 // estValide
+    operation_ref 200626 // estValide
+    operation_ref 200754 // extraireDonnees
+    operation_ref 200882 // toInt
+    operation_ref 201010 // toLong
+    operation_ref 524466 // getFormat
+    operation_ref 524594 // getType
+    operation_ref 524722 // traiterTrame
+    operation_ref 524850 // getProtocole
+    operation_ref 524978 // getTrame
+    operation_ref 525106 // setTrame
+    operation_ref 525234 // genererTrame
+    operation_ref 525362 // envoyer
+    operation_ref 525490 // envoyer
+    operation_ref 525618 // estValide
+    operation_ref 525746 // estValide
+    operation_ref 525874 // extraireDonnees
+    operation_ref 526002 // toInt
+    operation_ref 526130 // toLong
+  xyz 1513.3 1983.2 3057
+end
+classcanvas 135090 class_ref 149426 // ReceptionReponse
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 202418 // ReceptionReponse
+    operation_ref 202546 // getFormat
+    operation_ref 202674 // getType
+    operation_ref 202802 // getTempsReponse
+    operation_ref 202930 // getNumeroReponse
+    operation_ref 203058 // getNumeroQuestion
+    operation_ref 203186 // genererTrame
+  xyz 229.1 2100.9 3063
+end
+classcanvas 135346 class_ref 150066 // Acquitement
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 202034 // getFormat
+    operation_ref 202162 // getType
+    operation_ref 202290 // genererTrame
+  xyz 1655.5 2100.9 3063
+end
+classcanvas 135602 class_ref 149938 // VerifierConnexion
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 201650 // getFormat
+    operation_ref 201778 // getType
+    operation_ref 201906 // genererTrame
+  xyz 1992 2100.9 3069
+end
+classcanvas 135858 class_ref 150194 // AfficherQuestionPrecedente
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 203314 // getFormat
+    operation_ref 203442 // getType
+    operation_ref 203570 // genererTrame
+  xyz 2169.4 2100.9 3074
+end
+classcanvas 136114 class_ref 150322 // AfficherQuestionSuivante
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 203698 // getFormat
+    operation_ref 203826 // getType
+    operation_ref 203954 // genererTrame
+  xyz 938.4 2100.9 3079
+end
+classcanvas 136370 class_ref 150450 // AfficherReponse
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 204082 // getFormat
+    operation_ref 204210 // getType
+    operation_ref 204338 // genererTrame
+  xyz 416 2100.9 3069
+end
+classcanvas 136626 class_ref 150578 // DemarrerChrono
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 204466 // getFormat
+    operation_ref 204594 // getType
+    operation_ref 204722 // genererTrame
+  xyz 1485.9 2100.9 3085
+end
+classcanvas 136882 class_ref 150706 // EnregistrerParticipant
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 204850 // EnregistrerParticipant
+    operation_ref 204978 // getFormat
+    operation_ref 205106 // getType
+    operation_ref 205234 // getNom
+    operation_ref 205362 // getPID
+    operation_ref 205490 // genererTrame
+  xyz 2932.5 2100.9 3091
+end
+classcanvas 137138 class_ref 150834 // EnregistrerQuestion
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 205618 // EnregistrerQuestion
+    operation_ref 205746 // getFormat
+    operation_ref 205874 // getType
+    operation_ref 206002 // getLibelle
+    operation_ref 206130 // getPropositions
+    operation_ref 206258 // getTemps
+    operation_ref 206386 // getNumeroReponse
+    operation_ref 206514 // genererTrame
+  xyz 1796.3 2100.9 3097
+end
+classcanvas 137394 class_ref 150962 // EnregistrerSelectionParticipant
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 206642 // EnregistrerSelectionParticipant
+    operation_ref 206770 // getFormat
+    operation_ref 206898 // getType
+    operation_ref 207026 // getPID
+    operation_ref 207154 // getTempsReponse
+    operation_ref 207282 // getNumeroReponse
+    operation_ref 207410 // genererTrame
+  xyz 2662.7 2100.9 3103
+end
+classcanvas 137650 class_ref 151090 // FinSession
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 207538 // getFormat
+    operation_ref 207666 // getType
+    operation_ref 207794 // genererTrame
+  xyz 1352.7 2100.9 3108
+end
+classcanvas 137906 class_ref 151218 // LancementSession
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 207922 // getFormat
+    operation_ref 208050 // getType
+    operation_ref 208178 // genererTrame
+  xyz 588 2100.9 3113
+end
+classcanvas 138162 class_ref 151346 // ActiverBumpers
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 208306 // ActiverBumpers
+    operation_ref 208434 // getFormat
+    operation_ref 208562 // getType
+    operation_ref 208690 // getNumeroQuestion
+    operation_ref 208818 // genererTrame
+  xyz 773.5 2100.9 3096
+end
+classcanvas 138418 class_ref 151474 // DesactiverBumpers
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 208946 // DesactiverBumpers
+    operation_ref 209074 // getFormat
+    operation_ref 209202 // getType
+    operation_ref 209330 // getNumeroQuestion
+    operation_ref 209458 // genererTrame
+  xyz 39.4 2100.9 3102
+end
+classcanvas 138674 class_ref 151602 // EnregistrerResultat
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 209586 // EnregistrerResultat
+    operation_ref 209714 // getFormat
+    operation_ref 209842 // getType
+    operation_ref 209970 // getNumeroQuestion
+    operation_ref 210098 // estReponseVraie
+    operation_ref 210226 // genererTrame
+  xyz 1167.1 2100.9 3113
+end
+classcanvas 138930 class_ref 151730 // EnregistrerTempsQuestion
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 210354 // EnregistrerTempsQuestion
+    operation_ref 210482 // getFormat
+    operation_ref 210610 // getType
+    operation_ref 210738 // getTempsReponse
+    operation_ref 210866 // getNumeroQuestion
+    operation_ref 210994 // genererTrame
+  xyz 2420 2100.9 3118
+end
+classcanvas 139186 class_ref 151986 // PopupAucunParticipant
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 213042 // PopupAucunParticipant
+    operation_ref 213170 // PopupAucunParticipant
+    operation_ref 213298 // onCreateView
+    operation_ref 213426 // initialiserVue
+  xyz 1915.4 1739.8 3123
+end
+classcanvas 139442 class_ref 151858 // IHM
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163506 // ihmActives
+    attribute_ref 163634 // activiteActive
+  hidden_operations
+    operation_ref 211122 // getIHMActive
+    operation_ref 211250 // getIHM
+    operation_ref 211378 // IHM
+    operation_ref 211506 // ajouterIHM
+    operation_ref 211634 // mettreAjourListeParticipants
+    operation_ref 211762 // afficherInterface
+    operation_ref 211890 // getActiviteActive
+    operation_ref 212018 // afficherBoutons
+    operation_ref 212146 // afficherChrono
+    operation_ref 212274 // getActivite
+    operation_ref 212402 // fermerActivite
+    operation_ref 212530 // fermerPopups
+    operation_ref 212658 // mettreAjourHistorique
+    operation_ref 212786 // demarrerActivite
+    operation_ref 212914 // mettreAjourSpinnerParticipants
+    operation_ref 526258 // getIHMActive
+    operation_ref 526386 // getIHM
+    operation_ref 526514 // IHM
+    operation_ref 526642 // ajouterIHM
+    operation_ref 526770 // mettreAjourListeParticipants
+    operation_ref 526898 // afficherInterface
+    operation_ref 527026 // getActiviteActive
+    operation_ref 527154 // afficherBoutons
+    operation_ref 527282 // afficherChrono
+    operation_ref 527410 // getActivite
+    operation_ref 527538 // fermerActivite
+    operation_ref 527666 // fermerPopups
+    operation_ref 527794 // mettreAjourHistorique
+    operation_ref 527922 // demarrerActivite
+    operation_ref 528050 // mettreAjourSpinnerParticipants
+  xyz 1255.7 1335.4 3129
+end
+classcanvas 140722 class_ref 152242 // PopupCredits
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 213554 // onCreateView
+    operation_ref 213682 // initialiserVue
+  xyz 1295.9 1573.2 3135
+end
+classcanvas 140850 class_ref 152370 // PopupCreerParticipant
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 213810 // onCreateView
+    operation_ref 213938 // initialiserVue
+  xyz 1444 1573.2 3140
+end
+classcanvas 140978 class_ref 152498 // PopupFinSession
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 214066 // PopupFinSession
+    operation_ref 214194 // PopupFinSession
+    operation_ref 214322 // onCreateView
+    operation_ref 214450 // initialiserVue
+  xyz 1657.5 1616.5 3145
+end
+classcanvas 141234 class_ref 152626 // PopupHistorique
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163762 // activite
+  hidden_operations
+    operation_ref 214578 // PopupHistorique
+    operation_ref 214706 // PopupHistorique
+    operation_ref 214834 // onCreateView
+    operation_ref 214962 // initialiserVue
+    operation_ref 215090 // mettreAjourHistorique
+  xyz 1834.9 1660.9 3150
+end
+classcanvas 141362 class_ref 152882 // PopupNonConfigurer
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 215218 // PopupNonConfigurer
+    operation_ref 215346 // PopupNonConfigurer
+    operation_ref 215474 // onCreateView
+    operation_ref 215602 // initialiserVue
+    operation_ref 215730 // getPeripherique
+  xyz 2054.4 1818.7 3155
+end
+classcanvas 141746 class_ref 153010 // PopupNonConnecte
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163890 // estAfficher
+    attribute_ref 164018 // btn_connecter
+  hidden_operations
+    operation_ref 215858 // PopupNonConnecte
+    operation_ref 215986 // PopupNonConnecte
+    operation_ref 216114 // onCreateView
+    operation_ref 216242 // initialiserVue
+    operation_ref 216370 // mettreAjourEtatBoutons
+    operation_ref 216498 // onDismiss
+    operation_ref 216626 // getPeripherique
+  xyz 2178.4 1573.2 3161
+end
+classcanvas 142130 class_ref 152754 // ListViewHistorique
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 166194 // context
+    attribute_ref 166322 // activite
+    attribute_ref 166450 // liste
+  hidden_operations
+    operation_ref 219954 // ListViewHistorique
+    operation_ref 220082 // getCount
+    operation_ref 220210 // getItem
+    operation_ref 220338 // getItemId
+    operation_ref 220466 // getView
+    operation_ref 220594 // mettreAjour
+  xyz 1472.4 1692.1 3166
+end
+classcanvas 142514 class_ref 153778 // ListViewPeripheriques
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 166834 // context
+    attribute_ref 166962 // liste
+  hidden_operations
+    operation_ref 221618 // ListViewPeripheriques
+    operation_ref 221746 // getCount
+    operation_ref 221874 // getItem
+    operation_ref 222002 // getItemId
+    operation_ref 222130 // getView
+    operation_ref 222258 // mettreAjour
+  xyz 2675.9 1785.4 3172
+end
+classcanvas 142770 class_ref 153906 // SpinnerParticipants
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 167346 // spinner
+  hidden_operations
+    operation_ref 223154 // SpinnerParticipants
+    operation_ref 223282 // getParticipants
+    operation_ref 223410 // getSpinner
+    operation_ref 223538 // mettreAjourSpinnerParticipants
+    operation_ref 528178 // SpinnerParticipants
+    operation_ref 528306 // getParticipants
+    operation_ref 528434 // getSpinner
+    operation_ref 528562 // mettreAjourSpinnerParticipants
+  xyz 2861.6 119.8 3177
+end
+classcanvas 142898 class_ref 154034 // SpinnerPeripheriques
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 167474 // spinner
+  hidden_operations
+    operation_ref 223666 // SpinnerPeripheriques
+    operation_ref 223794 // getPeripheriques
+    operation_ref 223922 // getNomsPeripheriques
+    operation_ref 224050 // getSpinner
+  xyz 2677.9 40.9 3182
+end
+classcanvas 143026 class_ref 154290 // ListViewParticipants
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 166578 // context
+    attribute_ref 166706 // liste
+  hidden_operations
+    operation_ref 220722 // ListViewParticipants
+    operation_ref 220850 // getCount
+    operation_ref 220978 // getItem
+    operation_ref 221106 // estRepondu
+    operation_ref 221234 // getItemId
+    operation_ref 221362 // getView
+    operation_ref 221490 // mettreAjour
+  xyz 1532.9 776.5 3187
+end
+classcanvas 143282 class_ref 154418 // ListViewEcran
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 165938 // context
+    attribute_ref 166066 // liste
+  hidden_operations
+    operation_ref 219186 // ListViewEcran
+    operation_ref 219314 // getCount
+    operation_ref 219442 // getItem
+    operation_ref 219570 // getItemId
+    operation_ref 219698 // getView
+    operation_ref 219826 // mettreAjour
+  xyz 471.7 219.8 3193
+end
+classcanvas 143538 class_ref 154674 // ListViewQuestions
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 167090 // context
+    attribute_ref 167218 // liste
+  hidden_operations
+    operation_ref 222386 // ListViewQuestions
+    operation_ref 222514 // getCount
+    operation_ref 222642 // getItem
+    operation_ref 222770 // getItemId
+    operation_ref 222898 // getView
+    operation_ref 223026 // mettreAjour
+  xyz 1412.3 357.6 3187
+end
+classcanvas 143922 class_ref 153138 // VueHistorique
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 216754 // onCreate
+  xyz 269.4 377.6 3198
+end
+classcanvas 144050 class_ref 153266 // VueParametres
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 164146 // btn_lancer
+  hidden_operations
+    operation_ref 216882 // onCreate
+    operation_ref 217010 // onRestart
+  xyz 269.8 298.7 3199
+end
+classcanvas 144178 class_ref 153650 // VueParticipants
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 164402 // btn_associer
+    attribute_ref 164530 // btn_creer_participant
+  hidden_operations
+    operation_ref 217522 // onCreate
+    operation_ref 217650 // onRestart
+    operation_ref 217778 // initialiserAttributs
+    operation_ref 217906 // initialiserAssociation
+    operation_ref 218034 // mettreAjourListeParticipants
+    operation_ref 218162 // mettreAjourSpinnerParticipants
+  xyz 2698.9 119.8 3204
+end
+classcanvas 144690 class_ref 154162 // VueSession
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 164658 // question
+    attribute_ref 164786 // chronometre
+    attribute_ref 164914 // progression
+    attribute_ref 165042 // propositions
+    attribute_ref 165170 // btn_stopper
+    attribute_ref 165298 // btn_reinitialiser
+    attribute_ref 165426 // btn_pause
+    attribute_ref 165554 // btn_suivant
+    attribute_ref 165682 // btn_precedent
+    attribute_ref 165810 // format
+  hidden_operations
+    operation_ref 218290 // onCreate
+    operation_ref 218418 // onRestart
+    operation_ref 218546 // mettreAjourListeParticipants
+    operation_ref 218674 // afficherInterface
+    operation_ref 218802 // afficherBoutons
+    operation_ref 218930 // afficherChrono
+    operation_ref 219058 // setSession
+  xyz 336.3 219.8 3210
+end
+classcanvas 145202 class_ref 155186 // GestionnaireSonore
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 171442 // bonne_reponse
+    attribute_ref 171570 // mauvaise_reponse
+    attribute_ref 171698 // nouvelle_question
+    attribute_ref 171826 // reponses_vraies_et_fausses
+    attribute_ref 171954 // selection_reponse
+  hidden_operations
+    operation_ref 235826 // GestionnaireSonore
+    operation_ref 235954 // jouerBonneReponse
+    operation_ref 236082 // jouerMauvaiseReponse
+    operation_ref 236210 // jouerReponsesVaries
+    operation_ref 236338 // jouerNouvelleQuestion
+    operation_ref 236466 // jouerSelectionReponse
+    operation_ref 236594 // jouerFinQuestion
+    operation_ref 539570 // GestionnaireSonore
+    operation_ref 539698 // jouerBonneReponse
+    operation_ref 539826 // jouerMauvaiseReponse
+    operation_ref 539954 // jouerReponsesVaries
+    operation_ref 540082 // jouerNouvelleQuestion
+    operation_ref 540210 // jouerSelectionReponse
+    operation_ref 540338 // jouerFinQuestion
+  xyz 855.1 804.3 3216
+end
+classcanvas 145458 class_ref 147506 // AppCompatActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 40.4 298.7 3221
+end
+classcanvas 146226 class_ref 147762 // SQLiteOpenHelper
+  classdiagramsettings member_max_width 0 end
+  xyz 1344.5 1134.3 3209
+end
+classcanvas 146610 class_ref 152114 // DialogFragment
+  classdiagramsettings member_max_width 0 end
+  xyz 1837.9 1454.3 3220
+end
+relationcanvas 128818 relation_ref 163890 // <unidirectional association>
+  decenter_begin 564
+  decenter_end 69
+  from ref 128690 z 3006 to point 1054 1755.5
+  line 158386 z 3006 to point 1054 1094
+  line 158514 z 3006 to point 1137.5 1094
+  line 158642 z 3006 to ref 128178
+  role_a_pos 1153 1113 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128946 relation_ref 164402 // <unidirectional association>
+  decenter_begin 869
+  decenter_end 116
+  from ref 128690 z 3006 to point 534.4 1733.7
+  line 149810 z 3006 to point 534.4 439.7
+  line 149938 z 3006 stereotype "<<List>>" xyz 961.5 440.5 3006 to ref 128434
+  role_a_pos 1371 420 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129074 relation_ref 165298 // <unidirectional association>
+  decenter_begin 666
+  decenter_end 152
+  from ref 128690 z 3006 to point 1134.8 1759.1
+  line 148530 z 3006 to point 1134.8 1216.7
+  line 148658 z 3006 to ref 128562
+  role_a_pos 1329 1198 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129202 relation_ref 175538 // <unidirectional association>
+  decenter_begin 615
+  decenter_end 69
+  from ref 128690 z 3006 to point 1094 1757.5
+  line 158130 z 3006 to point 1094 1169.5
+  line 158258 z 3006 to ref 128178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129330 relation_ref 176050 // <unidirectional association>
+  decenter_begin 869
+  decenter_end 282
+  from ref 128690 z 3006 to point 574.1 1735.4
+  line 148018 z 3006 to point 574.1 447.4
+  line 148146 z 3006 stereotype "<<List>>" xyz 982 447.5 3006 to ref 128434
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129586 relation_ref 165170 // <unidirectional association>
+  decenter_begin 256
+  decenter_end 82
+  from ref 128690 z 3012 to point 775 1743.5
+  line 160562 z 3012 to point 775 760
+  line 160690 z 3012 to ref 129458
+  role_a_pos 819 716 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129842 relation_ref 164786 // <unidirectional association>
+  decenter_begin 692
+  decenter_end 105
+  from ref 128690 z 3018 to point 1174.1 1760.3
+  line 152498 z 3018 to point 1174.1 1292.2
+  line 152626 z 3018 to ref 129714
+  role_a_pos 1159 1235 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130098 relation_ref 162482 // <unidirectional association>
+  from ref 129970 z 3024 to point 1487.6 1238.7
+  line 130226 z 3024 to point 1487.6 1268.7
+  line 130354 z 3024 to ref 129970
+  role_a_pos 1433.1 1240.4 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130482 relation_ref 162610 // <unidirectional association>
+  decenter_begin 96
+  decenter_end 282
+  from ref 129970 z 3024 to point 1527 1094
+  line 161074 z 3024 to point 1303.5 1094
+  line 161202 z 3024 to point 1303.5 1145.5
+  line 161330 z 3024 to ref 128178
+  role_a_pos 1273 1124 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130610 relation_ref 162738 // <unidirectional association>
+  decenter_begin 256
+  decenter_end 847
+  from ref 129970 z 3024 to ref 128562
+  role_a_pos 1449 1226 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130738 relation_ref 162866 // <unidirectional association>
+  decenter_begin 322
+  from ref 129970 z 3024 to point 1551 973.5
+  line 160178 z 3024 to point 975 973.5
+  line 160306 z 3024 to point 975 1753
+  line 160434 z 3024 to ref 128690
+  role_a_pos 503 1732 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130866 relation_ref 163250 // <unidirectional association>
+  decenter_begin 96
+  decenter_end 717
+  from ref 129970 z 3024 stereotype "<<List>>" xyz 1450.5 1240.5 3024 to ref 128562
+  role_a_pos 1449 1220 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130994 relation_ref 175154 // <unidirectional association>
+  from ref 129970 z 3024 to point 1487.6 1238.7
+  line 131122 z 3024 to point 1487.6 1268.7
+  line 131250 z 3024 to ref 129970
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131378 relation_ref 175282 // <unidirectional association>
+  decenter_begin 150
+  decenter_end 930
+  from ref 129970 z 3024 to point 1535 1054
+  line 161714 z 3024 to point 1261 1054
+  line 161842 z 3024 to ref 128178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131506 relation_ref 164018 // <unidirectional association>
+  decenter_end 236
+  from ref 128690 z 3024 to point 1015 1753.5
+  line 162738 z 3024 to point 1015 1013.5
+  line 162866 z 3024 to point 1542 1013.5
+  line 162994 z 3024 to ref 129970
+  role_a_pos 1551 1218 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131634 relation_ref 175666 // <unidirectional association>
+  decenter_end 408
+  from ref 128690 z 3024 to point 935 1751
+  line 161970 z 3024 to point 935 933.5
+  line 162098 z 3024 to point 1558 933.5
+  line 162226 z 3024 to ref 129970
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131890 relation_ref 165042 // <unidirectional association>
+  decenter_begin 230
+  decenter_end 56
+  from ref 128690 z 3029 to point 735 1741.5
+  line 160818 z 3029 stereotype "<<List>>" xyz 708 1203 3029 to point 735 661.5
+  line 160946 z 3029 to ref 131762
+  role_a_pos 779 616 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132146 relation_ref 163122 // <unidirectional association>
+  decenter_end 898
+  from ref 129970 z 3030 stereotype "<<List>>" xyz 1533 1065 3030 to ref 132018
+  role_a_pos 1569 900 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132274 relation_ref 164146 // <unidirectional association>
+  decenter_begin 384
+  decenter_end 101
+  from ref 128690 z 3030 to point 895 1748
+  line 159282 z 3030 stereotype "<<List>>" xyz 868 1321 3030 to point 895 891
+  line 159410 z 3030 to ref 132018
+  role_a_pos 1394 838 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132402 relation_ref 175794 // <unidirectional association>
+  decenter_begin 358
+  decenter_end 692
+  from ref 128690 z 3030 to point 855 1747.5
+  line 158770 z 3030 stereotype "<<List>>" xyz 828 1316 3030 to point 855 882
+  line 158898 z 3030 to ref 132018
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132530 relation_ref 165554 // <unidirectional association>
+  decenter_end 101
+  from ref 128434 z 3030 stereotype "<<Map>>" xyz 1455 663.5 3030 to ref 132018
+  role_a_pos 1498 834 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132786 relation_ref 164274 // <unidirectional association>
+  decenter_begin 840
+  decenter_end 207
+  from ref 128690 z 3035 stereotype "<<List>>" xyz 453.5 1033.5 3035 to ref 132658
+  role_a_pos 492 343 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132914 relation_ref 175922 // <unidirectional association>
+  decenter_begin 724
+  decenter_end 169
+  from ref 128690 z 3035 stereotype "<<List>>" xyz 448.5 1033.5 3035 to ref 132658
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133170 relation_ref 163634 // <generalisation>
+  from ref 132018 z 3041 to ref 133042
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133298 relation_ref 163506 // <generalisation>
+  from ref 132658 z 3041 to point 1726.8 317.6
+  line 154418 z 3041 to point 1726.8 875
+  line 154546 z 3041 to ref 133042
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133682 relation_ref 155058 // <unidirectional association>
+  from ref 133554 z 3047 to ref 133426
+  role_a_pos 2512 1843 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133810 relation_ref 162994 // <unidirectional association>
+  geometry VHV unfixed
+  decenter_begin 903
+  decenter_end 87
+  from ref 129970 z 3047 stereotype "<<List>>" xyz 1574.5 1532.5 3047 to point 1601 1787.5
+  line 161458 z 3047 to point 2448 1787.5
+  line 161586 z 3047 to ref 133554
+  role_a_pos 2460 1795 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133938 relation_ref 163762 // <unidirectional association>
+  geometry VH unfixed
+  decenter_begin 898
+  decenter_end 87
+  from ref 132018 z 3047 to point 1557 1786
+  line 153010 z 3047 to ref 133554
+  role_a_pos 2358 1768 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134066 relation_ref 163378 // <unidirectional association>
+  decenter_begin 380
+  decenter_end 912
+  from ref 133042 z 3047 to ref 133554
+  role_a_pos 2554 1764 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134194 relation_ref 175410 // <unidirectional association>
+  geometry VH unfixed
+  decenter_begin 673
+  decenter_end 912
+  from ref 133042 z 3047 to point 2591 1818
+  line 159538 z 3047 to ref 133554
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134450 relation_ref 155314 // <unidirectional association>
+  decenter_begin 50
+  decenter_end 230
+  from ref 134322 z 3053 to point 694 563.5
+  line 159666 z 3053 to point 694 1741
+  line 159794 z 3053 to ref 128690
+  role_a_pos 503 1721 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134578 relation_ref 174898 // <unidirectional association>
+  decenter_begin 717
+  decenter_end 230
+  from ref 134322 z 3053 to point 655 555.5
+  line 159026 z 3053 to point 655 1738
+  line 159154 z 3053 to ref 128690
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134706 relation_ref 164658 // <unidirectional association>
+  decenter_begin 869
+  decenter_end 50
+  from ref 128690 z 3053 to point 615 1736
+  line 162354 z 3053 to point 615 487.5
+  line 162482 z 3053 to point 737.5 487.5
+  line 162610 z 3053 to ref 134322
+  role_a_pos 752 506 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135218 relation_ref 155698 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 468
+  from ref 135090 z 3064 to point 294 2060.3
+  line 149042 z 3064 to point 1536 2060.3
+  line 149170 z 3064 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135474 relation_ref 155570 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 534
+  from ref 135346 z 3064 to point 1706 2060.3
+  line 153522 z 3064 to point 1551 2060.3
+  line 153650 z 3064 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135730 relation_ref 155442 // <generalisation>
+  geometry VHV unfixed
+  from ref 135602 z 3070 to point 2058 2060.3
+  line 155570 z 3070 to point 1551.3 2060.3
+  line 155698 z 3070 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135986 relation_ref 155826 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 516
+  from ref 135858 z 3075 to point 2275 2060.3
+  line 155826 z 3075 to point 1551 2060.3
+  line 155954 z 3075 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136242 relation_ref 155954 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 476
+  from ref 136114 z 3080 to point 1027 2060.3
+  line 150706 z 3080 to point 1551 2060.3
+  line 150834 z 3080 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136498 relation_ref 156082 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 465
+  from ref 136370 z 3070 to point 473 2060.3
+  line 149298 z 3070 to point 1536 2060.3
+  line 149426 z 3070 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136754 relation_ref 156210 // <generalisation>
+  decenter_begin 527
+  from ref 136626 z 3086 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137010 relation_ref 156338 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 520
+  from ref 136882 z 3092 to point 3016 2060.3
+  line 157874 z 3092 to point 1551 2060.3
+  line 158002 z 3092 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137266 relation_ref 156466 // <generalisation>
+  geometry VHV unfixed
+  from ref 137138 z 3098 to point 1871.3 2060.3
+  line 153778 z 3098 to point 1551.3 2060.3
+  line 153906 z 3098 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137522 relation_ref 156594 // <generalisation>
+  geometry VHV unfixed
+  from ref 137394 z 3104 to point 2775.7 2060.3
+  line 156338 z 3104 to point 1551.3 2060.3
+  line 156466 z 3104 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137778 relation_ref 156722 // <generalisation>
+  geometry VHV unfixed
+  from ref 137650 z 3109 to point 1395.7 2060.3
+  line 152242 z 3109 to point 1551.3 2060.3
+  line 152370 z 3109 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138034 relation_ref 156850 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 469
+  from ref 137906 z 3114 to point 654 2060.3
+  line 149554 z 3114 to point 1550 2060.3
+  line 149682 z 3114 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138290 relation_ref 156978 // <generalisation>
+  geometry VHV unfixed
+  from ref 138162 z 3097 to point 833.5 2060.3
+  line 150450 z 3097 to point 1551.3 2060.3
+  line 150578 z 3097 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138546 relation_ref 157106 // <generalisation>
+  geometry VHV unfixed
+  decenter_begin 470
+  from ref 138418 z 3103 to point 107 2060.3
+  line 148786 z 3103 to point 1551 2060.3
+  line 148914 z 3103 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 138802 relation_ref 157234 // <generalisation>
+  geometry VHV unfixed
+  from ref 138674 z 3114 to point 1239.1 2060.3
+  line 151218 z 3114 to point 1551.3 2060.3
+  line 151346 z 3114 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139058 relation_ref 157362 // <generalisation>
+  geometry VHV unfixed
+  from ref 138930 z 3119 to point 2518 2060.3
+  line 156082 z 3119 to point 1551.3 2060.3
+  line 156210 z 3119 to ref 134834
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139314 relation_ref 157874 // <unidirectional association>
+  decenter_begin 769
+  decenter_end 869
+  from ref 139186 z 3124 to ref 128690
+  role_a_pos 503 1746 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139570 relation_ref 157490 // <unidirectional association>
+  from ref 139442 z 3130 to point 1225.7 1334.1
+  line 139698 z 3130 to point 1225.7 1364.1
+  line 139826 z 3130 to ref 139442
+  role_a_pos 1218.5 1336 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 139954 relation_ref 157618 // <unidirectional association>
+  geometry HV unfixed
+  from ref 139442 z 3130 to point 1564.6 1352.4
+  line 150322 z 3130 to ref 129970
+  role_a_pos 1576 1284 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140082 relation_ref 175026 // <unidirectional association>
+  from ref 139442 z 3130 to point 1225.7 1334.1
+  line 140210 z 3130 to point 1225.7 1364.1
+  line 140338 z 3130 to ref 139442
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140466 relation_ref 164914 // <unidirectional association>
+  decenter_begin 743
+  decenter_end 200
+  from ref 128690 z 3130 to point 1214.4 1763
+  line 157106 z 3130 to point 1214.4 1372
+  line 157234 z 3130 to ref 139442
+  role_a_pos 1220 1314 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 140594 relation_ref 165426 // <unidirectional association>
+  from ref 129714 z 3130 to ref 139442
+  role_a_pos 1287 1314 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141106 relation_ref 158386 // <unidirectional association>
+  decenter_begin 65
+  decenter_end 769
+  from ref 140978 z 3146 to point 1293.6 1652
+  line 157362 z 3146 to point 1293.6 1765.9
+  line 157490 z 3146 to ref 128690
+  role_a_pos 503 1742 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141490 relation_ref 158898 // <unidirectional association>
+  geometry HV unfixed
+  from ref 141362 z 3156 to point 457.9 1835.7
+  line 153394 z 3156 to ref 128690
+  role_a_pos 469 1778 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141618 relation_ref 159026 // <unidirectional association>
+  decenter_begin 944
+  decenter_end 87
+  from ref 141362 z 3156 to ref 133554
+  role_a_pos 2358 1766 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 141874 relation_ref 159282 // <unidirectional association>
+  decenter_end 769
+  from ref 141746 z 3162 to point 2370.7 1592.5
+  line 157618 z 3162 to point 2370.7 1414.7
+  line 157746 z 3162 to point 1254 1414
+  line 163122 z 3162 to point 1254 1765
+  line 163250 z 3162 to ref 128690
+  role_a_pos 503 1742 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142002 relation_ref 159410 // <unidirectional association>
+  geometry VH unfixed
+  decenter_end 256
+  from ref 141746 z 3162 to point 2252 1792
+  line 150066 z 3162 to ref 133554
+  role_a_pos 2358 1774 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142258 relation_ref 161330 // <unidirectional association>
+  decenter_begin 62
+  decenter_end 769
+  from ref 142130 z 3167 to point 1333.9 1728.5
+  line 156594 z 3167 stereotype "<<List>>" xyz 1307 1749.5 3167 to point 1333.9 1767.6
+  line 156722 z 3167 to ref 128690
+  role_a_pos 503 1742 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142386 relation_ref 158642 // <unidirectional association>
+  decenter_begin 68
+  decenter_end 937
+  from ref 141234 z 3167 to ref 142130
+  role_a_pos 1626 1705 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 142642 relation_ref 161842 // <unidirectional association>
+  from ref 142514 z 3173 stereotype "<<List>>" xyz 2585 1803.5 3173 to ref 133554
+  role_a_pos 2563 1784 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143154 relation_ref 161586 // <unidirectional association>
+  geometry VH unfixed
+  decenter_end 898
+  from ref 143026 z 3188 stereotype "<<List>>" xyz 1583 852 3188 to point 1606 888
+  line 154034 z 3188 to ref 132018
+  role_a_pos 1578 870 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143410 relation_ref 161074 // <unidirectional association>
+  decenter_begin 247
+  from ref 143282 z 3194 stereotype "<<List>>" xyz 469.5 277 3194 to ref 132658
+  role_a_pos 508 277 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143666 relation_ref 162098 // <unidirectional association>
+  geometry HV unfixed
+  decenter_end 869
+  from ref 143538 z 3188 to point 482 374
+  line 148274 z 3188 to ref 128690
+  role_a_pos 494 1712 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 143794 relation_ref 162226 // <unidirectional association>
+  from ref 143538 z 3188 stereotype "<<List>>" xyz 1454.5 415 3188 to ref 128434
+  role_a_pos 1493 415 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144306 relation_ref 160050 // <unidirectional association>
+  from ref 144178 z 3205 to ref 142514
+  role_a_pos 2769 1764 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144434 relation_ref 160178 // <unidirectional association>
+  from ref 144178 z 3205 to ref 142770
+  role_a_pos 2719 118 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144562 relation_ref 160306 // <unidirectional association>
+  from ref 144178 z 3205 to ref 142898
+  role_a_pos 2769 85 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144818 relation_ref 160562 // <unidirectional association>
+  from ref 144690 z 3211 to point 382.9 178.5
+  line 151474 z 3211 to point 1609.2 178.5
+  line 151602 z 3211 to ref 143026
+  role_a_pos 1619 755 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 144946 relation_ref 160690 // <unidirectional association>
+  from ref 144690 z 3211 to ref 143282
+  role_a_pos 388 218 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145074 relation_ref 160818 // <unidirectional association>
+  decenter_begin 905
+  decenter_end 130
+  from ref 144690 z 3211 to ref 128690
+  role_a_pos 443 1712 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145330 relation_ref 164530 // <unidirectional association>
+  decenter_begin 307
+  decenter_end 58
+  from ref 128690 z 3217 to point 815 1745.5
+  line 159922 z 3217 to point 815 839.5
+  line 160050 z 3217 to ref 145202
+  role_a_pos 717 777 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145586 relation_ref 159666 // <generalisation>
+  from ref 144050 z 3222 to ref 145458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145714 relation_ref 159922 // <generalisation>
+  from ref 144178 z 3222 to point 228.7 138.8
+  line 147762 z 3222 to point 228.7 317.5
+  line 147890 z 3222 to ref 145458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145842 relation_ref 160434 // <generalisation>
+  from ref 144690 z 3222 to point 228.7 238.9
+  line 150962 z 3222 to point 228.7 317.5
+  line 151090 z 3222 to ref 145458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 145970 relation_ref 159538 // <generalisation>
+  from ref 143922 z 3222 to point 228.7 396.3
+  line 156850 z 3222 to point 228.7 317.5
+  line 156978 z 3222 to ref 145458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146098 relation_ref 154674 // <generalisation>
+  from ref 128050 z 3222 to point 228.7 475.5
+  line 151986 z 3222 to point 228.7 317.5
+  line 152114 z 3222 to ref 145458
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146354 relation_ref 154802 // <generalisation>
+  from ref 128178 z 3210 to ref 146226
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146738 relation_ref 157746 // <generalisation>
+  geometry VHV unfixed
+  from ref 139186 z 3221 to point 2002.4 1533.3
+  line 155186 z 3221 to point 1897.9 1533.3
+  line 155314 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146866 relation_ref 158770 // <generalisation>
+  geometry VHV unfixed
+  from ref 141362 z 3221 to point 2132.4 1533.3
+  line 153138 z 3221 to point 1897.9 1533.3
+  line 153266 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 146994 relation_ref 158130 // <generalisation>
+  geometry VHV unfixed
+  from ref 140850 z 3221 to point 1528 1533.3
+  line 154930 z 3221 to point 1897.9 1533.3
+  line 155058 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 147122 relation_ref 158258 // <generalisation>
+  geometry VHV unfixed
+  from ref 140978 z 3221 to point 1723.5 1533.3
+  line 152754 z 3221 to point 1897.9 1533.3
+  line 152882 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 147250 relation_ref 158514 // <generalisation>
+  from ref 141234 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 147378 relation_ref 158002 // <generalisation>
+  geometry VHV unfixed
+  from ref 140722 z 3221 to point 1347.9 1533.3
+  line 154162 z 3221 to point 1897.9 1533.3
+  line 154290 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 147506 relation_ref 159154 // <generalisation>
+  geometry VHV unfixed
+  from ref 141746 z 3221 to point 2252.4 1533.3
+  line 154674 z 3221 to point 1897.9 1533.3
+  line 154802 z 3221 to ref 146610
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

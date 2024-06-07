@@ -1,0 +1,256 @@
+class GAME
+!!!326578.java!!!	GAME(in name : String, in backup : String, inout sign : Sign, inout open : boolean)
+		this.name = name;
+		this.sign = sign;
+		this.open = open;
+		BackupGestionary bg = BackupGestionary.from(backup);
+		this.bonus = bg.getBonus().clone();
+		this.max = bg.getSize();
+		this.signname = bg.getSignName().replace("%name%", name);
+		sign.setLine(0, signname);
+		this.replacer = new MapReplacer(bg.getFile(), bg.getNewWorldName());
+		for (Team t : bg.getTeams()) {
+			teams.add(t.clone());
+		}
+		if (open) {
+			reset();
+			setup();
+		} else {
+			state = State.END;
+			update();
+		}
+		scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		objective = scoreboard.registerNewObjective("scoreboard", "dummy");
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		objective.setDisplayName("§cBattle§fSheep");
+		for (Team t : teams) {
+			t.sendObjective(scoreboard, objective);
+		}
+		list.add(this);
+!!!326706.java!!!	AddAnimText(inout sc : Scoreboard, inout obj : Objective, in name : String, in line : String, in score : int) : org.bukkit.scoreboard.Team
+		org.bukkit.scoreboard.Team team = sc.registerNewTeam(name);
+		team.addEntry(line);
+		team.setSuffix("");
+		team.setPrefix("");
+		obj.getScore(line).setScore(score);
+		return team;
+!!!326962.java!!!	update() : void
+		switch (state) {
+		case RUN:
+			sign.setLine(1, "§e§lRejoindre");
+			sign.setLine(2, "§6En cours");
+			sign.setLine(3, "§f§l" + (players.size() - spectator.size()) + " §e§l/ §f§l" + max + " joueurs");
+			break;
+		case END:
+			sign.setLine(1, "");
+			sign.setLine(2, "§4§l▬▬▬REBOOT▬▬▬");
+			sign.setLine(3, "");
+			break;
+		case WAIT:
+			sign.setLine(1, "§e§lRejoindre");
+			sign.setLine(2, "§e§l>> §b§lCliquez §e§l<<");
+			sign.setLine(3, "§f§l" + (players.size() - spectator.size()) + " §e§l/ §f§l" + max + " joueurs");
+			break;
+		}
+		sign.update(true, true);
+!!!327090.java!!!	reset() : void
+		this.world = getReplacer().execute();
+		this.world.setAutoSave(false);
+		bonus.setWorld(world);
+		for (Team t : teams) {
+			t.getPlayers().clear();
+			t.getIsland().setWorld(world);
+			for (Location loc : t.getSpawnpoints()) {
+				changeWorldOfLocation(world, loc);
+			}
+		}
+		for (Player pll : players) {
+			pll.kickPlayer("Connexion perdue");
+		}
+		for (Player pll : spectator) {
+			pll.kickPlayer("Connexion perdue");
+		}
+		players.clear();
+		spectator.clear();
+		setState(State.WAIT);
+		update();
+!!!327218.java!!!	timer(inout force : boolean) : void
+		new BukkitRunnable() {int time = 15;@Override public void run() {
+			if (players.size() < max && !force) {
+				sendMessage("§7BattleSheep §e> §cPlus assez de joueurs pour commencer la partie");
+				cancel();
+				return;
+			}
+			if (time == 0) {
+				start();
+				cancel();
+				return;
+			} else {
+				sendMessage("§7BattleSheep §e> §7La partie commence dans " + time + " secondes");
+			}
+			
+			time--;
+		}}.runTaskTimer(Main.getInstance(), 0, 20);
+!!!327346.java!!!	start() : void
+		sendMessage("§7BattleSheep §e> §aDémarrage de la partie");
+		for (Player pll : getPlayers()) {
+			if (of(pll) == null) {
+				getAvailableTeam().add(pll);
+			}
+		}
+		for (Team t : getTeams()) {
+			List<Location> spawn = new ArrayList<>();
+			spawn.addAll(t.getSpawnpoints());
+			Collections.shuffle(spawn);
+			for (int i = 0; i < t.getPlayers().size(); i++) {
+				Player pll = t.getPlayers().get(i);
+				Location s = spawn.get(i >= spawn.size() ? new Random().nextInt(spawn.size()) : i);
+				pll.teleport(s);
+			}
+		}
+!!!327474.java!!!	changeWorldOfLocation(inout w : World, inout loc : Location) : Location
+		loc.setWorld(w);
+		return loc;
+!!!327602.java!!!	addPlayer(inout p : Player, inout spec : boolean, inout team : GAME::TeamType) : void
+		removePlayer(p);
+		players.add(p);
+		if (spec) {
+			p.setGameMode(GameMode.SPECTATOR);
+			spectator.add(p);
+		}
+		p.setScoreboard(scoreboard);
+		switch (getState()) {
+		case END:
+			break;
+		case RUN:
+			if (!spec && team != null) {
+				sendMessage("§7BattleSheep §e> " + team.getPrefix() + p.getName() + " §7s'ajoute à la partie en tant que " + team.getName());
+			}
+			break;
+		case WAIT:
+			sendMessage("§7BattleSheep §e> §7" + p.getName() + " §erejoint la partie " + (players.size() >= max ? "§a(" : "§c(") + players.size() + "/" + max + ")");
+			break;
+		}
+		update();
+!!!327730.java!!!	removePlayer(inout p : Player) : void
+		for (Team t : teams) {
+			t.remove(p);
+		}
+		if (players.contains(p)) {
+			players.remove(p);
+		}
+		if (spectator.contains(p)) {
+			spectator.remove(p);
+		}
+		if (p.isOnline()) {
+			p.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+		}
+		switch (getState()) {
+		case END:
+			
+			break;
+		case RUN:
+			
+			break;
+		case WAIT:
+			
+			break;
+		}
+		update();
+!!!327858.java!!!	sendMessage(in message : String) : void
+		for (Player pll : getPlayers()) {
+			pll.sendMessage(message);
+		}
+!!!327986.java!!!	getAvailableTeam() : GAME::Team
+		int min = Integer.MAX_VALUE;
+		Team team = null;
+		for (Team t : getTeams()) {
+			if (t.getPlayers().size() < min && t.canBeJoined(this, null)) {
+				team = t;
+				min = t.getPlayers().size();
+			}
+		}
+		return team;
+!!!328114.java!!!	from(in name : String) : GAME
+		for (GAME game : list) {
+			if (game.getName().equalsIgnoreCase(name)) {
+				return game;
+			}
+		}
+		return null;
+!!!328242.java!!!	from(inout item : ItemStack) : GAME
+		for (GAME game : list) {
+			if (game.getItem().isSimilar(item)) {
+				return game;
+			}
+		}
+		return null;
+!!!328370.java!!!	from(inout p : Player) : GAME
+		for (GAME game : list) {
+			if (game.getPlayers().contains(p)) {
+				return game;
+			}
+		}
+		return null;
+!!!328498.java!!!	from(inout sign : Sign) : GAME
+		for (GAME game : list) {
+			if (game.getSign().equals(sign)) {
+				return game;
+			}
+		}
+		return null;
+!!!328626.java!!!	getIsland(inout loc : Location) : Cuboid
+		for (Team t : teams) {
+			if (t.getIsland().isIn(loc)) {
+				return t.getIsland();
+			}
+		}
+		return null;
+!!!328754.java!!!	of(inout p : Player) : GAME::Team
+		for (Team t : teams) {
+			if (t.getPlayers().contains(p)) {
+				return t;
+			}
+		}
+		return null;
+!!!328882.java!!!	of(inout item : ItemStack) : GAME::Team
+		for (Team t : teams) {
+			if (item.toString().equalsIgnoreCase(t.getItem().toString())) {
+				return t;
+			}
+		}
+		return null;
+!!!329010.java!!!	getPlayers() : List<Player>
+		return players;
+!!!329138.java!!!	getSpectators() : List<Player>
+		return spectator;
+!!!329266.java!!!	getTeams() : GAME::Team
+		return teams;
+!!!329394.java!!!	getName() : String
+		return name;
+!!!329522.java!!!	getList() : GAME
+		return list;
+!!!329650.java!!!	getItem() : ItemStack
+		return new ItemBuilder(Material.STAINED_CLAY, (byte) getState().getData()).name(getState().getPrefix() + getName());
+!!!329778.java!!!	getState() : GAME::State
+		return state;
+!!!329906.java!!!	setState(inout state : GAME::State) : void
+		this.state = state;
+!!!330034.java!!!	getWorld() : World
+		return world;
+!!!330162.java!!!	setWorld(inout world : World) : void
+		this.world = world;
+!!!330290.java!!!	getReplacer() : GAME::MapReplacer
+		return replacer;
+!!!330418.java!!!	setReplacer(inout replacer : GAME::MapReplacer) : void
+		this.replacer = replacer;
+!!!330546.java!!!	getSign() : Sign
+		return sign;
+!!!330674.java!!!	isOpen() : boolean
+		return open;
+!!!330802.java!!!	setOpen(inout open : boolean) : void
+		this.open = open;
+!!!330930.java!!!	getSignName() : String
+		return signname;
+!!!331058.java!!!	getBonus() : Cuboid
+		return bonus;

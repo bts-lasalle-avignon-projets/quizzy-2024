@@ -1,0 +1,328 @@
+format 224
+"lcpets" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcpets
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Pets/src/fr/red/lcpets/"
+  java_package "fr.red.lcpets"
+  classview 158770 "lcpets"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 185522 "LifePets"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 196018 // <generalisation>
+	relation 196018 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 196018 // <generalisation>
+	  b parent class_ref 165810 // JavaPlugin
+      end
+
+      classrelation 196146 // instance (<unidirectional association>)
+	relation 196146 --->
+	  a role_name "instance" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 196146 // instance (<unidirectional association>)
+	  b parent class_ref 185522 // LifePets
+      end
+
+      operation 416562 "getInstance"
+	class_operation public return_type class_ref 185522 // LifePets
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 416690 "onEnable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 416818 "loadConfig"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"deprecation\")
+"
+	
+	
+	
+      end
+
+      operation 416946 "loadSQL"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 417074 "onDisable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 191410 "Main"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 205746 // <generalisation>
+	relation 205746 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 205746 // <generalisation>
+	  b parent class_ref 165810 // JavaPlugin
+      end
+
+      classrelation 205874 // instance (<unidirectional association>)
+	relation 205874 --->
+	  a role_name "instance" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 205874 // instance (<unidirectional association>)
+	  b parent class_ref 191410 // Main
+      end
+
+      operation 461746 "getInstance"
+	class_operation public return_type class_ref 191410 // Main
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 461874 "onEnable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 462002 "onDisable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 462130 "loadConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@SuppressWarnings(\"deprecation\")
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 151858 "lcpets"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 177202 "LifePets"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import fr.red.lcpets.api.PetAPI;
+import fr.red.lcpets.commands.PetCommand;
+import fr.red.lcpets.param.Cancelled;
+import fr.red.lcpets.param.Join;
+import fr.red.lcpets.sql.SQL;
+import fr.red.lcpets.sql.SQL.SQLAccess;
+import fr.red.lcpets.sql.SQL.SQLConnection;
+import fr.red.lcpets.utils.ItemBuilder;
+import fr.red.lcpets.utils.PlayerPetProfile;
+import fr.red.lcpets.utils.config.ConfigManager;
+import fr.red.lcpets.utils.menu.CraftMenu;
+import fr.red.lcpets.utils.menu.IMenu;
+${definition}"
+      associated_elems
+	class_ref 185522 // LifePets
+      end
+    end
+
+    artifact 182194 "Main"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ocelot.Type;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import fr.red.lcpets.commands.PetCommand;
+import fr.red.lcpets.mysql.ConnectSQL;
+import fr.red.lcpets.mysql.ConnectSQL.TableType;
+import fr.red.lcpets.mysql.SQLFunc;
+import fr.red.lcpets.mysql.SQLManager;
+import fr.red.lcpets.mysql.SQLManager.SQLRegister;
+import fr.red.lcpets.system.CancelledPets;
+import fr.red.lcpets.system.CraftPet;
+import fr.red.lcpets.system.PetInventory;
+import fr.red.lcpets.system.PetManager;
+import fr.red.lcpets.system.PetsRegister;
+import fr.red.lcpets.utils.ConfigManager;
+import fr.red.lcpets.utils.ItemBuilder;
+import fr.red.lcpets.utils.Stats;
+${definition}"
+      associated_elems
+	class_ref 191410 // Main
+      end
+    end
+  end
+
+  package_ref 154802 // api
+
+  package_ref 154930 // utils
+
+  package_ref 155058 // commands
+
+  package_ref 155186 // param
+
+  package_ref 155314 // sql
+
+  package_ref 156210 // system
+
+  package_ref 156466 // mysql
+end

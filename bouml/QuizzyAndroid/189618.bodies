@@ -1,0 +1,14 @@
+class MagmaCube
+!!!449714.java!!!	MagmaCube(inout owner : Player, in id : int)
+		super(owner, EntityType.MAGMA_CUBE, "Magma de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!449842.java!!!	MagmaCube(inout owner : Player)
+		super(owner, EntityType.MAGMA_CUBE, "Magma de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!449970.java!!!	getEntity() : org.bukkit.entity.MagmaCube
+		return (org.bukkit.entity.MagmaCube) entity;
+!!!450098.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setSize(1);
+!!!450226.java!!!	clone(inout player : Player) : MagmaCube
+		return new MagmaCube(player, getID());

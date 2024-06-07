@@ -1,0 +1,17 @@
+class VueHistorique
+!!!216754.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+
+        setContentView(R.layout.activite_historique);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        int idEvaluation = getIntent().getExtras().getInt("idEvaluation");
+        Session session = Parametres.getParametres().getBaseDeDonnees().getSession(idEvaluation);
+
+        new ListViewQuestions(this, R.id.liste_resultats, session);

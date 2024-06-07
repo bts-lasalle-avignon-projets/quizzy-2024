@@ -1,0 +1,39 @@
+class Column
+!!!290226.java!!!	Column(in name : String, inout defaultkey : Object, in position : int, inout type : SQL::TableType)
+			this.name = name;
+			this.type = type;
+			this.position = position;
+			this.defaultkey = defaultkey;
+			if (defaultkey == null) {
+				switch (type) {
+				case STRING:
+					this.defaultkey = (String) null;
+					break;
+				case BLOB:
+					this.defaultkey = (Blob) null;
+					break;
+				case BOOLEAN:
+					this.defaultkey = (boolean) false;
+					break;
+				case INT:
+					this.defaultkey = (int) 0;
+					break;
+				}
+			}
+!!!290354.java!!!	format() : String
+			String type = null;
+			switch (this.type) {
+			case BLOB:
+				type = "BLOB";
+				break;
+			case BOOLEAN:
+				type = "INT";
+				break;
+			case INT:
+				type = "INT";
+				break;
+			case STRING:
+				type = "VARCHAR";
+				break;
+			}
+			return this.name + " " + type + "(100)";

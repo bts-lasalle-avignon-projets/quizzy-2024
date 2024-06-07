@@ -1,0 +1,26 @@
+class PetCancellAttackEvent
+!!!465074.java!!!	PetCancellAttackEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+		setCancelled(false);
+!!!465202.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!465330.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!465458.java!!!	getPlayer() : Player
+		return player;
+!!!465586.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!465714.java!!!	getEntity() : Entity
+		return entity;
+!!!465842.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!465970.java!!!	getPet() : CraftPet
+		return pet;
+!!!466098.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;
+!!!466226.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!466354.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;

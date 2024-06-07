@@ -1,0 +1,18 @@
+class Pig
+!!!450994.java!!!	Pig(inout owner : Player, inout saddle : boolean, in id : int)
+		super(owner, EntityType.PIG, "Cochon de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+		this.saddle = saddle;
+!!!451122.java!!!	Pig(inout owner : Player, inout saddle : boolean)
+		super(owner, EntityType.PIG, "Cochon de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+		this.saddle = saddle;
+!!!451250.java!!!	getEntity() : org.bukkit.entity.Pig
+		return (org.bukkit.entity.Pig) entity;
+!!!451378.java!!!	hasSaddle() : boolean
+		return saddle;
+!!!451506.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setSaddle(hasSaddle());
+!!!451634.java!!!	clone(inout player : Player) : Pig
+		return new Pig(player, saddle, getID());

@@ -1,5 +1,7 @@
 package fr.hillionj.quizzy.session;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +25,8 @@ import fr.hillionj.quizzy.son.GestionnaireSonore;
 
 public class Session {
 
-    private BaseDeDonnees baseDeDonnees;
-    private Parametres parametres;
+    private final BaseDeDonnees baseDeDonnees;
+    private final Parametres parametres;
     private List<Participant> participants = new ArrayList<>();
     private List<Ecran> ecrans = new ArrayList<>();
     private List<Question> questions = null;
@@ -37,7 +39,21 @@ public class Session {
     private List<ArgumentLancement> arguments = new ArrayList<>();
     private EtapeSession etapeSession = EtapeSession.ARRET;
     private Theme theme = null;
+    private String horodatage;
+    private final int idEvaluation;
 
+    public Session(final int idEvaluation, final String horodatage, final List<Question> questions, final List<Participant> participants) {
+        this.idEvaluation = idEvaluation;
+        this.participants = participants;
+        this.questions = questions;
+        this.horodatage = horodatage;
+        this.parametres = null;
+        this.ihm = null;
+        this.baseDeDonnees = null;
+        this.gestionnaireSonore = null;
+        this.gestionnaireProtocoles = null;
+        this.watchDog = null;
+    }
 
     public Session(@NonNull final Session sessionPrecedente) {
         this.parametres = sessionPrecedente.parametres;
@@ -46,15 +62,17 @@ public class Session {
         this.gestionnaireSonore = sessionPrecedente.gestionnaireSonore;
         this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
         this.watchDog = sessionPrecedente.watchDog;
+        this.idEvaluation = -1;
     }
 
-    public Session(final Parametres parametres, @NonNull AppCompatActivity activite, IHM ihm) {
+    public Session(final Parametres parametres, @NonNull AppCompatActivity activite, IHM ihm, BaseDeDonnees baseDeDonnees) {
         this.parametres = parametres;
         this.ihm = ihm;
-        this.baseDeDonnees = new BaseDeDonnees(activite.getApplicationContext());
+        this.baseDeDonnees = baseDeDonnees;
         this.gestionnaireSonore = new GestionnaireSonore(activite);
         this.gestionnaireProtocoles = new GestionnaireProtocoles(this);
         this.watchDog = new WatchDog(ihm);
+        this.idEvaluation = -1;
     }
 
     public boolean estValide() {
@@ -178,14 +196,6 @@ public class Session {
         baseDeDonnees.sauvegarder(this);
     }
 
-    public BaseDeDonnees getBaseDeDonnees() {
-        return baseDeDonnees;
-    }
-
-    public GestionnaireSonore getGestionnaireSonore() {
-        return gestionnaireSonore;
-    }
-
     public GestionnaireProtocoles getGestionnaireProtocoles() {
         return gestionnaireProtocoles;
     }
@@ -206,7 +216,10 @@ public class Session {
         if (getQuestionActuelle() == null) {
             return 0.0;
         }
-        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - (((double) System.currentTimeMillis() - (double) heureDebutQuestion) / 1000.0);
+        long differenceTempsDebut = System.currentTimeMillis() - heureDebutQuestion;
+        long differenceTempsPause = etapeSession == EtapeSession.PAUSE || etapeSession == EtapeSession.PAUSE_FIN_QUESTION ? (System.currentTimeMillis() - watchDog.getHeureDebutTempsPause()) : 0;
+        differenceTempsDebut -= differenceTempsPause;
+        double tempsRestant = (double) getQuestionActuelle().getTempsReponse() - ((double) differenceTempsDebut / 1000.0);
         return Math.max(tempsRestant, 0.0);
     }
 
@@ -280,10 +293,12 @@ public class Session {
             return score;
         }
         for (Question question : questions) {
-            if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION && question.estPropositionValide(participant)) {
-                score++;
-            } else if (question != getQuestionActuelle() && question.estPropositionValide(participant)) {
-                score++;
+            if (question.estPropositionValide(participant)) {
+                if (question == getQuestionActuelle() && etapeSession == EtapeSession.PAUSE_FIN_QUESTION) {
+                    score++;
+                } else if (question != getQuestionActuelle() || idEvaluation != -1) {
+                    score++;
+                }
             }
         }
         return score;
@@ -291,5 +306,13 @@ public class Session {
 
     public Theme getTheme() {
         return theme;
+    }
+
+    public String getHorodatage() {
+        return this.horodatage;
+    }
+
+    public int getIdEvaluation() {
+        return idEvaluation;
     }
 }

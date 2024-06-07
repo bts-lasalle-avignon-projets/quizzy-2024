@@ -1,0 +1,60 @@
+class CraftMenu
+!!!506802.java!!!	init(inout plugin : Plugin) : void
+		Bukkit.getPluginManager().registerEvents(new MenuEvent(), plugin);
+!!!506930.java!!!	CraftMenu(inout inventory : Inventory, inout parent : IMenu)
+		this.inventory = inventory;
+		this.parent = parent;
+		
+		list.add(this);
+!!!507058.java!!!	open(inout player : Player) : void
+		player.openInventory(getInventory());
+!!!507186.java!!!	getParent() : IMenu
+		return parent;
+!!!507314.java!!!	setParent(inout parent : IMenu) : void
+		this.parent = parent;
+!!!507442.java!!!	getMenu() : IMenu
+		return menu;
+!!!507570.java!!!	setMenu(inout menu : IMenu) : void
+		this.menu = menu;
+!!!507698.java!!!	getInventory() : Inventory
+		return inventory;
+!!!507826.java!!!	getTitle() : String
+		return inventory.getTitle();
+!!!507954.java!!!	isSame(inout inv : Inventory) : boolean
+		return inv != null && inv.equals(getInventory());
+!!!508082.java!!!	hasSubMenu(inout menu : IMenu) : boolean
+		return subInventories.containsValue(menu);
+!!!508210.java!!!	removeClone(inout inv : Inventory) : void
+		clones.remove(inv);
+!!!508338.java!!!	isClone(inout inv : Inventory) : boolean
+		return clones.contains(inv);
+!!!508466.java!!!	clone() : Inventory
+		return clone(getInventory().getTitle());
+!!!508594.java!!!	clone(in newTitle : String) : Inventory
+		Inventory inv = Bukkit.createInventory(null, getInventory().getSize(), newTitle);
+		inv.clear();
+		for (int i = 0; i < inv.getContents().length; i++) {
+			ItemStack it = getInventory().getContents()[i];
+			if (it != null) {
+				inv.setItem(i, it.clone());
+			}
+		}
+		clones.add(inv);
+		return inventory;
+!!!508722.java!!!	from(inout inventory : Inventory) : IMenu
+		for (CraftMenu m : list) {
+			if (m.isSame(inventory) || m.isClone(inventory)) {
+				return m.getMenu();
+			}
+		}
+		return null;
+!!!508850.java!!!	from(inout item : ItemStack) : IMenu
+		for (ItemStack it : subInventories.keySet()) {
+			System.out.println(it + " - " + item);
+			if (it.isSimilar(item)) {
+				return subInventories.get(it);
+			}
+		}
+		return null;
+!!!508978.java!!!	addSub(inout item : ItemStack, inout menu : IMenu) : void
+		subInventories.put(item, menu);

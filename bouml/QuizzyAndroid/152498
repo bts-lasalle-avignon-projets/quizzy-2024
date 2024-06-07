@@ -1,0 +1,192 @@
+format 224
+"lclangmanager" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lclangmanager
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_LangManager/src/fr/red/lclangmanager/"
+  java_package "fr.red.lclangmanager"
+  classview 156594 "lclangmanager"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 179762 "LangManager"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 191666 // <generalisation>
+	relation 191666 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 191666 // <generalisation>
+	  b parent class_ref 165810 // JavaPlugin
+      end
+
+      classrelation 191794 // instance (<unidirectional association>)
+	relation 191794 --->
+	  a role_name "instance" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 191794 // instance (<unidirectional association>)
+	  b parent class_ref 179762 // LangManager
+      end
+
+      operation 383666 "getInstance"
+	class_operation public return_type class_ref 179762 // LangManager
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 383794 "onEnable"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 383922 "registerLocaleTranslations"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 384050 "initSQL"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 384178 "registerRemoteTranslations"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "a" type class_ref 180018 // SQLAccess
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  package_ref 152626 // sql
+
+  deploymentview 149682 "lclangmanager"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 172850 "LangManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import fr.red.lclangmanager.commands.LangCommand;
+import fr.red.lclangmanager.config.ConfigManager;
+import fr.red.lclangmanager.injection.InjectionManager;
+import fr.red.lclangmanager.param.InventoryClick;
+import fr.red.lclangmanager.param.Join;
+import fr.red.lclangmanager.sql.SQL;
+import fr.red.lclangmanager.sql.SQL.SQLAccess;
+import fr.red.lclangmanager.sql.SQL.SQLConnection;
+import fr.red.lclangmanager.sql.SQL.TableType;
+import fr.red.lclangmanager.uils.TextRegister;
+${definition}"
+      associated_elems
+	class_ref 179762 // LangManager
+      end
+    end
+  end
+
+  package_ref 152754 // api
+
+  package_ref 152882 // commands
+
+  package_ref 153010 // config
+
+  package_ref 153138 // injection
+
+  package_ref 153522 // param
+
+  package_ref 153650 // uils
+end

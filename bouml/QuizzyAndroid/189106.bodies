@@ -1,0 +1,13 @@
+class Cow
+!!!447282.java!!!	Cow(inout owner : Player, in id : int)
+		super(owner, EntityType.COW, "Vache de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+!!!447410.java!!!	Cow(inout owner : Player)
+		super(owner, EntityType.COW, "Vache de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+!!!447538.java!!!	getEntity() : org.bukkit.entity.Cow
+		return (org.bukkit.entity.Cow) entity;
+!!!447666.java!!!	spawn() : void
+		super.spawn();
+!!!447794.java!!!	clone(inout player : Player) : Cow
+		return new Cow(player, getID());

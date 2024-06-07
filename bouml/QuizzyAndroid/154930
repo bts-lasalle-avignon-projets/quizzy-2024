@@ -1,0 +1,1766 @@
+format 224
+"utils" // eclipse-workspace::LC_BattleSheep_II::src::fr::red::lcpets::utils
+  revision 1
+  modified_by 50 "btssn2"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "eclipse-workspace/LC_Pets/src/fr/red/lcpets/utils/"
+  java_package "fr.red.lcpets.utils"
+  classview 159026 "utils"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 185778 "PetMenu"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 198962 // <generalisation>
+	relation 198962 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 198962 // <generalisation>
+	  b parent class_ref 187442 // SimpleMenu
+      end
+
+      classrelation 199090 // availablePets (<unidirectional association>)
+	relation 199090 --->
+	  stereotype "Map"
+	  a role_name "availablePets" init_value " new HashMap<>()" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<ItemStack, ${type}> ${name}${value};
+"
+	    classrelation_ref 199090 // availablePets (<unidirectional association>)
+	  b parent class_ref 187826 // Pet
+      end
+
+      operation 433458 "PetMenu"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "inventory" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 433586 "PetMenu"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "inventory" explicit_type "Inventory"
+	  param inout name "parent" type class_ref 187698 // IMenu
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 433714 "addSubMenu"
+	public return_type class_ref 187698 // IMenu
+	nparams 3
+	  param in name "slot" explicit_type "int"
+	  param inout name "item" explicit_type "ItemStack"
+	  param inout name "inv" explicit_type "Inventory"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 433842 "addPet"
+	public explicit_return_type "void"
+	nparams 4
+	  param inout name "menu" type class_ref 187698 // IMenu
+	  param inout name "type" explicit_type "EntityType"
+	  param inout name "it" explicit_type "ItemStack"
+	  param in name "argument" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 433970 "getPetFrom"
+	public return_type class_ref 187826 // Pet
+	nparams 1
+	  param inout name "item" explicit_type "ItemStack"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434098 "getPetFrom"
+	public return_type class_ref 187826 // Pet
+	nparams 1
+	  param in name "id" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434226 "from"
+	public return_type class_ref 187826 // Pet
+	nparams 1
+	  param inout name "entity" explicit_type "Entity"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434354 "getPet"
+	private return_type class_ref 187826 // Pet
+	nparams 2
+	  param inout name "type" explicit_type "EntityType"
+	  param in name "argument" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 187058 "ItemBuilder"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 198066 // <generalisation>
+	relation 198066 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 198066 // <generalisation>
+	  b parent class_ref 173618 // ItemStack
+      end
+
+      operation 425010 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "mat" explicit_type "Material"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Initializes the builder with the given {@link Material}
+
+@param mat the {@link Material} to start the builder from
+@since 1.0
+"
+      end
+
+      operation 425138 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "material" explicit_type "Material"
+	  param in name "data" explicit_type "byte"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 425266 "ItemBuilder"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "is" explicit_type "ItemStack"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Inits the builder with the given {@link ItemStack}
+
+@param is the {@link ItemStack} to start the builder from
+@since 1.0
+"
+      end
+
+      operation 425394 "amount"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "amount" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the amount of the {@link ItemStack}
+
+@param amount the new amount to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 425522 "skullOwner"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "owner" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 425650 "skullTextue"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "url" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 425778 "name"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the display name of the {@link ItemStack}
+
+@param name the new display name to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 425906 "lore"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "text" explicit_type "List<String>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds a new line to the lore of the {@link ItemStack}
+
+@param text the new line to add
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426034 "durability"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "durability" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the durability of the {@link ItemStack}
+
+@param durability the new durability to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426162 "enchantment"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 2
+	  param in name "enchantment" explicit_type "Enchantment"
+	  param in name "level" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, final ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds an {@link Enchantment} with the given level to the {@link ItemStack}
+
+@param enchantment the enchantment to add
+@param level       the level of the enchantment
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426290 "flag"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "flag" explicit_type "ItemFlag"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 426418 "enchantment"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "enchantment" explicit_type "Enchantment"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Adds an {@link Enchantment} with the level 1 to the {@link ItemStack}
+
+@param enchantment the enchantment to add
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426546 "unbreakable"
+	public explicit_return_type "ItemStack"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 426674 "type"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param in name "material" explicit_type "Material"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Changes the {@link Material} of the {@link ItemStack}
+
+@param material the new material to set
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426802 "clearLore"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Clears the lore of the {@link ItemStack}
+
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 426930 "clearEnchantments"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Clears the list of {@link Enchantment}s of the {@link ItemStack}
+
+@return this builder for chaining
+@since 1.0
+"
+      end
+
+      operation 427058 "color"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 1
+	  param inout name "color" explicit_type "Color"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Sets the {@link Color} of a part of leather armor
+
+@param color the {@link Color} to use
+@return this builder for chaining
+@since 1.1
+"
+      end
+
+      operation 427186 "createPotion"
+	public return_type class_ref 187058 // ItemBuilder
+	nparams 2
+	  param inout name "list" explicit_type "List<PotionBuilder>"
+	  param inout name "splash" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      class 187186 "PotionBuilder"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 258226 "type"
+	  private explicit_type "PotionEffectType"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 258354 "duration"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 258482 "amplifier"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 427314 "PotionBuilder"
+	  public explicit_return_type ""
+	  nparams 3
+	    param inout name "type" explicit_type "PotionType"
+	    param in name "seconds" explicit_type "int"
+	    param in name "power" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 427442 "PotionBuilder"
+	  public explicit_return_type ""
+	  nparams 3
+	    param inout name "type" explicit_type "PotionEffectType"
+	    param in name "seconds" explicit_type "int"
+	    param in name "power" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 427570 "getType"
+	  public explicit_return_type "PotionEffectType"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 427698 "setType"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "type" explicit_type "PotionEffectType"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 427826 "getDuration"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 427954 "setDuration"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "duration" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428082 "getAmplifier"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428210 "setAmplifier"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "amplifier" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      class 187314 "EnchantBuilder"
+	visibility public 
+	cpp_decl ""
+	static java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 258610 "enchantment"
+	  private explicit_type "Enchantment"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 258738 "level"
+	  private explicit_type "int"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 428338 "EnchantBuilder"
+	  public explicit_return_type ""
+	  nparams 2
+	    param inout name "enchantment" explicit_type "Enchantment"
+	    param in name "level" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428466 "getEnchantment"
+	  public explicit_return_type "Enchantment"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428594 "setEnchantment"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param inout name "enchantment" explicit_type "Enchantment"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428722 "getLevel"
+	  public explicit_return_type "int"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 428850 "setLevel"
+	  public explicit_return_type "void"
+	  nparams 1
+	    param in name "level" explicit_type "int"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+      end
+
+      operation 496818 "addItem"
+	public explicit_return_type "ItemStack"
+	nparams 4
+	  param in name "name" explicit_type "String"
+	  param inout name "lore" explicit_type "List<String>"
+	  param inout name "mat" explicit_type "Material"
+	  param in name "data" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496946 "addEnchantItem"
+	public explicit_return_type "ItemStack"
+	nparams 4
+	  param in name "name" explicit_type "String"
+	  param inout name "lore" explicit_type "List<String>"
+	  param inout name "mat" explicit_type "Material"
+	  param in name "data" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497074 "addHead"
+	public explicit_return_type "ItemStack"
+	nparams 3
+	  param in name "name" explicit_type "String"
+	  param inout name "lore" explicit_type "List<String>"
+	  param in name "owner" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497202 "addLeather"
+	public explicit_return_type "ItemStack"
+	nparams 4
+	  param inout name "mat" explicit_type "Material"
+	  param inout name "color" explicit_type "Color"
+	  param in name "name" explicit_type "String"
+	  param inout name "lore" explicit_type "List<String>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 187954 "PlayerPetProfile"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 259122 "player"
+	private explicit_type "Player"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 199218 // pets (<unidirectional association>)
+	relation 199218 --->
+	  stereotype "List"
+	  a role_name "pets" init_value " new ArrayList<>()" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 199218 // pets (<unidirectional association>)
+	  b parent class_ref 187826 // Pet
+      end
+
+      attribute 259250 "autospawns"
+	private explicit_type "Boolean"
+	init_value " new ArrayList<>()"
+	stereotype "List"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 199346 // list (<unidirectional association>)
+	relation 199346 --->
+	  stereotype "List"
+	  a role_name "list" init_value " new ArrayList<>()" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 199346 // list (<unidirectional association>)
+	  b parent class_ref 187954 // PlayerPetProfile
+      end
+
+      classrelation 199474 // m (<unidirectional association>)
+	relation 199474 --->
+	  a role_name "m" init_value " Methods.from(\"pets\")" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199474 // m (<unidirectional association>)
+	  b parent class_ref 186674 // Methods
+      end
+
+      operation 434482 "PlayerPetProfile"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434610 "getRemoteIDs"
+	private explicit_return_type "List<Integer>"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "Exception"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434738 "getRemoteAutoSpawns"
+	private explicit_return_type "void"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "Exception"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434866 "destroy"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 434994 "save"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435122 "getPets"
+	public return_type class_ref 187826 // Pet
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435250 "hasPet"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435378 "hasAlivePet"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435506 "addPet"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "pet" type class_ref 187826 // Pet
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435634 "getPlayer"
+	public explicit_return_type "Player"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435762 "dispawnAll"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 435890 "spawnAll"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 436018 "from"
+	class_operation public return_type class_ref 187954 // PlayerPetProfile
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 194354 "Stats"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 210610 // sql (<unidirectional association>)
+	relation 210610 --->
+	  a role_name "sql" init_value " new SQLFunc()" class_relation package
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 210610 // sql (<unidirectional association>)
+	  b parent class_ref 193842 // SQLFunc
+      end
+
+      classrelation 210738 // stat (<unidirectional association>)
+	relation 210738 --->
+	  stereotype "List"
+	  a role_name "stat" init_value " new ArrayList<>()" class_relation public
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 210738 // stat (<unidirectional association>)
+	  b parent class_ref 194354 // Stats
+      end
+
+      attribute 274866 "player"
+	private explicit_type "Player"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 274994 "name"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 275122 "ID"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 275250 "autospawn"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 497714 "Stats"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497842 "getStats"
+	class_operation public return_type class_ref 194354 // Stats
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497970 "getNULLStats"
+	class_operation public return_type class_ref 194354 // Stats
+	nparams 1
+	  param inout name "p" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498098 "removePlayer"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "stat" type class_ref 194354 // Stats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498226 "getPlayer"
+	public explicit_return_type "Player"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498354 "setPlayer"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "player" explicit_type "Player"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498482 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498610 "setName"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "name" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498738 "getID"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498866 "setID"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "iD" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 498994 "isAutoSpawn"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 499122 "setAutoSpawn"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "autospawn" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 194610 "ConfigAccess"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 273970 "file"
+	private explicit_type "File"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 274098 "config"
+	private explicit_type "FileConfiguration"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 274226 "fileName"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 495282 "ConfigAccess"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "fileName" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 495410 "getConfig"
+	public explicit_return_type "FileConfiguration"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 495538 "getFileName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 495666 "saveDefaultConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 495794 "saveConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 495922 "reloadConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 194738 "ConfigManager"
+      visibility public stereotype "enum"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 274354 "PETS"
+	public type class_ref 194738 // ConfigManager
+	cpp_decl ""
+	java_decl "  ${@}${name}(new ConfigAccess(\"pets\")),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 274482 "MYSQL"
+	public type class_ref 194738 // ConfigManager
+	cpp_decl ""
+	java_decl "  ${@}${name}(new ConfigAccess(\"mysql\")),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 274610 "MESSAGES"
+	public type class_ref 194738 // ConfigManager
+	cpp_decl ""
+	java_decl "  ${@}${name}(new ConfigAccess(\"messages\")),${comment}"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 210482 // configAccess (<unidirectional association>)
+	relation 210482 --->
+	  a role_name "configAccess" const_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 210482 // configAccess (<unidirectional association>)
+	  b parent class_ref 194610 // ConfigAccess
+      end
+
+      operation 496050 "ConfigManager"
+	package explicit_return_type ""
+	nparams 1
+	  param inout name "configAccess" type class_ref 194610 // ConfigAccess
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496178 "saveDefaultConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496306 "saveConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496434 "reloadConfig"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496562 "getName"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 496690 "getConfig"
+	public explicit_return_type "FileConfiguration"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 194866 "MessageBuilder"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 274738 "path"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 497330 "MessageBuilder"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "path" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497458 "getString"
+	public explicit_return_type "String"
+	nparams 1
+	  param inout name "withColor" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 497586 "getStringList"
+	public explicit_return_type "List<String>"
+	nparams 1
+	  param inout name "withColor" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 152498 "utils"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 177970 "ItemBuilder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.List;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+${definition}"
+      associated_elems
+	class_ref 187058 // ItemBuilder
+      end
+    end
+
+    artifact 178482 "PetMenu"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.HashMap;
+import java.util.Map;
+import org.bukkit.DyeColor;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Ocelot.Type;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import fr.red.lcpets.utils.entity.Pet;
+import fr.red.lcpets.utils.entity.list.Bat;
+import fr.red.lcpets.utils.entity.list.Cat;
+import fr.red.lcpets.utils.entity.list.CaveSpider;
+import fr.red.lcpets.utils.entity.list.Chicken;
+import fr.red.lcpets.utils.entity.list.Cow;
+import fr.red.lcpets.utils.entity.list.DefaultPet;
+import fr.red.lcpets.utils.entity.list.Dog;
+import fr.red.lcpets.utils.entity.list.Enderman;
+import fr.red.lcpets.utils.entity.list.MagmaCube;
+import fr.red.lcpets.utils.entity.list.MushroomCow;
+import fr.red.lcpets.utils.entity.list.Pig;
+import fr.red.lcpets.utils.entity.list.PigZombie;
+import fr.red.lcpets.utils.entity.list.Sheep;
+import fr.red.lcpets.utils.entity.list.Silverfish;
+import fr.red.lcpets.utils.entity.list.Slime;
+import fr.red.lcpets.utils.entity.list.Spider;
+import fr.red.lcpets.utils.entity.list.Squid;
+import fr.red.lcpets.utils.entity.list.WitherSkeleton;
+import fr.red.lcpets.utils.entity.list.Zombie;
+import fr.red.lcpets.utils.menu.IMenu;
+import fr.red.lcpets.utils.menu.list.SimpleMenu;
+${definition}"
+      associated_elems
+	class_ref 185778 // PetMenu
+      end
+    end
+
+    artifact 178610 "PlayerPetProfile"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.api.PetAPI;
+import fr.red.lcpets.sql.SQL.Methods;
+import fr.red.lcpets.utils.entity.Pet;
+${definition}"
+      associated_elems
+	class_ref 187954 // PlayerPetProfile
+      end
+    end
+
+    artifact 184882 "ConfigAccess"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.File;
+import java.io.IOException;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import fr.red.lcpets.Main;
+${definition}"
+      associated_elems
+	class_ref 194610 // ConfigAccess
+      end
+    end
+
+    artifact 185010 "ConfigManager"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import org.bukkit.configuration.file.FileConfiguration;
+${definition}"
+      associated_elems
+	class_ref 194738 // ConfigManager
+      end
+    end
+
+    artifact 185138 "MessageBuilder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.configuration.file.FileConfiguration;
+${definition}"
+      associated_elems
+	class_ref 194866 // MessageBuilder
+      end
+    end
+
+    artifact 185266 "Stats"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.entity.Player;
+import fr.red.lcpets.mysql.SQLFunc;
+import fr.red.lcpets.system.PetManager;
+${definition}"
+      associated_elems
+	class_ref 194354 // Stats
+      end
+    end
+  end
+
+  package_ref 155442 // menu
+
+  package_ref 155698 // entity
+
+  package_ref 155826 // config
+end

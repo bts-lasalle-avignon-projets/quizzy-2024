@@ -1,0 +1,18 @@
+class State
+!!!359090.java!!!	getItem() : ItemStack
+			if (item == null) {
+				item =  clone(true);
+			}
+			return item ;
+!!!359218.java!!!	clone(inout init : boolean) : ItemBuilder
+			switch (this) {
+			case WAITING:
+				return new ItemBuilder(Material.STAINED_CLAY, (byte) 4).name("§6En attente").lore(Arrays.asList("§7(§eCliquez pour lancer§7)"));
+			case RUN:
+				return new ItemBuilder(Material.STAINED_CLAY, (byte) 3).name("§dEn cours");
+			case END:
+				return new ItemBuilder(Material.STAINED_CLAY, (byte) 14).name("§dcRedémarrage");
+			case OFF:
+				return init ? null : new ItemBuilder(Material.STAINED_CLAY, (byte) 15).name("§8Eteinte");
+			}
+			return null;

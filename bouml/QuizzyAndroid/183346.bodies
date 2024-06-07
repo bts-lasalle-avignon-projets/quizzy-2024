@@ -1,0 +1,44 @@
+class Main
+!!!402226.java!!!	getInstance() : Main
+		return instance;
+!!!402354.java!!!	onEnable() : void
+		instance = this;
+		ConfigManager.CONFIG.saveDefaultConfig(this);
+		Date current = MapDaterRegister.getCurrent();
+		load(current);
+		MapDaterRegister.setup(current);
+		getCommand("map").setExecutor(new Reload());
+!!!402482.java!!!	onDisable() : void
+		for (MapDaterRegister mr : MapDaterRegister.list) {
+			for (MapDate md : mr.getMaps()) {
+				World w = Bukkit.getWorld(md.getWorld());
+				if (w != null && md.getScript() != null) {
+					md.getScript().stop();
+				}
+			}
+		}
+!!!402610.java!!!	reload() : void
+		ConfigManager.CONFIG.reloadConfig();
+		Date current = MapDaterRegister.getCurrent();
+		onDisable();
+		MapDaterRegister.list.clear();
+		load(current);
+!!!402738.java!!!	load(inout current : Date) : void
+		for (String base : ConfigManager.CONFIG.getConfig().getKeys(false)) {
+			List<MapDate> maps = new ArrayList<>();
+			for (String map : ConfigManager.CONFIG.getConfig().getConfigurationSection(base).getKeys(false)) {
+				String from_s = ConfigManager.CONFIG.getConfig().getString(base + "." + map + ".from");
+				int from_d = Integer.parseInt(from_s.split("/")[0]);
+				int from_m = Integer.parseInt(from_s.split("/")[1]) - 1;
+				String to_s = ConfigManager.CONFIG.getConfig().getString(base + "." + map + ".to");
+				int to_d = Integer.parseInt(to_s.split("/")[0]);
+				int to_m = Integer.parseInt(to_s.split("/")[1]) - 1;
+				Date from = new Date(current.getYear(), from_m, from_d);
+				Date to = new Date(from_m > to_m ? current.getYear() + 1 : current.getYear(), to_m, to_d);
+				String script_s = ConfigManager.CONFIG.getConfig().getString(base + "." + map + ".script");
+				ScripType type = script_s != null ? ScripType.valueOf(script_s) : null;
+				boolean save = ConfigManager.CONFIG.getConfig().getBoolean(base + "." + map + ".world-save");
+				maps.add(new MapDate(map, from, to, type, save));
+			}
+			new MapDaterRegister(base, maps);
+		}

@@ -1,0 +1,9 @@
+class KitModule
+!!!363826.java!!!	openKitMenu(inout player : Player) : void
+		getKitMenu().open(player);
+!!!363954.java!!!	craftKitMenu(inout kits : List<ItemStack>) : IMenu
+		return new HGKitMenu(kits, "§cSelection du kit", 54);
+!!!368818.java!!!	openKitMenu(inout player : Player) : void
+		getKitMenu().open(player);
+!!!368946.java!!!	craftKitMenu(inout kits : List<ItemStack>) : HGKitMenu
+		return new HGKitMenu(kits, "§cSelection du kit", 54);
