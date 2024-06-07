@@ -1,6 +1,6 @@
 format 224
 "QuizzyAndroid"
-  revision 12
+  revision 14
   modified_by 50 "btssn2"
   java_root_dir "../../"
 
@@ -402,10 +402,6 @@ format 224
 
   package_ref 143282 // unknown
 
-  package_ref 145714 // Android
-
-  package_ref 149042 // eclipse-workspace
-
   usecaseview 134706 "Diagramme de classes"
     
     usecasediagramsettings end
@@ -432,5 +428,545 @@ format 224
       size 4247x5677
     end
 
+    classdiagram 161074 "BDD"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+  end
+
+  classview 158770 "db"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 187570 "evaluations"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 209330 "idEvaluation"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 209458 "idTheme"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 209586 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+
+      classrelation 183474 // <unidirectional association>
+	relation 183474 --->
+	  a role_name "" public
+	    classrelation_ref 183474 // <unidirectional association>
+	  b parent class_ref 188338 // themes
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+    end
+
+    class 187698 "participants"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 209714 "idParticipant"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 209842 "nom"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL
+"
+	MysqlColumn
+      end
+    end
+
+    class 187826 "questions"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 209970 "idQuestion"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 210098 "idTheme"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 210226 "question"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL"
+	MysqlColumn
+      end
+
+      attribute 210354 "proposition1"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL"
+	MysqlColumn
+      end
+
+      attribute 210482 "proposition2"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL"
+	MysqlColumn
+      end
+
+      attribute 210610 "proposition3"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL"
+	MysqlColumn
+      end
+
+      attribute 210738 "proposition4"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL"
+	MysqlColumn
+      end
+
+      attribute 210866 "anecdote"
+	default explicit_type "TEXT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci"
+	MysqlColumn
+      end
+
+      attribute 210994 "reponse"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+
+      classrelation 182578 // <unidirectional association>
+	relation 182578 --->
+	  a role_name "" public
+	    classrelation_ref 182578 // <unidirectional association>
+	  b parent class_ref 187570 // evaluations
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+
+      classrelation 182706 // <unidirectional association>
+	relation 182706 --->
+	  a role_name "" public
+	    classrelation_ref 182706 // <unidirectional association>
+	  b parent class_ref 188338 // themes
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+    end
+
+    class 187954 "quiz"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 211122 "idEvaluation"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 211250 "idQuestion"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 211378 "points"
+	default explicit_type "DOUBLE"
+	init_value "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 211506 "temps"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+
+      classrelation 183602 // <unidirectional association>
+	relation 183602 --->
+	  a role_name "" public
+	    classrelation_ref 183602 // <unidirectional association>
+	  b parent class_ref 187570 // evaluations
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+
+      classrelation 183730 // <unidirectional association>
+	relation 183730 --->
+	  a role_name "" public
+	    classrelation_ref 183730 // <unidirectional association>
+	  b parent class_ref 187826 // questions
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+    end
+
+    class 188082 "reponses"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ;
+"
+      
+      attribute 211634 "idEvaluation"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 211762 "idParticipant"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 211890 "idQuestion"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 212018 "temps"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 212146 "correct"
+	default explicit_type "TINYINT"
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+
+      classrelation 183090 // <unidirectional association>
+	relation 183090 --->
+	  a role_name "" public
+	    classrelation_ref 183090 // <unidirectional association>
+	  b parent class_ref 187570 // evaluations
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+
+      classrelation 183218 // <unidirectional association>
+	relation 183218 --->
+	  a role_name "" public
+	    classrelation_ref 183218 // <unidirectional association>
+	  b parent class_ref 187698 // participants
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+
+      classrelation 183346 // <unidirectional association>
+	relation 183346 --->
+	  a role_name "" public
+	    classrelation_ref 183346 // <unidirectional association>
+	  b parent class_ref 187826 // questions
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+    end
+
+    class 188210 "resultats"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 212274 "idEvaluation"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 212402 "idParticipant"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 212530 "score"
+	default explicit_type "INT"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+
+      classrelation 182834 // <unidirectional association>
+	relation 182834 --->
+	  a role_name "" public
+	    classrelation_ref 182834 // <unidirectional association>
+	  b parent class_ref 187570 // evaluations
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+
+      classrelation 182962 // <unidirectional association>
+	relation 182962 --->
+	  a role_name "" public
+	    classrelation_ref 182962 // <unidirectional association>
+	  b parent class_ref 187698 // participants
+	  mysql_decl "  ${constraint}${modifier}KEY${name}${type} (${columns})${ref}${comment}"
+      end
+    end
+
+    class 188338 "themes"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+"
+      
+      attribute 212658 "idTheme"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 212786 "theme"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} COLLATE utf8mb4_general_ci NOT NULL
+"
+	MysqlColumn
+      end
+    end
+  end
+
+  deploymentview 151858 "db"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 169266 "db"
+      stereotype "database"
+      mysql_src "${definition}"
+      associated_elems
+	class_ref 187570 // evaluations
+	class_ref 187698 // participants
+	class_ref 187826 // questions
+	class_ref 187954 // quiz
+	class_ref 188082 // reponses
+	class_ref 188210 // resultats
+	class_ref 188338 // themes
+      end
+    end
   end
 end
