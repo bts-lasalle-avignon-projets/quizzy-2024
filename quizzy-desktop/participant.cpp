@@ -3,7 +3,7 @@
  *
  * @brief Définition de la classe Participant
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 #include "participant.h"
@@ -59,9 +59,15 @@ unsigned int Participant::getNombreReponsesCorrectes() const
 /**
  * @brief Incrémente le nombre de bonnes réponses
  */
-void Participant::incrementerNombreReponsesCorrectes()
+void Participant::incrementerNombreReponsesCorrectes(int numeroQuestion)
 {
     ++nombreReponsesCorrectes;
+    questionsCorrectes.push_back(numeroQuestion);
+}
+
+QVector<int> Participant::getQuestionsCorrectes() const
+{
+    return questionsCorrectes;
 }
 
 QVector<int> Participant::getReponses() const
