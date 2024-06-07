@@ -76,7 +76,7 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Gestion de chronomètre** : Un chronomètre est mis en place pour limiter le temps de réponse.
 - **Affichage chronomètre** : Le chronomètre est affiché à l’utilisateur.
 
-![Tickets Jira](images/Jira_v0.2.png)
+![Tickets Jira](images/Jira_v1.0.png)
 
 ### Itération 3
 
@@ -100,7 +100,7 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ### Quizzy-mobile (Java/Android)
 
-![Android diagramme de classes](images/Android_v0.2_diagramme_de%20classes.png)
+![Android diagramme de classes](images/Android_v1.0_diagramme_de%20classes.png)
 
 ### Quizzy-desktop (C++/Qt)
 
@@ -148,13 +148,27 @@ Nom des périphériques Bluetooth :
 
 ### Interface Évaluateur (Tablette)
 
-![Gif Quiz Mobile](images/screenshot-quizzy-mobile.gif)
+![Gif Quiz Mobile](images/mobile/mobile.gif)
 
 Les différentes vues :
 
-- visualisation du quiz en cours en pouvant gérer son déroulement
-- connexion d'un ou plusieurs périphériques écran ou pupitre
-- sélection d'un thème pour le quiz à générer, le nombre de questions et association d'un participant à un profil (nom + score)
+- Accueil (Session, Historique, Crédits)
+- Paramétrage d'une session (Thème, Temps, Nombre de question, Participants)
+- Association des paticipants, connexions aux pupitres et écrans
+- Visualisation et gestion d'une session
+- Historique de partie sauvegardées
+
+Les différentes popups :
+
+*Note :  Les termes entre parenthèses indiquent les boutons permettant d'intéragir avec le popup*
+
+- Aucun participant connecté (Continuer, Configurer, Annuler)
+- Participant non connecté (Connecté, Dissocier, Annuler)
+- Périphérique non configuré (Déconnecter, Configurer, Annuler)
+- Créer un participant (Créer, Annuler)
+- Fin de session (Relancer, Sauvegarder, Quitter)
+- Historique (Visualiser, Supprimer, Fermer)
+- Crédits (Fermer)
 
 ### Interface participant (Écran)
 
