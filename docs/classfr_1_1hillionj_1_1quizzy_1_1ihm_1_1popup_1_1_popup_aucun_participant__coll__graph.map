@@ -1,0 +1,12 @@
+<map id="fr.hillionj.quizzy.ihm.popup.PopupAucunParticipant" name="fr.hillionj.quizzy.ihm.popup.PopupAucunParticipant">
+<area shape="rect" id="node1" title=" " alt="" coords="866,1063,1066,1199"/>
+<area shape="rect" id="node2" href="$classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html" title=" " alt="" coords="501,453,719,868"/>
+<area shape="rect" id="node4" href="$classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html" title=" " alt="" coords="37,931,271,1331"/>
+<area shape="rect" id="node9" href="$classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_gestionnaire_protocoles.html" title=" " alt="" coords="405,1011,709,1250"/>
+<area shape="rect" id="node3" href="$classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html" title=" " alt="" coords="482,1393,733,1691"/>
+<area shape="rect" id="node7" href="$classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html" title=" " alt="" coords="605,1753,831,2065"/>
+<area shape="rect" id="node5" href="$classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_theme.html" title=" " alt="" coords="5,130,241,266"/>
+<area shape="rect" id="node6" href="$classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html" title=" " alt="" coords="265,5,467,391"/>
+<area shape="rect" id="node8" href="$classfr_1_1hillionj_1_1quizzy_1_1son_1_1_gestionnaire_sonore.html" title=" " alt="" coords="491,71,729,325"/>
+<area shape="rect" id="node10" href="$enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html" title=" " alt="" coords="753,130,936,266"/>
+</map>

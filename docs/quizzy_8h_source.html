@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de quizzy.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('quizzy_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">quizzy.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="quizzy_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef QUIZZY_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define QUIZZY_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QMap&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="quizzy_8h.html#ae2fe6ee2d2df6062f8c96683ed82c749">   16</a></span>&#160;<span class="preprocessor">#define INDEX_NON_DEFINI -1</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">class </span><a class="code" href="class_participant.html">Participant</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">class </span><a class="code" href="class_question.html">Question</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span><a class="code" href="class_communication_bluetooth.html">CommunicationBluetooth</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_quizzy.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_quizzy.html">Quizzy</a> : <span class="keyword">public</span> <a class="code" href="class_q_object.html">QObject</a></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9">   37</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9">Etat</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6ecce1b9bf50cbfeba9acbeca5054b28">   39</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6ecce1b9bf50cbfeba9acbeca5054b28">Initial</a>,</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9b2c831a3261c57711cc95dd3581ba6f">   40</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9b2c831a3261c57711cc95dd3581ba6f">QuizDemarre</a>,</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9ad316fc61a22113617e29169ac8c72a2a">   41</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9ad316fc61a22113617e29169ac8c72a2a">ParticipantsAjoutes</a>,</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a740fbb45b6352493cc6fa471f4631063">   42</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a740fbb45b6352493cc6fa471f4631063">QuestionsAjoutees</a>,</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a3db52ea4c6837e560b47f03c23df99e2">   43</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a3db52ea4c6837e560b47f03c23df99e2">QuizLance</a>,</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6a649af2f60c5a6677c1ff03cf1be8db">   44</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6a649af2f60c5a6677c1ff03cf1be8db">QuestionDemarree</a>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9e218d196526630685c9f925804b7549">   45</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9e218d196526630685c9f925804b7549">QuestionTerminee</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a91569672b9c4a8164d1c06badb6460c7">   46</a></span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a91569672b9c4a8164d1c06badb6460c7">Resultats</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a5553cccfcdde211eba4287b6d2036926">QuizFini</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a5553cccfcdde211eba4287b6d2036926">   48</a></span>&#160;    };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QVector&lt;Participant*&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_quizzy.html#a3ed0c1142667064edb0bdd45ddf31ff4">   52</a></span>&#160;                       <a class="code" href="class_quizzy.html#a3ed0c1142667064edb0bdd45ddf31ff4">participants</a>; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_quizzy.html#a1f3ace7ecbcfdcaec54e246b716deb61">   53</a></span>&#160;    QVector&lt;Question*&gt; <a class="code" href="class_quizzy.html#a1f3ace7ecbcfdcaec54e246b716deb61">listeQuestions</a>; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QMap&lt;int, QStringList&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_quizzy.html#a187f06d53e7a50b627ac59a64d3075a2">   55</a></span>&#160;      <a class="code" href="class_quizzy.html#a187f06d53e7a50b627ac59a64d3075a2">choixParticipants</a>; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_quizzy.html#afca85ccc207c089637c47948dd4cd88b">   57</a></span>&#160;    <span class="keywordtype">int</span>  <a class="code" href="class_quizzy.html#afca85ccc207c089637c47948dd4cd88b">indexQuestionActuelle</a>; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_quizzy.html#a8b1dfc114a032cf81b1cee6b9f7c9450">   58</a></span>&#160;    <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9">Etat</a> <a class="code" href="class_quizzy.html#a8b1dfc114a032cf81b1cee6b9f7c9450">etat</a>;                  </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_communication_bluetooth.html">CommunicationBluetooth</a>*</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_quizzy.html#a2127763c06086ced869ee8d5fc294528">   60</a></span>&#160;      <a class="code" href="class_quizzy.html#a2127763c06086ced869ee8d5fc294528">communicationTablette</a>; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#af25fd3ab1c1cd303ed22cb304dbd628f">initialiserCommunicationTablette</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#ae9b1cfe36fc0b302792b015d521bb2d0">initialiserQuiz</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_quizzy.html#a57ad74c9f9f51674f736c9f0166f16a5">Quizzy</a>(<a class="code" href="class_q_object.html">QObject</a>* parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="class_quizzy.html#a40c68331a0ae612d338069505bedcef4">~Quizzy</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Gestion du quiz</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a040c1e40c5075b510cab749a3e420d88">debuter</a>(<span class="keywordtype">bool</span> reset = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#aa5fb10daf518151016a3fb733e75b762">lancer</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// Gestion des participants</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_quizzy.html#a3acbfaf01154ad605df56b07177b77e5">estParticipantActuel</a>(QString pidJoueur) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Gestion des questions</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">// Gestion des réponses</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_quizzy.html#a9922c365f7910ae6d69d5e2eaa7c0000">traiterReponseParticipant</a>(<a class="code" href="class_participant.html">Participant</a>* participant,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                   <span class="keywordtype">int</span>          numeroReponse,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                                   <span class="keywordtype">int</span>          tempsReponse);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#aa908ff9d6a905b2016374e2057c3fd97">effacerChoix</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// Getters</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>            <a class="code" href="class_quizzy.html#a8a6194ef3e44eb9db250b5829641d741">getNbQuestions</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>            <a class="code" href="class_quizzy.html#aa267882e59045e7423f290b9e4b98882">getNbParticipants</a>();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QVector&lt;Participant*&gt;   <a class="code" href="class_quizzy.html#ae386ec299dff690055f0779cfc254358">getParticipants</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="class_question.html">Question</a>*               <a class="code" href="class_quizzy.html#a691e3eea74f427ca856272f4fa8d8022">getQuestion</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9">Etat</a>                    <a class="code" href="class_quizzy.html#ab8f632a9b1948fab4b8e040347219de2">getEtat</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QMap&lt;int, QStringList&gt;  <a class="code" href="class_quizzy.html#abdae802c9e508120f9c55452598d31fb">getChoixParticipants</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span>                     <a class="code" href="class_quizzy.html#a649aac0c0acba89ffa64e2bb78df8d66">getIndexQuestionActuelle</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QString                 <a class="code" href="class_quizzy.html#a22777a03048e3d9971f808b9e5086af4">getNomDuParticipant</a>(QString pidJoueur);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="class_communication_bluetooth.html">CommunicationBluetooth</a>* <a class="code" href="class_quizzy.html#abbfc0d27bb6d4f27d35e6878b45cac64">getCommunicationTablette</a>();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// Gestion du quiz</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a958b97d0e937c2a24f5c2be4bc60a472">gererDebutQuiz</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// Gestion des participants</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a76baf09ef0d42c08b5005a21f50e3869">ajouterParticipant</a>(QString pidJoueur, QString participant);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">// Gestion des questions</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a4153725e1cae043a142f9ce3b5fdd194">ajouterQuestion</a>(QString     libelle,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                         QStringList propositions,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                         <span class="keywordtype">int</span>         reponseValide,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                         <span class="keywordtype">int</span>         temps);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a8a28acfa910baaa72226956ea5e2f214">demarrerQuestion</a>();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a626112e901ca6d072fa032b12e5012c4">terminerQuestion</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#ade651161f85d8fcf8847bf04d4c4b290">traiterReponse</a>(QString pidJoueur, <span class="keywordtype">int</span> numeroReponse, <span class="keywordtype">int</span> tempsReponse);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a9df7013ad98adc80a20f46d0a5d343a9">passerQuestionSuivante</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#ae0d64becb1a4f363f3d19f0c8927b38a">gererFinQuiz</a>();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  signals:</div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="class_quizzy.html#a85ae533a4c1e6eb1b1f2bc2316a7383f">  112</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a85ae533a4c1e6eb1b1f2bc2316a7383f">debutQuiz</a>();</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="class_quizzy.html#a4f1dc5d0f0292dd55b708a25f0604937">  113</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a4f1dc5d0f0292dd55b708a25f0604937">lancementQuiz</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="class_quizzy.html#a49ff7cc8a42bbb9fb62e14cd0733a770">  114</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a49ff7cc8a42bbb9fb62e14cd0733a770">participantAjoute</a>(QString pidJoueur, QString nomParticipant);</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="class_quizzy.html#a51274ec3ea055c92663ae28aa8bde02f">  115</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a51274ec3ea055c92663ae28aa8bde02f">questionAjoutee</a>();</div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="class_quizzy.html#a0ef8a20eaf3e58f74ce39a379ea57024">  116</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a0ef8a20eaf3e58f74ce39a379ea57024">questionDemarree</a>();</div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="class_quizzy.html#a9f0b16a0c68a1ef59dd7d29fff5241b6">  117</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a9f0b16a0c68a1ef59dd7d29fff5241b6">choixParticipant</a>();</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="class_quizzy.html#a4ca07b1b2b3679318fd2a6b80a82c7ef">  118</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a4ca07b1b2b3679318fd2a6b80a82c7ef">questionTerminee</a>();</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class_quizzy.html#a1cb456052d0554a259efb14b0ba29e9b">  119</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a1cb456052d0554a259efb14b0ba29e9b">questionSuivantePrete</a>();</div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="class_quizzy.html#a84cffdc327a3c67db039faa32fb36787">  120</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_quizzy.html#a84cffdc327a3c67db039faa32fb36787">quizTermine</a>();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// QUIZZY_H</span></div>
+<div class="ttc" id="aclass_communication_bluetooth_html"><div class="ttname"><a href="class_communication_bluetooth.html">CommunicationBluetooth</a></div><div class="ttdoc">Déclaration de la classe CommunicationBluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00051">communicationbluetooth.h:52</a></div></div>
+<div class="ttc" id="aclass_participant_html"><div class="ttname"><a href="class_participant.html">Participant</a></div><div class="ttdoc">Déclaration de la classe Participant.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00026">participant.h:27</a></div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="aclass_question_html"><div class="ttname"><a href="class_question.html">Question</a></div><div class="ttdoc">Déclaration de la classe Question.</div><div class="ttdef"><b>Definition:</b> <a href="question_8h_source.html#l00020">question.h:21</a></div></div>
+<div class="ttc" id="aclass_quizzy_html"><div class="ttname"><a href="class_quizzy.html">Quizzy</a></div><div class="ttdoc">Déclaration de la classe Quizzy.</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00027">quizzy.h:28</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a040c1e40c5075b510cab749a3e420d88"><div class="ttname"><a href="class_quizzy.html#a040c1e40c5075b510cab749a3e420d88">Quizzy::debuter</a></div><div class="ttdeci">void debuter(bool reset=true)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00029">quizzy.cpp:29</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a0ef8a20eaf3e58f74ce39a379ea57024"><div class="ttname"><a href="class_quizzy.html#a0ef8a20eaf3e58f74ce39a379ea57024">Quizzy::questionDemarree</a></div><div class="ttdeci">void questionDemarree()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a187f06d53e7a50b627ac59a64d3075a2"><div class="ttname"><a href="class_quizzy.html#a187f06d53e7a50b627ac59a64d3075a2">Quizzy::choixParticipants</a></div><div class="ttdeci">QMap&lt; int, QStringList &gt; choixParticipants</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00055">quizzy.h:55</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a1cb456052d0554a259efb14b0ba29e9b"><div class="ttname"><a href="class_quizzy.html#a1cb456052d0554a259efb14b0ba29e9b">Quizzy::questionSuivantePrete</a></div><div class="ttdeci">void questionSuivantePrete()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a1f3ace7ecbcfdcaec54e246b716deb61"><div class="ttname"><a href="class_quizzy.html#a1f3ace7ecbcfdcaec54e246b716deb61">Quizzy::listeQuestions</a></div><div class="ttdeci">QVector&lt; Question * &gt; listeQuestions</div><div class="ttdoc">conteneur de Question pour le quiz</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00053">quizzy.h:53</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a2127763c06086ced869ee8d5fc294528"><div class="ttname"><a href="class_quizzy.html#a2127763c06086ced869ee8d5fc294528">Quizzy::communicationTablette</a></div><div class="ttdeci">CommunicationBluetooth * communicationTablette</div><div class="ttdoc">association avec CommunicationBluetooth</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00060">quizzy.h:60</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a22777a03048e3d9971f808b9e5086af4"><div class="ttname"><a href="class_quizzy.html#a22777a03048e3d9971f808b9e5086af4">Quizzy::getNomDuParticipant</a></div><div class="ttdeci">QString getNomDuParticipant(QString pidJoueur)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00296">quizzy.cpp:296</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3acbfaf01154ad605df56b07177b77e5"><div class="ttname"><a href="class_quizzy.html#a3acbfaf01154ad605df56b07177b77e5">Quizzy::estParticipantActuel</a></div><div class="ttdeci">bool estParticipantActuel(QString pidJoueur) const</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00059">quizzy.cpp:59</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3ed0c1142667064edb0bdd45ddf31ff4"><div class="ttname"><a href="class_quizzy.html#a3ed0c1142667064edb0bdd45ddf31ff4">Quizzy::participants</a></div><div class="ttdeci">QVector&lt; Participant * &gt; participants</div><div class="ttdoc">conteneur de Participant pour le quiz</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00052">quizzy.h:52</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9">Quizzy::Etat</a></div><div class="ttdeci">Etat</div><div class="ttdoc">Définit les différentes états de déroulement d'un quiz.</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00037">quizzy.h:38</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a3db52ea4c6837e560b47f03c23df99e2"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a3db52ea4c6837e560b47f03c23df99e2">Quizzy::QuizLance</a></div><div class="ttdeci">@ QuizLance</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00043">quizzy.h:43</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a5553cccfcdde211eba4287b6d2036926"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a5553cccfcdde211eba4287b6d2036926">Quizzy::QuizFini</a></div><div class="ttdeci">@ QuizFini</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00048">quizzy.h:47</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a6a649af2f60c5a6677c1ff03cf1be8db"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6a649af2f60c5a6677c1ff03cf1be8db">Quizzy::QuestionDemarree</a></div><div class="ttdeci">@ QuestionDemarree</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00044">quizzy.h:44</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a6ecce1b9bf50cbfeba9acbeca5054b28"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a6ecce1b9bf50cbfeba9acbeca5054b28">Quizzy::Initial</a></div><div class="ttdeci">@ Initial</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00039">quizzy.h:39</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a740fbb45b6352493cc6fa471f4631063"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a740fbb45b6352493cc6fa471f4631063">Quizzy::QuestionsAjoutees</a></div><div class="ttdeci">@ QuestionsAjoutees</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00042">quizzy.h:42</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a91569672b9c4a8164d1c06badb6460c7"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a91569672b9c4a8164d1c06badb6460c7">Quizzy::Resultats</a></div><div class="ttdeci">@ Resultats</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00046">quizzy.h:46</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a9b2c831a3261c57711cc95dd3581ba6f"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9b2c831a3261c57711cc95dd3581ba6f">Quizzy::QuizDemarre</a></div><div class="ttdeci">@ QuizDemarre</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00040">quizzy.h:40</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9a9e218d196526630685c9f925804b7549"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9a9e218d196526630685c9f925804b7549">Quizzy::QuestionTerminee</a></div><div class="ttdeci">@ QuestionTerminee</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00045">quizzy.h:45</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a3f071e2693c95d1b44c41d2c1281fdb9ad316fc61a22113617e29169ac8c72a2a"><div class="ttname"><a href="class_quizzy.html#a3f071e2693c95d1b44c41d2c1281fdb9ad316fc61a22113617e29169ac8c72a2a">Quizzy::ParticipantsAjoutes</a></div><div class="ttdeci">@ ParticipantsAjoutes</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00041">quizzy.h:41</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a40c68331a0ae612d338069505bedcef4"><div class="ttname"><a href="class_quizzy.html#a40c68331a0ae612d338069505bedcef4">Quizzy::~Quizzy</a></div><div class="ttdeci">~Quizzy()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00023">quizzy.cpp:23</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a4153725e1cae043a142f9ce3b5fdd194"><div class="ttname"><a href="class_quizzy.html#a4153725e1cae043a142f9ce3b5fdd194">Quizzy::ajouterQuestion</a></div><div class="ttdeci">void ajouterQuestion(QString libelle, QStringList propositions, int reponseValide, int temps)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00149">quizzy.cpp:149</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a49ff7cc8a42bbb9fb62e14cd0733a770"><div class="ttname"><a href="class_quizzy.html#a49ff7cc8a42bbb9fb62e14cd0733a770">Quizzy::participantAjoute</a></div><div class="ttdeci">void participantAjoute(QString pidJoueur, QString nomParticipant)</div></div>
+<div class="ttc" id="aclass_quizzy_html_a4ca07b1b2b3679318fd2a6b80a82c7ef"><div class="ttname"><a href="class_quizzy.html#a4ca07b1b2b3679318fd2a6b80a82c7ef">Quizzy::questionTerminee</a></div><div class="ttdeci">void questionTerminee()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a4f1dc5d0f0292dd55b708a25f0604937"><div class="ttname"><a href="class_quizzy.html#a4f1dc5d0f0292dd55b708a25f0604937">Quizzy::lancementQuiz</a></div><div class="ttdeci">void lancementQuiz()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a51274ec3ea055c92663ae28aa8bde02f"><div class="ttname"><a href="class_quizzy.html#a51274ec3ea055c92663ae28aa8bde02f">Quizzy::questionAjoutee</a></div><div class="ttdeci">void questionAjoutee()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a57ad74c9f9f51674f736c9f0166f16a5"><div class="ttname"><a href="class_quizzy.html#a57ad74c9f9f51674f736c9f0166f16a5">Quizzy::Quizzy</a></div><div class="ttdeci">Quizzy(QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00015">quizzy.cpp:15</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a626112e901ca6d072fa032b12e5012c4"><div class="ttname"><a href="class_quizzy.html#a626112e901ca6d072fa032b12e5012c4">Quizzy::terminerQuestion</a></div><div class="ttdeci">void terminerQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00180">quizzy.cpp:180</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a649aac0c0acba89ffa64e2bb78df8d66"><div class="ttname"><a href="class_quizzy.html#a649aac0c0acba89ffa64e2bb78df8d66">Quizzy::getIndexQuestionActuelle</a></div><div class="ttdeci">int getIndexQuestionActuelle() const</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00291">quizzy.cpp:291</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a691e3eea74f427ca856272f4fa8d8022"><div class="ttname"><a href="class_quizzy.html#a691e3eea74f427ca856272f4fa8d8022">Quizzy::getQuestion</a></div><div class="ttdeci">Question * getQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00274">quizzy.cpp:274</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a76baf09ef0d42c08b5005a21f50e3869"><div class="ttname"><a href="class_quizzy.html#a76baf09ef0d42c08b5005a21f50e3869">Quizzy::ajouterParticipant</a></div><div class="ttdeci">void ajouterParticipant(QString pidJoueur, QString participant)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00129">quizzy.cpp:129</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a84cffdc327a3c67db039faa32fb36787"><div class="ttname"><a href="class_quizzy.html#a84cffdc327a3c67db039faa32fb36787">Quizzy::quizTermine</a></div><div class="ttdeci">void quizTermine()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a85ae533a4c1e6eb1b1f2bc2316a7383f"><div class="ttname"><a href="class_quizzy.html#a85ae533a4c1e6eb1b1f2bc2316a7383f">Quizzy::debutQuiz</a></div><div class="ttdeci">void debutQuiz()</div></div>
+<div class="ttc" id="aclass_quizzy_html_a8a28acfa910baaa72226956ea5e2f214"><div class="ttname"><a href="class_quizzy.html#a8a28acfa910baaa72226956ea5e2f214">Quizzy::demarrerQuestion</a></div><div class="ttdeci">void demarrerQuestion()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00170">quizzy.cpp:170</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a8a6194ef3e44eb9db250b5829641d741"><div class="ttname"><a href="class_quizzy.html#a8a6194ef3e44eb9db250b5829641d741">Quizzy::getNbQuestions</a></div><div class="ttdeci">unsigned int getNbQuestions()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00259">quizzy.cpp:259</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a8b1dfc114a032cf81b1cee6b9f7c9450"><div class="ttname"><a href="class_quizzy.html#a8b1dfc114a032cf81b1cee6b9f7c9450">Quizzy::etat</a></div><div class="ttdeci">Etat etat</div><div class="ttdoc">l'état de déroulement du quiz</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00058">quizzy.h:58</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a958b97d0e937c2a24f5c2be4bc60a472"><div class="ttname"><a href="class_quizzy.html#a958b97d0e937c2a24f5c2be4bc60a472">Quizzy::gererDebutQuiz</a></div><div class="ttdeci">void gererDebutQuiz()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00111">quizzy.cpp:111</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a9922c365f7910ae6d69d5e2eaa7c0000"><div class="ttname"><a href="class_quizzy.html#a9922c365f7910ae6d69d5e2eaa7c0000">Quizzy::traiterReponseParticipant</a></div><div class="ttdeci">bool traiterReponseParticipant(Participant *participant, int numeroReponse, int tempsReponse)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00075">quizzy.cpp:75</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a9df7013ad98adc80a20f46d0a5d343a9"><div class="ttname"><a href="class_quizzy.html#a9df7013ad98adc80a20f46d0a5d343a9">Quizzy::passerQuestionSuivante</a></div><div class="ttdeci">void passerQuestionSuivante()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00191">quizzy.cpp:191</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_a9f0b16a0c68a1ef59dd7d29fff5241b6"><div class="ttname"><a href="class_quizzy.html#a9f0b16a0c68a1ef59dd7d29fff5241b6">Quizzy::choixParticipant</a></div><div class="ttdeci">void choixParticipant()</div></div>
+<div class="ttc" id="aclass_quizzy_html_aa267882e59045e7423f290b9e4b98882"><div class="ttname"><a href="class_quizzy.html#aa267882e59045e7423f290b9e4b98882">Quizzy::getNbParticipants</a></div><div class="ttdeci">unsigned int getNbParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00264">quizzy.cpp:264</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_aa5fb10daf518151016a3fb733e75b762"><div class="ttname"><a href="class_quizzy.html#aa5fb10daf518151016a3fb733e75b762">Quizzy::lancer</a></div><div class="ttdeci">void lancer()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00044">quizzy.cpp:44</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_aa908ff9d6a905b2016374e2057c3fd97"><div class="ttname"><a href="class_quizzy.html#aa908ff9d6a905b2016374e2057c3fd97">Quizzy::effacerChoix</a></div><div class="ttdeci">void effacerChoix()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00102">quizzy.cpp:102</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_ab8f632a9b1948fab4b8e040347219de2"><div class="ttname"><a href="class_quizzy.html#ab8f632a9b1948fab4b8e040347219de2">Quizzy::getEtat</a></div><div class="ttdeci">Etat getEtat() const</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00281">quizzy.cpp:281</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_abbfc0d27bb6d4f27d35e6878b45cac64"><div class="ttname"><a href="class_quizzy.html#abbfc0d27bb6d4f27d35e6878b45cac64">Quizzy::getCommunicationTablette</a></div><div class="ttdeci">CommunicationBluetooth * getCommunicationTablette()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00308">quizzy.cpp:308</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_abdae802c9e508120f9c55452598d31fb"><div class="ttname"><a href="class_quizzy.html#abdae802c9e508120f9c55452598d31fb">Quizzy::getChoixParticipants</a></div><div class="ttdeci">QMap&lt; int, QStringList &gt; getChoixParticipants() const</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00286">quizzy.cpp:286</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_ade651161f85d8fcf8847bf04d4c4b290"><div class="ttname"><a href="class_quizzy.html#ade651161f85d8fcf8847bf04d4c4b290">Quizzy::traiterReponse</a></div><div class="ttdeci">void traiterReponse(QString pidJoueur, int numeroReponse, int tempsReponse)</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00212">quizzy.cpp:212</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_ae0d64becb1a4f363f3d19f0c8927b38a"><div class="ttname"><a href="class_quizzy.html#ae0d64becb1a4f363f3d19f0c8927b38a">Quizzy::gererFinQuiz</a></div><div class="ttdeci">void gererFinQuiz()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00242">quizzy.cpp:242</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_ae386ec299dff690055f0779cfc254358"><div class="ttname"><a href="class_quizzy.html#ae386ec299dff690055f0779cfc254358">Quizzy::getParticipants</a></div><div class="ttdeci">QVector&lt; Participant * &gt; getParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00269">quizzy.cpp:269</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_ae9b1cfe36fc0b302792b015d521bb2d0"><div class="ttname"><a href="class_quizzy.html#ae9b1cfe36fc0b302792b015d521bb2d0">Quizzy::initialiserQuiz</a></div><div class="ttdeci">void initialiserQuiz()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00320">quizzy.cpp:320</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_af25fd3ab1c1cd303ed22cb304dbd628f"><div class="ttname"><a href="class_quizzy.html#af25fd3ab1c1cd303ed22cb304dbd628f">Quizzy::initialiserCommunicationTablette</a></div><div class="ttdeci">void initialiserCommunicationTablette()</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8cpp_source.html#l00314">quizzy.cpp:314</a></div></div>
+<div class="ttc" id="aclass_quizzy_html_afca85ccc207c089637c47948dd4cd88b"><div class="ttname"><a href="class_quizzy.html#afca85ccc207c089637c47948dd4cd88b">Quizzy::indexQuestionActuelle</a></div><div class="ttdeci">int indexQuestionActuelle</div><div class="ttdoc">le numéro de question en cours</div><div class="ttdef"><b>Definition:</b> <a href="quizzy_8h_source.html#l00057">quizzy.h:57</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f8595b17f723a3ca19aa5ba6d7441db2.html">quizzy-desktop</a></li><li class="navelem"><a class="el" href="quizzy_8h.html">quizzy.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:04 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

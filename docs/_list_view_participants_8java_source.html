@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de ListViewParticipants.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_list_view_participants_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ListViewParticipants.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_list_view_participants_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.ihm.widgets;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> android.content.Context;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> android.graphics.Color;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> android.graphics.PorterDuff;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> android.view.LayoutInflater;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> android.view.View;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> android.view.ViewGroup;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> android.widget.AdapterView;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> android.widget.BaseAdapter;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> android.widget.ImageView;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> android.widget.ListView;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> android.widget.TextView;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> androidx.appcompat.content.res.AppCompatResources;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">import</span> java.util.ArrayList;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.R;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.communication.bluetooth.Peripherique;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.Parametres;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.receveur.speciales.Participant;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.EtapeSession;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.Session;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html">   28</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html">ListViewParticipants</a> <span class="keyword">extends</span> BaseAdapter {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a7fe109d3078daf933f384a5b46fa9965">   30</a></span>&#160;    <span class="keyword">private</span> Context <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a7fe109d3078daf933f384a5b46fa9965">context</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a233e0c65b8b7fb085946d10c1a1c0859">   31</a></span>&#160;    <span class="keyword">private</span> List&lt;Participant&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a233e0c65b8b7fb085946d10c1a1c0859">participants</a> = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#af51a479e6d46f8f1cda96e56edbba601">   32</a></span>&#160;    <span class="keyword">private</span> ListView <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#af51a479e6d46f8f1cda96e56edbba601">liste</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab0ebd8284cb3839cbc3a68612bbaa2cb">   34</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab0ebd8284cb3839cbc3a68612bbaa2cb">ListViewParticipants</a>(AppCompatActivity activity, <span class="keywordtype">int</span> <span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        this.context = activity.getApplicationContext();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#af51a479e6d46f8f1cda96e56edbba601">liste</a> = activity.findViewById(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a72e3b71546be7fc2b62037218a1a61d0">mettreAjour</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    @Override</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a712e33ef29f8ededd75ece35d91555bd">   41</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a712e33ef29f8ededd75ece35d91555bd">getCount</a>() {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a233e0c65b8b7fb085946d10c1a1c0859">participants</a>.size();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    @Override</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ac3d48326846a126b87d64d2c555193e3">   46</a></span>&#160;    <span class="keyword">public</span> Object[] <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ac3d48326846a126b87d64d2c555193e3">getItem</a>(<span class="keywordtype">int</span> position) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant  = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a233e0c65b8b7fb085946d10c1a1c0859">participants</a>.get(position);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordtype">int</span> score = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">getSession</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#a9557c11067260f776e6d99d408a7fd81">getScore</a>(participant);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordtype">boolean</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">estRepondu</a> = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">estRepondu</a>(participant);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        String description = score + <span class="stringliteral">&quot; points&quot;</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html">Peripherique</a> peripherique = participant.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1_receveur_protocole.html#a94d4fbeff00e355bc1a1b212a966e52c">getPeripherique</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">int</span> logoPeripherique = R.drawable.bumper;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (!peripherique.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html#a1e384d5155dba5ed1cc068d90f584f6a">getNom</a>().startsWith(<span class="stringliteral">&quot;quizzy-p&quot;</span>)) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            logoPeripherique = R.drawable.ecran;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">int</span> couleur = Color.WHITE;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">estRepondu</a>) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">getSession</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#ab1a813f0c233c2197072139bcf529f37">getEtape</a>() == <a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html">EtapeSession</a>.<a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html#abbf5a16149bfc0485b49b6e2d7e35978">PAUSE_FIN_QUESTION</a>) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">getSession</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#a2561060f56c17a608efd917422e88af1">getQuestionActuelle</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html#a13825a164035b720d7546e058167f583">estPropositionValide</a>(participant)) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    couleur = Color.GREEN;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    couleur = Color.RED;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                couleur = Color.YELLOW;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">new</span> Object[] {participant.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html#ae9155195581ea7d3b1ca4f023795c39f">getNom</a>(), description, logoPeripherique, couleur};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">   71</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">estRepondu</a>(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">getSession</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#ab1a813f0c233c2197072139bcf529f37">getEtape</a>() != <a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html">EtapeSession</a>.<a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html#a29a662fc2f6f44f0a035dd825e3871af">ARRET</a>) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">getSession</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#a2561060f56c17a608efd917422e88af1">getQuestionActuelle</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html#ad2b1c8f0e7f39b6f80da6d4f91ab944d">estSelectionne</a>(participant);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    @Override</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a75c17ef0092dcafe5e059219453571b0">   79</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">long</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a75c17ef0092dcafe5e059219453571b0">getItemId</a>(<span class="keywordtype">int</span> position) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> position;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    @Override</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#aeb3289485ecc83e7ef925814fc694a6f">   84</a></span>&#160;    <span class="keyword">public</span> View <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#aeb3289485ecc83e7ef925814fc694a6f">getView</a>(<span class="keywordtype">int</span> position, View convertView, ViewGroup parent) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (convertView == <span class="keyword">null</span>) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            convertView = LayoutInflater.from(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a7fe109d3078daf933f384a5b46fa9965">context</a>).inflate(R.layout.list_items, parent, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        Object[] objet = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ac3d48326846a126b87d64d2c555193e3">getItem</a>(position);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        String nom = (String) objet[0];</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        String description = (String) objet[1];</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">int</span> logoPeripherique = (int) objet[2];</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordtype">int</span> couleur = (int) objet[3];</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        TextView text1 = convertView.findViewById(R.id.text1);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        TextView text2 = convertView.findViewById(R.id.text2);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        ImageView logo_peripherique = convertView.findViewById(R.id.logo_peripherique);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        text1.setText(nom);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        text2.setText(description);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        logo_peripherique.setImageDrawable(AppCompatResources.getDrawable(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a7fe109d3078daf933f384a5b46fa9965">context</a>, logoPeripherique));</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        logo_peripherique.setColorFilter(couleur, PorterDuff.Mode.SRC_ATOP);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">return</span> convertView;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a72e3b71546be7fc2b62037218a1a61d0">  108</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a72e3b71546be7fc2b62037218a1a61d0">mettreAjour</a>() {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        this.participants.clear();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant : <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad619652e6afec692636523013ffa957b">getParticipants</a>()) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">if</span> (participant.getPeripherique() != <span class="keyword">null</span>) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                this.participants.add(participant);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#af51a479e6d46f8f1cda96e56edbba601">liste</a>.setAdapter(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html">fr.hillionj.quizzy.communication.bluetooth.Peripherique</a></div><div class="ttdef"><b>Definition:</b> <a href="_peripherique_8java_source.html#l00023">Peripherique.java:24</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique_html_a1e384d5155dba5ed1cc068d90f584f6a"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html#a1e384d5155dba5ed1cc068d90f584f6a">fr.hillionj.quizzy.communication.bluetooth.Peripherique.getNom</a></div><div class="ttdeci">String getNom()</div><div class="ttdef"><b>Definition:</b> <a href="_peripherique_8java_source.html#l00109">Peripherique.java:109</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants</a></div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00028">ListViewParticipants.java:28</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_a233e0c65b8b7fb085946d10c1a1c0859"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a233e0c65b8b7fb085946d10c1a1c0859">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.participants</a></div><div class="ttdeci">List&lt; Participant &gt; participants</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00031">ListViewParticipants.java:31</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_a712e33ef29f8ededd75ece35d91555bd"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a712e33ef29f8ededd75ece35d91555bd">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.getCount</a></div><div class="ttdeci">int getCount()</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00041">ListViewParticipants.java:41</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_a72e3b71546be7fc2b62037218a1a61d0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a72e3b71546be7fc2b62037218a1a61d0">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.mettreAjour</a></div><div class="ttdeci">void mettreAjour()</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00108">ListViewParticipants.java:108</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_a75c17ef0092dcafe5e059219453571b0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a75c17ef0092dcafe5e059219453571b0">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.getItemId</a></div><div class="ttdeci">long getItemId(int position)</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00079">ListViewParticipants.java:79</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_a7fe109d3078daf933f384a5b46fa9965"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#a7fe109d3078daf933f384a5b46fa9965">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.context</a></div><div class="ttdeci">Context context</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00030">ListViewParticipants.java:30</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_ab0ebd8284cb3839cbc3a68612bbaa2cb"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab0ebd8284cb3839cbc3a68612bbaa2cb">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.ListViewParticipants</a></div><div class="ttdeci">ListViewParticipants(AppCompatActivity activity, int id)</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00034">ListViewParticipants.java:34</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_ab41586aee74976cb7db5fb0754ccdcee"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ab41586aee74976cb7db5fb0754ccdcee">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.estRepondu</a></div><div class="ttdeci">boolean estRepondu(Participant participant)</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00071">ListViewParticipants.java:71</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_ac3d48326846a126b87d64d2c555193e3"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#ac3d48326846a126b87d64d2c555193e3">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.getItem</a></div><div class="ttdeci">Object[] getItem(int position)</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00046">ListViewParticipants.java:46</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_aeb3289485ecc83e7ef925814fc694a6f"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#aeb3289485ecc83e7ef925814fc694a6f">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.getView</a></div><div class="ttdeci">View getView(int position, View convertView, ViewGroup parent)</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00084">ListViewParticipants.java:84</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants_html_af51a479e6d46f8f1cda96e56edbba601"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_participants.html#af51a479e6d46f8f1cda96e56edbba601">fr.hillionj.quizzy.ihm.widgets.ListViewParticipants.liste</a></div><div class="ttdeci">ListView liste</div><div class="ttdef"><b>Definition:</b> <a href="_list_view_participants_8java_source.html#l00032">ListViewParticipants.java:32</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">fr.hillionj.quizzy.parametres.Parametres</a></div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00022">Parametres.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_a1590ee50bd730484f049d7588bf195cb"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a1590ee50bd730484f049d7588bf195cb">fr.hillionj.quizzy.parametres.Parametres.getSession</a></div><div class="ttdeci">Session getSession()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00083">Parametres.java:83</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad619652e6afec692636523013ffa957b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad619652e6afec692636523013ffa957b">fr.hillionj.quizzy.parametres.Parametres.getParticipants</a></div><div class="ttdeci">List&lt; Participant &gt; getParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00071">Parametres.java:71</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad6ba504ec779cb1f118f734b9eb72b2b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">fr.hillionj.quizzy.parametres.Parametres.getParametres</a></div><div class="ttdeci">static Parametres getParametres(AppCompatActivity activite)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00037">Parametres.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1_receveur_protocole_html_a94d4fbeff00e355bc1a1b212a966e52c"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1_receveur_protocole.html#a94d4fbeff00e355bc1a1b212a966e52c">fr.hillionj.quizzy.parametres.receveur.ReceveurProtocole.getPeripherique</a></div><div class="ttdeci">Peripherique getPeripherique()</div><div class="ttdef"><b>Definition:</b> <a href="_receveur_protocole_8java_source.html#l00010">ReceveurProtocole.java:10</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">fr.hillionj.quizzy.parametres.receveur.speciales.Participant</a></div><div class="ttdef"><b>Definition:</b> <a href="_participant_8java_source.html#l00007">Participant.java:7</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant_html_ae9155195581ea7d3b1ca4f023795c39f"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html#ae9155195581ea7d3b1ca4f023795c39f">fr.hillionj.quizzy.parametres.receveur.speciales.Participant.getNom</a></div><div class="ttdeci">String getNom()</div><div class="ttdef"><b>Definition:</b> <a href="_participant_8java_source.html#l00023">Participant.java:23</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html_a2561060f56c17a608efd917422e88af1"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#a2561060f56c17a608efd917422e88af1">fr.hillionj.quizzy.session.Session.getQuestionActuelle</a></div><div class="ttdeci">Question getQuestionActuelle()</div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00203">Session.java:203</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html_a9557c11067260f776e6d99d408a7fd81"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#a9557c11067260f776e6d99d408a7fd81">fr.hillionj.quizzy.session.Session.getScore</a></div><div class="ttdeci">int getScore(Participant participant)</div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00290">Session.java:290</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html_ab1a813f0c233c2197072139bcf529f37"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#ab1a813f0c233c2197072139bcf529f37">fr.hillionj.quizzy.session.Session.getEtape</a></div><div class="ttdeci">EtapeSession getEtape()</div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00278">Session.java:278</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question_html_a13825a164035b720d7546e058167f583"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html#a13825a164035b720d7546e058167f583">fr.hillionj.quizzy.session.contenu.Question.estPropositionValide</a></div><div class="ttdeci">boolean estPropositionValide(Participant participant)</div><div class="ttdef"><b>Definition:</b> <a href="_question_8java_source.html#l00072">Question.java:72</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question_html_ad2b1c8f0e7f39b6f80da6d4f91ab944d"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html#ad2b1c8f0e7f39b6f80da6d4f91ab944d">fr.hillionj.quizzy.session.contenu.Question.estSelectionne</a></div><div class="ttdeci">boolean estSelectionne(Participant participant)</div><div class="ttdef"><b>Definition:</b> <a href="_question_8java_source.html#l00063">Question.java:63</a></div></div>
+<div class="ttc" id="aenumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session_html"><div class="ttname"><a href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html">fr.hillionj.quizzy.session.EtapeSession</a></div><div class="ttdef"><b>Definition:</b> <a href="_etape_session_8java_source.html#l00003">EtapeSession.java:3</a></div></div>
+<div class="ttc" id="aenumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session_html_a29a662fc2f6f44f0a035dd825e3871af"><div class="ttname"><a href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html#a29a662fc2f6f44f0a035dd825e3871af">fr.hillionj.quizzy.session.EtapeSession.ARRET</a></div><div class="ttdeci">ARRET</div><div class="ttdef"><b>Definition:</b> <a href="_etape_session_8java_source.html#l00004">EtapeSession.java:4</a></div></div>
+<div class="ttc" id="aenumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session_html_abbf5a16149bfc0485b49b6e2d7e35978"><div class="ttname"><a href="enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html#abbf5a16149bfc0485b49b6e2d7e35978">fr.hillionj.quizzy.session.EtapeSession.PAUSE_FIN_QUESTION</a></div><div class="ttdeci">PAUSE_FIN_QUESTION</div><div class="ttdef"><b>Definition:</b> <a href="_etape_session_8java_source.html#l00004">EtapeSession.java:4</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_8c4764f68693b82d8531aad504f3b123.html">ihm</a></li><li class="navelem"><a class="el" href="dir_28a3706d5cafdb30da8cdb6814dfd227.html">widgets</a></li><li class="navelem"><a class="el" href="_list_view_participants_8java.html">ListViewParticipants.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:03 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

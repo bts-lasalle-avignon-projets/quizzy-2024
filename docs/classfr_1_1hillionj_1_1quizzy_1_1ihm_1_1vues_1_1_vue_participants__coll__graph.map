@@ -1,0 +1,6 @@
+<map id="fr.hillionj.quizzy.ihm.vues.VueParticipants" name="fr.hillionj.quizzy.ihm.vues.VueParticipants">
+<area shape="rect" id="node1" title=" " alt="" coords="220,263,471,443"/>
+<area shape="rect" id="node2" href="$classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_peripheriques.html" title=" " alt="" coords="5,5,216,200"/>
+<area shape="rect" id="node3" href="$classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_spinner_peripheriques.html" title=" " alt="" coords="240,35,451,171"/>
+<area shape="rect" id="node4" href="$classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_spinner_participants.html" title=" " alt="" coords="475,35,725,171"/>
+</map>

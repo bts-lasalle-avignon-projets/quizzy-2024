@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de participant.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('participant_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">participant.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="participant_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="participant_8h.html">participant.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_participant.html#a6cfb473efb8f6831d294020b636d4029">   17</a></span>&#160;<a class="code" href="class_participant.html#a6cfb473efb8f6831d294020b636d4029">Participant::Participant</a>(<span class="keyword">const</span> QString&amp; nom, <span class="keyword">const</span> QString&amp; idPupitre) :</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    nom(nom), idPupitre(idPupitre), nombreReponsesCorrectes(0)</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_participant.html#afb8c8a103cf97d1bacbd5e3621041522">   25</a></span>&#160;<a class="code" href="class_participant.html#afb8c8a103cf97d1bacbd5e3621041522">Participant::~Participant</a>()</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_participant.html#a670f920c10ec14c9ee5922c9116627c9">   34</a></span>&#160;QString <a class="code" href="class_participant.html#a670f920c10ec14c9ee5922c9116627c9">Participant::getNom</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#a500801f9a9cfc1ce7cbaed95ffd22291">nom</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_participant.html#a211a2a8ff32dde32fa8f5748786e2b2a">   44</a></span>&#160;QString <a class="code" href="class_participant.html#a211a2a8ff32dde32fa8f5748786e2b2a">Participant::getIdPupitre</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#a3d8d6438f9cef3ebb151bebbb9e74857">idPupitre</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_participant.html#ab00879fe95b3ef35cd38b2aca6932475">   54</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_participant.html#ab00879fe95b3ef35cd38b2aca6932475">Participant::getNombreReponsesCorrectes</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#a57006a0cf1425e5beff5fbd4edd017e8">nombreReponsesCorrectes</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_participant.html#a2573050ca5c1b2df331fc8a639970ce0">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_participant.html#a2573050ca5c1b2df331fc8a639970ce0">Participant::incrementerNombreReponsesCorrectes</a>(<span class="keywordtype">int</span> numeroQuestion)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    ++<a class="code" href="class_participant.html#a57006a0cf1425e5beff5fbd4edd017e8">nombreReponsesCorrectes</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_participant.html#ad50197c131b7b24c8c176abdd9539555">questionsCorrectes</a>.push_back(numeroQuestion);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_participant.html#a3c3e06bdc666230d5b598f8df986976d">   68</a></span>&#160;QVector&lt;int&gt; <a class="code" href="class_participant.html#a3c3e06bdc666230d5b598f8df986976d">Participant::getQuestionsCorrectes</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#ad50197c131b7b24c8c176abdd9539555">questionsCorrectes</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_participant.html#a30fa2b8ce5143a3b267b66a3b25e21b6">   73</a></span>&#160;QVector&lt;int&gt; <a class="code" href="class_participant.html#a30fa2b8ce5143a3b267b66a3b25e21b6">Participant::getReponses</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#abe066140333820c095cdec1b83797fba">reponses</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_participant.html#ab166bca90ddaa8783e652cee0c0d459f">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_participant.html#ab166bca90ddaa8783e652cee0c0d459f">Participant::enregistrerReponse</a>(<span class="keywordtype">int</span> reponse, <span class="keywordtype">int</span> tempsReponse)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_participant.html#abe066140333820c095cdec1b83797fba">reponses</a>.push_back(reponse);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="class_participant.html#acabfae7a606d1beb2b2e44ab20c48cce">tempsReponses</a>.push_back(tempsReponse);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_participant.html#afd317ca7a83635bea8164c0dba5f3d22">   84</a></span>&#160;QVector&lt;int&gt; <a class="code" href="class_participant.html#afd317ca7a83635bea8164c0dba5f3d22">Participant::getTempsReponses</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_participant.html#acabfae7a606d1beb2b2e44ab20c48cce">tempsReponses</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="ttc" id="aclass_participant_html_a211a2a8ff32dde32fa8f5748786e2b2a"><div class="ttname"><a href="class_participant.html#a211a2a8ff32dde32fa8f5748786e2b2a">Participant::getIdPupitre</a></div><div class="ttdeci">QString getIdPupitre() const</div><div class="ttdoc">Accesseur de l'attribut idPupitre.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00044">participant.cpp:44</a></div></div>
+<div class="ttc" id="aclass_participant_html_a2573050ca5c1b2df331fc8a639970ce0"><div class="ttname"><a href="class_participant.html#a2573050ca5c1b2df331fc8a639970ce0">Participant::incrementerNombreReponsesCorrectes</a></div><div class="ttdeci">void incrementerNombreReponsesCorrectes(int numeroQuestion)</div><div class="ttdoc">Incrémente le nombre de bonnes réponses.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00062">participant.cpp:62</a></div></div>
+<div class="ttc" id="aclass_participant_html_a30fa2b8ce5143a3b267b66a3b25e21b6"><div class="ttname"><a href="class_participant.html#a30fa2b8ce5143a3b267b66a3b25e21b6">Participant::getReponses</a></div><div class="ttdeci">QVector&lt; int &gt; getReponses() const</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00073">participant.cpp:73</a></div></div>
+<div class="ttc" id="aclass_participant_html_a3c3e06bdc666230d5b598f8df986976d"><div class="ttname"><a href="class_participant.html#a3c3e06bdc666230d5b598f8df986976d">Participant::getQuestionsCorrectes</a></div><div class="ttdeci">QVector&lt; int &gt; getQuestionsCorrectes() const</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00068">participant.cpp:68</a></div></div>
+<div class="ttc" id="aclass_participant_html_a3d8d6438f9cef3ebb151bebbb9e74857"><div class="ttname"><a href="class_participant.html#a3d8d6438f9cef3ebb151bebbb9e74857">Participant::idPupitre</a></div><div class="ttdeci">QString idPupitre</div><div class="ttdoc">l'id du pupitre</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00030">participant.h:30</a></div></div>
+<div class="ttc" id="aclass_participant_html_a500801f9a9cfc1ce7cbaed95ffd22291"><div class="ttname"><a href="class_participant.html#a500801f9a9cfc1ce7cbaed95ffd22291">Participant::nom</a></div><div class="ttdeci">QString nom</div><div class="ttdoc">le nom du participant</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00029">participant.h:29</a></div></div>
+<div class="ttc" id="aclass_participant_html_a57006a0cf1425e5beff5fbd4edd017e8"><div class="ttname"><a href="class_participant.html#a57006a0cf1425e5beff5fbd4edd017e8">Participant::nombreReponsesCorrectes</a></div><div class="ttdeci">unsigned int nombreReponsesCorrectes</div><div class="ttdoc">le nombre de bonnes réponses</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00031">participant.h:31</a></div></div>
+<div class="ttc" id="aclass_participant_html_a670f920c10ec14c9ee5922c9116627c9"><div class="ttname"><a href="class_participant.html#a670f920c10ec14c9ee5922c9116627c9">Participant::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Retourne le nom du paricipant.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00034">participant.cpp:34</a></div></div>
+<div class="ttc" id="aclass_participant_html_a6cfb473efb8f6831d294020b636d4029"><div class="ttname"><a href="class_participant.html#a6cfb473efb8f6831d294020b636d4029">Participant::Participant</a></div><div class="ttdeci">Participant(const QString &amp;nom, const QString &amp;idPupitre)</div><div class="ttdoc">Constructeur de la classe Participant.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00017">participant.cpp:17</a></div></div>
+<div class="ttc" id="aclass_participant_html_ab00879fe95b3ef35cd38b2aca6932475"><div class="ttname"><a href="class_participant.html#ab00879fe95b3ef35cd38b2aca6932475">Participant::getNombreReponsesCorrectes</a></div><div class="ttdeci">unsigned int getNombreReponsesCorrectes() const</div><div class="ttdoc">Constructeur de la classe IHMQuizzy.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00054">participant.cpp:54</a></div></div>
+<div class="ttc" id="aclass_participant_html_ab166bca90ddaa8783e652cee0c0d459f"><div class="ttname"><a href="class_participant.html#ab166bca90ddaa8783e652cee0c0d459f">Participant::enregistrerReponse</a></div><div class="ttdeci">void enregistrerReponse(int reponse, int tempsReponse)</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00078">participant.cpp:78</a></div></div>
+<div class="ttc" id="aclass_participant_html_abe066140333820c095cdec1b83797fba"><div class="ttname"><a href="class_participant.html#abe066140333820c095cdec1b83797fba">Participant::reponses</a></div><div class="ttdeci">QVector&lt; int &gt; reponses</div><div class="ttdoc">les choix des participants aux questions</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00032">participant.h:32</a></div></div>
+<div class="ttc" id="aclass_participant_html_acabfae7a606d1beb2b2e44ab20c48cce"><div class="ttname"><a href="class_participant.html#acabfae7a606d1beb2b2e44ab20c48cce">Participant::tempsReponses</a></div><div class="ttdeci">QVector&lt; int &gt; tempsReponses</div><div class="ttdoc">les temps de réponse</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00033">participant.h:33</a></div></div>
+<div class="ttc" id="aclass_participant_html_ad50197c131b7b24c8c176abdd9539555"><div class="ttname"><a href="class_participant.html#ad50197c131b7b24c8c176abdd9539555">Participant::questionsCorrectes</a></div><div class="ttdeci">QVector&lt; int &gt; questionsCorrectes</div><div class="ttdoc">les numéros des réponses correctes</div><div class="ttdef"><b>Definition:</b> <a href="participant_8h_source.html#l00034">participant.h:34</a></div></div>
+<div class="ttc" id="aclass_participant_html_afb8c8a103cf97d1bacbd5e3621041522"><div class="ttname"><a href="class_participant.html#afb8c8a103cf97d1bacbd5e3621041522">Participant::~Participant</a></div><div class="ttdeci">~Participant()</div><div class="ttdoc">Destructeur de la classe Participant.</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00025">participant.cpp:25</a></div></div>
+<div class="ttc" id="aclass_participant_html_afd317ca7a83635bea8164c0dba5f3d22"><div class="ttname"><a href="class_participant.html#afd317ca7a83635bea8164c0dba5f3d22">Participant::getTempsReponses</a></div><div class="ttdeci">QVector&lt; int &gt; getTempsReponses() const</div><div class="ttdef"><b>Definition:</b> <a href="participant_8cpp_source.html#l00084">participant.cpp:84</a></div></div>
+<div class="ttc" id="aparticipant_8h_html"><div class="ttname"><a href="participant_8h.html">participant.h</a></div><div class="ttdoc">Déclaration de la classe Participant.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f8595b17f723a3ca19aa5ba6d7441db2.html">quizzy-desktop</a></li><li class="navelem"><a class="el" href="participant_8cpp.html">participant.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:03 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

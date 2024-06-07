@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de VueHistorique.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_vue_historique_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">VueHistorique.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_vue_historique_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacefr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues.html">    1</a></span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.ihm.vues;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> android.os.Bundle;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> androidx.activity.EdgeToEdge;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> androidx.annotation.Nullable;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> androidx.core.graphics.Insets;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> androidx.core.view.ViewCompat;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> androidx.core.view.WindowInsetsCompat;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.R;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.widgets.ListViewQuestions;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.Parametres;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.Session;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html">   18</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html">VueHistorique</a> <span class="keyword">extends</span> AppCompatActivity {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    @Override</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html#a605499652b0884a1bfb3b180ada91b77">   21</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html#a605499652b0884a1bfb3b180ada91b77">onCreate</a>(@Nullable Bundle savedInstanceState) {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        super.onCreate(savedInstanceState);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        EdgeToEdge.enable(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        setContentView(R.layout.activite_historique);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -&gt; {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            return insets;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        });</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">int</span> idEvaluation = getIntent().getExtras().getInt(<span class="stringliteral">&quot;idEvaluation&quot;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a> session = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad873d9c7e28ff56e1f8010fb1764fdc7">getBaseDeDonnees</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7f77779b1266e5d3d989b008e67904c2">getSession</a>(idEvaluation);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_questions.html">ListViewQuestions</a>(<span class="keyword">this</span>, R.id.liste_resultats, session);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a7f77779b1266e5d3d989b008e67904c2"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7f77779b1266e5d3d989b008e67904c2">fr.hillionj.quizzy.bdd.BaseDeDonnees.getSession</a></div><div class="ttdeci">Session getSession(int idEvaluation)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00177">BaseDeDonnees.java:177</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html">fr.hillionj.quizzy.ihm.vues.VueHistorique</a></div><div class="ttdef"><b>Definition:</b> <a href="_vue_historique_8java_source.html#l00018">VueHistorique.java:18</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique_html_a605499652b0884a1bfb3b180ada91b77"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1vues_1_1_vue_historique.html#a605499652b0884a1bfb3b180ada91b77">fr.hillionj.quizzy.ihm.vues.VueHistorique.onCreate</a></div><div class="ttdeci">void onCreate(@Nullable Bundle savedInstanceState)</div><div class="ttdef"><b>Definition:</b> <a href="_vue_historique_8java_source.html#l00021">VueHistorique.java:21</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_questions_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1widgets_1_1_list_view_questions.html">fr.hillionj.quizzy.ihm.widgets.ListViewQuestions</a></div><div class="ttdef"><b>Definition:</b> <a href="_list_view_questions_8java_source.html#l00028">ListViewQuestions.java:28</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">fr.hillionj.quizzy.parametres.Parametres</a></div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00022">Parametres.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad6ba504ec779cb1f118f734b9eb72b2b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">fr.hillionj.quizzy.parametres.Parametres.getParametres</a></div><div class="ttdeci">static Parametres getParametres(AppCompatActivity activite)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00037">Parametres.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad873d9c7e28ff56e1f8010fb1764fdc7"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad873d9c7e28ff56e1f8010fb1764fdc7">fr.hillionj.quizzy.parametres.Parametres.getBaseDeDonnees</a></div><div class="ttdeci">BaseDeDonnees getBaseDeDonnees()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00142">Parametres.java:142</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">fr.hillionj.quizzy.session.Session</a></div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00026">Session.java:26</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_8c4764f68693b82d8531aad504f3b123.html">ihm</a></li><li class="navelem"><a class="el" href="dir_40dd70ce5c3cad031f96e4ca87ccdb8d.html">vues</a></li><li class="navelem"><a class="el" href="_vue_historique_8java.html">VueHistorique.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:04 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

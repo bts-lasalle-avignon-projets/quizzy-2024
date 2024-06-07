@@ -1,0 +1,11 @@
+<map id="fr.hillionj.quizzy.session.Session" name="fr.hillionj.quizzy.session.Session">
+<area shape="rect" id="node1" title=" " alt="" coords="469,453,687,868"/>
+<area shape="rect" id="node3" href="$classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html" title=" " alt="" coords="150,931,385,1331"/>
+<area shape="rect" id="node8" href="$classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_gestionnaire_protocoles.html" title=" " alt="" coords="601,1011,905,1250"/>
+<area shape="rect" id="node2" href="$classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html" title=" " alt="" coords="417,1393,667,1691"/>
+<area shape="rect" id="node6" href="$classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html" title=" " alt="" coords="629,1753,855,2065"/>
+<area shape="rect" id="node4" href="$classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_theme.html" title=" " alt="" coords="231,130,467,266"/>
+<area shape="rect" id="node5" href="$classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html" title=" " alt="" coords="5,5,207,391"/>
+<area shape="rect" id="node7" href="$classfr_1_1hillionj_1_1quizzy_1_1son_1_1_gestionnaire_sonore.html" title=" " alt="" coords="698,71,935,325"/>
+<area shape="rect" id="node9" href="$enumfr_1_1hillionj_1_1quizzy_1_1session_1_1_etape_session.html" title=" " alt="" coords="491,130,673,266"/>
+</map>

@@ -1,0 +1,425 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de communicationbluetooth.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('communicationbluetooth_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">communicationbluetooth.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="communicationbluetooth_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="communicationbluetooth_8h.html">communicationbluetooth.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#aa759c75b0df7f7e237eec495f156bba0">   15</a></span>&#160;<a class="code" href="class_communication_bluetooth.html#aa759c75b0df7f7e237eec495f156bba0">CommunicationBluetooth::CommunicationBluetooth</a>(<a class="code" href="class_q_object.html">QObject</a>* parent) :</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_q_object.html">QObject</a>(parent), serveurBluetooth(nullptr), socketTablette(nullptr),</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    connecte(false)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a7b368ed817dac970e7c777c3aa532ef6">initialiserFormatTrame</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a88d13c33292ede32117f9679c0a505dd">verifierBluetooth</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a13c72d24359f40c204e94f3ef1ab6fd3">   29</a></span>&#160;<a class="code" href="class_communication_bluetooth.html#a13c72d24359f40c204e94f3ef1ab6fd3">CommunicationBluetooth::~CommunicationBluetooth</a>()</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a88d13c33292ede32117f9679c0a505dd">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a88d13c33292ede32117f9679c0a505dd">CommunicationBluetooth::verifierBluetooth</a>()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.isValid())</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Bluetooth disponible&quot;</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_communication_bluetooth.html#a854a15357eb742c0aff3632b023eb2ce">activerBluetooth</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_communication_bluetooth.html#ae29147cff21dccdef0e57003cb31a9a2">lireNomAppareil</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="class_communication_bluetooth.html#abb54c2a32f5581f4509e9f7a811b26f6">rendreAppareilVisible</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Bluetooth n&#39;est pas disponible.&quot;</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a854a15357eb742c0aff3632b023eb2ce">   49</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a854a15357eb742c0aff3632b023eb2ce">CommunicationBluetooth::activerBluetooth</a>()</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.powerOn();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Bluetooth activé.&quot;</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#ae29147cff21dccdef0e57003cb31a9a2">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#ae29147cff21dccdef0e57003cb31a9a2">CommunicationBluetooth::lireNomAppareil</a>()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_communication_bluetooth.html#ae9a5478c2dbf273ead9d71ddcdec759f">nomAppareilLocal</a>     = <a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.name();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a2efd2ca8981a0af7e6a140e54e068904">adresseAppareilLocal</a> = <a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.address();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    QString adresseMAC   = <a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.address().toString();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;nomAppareilLocal&quot;</span> &lt;&lt; <a class="code" href="class_communication_bluetooth.html#ae9a5478c2dbf273ead9d71ddcdec759f">nomAppareilLocal</a></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;adresseAppareilLocal&quot;</span> &lt;&lt; <a class="code" href="class_communication_bluetooth.html#a2efd2ca8981a0af7e6a140e54e068904">adresseAppareilLocal</a>.toString();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#abb54c2a32f5581f4509e9f7a811b26f6">   64</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#abb54c2a32f5581f4509e9f7a811b26f6">CommunicationBluetooth::rendreAppareilVisible</a>()</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.setHostMode(QBluetoothLocalDevice::HostDiscoverable);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a1e5e02168564c898147f19cf5257874a">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a1e5e02168564c898147f19cf5257874a">CommunicationBluetooth::demarrerServeur</a>()</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.isValid())</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a> =</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;          <span class="keyword">new</span> QBluetoothServer(QBluetoothServiceInfo::RfcommProtocol, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        connect(<a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a>,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                SIGNAL(newConnection()),</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                SLOT(<a class="code" href="class_communication_bluetooth.html#ac537b422e95b2ad2dcfed368a99b8190">connecterTablette</a>()));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        QBluetoothUuid uuid(QBluetoothUuid::Rfcomm);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="class_communication_bluetooth.html#a5ee2e50a8558ebb27b72a97343dabbf3">serviceInfo</a> = <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a>-&gt;listen(uuid, <a class="code" href="communicationbluetooth_8h.html#a5b79c49f46d19f23cf9ffdfcf100b423">serviceNom</a>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a15db86c5833c32c094e29f9d39b25d3b">   91</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a15db86c5833c32c094e29f9d39b25d3b">CommunicationBluetooth::arreterServeur</a>()</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">appareilLocal</a>.isValid() || <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// serviceInfo.unregisterService();</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>-&gt;close();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">delete</span> <a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">delete</span> <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#ac537b422e95b2ad2dcfed368a99b8190">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#ac537b422e95b2ad2dcfed368a99b8190">CommunicationBluetooth::connecterTablette</a>()</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a> = <a class="code" href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">serveurBluetooth</a>-&gt;nextPendingConnection();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span>(!<a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_communication_bluetooth.html#adf0d2d7ec30ab641539ffb52a7846217">connecte</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    connect(<a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            SIGNAL(disconnected()),</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            SLOT(<a class="code" href="class_communication_bluetooth.html#abda6c5f7ba9de540464f967c79488f65">deconnecterTablette</a>()));</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    connect(<a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>, SIGNAL(readyRead()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_communication_bluetooth.html#ac6cebddab781ed8ead1b1f8e3e6f69fa">recevoirTrame</a>()));</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    emit <a class="code" href="class_communication_bluetooth.html#a7d18fa040f42b05634063f5d540f5628">tabletteConnectee</a>();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#abda6c5f7ba9de540464f967c79488f65">  126</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#abda6c5f7ba9de540464f967c79488f65">CommunicationBluetooth::deconnecterTablette</a>()</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#adf0d2d7ec30ab641539ffb52a7846217">connecte</a>)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <a class="code" href="class_communication_bluetooth.html#adf0d2d7ec30ab641539ffb52a7846217">connecte</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        emit <a class="code" href="class_communication_bluetooth.html#a6354a8c16358211cb103c0d88f6afedc">tabletteDeconnectee</a>();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#ac6cebddab781ed8ead1b1f8e3e6f69fa">  136</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#ac6cebddab781ed8ead1b1f8e3e6f69fa">CommunicationBluetooth::recevoirTrame</a>()</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    QByteArray donneesRecues;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    donneesRecues = <a class="code" href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">socketTablette</a>-&gt;readAll();</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    QString trame = QString(donneesRecues);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;trame&quot;</span> &lt;&lt; trame;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="class_communication_bluetooth.html#abe9be63aaa0c84aab0378c58bbf75550">separerTrame</a>(trame);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">// Méthodes privées</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#abe9be63aaa0c84aab0378c58bbf75550">  149</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#abe9be63aaa0c84aab0378c58bbf75550">CommunicationBluetooth::separerTrame</a>(QString trameRecue)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;{</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    trameRecue.replace(<span class="stringliteral">&quot;\\n&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    QStringList trames = trameRecue.split(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; trames.size(); ++i)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        QString trame = trames[i];</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        <span class="keywordflow">if</span>(!trame.isEmpty())</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            trame.append(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#a56323f5b80114b6547bebffa6d49780a">verifierTrame</a>(trame))</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <a class="code" href="class_communication_bluetooth.html#a6b53f12131d9323cec8f2a03fe716e6a">decoderTrame</a>(trame);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a56323f5b80114b6547bebffa6d49780a">  167</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_communication_bluetooth.html#a56323f5b80114b6547bebffa6d49780a">CommunicationBluetooth::verifierTrame</a>(<span class="keyword">const</span> QString&amp; trame)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    QRegExp regexTrame(<span class="stringliteral">&quot;^\\$(.*;.*|[^;]*)\n$&quot;</span>);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span>(regexTrame.exactMatch(trame))</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Trame valide&quot;</span>;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="comment">// Vérifier le respect du protocole</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_communication_bluetooth.html#a26675998596d5eccb38eca0f4e430dd1">verifierChampsTrame</a>(trame);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Trame non valide.&quot;</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;}</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a26675998596d5eccb38eca0f4e430dd1">  184</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_communication_bluetooth.html#a26675998596d5eccb38eca0f4e430dd1">CommunicationBluetooth::verifierChampsTrame</a>(QString trame)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    trame.remove(0, 1);                <span class="comment">// supprime le $</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    trame.remove(trame.size() - 1, 1); <span class="comment">// supprime le \n</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">// qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; &quot;Nb séparateurs&quot; &lt;&lt;</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="comment">// trame.count(SEPARATEUR_DE_CHAMPS);</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    QStringList champs         = trame.split(<a class="code" href="communicationbluetooth_8h.html#a6aca035e856502e652346280a2fd9301">SEPARATEUR_DE_CHAMPS</a>);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">int</span>         nombreDeChamps = champs.size();</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; &quot;nombreDeChamps&quot; &lt;&lt; nombreDeChamps;</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;champs&quot;</span> &lt;&lt; champs;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">// vérification du nombre de champs de la trame</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.contains(trame.at(0)) &amp;&amp;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;       <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.value(trame.at(0)) == nombreDeChamps)</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    {</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Trame complète&quot;</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Trame incomplète&quot;</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a7b368ed817dac970e7c777c3aa532ef6">  212</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a7b368ed817dac970e7c777c3aa532ef6">CommunicationBluetooth::initialiserFormatTrame</a>()</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;{</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;L&#39;</span>, 1); <span class="comment">// Lancer un quiz : $L\n</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;      <span class="charliteral">&#39;I&#39;</span>,</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      3); <span class="comment">// Indiquer un participant au quiz : $I;PID;NOM DU JOUEUR\n</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;G&#39;</span>,</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                       8); <span class="comment">// Envoyer une question :</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                           <span class="comment">// $G;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;T&#39;</span>,</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                       1); <span class="comment">// Signaler le démarrage (top) d’une question : $T\n</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;U&#39;</span>, 4); <span class="comment">// Indiquer la réponse choisie par un joueur :</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                                <span class="comment">// $U;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;H&#39;</span>, 1); <span class="comment">// Afficher la réponse : $H\n</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;S&#39;</span>, 1); <span class="comment">// Passer à la question suivante : $S\n</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;P&#39;</span>, 1); <span class="comment">// Revenir à la question précédente : $P\n</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">formatTrame</a>.insert(<span class="charliteral">&#39;F&#39;</span>, 1); <span class="comment">// Finir un quiz : $F\n</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="class_communication_bluetooth.html#a6b53f12131d9323cec8f2a03fe716e6a">  231</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_communication_bluetooth.html#a6b53f12131d9323cec8f2a03fe716e6a">CommunicationBluetooth::decoderTrame</a>(QString trame)</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;{</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    trame.remove(0, 1);                <span class="comment">// supprime le $</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    trame.remove(trame.size() - 1, 1); <span class="comment">// supprime le \n</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    QStringList champs = trame.split(<a class="code" href="communicationbluetooth_8h.html#a6aca035e856502e652346280a2fd9301">SEPARATEUR_DE_CHAMPS</a>);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;champs&quot;</span> &lt;&lt; champs;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    QChar typeTrame = champs[<a class="code" href="communicationbluetooth_8h.html#a8da23fa25560c54c52884746a5d1cc69">TYPE_TRAME</a>].at(0);</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="keywordflow">switch</span>(typeTrame.toLatin1())</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;L&#39;</span>: <span class="comment">// Lancer un quiz : $L\n</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a3cb2b4a0556788d1e8bc684b0560b4b5">debutQuiz</a>();</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;I&#39;</span>: <span class="comment">// Un participant au quiz : $I;PID;NOM DU JOUEUR\n</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a986c7211dd2b0262375e87563045b9db">nouveauParticipant</a>(champs[<a class="code" href="communicationbluetooth_8h.html#a641988bde342d93164751fca00df0c7a">PID_JOUEUR</a>], champs[<a class="code" href="communicationbluetooth_8h.html#afa26baec0528d3988c7306ca680b8787">NOM_JOUEUR</a>]);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;G&#39;</span>: <span class="comment">// Une question :</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                  <span class="comment">// $G;LIBELLE;R1;R2;R3;R4;NUMERO_REP_VALIDE;TEMPS\n</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            QStringList propositions;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            propositions &lt;&lt; champs[<a class="code" href="communicationbluetooth_8h.html#a6c4bc4daafd3935d0172e99e66e0ba8a">PROPOSITION_A</a>] &lt;&lt; champs[<a class="code" href="communicationbluetooth_8h.html#a32bc9a0b94b16ad644d88bc08834b1f9">PROPOSITION_B</a>]</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                         &lt;&lt; champs[<a class="code" href="communicationbluetooth_8h.html#a5062799681ab64e271e7a1cd5e1cb4c2">PROPOSITION_C</a>] &lt;&lt; champs[<a class="code" href="communicationbluetooth_8h.html#ad550554350da259df2a4f90b29eb900b">PROPOSITION_D</a>];</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a462c2af43f18e26647297c77486f0962">nouvelleQuestion</a>(champs[<a class="code" href="communicationbluetooth_8h.html#a9f139fa98c926d05cb2ac7699fe8f4c1">LIBELLE</a>],</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                                  propositions,</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                                  champs[<a class="code" href="communicationbluetooth_8h.html#aa62c61a2410d79eb5ee1a5c48c267115">NUMERO_REPONSE_VALIDE</a>].toInt(),</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                                  champs[<a class="code" href="communicationbluetooth_8h.html#ad67b7981a5b5c479cd25328af2db4a3a">TEMPS</a>].toInt());</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        }</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;T&#39;</span>: <span class="comment">// Signaler le démarrage (top) d’une question : $T\n</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#aa80e95daca072931ec9617215c97cbab">debutQuestion</a>();</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;U&#39;</span>: <span class="comment">// Réponse choisie par un joueur :</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                  <span class="comment">// $U;PID_JOUEUR;NUMÉRO_REPONSE;TEMPS_REPONSE\n</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a5f97de8a91f01c07d588aa207de47047">choixReponse</a>(champs[<a class="code" href="communicationbluetooth_8h.html#a641988bde342d93164751fca00df0c7a">PID_JOUEUR</a>],</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                              champs[<a class="code" href="communicationbluetooth_8h.html#a2f8e4b3c6673d2e2a8e843d78202bb5a">NUMERO_REPONSE_PARTICIPANT</a>].toInt(),</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                              champs[<a class="code" href="communicationbluetooth_8h.html#a7c1f5c3edee4a8135b256e8f9578bed8">TEMPS_REPONSE_PARTICIPANT</a>].toInt());</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;H&#39;</span>: <span class="comment">// Afficher la réponse : $H\n</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#ad3d9939b4125eb8c896fff716f3ccf40">bonneReponse</a>();</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;S&#39;</span>: <span class="comment">// Passer à la question suivante : $S\n</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a8f9e373acd2d21da3736cbe2e252de08">questionSuivante</a>();</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;P&#39;</span>: <span class="comment">// Revenir à la question précédente : $P\n</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#ad603281b2bb67c07d850ec75e51c16d1">questionPrecedente</a>();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;F&#39;</span>: <span class="comment">// Finir un quiz : $F\n</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            emit <a class="code" href="class_communication_bluetooth.html#a1e44f87eb28fb34fa12cbd0f8ecf7e6f">finQuiz</a>();</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;type de trame inconnu !&quot;</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    }</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;}</div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a097c0eb469ab7df0837f9bb86e165531"><div class="ttname"><a href="class_communication_bluetooth.html#a097c0eb469ab7df0837f9bb86e165531">CommunicationBluetooth::socketTablette</a></div><div class="ttdeci">QBluetoothSocket * socketTablette</div><div class="ttdoc">La socket de communication Bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00061">communicationbluetooth.h:61</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a111c1867e2accca638b591d045981f71"><div class="ttname"><a href="class_communication_bluetooth.html#a111c1867e2accca638b591d045981f71">CommunicationBluetooth::formatTrame</a></div><div class="ttdeci">QMap&lt; QChar, int &gt; formatTrame</div><div class="ttdoc">Le format des trames du protocole Quizzy.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00064">communicationbluetooth.h:64</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a13c72d24359f40c204e94f3ef1ab6fd3"><div class="ttname"><a href="class_communication_bluetooth.html#a13c72d24359f40c204e94f3ef1ab6fd3">CommunicationBluetooth::~CommunicationBluetooth</a></div><div class="ttdeci">~CommunicationBluetooth()</div><div class="ttdoc">Destructeur de la classe Participant.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00029">communicationbluetooth.cpp:29</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a15db86c5833c32c094e29f9d39b25d3b"><div class="ttname"><a href="class_communication_bluetooth.html#a15db86c5833c32c094e29f9d39b25d3b">CommunicationBluetooth::arreterServeur</a></div><div class="ttdeci">void arreterServeur()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00091">communicationbluetooth.cpp:91</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a1e44f87eb28fb34fa12cbd0f8ecf7e6f"><div class="ttname"><a href="class_communication_bluetooth.html#a1e44f87eb28fb34fa12cbd0f8ecf7e6f">CommunicationBluetooth::finQuiz</a></div><div class="ttdeci">void finQuiz()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a1e5e02168564c898147f19cf5257874a"><div class="ttname"><a href="class_communication_bluetooth.html#a1e5e02168564c898147f19cf5257874a">CommunicationBluetooth::demarrerServeur</a></div><div class="ttdeci">void demarrerServeur()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00070">communicationbluetooth.cpp:70</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a26675998596d5eccb38eca0f4e430dd1"><div class="ttname"><a href="class_communication_bluetooth.html#a26675998596d5eccb38eca0f4e430dd1">CommunicationBluetooth::verifierChampsTrame</a></div><div class="ttdeci">bool verifierChampsTrame(QString trame) const</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00184">communicationbluetooth.cpp:184</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a2efd2ca8981a0af7e6a140e54e068904"><div class="ttname"><a href="class_communication_bluetooth.html#a2efd2ca8981a0af7e6a140e54e068904">CommunicationBluetooth::adresseAppareilLocal</a></div><div class="ttdeci">QBluetoothAddress adresseAppareilLocal</div><div class="ttdoc">L'adresse MAC du périphérique Bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00059">communicationbluetooth.h:59</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a3747e0dce83f40a11e22ed21bbafab97"><div class="ttname"><a href="class_communication_bluetooth.html#a3747e0dce83f40a11e22ed21bbafab97">CommunicationBluetooth::appareilLocal</a></div><div class="ttdeci">QBluetoothLocalDevice appareilLocal</div><div class="ttdoc">Le périphérique Bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00056">communicationbluetooth.h:56</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a3cb2b4a0556788d1e8bc684b0560b4b5"><div class="ttname"><a href="class_communication_bluetooth.html#a3cb2b4a0556788d1e8bc684b0560b4b5">CommunicationBluetooth::debutQuiz</a></div><div class="ttdeci">void debutQuiz()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a462c2af43f18e26647297c77486f0962"><div class="ttname"><a href="class_communication_bluetooth.html#a462c2af43f18e26647297c77486f0962">CommunicationBluetooth::nouvelleQuestion</a></div><div class="ttdeci">void nouvelleQuestion(QString libelle, QStringList propositions, int numeroReponse, int temps)</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a56323f5b80114b6547bebffa6d49780a"><div class="ttname"><a href="class_communication_bluetooth.html#a56323f5b80114b6547bebffa6d49780a">CommunicationBluetooth::verifierTrame</a></div><div class="ttdeci">bool verifierTrame(const QString &amp;trame) const</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00167">communicationbluetooth.cpp:167</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a5ee2e50a8558ebb27b72a97343dabbf3"><div class="ttname"><a href="class_communication_bluetooth.html#a5ee2e50a8558ebb27b72a97343dabbf3">CommunicationBluetooth::serviceInfo</a></div><div class="ttdeci">QBluetoothServiceInfo serviceInfo</div><div class="ttdoc">Les informations sur le service bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00063">communicationbluetooth.h:63</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a5f97de8a91f01c07d588aa207de47047"><div class="ttname"><a href="class_communication_bluetooth.html#a5f97de8a91f01c07d588aa207de47047">CommunicationBluetooth::choixReponse</a></div><div class="ttdeci">void choixReponse(QString pidJoueur, int numeroReponse, int tempsReponse)</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a6354a8c16358211cb103c0d88f6afedc"><div class="ttname"><a href="class_communication_bluetooth.html#a6354a8c16358211cb103c0d88f6afedc">CommunicationBluetooth::tabletteDeconnectee</a></div><div class="ttdeci">void tabletteDeconnectee()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a6b53f12131d9323cec8f2a03fe716e6a"><div class="ttname"><a href="class_communication_bluetooth.html#a6b53f12131d9323cec8f2a03fe716e6a">CommunicationBluetooth::decoderTrame</a></div><div class="ttdeci">void decoderTrame(QString trame)</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00231">communicationbluetooth.cpp:231</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a7b368ed817dac970e7c777c3aa532ef6"><div class="ttname"><a href="class_communication_bluetooth.html#a7b368ed817dac970e7c777c3aa532ef6">CommunicationBluetooth::initialiserFormatTrame</a></div><div class="ttdeci">void initialiserFormatTrame()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00212">communicationbluetooth.cpp:212</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a7d18fa040f42b05634063f5d540f5628"><div class="ttname"><a href="class_communication_bluetooth.html#a7d18fa040f42b05634063f5d540f5628">CommunicationBluetooth::tabletteConnectee</a></div><div class="ttdeci">void tabletteConnectee()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a854a15357eb742c0aff3632b023eb2ce"><div class="ttname"><a href="class_communication_bluetooth.html#a854a15357eb742c0aff3632b023eb2ce">CommunicationBluetooth::activerBluetooth</a></div><div class="ttdeci">void activerBluetooth()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00049">communicationbluetooth.cpp:49</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a88d13c33292ede32117f9679c0a505dd"><div class="ttname"><a href="class_communication_bluetooth.html#a88d13c33292ede32117f9679c0a505dd">CommunicationBluetooth::verifierBluetooth</a></div><div class="ttdeci">void verifierBluetooth()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00034">communicationbluetooth.cpp:34</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a8f9e373acd2d21da3736cbe2e252de08"><div class="ttname"><a href="class_communication_bluetooth.html#a8f9e373acd2d21da3736cbe2e252de08">CommunicationBluetooth::questionSuivante</a></div><div class="ttdeci">void questionSuivante()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a902d41186f7a156e28daa3b15e6b394e"><div class="ttname"><a href="class_communication_bluetooth.html#a902d41186f7a156e28daa3b15e6b394e">CommunicationBluetooth::serveurBluetooth</a></div><div class="ttdeci">QBluetoothServer * serveurBluetooth</div><div class="ttdoc">Le serveur Bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00060">communicationbluetooth.h:60</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_a986c7211dd2b0262375e87563045b9db"><div class="ttname"><a href="class_communication_bluetooth.html#a986c7211dd2b0262375e87563045b9db">CommunicationBluetooth::nouveauParticipant</a></div><div class="ttdeci">void nouveauParticipant(QString pidJoueur, QString nomJoueur)</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_aa759c75b0df7f7e237eec495f156bba0"><div class="ttname"><a href="class_communication_bluetooth.html#aa759c75b0df7f7e237eec495f156bba0">CommunicationBluetooth::CommunicationBluetooth</a></div><div class="ttdeci">CommunicationBluetooth(QObject *parent=nullptr)</div><div class="ttdoc">Constructeur de la classe CommunicationBluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00015">communicationbluetooth.cpp:15</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_aa80e95daca072931ec9617215c97cbab"><div class="ttname"><a href="class_communication_bluetooth.html#aa80e95daca072931ec9617215c97cbab">CommunicationBluetooth::debutQuestion</a></div><div class="ttdeci">void debutQuestion()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_abb54c2a32f5581f4509e9f7a811b26f6"><div class="ttname"><a href="class_communication_bluetooth.html#abb54c2a32f5581f4509e9f7a811b26f6">CommunicationBluetooth::rendreAppareilVisible</a></div><div class="ttdeci">void rendreAppareilVisible()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00064">communicationbluetooth.cpp:64</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_abda6c5f7ba9de540464f967c79488f65"><div class="ttname"><a href="class_communication_bluetooth.html#abda6c5f7ba9de540464f967c79488f65">CommunicationBluetooth::deconnecterTablette</a></div><div class="ttdeci">void deconnecterTablette()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00126">communicationbluetooth.cpp:126</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_abe9be63aaa0c84aab0378c58bbf75550"><div class="ttname"><a href="class_communication_bluetooth.html#abe9be63aaa0c84aab0378c58bbf75550">CommunicationBluetooth::separerTrame</a></div><div class="ttdeci">void separerTrame(QString trameRecue)</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00149">communicationbluetooth.cpp:149</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ac537b422e95b2ad2dcfed368a99b8190"><div class="ttname"><a href="class_communication_bluetooth.html#ac537b422e95b2ad2dcfed368a99b8190">CommunicationBluetooth::connecterTablette</a></div><div class="ttdeci">void connecterTablette()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00109">communicationbluetooth.cpp:109</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ac6cebddab781ed8ead1b1f8e3e6f69fa"><div class="ttname"><a href="class_communication_bluetooth.html#ac6cebddab781ed8ead1b1f8e3e6f69fa">CommunicationBluetooth::recevoirTrame</a></div><div class="ttdeci">void recevoirTrame()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00136">communicationbluetooth.cpp:136</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ad3d9939b4125eb8c896fff716f3ccf40"><div class="ttname"><a href="class_communication_bluetooth.html#ad3d9939b4125eb8c896fff716f3ccf40">CommunicationBluetooth::bonneReponse</a></div><div class="ttdeci">void bonneReponse()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ad603281b2bb67c07d850ec75e51c16d1"><div class="ttname"><a href="class_communication_bluetooth.html#ad603281b2bb67c07d850ec75e51c16d1">CommunicationBluetooth::questionPrecedente</a></div><div class="ttdeci">void questionPrecedente()</div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_adf0d2d7ec30ab641539ffb52a7846217"><div class="ttname"><a href="class_communication_bluetooth.html#adf0d2d7ec30ab641539ffb52a7846217">CommunicationBluetooth::connecte</a></div><div class="ttdeci">bool connecte</div><div class="ttdoc">L'état de connexion avec la tablette.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00065">communicationbluetooth.h:65</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ae29147cff21dccdef0e57003cb31a9a2"><div class="ttname"><a href="class_communication_bluetooth.html#ae29147cff21dccdef0e57003cb31a9a2">CommunicationBluetooth::lireNomAppareil</a></div><div class="ttdeci">void lireNomAppareil()</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8cpp_source.html#l00055">communicationbluetooth.cpp:55</a></div></div>
+<div class="ttc" id="aclass_communication_bluetooth_html_ae9a5478c2dbf273ead9d71ddcdec759f"><div class="ttname"><a href="class_communication_bluetooth.html#ae9a5478c2dbf273ead9d71ddcdec759f">CommunicationBluetooth::nomAppareilLocal</a></div><div class="ttdeci">QString nomAppareilLocal</div><div class="ttdoc">Le nom du périphérique Bluetooth.</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00057">communicationbluetooth.h:57</a></div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html"><div class="ttname"><a href="communicationbluetooth_8h.html">communicationbluetooth.h</a></div><div class="ttdoc">Déclaration de la classe CommunicationBluetooth.</div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a2f8e4b3c6673d2e2a8e843d78202bb5a"><div class="ttname"><a href="communicationbluetooth_8h.html#a2f8e4b3c6673d2e2a8e843d78202bb5a">NUMERO_REPONSE_PARTICIPANT</a></div><div class="ttdeci">#define NUMERO_REPONSE_PARTICIPANT</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00038">communicationbluetooth.h:38</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a32bc9a0b94b16ad644d88bc08834b1f9"><div class="ttname"><a href="communicationbluetooth_8h.html#a32bc9a0b94b16ad644d88bc08834b1f9">PROPOSITION_B</a></div><div class="ttdeci">#define PROPOSITION_B</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00032">communicationbluetooth.h:32</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a5062799681ab64e271e7a1cd5e1cb4c2"><div class="ttname"><a href="communicationbluetooth_8h.html#a5062799681ab64e271e7a1cd5e1cb4c2">PROPOSITION_C</a></div><div class="ttdeci">#define PROPOSITION_C</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00033">communicationbluetooth.h:33</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a5b79c49f46d19f23cf9ffdfcf100b423"><div class="ttname"><a href="communicationbluetooth_8h.html#a5b79c49f46d19f23cf9ffdfcf100b423">serviceNom</a></div><div class="ttdeci">static const QString serviceNom(QStringLiteral(&quot;quizzy-desktop&quot;))</div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a641988bde342d93164751fca00df0c7a"><div class="ttname"><a href="communicationbluetooth_8h.html#a641988bde342d93164751fca00df0c7a">PID_JOUEUR</a></div><div class="ttdeci">#define PID_JOUEUR</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00027">communicationbluetooth.h:27</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a6aca035e856502e652346280a2fd9301"><div class="ttname"><a href="communicationbluetooth_8h.html#a6aca035e856502e652346280a2fd9301">SEPARATEUR_DE_CHAMPS</a></div><div class="ttdeci">#define SEPARATEUR_DE_CHAMPS</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00022">communicationbluetooth.h:22</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a6c4bc4daafd3935d0172e99e66e0ba8a"><div class="ttname"><a href="communicationbluetooth_8h.html#a6c4bc4daafd3935d0172e99e66e0ba8a">PROPOSITION_A</a></div><div class="ttdeci">#define PROPOSITION_A</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00031">communicationbluetooth.h:31</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a7c1f5c3edee4a8135b256e8f9578bed8"><div class="ttname"><a href="communicationbluetooth_8h.html#a7c1f5c3edee4a8135b256e8f9578bed8">TEMPS_REPONSE_PARTICIPANT</a></div><div class="ttdeci">#define TEMPS_REPONSE_PARTICIPANT</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00039">communicationbluetooth.h:39</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a8da23fa25560c54c52884746a5d1cc69"><div class="ttname"><a href="communicationbluetooth_8h.html#a8da23fa25560c54c52884746a5d1cc69">TYPE_TRAME</a></div><div class="ttdeci">#define TYPE_TRAME</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00025">communicationbluetooth.h:25</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_a9f139fa98c926d05cb2ac7699fe8f4c1"><div class="ttname"><a href="communicationbluetooth_8h.html#a9f139fa98c926d05cb2ac7699fe8f4c1">LIBELLE</a></div><div class="ttdeci">#define LIBELLE</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00030">communicationbluetooth.h:30</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_aa62c61a2410d79eb5ee1a5c48c267115"><div class="ttname"><a href="communicationbluetooth_8h.html#aa62c61a2410d79eb5ee1a5c48c267115">NUMERO_REPONSE_VALIDE</a></div><div class="ttdeci">#define NUMERO_REPONSE_VALIDE</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00035">communicationbluetooth.h:35</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_ad550554350da259df2a4f90b29eb900b"><div class="ttname"><a href="communicationbluetooth_8h.html#ad550554350da259df2a4f90b29eb900b">PROPOSITION_D</a></div><div class="ttdeci">#define PROPOSITION_D</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00034">communicationbluetooth.h:34</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_ad67b7981a5b5c479cd25328af2db4a3a"><div class="ttname"><a href="communicationbluetooth_8h.html#ad67b7981a5b5c479cd25328af2db4a3a">TEMPS</a></div><div class="ttdeci">#define TEMPS</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00036">communicationbluetooth.h:36</a></div></div>
+<div class="ttc" id="acommunicationbluetooth_8h_html_afa26baec0528d3988c7306ca680b8787"><div class="ttname"><a href="communicationbluetooth_8h.html#afa26baec0528d3988c7306ca680b8787">NOM_JOUEUR</a></div><div class="ttdeci">#define NOM_JOUEUR</div><div class="ttdef"><b>Definition:</b> <a href="communicationbluetooth_8h_source.html#l00028">communicationbluetooth.h:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f8595b17f723a3ca19aa5ba6d7441db2.html">quizzy-desktop</a></li><li class="navelem"><a class="el" href="communicationbluetooth_8cpp.html">communicationbluetooth.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:03 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
