@@ -2,11 +2,14 @@
 
 [![qt-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment)
 
-# Le projet QUIZZY 2024 (Version 1.0)
+# Le projet QUIZZY 2024 (version 1.0)
 
-- [Le projet QUIZZY 2024 (Version 1.0)](#le-projet-quizzy-2024-version-10)
+- [Le projet QUIZZY 2024 (version 1.0)](#le-projet-quizzy-2024-version-10)
   - [Présentation](#présentation)
   - [Recette](#recette)
+  - [Screenshots](#screenshots)
+    - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
+    - [Interface participant (Écran)](#interface-participant-écran)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
@@ -24,9 +27,6 @@
     - [Évaluateur -\> Interface de jeu](#évaluateur---interface-de-jeu)
     - [Évaluateur -\> Pupitre](#évaluateur---pupitre)
     - [Pupitre -\> Évaluateur](#pupitre---évaluateur)
-  - [Screenshots](#screenshots)
-    - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
-    - [Interface participant (Écran)](#interface-participant-écran)
   - [Historique des versions](#historique-des-versions)
     - [Version 1.0](#version-10)
       - [Tablette](#tablette)
@@ -54,15 +54,64 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ## Recette
 
-| Fonctionalités                | A faire | En cours | Terminé |
-|-------------------------------|:-------:|:--------:|:-------:|
-| Appairage Bluetooth           |         |          |    X    |
-| Décodage des trames           |         |          |    X    |
-| Envoi de trames               |         |          |    X    |
-| Intéraction BDD               |         |          |    X    |
-| Gestion du chronomètre        |         |          |    X    |
-| Afficher déroulement du quiz  |         |          |    X    |
-| Sauvegarde des résultats      |         |          |    X    |
+- Quizzy-mobile (Java/Android)
+
+| Fonctionalités                          | A faire | En cours | Terminé |
+| --------------------------------------- | :-----: | :------: | :-----: |
+| Sélectionner un quiz                    |         |          |    X    |
+| Gérer le quiz                           |         |          |    X    |
+| Connecter les pupitres des participants |         |          |    X    |
+| Démarrer / Abandonner le quiz           |         |          |    X    |
+| Sauvegarder les résultats               |         |          |    X    |
+| Choisir le thème                        |         |          |    X    |
+| Définir le temps par question           |         |          |    X    |
+
+- Quizzy-desktop (C++/Qt)
+
+| Fonctionalités                  | A faire | En cours | Terminé |
+| ------------------------------- | :-----: | :------: | :-----: |
+| Visualiser et gérer une session |         |          |    X    |
+| Visualiser une question         |         |          |    X    |
+| Visualiser les propositions     |         |          |    X    |
+| Visualiser un compte à rebours  |         |          |    X    |
+| Visualiser les résultats        |         |          |    X    |
+| Dialoguer avec la tablette      |         |          |    X    |
+
+## Screenshots
+
+### Interface Évaluateur (Tablette)
+
+![Gif Quiz Mobile](images/mobile/mobile.gif)
+
+Les différentes vues :
+
+- Accueil (Session, Historique, Crédits)
+- Paramétrage d'une session (Thème, Temps, Nombre de question, Participants)
+- Association des paticipants, connexions aux pupitres et écrans
+- Visualisation et gestion d'une session
+- Historique de partie sauvegardées
+
+Les différentes popups :
+
+*Note :  Les termes entre parenthèses indiquent les boutons permettant d'intéragir avec le popup*
+
+- Aucun participant connecté (Continuer, Configurer, Annuler)
+- Participant non connecté (Connecté, Dissocier, Annuler)
+- Périphérique non configuré (Déconnecter, Configurer, Annuler)
+- Créer un participant (Créer, Annuler)
+- Fin de session (Relancer, Sauvegarder, Quitter)
+- Historique (Visualiser, Supprimer, Fermer)
+- Crédits (Fermer)
+
+### Interface participant (Écran)
+
+![Gif Quiz Desktop](images/QUIZZY-v1.0.gif)
+
+Les différentes vues :
+
+- affichage de la liste des participants en attente du démarrage du quiz
+- affichage du déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
+- affichage des résultats des participants
 
 ## Itérations
 
@@ -126,13 +175,13 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 Détails de la structure :
 
-- 'quiz' contient la liste des questions posées durant une session
-- 'questions' contient la liste des toutes les questions avec ses propositions existantes
-- 'reponses' contient la liste des bonnes et mauvaises reponses des participants par rapport aux questions de chaque sessions
-- 'evaluations' contient la liste de toutes les sessions sauvegardées avec leur horodatage
-- 'themes' contient la liste des themes de questions existantes
-- 'participants' contient la liste des participants
-- 'resultats' contient la liste des score de participants par session
+- `quiz` contient la liste des questions posées durant une session
+- `questions` contient la liste des toutes les questions avec ses propositions existantes
+- `reponses` contient la liste des bonnes et mauvaises reponses des participants par rapport aux questions de chaque sessions
+- `evaluations` contient la liste de toutes les sessions sauvegardées avec leur horodatage
+- `themes` contient la liste des themes de questions existantes
+- `participants` contient la liste des participants
+- `resultats` contient la liste des score de participants par session
 
 ## Protocole
 
@@ -170,42 +219,6 @@ Nom des périphériques Bluetooth :
 |------|--------|-------------|---------|
 | Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n`<br>Acquitter toutes les trames de l’évaluateur|
 | Acquitter | `$A\n`| Acquitter toutes les trames de l’évaluateur | `$A\n` |
-
-## Screenshots
-
-### Interface Évaluateur (Tablette)
-
-![Gif Quiz Mobile](images/mobile/mobile.gif)
-
-Les différentes vues :
-
-- Accueil (Session, Historique, Crédits)
-- Paramétrage d'une session (Thème, Temps, Nombre de question, Participants)
-- Association des paticipants, connexions aux pupitres et écrans
-- Visualisation et gestion d'une session
-- Historique de partie sauvegardées
-
-Les différentes popups :
-
-*Note :  Les termes entre parenthèses indiquent les boutons permettant d'intéragir avec le popup*
-
-- Aucun participant connecté (Continuer, Configurer, Annuler)
-- Participant non connecté (Connecté, Dissocier, Annuler)
-- Périphérique non configuré (Déconnecter, Configurer, Annuler)
-- Créer un participant (Créer, Annuler)
-- Fin de session (Relancer, Sauvegarder, Quitter)
-- Historique (Visualiser, Supprimer, Fermer)
-- Crédits (Fermer)
-
-### Interface participant (Écran)
-
-![Gif Quiz Desktop](images/QUIZZY-v1.0.gif)
-
-Les différentes vues :
-
-- affichage de la liste des participants en attente du démarrage du quiz
-- affichage du déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
-- affichage des résultats des participants
 
 ## Historique des versions
 
