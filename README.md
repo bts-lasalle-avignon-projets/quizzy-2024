@@ -17,6 +17,8 @@
   - [Diagramme de classes](#diagramme-de-classes)
     - [Quizzy-mobile (Java/Android)](#quizzy-mobile-javaandroid-1)
     - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt-1)
+      - [Diagramme des classes](#diagramme-des-classes)
+      - [Diagramme des classes simplifié](#diagramme-des-classes-simplifié)
   - [Protocole](#protocole)
     - [Évaluateur -\> Interface de jeu](#évaluateur---interface-de-jeu)
     - [Évaluateur -\> Pupitre](#évaluateur---pupitre)
@@ -109,7 +111,13 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ### Quizzy-desktop (C++/Qt)
 
-![Qt diagramme de classes](images/Qt_v0.2_diagramme_classes.png)
+#### Diagramme des classes
+
+![Qt diagramme de classes](images/DC_Quizzy_Desktop_1.0.png)
+
+#### Diagramme des classes simplifié
+
+![Qt diagramme de classes](images/DC_relation_Quizzy_Desktop1.0.png)
 
 ## Protocole
 
@@ -176,7 +184,7 @@ Les différentes popups :
 
 ### Interface participant (Écran)
 
-![Gif Quiz Desktop](images/screenshot-quizzy-desktop.gif)
+![Gif Quiz Desktop](images/QUIZZY-v1.0.gif)
 
 Les différentes vues :
 
