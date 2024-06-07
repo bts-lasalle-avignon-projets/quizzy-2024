@@ -42,7 +42,7 @@ public class PopupNonConfigurer extends DialogFragment {
     }
 
     public PopupNonConfigurer(Session session) {
-
+        this.peripherique = getPeripherique();
         this.session = session;
     }
 
