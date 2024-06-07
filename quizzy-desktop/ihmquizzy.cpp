@@ -10,7 +10,7 @@
  *
  * @brief Définition de la classe IHMQuizzy
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 /**
@@ -92,7 +92,8 @@ void IHMQuizzy::afficherPret()
         QPixmap pixmap(CHEMIN_PLAY_VERT);
         infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                           HAUTEUR_LOGO_PLAY,
-                                          Qt::KeepAspectRatio));
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
     }
 }
 
@@ -108,7 +109,8 @@ void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
     QPixmap logoParticipant(CHEMIN_LOGO_PARTICIPANT);
     logoParticipant = logoParticipant.scaled(
       QSize(LARGEUR_LOGO_PARTICIPANT, HAUTEUR_LOGO_PARTICIPANT),
-      Qt::KeepAspectRatio);
+      Qt::KeepAspectRatio,
+      Qt::SmoothTransformation);
 
     labelLogoParticipant->setPixmap(logoParticipant);
     labelLogoParticipant->setAlignment(Qt::AlignRight);
@@ -184,14 +186,16 @@ void IHMQuizzy::afficherConnexion()
             QPixmap pixmap(CHEMIN_PLAY_VERT);
             infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                               HAUTEUR_LOGO_PLAY,
-                                              Qt::KeepAspectRatio));
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
         }
         else
         {
             QPixmap pixmap(CHEMIN_PLAY_ORANGE);
             infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                               HAUTEUR_LOGO_PLAY,
-                                              Qt::KeepAspectRatio));
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
         }
     }
 }
@@ -214,7 +218,8 @@ void IHMQuizzy::afficherDeconnexion()
         QPixmap pixmap(CHEMIN_PLAY_ROUGE);
         infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                           HAUTEUR_LOGO_PLAY,
-                                          Qt::KeepAspectRatio));
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
     }
 }
 
@@ -360,8 +365,10 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
     infoQuiz->setFixedSize(LARGEUR_INFO_QUIZ, HAUTEUR_INFO_QUIZ);
     infoQuiz->setAlignment(Qt::AlignCenter);
     QPixmap pixmap(CHEMIN_PLAY_ORANGE);
-    infoQuiz->setPixmap(
-      pixmap.scaled(LARGEUR_LOGO_PLAY, HAUTEUR_LOGO_PLAY, Qt::KeepAspectRatio));
+    infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                      HAUTEUR_LOGO_PLAY,
+                                      Qt::KeepAspectRatio,
+                                      Qt::SmoothTransformation));
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
@@ -797,14 +804,16 @@ void IHMQuizzy::effacerFenetreParticipants()
         QPixmap pixmap(CHEMIN_PLAY_ORANGE);
         infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                           HAUTEUR_LOGO_PLAY,
-                                          Qt::KeepAspectRatio));
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
     }
     else
     {
         QPixmap pixmap(CHEMIN_PLAY_ROUGE);
         infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
                                           HAUTEUR_LOGO_PLAY,
-                                          Qt::KeepAspectRatio));
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
     }
 }
 

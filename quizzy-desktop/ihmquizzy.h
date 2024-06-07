@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe IHMQuizzy
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 #include <QtWidgets>
@@ -23,7 +23,7 @@
  * @def VERSION_APP
  * @brief La version de l'application
  */
-#define VERSION_APP "0.2"
+#define VERSION_APP "1.0"
 
 /**
  * @def TAILLE_LARGEUR_ECRAN_MIN
@@ -41,7 +41,7 @@
  * @def PLEIN_ECRAN_RASPBERRY_PI
  * @brief Pour le mode plein écran sur la Raspberry Pi
  */
-#define PLEIN_ECRAN_RASPBERRY_PI
+//#define PLEIN_ECRAN_RASPBERRY_PI
 
 /**
  * @def TOP_SECONDE
@@ -131,13 +131,13 @@
  * @def LARGEUR_LOGO_PLAY
  * @brief Pour la largeur du logo play
  */
-#define LARGEUR_LOGO_PLAY 80
+#define LARGEUR_LOGO_PLAY 90
 
 /**
  * @def HAUTEUR_LOGO_PLAY
  * @brief Pour la hauteur du logo play
  */
-#define HAUTEUR_LOGO_PLAY 80
+#define HAUTEUR_LOGO_PLAY 90
 
 /**
  * @def LARGEUR_INFO_QUIZ

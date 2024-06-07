@@ -3,7 +3,7 @@
  *
  * @brief Définition de la classe CommunicationBluetooth
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 #include "communicationbluetooth.h"
 #include <QDebug>

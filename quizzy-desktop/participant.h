@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Participant
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 #include <QString>
