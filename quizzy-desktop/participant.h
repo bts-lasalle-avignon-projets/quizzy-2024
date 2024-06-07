@@ -29,9 +29,9 @@ class Participant
     QString      nom;                     //!< le nom du participant
     QString      idPupitre;               //!< l'id du pupitre
     unsigned int nombreReponsesCorrectes; //!< le nombre de bonnes réponses
-    QVector<int> reponses;
+    QVector<int> reponses;      //!< les choix des participants aux questions
     QVector<int> tempsReponses; //!< les temps de réponse
-    QVector<int> questionsCorrectes;
+    QVector<int> questionsCorrectes; //!< les numéros des réponses correctes
 
   public:
     Participant(const QString& nom, const QString& idPupitre);
