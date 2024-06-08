@@ -28,6 +28,11 @@ classcanvas 128818 class_ref 188338 // themes
   classdiagramsettings member_max_width 0 end
   xyz 321 320 2000
 end
+relationcanvas 128002 relation_ref 182578 // <unidirectional association>
+  from ref 128306 z 2001 to ref 128050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
 relationcanvas 129074 relation_ref 182706 // <unidirectional association>
   from ref 128306 z 2001 to ref 128818
   no_role_a no_role_b

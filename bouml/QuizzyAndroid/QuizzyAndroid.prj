@@ -1,7 +1,7 @@
 format 224
 "QuizzyAndroid"
-  revision 14
-  modified_by 50 "btssn2"
+  revision 15
+  modified_by 2 "RedEstDeRetour"
   java_root_dir "../../"
 
 
@@ -431,6 +431,16 @@ format 224
     classdiagram 161074 "BDD"
       classdiagramsettings member_max_width 0 end
       size A4
+    end
+
+    classdiagram 128002 "Trames"
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size A
+    end
+
+    classdiagram 128130 "IHM"
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size C
     end
   end
 
