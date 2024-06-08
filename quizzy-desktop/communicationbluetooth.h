@@ -61,8 +61,8 @@ class CommunicationBluetooth : public QObject
     QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
     QBluetoothServiceInfo
                      serviceInfo; //!< Les informations sur le service bluetooth
-    QMap<QChar, int> formatTrame;
-    bool             connecte;
+    QMap<QChar, int> formatTrame; //!< Le format des trames du protocole Quizzy
+    bool             connecte;    //!< L'état de connexion avec la tablette
 
     void separerTrame(QString trameRecue);
     bool verifierTrame(const QString& trame) const;

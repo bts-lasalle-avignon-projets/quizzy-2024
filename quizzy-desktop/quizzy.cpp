@@ -1,3 +1,11 @@
+/**
+ * @file quizzy.cpp
+ *
+ * @brief Définition de la classe Quizzy
+ * @author Thomas HNIZDO
+ * @version 1.0
+ */
+
 #include "quizzy.h"
 #include "participant.h"
 #include "question.h"

@@ -27,6 +27,7 @@ class IHMQuizzy
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
 
     messageAttente = new QLabel("", this);
+    messageAttente->setText("En attente de connexion ...");
     messageAttente->setAlignment(Qt::AlignCenter);
 
     layoutAccueil->addWidget(titreFenetreAccueil);
@@ -45,14 +46,19 @@ class IHMQuizzy
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
     infoQuiz = new QLabel(this);
-    infoQuiz->setFixedSize(500, 100);
+    infoQuiz->setFixedSize(LARGEUR_INFO_QUIZ, HAUTEUR_INFO_QUIZ);
     infoQuiz->setAlignment(Qt::AlignCenter);
+    QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+    infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                      HAUTEUR_LOGO_PLAY,
+                                      Qt::KeepAspectRatio,
+                                      Qt::SmoothTransformation));
 !!!156458.cpp!!!	placerWidgetsFenetreParticipants() : void
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
-    layoutInfoQuiz = new QHBoxLayout;
-    layoutInfoQuiz->addStretch();
+    layoutInfoQuiz = new QHBoxLayout();
+    // layoutInfoQuiz->addStretch();
     layoutInfoQuiz->addWidget(infoQuiz);
-    layoutInfoQuiz->addStretch();
+    // layoutInfoQuiz->addStretch();
     layoutPrincipalParticipants->addLayout(layoutInfoQuiz);
 !!!148778.cpp!!!	creerFenetreJeu() : void
     fenetreJeu = new QWidget(this);
@@ -91,15 +97,17 @@ class IHMQuizzy
     // Fenêtre d'accueil
     auto effetAccueil = new QGraphicsDropShadowEffect(messageAttente);
     effetAccueil->setColor(Qt::black);
-    effetAccueil->setBlurRadius(20);
+    effetAccueil->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetAccueil->setOffset(0);
     messageAttente->setGraphicsEffect(effetAccueil);
 
     // Fenêtre Participant
+    layoutPrincipalParticipants->setAlignment(Qt::AlignTop);
+    titreFenetreParticipants->setFixedHeight(HAUTEUR_TITRE);
     auto effetTitreParticipant =
       new QGraphicsDropShadowEffect(titreFenetreParticipants);
     effetTitreParticipant->setColor(Qt::black);
-    effetTitreParticipant->setBlurRadius(20);
+    effetTitreParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetTitreParticipant->setOffset(0);
     titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
 
@@ -144,7 +152,15 @@ class IHMQuizzy
                                                  MARGE_LAYOUT_PROPOSITION,
                                                  0);
 
+    compteARebours->setFixedHeight(HAUTEUR_COMPTE_A_REBOURS);
+
     compteARebours->setAlignment(Qt::AlignCenter);
+    QSizePolicy sizePolicy = compteARebours->sizePolicy();
+    sizePolicy.setRetainSizeWhenHidden(true);
+    compteARebours->setSizePolicy(sizePolicy);
+
+    // Fenêtre des résultats
+    titreFenetreResultats->setFixedHeight(HAUTEUR_TITRE);
 !!!167082.cpp!!!	definirNomsObjets() : void
     // Fenêtre Accueil
     titreFenetreAccueil->setObjectName("titreAccueil");
@@ -218,6 +234,15 @@ class IHMQuizzy
 
     fenetres->addWidget(fenetreResultats);
 !!!167210.cpp!!!	initialiserEvenements() : void
+    // communicationTablette vers ihmQuizzy
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteConnectee()),
+            this,
+            SLOT(afficherConnexion()));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteDeconnectee()),
+            this,
+            SLOT(afficherDeconnexion()));
     // communicationTablette vers quizzy
     // Trame $L
     connect(quizzy->getCommunicationTablette(),
@@ -398,6 +423,22 @@ class IHMQuizzy
         }
     }
     infoQuiz->clear();
+    if(connecte)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
+    else
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
 !!!128642.cpp!!!	effacerFenetreResultats() : void
     qDebug() << Q_FUNC_INFO;
     QLayoutItem* child;
@@ -406,31 +447,42 @@ class IHMQuizzy
         child = layoutPrincipalResultat->itemAt(i);
         if(child->widget() != titreFenetreResultats)
         {
-            delete child->widget();
+            if(child->widget() != nullptr)
+            {
+                delete child->widget();
+            }
+            else if(child->layout() != nullptr)
+            {
+                QLayout*     layout = child->layout();
+                QLayoutItem* item;
+                while((item = layout->takeAt(0)) != nullptr)
+                {
+                    delete item->widget();
+                    delete item;
+                }
+            }
             delete child;
         }
     }
 !!!128770.cpp!!!	afficherNumerosQuestionsCorrectes(inout participant : Participant) : void
     QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
-    QString      texteQuestionsCorrectes = "Numéro des questions correctes : ";
+    QString      texteQuestionsCorrectes = "Questions correctes   ";
     for(int numeroQuestion: questionsCorrectes)
     {
         texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
     }
-    QLabel* labelQuestionsCorrectes = new QLabel(this);
+    labelQuestionsCorrectes = new QLabel(this);
     labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
 
     layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
 !!!128898.cpp!!!	afficherNombreBonnesReponses(inout participant : Participant, in nbQuestions : uint) : void
-    layoutParticipantResultat = new QHBoxLayout;
-
     nomParticipant = new QLabel(this);
     nomParticipant->setText(participant->getNom());
 
     resultatParticipant            = new QLabel(this);
     unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
-    QString      resultat =
-      QString::number(reponsesCorrectes) + "/" + QString::number(nbQuestions);
+    QString resultat = "Score " + QString::number(reponsesCorrectes) + "/" +
+                       QString::number(nbQuestions);
     resultatParticipant->setText(resultat);
 
     layoutParticipantResultat->addWidget(nomParticipant);
@@ -460,8 +512,10 @@ class IHMQuizzy
     afficherFenetre(Fenetre::FenetreResultats);
 !!!168362.cpp!!!	afficherDebutQuiz() : void
     qDebug() << Q_FUNC_INFO;
-    messageAttente->setText("En attente des participants...");
+    etatAttente = EtatAttente::Participants;
+    messageAttente->setText("En attente des participants ...");
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
+    pret = false;
     reinitialiserAffichage();
     afficherFenetreAccueil();
 !!!168490.cpp!!!	afficherLancementQuiz() : void
@@ -469,24 +523,45 @@ class IHMQuizzy
     afficherQuestion();
 !!!168618.cpp!!!	afficherPret() : void
     qDebug() << Q_FUNC_INFO;
-    infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
+    if(connecte)
+    {
+        pret = true;
+        QPixmap pixmap(CHEMIN_PLAY_VERT);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
 !!!168746.cpp!!!	afficherParticipant(in pidJoueur : QString, in nomParticipant : QString) : void
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
              << nomParticipant;
     QWidget* widgetParticipant = new QWidget(this);
-    layoutParticipant          = new QVBoxLayout(widgetParticipant);
+    layoutParticipant          = new QHBoxLayout(widgetParticipant);
     labelParticipant           = new QLabel(nomParticipant, this);
-    labelParticipant->setAlignment(Qt::AlignCenter);
+    labelLogoParticipant       = new QLabel(this);
 
+    QPixmap logoParticipant(CHEMIN_LOGO_PARTICIPANT);
+    logoParticipant = logoParticipant.scaled(
+      QSize(LARGEUR_LOGO_PARTICIPANT, HAUTEUR_LOGO_PARTICIPANT),
+      Qt::KeepAspectRatio,
+      Qt::SmoothTransformation);
+
+    labelLogoParticipant->setPixmap(logoParticipant);
+    labelLogoParticipant->setAlignment(Qt::AlignRight);
+
+    layoutParticipant->addWidget(labelLogoParticipant);
+    layoutParticipant->setAlignment(Qt::AlignTop);
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
     layoutPrincipalParticipants->addWidget(widgetParticipant);
+
     auto effetLabelParticipant =
       new QGraphicsDropShadowEffect(labelParticipant);
     effetLabelParticipant->setColor(Qt::black);
-    effetLabelParticipant->setBlurRadius(20);
+    effetLabelParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
     effetLabelParticipant->setOffset(0);
     labelParticipant->setGraphicsEffect(effetLabelParticipant);
+
     afficherFenetreParticipants();
 !!!168874.cpp!!!	demarrerQuestion() : void
     initialiserChronometre();
@@ -538,10 +613,69 @@ class IHMQuizzy
     {
         qDebug() << Q_FUNC_INFO << "nom" << participant->getNom();
 
+        layoutParticipantResultat = new QHBoxLayout;
+
         afficherNombreBonnesReponses(participant, nbQuestions);
         afficherNumerosQuestionsCorrectes(participant);
+        labelQuestionsCorrectes->setWordWrap(true);
 
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
 
     afficherFenetreResultats();
+!!!135554.cpp!!!	afficherConnexion() : void
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = true;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Connexion)
+        {
+            etatAttente = EtatAttente::Session;
+            messageAttente->setText("En attente de session ...");
+        }
+        else if(etatAttente == EtatAttente::Session)
+        {
+            etatAttente = EtatAttente::Participants;
+            messageAttente->setText("En attente des participants ...");
+        }
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        if(pret)
+        {
+            QPixmap pixmap(CHEMIN_PLAY_VERT);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
+        }
+        else
+        {
+            QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
+        }
+    }
+!!!135682.cpp!!!	afficherDeconnexion() : void
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = false;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Session)
+            etatAttente = EtatAttente::Connexion;
+        else if(etatAttente == EtatAttente::Participants)
+            etatAttente = EtatAttente::Session;
+        messageAttente->setText("En attente de connexion ...");
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }

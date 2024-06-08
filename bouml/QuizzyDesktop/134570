@@ -1,6 +1,6 @@
 format 224
 "quizzy-desktop" // quizzy-desktop
-  revision 7
+  revision 8
   modified_by 2 "btssn2"
   // class settings
   
@@ -156,6 +156,64 @@ ${items}};
 	end
       end
 
+      class 134530 "EtatAttente"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 135426 "Connexion"
+	  public type class_ref 134530 // EtatAttente
+	  init_value " 0"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 135554 "Session"
+	  public type class_ref 134530 // EtatAttente
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 135682 "Participants"
+	  public type class_ref 134530 // EtatAttente
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 135810 "NbEtats"
+	  public type class_ref 134530 // EtatAttente
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
       classrelation 134698 // quizzy (<unidirectional association>)
 	relation 134698 --->
 	  a role_name "quizzy" private
@@ -190,6 +248,39 @@ ${items}};
 	mysql_decl ""
 	MysqlColumn
 	comment "!< pour le temps d'une question"
+      end
+
+      attribute 135938 "connecte"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136066 "pret"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 134658 // etatAttente (<directional composition>)
+	relation 134658 *-->
+	  a role_name "etatAttente" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 134658 // etatAttente (<directional composition>)
+	  b parent class_ref 134530 // EtatAttente
       end
 
       attribute 149034 "fenetres"
@@ -283,7 +374,7 @@ ${items}};
       end
 
       attribute 128002 "layoutParticipant"
-	private explicit_type "QVBoxLayout"
+	private explicit_type "QHBoxLayout"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
@@ -307,6 +398,18 @@ ${items}};
       end
 
       attribute 128130 "labelParticipant"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136194 "labelLogoParticipant"
 	private explicit_type "QLabel"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -742,6 +845,18 @@ ${items}};
 	MysqlColumn
       end
 
+      attribute 136322 "labelQuestionsCorrectes"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       operation 149034 "initialiserFenetres"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
@@ -890,7 +1005,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -1093,7 +1208,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -1107,7 +1222,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -1121,7 +1236,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -1135,8 +1250,8 @@ ${body}}
 	  param inout name "participant" type class_ref 154666 // Participant
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1151,8 +1266,8 @@ ${body}}
 	  param in name "nbQuestions" explicit_type "uint"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1171,7 +1286,7 @@ ${body}}
 //
 //@brief Définition de la classe IHMQuizzy
 //@author Thomas HNIZDO
-//@version 0.2
+//@version 1.0
 //
 //
 //@brief Constructeur de la classe IHMQuizzy
@@ -1182,7 +1297,8 @@ ${body}}
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this)),
+    connecte(false), pret(false), etatAttente(EtatAttente::Connexion)
 ${throw}{
 ${body}}
 "
@@ -1415,11 +1531,39 @@ ${body}}
 	
       end
 
-      classrelation 128002 // <dependency>
-	relation 128002 -_->
+      operation 135554 "afficherConnexion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135682 "afficherDeconnexion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 135170 // <dependency>
+	relation 135170 -_->
 	  a public
 	    cpp default "#include in source"
-	    classrelation_ref 128002 // <dependency>
+	    classrelation_ref 135170 // <dependency>
 	  b parent class_ref 148138 // Fenetre
       end
     end
@@ -2176,12 +2320,20 @@ ${body}}
 	
       end
 
-      classrelation 128130 // <dependency>
-	relation 128130 -_->
+      classrelation 135298 // <dependency>
+	relation 135298 -_->
 	  a public
 	    cpp default "#include in source"
-	    classrelation_ref 128130 // <dependency>
+	    classrelation_ref 135298 // <dependency>
 	  b parent class_ref 154794 // Etat
+      end
+
+      classrelation 135426 // <dependency>
+	relation 135426 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 135426 // <dependency>
+	  b parent class_ref 134530 // EtatAttente
       end
     end
 
@@ -2496,9 +2648,10 @@ ${inlines}
 	comment "!< Les informations sur le service bluetooth"
       end
 
-      attribute 165802 "connecte"
-	private explicit_type "bool"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+      attribute 165930 "formatTrame"
+	private explicit_type "QChar, int"
+	stereotype "QMap"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -2508,10 +2661,9 @@ ${inlines}
 	MysqlColumn
       end
 
-      attribute 165930 "formatTrame"
-	private explicit_type "QChar, int"
-	stereotype "QMap"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+      attribute 165802 "connecte"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
 	java_decl ""
 	php_decl ""
@@ -2609,7 +2761,8 @@ ${body}}
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
-    QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr)
+    QObject(parent), serveurBluetooth(nullptr), socketTablette(nullptr),
+    connecte(false)
 ${throw}{
 ${body}}
 "
@@ -3142,7 +3295,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	

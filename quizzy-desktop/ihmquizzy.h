@@ -41,7 +41,7 @@
  * @def PLEIN_ECRAN_RASPBERRY_PI
  * @brief Pour le mode plein écran sur la Raspberry Pi
  */
-//#define PLEIN_ECRAN_RASPBERRY_PI
+#define PLEIN_ECRAN_RASPBERRY_PI
 
 /**
  * @def TOP_SECONDE
@@ -214,6 +214,11 @@ class IHMQuizzy : public QWidget
         FenetreResultats,
         NbEcrans
     };
+    /**
+     * @enum EtatAttente
+     * @brief Définit les états d'attente dans la fenêtre d'accueil
+     *
+     */
     enum EtatAttente
     {
         Connexion = 0,
@@ -226,9 +231,9 @@ class IHMQuizzy : public QWidget
     Quizzy*     quizzy;           //!< association vers la classe Quizzy
     QTimer*     minuteur;         //!< pour gérer le temps d'une question
     int         decompteQuestion; //!< pour le temps d'une question
-    bool        connecte;
-    bool        pret;
-    EtatAttente etatAttente;
+    bool        connecte;         //!< l'état de conexxion bluetooth
+    bool        pret;             //!< pour démarrer un quiz
+    EtatAttente etatAttente; //!< état d'attente dans la fenêtre d'accueil
     // Les ressources de la GUI
     QStackedWidget* fenetres;
     // FenetreAccueil

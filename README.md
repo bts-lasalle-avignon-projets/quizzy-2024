@@ -2,11 +2,14 @@
 
 [![qt-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/quizzy-2024/actions/workflows/pages/pages-build-deployment)
 
-# Le projet QUIZZY 2024 (Version 0.2)
+# Le projet QUIZZY 2024 (version 1.0)
 
-- [Le projet QUIZZY 2024 (Version 0.2)](#le-projet-quizzy-2024-version-02)
+- [Le projet QUIZZY 2024 (version 1.0)](#le-projet-quizzy-2024-version-10)
   - [Présentation](#présentation)
   - [Recette](#recette)
+  - [Screenshots](#screenshots)
+    - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
+    - [Interface participant (Écran)](#interface-participant-écran)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
@@ -17,20 +20,23 @@
   - [Diagramme de classes](#diagramme-de-classes)
     - [Quizzy-mobile (Java/Android)](#quizzy-mobile-javaandroid-1)
     - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt-1)
+      - [Diagramme des classes](#diagramme-des-classes)
+      - [Diagramme des classes simplifié](#diagramme-des-classes-simplifié)
+  - [Base de données](#base-de-données)
   - [Protocole](#protocole)
     - [Évaluateur -\> Interface de jeu](#évaluateur---interface-de-jeu)
     - [Évaluateur -\> Pupitre](#évaluateur---pupitre)
     - [Pupitre -\> Évaluateur](#pupitre---évaluateur)
-  - [Screenshots](#screenshots)
-    - [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
-    - [Interface participant (Écran)](#interface-participant-écran)
   - [Historique des versions](#historique-des-versions)
-    - [Version 0.2](#version-02)
+    - [Version 1.0](#version-10)
       - [Tablette](#tablette)
       - [Écran](#écran)
-    - [Version 0.1](#version-01)
+    - [Version 0.2](#version-02)
       - [Tablette](#tablette-1)
       - [Écran](#écran-1)
+    - [Version 0.1](#version-01)
+      - [Tablette](#tablette-2)
+      - [Écran](#écran-2)
   - [Documentation du code](#documentation-du-code)
   - [Auteurs](#auteurs)
 
@@ -48,15 +54,64 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ## Recette
 
-| Fonctionalités                | A faire | En cours | Terminé |
-|-------------------------------|:-------:|:--------:|:-------:|
-| Appairage Bluetooth           |         |          |    X    |
-| Décodage des trames           |         |          |    X    |
-| Envoi de trames               |         |          |    X    |
-| Intéraction BDD               |         |          |    X    |
-| Gestion du chronomètre        |         |          |    X    |
-| Afficher déroulement du quiz  |         |    X     |         |
-| Sauvegarde des résultats      |         |    X     |         |
+- Quizzy-mobile (Java/Android)
+
+| Fonctionalités                          | A faire | En cours | Terminé |
+| --------------------------------------- | :-----: | :------: | :-----: |
+| Sélectionner un quiz                    |         |          |    X    |
+| Gérer le quiz                           |         |          |    X    |
+| Connecter les pupitres des participants |         |          |    X    |
+| Démarrer / Abandonner le quiz           |         |          |    X    |
+| Sauvegarder les résultats               |         |          |    X    |
+| Choisir le thème                        |         |          |    X    |
+| Définir le temps par question           |         |          |    X    |
+
+- Quizzy-desktop (C++/Qt)
+
+| Fonctionalités                  | A faire | En cours | Terminé |
+| ------------------------------- | :-----: | :------: | :-----: |
+| Visualiser et gérer une session |         |          |    X    |
+| Visualiser une question         |         |          |    X    |
+| Visualiser les propositions     |         |          |    X    |
+| Visualiser un compte à rebours  |         |          |    X    |
+| Visualiser les résultats        |         |          |    X    |
+| Dialoguer avec la tablette      |         |          |    X    |
+
+## Screenshots
+
+### Interface Évaluateur (Tablette)
+
+![Gif Quiz Mobile](images/mobile/mobile.gif)
+
+Les différentes vues :
+
+- Accueil (Session, Historique, Crédits)
+- Paramétrage d'une session (Thème, Temps, Nombre de question, Participants)
+- Association des paticipants, connexions aux pupitres et écrans
+- Visualisation et gestion d'une session
+- Historique de partie sauvegardées
+
+Les différentes popups :
+
+*Note :  Les termes entre parenthèses indiquent les boutons permettant d'intéragir avec le popup*
+
+- Aucun participant connecté (Continuer, Configurer, Annuler)
+- Participant non connecté (Connecté, Dissocier, Annuler)
+- Périphérique non configuré (Déconnecter, Configurer, Annuler)
+- Créer un participant (Créer, Annuler)
+- Fin de session (Relancer, Sauvegarder, Quitter)
+- Historique (Visualiser, Supprimer, Fermer)
+- Crédits (Fermer)
+
+### Interface participant (Écran)
+
+![Gif Quiz Desktop](images/QUIZZY-v1.0.gif)
+
+Les différentes vues :
+
+- affichage de la liste des participants en attente du démarrage du quiz
+- affichage du déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
+- affichage des résultats des participants
 
 ## Itérations
 
@@ -86,6 +141,8 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 - **Effectuer plusieurs quiz** : La possibilité d'enchaîner plusieurs quiz
 - **Mettre en forme l'affichage** : La mise en forme pour un grand écran
 
+![Tickets Jira](images/Jira_v1.0.png)
+
 ## Diagramme de cas d'utilisation
 
 ### Quizzy-mobile (Java/Android)
@@ -100,11 +157,31 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 
 ### Quizzy-mobile (Java/Android)
 
-![Android diagramme de classes](images/Android_v0.2_diagramme_de%20classes.png)
+![Android diagramme de classes](images/Android_v1.0_diagramme_de%20classes.png)
 
 ### Quizzy-desktop (C++/Qt)
 
-![Qt diagramme de classes](images/Qt_v0.2_diagramme_classes.png)
+#### Diagramme des classes
+
+![Qt diagramme de classes](images/DC_Quizzy_Desktop_1.0.png)
+
+#### Diagramme des classes simplifié
+
+![Qt diagramme de classes](images/DC_relation_Quizzy_Desktop1.0.png)
+
+## Base de données
+
+![base de donees](/images/Android_v1.0_stucture_bdd.png)
+
+Détails de la structure :
+
+- `quiz` contient la liste des questions posées durant une session
+- `questions` contient la liste des toutes les questions avec ses propositions existantes
+- `reponses` contient la liste des bonnes et mauvaises reponses des participants par rapport aux questions de chaque sessions
+- `evaluations` contient la liste de toutes les sessions sauvegardées avec leur horodatage
+- `themes` contient la liste des themes de questions existantes
+- `participants` contient la liste des participants
+- `resultats` contient la liste des score de participants par session
 
 ## Protocole
 
@@ -134,6 +211,7 @@ Nom des périphériques Bluetooth :
 | Indiquer le numéro de question et le temps alloué pour répondre | `$Q;NUMERO_QUESTION;TEMPS\n`| NUMERO_QUESTION : de 1 à n <br> TEMPS QUESTION : en secondes si 0 alors la question n’a pas de temps limite | `$Q;1;30\n`<br>Question n°1<br>30 secondes pour cette question |
 | Activer buzzers + lancer chronomètre | `$E;NUMERO_QUESTION\n` | Activer les buzzers pour ce numéro de question et lancer le chronomètre si besoin | `$E;1\n` |
 | Désactiver buzzers + chronomètre | `$D;NUMERO_QUESTION\n`| Désactiver les buzzers et arrêter le chronomètre si besoin | `$D;1\n` |
+| Indiquer résultat | `$B;NUMERO_QUESTION;RESULTAT\n` | NUMERO_QUESTION : de 1 à n <br> RESULTAT: <br> 1 (vraie) ou 0 (faux) | `$B;1;0\n` |
 
 ### Pupitre -> Évaluateur
 
@@ -142,31 +220,38 @@ Nom des périphériques Bluetooth :
 | Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n`<br>Acquitter toutes les trames de l’évaluateur|
 | Acquitter | `$A\n`| Acquitter toutes les trames de l’évaluateur | `$A\n` |
 
-| Envoyer une réponse | `$R;NUMERO_QUESTION;NUMERO_REPONSE;TEMPS_REPONSE\n` | NUMERO_QUESTION : de 1 à n <br> NUMERO_REPONSE : 1 à 4 (0 = non répondu) <br> TEMPS_REPONSE : en ms <br> si 0 alors le temps n’a pas été mesuré | `$R;1;2;17000\n` |
-
-## Screenshots
-
-### Interface Évaluateur (Tablette)
-
-![Gif Quiz Mobile](images/screenshot-quizzy-mobile.gif)
-
-Les différentes vues :
-
-- visualisation du quiz en cours en pouvant gérer son déroulement
-- connexion d'un ou plusieurs périphériques écran ou pupitre
-- sélection d'un thème pour le quiz à générer, le nombre de questions et association d'un participant à un profil (nom + score)
-
-### Interface participant (Écran)
-
-![Gif Quiz Desktop](images/screenshot-quizzy-desktop.gif)
-
-Les différentes vues :
-
-- affichage de la liste des participants en attente du démarrage du quiz
-- affichage du déroulement de la partie (Question, Propositions, Temps restant, Numéro de question)
-- affichage des résultats des participants
-
 ## Historique des versions
+
+### Version 1.0
+
+#### Tablette
+
+- Nouvelle IHM
+- Se connecter à un périphérique Bluetooth
+- Emettre une trame vers un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Afficher le déroulement de la session
+- Associer les participants à un profil
+- Vérifier en continue les connexions aux périphériques
+- Paramétrer un quiz et une session
+- Calculer automatiquement le temps alloué pour répondre
+- Gérer une session
+- Sauvegarder une session
+- Afficher l'historique des sessions sauvegardées
+- Visualiser une session sauvegardée
+- Supprimer une session sauvegardée
+- Créer un participant
+
+#### Écran
+
+- Afficher disposition des fenêtres
+- Se connecter à un périphérique Bluetooth
+- Recevoir une trame
+- Décoder une trame
+- Afficher la liste des participants
+- Afficher les statistiques du quiz
+- Afficher le déroulement du quiz
 
 ### Version 0.2
 

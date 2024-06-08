@@ -1,6 +1,14 @@
 #ifndef QUIZZY_H
 #define QUIZZY_H
 
+/**
+ * @file quizy.h
+ *
+ * @brief Déclaration de la classe Quizzy
+ * @author Thomas HNIZDO
+ * @version 1.0
+ */
+
 #include <QObject>
 #include <QVector>
 #include <QMap>
@@ -11,6 +19,11 @@ class Participant;
 class Question;
 class CommunicationBluetooth;
 
+/**
+ * @class Quizzy
+ * @brief Déclaration de la classe Quizzy
+ * @details Cette classe gère la session d'un quiz avec des participants
+ */
 class Quizzy : public QObject
 {
     Q_OBJECT

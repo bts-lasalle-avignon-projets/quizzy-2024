@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de BaseDeDonnees.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_base_de_donnees_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">BaseDeDonnees.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_base_de_donnees_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespacefr_1_1hillionj_1_1quizzy_1_1bdd.html">    8</a></span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.bdd;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> android.content.Context;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> android.database.Cursor;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> android.database.sqlite.SQLiteDatabase;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> android.database.sqlite.SQLiteOpenHelper;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> androidx.annotation.NonNull;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">import</span> java.text.SimpleDateFormat;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">import</span> java.util.ArrayList;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">import</span> java.util.Arrays;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">import</span> java.util.Calendar;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">import</span> java.util.Locale;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.Parametres;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.receveur.speciales.Participant;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.contenu.Question;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.Session;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.contenu.Theme;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;@SuppressWarnings({ <span class="stringliteral">&quot;SpellCheckingInspection&quot;</span>, <span class="stringliteral">&quot;unused&quot;</span>, <span class="stringliteral">&quot;SdCardPath&quot;</span> })</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html">   31</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html">BaseDeDonnees</a> extends SQLiteOpenHelper</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7c8bb5a4f4b7eec1e9e56c1d4bfdd564">   33</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String nomFichier = <span class="stringliteral">&quot;quizzy.db&quot;</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab031be2b1db7e9c9d4aaa5111cbfc8f0">   35</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> SQLiteDatabase <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab031be2b1db7e9c9d4aaa5111cbfc8f0">sqlite</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#af3a18d24d5909958163c4ad93429669f">   37</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#af3a18d24d5909958163c4ad93429669f">BaseDeDonnees</a>(Context context)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        super(context, nomFichier, <span class="keyword">null</span>, 1);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d.html">CopieurBDD</a>(nomFichier, context).<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d.html#a390c7edcc88d53cd7a978da28a1ed882">verifier</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        this.sqlite = this.getWritableDatabase();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    @NonNull</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab73cc42803bf8012d90228466b4592fd">   45</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">Question</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab73cc42803bf8012d90228466b4592fd">genererQuestion</a>(Cursor curseur)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">int</span> idQuestion = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idQuestion&quot;</span>));</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        String question = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;question&quot;</span>));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        String prop1    = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;proposition1&quot;</span>));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        String prop2    = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;proposition2&quot;</span>));</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        String prop3    = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;proposition3&quot;</span>));</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        String prop4    = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;proposition4&quot;</span>));</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        List&lt;String&gt; propositions = Arrays.asList(prop1, prop2, prop3, prop4);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordtype">int</span> nombreCarateres = (question + prop1 + prop2 + prop3 + prop4).length();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">int</span> tempsReponse = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#aed6befe9c4d9edd92bc70224d147f2ea">estCalulAutomatiqueDuTempsDeReponse</a>() ? getTempsReponse(-1, nombreCarateres) : <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a0c8e86086e91e7f432ef8e9ac927929e">getTempsReponse</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">Question</a>(idQuestion, question, propositions, tempsReponse);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa7ca5650985c84f22c677dc8f9649b03">   62</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa7ca5650985c84f22c677dc8f9649b03">getTempsReponse</a>(<span class="keywordtype">int</span> tempsParQuestion, <span class="keywordtype">int</span> nombreCarateres)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span>(tempsParQuestion == -1)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> nombreCarateres / 5 + 1;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> tempsParQuestion;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    @NonNull</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afb818ffc10ce833ec428344dedb52d49">   70</a></span>&#160;    <span class="keyword">private</span> String <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afb818ffc10ce833ec428344dedb52d49">construireRequete</a>(@NonNull <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a> parametres)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        String query =</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="stringliteral">&quot;SELECT idQuestion, question, proposition1, proposition2, proposition3, proposition4 FROM questions INNER JOIN themes ON questions.idTheme = themes.idTheme&quot;</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span>(parametres.getTheme() != <span class="keyword">null</span>)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            query += <span class="stringliteral">&quot; WHERE themes.theme = \&quot;&quot;</span> + parametres.getTheme().getNom() + <span class="stringliteral">&quot;\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        query += <span class="stringliteral">&quot; ORDER BY RANDOM() LIMIT &quot;</span> + parametres.getNombreDeQuestions();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> query;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa5852ac9e96797ecbd42b30943b7c76d">   82</a></span>&#160;    <span class="keyword">public</span> List&lt;Question&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa5852ac9e96797ecbd42b30943b7c76d">getNouveauQuiz</a>(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a> parametres) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        String         query         = construireRequete(parametres);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        Cursor         curseur       = sqlite.rawQuery(query, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        List&lt;Question&gt; listeQuestion = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext())</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            listeQuestion.add(genererQuestion(curseur));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        curseur.close();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keywordflow">return</span> listeQuestion;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a47c09d3bc6062178e93a3d25320c6e86">   94</a></span>&#160;    <span class="keyword">public</span> List&lt;Participant&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a47c09d3bc6062178e93a3d25320c6e86">getParticipants</a>() {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        Cursor curseur = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT * FROM participants ORDER BY nom ASC&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        List&lt;Participant&gt; listeParticipants = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext())</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordtype">int</span> idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idParticipant&quot;</span>));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            String nom = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;nom&quot;</span>));</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            listeParticipants.add(<span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a>(idParticipant, nom));</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        curseur.close();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> listeParticipants;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa1c9c27b6028593441b1a027e5b627cc">  107</a></span>&#160;    <span class="keyword">public</span> List&lt;Theme&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa1c9c27b6028593441b1a027e5b627cc">getThemes</a>() {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        Cursor       curseur     = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT * FROM themes&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        List&lt;Theme&gt; listeThemes = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext())</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">int</span> idTheme = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idTheme&quot;</span>));</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            String nom = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;theme&quot;</span>));</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            listeThemes.add(<span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_theme.html">Theme</a>(idTheme, nom));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        curseur.close();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> listeThemes;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    @Override</div>
+<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#acaaf0edcb8aa79645ddf5ed36907db49">  121</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#acaaf0edcb8aa79645ddf5ed36907db49">onCreate</a>(SQLiteDatabase db) {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    @Override</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad264d81df2f8db858b588ead143d12ec">  125</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad264d81df2f8db858b588ead143d12ec">onUpgrade</a>(SQLiteDatabase db, <span class="keywordtype">int</span> oldVersion, <span class="keywordtype">int</span> newVersion) {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ac3e82116b5830b86161e37010b30909b">  128</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ac3e82116b5830b86161e37010b30909b">sauvegarder</a>(@NonNull <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a> session) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">int</span> idEvaluation = getIdNouvelleEvaluation(session.getTheme().getIdTheme());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">Question</a> question : session.getQuestions()) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            sqlite.execSQL(<span class="stringliteral">&quot;INSERT INTO quiz (idEvaluation, idQuestion, points, temps) VALUES (&quot;</span> + idEvaluation + <span class="stringliteral">&quot;, &quot;</span> + question.getIdQuestion() + <span class="stringliteral">&quot;, 1, &quot;</span> + question.getTempsReponse() + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant : session.getParticipants()) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                sqlite.execSQL(<span class="stringliteral">&quot;INSERT INTO reponses (idEvaluation, idParticipant, idQuestion, temps, correct) VALUES (&quot;</span> + idEvaluation + <span class="stringliteral">&quot;, &quot;</span> + participant.getIdParticipant() + <span class="stringliteral">&quot;, &quot;</span> + question.getIdQuestion() + <span class="stringliteral">&quot;, &quot;</span> + question.getIdQuestion() + <span class="stringliteral">&quot;, &quot;</span> + question.estPropositionValide(participant) + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant : session.getParticipants()) {</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            sqlite.execSQL(<span class="stringliteral">&quot;INSERT INTO resultats (idEvaluation, idParticipant, score) VALUES (&quot;</span> + idEvaluation + <span class="stringliteral">&quot;, &quot;</span> + participant.getIdParticipant() + <span class="stringliteral">&quot;, &quot;</span> + session.getScore(participant) + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abb5cd2ef3faa2add4e0c9c93b687bcbf">  141</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">int</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abb5cd2ef3faa2add4e0c9c93b687bcbf">getIdNouvelleEvaluation</a>(<span class="keywordtype">int</span> idTheme) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        String horodatage = <span class="keyword">new</span> SimpleDateFormat(<span class="stringliteral">&quot;dd/MM/yyyy HH:mm:ss&quot;</span>, Locale.getDefault()).format(Calendar.getInstance().getTime());</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;INSERT INTO evaluations (idTheme, horodatage) VALUES (&quot;</span> + idTheme + <span class="stringliteral">&quot;, &#39;&quot;</span> + horodatage + <span class="stringliteral">&quot;&#39;)&quot;</span>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        Cursor       curseur     = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT idEvaluation FROM evaluations WHERE horodatage = &#39;&quot;</span> + horodatage + <span class="stringliteral">&quot;&#39;&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        List&lt;Theme&gt; listeThemes = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        curseur.moveToNext();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">return</span> curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idEvaluation&quot;</span>));</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    }</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a000c478112dd86429d44accf0e0c929c">  152</a></span>&#160;    <span class="keyword">public</span> List&lt;Session&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a000c478112dd86429d44accf0e0c929c">getHistorique</a>() {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        List&lt;Session&gt; sessions = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">for</span>(Object[] evaluation : getEvaluations(<span class="stringliteral">&quot;&quot;</span>)) {</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordtype">int</span> idEvaluation = (int) evaluation[0];</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="keywordtype">int</span> idTheme = (int) evaluation[1];</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            String horodatage = (String) evaluation[2];</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            sessions.add(getSession(idEvaluation, idTheme, horodatage));</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordflow">return</span> sessions;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afa14ff29aab86779378aa4582842b69c">  163</a></span>&#160;    <span class="keyword">private</span> List&lt;Object[]&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afa14ff29aab86779378aa4582842b69c">getEvaluations</a>(String argumentSupplementaire) {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        List&lt;Object[]&gt; evaluations = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        Cursor       curseur     = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT * FROM evaluations&quot;</span> + argumentSupplementaire, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext())</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordtype">int</span> idEvaluation = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idEvaluation&quot;</span>));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordtype">int</span> idTheme = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idTheme&quot;</span>));</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            String horodatage = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;horodatage&quot;</span>));</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            evaluations.add(<span class="keyword">new</span> Object[] { idEvaluation, idTheme, horodatage });</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        curseur.close();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">return</span> evaluations;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7f77779b1266e5d3d989b008e67904c2">  177</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7f77779b1266e5d3d989b008e67904c2">getSession</a>(<span class="keywordtype">int</span> idEvaluation) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        Object[] evaluation = getEvaluations(<span class="stringliteral">&quot; WHERE idEvaluation = &#39;&quot;</span> + idEvaluation + <span class="stringliteral">&quot;&#39;&quot;</span>).get(0);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">return</span> getSession(idEvaluation, (<span class="keywordtype">int</span>) evaluation[1], (String) evaluation[2]);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a105e414a6e3db182d50fca71d4956e4c">  182</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a105e414a6e3db182d50fca71d4956e4c">getSession</a>(<span class="keywordtype">int</span> idEvaluation, <span class="keywordtype">int</span> idTheme, String horodatage) {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        List&lt;Participant&gt; particpants = getParticipants(idEvaluation);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        List&lt;Question&gt; questions = getQuestions(idEvaluation);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">Question</a> question : questions) {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            Cursor curseur = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT * FROM reponses WHERE reponses.idEvaluation = &quot;</span> + idEvaluation + <span class="stringliteral">&quot; AND reponses.idQuestion = &quot;</span> + question.getIdQuestion(), <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <span class="keywordflow">while</span>(curseur.moveToNext()) {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                <span class="keywordtype">int</span> idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idParticipant&quot;</span>));</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                <span class="keywordtype">int</span> temps = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;temps&quot;</span>));</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                <span class="keywordtype">boolean</span> correct = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;correct&quot;</span>)) == 1;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant = getParticipantDepuisID(idParticipant, particpants);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                <span class="keywordflow">if</span> (correct) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                    question.ajouterSelection(participant, 0);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a>(idEvaluation, horodatage, questions, particpants);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad5a029cba1312ecb11d04ddac731eb8f">  200</a></span>&#160;    <span class="keyword">private</span> List&lt;Participant&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad5a029cba1312ecb11d04ddac731eb8f">getParticipants</a>(<span class="keywordtype">int</span> idEvaluation) {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        List&lt;Participant&gt; participants = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        Cursor curseur = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT resultats.idParticipant, participants.nom FROM resultats INNER JOIN participants ON resultats.idParticipant = participants.idParticipant WHERE resultats.idEvaluation = &quot;</span> + idEvaluation, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext()) {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <span class="keywordtype">int</span> idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idParticipant&quot;</span>));</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            String nom = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;nom&quot;</span>));</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            participants.add(<span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a>(idParticipant, nom));</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keywordflow">return</span> participants;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a838e98798e7c894686987dd34fab4815">  212</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a838e98798e7c894686987dd34fab4815">getParticipantDepuisID</a>(<span class="keywordtype">int</span> idParticipant, List&lt;Participant&gt; participants) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant : participants) {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">if</span>(participant.getIdParticipant() == idParticipant) {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                <span class="keywordflow">return</span> participant;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a686f13f15aed5d80596bb47eba02aa09">  221</a></span>&#160;    <span class="keyword">private</span> List&lt;Question&gt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a686f13f15aed5d80596bb47eba02aa09">getQuestions</a>(<span class="keywordtype">int</span> idEvaluation) {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        List&lt;Question&gt; questions = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        Cursor curseur = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT questions.question, quiz.* FROM quiz INNER JOIN questions ON questions.idQuestion = quiz.idQuestion WHERE quiz.idEvaluation = &quot;</span> + idEvaluation, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">while</span>(curseur.moveToNext()) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordtype">int</span> idQuestion = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idQuestion&quot;</span>));</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            String question = curseur.getString(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;question&quot;</span>));</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordtype">int</span> temps = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;temps&quot;</span>));</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            questions.add(<span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">Question</a>(idQuestion, question, <span class="keyword">null</span>, temps));</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        }</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">return</span> questions;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afe43301f13c80a0b1aafca7ff64f053e">  233</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afe43301f13c80a0b1aafca7ff64f053e">supprimerSession</a>(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">Session</a> session) {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;DELETE FROM resultats WHERE idEvaluation = &quot;</span> + session.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#aed67eb82aaa99d22bf9d0f70a252d7c3">getIdEvaluation</a>());</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;DELETE FROM reponses WHERE idEvaluation = &quot;</span> + session.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#aed67eb82aaa99d22bf9d0f70a252d7c3">getIdEvaluation</a>());</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;DELETE FROM quiz WHERE idEvaluation = &quot;</span> + session.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#aed67eb82aaa99d22bf9d0f70a252d7c3">getIdEvaluation</a>());</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;DELETE FROM evaluations WHERE idEvaluation = &quot;</span> + session.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#aed67eb82aaa99d22bf9d0f70a252d7c3">getIdEvaluation</a>());</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abadad9ce6097a8219466879dc52fe4fb">  240</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abadad9ce6097a8219466879dc52fe4fb">creerParticipant</a>(String nom) {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        sqlite.execSQL(<span class="stringliteral">&quot;INSERT INTO participants (nom) VALUES (&#39;&quot;</span> + nom + <span class="stringliteral">&quot;&#39;)&quot;</span>);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        Cursor       curseur     = sqlite.rawQuery(<span class="stringliteral">&quot;SELECT idParticipant FROM participants WHERE nom = &#39;&quot;</span> + nom + <span class="stringliteral">&quot;&#39;&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        curseur.moveToNext();</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <span class="keywordtype">int</span> idParticipant = curseur.getInt(curseur.getColumnIndexOrThrow(<span class="stringliteral">&quot;idParticipant&quot;</span>));</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a>(idParticipant, nom);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html">fr.hillionj.quizzy.bdd.BaseDeDonnees</a></div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00031">BaseDeDonnees.java:32</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a000c478112dd86429d44accf0e0c929c"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a000c478112dd86429d44accf0e0c929c">fr.hillionj.quizzy.bdd.BaseDeDonnees.getHistorique</a></div><div class="ttdeci">List&lt; Session &gt; getHistorique()</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00152">BaseDeDonnees.java:152</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a105e414a6e3db182d50fca71d4956e4c"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a105e414a6e3db182d50fca71d4956e4c">fr.hillionj.quizzy.bdd.BaseDeDonnees.getSession</a></div><div class="ttdeci">Session getSession(int idEvaluation, int idTheme, String horodatage)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00182">BaseDeDonnees.java:182</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a47c09d3bc6062178e93a3d25320c6e86"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a47c09d3bc6062178e93a3d25320c6e86">fr.hillionj.quizzy.bdd.BaseDeDonnees.getParticipants</a></div><div class="ttdeci">List&lt; Participant &gt; getParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00094">BaseDeDonnees.java:94</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a686f13f15aed5d80596bb47eba02aa09"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a686f13f15aed5d80596bb47eba02aa09">fr.hillionj.quizzy.bdd.BaseDeDonnees.getQuestions</a></div><div class="ttdeci">List&lt; Question &gt; getQuestions(int idEvaluation)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00221">BaseDeDonnees.java:221</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a7f77779b1266e5d3d989b008e67904c2"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a7f77779b1266e5d3d989b008e67904c2">fr.hillionj.quizzy.bdd.BaseDeDonnees.getSession</a></div><div class="ttdeci">Session getSession(int idEvaluation)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00177">BaseDeDonnees.java:177</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_a838e98798e7c894686987dd34fab4815"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#a838e98798e7c894686987dd34fab4815">fr.hillionj.quizzy.bdd.BaseDeDonnees.getParticipantDepuisID</a></div><div class="ttdeci">Participant getParticipantDepuisID(int idParticipant, List&lt; Participant &gt; participants)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00212">BaseDeDonnees.java:212</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_aa1c9c27b6028593441b1a027e5b627cc"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa1c9c27b6028593441b1a027e5b627cc">fr.hillionj.quizzy.bdd.BaseDeDonnees.getThemes</a></div><div class="ttdeci">List&lt; Theme &gt; getThemes()</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00107">BaseDeDonnees.java:107</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_aa5852ac9e96797ecbd42b30943b7c76d"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa5852ac9e96797ecbd42b30943b7c76d">fr.hillionj.quizzy.bdd.BaseDeDonnees.getNouveauQuiz</a></div><div class="ttdeci">List&lt; Question &gt; getNouveauQuiz(Parametres parametres)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00082">BaseDeDonnees.java:82</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_aa7ca5650985c84f22c677dc8f9649b03"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#aa7ca5650985c84f22c677dc8f9649b03">fr.hillionj.quizzy.bdd.BaseDeDonnees.getTempsReponse</a></div><div class="ttdeci">int getTempsReponse(int tempsParQuestion, int nombreCarateres)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00062">BaseDeDonnees.java:62</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_ab031be2b1db7e9c9d4aaa5111cbfc8f0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab031be2b1db7e9c9d4aaa5111cbfc8f0">fr.hillionj.quizzy.bdd.BaseDeDonnees.sqlite</a></div><div class="ttdeci">final SQLiteDatabase sqlite</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00035">BaseDeDonnees.java:35</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_ab73cc42803bf8012d90228466b4592fd"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ab73cc42803bf8012d90228466b4592fd">fr.hillionj.quizzy.bdd.BaseDeDonnees.genererQuestion</a></div><div class="ttdeci">Question genererQuestion(Cursor curseur)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00045">BaseDeDonnees.java:45</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_abadad9ce6097a8219466879dc52fe4fb"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abadad9ce6097a8219466879dc52fe4fb">fr.hillionj.quizzy.bdd.BaseDeDonnees.creerParticipant</a></div><div class="ttdeci">Participant creerParticipant(String nom)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00240">BaseDeDonnees.java:240</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_abb5cd2ef3faa2add4e0c9c93b687bcbf"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abb5cd2ef3faa2add4e0c9c93b687bcbf">fr.hillionj.quizzy.bdd.BaseDeDonnees.getIdNouvelleEvaluation</a></div><div class="ttdeci">int getIdNouvelleEvaluation(int idTheme)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00141">BaseDeDonnees.java:141</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_ac3e82116b5830b86161e37010b30909b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ac3e82116b5830b86161e37010b30909b">fr.hillionj.quizzy.bdd.BaseDeDonnees.sauvegarder</a></div><div class="ttdeci">void sauvegarder(@NonNull Session session)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00128">BaseDeDonnees.java:128</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_acaaf0edcb8aa79645ddf5ed36907db49"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#acaaf0edcb8aa79645ddf5ed36907db49">fr.hillionj.quizzy.bdd.BaseDeDonnees.onCreate</a></div><div class="ttdeci">void onCreate(SQLiteDatabase db)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00121">BaseDeDonnees.java:121</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_ad264d81df2f8db858b588ead143d12ec"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad264d81df2f8db858b588ead143d12ec">fr.hillionj.quizzy.bdd.BaseDeDonnees.onUpgrade</a></div><div class="ttdeci">void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00125">BaseDeDonnees.java:125</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_ad5a029cba1312ecb11d04ddac731eb8f"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#ad5a029cba1312ecb11d04ddac731eb8f">fr.hillionj.quizzy.bdd.BaseDeDonnees.getParticipants</a></div><div class="ttdeci">List&lt; Participant &gt; getParticipants(int idEvaluation)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00200">BaseDeDonnees.java:200</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_af3a18d24d5909958163c4ad93429669f"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#af3a18d24d5909958163c4ad93429669f">fr.hillionj.quizzy.bdd.BaseDeDonnees.BaseDeDonnees</a></div><div class="ttdeci">BaseDeDonnees(Context context)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00037">BaseDeDonnees.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_afa14ff29aab86779378aa4582842b69c"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afa14ff29aab86779378aa4582842b69c">fr.hillionj.quizzy.bdd.BaseDeDonnees.getEvaluations</a></div><div class="ttdeci">List&lt; Object[]&gt; getEvaluations(String argumentSupplementaire)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00163">BaseDeDonnees.java:163</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_afb818ffc10ce833ec428344dedb52d49"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afb818ffc10ce833ec428344dedb52d49">fr.hillionj.quizzy.bdd.BaseDeDonnees.construireRequete</a></div><div class="ttdeci">String construireRequete(@NonNull Parametres parametres)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00070">BaseDeDonnees.java:70</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_afe43301f13c80a0b1aafca7ff64f053e"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#afe43301f13c80a0b1aafca7ff64f053e">fr.hillionj.quizzy.bdd.BaseDeDonnees.supprimerSession</a></div><div class="ttdeci">void supprimerSession(Session session)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00233">BaseDeDonnees.java:233</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d.html">fr.hillionj.quizzy.bdd.CopieurBDD</a></div><div class="ttdef"><b>Definition:</b> <a href="_copieur_b_d_d_8java_source.html#l00017">CopieurBDD.java:17</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d_html_a390c7edcc88d53cd7a978da28a1ed882"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_copieur_b_d_d.html#a390c7edcc88d53cd7a978da28a1ed882">fr.hillionj.quizzy.bdd.CopieurBDD.verifier</a></div><div class="ttdeci">void verifier()</div><div class="ttdef"><b>Definition:</b> <a href="_copieur_b_d_d_8java_source.html#l00064">CopieurBDD.java:64</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">fr.hillionj.quizzy.parametres.Parametres</a></div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00022">Parametres.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_a0c8e86086e91e7f432ef8e9ac927929e"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a0c8e86086e91e7f432ef8e9ac927929e">fr.hillionj.quizzy.parametres.Parametres.getTempsReponse</a></div><div class="ttdeci">int getTempsReponse()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00138">Parametres.java:138</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad6ba504ec779cb1f118f734b9eb72b2b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">fr.hillionj.quizzy.parametres.Parametres.getParametres</a></div><div class="ttdeci">static Parametres getParametres(AppCompatActivity activite)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00037">Parametres.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_aed6befe9c4d9edd92bc70224d147f2ea"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#aed6befe9c4d9edd92bc70224d147f2ea">fr.hillionj.quizzy.parametres.Parametres.estCalulAutomatiqueDuTempsDeReponse</a></div><div class="ttdeci">boolean estCalulAutomatiqueDuTempsDeReponse()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00130">Parametres.java:130</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">fr.hillionj.quizzy.parametres.receveur.speciales.Participant</a></div><div class="ttdef"><b>Definition:</b> <a href="_participant_8java_source.html#l00007">Participant.java:7</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html">fr.hillionj.quizzy.session.Session</a></div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00026">Session.java:26</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_session_html_aed67eb82aaa99d22bf9d0f70a252d7c3"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_session.html#aed67eb82aaa99d22bf9d0f70a252d7c3">fr.hillionj.quizzy.session.Session.getIdEvaluation</a></div><div class="ttdeci">int getIdEvaluation()</div><div class="ttdef"><b>Definition:</b> <a href="_session_8java_source.html#l00315">Session.java:315</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_question.html">fr.hillionj.quizzy.session.contenu.Question</a></div><div class="ttdef"><b>Definition:</b> <a href="_question_8java_source.html#l00014">Question.java:15</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_theme_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1contenu_1_1_theme.html">fr.hillionj.quizzy.session.contenu.Theme</a></div><div class="ttdef"><b>Definition:</b> <a href="_theme_8java_source.html#l00003">Theme.java:3</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_1283cf4bc3fa195381f0105cd6bee623.html">bdd</a></li><li class="navelem"><a class="el" href="_base_de_donnees_8java.html">BaseDeDonnees.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:03 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

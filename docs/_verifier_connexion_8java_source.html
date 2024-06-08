@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de VerifierConnexion.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_verifier_connexion_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">VerifierConnexion.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_verifier_connexion_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.communication.protocoles.speciales;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.communication.protocoles.Protocole;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.communication.protocoles.TypeProtocole;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;@SuppressWarnings({ <span class="stringliteral">&quot;SpellCheckingInspection&quot;</span>, <span class="stringliteral">&quot;unused&quot;</span> })</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html">    7</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html">VerifierConnexion</a> extends <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_protocole.html">Protocole</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    @Override</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#aeaabaaeb7075d4018af098d7874d8d26">   10</a></span>&#160;    <span class="keyword">public</span> String <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#aeaabaaeb7075d4018af098d7874d8d26">getFormat</a>()</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keywordflow">return</span> <span class="stringliteral">&quot;$&quot;</span> + getType().getIndiceType() + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    @Override</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a43bfd15b9159ee6eb64b44e6a2c21660">   16</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole.html">TypeProtocole</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a43bfd15b9159ee6eb64b44e6a2c21660">getType</a>()</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole.html">TypeProtocole</a>.<a class="code" href="enumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole.html#a1cd5f8d570838ce403f3b55dd16bc32f">TEST_CONNEXION</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a9455a15755a80575168a064d1693ab40">   20</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a9455a15755a80575168a064d1693ab40">genererTrame</a>()</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        super.genererTrame();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_protocole_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_protocole.html">fr.hillionj.quizzy.communication.protocoles.Protocole</a></div><div class="ttdef"><b>Definition:</b> <a href="_protocole_8java_source.html#l00014">Protocole.java:15</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html">fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion</a></div><div class="ttdef"><b>Definition:</b> <a href="_verifier_connexion_8java_source.html#l00007">VerifierConnexion.java:8</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion_html_a43bfd15b9159ee6eb64b44e6a2c21660"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a43bfd15b9159ee6eb64b44e6a2c21660">fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion.getType</a></div><div class="ttdeci">TypeProtocole getType()</div><div class="ttdef"><b>Definition:</b> <a href="_verifier_connexion_8java_source.html#l00016">VerifierConnexion.java:16</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion_html_a9455a15755a80575168a064d1693ab40"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#a9455a15755a80575168a064d1693ab40">fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion.genererTrame</a></div><div class="ttdeci">void genererTrame()</div><div class="ttdef"><b>Definition:</b> <a href="_verifier_connexion_8java_source.html#l00020">VerifierConnexion.java:20</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion_html_aeaabaaeb7075d4018af098d7874d8d26"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1_verifier_connexion.html#aeaabaaeb7075d4018af098d7874d8d26">fr.hillionj.quizzy.communication.protocoles.speciales.VerifierConnexion.getFormat</a></div><div class="ttdeci">String getFormat()</div><div class="ttdef"><b>Definition:</b> <a href="_verifier_connexion_8java_source.html#l00010">VerifierConnexion.java:10</a></div></div>
+<div class="ttc" id="aenumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole_html"><div class="ttname"><a href="enumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole.html">fr.hillionj.quizzy.communication.protocoles.TypeProtocole</a></div><div class="ttdef"><b>Definition:</b> <a href="_type_protocole_8java_source.html#l00023">TypeProtocole.java:23</a></div></div>
+<div class="ttc" id="aenumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole_html_a1cd5f8d570838ce403f3b55dd16bc32f"><div class="ttname"><a href="enumfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1_type_protocole.html#a1cd5f8d570838ce403f3b55dd16bc32f">fr.hillionj.quizzy.communication.protocoles.TypeProtocole.TEST_CONNEXION</a></div><div class="ttdeci">TEST_CONNEXION</div><div class="ttdef"><b>Definition:</b> <a href="_type_protocole_8java_source.html#l00024">TypeProtocole.java:24</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_21a49629f19f07edee258c99d0c1dd18.html">communication</a></li><li class="navelem"><a class="el" href="dir_1be0aec055b1905d2f40424fbb7ee8f1.html">protocoles</a></li><li class="navelem"><a class="el" href="dir_aa33ad1213fea5b7a7f42b67c4df48ee.html">speciales</a></li><li class="navelem"><a class="el" href="_verifier_connexion_8java.html">VerifierConnexion.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:04 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

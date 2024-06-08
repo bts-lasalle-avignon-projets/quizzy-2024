@@ -1,0 +1,6 @@
+var classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1ecran_1_1_afficher_question_precedente =
+[
+    [ "genererTrame", "classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1ecran_1_1_afficher_question_precedente.html#ae80daf44821166ef516a00792e62d0ee", null ],
+    [ "getFormat", "classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1ecran_1_1_afficher_question_precedente.html#ae52455d29061a7ba586ed3795e80c2e6", null ],
+    [ "getType", "classfr_1_1hillionj_1_1quizzy_1_1communication_1_1protocoles_1_1speciales_1_1ecran_1_1_afficher_question_precedente.html#afff5e44d06ff0ceb73fd9090ec0bb3ae", null ]
+];
