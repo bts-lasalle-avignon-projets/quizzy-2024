@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe CommunicationBluetooth
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 #include <QObject>
@@ -61,9 +61,10 @@ class CommunicationBluetooth : public QObject
     QBluetoothSocket* socketTablette; //!< La socket de communication Bluetooth
     QBluetoothServiceInfo
                      serviceInfo; //!< Les informations sur le service bluetooth
-    bool             connecte;
-    QMap<QChar, int> formatTrame;
+    QMap<QChar, int> formatTrame; //!< Le format des trames du protocole Quizzy
+    bool             connecte;    //!< L'état de connexion avec la tablette
 
+    void separerTrame(QString trameRecue);
     bool verifierTrame(const QString& trame) const;
     bool verifierChampsTrame(QString trame) const;
     void initialiserFormatTrame();

@@ -1,0 +1,51 @@
+class Thanos
+!!!323250.java!!!	getAttackCount() : int
+		return 1;
+!!!323378.java!!!	getAwaitEnable() : int
+		return 8;
+!!!323506.java!!!	getAwaitDisable() : int
+		return 2;
+!!!323634.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.THANOS;
+!!!323762.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!323890.java!!!	Attack(inout info : SheepInfo) : void
+		Random r = new Random();
+		Map<Player, Location> list = new HashMap<>();
+		List<ParticleAPI> parts = new ArrayList<>();
+		for (Player pll : info.getSheep().getWorld().getPlayers()) {
+			if (eclipse.contains(pll) || r.nextBoolean()) {
+				continue;
+			}
+			list.put(pll, pll.getLocation().clone());
+			pll.setGameMode(GameMode.SPECTATOR);
+			parts.add(ParticleAPI.StartCircle(pll.getLocation().clone(), 0, false, 0.5, true, EnumParticle.PORTAL, 1.75, true, 80, 10));
+		}
+		eclipse.addAll(list.keySet());
+		new BukkitRunnable() {int i = 0;@SuppressWarnings("deprecation")
+		@Override public void run() {
+			if (i >= 10) {
+				for (Player pll : list.keySet()) {
+					if (!eclipse.contains(pll)) {
+						continue;
+					}
+					eclipse.remove(pll);
+					pll.teleport(list.get(pll));
+					pll.setGameMode(GameMode.SURVIVAL);
+				}
+				for (ParticleAPI p : parts) {
+					p.setEnable(false);
+				}
+				parts.clear();
+				list.clear();
+				cancel();
+				return;
+			}
+			for (Player pll : list.keySet()) {
+				if (!pll.isOnline() || !eclipse.contains(pll)) {
+					continue;
+				}
+				pll.sendTitle("§e" + (10 - i), "§5Vous avez été éclipsé");
+			}
+			i++;
+		}}.runTaskTimer(Main.getInstance(), 0, 20);

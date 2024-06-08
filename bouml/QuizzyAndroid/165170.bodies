@@ -1,0 +1,51 @@
+class PopupHistoriqueBinding
+!!!277554.java!!!	PopupHistoriqueBinding(inout rootView : LinearLayout, inout btnFermer : Button, inout btnListeSessions : ListView, inout textView2 : TextView, inout textView3 : TextView)
+    this.rootView = rootView;
+    this.btnFermer = btnFermer;
+    this.btnListeSessions = btnListeSessions;
+    this.textView2 = textView2;
+    this.textView3 = textView3;
+!!!277682.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!277810.java!!!	inflate(inout inflater : LayoutInflater) : PopupHistoriqueBinding
+    return inflate(inflater, null, false);
+!!!277938.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : PopupHistoriqueBinding
+    View root = inflater.inflate(R.layout.popup_historique, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!278066.java!!!	bind(inout rootView : View) : PopupHistoriqueBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_fermer;
+      Button btnFermer = ViewBindings.findChildViewById(rootView, id);
+      if (btnFermer == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_liste_sessions;
+      ListView btnListeSessions = ViewBindings.findChildViewById(rootView, id);
+      if (btnListeSessions == null) {
+        break missingId;
+      }
+
+      id = R.id.textView2;
+      TextView textView2 = ViewBindings.findChildViewById(rootView, id);
+      if (textView2 == null) {
+        break missingId;
+      }
+
+      id = R.id.textView3;
+      TextView textView3 = ViewBindings.findChildViewById(rootView, id);
+      if (textView3 == null) {
+        break missingId;
+      }
+
+      return new PopupHistoriqueBinding((LinearLayout) rootView, btnFermer, btnListeSessions,
+          textView2, textView3);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

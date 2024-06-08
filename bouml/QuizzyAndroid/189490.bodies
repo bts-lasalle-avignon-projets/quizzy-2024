@@ -1,0 +1,14 @@
+class Enderman
+!!!449074.java!!!	Enderman(inout owner : Player, in id : int)
+		super(owner, EntityType.ENDERMAN, "Enderman de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!449202.java!!!	Enderman(inout owner : Player)
+		super(owner, EntityType.ENDERMAN, "Enderman de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!449330.java!!!	getEntity() : org.bukkit.entity.Enderman
+		return (org.bukkit.entity.Enderman) entity;
+!!!449458.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setCarriedMaterial(null);
+!!!449586.java!!!	clone(inout player : Player) : Enderman
+		return new Enderman(player, getID());

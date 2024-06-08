@@ -1,0 +1,14 @@
+class GamePage
+!!!294066.java!!!	GamePage()
+		calculateContents();
+!!!294194.java!!!	getTemplateTitle() : String
+		return "§8Liste des parties - Page #%count%";
+!!!294322.java!!!	getContents() : List<ItemStack>
+		return contents;
+!!!294450.java!!!	calculateContents() : void
+		getContents().clear();
+		for (GAME game : GAME.getList()) {
+			getContents().add(game.getItem());
+		}
+!!!294578.java!!!	getPages() : List<Inventory>
+		return pages;

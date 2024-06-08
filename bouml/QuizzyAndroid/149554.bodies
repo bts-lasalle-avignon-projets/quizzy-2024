@@ -1,0 +1,199 @@
+class Protocole
+!!!199602.java!!!	traiterTrame(in trame : String) : Protocole
+        if(trame == null)
+        {
+            return null;
+        }
+        String        indiceTypeProtocole = trame.split(";")[0].replace("$", "").replace("\n", "");
+        TypeProtocole type                = TypeProtocole.getType(indiceTypeProtocole);
+        if(type == null)
+        {
+            return null;
+        }
+        return type.getProtocole(trame);
+!!!199730.java!!!	getProtocole(inout type : TypeProtocole) : Protocole
+        return type.getProtocole(null);
+!!!199858.java!!!	getTrame() : String
+        return trame;
+!!!199986.java!!!	setTrame(in trame : String) : void
+        this.trame = trame;
+!!!200114.java!!!	genererTrame(inout  : String...contenu) : void
+        if(!estValide(false, contenu))
+        {
+            setTrame(null);
+            return;
+        }
+        StringBuilder sb = new StringBuilder("$" + getType().getIndiceType());
+        if(contenu != null)
+        {
+            for(String st: contenu)
+            {
+                sb.append(";").append(st);
+            }
+        }
+        sb.append("\n");
+        setTrame(sb.toString());
+!!!200242.java!!!	envoyer(inout receveursProtocoles : List<? extends ReceveurProtocole>) : void
+        for(ReceveurProtocole receveur: receveursProtocoles)
+        {
+            envoyer(receveur);
+        }
+!!!200370.java!!!	envoyer(inout receveur : ReceveurProtocole) : void
+        if (receveur.getPeripherique() != null) {
+            Log.v("QUIZZY_" + this.getClass().getSimpleName(), "-> " + receveur.getPeripherique().getNom() + ": " + getTrame());
+            receveur.getPeripherique().envoyer(getTrame());
+        }
+!!!200498.java!!!	estValide(inout trameComplete : boolean, inout  : String...contenu) : boolean
+        int nombreArgumentsRequis = getFormat().split(";").length;
+        if(nombreArgumentsRequis == 1 && contenu == null)
+        {
+            return true;
+        }
+        int nombreArgumentsActuel = contenu == null ? 0 : contenu.length;
+        if(!trameComplete)
+        {
+            nombreArgumentsRequis--;
+        }
+        return nombreArgumentsRequis == nombreArgumentsActuel;
+!!!200626.java!!!	estValide(inout  : String...contenu) : boolean
+        return estValide(true, contenu);
+!!!200754.java!!!	extraireDonnees() : Map<String, String>
+        if(!estValide(getTrame().split(";")))
+        {
+            return null;
+        }
+        Map<String, String> donnees = new HashMap<>();
+        String[] cles               = getFormat().replace("$", "").replace("\n", "").split(";");
+        String[] arguments          = getTrame().replace("$", "").replace("\n", "").split(";");
+        for(int i = 1; i < arguments.length; i++)
+        {
+            donnees.put(cles[i], arguments[i]);
+        }
+        return donnees;
+!!!200882.java!!!	toInt(in string : String) : int
+        int integer = 0;
+        try
+        {
+            if(string != null)
+            {
+                integer = Integer.parseInt(string);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+        return integer;
+!!!201010.java!!!	toLong(in string : String) : long
+        long longInt = 0;
+        try
+        {
+            if(string != null)
+            {
+                longInt = Long.parseLong(string);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+        return longInt;
+!!!524722.java!!!	traiterTrame(in trame : String) : Protocole
+        if(trame == null)
+        {
+            return null;
+        }
+        String        indiceTypeProtocole = trame.split(";")[0].replace("$", "").replace("\n", "");
+        TypeProtocole type                = TypeProtocole.getType(indiceTypeProtocole);
+        if(type == null)
+        {
+            return null;
+        }
+        return type.getProtocole(trame);
+!!!524850.java!!!	getProtocole(inout type : TypeProtocole) : Protocole
+        return type.getProtocole(null);
+!!!524978.java!!!	getTrame() : String
+        return trame;
+!!!525106.java!!!	setTrame(in trame : String) : void
+        this.trame = trame;
+!!!525234.java!!!	genererTrame(inout  : String...contenu) : void
+        if(!estValide(false, contenu))
+        {
+            setTrame(null);
+            return;
+        }
+        StringBuilder sb = new StringBuilder("$" + getType().getIndiceType());
+        if(contenu != null)
+        {
+            for(String st: contenu)
+            {
+                sb.append(";").append(st);
+            }
+        }
+        sb.append("\n");
+        setTrame(sb.toString());
+!!!525362.java!!!	envoyer(inout receveursProtocoles : List<? extends ReceveurProtocole>) : void
+        for(ReceveurProtocole receveur: receveursProtocoles)
+        {
+            envoyer(receveur);
+        }
+!!!525490.java!!!	envoyer(inout receveur : ReceveurProtocole) : void
+        if (receveur.getPeripherique() != null) {
+            Log.v("QUIZZY_" + this.getClass().getSimpleName(), "-> " + receveur.getPeripherique().getNom() + ": " + getTrame());
+            receveur.getPeripherique().envoyer(getTrame());
+        }
+!!!525618.java!!!	estValide(inout trameComplete : boolean, inout  : String...contenu) : boolean
+        int nombreArgumentsRequis = getFormat().split(";").length;
+        if(nombreArgumentsRequis == 1 && contenu == null)
+        {
+            return true;
+        }
+        int nombreArgumentsActuel = contenu == null ? 0 : contenu.length;
+        if(!trameComplete)
+        {
+            nombreArgumentsRequis--;
+        }
+        return nombreArgumentsRequis == nombreArgumentsActuel;
+!!!525746.java!!!	estValide(inout  : String...contenu) : boolean
+        return estValide(true, contenu);
+!!!525874.java!!!	extraireDonnees() : Map<String, String>
+        if(!estValide(getTrame().split(";")))
+        {
+            return null;
+        }
+        Map<String, String> donnees = new HashMap<>();
+        String[] cles               = getFormat().replace("$", "").replace("\n", "").split(";");
+        String[] arguments          = getTrame().replace("$", "").replace("\n", "").split(";");
+        for(int i = 1; i < arguments.length; i++)
+        {
+            donnees.put(cles[i], arguments[i]);
+        }
+        return donnees;
+!!!526002.java!!!	toInt(in string : String) : int
+        int integer = 0;
+        try
+        {
+            if(string != null)
+            {
+                integer = Integer.parseInt(string);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+        return integer;
+!!!526130.java!!!	toLong(in string : String) : long
+        long longInt = 0;
+        try
+        {
+            if(string != null)
+            {
+                longInt = Long.parseLong(string);
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("QUIZZY_" + this.getClass().getName(), e.getMessage(), e);
+        }
+        return longInt;

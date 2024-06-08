@@ -1,0 +1,31 @@
+class SheepShoot
+!!!297138.java!!!	OnInteract(inout e : PlayerInteractEvent) : void
+		Player p = e.getPlayer();
+		ItemStack it = e.getItem();
+		if (it == null) {
+			return;
+		}
+		GAME game = GAME.from(p);
+		if (game == null) {
+			return;
+		}
+		Team team = game.of(p);
+		if (team == null) {
+			return;
+		}
+		SheepInfo si = SheepInfo.from(it);
+		if (si == null) {
+			return;
+		}
+		SheepInfo i = si.clone(game, team, SheepInfo.getSheep(si.getName(), DyeColor.getByWoolData(si.getItem().getData().getData()), p.getLocation().clone().add(0, 0.5, 0)), p, true);
+		if (i.hasPower(PowerType.STAY)) {
+			return;
+		}
+		i.getSheep().setVelocity(p.getLocation().getDirection().multiply(4));
+		if (it.getAmount() != 1) {
+			it.setAmount(it.getAmount() - 1);
+		} else {
+			p.setItemInHand(new ItemStack(Material.AIR));
+		}
+		p.updateInventory();
+		p.playSound(p.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);

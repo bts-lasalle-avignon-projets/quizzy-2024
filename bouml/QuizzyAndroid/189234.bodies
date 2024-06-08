@@ -1,0 +1,7 @@
+class DefaultPet
+!!!447922.java!!!	DefaultPet(inout owner : Player, inout type : EntityType)
+		super(owner, type, type.getName() + " de %player%", null, MovementType.BUKKIT_PATH, -1);
+!!!448050.java!!!	getEntity() : Entity
+		return entity;
+!!!448178.java!!!	clone(inout player : Player) : DefaultPet
+		return new DefaultPet(player, getType());

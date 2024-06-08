@@ -1,0 +1,12 @@
+class EnchantBuilder
+!!!505394.java!!!	EnchantBuilder(inout enchantment : Enchantment, in level : int)
+			setEnchantment(enchantment);
+			setLevel(level);
+!!!505522.java!!!	getEnchantment() : Enchantment
+			return enchantment;
+!!!505650.java!!!	setEnchantment(inout enchantment : Enchantment) : void
+			this.enchantment = enchantment;
+!!!505778.java!!!	getLevel() : int
+			return level;
+!!!505906.java!!!	setLevel(in level : int) : void
+			this.level = level;

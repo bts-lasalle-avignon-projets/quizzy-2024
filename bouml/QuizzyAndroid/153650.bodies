@@ -1,0 +1,51 @@
+class VueParticipants
+!!!217522.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activite_participants);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        initialiserAttributs();
+        initialiserAssociation();
+
+        IHM.getIHM().ajouterIHM(this);
+!!!217650.java!!!	onRestart() : void
+        super.onRestart();
+        IHM.getIHM().ajouterIHM(this);
+!!!217778.java!!!	initialiserAttributs() : void
+        btn_associer = findViewById(R.id.btn_associer);
+        btn_creer_participant = findViewById(R.id.btn_creer_participant);
+        spinner_participants = new SpinnerParticipants(this, R.id.spinner_participants);
+        spinner_peripheriques = new SpinnerPeripheriques(this, R.id.spinner_peripheriques);
+        liste_participants = new ListViewPeripheriques(this, R.id.liste_peripheriques);
+!!!217906.java!!!	initialiserAssociation() : void
+        btn_associer.setOnClickListener(v -> {
+            int positionSpinnerParticipant = spinner_participants.getSpinner().getSelectedItemPosition();
+            int positionSpinnerPeripheriques = spinner_peripheriques.getSpinner().getSelectedItemPosition();
+            Participant participant = positionSpinnerParticipant == 0 ? null : Parametres.getParametres().getParticipants().get(positionSpinnerParticipant - 1);
+            Peripherique peripherique = spinner_peripheriques.getPeripheriques().get(positionSpinnerPeripheriques);
+            for (Participant participant1 : Parametres.getParametres().getParticipants()) {
+                if (participant1.getPeripherique() == peripherique) {
+                    participant1.setPeripherique(null);
+                }
+            }
+            if (participant != null) {
+                participant.setPeripherique(peripherique);
+                Parametres.getParametres().getSession().getGestionnaireProtocoles().ajouterParticipant(participant);
+            }
+            mettreAjourListeParticipants();
+        });
+        btn_creer_participant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PopupCreerParticipant().show(getSupportFragmentManager(), "PopupCreerParticipant");
+            }
+        });
+!!!218034.java!!!	mettreAjourListeParticipants() : void
+        liste_participants.mettreAjour();
+!!!218162.java!!!	mettreAjourSpinnerParticipants() : void
+        spinner_participants.mettreAjourSpinnerParticipants();

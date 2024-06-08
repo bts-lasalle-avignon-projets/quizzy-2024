@@ -1,0 +1,14 @@
+class PopupCredits
+!!!213554.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        View vue = inflater.inflate(R.layout.popup_credits, container, false);
+        initialiserVue(vue);
+        return vue;
+!!!213682.java!!!	initialiserVue(inout vue : View) : void
+        vue.findViewById(R.id.btn_fermer).setOnClickListener(v -> {
+            dismiss();
+        });

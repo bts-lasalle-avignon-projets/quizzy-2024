@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de PopupCreerParticipant.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_popup_creer_participant_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">PopupCreerParticipant.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_popup_creer_participant_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.ihm.popup;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> android.graphics.Color;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> android.graphics.drawable.ColorDrawable;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> android.os.Bundle;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> android.text.Editable;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> android.text.TextWatcher;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> android.view.KeyEvent;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> android.view.LayoutInflater;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> android.view.View;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> android.view.ViewGroup;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">import</span> android.view.Window;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">import</span> android.widget.Button;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> android.widget.EditText;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> android.widget.TextView;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">import</span> androidx.annotation.NonNull;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">import</span> androidx.annotation.Nullable;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">import</span> androidx.fragment.app.DialogFragment;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.R;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.IHM;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.vues.VueParametres;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.vues.VueParticipants;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.vues.VueSession;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.ArgumentLancement;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.Parametres;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.receveur.speciales.Participant;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.session.Session;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html">   32</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html">PopupCreerParticipant</a> <span class="keyword">extends</span> DialogFragment {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    @Nullable</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    @Override</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aded3e8022019a444f6f17d849f98c13f">   36</a></span>&#160;    <span class="keyword">public</span> View <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aded3e8022019a444f6f17d849f98c13f">onCreateView</a>(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span> (getDialog() != <span class="keyword">null</span> &amp;&amp; getDialog().getWindow() != <span class="keyword">null</span>) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            getDialog().getWindow().setBackgroundDrawable(<span class="keyword">new</span> ColorDrawable(Color.TRANSPARENT));</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        setCancelable(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        View vue = inflater.inflate(R.layout.popup_creer_participant, container, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aa32873b6a7ccae2df87a3f1e52aecad3">initialiserVue</a>(vue);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> vue;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aa32873b6a7ccae2df87a3f1e52aecad3">   48</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aa32873b6a7ccae2df87a3f1e52aecad3">initialiserVue</a>(View vue) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        TextView texte_erreur_creer_participant = vue.findViewById(R.id.texte_erreur_creer_participant);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        Button btn_creer_participant = vue.findViewById(R.id.btn_creer_participant);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        EditText editText = vue.findViewById(R.id.entree_nom_participant);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        editText.addTextChangedListener(<span class="keyword">new</span> TextWatcher() {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            @Override</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> beforeTextChanged(CharSequence charSequence, <span class="keywordtype">int</span> i, <span class="keywordtype">int</span> i1, <span class="keywordtype">int</span> i2) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            @Override</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> onTextChanged(CharSequence charSequence, <span class="keywordtype">int</span> i, <span class="keywordtype">int</span> i1, <span class="keywordtype">int</span> i2) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                String nom = charSequence.toString();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">if</span> (nom.length() &gt; 0) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participantAvecLeMemeNom = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad05e006897e77b30b5e6223183a374f2">getParticipant</a>(nom);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">if</span> (participantAvecLeMemeNom != <span class="keyword">null</span>) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        btn_creer_participant.setEnabled(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        texte_erreur_creer_participant.setVisibility(View.VISIBLE);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        texte_erreur_creer_participant.setText(<span class="stringliteral">&quot;Erreur : Ce nom est déjà utilisé&quot;</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        btn_creer_participant.setEnabled(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        texte_erreur_creer_participant.setVisibility(View.INVISIBLE);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    btn_creer_participant.setEnabled(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            @Override</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> afterTextChanged(Editable editable) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        });</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        btn_creer_participant.setOnClickListener(v -&gt; {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            String nom = editText.getText().toString();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">Participant</a> participant = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad873d9c7e28ff56e1f8010fb1764fdc7">getBaseDeDonnees</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abadad9ce6097a8219466879dc52fe4fb">creerParticipant</a>(nom);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad619652e6afec692636523013ffa957b">getParticipants</a>().add(participant);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html">IHM</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a75782fe6e70b80b25bd342217c05f0bf">getIHM</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a603de79bc25dcfed96993a490a3d8626">mettreAjourSpinnerParticipants</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            dismiss();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        });</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        vue.findViewById(R.id.btn_annuler).setOnClickListener(v -&gt; {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            dismiss();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        });</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees_html_abadad9ce6097a8219466879dc52fe4fb"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1bdd_1_1_base_de_donnees.html#abadad9ce6097a8219466879dc52fe4fb">fr.hillionj.quizzy.bdd.BaseDeDonnees.creerParticipant</a></div><div class="ttdeci">Participant creerParticipant(String nom)</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00240">BaseDeDonnees.java:240</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html">fr.hillionj.quizzy.ihm.IHM</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00023">IHM.java:23</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html_a603de79bc25dcfed96993a490a3d8626"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a603de79bc25dcfed96993a490a3d8626">fr.hillionj.quizzy.ihm.IHM.mettreAjourSpinnerParticipants</a></div><div class="ttdeci">void mettreAjourSpinnerParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00141">IHM.java:141</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html_a75782fe6e70b80b25bd342217c05f0bf"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a75782fe6e70b80b25bd342217c05f0bf">fr.hillionj.quizzy.ihm.IHM.getIHM</a></div><div class="ttdeci">static IHM getIHM()</div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00040">IHM.java:40</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html">fr.hillionj.quizzy.ihm.popup.PopupCreerParticipant</a></div><div class="ttdef"><b>Definition:</b> <a href="_popup_creer_participant_8java_source.html#l00032">PopupCreerParticipant.java:32</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant_html_aa32873b6a7ccae2df87a3f1e52aecad3"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aa32873b6a7ccae2df87a3f1e52aecad3">fr.hillionj.quizzy.ihm.popup.PopupCreerParticipant.initialiserVue</a></div><div class="ttdeci">void initialiserVue(View vue)</div><div class="ttdef"><b>Definition:</b> <a href="_popup_creer_participant_8java_source.html#l00048">PopupCreerParticipant.java:48</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant_html_aded3e8022019a444f6f17d849f98c13f"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1popup_1_1_popup_creer_participant.html#aded3e8022019a444f6f17d849f98c13f">fr.hillionj.quizzy.ihm.popup.PopupCreerParticipant.onCreateView</a></div><div class="ttdeci">View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</div><div class="ttdef"><b>Definition:</b> <a href="_popup_creer_participant_8java_source.html#l00036">PopupCreerParticipant.java:36</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">fr.hillionj.quizzy.parametres.Parametres</a></div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00022">Parametres.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad05e006897e77b30b5e6223183a374f2"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad05e006897e77b30b5e6223183a374f2">fr.hillionj.quizzy.parametres.Parametres.getParticipant</a></div><div class="ttdeci">Participant getParticipant(String nom)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00154">Parametres.java:154</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad619652e6afec692636523013ffa957b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad619652e6afec692636523013ffa957b">fr.hillionj.quizzy.parametres.Parametres.getParticipants</a></div><div class="ttdeci">List&lt; Participant &gt; getParticipants()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00071">Parametres.java:71</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad6ba504ec779cb1f118f734b9eb72b2b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">fr.hillionj.quizzy.parametres.Parametres.getParametres</a></div><div class="ttdeci">static Parametres getParametres(AppCompatActivity activite)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00037">Parametres.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad873d9c7e28ff56e1f8010fb1764fdc7"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad873d9c7e28ff56e1f8010fb1764fdc7">fr.hillionj.quizzy.parametres.Parametres.getBaseDeDonnees</a></div><div class="ttdeci">BaseDeDonnees getBaseDeDonnees()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00142">Parametres.java:142</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1receveur_1_1speciales_1_1_participant.html">fr.hillionj.quizzy.parametres.receveur.speciales.Participant</a></div><div class="ttdef"><b>Definition:</b> <a href="_participant_8java_source.html#l00007">Participant.java:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_8c4764f68693b82d8531aad504f3b123.html">ihm</a></li><li class="navelem"><a class="el" href="dir_d41ae65546ee596e5bac55f80e39814d.html">popup</a></li><li class="navelem"><a class="el" href="_popup_creer_participant_8java.html">PopupCreerParticipant.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:03 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

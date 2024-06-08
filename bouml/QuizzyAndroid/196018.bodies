@@ -1,0 +1,61 @@
+class ParticleAPI
+!!!506034.java!!!	StartCircle(inout location : Location, in p : double, inout inverse : boolean, in radius : double, inout y_anim : boolean, inout particle : EnumParticle, in higher_block : double, inout enable : boolean, in count_per_circle : int, in speed : int) : ParticleAPI
+		return new ParticleAPI().circle(location, p, inverse, radius, y_anim, particle, higher_block, enable, count_per_circle, speed);
+!!!506162.java!!!	circle(inout location : Location, in p : double, inout inverse : boolean, in radius : double, inout y_anim : boolean, inout particle : EnumParticle, in higher_block : double, inout enable : boolean, in count_per_circle : int, in speed : int) : ParticleAPI
+		setEnable(enable);
+		double yy = location.getY();
+		Location loc = location.clone();
+		double multiply = Math.PI/(count_per_circle/2);
+		new BukkitRunnable() {double phi = p;@Override public void run() {
+			if (!isEnable()) {
+				return;
+			}
+			for (int i = 0; i < speed; i++) {
+				if (!inverse) {
+					phi += multiply;
+				} else {
+					phi -= multiply;
+				}
+				double r = radius;
+				double x = r*Math.sin(phi);
+				double y = 0.0;
+				if (y_anim) {
+					y = 0.006 * higher_block;
+				}
+				double z = r*Math.cos(phi);
+				loc.add(x, y, z);
+				PlayParticle(loc, particle, false, viewers);
+				loc.subtract(x, 0, z);
+				if (y_anim && ((!inverse && phi > 4*Math.PI + p) || (inverse && phi < -(4*Math.PI - p)))) {
+					phi = p;
+					loc.setY(yy);
+				}
+			}
+		}}.runTaskTimer(LifeRadio.getInstance(), 0, 1);
+		return this;
+!!!506290.java!!!	PlayParticle(inout loc : Location, inout particle : EnumParticle, inout random : boolean, inout viewers : List<Player>) : void
+		PacketPlayOutWorldParticles p;
+		if (random) {
+			Random r = new Random();		
+			p = new PacketPlayOutWorldParticles(particle, true,
+					(float) loc.clone().add(r.nextDouble() * 2 - r.nextDouble() * 2, r.nextDouble() * 2, r.nextDouble() * 2 - r.nextDouble() * 2).getX(),
+					(float) (loc.clone().add(r.nextDouble() * 2 - r.nextDouble() * 2, r.nextDouble() * 2, r.nextDouble() * 2 - r.nextDouble() * 2).getY()),
+					(float) loc.clone().add(r.nextDouble() * 2 - r.nextDouble() * 2, r.nextDouble() * 2, r.nextDouble() * 2 - r.nextDouble() * 2).getZ(), 0, 0, 0, 0, 1);
+		} else {
+			p = new PacketPlayOutWorldParticles(particle, true, (float) loc.getX(), (float) loc.getY(), (float) loc.clone().getZ(), 0, 0, 0, 0, 1);
+		}
+		if (viewers == null || viewers.isEmpty()) {
+			for (Player pll : loc.getWorld().getPlayers()) {
+				((CraftPlayer) pll).getHandle().playerConnection.sendPacket(p);
+			}
+		} else {
+			for (Player pll : viewers) {
+				((CraftPlayer) pll).getHandle().playerConnection.sendPacket(p);
+			}
+		}
+!!!506418.java!!!	isEnable() : boolean
+		return enable;
+!!!506546.java!!!	setEnable(inout enable : boolean) : void
+		this.enable = enable;
+!!!506674.java!!!	getViewers() : List<Player>
+		return viewers;

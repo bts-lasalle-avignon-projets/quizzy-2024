@@ -1,0 +1,25 @@
+class MenuClickContentEvent
+!!!375986.java!!!	MenuClickContentEvent(inout player : Player, inout menu : IMenu, inout item : ItemStack, inout action : InventoryAction, in slot : int)
+		this.player = player;
+		this.menu = menu;
+		this.item = item;
+		this.action = action;
+		this.slot = slot;
+!!!376114.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!376242.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!376370.java!!!	getPlayer() : Player
+		return player;
+!!!376498.java!!!	getMenu() : IMenu
+		return menu;
+!!!376626.java!!!	getItem() : ItemStack
+		return item;
+!!!376754.java!!!	getAction() : InventoryAction
+		return action;
+!!!376882.java!!!	getSlot() : int
+		return slot;
+!!!377010.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!377138.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;

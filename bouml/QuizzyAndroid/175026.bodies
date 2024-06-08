@@ -1,0 +1,49 @@
+class Cancelled
+!!!343730.java!!!	onBreak(inout e : BlockBreakEvent) : void
+		if (isCancelled(e.getPlayer())) {
+			e.setCancelled(true);
+		}
+!!!343858.java!!!	onPlace(inout e : BlockPlaceEvent) : void
+		if (isCancelled(e.getPlayer())) {
+			e.setCancelled(true);
+		}
+!!!343986.java!!!	onDrop(inout e : PlayerDropItemEvent) : void
+		if (isCancelled(e.getPlayer())) {
+			e.setCancelled(true);
+		}
+!!!344114.java!!!	onPickup(inout e : PlayerPickupItemEvent) : void
+		if (isCancelled(e.getPlayer())) {
+			e.setCancelled(true);
+		}
+!!!344242.java!!!	onSpawn(inout e : EntitySpawnEvent) : void
+		if (e.getEntity().getWorld().getName().equals("lobby")) {
+			e.setCancelled(true);
+		}
+!!!344370.java!!!	onInteract(inout e : PlayerInteractEvent) : void
+		if (isCancelled(e.getPlayer())) {
+			e.setCancelled(true);
+		}
+!!!344498.java!!!	onWeather(inout e : WeatherChangeEvent) : void
+		if (e.getWorld().getName().equals("lobby")) {
+			e.setCancelled(true);
+		}
+!!!344626.java!!!	onFood(inout e : FoodLevelChangeEvent) : void
+		if (isCancelled(e.getEntity(), true)) {
+			e.setCancelled(true);
+		}
+!!!344754.java!!!	onDamage(inout e : EntityDamageEvent) : void
+		if (isCancelled(e.getEntity(), true)) {
+			e.setCancelled(true);
+		}
+!!!344882.java!!!	isCancelled(inout entity : Entity) : boolean
+		return isCancelled(entity, false);
+!!!345010.java!!!	isCancelled(inout entity : Entity, inout checkState : boolean) : boolean
+		return isCancelled(entity.getWorld(), checkState);
+!!!345138.java!!!	isCancelled(inout world : World) : boolean
+		return isCancelled(world, false);
+!!!345266.java!!!	isCancelled(inout world : World, inout checkState : boolean) : boolean
+		if (world.getName().equals("lobby")) {
+			return true;
+		}
+		HGGames game = (HGGames) Game.from(world, HGGames.class);
+		return game != null && (game.getState() != State.RUN || (checkState && game.getStep() == Step.INVINCIBLE));

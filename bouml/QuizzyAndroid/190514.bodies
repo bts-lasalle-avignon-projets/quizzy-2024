@@ -1,0 +1,13 @@
+class Spider
+!!!454450.java!!!	Spider(inout owner : Player, in id : int)
+		super(owner, EntityType.SPIDER, "Araignée de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!454578.java!!!	Spider(inout owner : Player)
+		super(owner, EntityType.SPIDER, "Araignée de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!454706.java!!!	getEntity() : org.bukkit.entity.Spider
+		return (org.bukkit.entity.Spider) entity;
+!!!454834.java!!!	spawn() : void
+		super.spawn();
+!!!454962.java!!!	clone(inout player : Player) : Spider
+		return new Spider(player, getID());

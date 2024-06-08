@@ -1,0 +1,13 @@
+class ReceveurProtocole
+!!!227378.java!!!	getPeripherique() : Peripherique
+        return peripherique;
+!!!227506.java!!!	setPeripherique(inout peripherique : Peripherique) : void
+        this.peripherique = peripherique;
+!!!283058.java!!!	getPeripherique() : Peripherique
+        return peripherique;
+!!!283186.java!!!	setPeripherique(inout peripherique : Peripherique) : void
+        this.peripherique = peripherique;
+!!!531762.java!!!	getPeripherique() : Peripherique
+        return peripherique;
+!!!531890.java!!!	setPeripherique(inout peripherique : Peripherique) : void
+        this.peripherique = peripherique;

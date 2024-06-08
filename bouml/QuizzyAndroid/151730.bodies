@@ -1,0 +1,13 @@
+class EnregistrerTempsQuestion
+!!!210354.java!!!	EnregistrerTempsQuestion(in trame : String)
+        setTrame(trame);
+!!!210482.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";QUESTION;TEMPS\n";
+!!!210610.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENREGISTRER_TEMPS_QUESTION;
+!!!210738.java!!!	getTempsReponse() : int
+        return toInt(extraireDonnees().get("TEMPS"));
+!!!210866.java!!!	getNumeroQuestion() : int
+        return toInt(extraireDonnees().get("QUESTION"));
+!!!210994.java!!!	genererTrame(in numeroQuestion : int, in tempsAlloue : int) : void
+        super.genererTrame(numeroQuestion + "", tempsAlloue + "");

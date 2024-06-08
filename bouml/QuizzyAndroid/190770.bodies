@@ -1,0 +1,14 @@
+class WitherSkeleton
+!!!455730.java!!!	WitherSkeleton(inout owner : Player, in id : int)
+		super(owner, EntityType.SKELETON, "Squelette de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!455858.java!!!	WitherSkeleton(inout owner : Player)
+		super(owner, EntityType.SKELETON, "Squelette de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!455986.java!!!	getEntity() : org.bukkit.entity.Skeleton
+		return (org.bukkit.entity.Skeleton) entity;
+!!!456114.java!!!	spawn() : void
+		super.spawn();
+		getEntity().setSkeletonType(SkeletonType.WITHER);
+!!!456242.java!!!	clone(inout player : Player) : WitherSkeleton
+		return new WitherSkeleton(player, getID());

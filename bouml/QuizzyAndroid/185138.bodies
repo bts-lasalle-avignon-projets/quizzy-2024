@@ -1,0 +1,16 @@
+class MapDate
+!!!413746.java!!!	MapDate(in world : String, inout from : Date, inout to : Date, inout script : ScripType, inout save : boolean)
+		this.from = from;
+		this.to = to;
+		this.world = world;
+		this.script = script != null ? script.getScript() : null;
+		this.save = save;
+!!!413874.java!!!	isReady(inout current : Date) : boolean
+		Date c = new Date(current.getYear(), current.getMonth(), current.getDate());
+		return c.compareTo(from) == 0 || c.compareTo(to) == 0 || (c.after(from) && c.before(to));
+!!!414002.java!!!	getWorld() : String
+		return world;
+!!!414130.java!!!	getScript() : MapScript
+		return script;
+!!!414258.java!!!	isAutoSave() : boolean
+		return save;

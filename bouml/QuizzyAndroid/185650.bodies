@@ -1,0 +1,48 @@
+class PetAPI
+!!!417202.java!!!	openInventory(inout p : Player) : void
+		PetCommand.petMenu.open(p);
+!!!417330.java!!!	removePet(inout p : Player) : void
+		for (PlayerPetProfile pet : PlayerPetProfile.list) {
+			if (pet.getPlayer().equals(p)) {
+				pet.dispawnAll();
+			}
+		}
+!!!417458.java!!!	getMenu() : PetMenu
+		return PetCommand.petMenu;
+!!!462258.java!!!	openInventory(inout player : Player) : void
+		PetInventory.OpenInventory(player);
+!!!462386.java!!!	getPetEntityOfPlayer(inout player : Player) : Entity
+		if (PetManager.pets.containsKey(player)) {
+			return PetManager.pets.get(player);
+		}
+		return null;
+!!!462514.java!!!	getPetOfPlayer(inout player : Player) : CraftPet
+		Entity pet = getPetEntityOfPlayer(player);
+		if (pet != null) {
+			return CraftPet.getPetOfType(pet.getType());
+		}
+		return null;
+!!!462642.java!!!	hasPet(inout player : Player) : boolean
+		if (PetManager.pets.containsKey(player)) {
+			return true;
+		}
+		return false;
+!!!462770.java!!!	removePet(inout player : Player) : void
+		if (!hasPet(player)) {
+			return;
+		}
+		PetManager.removePet(player, PetManager.pets.get(player));
+!!!462898.java!!!	TemporaryRenamePet(inout player : Player, in name : String) : void
+		PetManager.pets.get(player).setCustomName(name);
+!!!463026.java!!!	PermanentRenamePet(inout player : Player, in name : String) : void
+		PetManager.pets.get(player).setCustomName(name);
+		Stats.getStats(player).setName(name);
+!!!463154.java!!!	TemporaryResetNamePet(inout player : Player, in name : String) : void
+		TemporaryRenamePet(player, null);
+		PetManager.pets.get(player).setCustomName(CraftPet.getPetOfType(PetManager.pets.get(player).getType()).getResetName().replace("%player%", player.getName()));
+!!!463282.java!!!	PermanentResetNamePet(inout player : Player, in name : String) : void
+		PermanentRenamePet(player, null);
+!!!463410.java!!!	ToggleAttack(inout player : Player) : void
+		PetManager.toogleAttack(player, PetManager.pets.get(player));
+!!!463538.java!!!	ToggleFollow(inout player : Player) : void
+		PetManager.toggleFollow(player, PetManager.pets.get(player), true);

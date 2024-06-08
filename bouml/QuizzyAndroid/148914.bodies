@@ -1,0 +1,60 @@
+class TReception
+!!!195890.java!!!	run() : void
+            recevoir();
+!!!196018.java!!!	recevoir() : void
+            while(!fini)
+            {
+                try
+                {
+                    if(receiveStream.available() > 0)
+                    {
+                        traiterReception();
+                    }
+                    attendre(250);
+                }
+                catch(IOException e)
+                {
+                    Log.d("QUIZZY_" + this.getClass().getName(), "envoyer() erreur read socket");
+                }
+            }
+!!!196402.java!!!	arreter() : void
+            fini = true;
+            attendre(250);
+!!!196146.java!!!	traiterReception() : void
+            byte buffer[] = new byte[100];
+            int  k        = receiveStream.read(buffer, 0, 100);
+            if(k > 0)
+            {
+                byte rawdata[] = new byte[k];
+                for(int i = 0; i < k; i++)
+                    rawdata[i] = buffer[i];
+                envoyerCodeAuHandler(gestionnaireBluetooth.CODE_RECEPTION_BLUETOOTH, new String(rawdata));
+            }
+!!!196274.java!!!	attendre(in millisecondes : long) : void
+            try
+            {
+                Thread.sleep(millisecondes);
+            }
+            catch(InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+!!!521394.java!!!	traiterReception() : void
+            byte buffer[] = new byte[100];
+            int  k        = receiveStream.read(buffer, 0, 100);
+            if(k > 0)
+            {
+                byte rawdata[] = new byte[k];
+                for(int i = 0; i < k; i++)
+                    rawdata[i] = buffer[i];
+                envoyerCodeAuHandler(gestionnaireBluetooth.CODE_RECEPTION_BLUETOOTH, new String(rawdata));
+            }
+!!!521522.java!!!	attendre(in millisecondes : long) : void
+            try
+            {
+                Thread.sleep(millisecondes);
+            }
+            catch(InterruptedException e)
+            {
+                e.printStackTrace();
+            }

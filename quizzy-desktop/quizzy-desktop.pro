@@ -36,8 +36,14 @@ HEADERS += \
 RESOURCES += \
     quizzy.qrc
 
-DISTFILES += \
-    style.qss
+DISTFILES +=  \
+    style.qss \
+    logo.png  \
+    logoParticipant.png \
+    play_rouge.png \
+    play_orange.png.png \
+    play_vert.png \
+    REM-Bold.ttf
 
 # Les defines pour la version release (sans debug)
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT

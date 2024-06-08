@@ -1,0 +1,33 @@
+class PopupHistorique
+!!!214578.java!!!	PopupHistorique()
+        PopupHistorique popup = (PopupHistorique) IHM.getIHM().getIHMActive(getClass());
+        if (popup != null)
+            this.activite = popup.activite;
+        else
+            this.activite = null;
+!!!214706.java!!!	PopupHistorique(inout activite : AppCompatActivity)
+        this.activite = activite;
+!!!214834.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        if (activite != null) {
+            IHM.getIHM().ajouterIHM(this);
+        }
+
+        View vue = inflater.inflate(R.layout.popup_historique, container, false);
+        initialiserVue(vue);
+        return vue;
+!!!214962.java!!!	initialiserVue(inout vue : View) : void
+        if (activite == null) {
+            dismiss();
+            return;
+        }
+        historique = new ListViewHistorique(activite, vue, R.id.btn_liste_sessions);
+        vue.findViewById(R.id.btn_fermer).setOnClickListener(v -> {
+            dismiss();
+        });
+!!!215090.java!!!	mettreAjourHistorique() : void
+        historique.mettreAjour();

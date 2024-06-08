@@ -1,0 +1,16 @@
+class Rambow
+!!!316210.java!!!	Rambow(in enable : int, in disable : int)
+		this.enable = enable;
+		this.disable = disable;
+!!!316338.java!!!	getAttackCount() : int
+		return 0;
+!!!316466.java!!!	getAwaitEnable() : int
+		return enable;
+!!!316594.java!!!	getAwaitDisable() : int
+		return disable;
+!!!316722.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.RAMBOW;
+!!!316850.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this, 2);
+!!!316978.java!!!	Attack(inout info : SheepInfo) : void
+		info.getSheep().setColor(DyeColor.values()[new Random().nextInt(DyeColor.values().length - 1)]);

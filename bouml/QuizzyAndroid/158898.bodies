@@ -1,0 +1,57 @@
+class TReception
+!!!244530.java!!!	run() : void
+            recevoir();
+!!!244658.java!!!	recevoir() : void
+            while(!fini)
+            {
+                try
+                {
+                    if(receiveStream.available() > 0)
+                    {
+                        byte buffer[] = new byte[100];
+                        int  k        = receiveStream.read(buffer, 0, 100);
+                        if(k > 0)
+                        {
+                            byte rawdata[] = new byte[k];
+                            for(int i = 0; i < k; i++)
+                                rawdata[i] = buffer[i];
+                            String data = new String(rawdata);
+                            /*Log.d(TAG,
+                                  "recevoir() nom = " + getNom() + " - adresse mac = " +
+                                    getAdresse() + " - indicePeripherique = " + indicePeripherique +
+                                    " - datas = " + data);*/
+                            Message msg = Message.obtain();
+                            msg.what    = GestionnaireProtocoles.CODE_RECEPTION_BLUETOOTH;
+                            msg.obj     = data;
+                            msg.arg1    = indicePeripherique;
+                            handler.sendMessage(msg);
+                        }
+                    }
+                    try
+                    {
+                        Thread.sleep(250);
+                    }
+                    catch(InterruptedException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                catch(IOException e)
+                {
+                    Log.d(TAG, "envoyer() erreur read socket");
+                    e.printStackTrace();
+                }
+            }
+!!!244786.java!!!	arreter() : void
+            if(fini == false)
+            {
+                fini = true;
+            }
+            try
+            {
+                Thread.sleep(250);
+            }
+            catch(InterruptedException e)
+            {
+                e.printStackTrace();
+            }

@@ -1,0 +1,13 @@
+class ConnectionRegister
+!!!481202.java!!!	getTables() : SQLManager::SQLRegister
+			return tables;
+!!!481330.java!!!	setTables(inout tables : List<SQLRegister>) : void
+			ConnectionRegister.tables = tables;
+!!!481458.java!!!	getPrimary() : String
+			return primary;
+!!!481586.java!!!	setPrimary(in primary : String) : void
+			ConnectionRegister.primary = primary;
+!!!481714.java!!!	getName() : String
+			return name;
+!!!481842.java!!!	setName(in name : String) : void
+			ConnectionRegister.name = name;

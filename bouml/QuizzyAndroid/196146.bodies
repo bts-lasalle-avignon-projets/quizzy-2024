@@ -1,0 +1,100 @@
+class RadioMenu
+!!!511538.java!!!	RadioMenu(inout inventory : Inventory, inout sp : SongPlayer)
+		super(inventory, null);
+		this.songPlayer = sp;
+		if (sp != LifeRadio.getRadio()) {
+			getInventory().setItem(39, back_song);
+			getInventory().setItem(41, next_song);
+			getInventory().setItem(36, back_to_live);
+		}
+		updateMenu();
+!!!511666.java!!!	init() : void
+		new BukkitRunnable() {
+			List<Player> rm = new ArrayList<>();
+			@Override
+			public void run() {
+				mainMenu.updateMenu();
+				for (Player pll : private_radio.keySet()) {
+					if (!pll.isOnline()) {
+						rm.add(pll);
+					} else {
+						private_radio.get(pll).updateMenu();
+					}
+				}
+				for (Player pll : rm) {
+					private_radio.get(pll).getSongPlayer().destroy();
+					private_radio.remove(pll);
+				}
+				rm.clear();
+			}
+		}.runTaskTimer(LifeRadio.getInstance(), 0, 20);
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				for (Player pll : Bukkit.getOnlinePlayers()) {
+					if (!isListening(pll)) {
+						continue;
+					}
+					particle(pll);
+				}
+			}
+		}.runTaskTimer(LifeRadio.getInstance(), 0, 20);
+!!!511794.java!!!	isListening(inout p : Player) : boolean
+		if (!NoteBlockAPI.isReceivingSong(p)) {
+			return false;
+		}
+		for (SongPlayer song : NoteBlockAPI.getSongPlayersByPlayer(p)) {
+			if (song.isPlaying()) {
+				return true;
+			}
+		}
+		return false;
+!!!511922.java!!!	particle(inout p : Player) : void
+	    Location loc = p.getLocation().clone().add(0, 2, 0);        
+        PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.NOTE, true,
+                (float) loc.clone().add(r2(), r(), r2()).getX(),
+                (float) (loc.clone().add(r2(), r(), r2()).getY()),
+                (float) loc.clone().add(r2(), r(), r2()).getZ(), rnd(), rnd(), rnd(), 1, 0);
+
+        for (Player pll : p.getWorld().getPlayers()) {
+            ((CraftPlayer) pll).getHandle().playerConnection.sendPacket(packet);
+        }
+!!!512050.java!!!	r() : double
+	    return new Random().nextDouble() / 2;
+!!!512178.java!!!	rnd() : float
+	    return (float) Math.random();
+!!!512306.java!!!	r2() : double
+	    return r() - r();
+!!!512434.java!!!	get(inout p : Player) : RadioMenu
+		if (LifeRadio.getRadio().getPlayerUUIDs().contains(p.getUniqueId())) {
+			return mainMenu;
+		}
+		if (!private_radio.containsKey(p)) {
+			RadioSongPlayer sp = new RadioSongPlayer(mainMenu.getSongPlayer().getPlaylist());
+			sp.addPlayer(p);
+			sp.setVolume((byte) 15);
+			sp.setRandom(true);
+			sp.setRepeatMode(RepeatMode.ALL);
+			sp.setPlaying(true);
+			Inventory inv = Bukkit.createInventory(null, mainMenu.getInventory().getSize(), "INVENTORY.RADIO.PRIVATE.TITLE");
+			RadioMenu pr = new RadioMenu(inv, sp);
+			private_radio.put(p, pr);
+		}
+		return private_radio.get(p);
+!!!512562.java!!!	updateMenu() : void
+		if (songPlayer != LifeRadio.getRadio()) {
+			getInventory().setItem(40, songPlayer.isPlaying() ? stop : start);
+		}
+		float progress = (float) songPlayer.getTick() / (float) songPlayer.getSong().getLength();
+		int blocks = Math.round(progress * (float) 9) - 1;
+		for (int i = 0; i < 9; i++) {
+			getInventory().setItem(i, i > blocks ? empty : full);
+		}
+		for (int i = 0; i < Song.all.size(); i++) {
+			Song song = Song.all.get(i);
+			getInventory().setItem(i + 9, song.getItem(song.getSong() == songPlayer.getSong()));
+		}
+!!!512690.java!!!	getSongPlayer() : SongPlayer
+		return songPlayer;
+!!!512818.java!!!	isRadioMenu(inout menu : IMenu) : boolean
+		return mainMenu == menu || private_radio.containsValue(menu);

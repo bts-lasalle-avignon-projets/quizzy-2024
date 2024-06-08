@@ -1,0 +1,38 @@
+class SQL
+!!!418866.java!!!	SQL(inout plugin : Plugin, in timeout : int)
+		this.plugin = plugin;
+		this.timeout = timeout;
+		
+		list.add(this);
+!!!418994.java!!!	adress(in adress : String, in port : int, in database : String, in username : String, in password : String) : SQL::SQLConnection
+		this.connection = new SQLConnection(this, adress, port, database, username, password);
+		return this.connection;
+!!!419122.java!!!	adress(inout config : FileConfiguration) : SQL::SQLConnection
+		this.connection = new SQLConnection(this, config.getString("mysql.host"), config.getInt("mysql.port"), config.getString("mysql.database"), config.getString("mysql.username"), config.getString("mysql.password"));
+		this.database = config.getString("mysql.database");
+		return this.connection;
+!!!419250.java!!!	access(in table : String, in primarykey : String) : SQL::SQLAccess
+		SQLAccess a = new SQLAccess(connection, table, primarykey);
+		access.add(a);
+		return a;
+!!!419378.java!!!	getConnection() : SQL::SQLConnection
+		return this.connection;
+!!!419506.java!!!	from(inout config : FileConfiguration, in table : String) : SQL::Methods
+		return from(config.getString("mysql.database"), table);
+!!!419634.java!!!	from(in database : String, in table : String) : SQL::Methods
+		for (SQL sql : list) {
+			if (sql.database != null && database != null && sql.database.equalsIgnoreCase(database)) {
+				SQLAccess a = sql.from(table);
+				if (a != null) {
+					return a.getMethods();
+				}
+			}
+		}
+		return null;
+!!!419762.java!!!	from(in table : String) : SQL::SQLAccess
+		for (SQLAccess sql : access) {
+			if (sql.table != null && table != null && sql.table.equalsIgnoreCase(table)) {
+				return sql;
+			}
+		}
+		return null;

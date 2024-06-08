@@ -1,0 +1,87 @@
+class GestionnaireSonore
+!!!235826.java!!!	GestionnaireSonore(inout activite : AppCompatActivity)
+        bonne_reponse = MediaPlayer.create(activite, R.raw.bonne_reponse);
+        mauvaise_reponse =
+                MediaPlayer.create(activite, R.raw.mauvaise_reponse);
+        nouvelle_question =
+                MediaPlayer.create(activite, R.raw.nouvelle_question);
+        reponses_vraies_et_fausses =
+                MediaPlayer.create(activite, R.raw.reponses_vraies_et_fausses);
+        selection_reponse =
+                MediaPlayer.create(activite, R.raw.selection_reponse);
+!!!235954.java!!!	jouerBonneReponse() : void
+        bonne_reponse.start();
+!!!236082.java!!!	jouerMauvaiseReponse() : void
+        mauvaise_reponse.start();
+!!!236210.java!!!	jouerReponsesVaries() : void
+        reponses_vraies_et_fausses.start();
+!!!236338.java!!!	jouerNouvelleQuestion() : void
+        nouvelle_question.start();
+!!!236466.java!!!	jouerSelectionReponse() : void
+        selection_reponse.start();
+!!!236594.java!!!	jouerFinQuestion(inout session : Session) : void
+        Question question = session.getQuestionActuelle();
+        boolean bonneReponse = false;
+        boolean mauvaiseReponse = false;
+
+        for (Participant participant : session.getParticipants()) {
+            if (!question.estSelectionne(participant)) {
+                continue;
+            }
+            if (question.estPropositionValide(participant)) {
+                bonneReponse = true;
+            } else {
+                mauvaiseReponse = true;
+            }
+        }
+
+        if (bonneReponse && mauvaiseReponse) {
+            jouerReponsesVaries();
+        } else if (bonneReponse) {
+            jouerBonneReponse();
+        } else {
+            jouerMauvaiseReponse();
+        }
+!!!539570.java!!!	GestionnaireSonore(inout activite : AppCompatActivity)
+        bonne_reponse = MediaPlayer.create(activite, R.raw.bonne_reponse);
+        mauvaise_reponse =
+                MediaPlayer.create(activite, R.raw.mauvaise_reponse);
+        nouvelle_question =
+                MediaPlayer.create(activite, R.raw.nouvelle_question);
+        reponses_vraies_et_fausses =
+                MediaPlayer.create(activite, R.raw.reponses_vraies_et_fausses);
+        selection_reponse =
+                MediaPlayer.create(activite, R.raw.selection_reponse);
+!!!539698.java!!!	jouerBonneReponse() : void
+        bonne_reponse.start();
+!!!539826.java!!!	jouerMauvaiseReponse() : void
+        mauvaise_reponse.start();
+!!!539954.java!!!	jouerReponsesVaries() : void
+        reponses_vraies_et_fausses.start();
+!!!540082.java!!!	jouerNouvelleQuestion() : void
+        nouvelle_question.start();
+!!!540210.java!!!	jouerSelectionReponse() : void
+        selection_reponse.start();
+!!!540338.java!!!	jouerFinQuestion(inout session : Session) : void
+        Question question = session.getQuestionActuelle();
+        boolean bonneReponse = false;
+        boolean mauvaiseReponse = false;
+
+        for (Participant participant : session.getParticipants()) {
+            if (!question.estSelectionne(participant)) {
+                continue;
+            }
+            if (question.estPropositionValide(participant)) {
+                bonneReponse = true;
+            } else {
+                mauvaiseReponse = true;
+            }
+        }
+
+        if (bonneReponse && mauvaiseReponse) {
+            jouerReponsesVaries();
+        } else if (bonneReponse) {
+            jouerBonneReponse();
+        } else {
+            jouerMauvaiseReponse();
+        }

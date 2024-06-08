@@ -1,0 +1,440 @@
+class PetManager
+!!!490930.java!!!	SendFollow() : void
+		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
+			for (Player p : pets.keySet()) {
+				Entity ent = pets.get(p);
+				if (ent.isDead()) {
+					removePet(p, ent);
+					continue;
+				}
+				Location loc = ent.getLocation().clone().add(0, 0.5, 0);
+				PacketPlayOutWorldParticles packet = new PacketPlayOutWorldParticles(EnumParticle.HEART, true, (float) loc.getX(), (float) (loc.getY()), (float) loc.getZ(), 0, 0, 0, 0, 1);
+				for (Player pll : ent.getWorld().getPlayers()) {
+					((CraftPlayer) pll).getHandle().playerConnection.sendPacket(packet);
+				}
+			}
+		}, 0, 5);
+		Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
+			for (Player p : follow) {
+				if (!pets.containsKey(p)) {
+					continue;
+				}
+				Entity ent = pets.get(p);
+				if (ent.isDead()) {
+					continue;
+				}
+				if (ent.getWorld() != p.getWorld()) {
+					PetChangeWorldEvent event = new PetChangeWorldEvent(p, ent, CraftPet.getPetOfType(ent.getType()), p.getWorld());
+					Bukkit.getPluginManager().callEvent(event);
+					if (event.isCancelled()) {
+						continue;
+					}
+					ent.teleport(p);
+				}
+				double distance = p.getLocation().distance(ent.getLocation());
+				if (ent instanceof Squid && distance > 3) {
+					PetMovingToOwnerEvent event = new PetMovingToOwnerEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+					Bukkit.getPluginManager().callEvent(event);
+					if (event.isCancelled()) {
+						continue;
+					}
+					Vector v = ent.getLocation().subtract(p.getLocation()).toVector().normalize();
+					ent.setVelocity(v.multiply(-1.5).setY(0.25));
+					((EntityInsentient) ((CraftEntity) ((LivingEntity) ent)).getHandle()).getNavigation().a(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), 1.75);
+				} else if (distance > 19) {
+					PetMovingToOwnerEvent event = new PetMovingToOwnerEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+					Bukkit.getPluginManager().callEvent(event);
+					if (event.isCancelled()) {
+						continue;
+					}
+					ent.teleport(p);
+				} else if (distance > 3) {
+					PetMovingToOwnerEvent event = new PetMovingToOwnerEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+					Bukkit.getPluginManager().callEvent(event);
+					if (event.isCancelled()) {
+						continue;
+					}
+					Location loc = p.getLocation();
+					((EntityInsentient) ((CraftEntity) ((LivingEntity) ent)).getHandle()).getNavigation().a(loc.getX(), p.getLocation().getY(), loc.getZ(), 1.75);
+				}
+			}
+		}, 0, 20);
+!!!491058.java!!!	SpawnPet(inout p : Player, inout pet : CraftPet) : void
+		Stats stat = Stats.getStats(p);
+		Location loc = p.getLocation();
+		Entity ent = loc.getWorld().spawnEntity(loc, pet.getType());
+		PetSpawnEvent event = new PetSpawnEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+		Bukkit.getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			ent.remove();
+			return;
+		}
+		switch (pet.getType()) {
+		case SHEEP:
+			((Sheep) ent).setColor(pet.getColor());
+			((Sheep) ent).setBaby();
+			((Sheep) ent).setAgeLock(true);
+			((Sheep) ent).setBreed(false);
+			break;
+		case OCELOT:
+			((Ocelot) ent).setBaby();
+			((Ocelot) ent).setAgeLock(true);
+			((Ocelot) ent).setBreed(false);
+			((Ocelot) ent).setCatType(pet.getCattype());
+			((Ocelot) ent).setSitting(true);
+			break;
+		case WOLF:
+			((Wolf) ent).setBaby();
+			((Wolf) ent).setAgeLock(true);
+			((Wolf) ent).setBreed(false);
+			((Wolf) ent).setSitting(true);
+			break;
+		case PIG:
+			((Pig) ent).setBaby();
+			((Pig) ent).setAgeLock(true);
+			((Pig) ent).setBreed(false);
+			if (pet.isCarrot()) {
+				((Pig) ent).setSaddle(true);
+				p.getInventory().addItem(new ItemBuilder().addItem("§cBâton à carrote", null, Material.CARROT_STICK, 0));
+			}
+			break;
+		case CHICKEN:
+			((Chicken) ent).setBaby();
+			((Chicken) ent).setAgeLock(true);
+			((Chicken) ent).setBreed(false);
+			break;
+		case COW:
+			((Cow) ent).setBaby();
+			((Cow) ent).setAgeLock(true);
+			((Cow) ent).setBreed(false);
+			break;
+		case MUSHROOM_COW:
+			((MushroomCow) ent).setBaby();
+			((MushroomCow) ent).setAgeLock(true);
+			((MushroomCow) ent).setBreed(false);
+			break;
+		case SQUID:
+			((Squid) ent).setNoDamageTicks(0);
+			break;
+		case SLIME:
+			((Slime) ent).setSize(1);
+		case MAGMA_CUBE:
+			((MagmaCube) ent).setSize(1);
+			break;
+		case ZOMBIE:
+			((Zombie) ent).getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+			if (pet.isVillager()) {
+				((Zombie) ent).setVillager(true);
+			}
+			break;
+		case PIG_ZOMBIE:
+			((PigZombie) ent).setVillager(true);
+			break;
+		case SKELETON:
+			((Skeleton) ent).setSkeletonType(SkeletonType.WITHER);
+			((Skeleton) ent).getEquipment().setItemInHand(new ItemStack(Material.STONE_SWORD));
+			break;
+		default:
+			break;
+		}
+		if (stat.getName() == null) {
+			ent.setCustomName(pet.getResetName().replace("%player%", p.getName()));
+		} else {
+			ent.setCustomName(stat.getName() + "§r (" + p.getName() + ")");
+		}
+		ent.setCustomNameVisible(true);
+		if (pets.containsKey(p)) {
+			removePet(p, pets.get(p));
+		}
+		pets.put(p, ent);
+!!!491186.java!!!	removePet(inout p : Player, inout pet : Entity) : void
+		PetRemoveEvent e = new PetRemoveEvent(p, pet, CraftPet.getPetOfType(pet.getType()));
+		Bukkit.getPluginManager().callEvent(e);
+		Stats stat = Stats.getStats(p);
+		if (stat.getName() == null) {
+			p.sendMessage(new MessageBuilder("pets.RemovedPed").getString(true).replace("%name%", pet.getName()));
+		} else {
+			p.sendMessage(new MessageBuilder("pets.RemovedPed").getString(true).replace("%name%", stat.getName()));
+		}
+		if (follow.contains(p)) {
+			follow.remove(p);
+		}
+		if (attack.contains(p)) {
+			attack.remove(p);
+		}
+		if (!pet.isDead()) {
+			pet.getLocation().getChunk().load();
+			pet.remove();
+		}
+		if (p.getInventory().contains(Material.CARROT_STICK)) {
+			p.getInventory().remove(Material.CARROT_STICK);
+		}
+		pets.remove(p);
+!!!491314.java!!!	toggleFollow(inout p : Player, inout ent : Entity, inout message : boolean) : void
+		Stats stat = Stats.getStats(p);
+		if (follow.contains(p)) {
+			PetFollowStartEvent event = new PetFollowStartEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				return;
+			}
+			follow.remove(p);
+			if (message && stat.getName() == null) {
+				p.sendMessage(
+						new MessageBuilder("pets.NotFollow").getString(true).replace("%name%", ent.getName()));
+			} else if (message) {
+				p.sendMessage(
+						new MessageBuilder("pets.NotFollow").getString(true).replace("%name%", stat.getName()));
+			}
+			if (ent instanceof Ocelot) {
+				((Ocelot) ent).setSitting(true);
+				((Ocelot) ent).setTamed(false);
+				((Ocelot) ent).setOwner(null);
+			} else if (ent instanceof Wolf) {
+				((Wolf) ent).setSitting(true);
+				((Wolf) ent).setTamed(false);
+				((Wolf) ent).setOwner(null);
+			}
+		} else {
+			PetFollowStopEvent event = new PetFollowStopEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				return;
+			}
+			follow.add(p);
+			if (message && stat.getName() == null) {
+				p.sendMessage(new MessageBuilder("pets.Follow").getString(true).replace("%name%", ent.getName()));
+			} else if (message) {
+				p.sendMessage(new MessageBuilder("pets.Follow").getString(true).replace("%name%", stat.getName()));
+			}
+			if (ent instanceof Ocelot) {
+				((Ocelot) ent).setSitting(false);
+				((Ocelot) ent).setTamed(true);
+				((Ocelot) ent).setOwner(p);
+			} else if (ent instanceof Wolf) {
+				((Wolf) ent).setSitting(false);
+				((Wolf) ent).setTamed(true);
+				((Wolf) ent).setOwner(p);
+			}
+		}
+!!!491442.java!!!	toogleAttack(inout p : Player, inout ent : Entity) : void
+		Stats stat = Stats.getStats(p);
+		if (!attack.contains(p)) {
+			PetAttackEvent event = new PetAttackEvent(p, PetManager.pets.get(p), CraftPet.getPetOfType(PetManager.pets.get(p).getType()));
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				return;
+			}
+			attack.add(p);
+			if (follow.contains(p)) {
+				follow.remove(p);
+			}
+			if (ent instanceof Ocelot) {
+				((Ocelot) ent).setSitting(false);
+				((Ocelot) ent).setTamed(false);
+				((Ocelot) ent).setOwner(null);
+			} else if (ent instanceof Wolf) {
+				((Wolf) ent).setSitting(false);
+				((Wolf) ent).setTamed(false);
+				((Wolf) ent).setOwner(null);
+				((Wolf) ent).setAngry(true);
+			}
+			StartAttack(ent, p, 4, stat);
+		} else {
+			PetCancellAttackEvent event = new PetCancellAttackEvent(p, PetManager.pets.get(p), CraftPet.getPetOfType(PetManager.pets.get(p).getType()));
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				return;
+			}
+			attack.remove(p);
+			if (stat.getName() == null) {
+				p.sendMessage(new MessageBuilder("pets.ManualCancellAttack").getString(true).replace("%name%", ent.getName()));
+			} else {
+				p.sendMessage(new MessageBuilder("pets.ManualCancellAttack").getString(true).replace("%name%", stat.getName()));
+			}
+			if (pets.get(p) instanceof Ocelot) {
+				((Ocelot) pets.get(p)).setSitting(false);
+				((Ocelot) pets.get(p)).setTamed(true);
+				((Ocelot) pets.get(p)).setOwner(p);
+			} else if (pets.get(p) instanceof Wolf) {
+				((Wolf) pets.get(p)).setSitting(false);
+				((Wolf) pets.get(p)).setTamed(true);
+				((Wolf) pets.get(p)).setOwner(p);
+				((Wolf) pets.get(p)).setAngry(false);
+			}
+			if (p.getInventory().contains(Material.CARROT_STICK)) {
+				p.getInventory().remove(Material.CARROT_STICK);
+			}
+		}
+!!!491570.java!!!	StartAttack(inout ent : Entity, inout p : Player, in round : double, inout stat : Stats) : void
+		if (ent.isDead() || !attack.contains(p)) {
+			return;
+		}
+		Player target = getNearedPlayer(ent, p);
+		if (target == null) {
+			attack.remove(p);
+			if (pets.get(p) instanceof Ocelot) {
+				((Ocelot) pets.get(p)).setSitting(false);
+				((Ocelot) pets.get(p)).setTamed(true);
+				((Ocelot) pets.get(p)).setOwner(p);
+			} else if (pets.get(p) instanceof Wolf) {
+				((Wolf) pets.get(p)).setSitting(false);
+				((Wolf) pets.get(p)).setTamed(true);
+				((Wolf) pets.get(p)).setOwner(p);
+				((Wolf) pets.get(p)).setAngry(false);
+			}
+			if (p.getInventory().contains(Material.CARROT_STICK)) {
+				p.getInventory().remove(Material.CARROT_STICK);
+			}
+			if (stat.getName() == null) {
+				p.sendMessage(new MessageBuilder("pets.AttackCancelled").getString(true).replace("%name%", ent.getName()));
+			} else {
+				p.sendMessage(new MessageBuilder("pets.AttackCancelled").getString(true).replace("%name%", stat.getName()));
+			}
+			return;
+		}
+		PetMovingToOwnerEvent event = new PetMovingToOwnerEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+		Bukkit.getPluginManager().callEvent(event);
+		if (!event.isCancelled()) {
+			((EntityInsentient) ((CraftEntity) ((LivingEntity) ent)).getHandle()).getNavigation().a(target.getLocation().getX(), target.getLocation().getY(), target.getLocation().getZ(), 1.75);
+		}
+		if (round <= 0) {
+			PetRemoveEvent e = new PetRemoveEvent(p, ent, CraftPet.getPetOfType(ent.getType()));
+			Bukkit.getPluginManager().callEvent(e);
+			ent.remove();
+			TNTPrimed tnt = (TNTPrimed) ent.getWorld().spawnEntity(ent.getLocation(), EntityType.PRIMED_TNT);
+			tnt.setFuseTicks(0);
+			if (attack.contains(p)) {
+				attack.remove(p);
+			}
+			if (follow.contains(p)) {
+				follow.remove(p);
+			}
+			if (pets.containsKey(p)) {
+				pets.remove(p);
+			}
+			return;
+		}
+		Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+			StartAttack(ent, p, round - 0.25, stat);
+		}, 5);
+!!!491698.java!!!	OnSneak(inout e : PlayerToggleSneakEvent) : void
+		Player p = e.getPlayer();
+		if (!pets.containsKey(p)) {
+			return;
+		}
+		if (p.getOpenInventory() == null) {
+			return;
+		}
+		if (p.isFlying()) {
+			return;
+		}
+		if (p.isInsideVehicle()) {
+			return;
+		}
+		PetInventory.OpenInventory(p);
+!!!491826.java!!!	OnExplode(inout e : EntityExplodeEvent) : void
+		e.setCancelled(true);
+		if (!(e.getEntity() instanceof TNTPrimed)) {
+			return;
+		}
+		List<Entity> list = new ArrayList<>();
+		for (Entity ent : e.getEntity().getNearbyEntities(5, 5, 5)) {
+			if (!(ent instanceof ArmorStand)) {
+				list.add(ent);
+			}
+		}
+		PetExplodeEvent event = new PetExplodeEvent(e.getEntity(), CraftPet.getPetOfType(e.getEntity().getType()), list);
+		Bukkit.getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			list.clear();
+			return;
+		}
+		for (Entity ent : list) {
+			Vector v = ent.getLocation().subtract(e.getEntity().getLocation()).toVector().multiply(1).setY(0.75).normalize();
+			ent.setVelocity(v);
+		}
+		list.clear();
+!!!491954.java!!!	OnBatInteract(inout e : PlayerInteractEntityEvent) : void
+		if (!pets.containsValue(e.getRightClicked())) {
+			return;
+		}
+		Player p = e.getPlayer();
+		if (!(e.getRightClicked() instanceof Bat)) {
+			return;
+		}
+		if (p.hasPermission("life.vip") || p.hasPermission("life.vip+")) {
+			e.getRightClicked().setPassenger(p);
+		}
+!!!492082.java!!!	getNearedPlayer(inout ent : Entity, inout p : Player) : Player
+		Player near = null;
+		double distance = Double.MAX_VALUE;
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			if (pll.getWorld() == ent.getWorld() && pll != p && pll.getLocation().distance(ent.getLocation()) < distance) {
+				near = pll;
+				distance = pll.getLocation().distance(ent.getLocation());
+			}
+		}
+		return near;
+!!!492210.java!!!	onCommand(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : boolean
+		if (!(sender instanceof Player)) {
+			return false;
+		}
+		Player p = (Player) sender;
+		if (!pets.containsKey(p)) {
+			p.sendMessage(new MessageBuilder("pets.NoPresentPet").getString(true));
+			return false;
+		}
+		CraftPet pet = CraftPet.getPetOfType(pets.get(p).getType());
+		if (pet == null) {
+			return false;
+		}
+		Stats stat = Stats.getStats(p);
+		if (args.length == 1 && args[0].equalsIgnoreCase("reset")) {
+			return resetName(p, stat, pet, args);
+		}
+		if (args.length < 1) {
+			p.sendMessage(new MessageBuilder("pets.ChangeNameCommand").getString(true));
+			return false;
+		}
+		return changeName(p, stat, pet, args);
+!!!492338.java!!!	changeName(inout p : Player, inout stat : Stats, inout pet : CraftPet, inout args : String [[]]) : boolean
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < args.length; i++) {
+			sb.append(args[i].replaceAll("&", "§") + " ");
+		}
+		String name = sb.toString();
+		stat.setName(sb.toString());
+		sb.append("§r(" + p.getName() + ")");
+		PetNameChangeEvent event = new PetNameChangeEvent(p, pets.get(p), pet, name, sb.toString());
+		Bukkit.getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			return false;
+		}
+		if (event.getName() == null) {
+			return resetName(p, stat, pet, args);
+		}
+		pets.get(p).setCustomName(sb.toString());
+		p.sendMessage(new MessageBuilder("pets.NameUpdate").getString(true));
+		return true;
+!!!492466.java!!!	resetName(inout p : Player, inout stat : Stats, inout pet : CraftPet, inout args : String [[]]) : boolean
+		PetNameResetEvent event = new PetNameResetEvent(p, pets.get(p), pet, null);
+		Bukkit.getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			return false;
+		}
+		if (event.getName() != null) {
+			return changeName(p, stat, pet, args);
+		}
+		stat.setName(null);
+		pets.get(p).setCustomName(pet.getResetName() + p.getName());
+		p.sendMessage(new MessageBuilder("pets.NameReset").getString(true));
+		return true;
+!!!492594.java!!!	onTabComplete(inout sender : CommandSender, inout cmd : Command, in msg : String, inout args : String [[]]) : List<String>
+		if (!cmd.getName().equalsIgnoreCase("changename")) {
+			return null;
+		}
+		if (args.length != 1) {
+			return null;
+		}
+		return Arrays.asList("reset");

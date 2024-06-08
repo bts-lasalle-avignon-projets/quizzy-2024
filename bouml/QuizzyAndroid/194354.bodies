@@ -1,0 +1,75 @@
+class Stats
+!!!497714.java!!!	Stats(inout p : Player)
+		try {
+			sql.createSection(p.getName());
+		} catch (Exception e1) {
+		}
+		setPlayer(p);
+		try {
+			setName(sql.getString(p.getName(), "CUSTOMNAME"));
+		} catch (Exception e) {
+			setName(null);
+		}
+		try {
+			setID(Integer.parseInt(sql.getString(p.getName(), "ID")));
+		} catch (Exception e) {
+			setID(0);
+		}
+		try {
+			setAutoSpawn(Boolean.parseBoolean(sql.getString(p.getName(), "AUTOSPAWN")));
+		} catch (Exception e) {
+			setAutoSpawn(false);
+		}
+		stat.add(this);
+!!!497842.java!!!	getStats(inout p : Player) : Stats
+		for (Stats s : stat) {
+			if (s.getPlayer() == p) {
+				return s;
+			}
+		}
+		return new Stats(p);
+!!!497970.java!!!	getNULLStats(inout p : Player) : Stats
+		for (Stats s : stat) {
+			if (s.getPlayer() == p) {
+				return s;
+			}
+		}
+		return null;
+!!!498098.java!!!	removePlayer(inout stat : Stats) : void
+		if (stat == null) {
+			return;
+		}
+		Player p = stat.getPlayer();
+		if (PetManager.pets.containsKey(p)) {
+			stat.setAutoSpawn(true);
+		} else {
+			stat.setAutoSpawn(false);
+		}
+		try {
+			sql.setString(p.getName(), "ID", stat.getID() + "");
+			sql.setString(p.getName(), "CUSTOMNAME", stat.getName());
+			sql.setString(p.getName(), "AUTOSPAWN", stat.isAutoSpawn() + "");
+		} catch (Exception e) {
+		}
+		if (Stats.stat.contains(stat)) {
+			Stats.stat.remove(stat);
+		}
+		if (PetManager.pets.containsKey(p)) {
+			PetManager.removePet(p, PetManager.pets.get(p));
+		}
+!!!498226.java!!!	getPlayer() : Player
+		return player;
+!!!498354.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!498482.java!!!	getName() : String
+		return name;
+!!!498610.java!!!	setName(in name : String) : void
+		this.name = name;
+!!!498738.java!!!	getID() : int
+		return ID;
+!!!498866.java!!!	setID(in iD : int) : void
+		ID = iD;
+!!!498994.java!!!	isAutoSpawn() : boolean
+		return autospawn;
+!!!499122.java!!!	setAutoSpawn(inout autospawn : boolean) : void
+		this.autospawn = autospawn;

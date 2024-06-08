@@ -1,0 +1,21 @@
+class KitEvent
+!!!345906.java!!!	onClick(inout e : PlayerInteractEvent) : void
+		Player p = e.getPlayer();
+		HGGames game;
+		if (e.getItem() == null || !e.getItem().hasItemMeta() || e.getItem().getItemMeta().getDisplayName() == null || (game = (HGGames) Game.from(p, HGGames.class)) == null) {
+			return;
+		}
+		if (e.getItem().getType() == Material.FEATHER && game.getState() == State.WAITING) {
+			game.openKitMenu(p);
+		}
+!!!346034.java!!!	onChoose(inout e : MenuClickContentEvent) : void
+		Player p = e.getPlayer();
+		HGGames game;
+		if (e.getItem() == null || !e.getItem().hasItemMeta() || e.getItem().getItemMeta().getDisplayName() == null || (game = (HGGames) Game.from(p, HGGames.class)) == null || !game.getKitMenu().equals(e.getMenu())) {
+			return;
+		}
+		Kit kit = Kit.from(e.getItem());
+		if (kit == null) {
+			return;
+		}
+		

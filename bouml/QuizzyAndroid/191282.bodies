@@ -1,0 +1,83 @@
+class PageCloneMenu
+!!!459058.java!!!	PageCloneMenu(inout content : List<ItemStack>)
+		this(content, null);
+!!!459186.java!!!	PageCloneMenu(inout content : List<ItemStack>, in title : String)
+		this(content, title, 45);
+!!!459314.java!!!	PageCloneMenu(inout content : List<ItemStack>, in title : String, in size : int)
+		this(content, null, title, size);
+!!!459442.java!!!	PageCloneMenu(inout content : List<ItemStack>, inout parent : IMenu, in title : String, in size : int)
+		super(null, parent);
+		setMenu(this);
+		this.content = content;
+		this.size = size;
+		this.title = title;
+!!!459570.java!!!	open(inout p : Player) : void
+		Inventory inv = getInventory();
+		p.openInventory(inv);
+		views.put(inv, 0);
+!!!459698.java!!!	getInventory() : Inventory
+		return getPage(0);
+!!!459826.java!!!	getTitle() : String
+		return title;
+!!!459954.java!!!	getSize() : int
+		return size;
+!!!460082.java!!!	isIn(in pageNumber : int) : boolean
+		return pageNumber == 0 || content.size() > size*pageNumber;
+!!!460210.java!!!	hasNextPage(inout inv : Inventory) : boolean
+		return views.containsKey(inv) ? isIn(views.get(inv) + 1) : false;
+!!!460338.java!!!	openNextPage(inout p : Player, inout inv : Inventory) : void
+		p.openInventory(getPage(views.get(inv) + 1, inv));
+!!!460466.java!!!	hasBackPage(inout inv : Inventory) : boolean
+		return views.containsKey(inv) ? views.get(inv) > 0 : false;
+!!!460594.java!!!	openBackPage(inout p : Player, inout inv : Inventory) : void
+		p.openInventory(getPage(views.get(inv) - 1, inv));
+!!!460722.java!!!	getPage(in pageNumber : int) : Inventory
+		return getPage(pageNumber, Bukkit.createInventory(null, size, title));
+!!!460850.java!!!	getPage(in pageNumber : int, inout inv : Inventory) : Inventory
+		inv.clear();
+		int totalItems = content.size() - pageNumber * size;
+		totalItems = totalItems > size ? size : totalItems;
+		for (int slot = 0; slot < totalItems; slot++) {
+			inv.setItem(slot, content.get(slot + size * pageNumber));
+		}
+		inv.setItem(size, new ItemBuilder(Material.INK_SACK, (byte) (pageNumber == 0 ? 8 : 10)));
+		inv.setItem(size + 8, new ItemBuilder(Material.INK_SACK, (byte) (!isIn(pageNumber + 1) ? 8 : 10)));
+		if (views.containsKey(inv)) {
+			views.replace(inv, pageNumber);
+		}
+		return inv;
+!!!460978.java!!!	addItem(inout item : ItemStack) : void
+		content.add(item);
+!!!461106.java!!!	removeItem(inout item : ItemStack) : void
+		for (int i = 0; i < content.size(); i++) {
+			ItemStack contentItem = content.get(i);
+			if (contentItem != null && contentItem.isSimilar(item)) {
+				content.remove(i);
+				i--;
+			}
+		}
+!!!461234.java!!!	update() : void
+		for (Inventory inv : views.keySet()) {
+			getPage(views.get(inv), inv);
+		}
+!!!461362.java!!!	onClick(inout e : InventoryClickEvent) : void
+		IMenu sub = from(e.getCurrentItem());
+		Inventory inv = e.getClickedInventory();
+		Player p = (Player) e.getWhoClicked();
+		e.setCancelled(true);
+		if (sub != null) {
+			sub.open(p);
+		} else if (e.getSlot() == size && hasBackPage(inv)) {
+			openBackPage(p, inv);
+		} else if (e.getSlot() == size + 8 && hasNextPage(inv)) {
+			openNextPage(p, inv);
+		} else {
+			MenuClickContentEvent event = new MenuClickContentEvent(p, this, e.getCurrentItem(), e.getAction(), e.getSlot());
+			Bukkit.getPluginManager().callEvent(event);
+		}
+!!!461490.java!!!	onOpen(inout e : InventoryOpenEvent) : void
+		
+!!!461618.java!!!	onClose(inout e : InventoryCloseEvent) : void
+		if (views.containsKey(e.getInventory())) {
+			views.remove(e.getInventory());
+		}

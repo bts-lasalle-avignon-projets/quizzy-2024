@@ -1,0 +1,7 @@
+class AfficherReponse
+!!!204082.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!204210.java!!!	getType() : TypeProtocole
+        return TypeProtocole.AFFICHER_REPONSE;
+!!!204338.java!!!	genererTrame() : void
+        super.genererTrame();

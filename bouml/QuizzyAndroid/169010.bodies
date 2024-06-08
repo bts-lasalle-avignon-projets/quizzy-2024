@@ -1,0 +1,102 @@
+class SheepInfo
+!!!298802.java!!!	SheepInfo(inout game : GAME, inout team : GAME::Team, in name : String, in life : double, inout powers : List<PowerSheep>, inout sheep : Sheep, inout shooter : Player, inout item : ItemStack, inout enablepowers : boolean)
+		boolean base = shooter == null;
+		this.game = game;
+		this.team = team;
+		this.name = name;
+		this.life = life;
+		this.based = life;
+		this.powers = powers;
+		this.sheep = sheep;
+		this.shooter = shooter;
+		this.launchpoint = shooter != null ? shooter.getLocation().clone() : null;
+		this.item = item;
+		this.color = DyeColor.getByWoolData(item.getData().getData());
+		if (base) {
+			SheepInfo.base.add(this);
+			return;
+		}
+		list.add(this);
+		if (enablepowers) {
+			for (PowerSheep ps : getPowers()) {
+				ps.Enable(this);
+			}
+		}
+		new BukkitRunnable() {@Override public void run() {
+			if (getLife() > -0.1) {
+				substactLife();
+			} else {
+				if (!sheep.isDead()) {
+					sheep.remove();
+				}
+				cancel();
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!298930.java!!!	SheepInfo(in name : String, in life : int, inout powers : List<PowerSheep>, inout item : ItemStack)
+		this(null, null, name, life, powers, null, null, item, false);
+!!!299058.java!!!	clone(inout game : GAME, inout team : GAME::Team, inout sheep : Sheep, in life : double, inout shooter : Player, inout enablepowers : boolean) : SheepInfo
+		return new SheepInfo(game, team, getName(), life, getPowers(), sheep, shooter, getItem(), enablepowers);
+!!!299186.java!!!	clone(inout game : GAME, inout team : GAME::Team, inout sheep : Sheep, inout shooter : Player, inout enablepowers : boolean) : SheepInfo
+		return clone(game, team, sheep, getLife(), shooter, enablepowers);
+!!!299314.java!!!	getSheep() : Sheep
+		return sheep;
+!!!299442.java!!!	getBasedLife() : double
+		return based;
+!!!299570.java!!!	getLife() : double
+		return life;
+!!!299698.java!!!	substactLife() : void
+		life -= 0.05;
+!!!299826.java!!!	resetLife() : void
+		life = based;
+!!!299954.java!!!	getPowers() : PowerSheep
+		return powers;
+!!!300082.java!!!	getShooter() : Player
+		return shooter;
+!!!300210.java!!!	getName() : String
+		return name;
+!!!300338.java!!!	getItem() : ItemStack
+		return item;
+!!!300466.java!!!	getSheep(in name : String, inout color : DyeColor, inout loc : Location) : Sheep
+		Sheep sheep = (Sheep) loc.getWorld().spawnEntity(loc, EntityType.SHEEP);
+		sheep.setAdult();
+		sheep.setCustomName(name);
+		sheep.setCustomNameVisible(true);
+		sheep.setColor(color);
+		sheep.setAgeLock(true);
+		return sheep;
+!!!300594.java!!!	from(inout owner : Player) : SheepInfo
+		for (SheepInfo si : list) {
+			if (si.getShooter().equals(owner)) {
+				return si;
+			}
+		}
+		return null;
+!!!300722.java!!!	from(inout sheep : Sheep) : SheepInfo
+		for (SheepInfo si : list) {
+			if (si.getSheep().equals(sheep)) {
+				return si;
+			}
+		}
+		return null;
+!!!300850.java!!!	from(inout item : ItemStack) : SheepInfo
+		for (SheepInfo si : base) {
+			if (si.getItem().isSimilar(item)) {
+				return si;
+			}
+		}
+		return null;
+!!!300978.java!!!	getColor() : DyeColor
+		return color;
+!!!301106.java!!!	hasPower(inout power : PowerSheep::PowerType) : boolean
+		for (PowerSheep ps : getPowers()) {
+			if (ps.getType() == power) {
+				return true;
+			}
+		}
+		return false;
+!!!301234.java!!!	getGame() : GAME
+		return game;
+!!!301362.java!!!	getTeam() : GAME::Team
+		return team;
+!!!301490.java!!!	getLaunchPoint() : Location
+		return launchpoint;

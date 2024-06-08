@@ -1,0 +1,56 @@
+class TypeProtocole
+!!!201138.java!!!	TypeProtocole(in indiceType : String)
+        this.indiceType = indiceType;
+!!!201266.java!!!	getType(in indiceType : String) : TypeProtocole
+        for(TypeProtocole type: values())
+        {
+            if(type.getIndiceType().equals(indiceType))
+            {
+                return type;
+            }
+        }
+        return null;
+!!!201394.java!!!	getIndiceType() : String
+        return indiceType;
+!!!201522.java!!!	getProtocole(in trame : String) : Protocole
+        switch(this)
+        {
+            case LANCEMENT_SESSION:
+                return new LancementSession();
+            case ENREGISTRER_PARTICIPANT:
+                return new EnregistrerParticipant(trame);
+            case ENREGISTRER_QUESTION:
+                return new EnregistrerQuestion(trame);
+            case DEMARRER_CHRONO:
+                return new DemarrerChrono();
+            case ENREGISTRER_SELECTION_PARTICIPANT:
+                return new EnregistrerSelectionParticipant(trame);
+            case ACQUITEMENT:
+                return new Acquitement();
+            case FIN_SESSION:
+                return new FinSession();
+            case ACTIVER_BUMPERS:
+                return new ActiverBumpers(trame);
+            case AFFICHER_REPONSE:
+                return new AfficherReponse();
+            case RECEPTION_REPONSE:
+                return new ReceptionReponse(trame);
+            case DESACTIVER_BUMPERS:
+                return new DesactiverBumpers(trame);
+            case ENREGISTRER_TEMPS_QUESTION:
+                return new EnregistrerTempsQuestion(trame);
+            case AFFICHER_QUESTION_SUIVANTE:
+                return new AfficherQuestionSuivante();
+            case AFFICHER_QUESTION_PRECEDENTE:
+                return new AfficherQuestionPrecedente();
+            case ENREGISTRER_RESULTAT:
+                return new EnregistrerResultat(trame);
+            case TEST_CONNEXION:
+                return new VerifierConnexion();
+            default:
+                Log.d("QUIZZY_" + this.getClass().getName(),
+                      "Aucun protocole trouvé dans " + getClass().getName() + " pour la trame " +
+                        (trame == null ? "null" : trame));
+                break;
+        }
+        return null;

@@ -1,0 +1,36 @@
+class Join
+!!!296626.java!!!	OnJoin(inout e : PlayerJoinEvent) : void
+		Player p = e.getPlayer();
+		Spawn(p, true);
+!!!296754.java!!!	OnQuit(inout e : PlayerQuitEvent) : void
+		Player p = e.getPlayer();
+		GAME game = GAME.from(p);
+		if (game != null) {
+			game.removePlayer(p);
+		}
+!!!296882.java!!!	Spawn(inout p : Player, inout remove : boolean) : void
+		if (remove) {
+			GAME game = GAME.from(p);
+			if (game != null) {
+				game.removePlayer(p);
+			}
+		}
+		p.setHealth(20);
+		p.setFoodLevel(20);
+		p.setLevel(0);
+		p.getInventory().clear();
+		p.getInventory().setArmorContents(new ItemStack[] {null, null, null, null});
+		p.updateInventory();
+		Location spawn = getSpawn();
+		p.teleport(spawn);
+		for (Player pll : Bukkit.getOnlinePlayers()) {
+			if (spawn.getWorld().getPlayers().contains(pll)) {
+				pll.showPlayer(p);
+				p.showPlayer(pll);
+			} else {
+				pll.hidePlayer(p);
+				p.hidePlayer(pll);
+			}
+		}
+!!!297010.java!!!	getSpawn() : Location
+		return new Location(Bukkit.getWorld("lobby"), -979.0, 102, -407.0, 0, 0);

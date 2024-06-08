@@ -1,0 +1,70 @@
+class Cuboid
+!!!324274.java!!!	Cuboid(in point1 : Location, in point2 : Location)
+        this.xMin = Math.min(point1.getBlockX(), point2.getBlockX());
+        this.xMax = Math.max(point1.getBlockX(), point2.getBlockX());
+        this.yMin = Math.min(point1.getBlockY(), point2.getBlockY());
+        this.yMax = Math.max(point1.getBlockY(), point2.getBlockY());
+        this.zMin = Math.min(point1.getBlockZ(), point2.getBlockZ());
+        this.zMax = Math.max(point1.getBlockZ(), point2.getBlockZ());
+        this.world = point1.getWorld();
+        this.xMinCentered = this.xMin + 0.5;
+        this.xMaxCentered = this.xMax + 0.5;
+        this.yMinCentered = this.yMin + 0.5;
+        this.yMaxCentered = this.yMax + 0.5;
+        this.zMinCentered = this.zMin + 0.5;
+        this.zMaxCentered = this.zMax + 0.5;
+!!!324402.java!!!	setWorld(inout world : World) : void
+    	this.world = world;
+!!!324530.java!!!	blockList() : List<Block>
+        List<Block> bL = new ArrayList<>(this.getTotalBlockSize());
+        for(int x = this.xMin; x <= this.xMax; ++x) {
+            for(int y = this.yMin; y <= this.yMax; ++y) {
+                for(int z = this.zMin; z <= this.zMax; ++z) {
+                    final Block b = this.world.getBlockAt(x, y, z);
+                    bL.add(b);
+                }
+            }
+        }
+        return bL;
+!!!324658.java!!!	getCenter() : Location
+        return new Location(this.world, (this.xMax - this.xMin) / 2 + this.xMin, (this.yMax - this.yMin) / 2 + this.yMin, (this.zMax - this.zMin) / 2 + this.zMin);
+!!!324786.java!!!	getDistance() : double
+        return this.getPoint1().distance(this.getPoint2());
+!!!324914.java!!!	getDistanceSquared() : double
+        return this.getPoint1().distanceSquared(this.getPoint2());
+!!!325042.java!!!	getHeight() : int
+        return this.yMax - this.yMin + 1;
+!!!325170.java!!!	getPoint1() : Location
+        return new Location(this.world, this.xMin, this.yMin, this.zMin);
+!!!325298.java!!!	getPoint2() : Location
+        return new Location(this.world, this.xMax, this.yMax, this.zMax);
+!!!325426.java!!!	getRandomLocation() : Location
+        final Random rand = new Random();
+        final int x = rand.nextInt(Math.abs(this.xMax - this.xMin) + 1) + this.xMin;
+        final int y = rand.nextInt(Math.abs(this.yMax - this.yMin) + 1) + this.yMin;
+        final int z = rand.nextInt(Math.abs(this.zMax - this.zMin) + 1) + this.zMin;
+        return new Location(this.world, x, y, z);
+!!!325554.java!!!	getTotalBlockSize() : int
+        return this.getHeight() * this.getXWidth() * this.getZWidth();
+!!!325682.java!!!	getXWidth() : int
+        return this.xMax - this.xMin + 1;
+!!!325810.java!!!	getZWidth() : int
+        return this.zMax - this.zMin + 1;
+!!!325938.java!!!	isIn(in loc : Location) : boolean
+        return loc.getWorld() == this.world && loc.getBlockX() >= this.xMin && loc.getBlockX() <= this.xMax && loc.getBlockY() >= this.yMin && loc.getBlockY() <= this.yMax && loc
+                .getBlockZ() >= this.zMin && loc.getBlockZ() <= this.zMax;
+!!!326066.java!!!	isIn(in player : Player) : boolean
+        return this.isIn(player.getLocation());
+!!!326194.java!!!	isInWithMarge(in loc : Location, in marge : double) : boolean
+        return loc.getWorld() == this.world && loc.getX() >= this.xMinCentered - marge && loc.getX() <= this.xMaxCentered + marge && loc.getY() >= this.yMinCentered - marge && loc
+                .getY() <= this.yMaxCentered + marge && loc.getZ() >= this.zMinCentered - marge && loc.getZ() <= this.zMaxCentered + marge;
+!!!326322.java!!!	getPlayers() : List<Player>
+		List<Player> list = new ArrayList<>();
+		for (Player pll : world.getPlayers()) {
+			if (isIn(pll)) {
+				list.add(pll);
+			}
+		}
+		return list;
+!!!326450.java!!!	clone() : Cuboid
+    	return new Cuboid(getPoint1(), getPoint2());

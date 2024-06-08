@@ -1,0 +1,9 @@
+class ScripType
+!!!405938.java!!!	getScript() : MapScript
+		switch (this) {
+		case HUB_CHRISTMAS:
+			return new Christmas();
+		case HUB_HALLOWEEN:
+			return new Halloween();
+		}
+		return null;

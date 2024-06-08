@@ -10,7 +10,7 @@
  *
  * @brief Définition de la classe IHMQuizzy
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 /**
@@ -21,7 +21,8 @@
  * fenêtre principale de l'application
  */
 IHMQuizzy::IHMQuizzy(QWidget* parent) :
-    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this))
+    QWidget(parent), quizzy(new Quizzy(this)), minuteur(new QTimer(this)),
+    connecte(false), pret(false), etatAttente(EtatAttente::Connexion)
 {
     qDebug() << Q_FUNC_INFO;
     creerFenetres();
@@ -68,7 +69,11 @@ void IHMQuizzy::afficherFenetreResultats()
 void IHMQuizzy::afficherDebutQuiz()
 {
     qDebug() << Q_FUNC_INFO;
-    messageAttente->setText("En attente des participants...");
+    etatAttente = EtatAttente::Participants;
+    messageAttente->setText("En attente des participants ...");
+    titreFenetreParticipants->setAlignment(Qt::AlignCenter);
+    pret = false;
+    reinitialiserAffichage();
     afficherFenetreAccueil();
 }
 
@@ -81,19 +86,47 @@ void IHMQuizzy::afficherLancementQuiz()
 void IHMQuizzy::afficherPret()
 {
     qDebug() << Q_FUNC_INFO;
-    infoQuiz->setText(QString::fromUtf8("\u2139 Prêt à lancer le quiz"));
+    if(connecte)
+    {
+        pret = true;
+        QPixmap pixmap(CHEMIN_PLAY_VERT);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
 }
 
 void IHMQuizzy::afficherParticipant(QString pidJoueur, QString nomParticipant)
 {
     qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
              << nomParticipant;
-    QWidget*     widgetParticipant = new QWidget(this);
-    QVBoxLayout* layoutParticipant = new QVBoxLayout(widgetParticipant);
-    QLabel*      labelParticipant  = new QLabel(nomParticipant, this);
+    QWidget* widgetParticipant = new QWidget(this);
+    layoutParticipant          = new QHBoxLayout(widgetParticipant);
+    labelParticipant           = new QLabel(nomParticipant, this);
+    labelLogoParticipant       = new QLabel(this);
+
+    QPixmap logoParticipant(CHEMIN_LOGO_PARTICIPANT);
+    logoParticipant = logoParticipant.scaled(
+      QSize(LARGEUR_LOGO_PARTICIPANT, HAUTEUR_LOGO_PARTICIPANT),
+      Qt::KeepAspectRatio,
+      Qt::SmoothTransformation);
+
+    labelLogoParticipant->setPixmap(logoParticipant);
+    labelLogoParticipant->setAlignment(Qt::AlignRight);
+
+    layoutParticipant->addWidget(labelLogoParticipant);
+    layoutParticipant->setAlignment(Qt::AlignTop);
     layoutParticipant->setContentsMargins(100, 10, 100, 10);
     layoutParticipant->addWidget(labelParticipant);
     layoutPrincipalParticipants->addWidget(widgetParticipant);
+
+    auto effetLabelParticipant =
+      new QGraphicsDropShadowEffect(labelParticipant);
+    effetLabelParticipant->setColor(Qt::black);
+    effetLabelParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
+    effetLabelParticipant->setOffset(0);
+    labelParticipant->setGraphicsEffect(effetLabelParticipant);
 
     afficherFenetreParticipants();
 }
@@ -118,24 +151,107 @@ void IHMQuizzy::afficherResultats()
 
         layoutParticipantResultat = new QHBoxLayout;
 
-        nomParticipant = new QLabel(this);
-        nomParticipant->setText(participant->getNom());
+        afficherNombreBonnesReponses(participant, nbQuestions);
+        afficherNumerosQuestionsCorrectes(participant);
+        labelQuestionsCorrectes->setWordWrap(true);
 
-        resultatParticipant = new QLabel(this);
-        unsigned int reponsesCorrectes =
-          participant->getNombreReponsesCorrectes();
-        QString resultat = QString::number(reponsesCorrectes) + "/" +
-                           QString::number(nbQuestions);
-        resultatParticipant->setText(resultat);
-
-        layoutParticipantResultat->addWidget(nomParticipant);
-        layoutParticipantResultat->addWidget(resultatParticipant);
         layoutPrincipalResultat->addLayout(layoutParticipantResultat);
     }
 
     afficherFenetreResultats();
 }
 
+void IHMQuizzy::afficherConnexion()
+{
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = true;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Connexion)
+        {
+            etatAttente = EtatAttente::Session;
+            messageAttente->setText("En attente de session ...");
+        }
+        else if(etatAttente == EtatAttente::Session)
+        {
+            etatAttente = EtatAttente::Participants;
+            messageAttente->setText("En attente des participants ...");
+        }
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        if(pret)
+        {
+            QPixmap pixmap(CHEMIN_PLAY_VERT);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
+        }
+        else
+        {
+            QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+            infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                              HAUTEUR_LOGO_PLAY,
+                                              Qt::KeepAspectRatio,
+                                              Qt::SmoothTransformation));
+        }
+    }
+}
+
+void IHMQuizzy::afficherDeconnexion()
+{
+    qDebug() << Q_FUNC_INFO << "currentIndex" << fenetres->currentIndex();
+    connecte = false;
+    if(fenetres->currentIndex() == Fenetre::FenetreAccueil)
+    {
+        qDebug() << Q_FUNC_INFO << "etatAttente" << etatAttente;
+        if(etatAttente == EtatAttente::Session)
+            etatAttente = EtatAttente::Connexion;
+        else if(etatAttente == EtatAttente::Participants)
+            etatAttente = EtatAttente::Session;
+        messageAttente->setText("En attente de connexion ...");
+    }
+    if(fenetres->currentIndex() == Fenetre::FenetreParticipants)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
+}
+
+void IHMQuizzy::afficherNombreBonnesReponses(Participant* participant,
+                                             unsigned int nbQuestions)
+{
+    nomParticipant = new QLabel(this);
+    nomParticipant->setText(participant->getNom());
+
+    resultatParticipant            = new QLabel(this);
+    unsigned int reponsesCorrectes = participant->getNombreReponsesCorrectes();
+    QString resultat = "Score " + QString::number(reponsesCorrectes) + "/" +
+                       QString::number(nbQuestions);
+    resultatParticipant->setText(resultat);
+
+    layoutParticipantResultat->addWidget(nomParticipant);
+    layoutParticipantResultat->addWidget(resultatParticipant);
+}
+
+void IHMQuizzy::afficherNumerosQuestionsCorrectes(Participant* participant)
+{
+    QVector<int> questionsCorrectes      = participant->getQuestionsCorrectes();
+    QString      texteQuestionsCorrectes = "Questions correctes   ";
+    for(int numeroQuestion: questionsCorrectes)
+    {
+        texteQuestionsCorrectes += QString::number(numeroQuestion) + " ";
+    }
+    labelQuestionsCorrectes = new QLabel(this);
+    labelQuestionsCorrectes->setText(texteQuestionsCorrectes);
+
+    layoutParticipantResultat->addWidget(labelQuestionsCorrectes);
+}
 void IHMQuizzy::demarrerQuestion()
 {
     initialiserChronometre();
@@ -146,15 +262,12 @@ void IHMQuizzy::afficherDecompteQuestion()
     if(fenetres->currentIndex() == Fenetre::FenetreJeu)
     {
         changerCouleurChronometre();
-        labelChronometre->setText(QString::number(decompteQuestion) + "s");
+        compteARebours->setValue(decompteQuestion);
         decompteQuestion--;
         if(decompteQuestion < 0)
         {
             minuteur->stop();
-            labelChronometre->setText(QString::number(0) + "s");
-            labelChronometre->setStyleSheet("background-color: #f9e4b7");
-            // @fixme Si la question n'a pas de durée, il faudra créer une trame
-            // pour mettre fin à cette question ou utilise-t-on la trame $S ?
+            compteARebours->setValue(0);
             quizzy->terminerQuestion();
         }
     }
@@ -205,6 +318,7 @@ void IHMQuizzy::creerFenetres()
     creerFenetreParticipants();
     creerFenetreJeu();
     creerFenetreResultats();
+    configurerResponsiveLabels();
     definirNomsObjets();
 }
 
@@ -212,10 +326,17 @@ void IHMQuizzy::creerFenetreAccueil()
 {
     fenetreAccueil             = new QWidget(this);
     QVBoxLayout* layoutAccueil = new QVBoxLayout(fenetreAccueil);
-    titreFenetreAccueil        = new QLabel("QUIZZY", this);
+    titreFenetreAccueil        = new QLabel(this);
+    QPixmap pixmap(CHEMIN_LOGO);
+    pixmap =
+      pixmap.scaled(QSize(LARGEUR_LOGO, HAUTEUR_LOGO), Qt::KeepAspectRatio);
+    titreFenetreAccueil->setPixmap(pixmap);
     titreFenetreAccueil->setAlignment(Qt::AlignCenter);
+
     messageAttente = new QLabel("", this);
+    messageAttente->setText("En attente de connexion ...");
     messageAttente->setAlignment(Qt::AlignCenter);
+
     layoutAccueil->addWidget(titreFenetreAccueil);
     layoutAccueil->addWidget(messageAttente);
     fenetres->addWidget(fenetreAccueil);
@@ -241,17 +362,22 @@ void IHMQuizzy::creerWidgetsFenetreParticipants()
     titreFenetreParticipants = new QLabel("Liste des participants", this);
     titreFenetreParticipants->setAlignment(Qt::AlignCenter);
     infoQuiz = new QLabel(this);
-    infoQuiz->setFixedSize(500, 100);
+    infoQuiz->setFixedSize(LARGEUR_INFO_QUIZ, HAUTEUR_INFO_QUIZ);
     infoQuiz->setAlignment(Qt::AlignCenter);
+    QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+    infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                      HAUTEUR_LOGO_PLAY,
+                                      Qt::KeepAspectRatio,
+                                      Qt::SmoothTransformation));
 }
 
 void IHMQuizzy::placerWidgetsFenetreParticipants()
 {
     layoutPrincipalParticipants->addWidget(titreFenetreParticipants);
-    layoutInfoQuiz = new QHBoxLayout;
-    layoutInfoQuiz->addStretch();
+    layoutInfoQuiz = new QHBoxLayout();
+    // layoutInfoQuiz->addStretch();
     layoutInfoQuiz->addWidget(infoQuiz);
-    layoutInfoQuiz->addStretch();
+    // layoutInfoQuiz->addStretch();
     layoutPrincipalParticipants->addLayout(layoutInfoQuiz);
 }
 
@@ -280,29 +406,111 @@ void IHMQuizzy::creerLayoutsFenetreJeu()
 
 void IHMQuizzy::creerWidgetsFenetreJeu()
 {
-    labelNombreTotal    = new QLabel("0/0", this);
-    labelQuestion       = new QLabel("", this);
-    propositionReponseA = new QLabel("A", this);
-    choixPropositionA   = new QLabel("", this);
-    propositionReponseB = new QLabel("B", this);
-    choixPropositionB   = new QLabel("", this);
-    propositionReponseC = new QLabel("C", this);
-    choixPropositionC   = new QLabel("", this);
-    propositionReponseD = new QLabel("D", this);
-    choixPropositionD   = new QLabel("", this);
-    labelChronometre    = new QLabel("00:00", this);
+    labelNombreTotal      = new QLabel("0/0", this);
+    labelQuestion         = new QLabel("", this);
+    idPropositionReponseA = new QLabel("A.", this);
+    propositionReponseA   = new QLabel("", this);
+    choixPropositionA     = new QLabel("", this);
+    idPropositionReponseB = new QLabel("B.", this);
+    propositionReponseB   = new QLabel("", this);
+    choixPropositionB     = new QLabel("", this);
+    idPropositionReponseC = new QLabel("C.", this);
+    propositionReponseC   = new QLabel("", this);
+    choixPropositionC     = new QLabel("", this);
+    idPropositionReponseD = new QLabel("D.", this);
+    propositionReponseD   = new QLabel("", this);
+    choixPropositionD     = new QLabel("", this);
+    compteARebours        = new QProgressBar(this);
+}
+
+void IHMQuizzy::configurerResponsiveLabels()
+{
+    // Fenêtre d'accueil
+    auto effetAccueil = new QGraphicsDropShadowEffect(messageAttente);
+    effetAccueil->setColor(Qt::black);
+    effetAccueil->setBlurRadius(CONTOUR_FLOUE_LABEL);
+    effetAccueil->setOffset(0);
+    messageAttente->setGraphicsEffect(effetAccueil);
+
+    // Fenêtre Participant
+    layoutPrincipalParticipants->setAlignment(Qt::AlignTop);
+    titreFenetreParticipants->setFixedHeight(HAUTEUR_TITRE);
+    auto effetTitreParticipant =
+      new QGraphicsDropShadowEffect(titreFenetreParticipants);
+    effetTitreParticipant->setColor(Qt::black);
+    effetTitreParticipant->setBlurRadius(CONTOUR_FLOUE_LABEL);
+    effetTitreParticipant->setOffset(0);
+    titreFenetreParticipants->setGraphicsEffect(effetTitreParticipant);
+
+    // Fenêtre Jeu
+    labelQuestion->setWordWrap(true);
+    propositionReponseA->setWordWrap(true);
+    propositionReponseB->setWordWrap(true);
+    propositionReponseC->setWordWrap(true);
+    propositionReponseD->setWordWrap(true);
+
+    choixPropositionA->setWordWrap(true);
+    choixPropositionB->setWordWrap(true);
+    choixPropositionC->setWordWrap(true);
+    choixPropositionD->setWordWrap(true);
+
+    labelNombreTotal->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+    labelNombreTotal->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    labelQuestion->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    labelQuestion->setFixedHeight(HAUTEUR_LABEL_LIBELLE);
+
+    propositionReponseA->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseB->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseC->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+    propositionReponseD->setSizePolicy(QSizePolicy::Expanding,
+                                       QSizePolicy::Fixed);
+
+    propositionReponseA->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseB->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseC->setFixedHeight(HAUTEUR_PROPOSITION);
+    propositionReponseD->setFixedHeight(HAUTEUR_PROPOSITION);
+
+    choixPropositionA->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionB->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionC->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    choixPropositionD->setFixedSize(LARGEUR_PROPOSITION, HAUTEUR_PROPOSITION);
+    layoutPropositionReponse->setContentsMargins(MARGE_LAYOUT_PROPOSITION,
+                                                 0,
+                                                 MARGE_LAYOUT_PROPOSITION,
+                                                 0);
+
+    compteARebours->setFixedHeight(HAUTEUR_COMPTE_A_REBOURS);
+
+    compteARebours->setAlignment(Qt::AlignCenter);
+    QSizePolicy sizePolicy = compteARebours->sizePolicy();
+    sizePolicy.setRetainSizeWhenHidden(true);
+    compteARebours->setSizePolicy(sizePolicy);
+
+    // Fenêtre des résultats
+    titreFenetreResultats->setFixedHeight(HAUTEUR_TITRE);
 }
 
 void IHMQuizzy::definirNomsObjets()
 {
     // Fenêtre Accueil
     titreFenetreAccueil->setObjectName("titreAccueil");
+    messageAttente->setObjectName("messageAttente");
 
     // Fenêtre Participants
     titreFenetreParticipants->setObjectName("titreParticipants");
     infoQuiz->setObjectName("infoQuiz");
 
     // Fenêtre jeu
+    labelNombreTotal->setObjectName("labelNombreTotal");
+    labelQuestion->setObjectName("labelQuestion");
+    idPropositionReponseA->setObjectName("idPropositionReponseA");
+    idPropositionReponseB->setObjectName("idPropositionReponseB");
+    idPropositionReponseC->setObjectName("idPropositionReponseC");
+    idPropositionReponseD->setObjectName("idPropositionReponseD");
     propositionReponseA->setObjectName("propositionReponseA");
     propositionReponseB->setObjectName("propositionReponseB");
     propositionReponseC->setObjectName("propositionReponseC");
@@ -311,7 +519,7 @@ void IHMQuizzy::definirNomsObjets()
     choixPropositionB->setObjectName("choixPropositionB");
     choixPropositionC->setObjectName("choixPropositionC");
     choixPropositionD->setObjectName("choixPropositionD");
-
+    compteARebours->setObjectName("chronometre");
     // Fenêtre Résultats
     titreFenetreResultats->setObjectName("titreResultats");
 }
@@ -322,26 +530,36 @@ void IHMQuizzy::placerWidgetsFenetreJeu()
     layoutLibelle->addWidget(labelNombreTotal);
     layoutLibelle->addWidget(labelQuestion);
     layoutPrincipalJeu->addLayout(layoutLibelle);
+
     // Proposition A et B
+    layoutPrincipalJeu->addStretch(1);
+    layoutPropositionChoixA->addWidget(idPropositionReponseA);
     layoutPropositionChoixA->addWidget(propositionReponseA);
     layoutPropositionChoixA->addWidget(choixPropositionA);
     layoutPropositonAB->addLayout(layoutPropositionChoixA);
+    layoutPropositionChoixB->addWidget(idPropositionReponseB);
     layoutPropositionChoixB->addWidget(propositionReponseB);
     layoutPropositionChoixB->addWidget(choixPropositionB);
     layoutPropositonAB->addLayout(layoutPropositionChoixB);
     layoutPropositionReponse->addLayout(layoutPropositonAB);
 
     // Proposition C et D
+    layoutPropositionChoixC->addWidget(idPropositionReponseC);
     layoutPropositionChoixC->addWidget(propositionReponseC);
     layoutPropositionChoixC->addWidget(choixPropositionC);
     layoutPropositonCD->addLayout(layoutPropositionChoixC);
+    layoutPropositionChoixD->addWidget(idPropositionReponseD);
     layoutPropositionChoixD->addWidget(propositionReponseD);
     layoutPropositionChoixD->addWidget(choixPropositionD);
     layoutPropositonCD->addLayout(layoutPropositionChoixD);
     layoutPropositionReponse->addLayout(layoutPropositonCD);
+
     // Ajout Layout principal
     layoutPrincipalJeu->addLayout(layoutPropositionReponse);
-    layoutChronometre->addWidget(labelChronometre);
+
+    // Chronomètre
+    layoutPrincipalJeu->addStretch(1);
+    layoutChronometre->addWidget(compteARebours);
     layoutPrincipalJeu->addLayout(layoutChronometre);
 }
 
@@ -359,6 +577,15 @@ void IHMQuizzy::creerFenetreResultats()
 
 void IHMQuizzy::initialiserEvenements()
 {
+    // communicationTablette vers ihmQuizzy
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteConnectee()),
+            this,
+            SLOT(afficherConnexion()));
+    connect(quizzy->getCommunicationTablette(),
+            SIGNAL(tabletteDeconnectee()),
+            this,
+            SLOT(afficherDeconnexion()));
     // communicationTablette vers quizzy
     // Trame $L
     connect(quizzy->getCommunicationTablette(),
@@ -408,6 +635,10 @@ void IHMQuizzy::initialiserEvenements()
     connect(quizzy, SIGNAL(questionAjoutee()), this, SLOT(afficherPret()));
     connect(quizzy, SIGNAL(questionDemarree()), this, SLOT(demarrerQuestion()));
     connect(quizzy,
+            SIGNAL(choixParticipant()),
+            this,
+            SLOT(afficherChoixParticipants()));
+    connect(quizzy,
             SIGNAL(questionTerminee()),
             this,
             SLOT(afficherChoixParticipants()));
@@ -435,8 +666,9 @@ void IHMQuizzy::afficherNbQuestions(unsigned int numeroQuestion,
 {
     qDebug() << Q_FUNC_INFO << "numeroQuestion" << numeroQuestion
              << "nbQuestions" << nbQuestions;
-    labelNombreTotal->setText(QString("Question n°") +
-                              QString::number(numeroQuestion));
+    labelNombreTotal->setText(QString("Question ") +
+                              QString::number(numeroQuestion) + QString("/") +
+                              QString::number(nbQuestions));
 }
 
 void IHMQuizzy::afficherLibelleQuestion(const Question& question)
@@ -447,25 +679,26 @@ void IHMQuizzy::afficherLibelleQuestion(const Question& question)
 void IHMQuizzy::afficherPropositionsQuestion(const Question& question)
 {
     QMap<char, QString> propositions = question.getPropositions();
-    propositionReponseA->setText("A. " + propositions['A']);
-    propositionReponseB->setText("B. " + propositions['B']);
-    propositionReponseC->setText("C. " + propositions['C']);
-    propositionReponseD->setText("D. " + propositions['D']);
+    propositionReponseA->setText(propositions['A']);
+    propositionReponseB->setText(propositions['B']);
+    propositionReponseC->setText(propositions['C']);
+    propositionReponseD->setText(propositions['D']);
 }
 
 void IHMQuizzy::afficherTempsQuestion(const Question& question)
 {
     if(question.getDuree() > 0)
     {
-        labelChronometre->setText(QString::number(question.getDuree()) + "s");
-        labelChronometre->setVisible(true);
+        compteARebours->setMaximum(question.getDuree());
+        compteARebours->setValue(question.getDuree());
+        compteARebours->setFormat("%v s");
+        compteARebours->setVisible(true);
     }
     else
     {
-        labelChronometre->setVisible(false);
+        compteARebours->setVisible(false);
     }
 }
-
 void IHMQuizzy::initialiserChronometre()
 {
     decompteQuestion = quizzy->getQuestion()->getDuree();
@@ -501,7 +734,8 @@ void IHMQuizzy::changerCouleurChronometre()
     {
         couleur = FOND_ROUGE;
     }
-    labelChronometre->setStyleSheet("background-color: " + couleur);
+    compteARebours->setStyleSheet(
+      "QProgressBar::chunk#chronometre { background-color: " + couleur + "; }");
 }
 
 void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
@@ -512,23 +746,19 @@ void IHMQuizzy::mettreAJourProposition(int numeroReponse, QString texte)
     switch(numeroReponse)
     {
         case 1:
-            choixPropositionA->setStyleSheet(
-              "background-color: #f9b7b7; border: 3px solid red");
+            choixPropositionA->setStyleSheet("border: 3px solid red");
             choixPropositionA->setText(texte);
             break;
         case 2:
-            choixPropositionB->setStyleSheet(
-              "background-color: #b7f9ba; border: 3px solid red");
+            choixPropositionB->setStyleSheet("border: 3px solid red");
             choixPropositionB->setText(texte);
             break;
         case 3:
-            choixPropositionC->setStyleSheet(
-              "background-color: #f6f476; border: 3px solid red");
+            choixPropositionC->setStyleSheet("border: 3px solid red");
             choixPropositionC->setText(texte);
             break;
         case 4:
-            choixPropositionD->setStyleSheet(
-              "background-color: #b7baf9; border: 3px solid red");
+            choixPropositionD->setStyleSheet("border: 3px solid red");
             choixPropositionD->setText(texte);
             break;
         default:
@@ -546,4 +776,71 @@ void IHMQuizzy::effacerChoixParticipants()
     choixPropositionC->setStyleSheet("");
     choixPropositionD->setText("");
     choixPropositionD->setStyleSheet("");
+}
+
+void IHMQuizzy::reinitialiserAffichage()
+{
+    qDebug() << Q_FUNC_INFO;
+    effacerFenetreParticipants();
+    effacerChoixParticipants();
+    effacerFenetreResultats();
+}
+
+void IHMQuizzy::effacerFenetreParticipants()
+{
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalParticipants->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalParticipants->itemAt(i);
+        if(child->widget() != titreFenetreParticipants)
+        {
+            delete child->widget();
+        }
+    }
+    infoQuiz->clear();
+    if(connecte)
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ORANGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
+    else
+    {
+        QPixmap pixmap(CHEMIN_PLAY_ROUGE);
+        infoQuiz->setPixmap(pixmap.scaled(LARGEUR_LOGO_PLAY,
+                                          HAUTEUR_LOGO_PLAY,
+                                          Qt::KeepAspectRatio,
+                                          Qt::SmoothTransformation));
+    }
+}
+
+void IHMQuizzy::effacerFenetreResultats()
+{
+    qDebug() << Q_FUNC_INFO;
+    QLayoutItem* child;
+    for(int i = layoutPrincipalResultat->count() - 1; i >= 0; --i)
+    {
+        child = layoutPrincipalResultat->itemAt(i);
+        if(child->widget() != titreFenetreResultats)
+        {
+            if(child->widget() != nullptr)
+            {
+                delete child->widget();
+            }
+            else if(child->layout() != nullptr)
+            {
+                QLayout*     layout = child->layout();
+                QLayoutItem* item;
+                while((item = layout->takeAt(0)) != nullptr)
+                {
+                    delete item->widget();
+                    delete item;
+                }
+            }
+            delete child;
+        }
+    }
 }

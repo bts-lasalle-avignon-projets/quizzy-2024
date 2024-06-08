@@ -1,0 +1,13 @@
+class NoDrop
+!!!313650.java!!!	getAttackCount() : int
+		return 0;
+!!!313778.java!!!	getAwaitEnable() : int
+		return 0;
+!!!313906.java!!!	getAwaitDisable() : int
+		return 0;
+!!!314034.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.NODROP;
+!!!314162.java!!!	Enable(inout info : SheepInfo) : void
+		
+!!!314290.java!!!	Attack(inout info : SheepInfo) : void
+		

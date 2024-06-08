@@ -1,0 +1,110 @@
+class SQLFunc
+!!!481970.java!!!	getConnection() : Connection
+		return connection;
+!!!482098.java!!!	setConnection(inout connection : Connection) : void
+		SQLFunc.connection = connection;
+!!!482226.java!!!	getMainPlugin() : Plugin
+		return plugin;
+!!!482354.java!!!	setMainPlugin(inout plugin : Plugin) : void
+		SQLFunc.plugin = plugin;
+!!!482482.java!!!	createTable(in indicator : String) : void
+		try {
+			PreparedStatement ps = getConnection().prepareStatement(indicator);
+			ps.executeUpdate();
+			ps.close();
+		} catch (Exception e) {
+		}
+!!!482610.java!!!	exists(in name : String) : boolean
+		verifConnection();
+		try {
+			PreparedStatement ps = getConnection().prepareStatement("SELECT * FROM " + SQLManager.getTableName() + " WHERE " + SQLManager.getPrimary() + "=?");
+			ps.setString(1, name.toString());
+			ResultSet result = ps.executeQuery();
+			if (result.next()) {
+				return true;
+			}
+			result.close();
+			ps.close();
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+!!!482738.java!!!	verifConnection() : void
+		try {
+			if (getConnection() == null || getConnection().isClosed()) {
+				Bukkit.getConsoleSender().sendMessage(SQLManager.getPrefix() + "§eReconnecting mysql...");
+				ConnectSQL.Connect(plugin, SQLManager.getConfig());
+			}
+		} catch (Exception e) {
+			Bukkit.getConsoleSender().sendMessage(SQLManager.getPrefix() + "§eReconnecting mysql...");
+			ConnectSQL.Connect(plugin, SQLManager.getConfig());
+		}
+!!!482866.java!!!	getSections() : List<String>
+		verifConnection();
+		Statement statement = getConnection().createStatement();
+		String sql = "SELECT " + SQLManager.getPrimary() + " FROM " + SQLManager.getTableName();
+		ResultSet rs = statement.executeQuery(sql);
+		List<String> uuids = new ArrayList<>();
+		while (rs.next()) {
+			uuids.add(rs.getString(SQLManager.getPrimary()));
+		}
+		rs.close();
+		statement.close();
+		return uuids;
+!!!482994.java!!!	createSection(in name : String) : void
+		verifConnection();
+		if (!exists(name)) {
+			PreparedStatement pss = getConnection().prepareStatement("INSERT IGNORE INTO " + SQLManager.getTableName() + " (" + SQLManager.getNameList() + ") VALUES (" + SQLManager.getAnomymousList() + ")");
+			for (SQLRegister r : SQLManager.getTablelist()) {
+				if (r.getPosition() == 1) {
+					pss.setString(1, name);
+				} else if (r.getType() == TableType.STRING) {
+					pss.setString(r.getPosition(), null);
+				} else if (r.getType() == TableType.INT) {
+					pss.setInt(r.getPosition(), 0);
+				}
+			}
+			pss.execute();
+			pss.close();
+			setString(name, "ID", "0");
+			setString(name, "AUTOSPAWN", "false");
+			return;
+		}
+!!!483122.java!!!	setInt(in section : String, in table : String, in arg0 : int) : void
+		verifConnection();
+		PreparedStatement ps = getConnection().prepareStatement("UPDATE " + SQLManager.getTableName() + " SET " + table + "=? WHERE " + SQLManager.getPrimary() + "=?");
+		ps.setInt(1, arg0);
+		ps.setString(2, section);
+		ps.execute();
+		ps.close();
+!!!483250.java!!!	getInt(in section : String, in table : String) : int
+		verifConnection();
+		PreparedStatement ps = getConnection().prepareStatement("SELECT " + table + " FROM " + SQLManager.getTableName() + " WHERE " + SQLManager.getPrimary() + "=?");
+		ps.setString(1, section);
+		ResultSet rs = ps.executeQuery();
+		int arg0 = 0;
+		if (rs.next()) {
+			arg0 = rs.getInt(table);
+			rs.close();
+			ps.close();
+		}
+		return arg0;
+!!!483378.java!!!	setString(in section : String, in table : String, in arg0 : String) : void
+		verifConnection();
+		PreparedStatement ps = getConnection().prepareStatement("UPDATE " + SQLManager.getTableName() + " SET " + table + "=? WHERE " + SQLManager.getPrimary() + "=?");
+		ps.setString(1, arg0);
+		ps.setString(2, section);
+		ps.execute();
+		ps.close();
+!!!483506.java!!!	getString(in section : String, in table : String) : String
+		verifConnection();
+		PreparedStatement ps = getConnection().prepareStatement("SELECT " + table + " FROM " + SQLManager.getTableName() + " WHERE " + SQLManager.getPrimary() + "=?");
+		ps.setString(1, section);
+		ResultSet rs = ps.executeQuery();
+		String arg0 = null;
+		if (rs.next()) {
+			arg0 = rs.getString(table);
+			rs.close();
+			ps.close();
+		}
+		return arg0;

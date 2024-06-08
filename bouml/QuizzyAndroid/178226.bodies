@@ -1,0 +1,31 @@
+class IMenuModule
+!!!363186.java!!!	craftMenu(in size : int, in title : String) : IMenu
+		IMenu menu = new SimpleMenu(Bukkit.createInventory(null, size, title));
+		updateMenu(menu);
+		ItemStack player_menu_item = new ItemBuilder(Material.SKULL_ITEM, (byte) 3).name("§7Joueurs");
+		IMenu player_menu = new PageCloneMenu(new ArrayList<>(), "§8Liste des joueurs", 36);
+		player_menu.addSub(new ItemBuilder(Material.BARRIER).name("§cRetour"), menu);
+		menu.addSub(player_menu_item, player_menu);
+		menu.getInventory().setItem(1, player_menu_item);
+		menu.getInventory().setItem(8, return_item);
+		return menu;
+!!!363314.java!!!	updateMenu(inout menu : IMenu) : void
+		Game game = (Game) this;
+		Inventory inv = menu.getInventory();
+		inv.setItem(4, game.getState().getItem());
+		if (game instanceof OpenCloseModule) {
+			boolean open = ((OpenCloseModule)game).isOpen();
+			inv.setItem(0, new ItemBuilder(Material.STAINED_GLASS_PANE, open ? (byte) 1 : (byte) 14).name(open ? "§eEtat: §aAllumé" : "§eEtat: §cEteint"));
+		}
+		for (IMenu sub : menu.getSubMenus().values()) {
+			if (sub.equals(GameGui.gameMenu)) {
+				continue;
+			}
+			if (sub instanceof PageCloneMenu) {
+				PageCloneMenu subM = (PageCloneMenu) sub;
+				subM.getContent().clear();
+				for (Player pll : game.getPlayers()) {
+					subM.addItem(new ItemBuilder(Material.SKULL_ITEM, (byte) 3).skullOwner(pll.getName()));
+				}
+			}
+		}

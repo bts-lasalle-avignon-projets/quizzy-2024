@@ -1,0 +1,53 @@
+class InteractTeam
+!!!324018.java!!!	onInteract(inout e : PlayerInteractEvent) : void
+		Player p = e.getPlayer();
+		ItemStack it = e.getItem();
+		if (!p.getWorld().getName().equalsIgnoreCase("wait")) {
+			return;
+		}
+		if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) {
+			return;
+		}
+		if (it == null) {
+			return;
+		}
+		GAME game = GAME.from(p);
+		if (game == null || game.getState() != State.WAIT) {
+			return;
+		}
+		Team click = game.of(it);
+		if (click == null) {
+			return;
+		}
+		Team current = game.of(p);
+		if (click == current) {
+			p.sendMessage("§7BattleSheep §e> §cErreur: Vous faites déjà partie de cette équipe");
+			return;
+		}
+		if (!click.canBeJoined(game, current)) {
+			p.sendMessage("§7BattleSheep §e> §cErreur: Il manque des joueurs dans les autres équipes");
+			return;
+		}
+		if (current != null) {
+			current.remove(p);
+		}
+		click.add(p);
+		p.sendMessage("§7BattleSheep §e> §eVous rejoignez l'équipe " + click.getName());
+!!!324146.java!!!	onDamageBy(inout e : EntityDamageByEntityEvent) : void
+		if (!(e.getEntity() instanceof Player && (e.getDamager() instanceof Player || (e.getDamager() instanceof Arrow && ((Arrow)e.getDamager()).getShooter() instanceof Player)))) {
+			return;
+		}
+		Player p = (Player) e.getEntity();
+		Player d = (Player) (e.getDamager() instanceof Arrow ? ((Arrow)e.getDamager()).getShooter() : e.getDamager());
+		if (!p.getWorld().getName().equals("lobby") && !p.getWorld().getName().equals("wait")) {
+			return;
+		}
+		GAME game = GAME.from(p);
+		if (game == null || !game.getPlayers().contains(d)) {
+			return;
+		}
+		Team team = game.of(p);
+		if (team == null || !team.getPlayers().contains(d)) {
+			return;
+		}
+		e.setCancelled(true);

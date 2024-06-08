@@ -1,0 +1,26 @@
+class PetFollowStopEvent
+!!!470962.java!!!	PetFollowStopEvent(inout player : Player, inout entity : Entity, inout pet : CraftPet)
+		setPlayer(player);
+		setEntity(entity);
+		setPet(pet);
+		setCancelled(false);
+!!!471090.java!!!	getHandlers() : HandlerList
+		return HANDLERS;
+!!!471218.java!!!	getHandlerList() : HandlerList
+		return HANDLERS;
+!!!471346.java!!!	getPlayer() : Player
+		return player;
+!!!471474.java!!!	setPlayer(inout player : Player) : void
+		this.player = player;
+!!!471602.java!!!	getEntity() : Entity
+		return entity;
+!!!471730.java!!!	setEntity(inout entity : Entity) : void
+		this.entity = entity;
+!!!471858.java!!!	getPet() : CraftPet
+		return pet;
+!!!471986.java!!!	setPet(inout pet : CraftPet) : void
+		this.pet = pet;
+!!!472114.java!!!	isCancelled() : boolean
+		return cancelled;
+!!!472242.java!!!	setCancelled(inout cancelled : boolean) : void
+		this.cancelled = cancelled;

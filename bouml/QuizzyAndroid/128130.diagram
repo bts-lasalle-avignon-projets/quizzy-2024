@@ -1,0 +1,98 @@
+format 224
+
+classcanvas 128002 class_ref 151858 // IHM
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163506 // ihmActives
+    attribute_ref 163634 // activiteActive
+  hidden_operations
+    operation_ref 211122 // getIHMActive
+    operation_ref 211378 // IHM
+    operation_ref 211506 // ajouterIHM
+    operation_ref 211634 // mettreAjourListeParticipants
+    operation_ref 211762 // afficherInterface
+    operation_ref 211890 // getActiviteActive
+    operation_ref 212146 // afficherChrono
+    operation_ref 212274 // getActivite
+    operation_ref 212402 // fermerActivite
+    operation_ref 212530 // fermerPopups
+    operation_ref 212658 // mettreAjourHistorique
+    operation_ref 212786 // demarrerActivite
+    operation_ref 526258 // getIHMActive
+    operation_ref 526386 // getIHM
+    operation_ref 526514 // IHM
+    operation_ref 526642 // ajouterIHM
+    operation_ref 527026 // getActiviteActive
+    operation_ref 527154 // afficherBoutons
+    operation_ref 527410 // getActivite
+    operation_ref 527538 // fermerActivite
+    operation_ref 527666 // fermerPopups
+    operation_ref 527922 // demarrerActivite
+    operation_ref 528050 // mettreAjourSpinnerParticipants
+  xyz 601 262.5 3005
+end
+classcanvas 129410 class_ref 152626 // PopupHistorique
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163762 // activite
+  hidden_operations
+    operation_ref 214578 // PopupHistorique
+    operation_ref 214706 // PopupHistorique
+    operation_ref 214834 // onCreateView
+    operation_ref 214962 // initialiserVue
+  xyz 255.5 411.5 2000
+end
+classcanvas 129666 class_ref 153010 // PopupNonConnecte
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 163890 // estAfficher
+    attribute_ref 164018 // btn_connecter
+  hidden_operations
+    operation_ref 215858 // PopupNonConnecte
+    operation_ref 215986 // PopupNonConnecte
+    operation_ref 216114 // onCreateView
+    operation_ref 216242 // initialiserVue
+    operation_ref 216498 // onDismiss
+    operation_ref 216626 // getPeripherique
+  xyz 948.5 241.5 2000
+end
+classcanvas 130050 class_ref 153650 // VueParticipants
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 164402 // btn_associer
+    attribute_ref 164530 // btn_creer_participant
+  hidden_operations
+    operation_ref 217522 // onCreate
+    operation_ref 217650 // onRestart
+    operation_ref 217778 // initialiserAttributs
+    operation_ref 217906 // initialiserAssociation
+  xyz 191 286 2010
+end
+classcanvas 130178 class_ref 154162 // VueSession
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 164658 // question
+    attribute_ref 164786 // chronometre
+    attribute_ref 164914 // progression
+    attribute_ref 165042 // propositions
+    attribute_ref 165170 // btn_stopper
+    attribute_ref 165298 // btn_reinitialiser
+    attribute_ref 165426 // btn_pause
+    attribute_ref 165554 // btn_suivant
+    attribute_ref 165682 // btn_precedent
+    attribute_ref 165810 // format
+  hidden_operations
+    operation_ref 218290 // onCreate
+    operation_ref 218418 // onRestart
+    operation_ref 219058 // setSession
+  xyz 979.5 399.5 2005
+end
+relationcanvas 128130 relation_ref 157490 // <unidirectional association>
+  decenter_end 268
+  from ref 128002 z 3006 to point 730.5 188.5
+  line 128258 z 3006 to point 668.5 190.5
+  line 128386 z 3006 to ref 128002
+  role_a_pos 753 198 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

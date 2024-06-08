@@ -1,0 +1,119 @@
+class MapDaterRegister
+!!!414386.java!!!	MapDaterRegister(in base : String, inout maps : List<MapDate>)
+		this.base = base;
+		this.maps = maps;
+		current = base;
+		default_map = new MapDate(base, null, null, null, false);
+		for (MapDate md : maps) {
+			World w = Bukkit.getWorld(md.getWorld());
+			if (w != null && md.getScript() != null) {
+				md.getScript().reset(w);
+			}
+		}
+		switchMap(test(getCurrent()));
+		for (MapDate md : maps) {
+			if (!md.getWorld().equalsIgnoreCase(current)) {
+				unload(Bukkit.getWorld(md.getWorld()), md.isAutoSave());
+			}
+		}
+		
+		list.add(this);
+!!!414514.java!!!	getMaps() : MapDate
+		return maps;
+!!!414642.java!!!	getWorld() : World
+		if (world == null) {
+			world = Bukkit.getWorld(current);
+		}
+		return world;
+!!!414770.java!!!	switchMap(inout date : MapDate) : void
+		World w = Bukkit.getWorld(current);
+		MapDate old = from(current);
+		current = date.getWorld();
+		world = Bukkit.getWorld(current) != null ? Bukkit.getWorld(current) : new WorldCreator(current).createWorld();
+		if (world != null) {
+			world.setAutoSave(date.isAutoSave());
+		}
+		if (date.getScript() != null) {
+			date.getScript().start(world);
+		}
+		if (old != null && old.getScript() != null) {
+			old.getScript().stop();
+		}
+		Bukkit.getPluginManager().callEvent(new MapDaterSwitchEvent(base, world));
+		if (old != null) {
+			unload(w, old.isAutoSave());
+		}
+!!!414898.java!!!	from(in current : String) : MapDate
+		for (MapDate d : maps) {
+			if (d.getWorld().equalsIgnoreCase(current)) {
+				return d;
+			}
+		}
+		return default_map.getWorld().equalsIgnoreCase(current) ? default_map : null;
+!!!415026.java!!!	unload(inout w : World, inout save : boolean) : void
+		try {
+			if (w != null) {
+				Bukkit.unloadWorld(w, save);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+!!!415154.java!!!	test(inout current : Date) : MapDate
+		for (MapDate d : maps) {
+			if (d.isReady(current)) {
+				return d;
+			}
+		}
+		return default_map;
+!!!415282.java!!!	getBase() : String
+		return base;
+!!!415410.java!!!	get(in world : String) : World
+		for (MapDaterRegister m : list) {
+			if (m.getBase().equalsIgnoreCase(world)) {
+				return m.getWorld();
+			}
+		}
+		return Bukkit.getWorld(world);
+!!!415538.java!!!	setup(inout date : Date) : void
+		new BukkitRunnable() {
+			Date current = date;
+			int hour = current.getHours();
+			int min = current.getMinutes();
+			int sec = current.getSeconds();
+			@Override
+			public void run() {
+				if (sec >= 60) {
+					sec = 0;
+					min++;
+					if (min >= 60) {
+						min = 0;
+						hour++;
+					}
+					if (hour >= 24) {
+						hour = 0;
+						current = MapDaterRegister.getCurrent();
+						hour = current.getHours();
+						min = current.getMinutes();
+						sec = current.getSeconds();
+					}
+				}
+				sec++;
+				
+				for (MapDaterRegister m : list) {
+					MapDate d = m.test(current);
+					if (d.getWorld().equalsIgnoreCase(m.current)) {
+						continue;
+					}
+					m.switchMap(d);
+				}
+			}
+		}.runTaskTimer(Main.getInstance(), 0, 20);
+!!!415666.java!!!	getCurrent() : Date
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		df.setTimeZone(TimeZone.getTimeZone("Europe/Istanbul"));
+		String format = df.format(new Date());
+		try {
+			return df.parse(format);
+		} catch (Exception e) {
+			return null;
+		}

@@ -1,0 +1,82 @@
+class Methods
+!!!422578.java!!!	Methods(inout adress : SQL::SQLConnection, inout access : SQL::SQLAccess)
+			this.adress = adress;
+			this.access = access;
+!!!422706.java!!!	getAccess() : SQL::SQLAccess
+			return access;
+!!!422834.java!!!	exec(in command : String) : void
+			PreparedStatement ps = adress.connection.prepareStatement(command);
+			ps.execute();
+			ps.close();
+!!!422962.java!!!	execResult(in command : String, in column : String) : Object
+			PreparedStatement ps = adress.connection.prepareStatement(command);
+			ResultSet rs = ps.executeQuery();
+			Object o = rs.next() ? rs.getObject(column) : null;
+			if (rs.next()) {
+				o = rs.getObject(column);
+			}
+			rs.close();
+			ps.close();
+			return o;
+!!!423090.java!!!	exec(in command : String, inout object : Object) : void
+			PreparedStatement ps = access.adress.connection.prepareStatement(command);
+			ps.setObject(1, object);
+			ps.execute();
+			ps.close();
+!!!423218.java!!!	exists(in key : String) : boolean
+			PreparedStatement ps = adress.connection.prepareStatement("SELECT * FROM " + access.table + " WHERE " + access.primarykey + "='" + key + "'");
+			ResultSet rs = ps.executeQuery();
+			boolean b = rs.next();
+			rs.close();
+			ps.close();
+			return b;
+!!!423346.java!!!	lines() : List<String>
+			Statement ps = adress.connection.createStatement();
+			ResultSet rs = ps.executeQuery("SELECT " + access.primarykey + " FROM " + access.table);
+			List<String> list = new ArrayList<>();
+			while (rs.next()) {
+				list.add(rs.getString(access.primarykey));
+			}
+			rs.close();
+			ps.close();
+			return list;
+!!!423474.java!!!	createLine(in line : String) : void
+			PreparedStatement pss = access.adress.connection.prepareStatement("INSERT IGNORE INTO " + access.table + " (" + access.list + ") VALUES (" + access.undefined + ")");
+			for (Column r : access.columns) {
+				if (r.position == 1) {
+					pss.setString(1, line);
+				} else {
+					pss.setObject(r.position, r.defaultkey);
+				}
+			}
+			pss.execute();
+			pss.close();
+!!!423602.java!!!	createTable() : void
+			exec("CREATE TABLE IF NOT EXISTS " + access.table + " (" + access.formats + ",PRIMARY KEY (" + access.primarykey + "))");
+!!!423730.java!!!	removeLine(in line : String) : void
+			exec("DELETE FROM " + access.table + " WHERE " + access.primarykey + "=" + line);
+!!!423858.java!!!	setInt(in key : String, in column : String, in arg0 : int) : void
+			exec("UPDATE " + access.table + " SET " + column + "=? WHERE " + access.primarykey + "='" + key + "'", arg0);
+!!!423986.java!!!	getInt(in key : String, in column : String) : int
+			return (int) execResult("SELECT " + column + " FROM " + access.table + " WHERE " + access.primarykey + "='" + key + "'", column);
+!!!424114.java!!!	setString(in key : String, in column : String, in arg0 : String) : void
+			exec("UPDATE " + access.table + " SET " + column + "=? WHERE " + access.primarykey + "='" + key + "'", arg0);
+!!!424242.java!!!	getString(in key : String, in column : String) : String
+			return (String) execResult("SELECT " + column + " FROM " + access.table + " WHERE " + access.primarykey + "='" + key + "'", column);
+!!!424370.java!!!	setBoolean(in key : String, in column : String, inout arg0 : boolean) : void
+			exec("UPDATE " + access.table + " SET " + column + "=? WHERE " + access.primarykey + "='" + key + "'", arg0);
+!!!424498.java!!!	getBoolean(in key : String, in column : String) : boolean
+			return (boolean) execResult("SELECT " + column + " FROM " + access.table + " WHERE " + access.primarykey + "='" + key + "'", column);
+!!!424626.java!!!	setBlob(in key : String, in column : String, inout arg0 : InputStream) : void
+			exec("UPDATE " + access.table + " SET " + column + "=? WHERE " + access.primarykey + "='" + key + "'", arg0);
+!!!424754.java!!!	getBlob(in key : String, in column : String) : Blob
+			return (Blob) execResult("SELECT " + column + " FROM " + access.table + " WHERE " + access.primarykey + "='" + key + "'", column);
+!!!424882.java!!!	from(in table : String) : SQL::Methods
+			for (SQL sql : SQL.list) {
+				for (SQLAccess a : sql.access) {
+					if (a.table.equalsIgnoreCase(table)) {
+						return a.getMethods();
+					}
+				}
+			}
+			return null;

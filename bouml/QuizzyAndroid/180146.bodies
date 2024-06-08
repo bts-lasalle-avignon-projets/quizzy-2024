@@ -1,0 +1,36 @@
+class LifeLangAPI
+!!!384306.java!!!	openLangMenu(inout p : Player) : void
+		Bukkit.getScheduler().runTaskLater(LangManager.getInstance(), () -> {
+			if (p.isOnline()) {
+				p.openInventory(LangCommand.getInventory(p));
+			}
+		}, 5);
+!!!384434.java!!!	getArgs(in packetMessageReceived : String) : String
+		return getArgs(null, packetMessageReceived);
+!!!384562.java!!!	getMessage(in countryCode : String, in packetMessageReceived : String) : String
+		if (packetMessageReceived == null || countryCode == null) {
+			return packetMessageReceived;
+		}
+		String adress = packetMessageReceived.split(splitSequence, -1)[0];
+		TextRegister tr = TextRegister.from(countryCode, adress);
+		if (tr == null) {
+			return packetMessageReceived;
+		}
+		String[] args = getArgs(countryCode, packetMessageReceived);
+		return String.format(tr.getText(), (Object[]) args);
+!!!384690.java!!!	getArgs(in countryCode : String, in packetMessageReceived : String) : String
+		List<String> l = new ArrayList<>();
+		String[] ll = packetMessageReceived.split(splitSequence, -1);
+		for (int i = 0; i < ll.length; i++) {
+			String st = ll[i];
+			String msg = i > 0 ? getMessage(countryCode, st) : null;
+			l.add(msg != null ? msg : st);
+		}
+		l.remove(l.get(0));
+		return l.toArray(new String[l.size()]);
+!!!384818.java!!!	parseMessage(in adress : String, inout args : String [[]]) : String
+		StringBuilder sb = new StringBuilder(adress);
+		for (int i = 0; i < args.length; i++) {
+			sb.append(splitSequence + args[i]);
+		}
+		return sb.toString();

@@ -1,0 +1,16 @@
+class PacketSign
+!!!390194.java!!!	editSign(inout msg : PacketPlayOutUpdateSign, inout handler : PacketHandler) : boolean
+		IChatBaseComponent[] lines = (IChatBaseComponent[]) PacketUtils.getPrivate(msg, "c");
+		for (int i = 0; i < lines.length; i++) {
+			IChatBaseComponent ic = lines[i];
+			if (!(ic instanceof ChatComponentText)) {
+				continue;
+			}
+			String line = PacketUtils.getMessage((ChatComponentText) lines[i]);
+			String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), line);
+			if (extractedMessage == null) {
+				continue;
+			}
+			lines[i] = new ChatMessage(extractedMessage);
+		}
+		return true;

@@ -6,7 +6,7 @@
  *
  * @brief Déclaration de la classe Participant
  * @author Thomas HNIZDO
- * @version 0.2
+ * @version 1.0
  */
 
 #include <QString>
@@ -27,22 +27,24 @@ class Participant
 {
   private:
     QString      nom;                     //!< le nom du participant
-    int          idPupitre;               //!< l'id du pupitre
+    QString      idPupitre;               //!< l'id du pupitre
     unsigned int nombreReponsesCorrectes; //!< le nombre de bonnes réponses
-    QVector<int> reponses;
+    QVector<int> reponses;      //!< les choix des participants aux questions
     QVector<int> tempsReponses; //!< les temps de réponse
+    QVector<int> questionsCorrectes; //!< les numéros des réponses correctes
 
   public:
-    Participant(const QString& nom, int idPupitre);
+    Participant(const QString& nom, const QString& idPupitre);
     ~Participant();
 
     QString      getNom() const;
-    int          getIdPupitre() const;
+    QString      getIdPupitre() const;
     unsigned int getNombreReponsesCorrectes() const;
     QVector<int> getReponses() const;
     QVector<int> getTempsReponses() const;
+    QVector<int> getQuestionsCorrectes() const;
     void         enregistrerReponse(int reponse, int tempsReponse);
-    void         incrementerNombreReponsesCorrectes();
+    void         incrementerNombreReponsesCorrectes(int numeroQuestion);
 };
 
 #endif // PARTICIPANT_H

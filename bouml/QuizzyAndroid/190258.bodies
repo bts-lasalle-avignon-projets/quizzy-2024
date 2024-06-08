@@ -1,0 +1,13 @@
+class Silverfish
+!!!453170.java!!!	Silverfish(inout owner : Player, in id : int)
+		super(owner, EntityType.SILVERFISH, "Poisson d'argent de %player%", null, MovementType.MONSTER_TARGET, id);
+		setPet(this);
+!!!453298.java!!!	Silverfish(inout owner : Player)
+		super(owner, EntityType.SILVERFISH, "Poisson d'argent de %player%", null, MovementType.MONSTER_TARGET);
+		setPet(this);
+!!!453426.java!!!	getEntity() : org.bukkit.entity.Silverfish
+		return (org.bukkit.entity.Silverfish) entity;
+!!!453554.java!!!	spawn() : void
+		super.spawn();
+!!!453682.java!!!	clone(inout player : Player) : Silverfish
+		return new Silverfish(player, getID());

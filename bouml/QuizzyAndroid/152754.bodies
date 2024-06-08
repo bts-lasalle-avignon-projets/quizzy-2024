@@ -1,0 +1,50 @@
+class ListViewHistorique
+!!!219954.java!!!	ListViewHistorique(inout activite : AppCompatActivity, inout vue : View, in id : int)
+        this.activite = activite;
+        this.context = vue.getContext();
+        liste = vue.findViewById(id);
+        mettreAjour();
+!!!220082.java!!!	getCount() : int
+        return sessionsPrecedentes.size();
+!!!220210.java!!!	getItem(in position : int) : Object
+        Session session = sessionsPrecedentes.get(position);
+        String titre = session.getHorodatage();
+        String description = session.getParticipants().size() + " participants - " + session.getQuestions().size() + " questions";
+
+        return new Object[] {session, titre, description};
+!!!220338.java!!!	getItemId(in position : int) : long
+        return position;
+!!!220466.java!!!	getView(in position : int, inout convertView : View, inout parent : ViewGroup) : View
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_items_historique, parent, false);
+        }
+
+        Object[] objet = getItem(position);
+        Session session = (Session) objet[0];
+        String titre = (String) objet[1];
+        String description = (String) objet[2];
+
+        TextView text1 = convertView.findViewById(R.id.text1);
+        TextView text2 = convertView.findViewById(R.id.text2);
+        convertView.findViewById(R.id.btn_voir_session).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activite, VueHistorique.class);
+                intent.putExtra("idEvaluation", session.getIdEvaluation());
+                activite.startActivity(intent);
+            }
+        });
+        convertView.findViewById(R.id.btn_supprimer_session).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Parametres.getParametres().getBaseDeDonnees().supprimerSession(session);
+                IHM.getIHM().mettreAjourHistorique();
+            }
+        });
+
+        text1.setText(titre);
+        text2.setText(description);
+        return convertView;
+!!!220594.java!!!	mettreAjour() : void
+        this.sessionsPrecedentes = Parametres.getParametres().getBaseDeDonnees().getHistorique();
+        liste.setAdapter(this);

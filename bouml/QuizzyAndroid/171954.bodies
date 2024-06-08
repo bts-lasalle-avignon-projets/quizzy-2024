@@ -1,0 +1,27 @@
+class RC
+!!!317874.java!!!	getAttackCount() : int
+		return 0;
+!!!318002.java!!!	getAwaitEnable() : int
+		return 0;
+!!!318130.java!!!	getAwaitDisable() : int
+		return 0;
+!!!318258.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.RC;
+!!!318386.java!!!	Enable(inout info : SheepInfo) : void
+		if (info.getShooter().getVehicle() != info.getSheep()) {
+			info.getSheep().setPassenger(info.getShooter());
+		}
+		new BukkitRunnable() {@Override public void run() {
+			if (info.getSheep().isDead()) {
+				cancel();
+				return;
+			}
+			if (info.getLife() <= 1 || info.getSheep().getPassenger() == null) {
+				info.getShooter().teleport(info.getLaunchPoint());
+				info.getSheep().getWorld().createExplosion(info.getSheep().getLocation(), 5);
+				cancel();
+				return;
+			}
+		}}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!318514.java!!!	Attack(inout info : SheepInfo) : void
+

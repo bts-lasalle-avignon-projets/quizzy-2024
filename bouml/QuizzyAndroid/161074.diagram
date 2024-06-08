@@ -1,0 +1,84 @@
+format 224
+
+classcanvas 128050 class_ref 187570 // evaluations
+  classdiagramsettings member_max_width 0 end
+  xyz 178 312 2000
+end
+classcanvas 128178 class_ref 187698 // participants
+  classdiagramsettings member_max_width 0 end
+  xyz 41 464 2000
+end
+classcanvas 128306 class_ref 187826 // questions
+  classdiagramsettings member_max_width 0 end
+  xyz 314 81 2000
+end
+classcanvas 128434 class_ref 187954 // quiz
+  classdiagramsettings member_max_width 0 end
+  xyz 178 127 2005
+end
+classcanvas 128562 class_ref 188082 // reponses
+  classdiagramsettings member_max_width 0 end
+  xyz 42 295 2000
+end
+classcanvas 128690 class_ref 188210 // resultats
+  classdiagramsettings member_max_width 0 end
+  xyz 178 456 2000
+end
+classcanvas 128818 class_ref 188338 // themes
+  classdiagramsettings member_max_width 0 end
+  xyz 321 320 2000
+end
+relationcanvas 128002 relation_ref 182578 // <unidirectional association>
+  from ref 128306 z 2001 to ref 128050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129074 relation_ref 182706 // <unidirectional association>
+  from ref 128306 z 2001 to ref 128818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129202 relation_ref 182834 // <unidirectional association>
+  from ref 128690 z 2001 to ref 128050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129330 relation_ref 182962 // <unidirectional association>
+  from ref 128690 z 2001 to ref 128178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129458 relation_ref 183090 // <unidirectional association>
+  from ref 128562 z 2001 to ref 128050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129586 relation_ref 183218 // <unidirectional association>
+  from ref 128562 z 2001 to ref 128178
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129714 relation_ref 183346 // <unidirectional association>
+  from ref 128562 z 2001 to point 88 40
+  line 130226 z 2001 to point 360 40
+  line 130354 z 2001 to ref 128306
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129842 relation_ref 183474 // <unidirectional association>
+  from ref 128050 z 2001 to ref 128818
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129970 relation_ref 183602 // <unidirectional association>
+  from ref 128434 z 2006 to ref 128050
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130098 relation_ref 183730 // <unidirectional association>
+  decenter_end 517
+  from ref 128434 z 2006 to ref 128306
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

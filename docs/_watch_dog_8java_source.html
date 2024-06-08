@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet quizzy:  Fichier source de WatchDog.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet quizzy
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_watch_dog_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">WatchDog.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_watch_dog_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">package </span>fr.hillionj.quizzy.session;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> java.util.concurrent.Executors;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">import</span> java.util.concurrent.TimeUnit;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.communication.bluetooth.Peripherique;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.ihm.IHM;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> fr.hillionj.quizzy.parametres.Parametres;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html">   13</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html">WatchDog</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a077cecf6d3fed6384d84295106253f25">   15</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keywordtype">long</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a077cecf6d3fed6384d84295106253f25">tempsPeriode</a> = 1;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">   16</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">heureDebutTempsPause</a> = 0;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">   17</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">long</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a> = 0;</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">   18</a></span>&#160;    <span class="keyword">private</span> ScheduledExecutorService <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">   19</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html">IHM</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">   20</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">etaitEnPause</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2e57b4bef5a2454cf3cff5f8aa56b5f6">   22</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2e57b4bef5a2454cf3cff5f8aa56b5f6">WatchDog</a>(<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html">IHM</a> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>) {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        this.ihm = <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a> = Executors.newScheduledThreadPool(1);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>.scheduleWithFixedDelay(() -&gt; {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">try</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0183d1fa1da199c8bde7738ae3860dd0">loop</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">catch</span>(Exception e)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                Log.e(<span class="stringliteral">&quot;QUIZZ_&quot;</span> + this.getClass().getName(), e.getMessage(), e);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }, 0, <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a077cecf6d3fed6384d84295106253f25">tempsPeriode</a>, TimeUnit.MILLISECONDS);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0183d1fa1da199c8bde7738ae3860dd0">   37</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0183d1fa1da199c8bde7738ae3860dd0">loop</a>() {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a2315f722839c3aa8516c508e6ea7abfc">estTesterLaConnexion</a>()) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac3aa6898c7bfdfb8083e7dfbc5056673">testerConnexion</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aecccee18af34f765fe304a317b94d27d">estEnPause</a>()) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">etaitEnPause</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">etaitEnPause</a>) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a1396ee87892e303fc345473da533d64e">reprendreSession</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">etaitEnPause</a>  = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0e44f36c805207885dcb0f3daf701b43">afficherChrono</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa233877ddf29d2c5cc97227b4a3a8363">   52</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa233877ddf29d2c5cc97227b4a3a8363">afficherBoutons</a>() {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a2fa72d0b777a7bf5a581b603e4c7e7fa">getActiviteActive</a>().runOnUiThread(() -&gt; {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#ab47d0f329ad1c0c466cad84eaeb60b0c">afficherBoutons</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        });</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0e44f36c805207885dcb0f3daf701b43">   58</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0e44f36c805207885dcb0f3daf701b43">afficherChrono</a>() {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a2fa72d0b777a7bf5a581b603e4c7e7fa">getActiviteActive</a>().runOnUiThread(() -&gt; {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().getSession().verifierChrono();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#ac40fbccb3521415bf91b0e67ab02e559">afficherChrono</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        });</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a20c6729163cd0684cf4ed5f508f0273b">   65</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a20c6729163cd0684cf4ed5f508f0273b">arreter</a>() {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>.shutdown();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">if</span> (!<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>.awaitTermination(1, TimeUnit.SECONDS)) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>.shutdownNow();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        } <span class="keywordflow">catch</span> (InterruptedException e) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">scheduler</a>.shutdownNow();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ae03439f83b5a9304af965d827ca6ec12">   76</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ae03439f83b5a9304af965d827ca6ec12">pause</a>() {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ae03439f83b5a9304af965d827ca6ec12">pause</a>(-1);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac421f584467b94fe09375ed2f3d698c0">   80</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac421f584467b94fe09375ed2f3d698c0">pause</a>(<span class="keywordtype">long</span> millis) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a> = millis;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">heureDebutTempsPause</a> = System.currentTimeMillis();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aecccee18af34f765fe304a317b94d27d">   85</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aecccee18af34f765fe304a317b94d27d">estEnPause</a>() {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a> != 0 &amp;&amp; (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a> == -1 || System.currentTimeMillis() - <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">heureDebutTempsPause</a> &lt; <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#adc27129b1797e9571d7dd1e1529b2250">   89</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">long</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#adc27129b1797e9571d7dd1e1529b2250">getHeureDebutTempsPause</a>() {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">heureDebutTempsPause</a>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ad69d04987e821b76e3a7cbebfb20365a">   93</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ad69d04987e821b76e3a7cbebfb20365a">reprendre</a>() {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">tempsPause</a> = 0;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a1396ee87892e303fc345473da533d64e">   97</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a1396ee87892e303fc345473da533d64e">reprendreSession</a>() {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ad69d04987e821b76e3a7cbebfb20365a">reprendre</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a2fa72d0b777a7bf5a581b603e4c7e7fa">getActiviteActive</a>().runOnUiThread(() -&gt;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().getSession().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ad69d04987e821b76e3a7cbebfb20365a">reprendre</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        });</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac3aa6898c7bfdfb8083e7dfbc5056673">  105</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac3aa6898c7bfdfb8083e7dfbc5056673">testerConnexion</a>() {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">ihm</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a2fa72d0b777a7bf5a581b603e4c7e7fa">getActiviteActive</a>().runOnUiThread(() -&gt;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">for</span> (<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html">Peripherique</a> peripherique : <a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">Parametres</a>.<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">getParametres</a>().<a class="code" href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a3051d32243d36e8b4bb917df99ee2ed1">getPeripheriques</a>()) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                peripherique.verifierInterruption();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        });</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1communication_1_1bluetooth_1_1_peripherique.html">fr.hillionj.quizzy.communication.bluetooth.Peripherique</a></div><div class="ttdef"><b>Definition:</b> <a href="_peripherique_8java_source.html#l00023">Peripherique.java:24</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html">fr.hillionj.quizzy.ihm.IHM</a></div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00023">IHM.java:23</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html_a2fa72d0b777a7bf5a581b603e4c7e7fa"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#a2fa72d0b777a7bf5a581b603e4c7e7fa">fr.hillionj.quizzy.ihm.IHM.getActiviteActive</a></div><div class="ttdeci">AppCompatActivity getActiviteActive()</div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00085">IHM.java:85</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html_ab47d0f329ad1c0c466cad84eaeb60b0c"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#ab47d0f329ad1c0c466cad84eaeb60b0c">fr.hillionj.quizzy.ihm.IHM.afficherBoutons</a></div><div class="ttdeci">void afficherBoutons()</div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00089">IHM.java:89</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m_html_ac40fbccb3521415bf91b0e67ab02e559"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1ihm_1_1_i_h_m.html#ac40fbccb3521415bf91b0e67ab02e559">fr.hillionj.quizzy.ihm.IHM.afficherChrono</a></div><div class="ttdeci">void afficherChrono()</div><div class="ttdef"><b>Definition:</b> <a href="_i_h_m_8java_source.html#l00095">IHM.java:95</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html">fr.hillionj.quizzy.parametres.Parametres</a></div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00022">Parametres.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_a2315f722839c3aa8516c508e6ea7abfc"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a2315f722839c3aa8516c508e6ea7abfc">fr.hillionj.quizzy.parametres.Parametres.estTesterLaConnexion</a></div><div class="ttdeci">boolean estTesterLaConnexion()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00146">Parametres.java:146</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_a3051d32243d36e8b4bb917df99ee2ed1"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#a3051d32243d36e8b4bb917df99ee2ed1">fr.hillionj.quizzy.parametres.Parametres.getPeripheriques</a></div><div class="ttdeci">List&lt; Peripherique &gt; getPeripheriques()</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00067">Parametres.java:67</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres_html_ad6ba504ec779cb1f118f734b9eb72b2b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1parametres_1_1_parametres.html#ad6ba504ec779cb1f118f734b9eb72b2b">fr.hillionj.quizzy.parametres.Parametres.getParametres</a></div><div class="ttdeci">static Parametres getParametres(AppCompatActivity activite)</div><div class="ttdef"><b>Definition:</b> <a href="_parametres_8java_source.html#l00037">Parametres.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html">fr.hillionj.quizzy.session.WatchDog</a></div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00013">WatchDog.java:13</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a0183d1fa1da199c8bde7738ae3860dd0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0183d1fa1da199c8bde7738ae3860dd0">fr.hillionj.quizzy.session.WatchDog.loop</a></div><div class="ttdeci">void loop()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00037">WatchDog.java:37</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a077cecf6d3fed6384d84295106253f25"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a077cecf6d3fed6384d84295106253f25">fr.hillionj.quizzy.session.WatchDog.tempsPeriode</a></div><div class="ttdeci">final long tempsPeriode</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00015">WatchDog.java:15</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a0e44f36c805207885dcb0f3daf701b43"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a0e44f36c805207885dcb0f3daf701b43">fr.hillionj.quizzy.session.WatchDog.afficherChrono</a></div><div class="ttdeci">void afficherChrono()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00058">WatchDog.java:58</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a1396ee87892e303fc345473da533d64e"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a1396ee87892e303fc345473da533d64e">fr.hillionj.quizzy.session.WatchDog.reprendreSession</a></div><div class="ttdeci">void reprendreSession()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00097">WatchDog.java:97</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a20c6729163cd0684cf4ed5f508f0273b"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a20c6729163cd0684cf4ed5f508f0273b">fr.hillionj.quizzy.session.WatchDog.arreter</a></div><div class="ttdeci">void arreter()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00065">WatchDog.java:65</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a2bb96cef7b45da7412a369befb8f10d6"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2bb96cef7b45da7412a369befb8f10d6">fr.hillionj.quizzy.session.WatchDog.etaitEnPause</a></div><div class="ttdeci">boolean etaitEnPause</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00020">WatchDog.java:20</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a2e57b4bef5a2454cf3cff5f8aa56b5f6"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a2e57b4bef5a2454cf3cff5f8aa56b5f6">fr.hillionj.quizzy.session.WatchDog.WatchDog</a></div><div class="ttdeci">WatchDog(IHM ihm)</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00022">WatchDog.java:22</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a6f54864ac3a90fa560a50294b4d28ff0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a6f54864ac3a90fa560a50294b4d28ff0">fr.hillionj.quizzy.session.WatchDog.heureDebutTempsPause</a></div><div class="ttdeci">long heureDebutTempsPause</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00016">WatchDog.java:16</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a88acf6caf9564ca0a2526e34d9446961"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a88acf6caf9564ca0a2526e34d9446961">fr.hillionj.quizzy.session.WatchDog.scheduler</a></div><div class="ttdeci">ScheduledExecutorService scheduler</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00018">WatchDog.java:18</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_a8c082fc8bb32cb1e6c1c2970656485ef"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#a8c082fc8bb32cb1e6c1c2970656485ef">fr.hillionj.quizzy.session.WatchDog.ihm</a></div><div class="ttdeci">IHM ihm</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00019">WatchDog.java:19</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_aa233877ddf29d2c5cc97227b4a3a8363"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa233877ddf29d2c5cc97227b4a3a8363">fr.hillionj.quizzy.session.WatchDog.afficherBoutons</a></div><div class="ttdeci">void afficherBoutons()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00052">WatchDog.java:52</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_aa932675b3cc92b48a23a8fa898400758"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aa932675b3cc92b48a23a8fa898400758">fr.hillionj.quizzy.session.WatchDog.tempsPause</a></div><div class="ttdeci">long tempsPause</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00017">WatchDog.java:17</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_ac3aa6898c7bfdfb8083e7dfbc5056673"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac3aa6898c7bfdfb8083e7dfbc5056673">fr.hillionj.quizzy.session.WatchDog.testerConnexion</a></div><div class="ttdeci">void testerConnexion()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00105">WatchDog.java:105</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_ac421f584467b94fe09375ed2f3d698c0"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ac421f584467b94fe09375ed2f3d698c0">fr.hillionj.quizzy.session.WatchDog.pause</a></div><div class="ttdeci">void pause(long millis)</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00080">WatchDog.java:80</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_ad69d04987e821b76e3a7cbebfb20365a"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ad69d04987e821b76e3a7cbebfb20365a">fr.hillionj.quizzy.session.WatchDog.reprendre</a></div><div class="ttdeci">void reprendre()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00093">WatchDog.java:93</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_adc27129b1797e9571d7dd1e1529b2250"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#adc27129b1797e9571d7dd1e1529b2250">fr.hillionj.quizzy.session.WatchDog.getHeureDebutTempsPause</a></div><div class="ttdeci">long getHeureDebutTempsPause()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00089">WatchDog.java:89</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_ae03439f83b5a9304af965d827ca6ec12"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#ae03439f83b5a9304af965d827ca6ec12">fr.hillionj.quizzy.session.WatchDog.pause</a></div><div class="ttdeci">void pause()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00076">WatchDog.java:76</a></div></div>
+<div class="ttc" id="aclassfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog_html_aecccee18af34f765fe304a317b94d27d"><div class="ttname"><a href="classfr_1_1hillionj_1_1quizzy_1_1session_1_1_watch_dog.html#aecccee18af34f765fe304a317b94d27d">fr.hillionj.quizzy.session.WatchDog.estEnPause</a></div><div class="ttdeci">boolean estEnPause()</div><div class="ttdef"><b>Definition:</b> <a href="_watch_dog_8java_source.html#l00085">WatchDog.java:85</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_922abb0a3655b8baaf875f5d29030f9f.html">quizzy-mobile</a></li><li class="navelem"><a class="el" href="dir_29df2e38decdd9581c4701d4fc583f14.html">QUIZZY</a></li><li class="navelem"><a class="el" href="dir_71f48a715e82a37d972ccc9db68c014b.html">app</a></li><li class="navelem"><a class="el" href="dir_70c55cf233bda097cb4638b5e7e8615d.html">src</a></li><li class="navelem"><a class="el" href="dir_0913871232412fabdcbf33187c610831.html">main</a></li><li class="navelem"><a class="el" href="dir_ea9c5f36e2f1527ffbfcc05bca6aafd4.html">java</a></li><li class="navelem"><a class="el" href="dir_e6e18fd49c1899b5c09f947c2f3421b9.html">fr</a></li><li class="navelem"><a class="el" href="dir_f7cdc530559abb7101bff829a558a5b7.html">hillionj</a></li><li class="navelem"><a class="el" href="dir_dde9a60c3527429a42985cbde94f99b7.html">quizzy</a></li><li class="navelem"><a class="el" href="dir_5fc93550afa5a630fd4c57184beb2387.html">session</a></li><li class="navelem"><a class="el" href="_watch_dog_8java.html">WatchDog.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 7 Juin 2024 20:32:04 pour Projet quizzy par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

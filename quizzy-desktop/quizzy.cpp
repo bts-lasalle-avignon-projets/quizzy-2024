@@ -1,3 +1,11 @@
+/**
+ * @file quizzy.cpp
+ *
+ * @brief Définition de la classe Quizzy
+ * @author Thomas HNIZDO
+ * @version 1.0
+ */
+
 #include "quizzy.h"
 #include "participant.h"
 #include "question.h"
@@ -52,7 +60,7 @@ bool Quizzy::estParticipantActuel(QString pidJoueur) const
 {
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nom"
                      << participant->getNom() << "true";
@@ -72,6 +80,7 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
     if(questionActuelle)
     {
         int reponseCorrecte = questionActuelle->getReponseCorrecte();
+        int numeroQuestion  = indexQuestionActuelle + 1;
         qDebug() << Q_FUNC_INFO << "pidJoueur" << participant->getIdPupitre()
                  << "nom" << participant->getNom() << "numeroReponse"
                  << numeroReponse << "reponseCorrecte" << reponseCorrecte
@@ -81,7 +90,7 @@ bool Quizzy::traiterReponseParticipant(Participant* participant,
 
         if(numeroReponse == reponseCorrecte)
         {
-            participant->incrementerNombreReponsesCorrectes();
+            participant->incrementerNombreReponsesCorrectes(numeroQuestion);
         }
 
         choixParticipants[numeroReponse].append(participant->getNom());
@@ -109,6 +118,11 @@ void Quizzy::gererDebutQuiz()
     {
         lancer();
     }
+    else if(etat == Resultats)
+    {
+        etat = Initial;
+        debuter(true);
+    }
 }
 
 // Slot Gestion des participants
@@ -121,8 +135,7 @@ void Quizzy::ajouterParticipant(QString pidJoueur, QString nomParticipant)
 
         qDebug() << Q_FUNC_INFO << "pidJoueur" << pidJoueur << "nomParticipant"
                  << nomParticipant;
-        Participant* participant =
-          new Participant(nomParticipant, pidJoueur.toInt());
+        Participant* participant = new Participant(nomParticipant, pidJoueur);
         participants.push_back(participant);
 
         etat = ParticipantsAjoutes;
@@ -177,6 +190,11 @@ void Quizzy::terminerQuestion()
 
 void Quizzy::passerQuestionSuivante()
 {
+    if(etat == QuestionDemarree && getQuestion()->getDuree() == 0)
+    {
+        terminerQuestion();
+    }
+
     if(etat == QuestionTerminee &&
        indexQuestionActuelle < listeQuestions.size() - 1)
     {
@@ -206,18 +224,28 @@ void Quizzy::traiterReponse(QString pidJoueur,
                  << numeroReponse << "tempsReponse" << tempsReponse;
         for(Participant* participant: participants)
         {
-            if(participant->getIdPupitre() == pidJoueur.toInt())
+            if(participant->getIdPupitre() == pidJoueur)
             {
                 traiterReponseParticipant(participant,
                                           numeroReponse,
                                           tempsReponse);
             }
         }
+
+        if(getQuestion()->getDuree() == 0)
+        {
+            emit choixParticipant();
+        }
     }
 }
 
 void Quizzy::gererFinQuiz()
 {
+    if(etat == QuestionDemarree &&
+       indexQuestionActuelle == listeQuestions.size() - 1)
+    {
+        terminerQuestion();
+    }
     if(etat == QuestionTerminee &&
        indexQuestionActuelle == listeQuestions.size() - 1)
     {
@@ -269,7 +297,7 @@ QString Quizzy::getNomDuParticipant(QString pidJoueur)
 {
     for(Participant* participant: participants)
     {
-        if(participant->getIdPupitre() == pidJoueur.toInt())
+        if(participant->getIdPupitre() == pidJoueur)
         {
             return participant->getNom();
         }

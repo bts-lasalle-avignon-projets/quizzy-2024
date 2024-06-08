@@ -1,3 +1,11 @@
+/**
+ * @file question.cpp
+ *
+ * @brief Définition de la classe Question
+ * @author Thomas HNIZDO
+ * @version 1.0
+ */
+
 #include "question.h"
 
 Question::Question(QString     libelle,

@@ -1,0 +1,47 @@
+class Cycles
+!!!298162.java!!!	DefaultCycle(inout info : SheepInfo, inout power : PowerSheep) : void
+			DefaultCycle(info, power, false, -1);
+!!!298290.java!!!	DefaultCycle(inout info : SheepInfo, inout power : PowerSheep, in interval : int) : void
+			DefaultCycle(info, power, false, interval);
+!!!298418.java!!!	DefaultCycle(inout info : SheepInfo, inout power : PowerSheep, inout continue_after_death : boolean) : void
+			DefaultCycle(info, power, continue_after_death, -1);
+!!!298546.java!!!	DefaultCycle(inout info : SheepInfo, inout power : PowerSheep, inout continue_after_death : boolean, in interval : int) : void
+			int life = (int) info.getBasedLife() * 20;
+			/*try {
+				if (power.getAttackCount() <= 0) {
+					throw new SheepExeption("Attack count must be greater than '0'");
+				}
+				if (power.getAwaitEnable() + power.getAwaitDisable() > life) {
+					throw new SheepExeption("Sheep's life time must be greater or equal than activation and desactivation time");
+				}
+			} catch (SheepExeption e) {
+				e.printStackTrace();
+			}*/
+			int waittime = power.getAwaitEnable() * 20;
+			int disabletime = power.getAwaitDisable() * 20;
+			int base_interval = interval != -1 ? interval : (int) ((double) (life - waittime - disabletime) / (double)  power.getAttackCount());
+			new BukkitRunnable() {
+				int wait = waittime;
+				int interval = 0;
+				int total = 0;
+				@Override
+				public void run() {
+					if ((info.getSheep().isDead() && !continue_after_death) || (continue_after_death && info.getLife() <= 0)) {
+						cancel();
+						return;
+					}
+					if (wait > 0) {
+						wait--;
+						return;
+					}
+					if (interval >= base_interval && (total < power.getAttackCount() || power.getAttackCount() == 0)) {
+						power.Attack(info);
+						interval = 0;
+						total++;
+					} else {
+						interval++;
+					}
+				}
+			}.runTaskTimer(Main.getInstance(), 0, 1);
+!!!298674.java!!!	target(inout sheep : Sheep, inout loc : Location, in speed : double) : void
+			((EntityInsentient) ((CraftEntity) ((LivingEntity)sheep)).getHandle()).getNavigation().a(loc.getX(), loc.getY(), loc.getZ(), speed);

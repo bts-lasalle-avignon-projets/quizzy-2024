@@ -1,0 +1,13 @@
+class EnregistrerParticipant
+!!!204850.java!!!	EnregistrerParticipant(in trame : String)
+        setTrame(trame);
+!!!204978.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + ";PID;NOM\n";
+!!!205106.java!!!	getType() : TypeProtocole
+        return TypeProtocole.ENREGISTRER_PARTICIPANT;
+!!!205234.java!!!	getNom() : String
+        return extraireDonnees().get("NOM");
+!!!205362.java!!!	getPID() : String
+        return extraireDonnees().get("PID");
+!!!205490.java!!!	genererTrame(in pid : String, in nom : String) : void
+        super.genererTrame(pid, nom);

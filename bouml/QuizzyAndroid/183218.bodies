@@ -1,0 +1,41 @@
+class TextRegister
+!!!401202.java!!!	TextRegister(in uid : String, in text : String)
+		String[] l = uid.split("\\.");
+		this.countyCode = l[0];
+		this.pluginName = l[1];
+		StringBuilder sb = new StringBuilder();
+		for (int i = 1; i < l.length; i++) {
+			sb.append(l[i]);
+			if (i != l.length - 1) {
+				sb.append(".");
+			}
+		}
+		this.uid = uid;
+		this.adress = sb.toString();
+		this.text = text;
+		this.universal = this.countyCode.equalsIgnoreCase("ALL");
+		all.add(this);
+!!!401330.java!!!	getPluginName() : String
+		return pluginName;
+!!!401458.java!!!	getUID() : String
+		return uid;
+!!!401586.java!!!	getCountyCode() : String
+		return countyCode;
+!!!401714.java!!!	getAdress() : String
+		return adress;
+!!!401842.java!!!	getText() : String
+		return text;
+!!!401970.java!!!	isUniversal() : boolean
+		return universal;
+!!!402098.java!!!	from(in countryCode : String, in adress : String) : TextRegister
+		TextRegister universal = null;
+		for (TextRegister tr : all) {
+			if (tr.getAdress().equalsIgnoreCase(adress)) {
+				if (tr.isUniversal()) {
+					universal = tr;
+				} else if (tr.getCountyCode().equalsIgnoreCase(countryCode)) {
+					return tr;
+				}
+			}
+		}
+		return universal;

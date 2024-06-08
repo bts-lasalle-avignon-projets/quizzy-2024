@@ -1,0 +1,57 @@
+class MenuEvent
+!!!513842.java!!!	onClick(inout e : InventoryClickEvent) : void
+		IMenu menu = CraftMenu.from(e.getClickedInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onClick(e);
+!!!513970.java!!!	onOpen(inout e : InventoryOpenEvent) : void
+		IMenu menu = CraftMenu.from(e.getInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onOpen(e);
+!!!514098.java!!!	onClose(inout e : InventoryCloseEvent) : void
+		IMenu menu = CraftMenu.from(e.getInventory());
+		if (menu == null) {
+			return;
+		}
+		menu.onClose(e);
+		if (menu.isClone(e.getInventory())) {
+			menu.removeClone(e.getInventory());
+		}
+!!!514226.java!!!	onContentClick(inout e : MenuClickContentEvent) : void
+		Player p = e.getPlayer();
+		if (e.getItem().getType() == Material.AIR) {
+			return;
+		}
+		if (LifeRadio.getRadio().getPlayerUUIDs().contains(e.getPlayer().getUniqueId())) {
+			LifeRadio.getRadio().removePlayer(e.getPlayer());
+		}
+		RadioMenu radio = RadioMenu.get(p);
+		SongPlayer sp = radio.getSongPlayer();
+		Song song = Song.from(e.getItem());
+		if (song == null) {
+			if (e.getSlot() == 40) {
+				sp.setPlaying(!sp.isPlaying());
+			} else if (e.getSlot() == 41) {
+				int index = sp.getPlayedSongIndex() + 1 < sp.getPlaylist().getSongList().size() ? sp.getPlayedSongIndex() + 1 : 0;
+				sp.playSong(index);
+			} else if (e.getSlot() == 39) {
+				int index = sp.getPlayedSongIndex() - 1 > 0 ? sp.getPlayedSongIndex() - 1 : 0;
+				sp.playSong(index);
+			} else if (e.getSlot() == 36) {
+				radio.getSongPlayer().destroy();
+				RadioMenu.private_radio.remove(p);
+				LifeRadio.getRadio().addPlayer(p);
+				p.openInventory(RadioMenu.get(p).getInventory());
+			}
+			return;
+		}
+		sp.playSong(sp.getPlaylist().getIndex(song.getSong()));
+		radio.updateMenu();
+		Inventory inv = radio.getInventory();
+		Inventory open_inv = p.getOpenInventory().getTopInventory();
+		if (open_inv == null || !open_inv.equals(inv)) {
+			p.openInventory(inv);
+		}

@@ -1,0 +1,71 @@
+class SQLManager
+!!!483634.java!!!	getConfig() : FileConfiguration
+		return config;
+!!!483762.java!!!	setConfig(inout config : FileConfiguration) : void
+		SQLManager.config = config;
+!!!483890.java!!!	setup(inout plugin : Plugin, in output_prefix : String, inout configuration : FileConfiguration, in table_name : String, inout columns : List<SQLRegister>, in primary_key : String) : void
+		ConnectionRegister.setName(table_name);
+		ConnectionRegister.setPrimary(primary_key);
+		ConnectionRegister.setTables(columns);
+		setConfig(configuration);
+		setPrefix(output_prefix);
+		SQLFunc.setMainPlugin(plugin);
+		ConnectSQL.Connect(plugin, configuration);
+!!!484018.java!!!	getPrefix() : String
+		return prefix;
+!!!484146.java!!!	setPrefix(in prefix : String) : void
+		SQLManager.prefix = prefix;
+!!!484274.java!!!	createTable() : void
+		String table_name = ConnectionRegister.getName();
+		List<SQLRegister> tables = ConnectionRegister.getTables();
+		String primary = ConnectionRegister.getPrimary();
+		StringBuilder sb = new StringBuilder();
+		sb.append("CREATE TABLE IF NOT EXISTS ");
+		sb.append(table_name + " (");
+		for (SQLRegister r : tables) {
+			if (r.toString() == null) {
+				return;
+			}
+			sb.append(r.toString() + ",");
+		}
+		sb.append("PRIMARY KEY (" + primary + "))");
+		SQLFunc sql = new SQLFunc();
+		sql.createTable(sb.toString());
+		setTableName(table_name);
+		setPrimary(primary);
+		setTablelist(tables);
+		
+		sb = new StringBuilder();
+		StringBuilder sb2 = new StringBuilder();
+		for (int i = 0; i < tables.size(); i++) {
+			SQLRegister r = tables.get(i);
+			if (i != tables.size() - 1) {
+				sb.append(r.getName() + ",");
+				sb2.append("?,");
+			} else {
+				sb.append(r.getName());
+				sb2.append("?");
+			}
+		}
+		setNameList(sb.toString());
+		setAnomymousList(sb2.toString());
+!!!485426.java!!!	getTableName() : String
+		return table_name;
+!!!485554.java!!!	setTableName(in table_name : String) : void
+		SQLManager.table_name = table_name;
+!!!485682.java!!!	getPrimary() : String
+		return primary;
+!!!485810.java!!!	setPrimary(in primary : String) : void
+		SQLManager.primary = primary;
+!!!485938.java!!!	getNameList() : String
+		return namelist;
+!!!486066.java!!!	setNameList(in namelist : String) : void
+		SQLManager.namelist = namelist;
+!!!486194.java!!!	getAnomymousList() : String
+		return anomymouslist;
+!!!486322.java!!!	setAnomymousList(in anomymouslist : String) : void
+		SQLManager.anomymouslist = anomymouslist;
+!!!486450.java!!!	getTablelist() : SQLManager::SQLRegister
+		return tablelist;
+!!!486578.java!!!	setTablelist(inout tablelist : List<SQLRegister>) : void
+		SQLManager.tablelist = tablelist;

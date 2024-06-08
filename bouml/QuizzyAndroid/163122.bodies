@@ -1,0 +1,36 @@
+class ActiviteParametresBinding
+!!!267314.java!!!	ActiviteParametresBinding(inout rootView : ConstraintLayout, inout btnLancer : Button, inout settings : FrameLayout)
+    this.rootView = rootView;
+    this.btnLancer = btnLancer;
+    this.settings = settings;
+!!!267442.java!!!	getRoot() : ConstraintLayout
+    return rootView;
+!!!267570.java!!!	inflate(inout inflater : LayoutInflater) : ActiviteParametresBinding
+    return inflate(inflater, null, false);
+!!!267698.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : ActiviteParametresBinding
+    View root = inflater.inflate(R.layout.activite_parametres, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!267826.java!!!	bind(inout rootView : View) : ActiviteParametresBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_lancer;
+      Button btnLancer = ViewBindings.findChildViewById(rootView, id);
+      if (btnLancer == null) {
+        break missingId;
+      }
+
+      id = R.id.settings;
+      FrameLayout settings = ViewBindings.findChildViewById(rootView, id);
+      if (settings == null) {
+        break missingId;
+      }
+
+      return new ActiviteParametresBinding((ConstraintLayout) rootView, btnLancer, settings);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

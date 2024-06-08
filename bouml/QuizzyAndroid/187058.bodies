@@ -1,0 +1,131 @@
+class ItemBuilder
+!!!425010.java!!!	ItemBuilder(in mat : Material)
+		super(mat);
+!!!425138.java!!!	ItemBuilder(inout material : Material, in data : byte)
+		super(material, 1, data);
+!!!425266.java!!!	ItemBuilder(in is : ItemStack)
+		super(is);
+!!!425394.java!!!	amount(in amount : int) : ItemBuilder
+		setAmount(amount);
+		return this;
+!!!425522.java!!!	skullOwner(in owner : String) : ItemBuilder
+		final SkullMeta skullMeta = (SkullMeta) getItemMeta();
+		skullMeta.setOwner(owner);
+		setItemMeta(skullMeta);
+		return this;
+!!!425650.java!!!	skullTextue(in url : String) : ItemBuilder
+		if (url.isEmpty()) {
+			return this;
+		}
+		SkullMeta headMeta = (SkullMeta) getItemMeta();
+		GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+		profile.getProperties().put("textures", new Property("textures", url));
+		try {
+			Field profileField = headMeta.getClass().getDeclaredField("profile");
+			profileField.setAccessible(true);
+			profileField.set(headMeta, profile);
+		} catch (IllegalArgumentException | NoSuchFieldException | SecurityException | IllegalAccessException error) {
+			error.printStackTrace();
+		}
+		setItemMeta(headMeta);
+		return this;
+!!!425778.java!!!	name(in name : String) : ItemBuilder
+		final ItemMeta meta = getItemMeta();
+		meta.setDisplayName(name);
+		setItemMeta(meta);
+		return this;
+!!!425906.java!!!	lore(in text : List<String>) : ItemBuilder
+		final ItemMeta meta = getItemMeta();
+		meta.setLore(text);
+		setItemMeta(meta);
+		return this;
+!!!426034.java!!!	durability(in durability : int) : ItemBuilder
+		setDurability((short) durability);
+		return this;
+!!!426162.java!!!	enchantment(in enchantment : Enchantment, in level : int) : ItemBuilder
+		addUnsafeEnchantment(enchantment, level);
+		return this;
+!!!426290.java!!!	flag(in flag : ItemFlag) : ItemBuilder
+		ItemMeta itM = getItemMeta();
+		itM.addItemFlags(flag);
+		setItemMeta(itM);
+		return this;
+!!!426418.java!!!	enchantment(in enchantment : Enchantment) : ItemBuilder
+		ItemMeta itM = getItemMeta();
+		itM.addEnchant(enchantment, 1, true);
+		setItemMeta(itM);
+		return this;
+!!!426546.java!!!	unbreakable() : ItemStack
+		ItemMeta itM = getItemMeta();
+		itM.spigot().setUnbreakable(true);
+		setItemMeta(itM);
+		return this;
+!!!426674.java!!!	type(in material : Material) : ItemBuilder
+		setType(material);
+		return this;
+!!!426802.java!!!	clearLore() : ItemBuilder
+		final ItemMeta meta = getItemMeta();
+		meta.setLore(new ArrayList<>());
+		setItemMeta(meta);
+		return this;
+!!!426930.java!!!	clearEnchantments() : ItemBuilder
+		getEnchantments().keySet().forEach(this::removeEnchantment);
+		return this;
+!!!427058.java!!!	color(inout color : Color) : ItemBuilder
+		if (getType() == Material.LEATHER_BOOTS || getType() == Material.LEATHER_CHESTPLATE
+				|| getType() == Material.LEATHER_HELMET || getType() == Material.LEATHER_LEGGINGS) {
+			LeatherArmorMeta meta = (LeatherArmorMeta) getItemMeta();
+			meta.setColor(color);
+			setItemMeta(meta);
+			return this;
+		} else {
+			throw new IllegalArgumentException("color() only applicable for leather armor!");
+		}
+!!!427186.java!!!	createPotion(inout list : List<PotionBuilder>, inout splash : boolean) : ItemBuilder
+		Potion p = Potion.fromItemStack(this);
+		p.setSplash(false);
+		PotionMeta pm = (PotionMeta) getItemMeta();
+		if (!list.isEmpty()) {
+			setDurability(p.toItemStack(1).getDurability());
+			pm.setMainEffect(list.get(0).getType());
+		} else {
+			setType(Material.GLASS_BOTTLE);
+			return this;
+		}
+		for (PotionBuilder b : list) {
+			pm.addCustomEffect(new PotionEffect(b.getType(), b.getDuration(), b.getAmplifier(), true), true);
+		}
+		setItemMeta(pm);
+		return this;
+!!!496818.java!!!	addItem(in name : String, inout lore : List<String>, inout mat : Material, in data : int) : ItemStack
+		ItemStack it = new ItemStack(mat, 1, (short) data);
+		ItemMeta itM = it.getItemMeta();
+		itM.setDisplayName(name);
+		itM.setLore(lore);
+		it.setItemMeta(itM);
+		return it;
+!!!496946.java!!!	addEnchantItem(in name : String, inout lore : List<String>, inout mat : Material, in data : int) : ItemStack
+		ItemStack it = new ItemStack(mat, 1, (short) data);
+		ItemMeta itM = it.getItemMeta();
+		itM.setDisplayName(name);
+		itM.setLore(lore);
+		itM.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+		itM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		it.setItemMeta(itM);
+		return it;
+!!!497074.java!!!	addHead(in name : String, inout lore : List<String>, in owner : String) : ItemStack
+		ItemStack it = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+		SkullMeta itM = (SkullMeta) it.getItemMeta();
+		itM.setDisplayName(name);
+		itM.setLore(lore);
+		itM.setOwner(owner);
+		it.setItemMeta(itM);
+		return it;
+!!!497202.java!!!	addLeather(inout mat : Material, inout color : Color, in name : String, inout lore : List<String>) : ItemStack
+		ItemStack it = new ItemStack(mat, 1, (byte) 0);
+		LeatherArmorMeta leather = (LeatherArmorMeta) it.getItemMeta();
+		leather.setColor(color);
+		leather.setDisplayName(name);
+		leather.setLore(lore);
+		it.setItemMeta(leather);
+		return it;

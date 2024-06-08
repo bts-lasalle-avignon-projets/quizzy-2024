@@ -1,0 +1,11 @@
+class PacketInventory
+!!!389426.java!!!	editInventory(inout msg : PacketPlayOutOpenWindow, inout handler : PacketHandler) : boolean
+		String inventoryType = (String) PacketUtils.getPrivate(msg, "b");
+		IChatBaseComponent cVar = (IChatBaseComponent) PacketUtils.getPrivate(msg, "c");
+		if (inventoryType == null || !inventoryType.equalsIgnoreCase("minecraft:container")) {
+			return true;
+		}
+		String inventoryTitle = cVar.getText();
+		String extractedMessage = LifeLangAPI.getMessage(Join.playerLang.get(handler.getPlayer()), inventoryTitle);
+		PacketUtils.setPrivate(msg, "c", new ChatMessage(extractedMessage));
+		return true;

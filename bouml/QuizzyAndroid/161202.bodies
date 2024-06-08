@@ -1,0 +1,7 @@
+class ProtocoleAfficherReponse
+!!!253746.java!!!	getFormat() : String
+        return "$" + getType().getIndiceType() + "\n";
+!!!253874.java!!!	getType() : TypeProtocole
+        return TypeProtocole.AFFICHER_REPONSE;
+!!!254002.java!!!	genererTrame() : void
+        super.genererTrame();

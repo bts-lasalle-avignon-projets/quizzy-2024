@@ -1,0 +1,173 @@
+class IHM
+!!!211122.java!!!	getIHMActive(inout typeObjet : Class<?>) : Object
+        for (Object ihmActive : ihmActives) {
+            if (typeObjet.isInstance(ihmActive)) {
+                return ihmActive;
+            }
+        }
+        return null;
+!!!211250.java!!!	getIHM() : IHM
+        return IHM.ihm;
+!!!211378.java!!!	IHM(inout parametres : Parametres, inout activiteActive : AppCompatActivity)
+        IHM.ihm = this;
+        this.activiteActive = activiteActive;
+        this.parametres = parametres;
+!!!211506.java!!!	ajouterIHM(inout pageIHM : Object) : void
+        if (pageIHM instanceof AppCompatActivity) {
+            if (getActiviteActive() instanceof VueSession && (!(pageIHM instanceof VueSession))) {
+                Parametres.getParametres().getSession().getGestionnaireProtocoles().preparerRelancement();
+                Parametres.getParametres().nouvelleSession();
+            }
+            activiteActive = (AppCompatActivity) pageIHM;
+        }
+        for (Object ihmActive : ihmActives) {
+            if (pageIHM.getClass() == ihmActive.getClass()) {
+                ihmActives.remove(ihmActive);
+                break;
+            }
+        }
+        ihmActives.add(pageIHM);
+!!!211634.java!!!	mettreAjourListeParticipants() : void
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourListeParticipants();
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.mettreAjourListeParticipants();
+        PopupNonConnecte nonConnecte = (PopupNonConnecte) getIHMActive(PopupNonConnecte.class);
+        if (nonConnecte != null)
+            nonConnecte.mettreAjourEtatBoutons();
+!!!211762.java!!!	afficherInterface() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherInterface();
+!!!211890.java!!!	getActiviteActive() : AppCompatActivity
+        return activiteActive;
+!!!212018.java!!!	afficherBoutons() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherBoutons();
+!!!212146.java!!!	afficherChrono() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherChrono();
+!!!212274.java!!!	getActivite(inout typeActivite : Class<?>) : AppCompatActivity
+        return (AppCompatActivity) getIHMActive(typeActivite);
+!!!212402.java!!!	fermerActivite(inout typeActivite : Class<?>) : void
+        Object activite = getIHMActive(typeActivite);
+        if (activite instanceof AppCompatActivity) {
+            ((AppCompatActivity)activite).finish();
+        }
+!!!212530.java!!!	fermerPopups() : void
+        for (Object ihmActive : ihmActives) {
+            if (ihmActive instanceof DialogFragment) {
+                try {
+                    ((DialogFragment)ihmActive).dismiss();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+!!!212658.java!!!	mettreAjourHistorique() : void
+        PopupHistorique popupHistorique = (PopupHistorique) getIHMActive(PopupHistorique.class);
+        if (popupHistorique != null)
+            popupHistorique.mettreAjourHistorique();
+!!!212786.java!!!	demarrerActivite(inout lanceur : Object, inout contexte : Context, inout typeActivite : Class<?>) : void
+        Intent intent = new Intent(contexte, typeActivite);
+        if (VueSession.class.isAssignableFrom(typeActivite)) {
+            intent.putExtra("estRecree", false);
+        }
+        if (lanceur instanceof Fragment) {
+            ((Fragment) lanceur).startActivity(intent);
+        } else {
+            ((AppCompatActivity) lanceur).startActivity(intent);
+        }
+!!!212914.java!!!	mettreAjourSpinnerParticipants() : void
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourSpinnerParticipants();
+!!!526258.java!!!	getIHMActive(inout typeObjet : Class<?>) : Object
+        for (Object ihmActive : ihmActives) {
+            if (typeObjet.isInstance(ihmActive)) {
+                return ihmActive;
+            }
+        }
+        return null;
+!!!526386.java!!!	getIHM() : IHM
+        return IHM.ihm;
+!!!526514.java!!!	IHM(inout parametres : Parametres, inout activiteActive : AppCompatActivity)
+        IHM.ihm = this;
+        this.activiteActive = activiteActive;
+        this.parametres = parametres;
+!!!526642.java!!!	ajouterIHM(inout pageIHM : Object) : void
+        if (pageIHM instanceof AppCompatActivity) {
+            if (getActiviteActive() instanceof VueSession && (!(pageIHM instanceof VueSession))) {
+                Parametres.getParametres().getSession().getGestionnaireProtocoles().preparerRelancement();
+                Parametres.getParametres().nouvelleSession();
+            }
+            activiteActive = (AppCompatActivity) pageIHM;
+        }
+        for (Object ihmActive : ihmActives) {
+            if (pageIHM.getClass() == ihmActive.getClass()) {
+                ihmActives.remove(ihmActive);
+                break;
+            }
+        }
+        ihmActives.add(pageIHM);
+!!!526770.java!!!	mettreAjourListeParticipants() : void
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourListeParticipants();
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.mettreAjourListeParticipants();
+        PopupNonConnecte nonConnecte = (PopupNonConnecte) getIHMActive(PopupNonConnecte.class);
+        if (nonConnecte != null)
+            nonConnecte.mettreAjourEtatBoutons();
+!!!526898.java!!!	afficherInterface() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherInterface();
+!!!527026.java!!!	getActiviteActive() : AppCompatActivity
+        return activiteActive;
+!!!527154.java!!!	afficherBoutons() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherBoutons();
+!!!527282.java!!!	afficherChrono() : void
+        VueSession vueSession = (VueSession) getIHMActive(VueSession.class);
+        if (vueSession != null)
+            vueSession.afficherChrono();
+!!!527410.java!!!	getActivite(inout typeActivite : Class<?>) : AppCompatActivity
+        return (AppCompatActivity) getIHMActive(typeActivite);
+!!!527538.java!!!	fermerActivite(inout typeActivite : Class<?>) : void
+        Object activite = getIHMActive(typeActivite);
+        if (activite instanceof AppCompatActivity) {
+            ((AppCompatActivity)activite).finish();
+        }
+!!!527666.java!!!	fermerPopups() : void
+        for (Object ihmActive : ihmActives) {
+            if (ihmActive instanceof DialogFragment) {
+                try {
+                    ((DialogFragment)ihmActive).dismiss();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+!!!527794.java!!!	mettreAjourHistorique() : void
+        PopupHistorique popupHistorique = (PopupHistorique) getIHMActive(PopupHistorique.class);
+        if (popupHistorique != null)
+            popupHistorique.mettreAjourHistorique();
+!!!527922.java!!!	demarrerActivite(inout lanceur : Object, inout contexte : Context, inout typeActivite : Class<?>) : void
+        Intent intent = new Intent(contexte, typeActivite);
+        if (VueSession.class.isAssignableFrom(typeActivite)) {
+            intent.putExtra("estRecree", false);
+        }
+        if (lanceur instanceof Fragment) {
+            ((Fragment) lanceur).startActivity(intent);
+        } else {
+            ((AppCompatActivity) lanceur).startActivity(intent);
+        }
+!!!528050.java!!!	mettreAjourSpinnerParticipants() : void
+        VueParticipants vueParticipants = (VueParticipants) getIHMActive(VueParticipants.class);
+        if (vueParticipants != null)
+            vueParticipants.mettreAjourSpinnerParticipants();

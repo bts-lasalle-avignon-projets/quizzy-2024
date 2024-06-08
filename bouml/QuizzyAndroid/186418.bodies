@@ -1,0 +1,82 @@
+class SQLConnection
+!!!419890.java!!!	SQLConnection(inout sql : SQL, in adress : String, in port : int, in database : String, in username : String, in password : String)
+			this.sql = sql;
+			this.adress = adress;
+			this.port = port;
+			this.database = database;
+			this.username = username;
+			this.password = password;
+			this.plugin = sql.plugin;
+			this.timeout = sql.timeout;
+			new BukkitRunnable() {@Override public void run() {
+				if (timeout == -1) {
+					cancel();
+					return;
+				}
+				if (timeout <= 0) {
+					update();
+				} else {
+					timeout -= 1;
+				}
+			}}.runTaskTimer(this.plugin, 0, 20);
+!!!420018.java!!!	update() : SQL::SQLConnection
+			this.timeout = sql.timeout;
+			async(() -> {
+				for (SQLAccess a : sql.access) {
+					try {
+						a.methods.lines().clear();
+					} catch (Exception e) {
+						error = e.getMessage();
+						when_errored.run();
+					}
+				}
+			});
+			return this;
+!!!420146.java!!!	connect(inout async : boolean) : SQL::SQLConnection
+			Runnable run = () -> {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					this.connection = DriverManager.getConnection("jdbc:mysql://" + this.adress + ":" + this.port + "/" + this.database, this.username, this.password);
+					when_connected.run();
+				} catch (Exception e) {
+					error = e.getMessage();
+					when_errored.run();
+				}
+			};
+			if (async) {
+				async(run);
+			} else {
+				run.run();
+			}
+			return this;
+!!!420274.java!!!	disconnect() : SQL::SQLConnection
+			try {
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+				when_disconnected.run();
+				return this;
+			} catch (Exception e) {
+				error = e.getMessage();
+				when_errored.run();
+				return this;
+			}
+!!!420402.java!!!	async(inout run : Runnable) : SQL::SQLConnection
+			new BukkitRunnable() {@Override public void run() {
+				run.run();
+			}}.runTaskAsynchronously(plugin);
+			return this;
+!!!420530.java!!!	WhenConnected(inout run : Runnable) : SQL::SQLConnection
+			this.when_connected = run;
+			return this;
+!!!420658.java!!!	WhenDisconnected(inout run : Runnable) : SQL::SQLConnection
+			this.when_disconnected = run;
+			return this;
+!!!420786.java!!!	WhenErrored(inout run : Runnable) : SQL::SQLConnection
+			this.when_errored = run;
+			return this;
+!!!420914.java!!!	WhenTableCreation(inout run : Runnable) : SQL::SQLConnection
+			this.when_tablecreation = run;
+			return this;
+!!!421042.java!!!	getError() : String
+			return this.error;

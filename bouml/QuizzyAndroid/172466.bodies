@@ -1,0 +1,40 @@
+class StrikeLightning
+!!!320946.java!!!	StrikeLightning(in attack : int)
+		this.attack = attack;
+!!!321074.java!!!	getAttackCount() : int
+		return attack;
+!!!321202.java!!!	getAwaitEnable() : int
+		return 0;
+!!!321330.java!!!	getAwaitDisable() : int
+		return 0;
+!!!321458.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.STRIKELIGHTNING;
+!!!321586.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!321714.java!!!	Attack(inout info : SheepInfo) : void
+		Cuboid is = info.getGame().getIsland(info.getSheep().getLocation());
+		if (is == null) {
+			return;
+		}
+		Location loc = null;
+		boolean b = false;
+		for (int i = 0; i < 5; i++) {
+			if (b) {
+				break;
+			}
+			Location r = is.getRandomLocation();
+			for (int y = 255; y >= 0; y--) {
+				r.setY(y);
+				if (r.getBlock().getType() != Material.AIR) {
+					r.setY(y + 1);
+					loc = r;
+					b = true;
+					break;
+				}
+			}
+		}
+		if (loc == null) {
+			return;
+		}
+		loc.getWorld().strikeLightning(loc);
+		loc.getWorld().createExplosion(loc, 5);

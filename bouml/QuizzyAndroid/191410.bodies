@@ -1,0 +1,197 @@
+class Main
+!!!461746.java!!!	getInstance() : Main
+		return instance;
+!!!461874.java!!!	onEnable() : void
+		instance = this;
+		ConfigManager.MESSAGES.saveDefaultConfig();
+		ConfigManager.PETS.saveDefaultConfig();
+		ConfigManager.MYSQL.saveDefaultConfig();
+		
+		loadConfig();
+		
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new PetManager(), this);
+		pm.registerEvents(new PetInventory(), this);
+		pm.registerEvents(new CancelledPets(), this);
+		PetManager.SendFollow();
+		getCommand("changename").setExecutor(new PetManager());
+		
+		List<SQLRegister> list = new ArrayList<>();
+		list.add(new SQLRegister("NAME", TableType.STRING, 1));
+		list.add(new SQLRegister("ID", TableType.STRING, 2));
+		list.add(new SQLRegister("CUSTOMNAME", TableType.STRING, 3));
+		list.add(new SQLRegister("AUTOSPAWN", TableType.STRING, 4));
+		
+		SQLManager.setup(this, "§7[§ePETS§7] ", ConfigManager.MYSQL.getConfig(), "pets", list, "NAME");
+
+		getCommand("pets").setExecutor(new PetCommand());
+		getCommand("pet").setExecutor(new PetCommand());
+		
+		for (World w : Bukkit.getWorlds()) {
+			w.setDifficulty(Difficulty.NORMAL);
+			for (Entity ent : w.getEntities()) {
+				if (ent instanceof Player || ent instanceof ArmorStand || !ent.isCustomNameVisible()) {
+					continue;
+				}
+				ent.remove();
+			}
+		}
+!!!462002.java!!!	onDisable() : void
+		ConnectSQL.Disconnect(SQLFunc.getConnection());
+		for (int i = 0; i < Stats.stat.size(); i++) {
+			Stats stat = Stats.stat.get(0);
+			Stats.removePlayer(stat);
+		}
+!!!462130.java!!!	loadConfig() : void
+		ConfigurationSection pets = ConfigManager.PETS.getConfig().getConfigurationSection("pets");
+		for (String st : pets.getKeys(false)) {
+			EntityType type = null;
+			try {
+				type = EntityType.valueOf(pets.getString(st + ".type"));
+			} catch (Exception e) {
+				Bukkit.getConsoleSender().sendMessage("§7[§ePETS§7] §cCouldn't find entity §e" + pets.getString(st + ".type") + " §c! Select and write in §epets.yml §can entity name in this list :");
+				List<EntityType> list = new ArrayList<>();
+				list.addAll(Arrays.asList(EntityType.values()));
+				int t = 0;
+				StringBuilder sb = new StringBuilder();
+				sb.append("§7[§ePETS§7] ");
+				for (int i = 0; i < list.size(); i++) {
+					EntityType u = list.get(i);
+					if (t >= 10) {
+						t = 0;
+						Bukkit.getConsoleSender().sendMessage(sb.toString());
+						sb = new StringBuilder();
+						sb.append("§7[§ePETS§7] ");
+					} else {
+						t++;
+					}
+					if (i != list.size() -1) {
+						sb.append(u.toString() + "§c, §7");
+					} else {
+						sb.append(u.toString());
+						Bukkit.getConsoleSender().sendMessage(sb.toString());
+					}
+				}
+				list.clear();
+				continue;
+			}
+			String name = pets.getString(st + ".name");
+			int ss = pets.getInt(st + ".slot");
+			String permission = pets.getString(st + ".permission");
+			Inventory inv = Bukkit.createInventory(null, 9, "§r§r" + pets.getString(st + ".inventory.title"));
+			inv.setItem(8, new ItemBuilder().addItem("§cRetour", null, Material.REDSTONE_TORCH_ON, 0));
+			boolean enchant = pets.getBoolean(st + ".enchant");
+			PetsRegister p = new PetsRegister(type, name, ss, permission, inv, enchant);
+			int slot = 0;
+			for (String s : pets.getConfigurationSection(st + ".inventory").getKeys(false)) {
+				if (s.equalsIgnoreCase("title")) {
+					continue;
+				}
+				EntityType t = null;
+				try {
+					t = EntityType.valueOf(pets.getString(st + ".inventory." + s + ".type"));
+				} catch (Exception e) {
+					Bukkit.getConsoleSender().sendMessage("§7[§ePETS§7] §cCouldn't find entity §e" + pets.getString(st + ".type") + " §c! Select and write in §epets.yml §can entity name in this list :");
+					List<EntityType> list = new ArrayList<>();
+					list.addAll(Arrays.asList(EntityType.values()));
+					int tt = 0;
+					StringBuilder sb = new StringBuilder();
+					sb.append("§7[§ePETS§7] ");
+					for (int i = 0; i < list.size(); i++) {
+						EntityType u = list.get(i);
+						if (tt >= 10) {
+							tt = 0;
+							Bukkit.getConsoleSender().sendMessage(sb.toString());
+							sb = new StringBuilder();
+							sb.append("§7[§ePETS§7] ");
+						} else {
+							tt++;
+						}
+						if (i != list.size() -1) {
+							sb.append(u.toString() + "§c, §7");
+						} else {
+							sb.append(u.toString());
+							Bukkit.getConsoleSender().sendMessage(sb.toString());
+						}
+					}
+					list.clear();
+					continue;
+				}
+				String n = pets.getString(st + ".inventory." + s + ".name");
+				String c = pets.getString(st + ".inventory." + s + ".color");
+				DyeColor color = null;
+				if (c != null) {
+					try {
+						color = DyeColor.valueOf(c);
+					} catch (Exception e) {
+						Bukkit.getConsoleSender().sendMessage("§7[§ePETS§7] §cCouldn't find color §e" + c + " §c! Select and write in §epets.yml §cyour color in this list :");
+						List<DyeColor> list = new ArrayList<>();
+						list.addAll(Arrays.asList(DyeColor.values()));
+						int tt = 0;
+						StringBuilder sb = new StringBuilder();
+						sb.append("§7[§ePETS§7] ");
+						for (int i = 0; i < list.size(); i++) {
+							DyeColor u = list.get(i);
+							if (tt >= 10) {
+								tt = 0;
+								Bukkit.getConsoleSender().sendMessage(sb.toString());
+								sb = new StringBuilder();
+								sb.append("§7[§ePETS§7] ");
+							} else {
+								tt++;
+							}
+							if (i != list.size() -1) {
+								sb.append(u.toString() + "§c, §7");
+							} else {
+								sb.append(u.toString());
+								Bukkit.getConsoleSender().sendMessage(sb.toString());
+							}
+						}
+						list.clear();
+						continue;
+					}
+				}
+				String cattype = pets.getString(st + ".inventory." + s + ".cattype");
+				Type ct = null;
+				if (cattype != null) {
+					try {
+						ct = Type.valueOf(cattype);
+					} catch (Exception e) {
+						Bukkit.getConsoleSender().sendMessage("§7[§ePETS§7] §cCouldn't find the type of cat §e" + cattype + " §c! Select and write in §epets.yml §ca valid type in this list :");
+						List<Type> list = new ArrayList<>();
+						list.addAll(Arrays.asList(Type.values()));
+						int tt = 0;
+						StringBuilder sb = new StringBuilder();
+						sb.append("§7[§ePETS§7] ");
+						for (int i = 0; i < list.size(); i++) {
+							Type u = list.get(i);
+							if (tt >= 10) {
+								tt = 0;
+								Bukkit.getConsoleSender().sendMessage(sb.toString());
+								sb = new StringBuilder();
+								sb.append("§7[§ePETS§7] ");
+							} else {
+								tt++;
+							}
+							if (i != list.size() -1) {
+								sb.append(u.toString() + "§c, §7");
+							} else {
+								sb.append(u.toString());
+								Bukkit.getConsoleSender().sendMessage(sb.toString());
+							}
+						}
+						list.clear();
+						continue;
+					}
+				}
+				String reset = pets.getString(st + ".inventory." + s + ".reset");
+				boolean carrot = pets.getBoolean(st + ".inventory." + s + ".carrot");
+				boolean villager = pets.getBoolean(st + ".inventory." + s + ".villager");
+				int id = pets.getInt(st + ".inventory." + s + ".id");
+				boolean follow = pets.getBoolean(st + ".inventory." + s + ".canfollow");
+				boolean attack = pets.getBoolean(st + ".inventory." + s + ".canattack");
+				p.getContents().add(new CraftPet(id, t, n, follow, attack, color, ct, carrot, villager, reset));
+				inv.setItem(slot, new ItemBuilder().addItem(n, null, Material.MONSTER_EGG, t.getTypeId()));
+				slot++;
+			}
+		}

@@ -1,0 +1,13 @@
+class Rare
+!!!317106.java!!!	getAttackCount() : int
+		return 0;
+!!!317234.java!!!	getAwaitEnable() : int
+		return 0;
+!!!317362.java!!!	getAwaitDisable() : int
+		return 0;
+!!!317490.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.RARE;
+!!!317618.java!!!	Enable(inout info : SheepInfo) : void
+		
+!!!317746.java!!!	Attack(inout info : SheepInfo) : void
+		

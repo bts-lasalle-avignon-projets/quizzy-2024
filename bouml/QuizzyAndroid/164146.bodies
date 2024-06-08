@@ -1,0 +1,36 @@
+class CustomSwitchPreferenceBinding
+!!!272434.java!!!	CustomSwitchPreferenceBinding(inout rootView : LinearLayout, inout switchWidget : Switch, inout title : TextView)
+    this.rootView = rootView;
+    this.switchWidget = switchWidget;
+    this.title = title;
+!!!272562.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!272690.java!!!	inflate(inout inflater : LayoutInflater) : CustomSwitchPreferenceBinding
+    return inflate(inflater, null, false);
+!!!272818.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : CustomSwitchPreferenceBinding
+    View root = inflater.inflate(R.layout.custom_switch_preference, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!272946.java!!!	bind(inout rootView : View) : CustomSwitchPreferenceBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = android.R.id.switch_widget;
+      Switch switchWidget = ViewBindings.findChildViewById(rootView, id);
+      if (switchWidget == null) {
+        break missingId;
+      }
+
+      id = android.R.id.title;
+      TextView title = ViewBindings.findChildViewById(rootView, id);
+      if (title == null) {
+        break missingId;
+      }
+
+      return new CustomSwitchPreferenceBinding((LinearLayout) rootView, switchWidget, title);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

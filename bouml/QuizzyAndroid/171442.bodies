@@ -1,0 +1,19 @@
+class Particle
+!!!314418.java!!!	Particle(inout particle : EnumParticle)
+		this.particle = particle;
+!!!314546.java!!!	getAttackCount() : int
+		return 30;
+!!!314674.java!!!	getAwaitEnable() : int
+		return 0;
+!!!314802.java!!!	getAwaitDisable() : int
+		return 0;
+!!!314930.java!!!	getType() : PowerSheep::PowerType
+		return PowerType.PARTICLE;
+!!!315058.java!!!	Enable(inout info : SheepInfo) : void
+		Cycles.DefaultCycle(info, this);
+!!!315186.java!!!	Attack(inout info : SheepInfo) : void
+		Location loc = info.getSheep().getLocation().clone().add(0, 1, 0);
+		PacketPlayOutWorldParticles p = new PacketPlayOutWorldParticles(particle, true, (float) loc.getX(), (float) loc.getY(), (float) loc.clone().getZ(), 0, 0, 0, 0, 1);
+		for (Player pll : info.getGame().getPlayers()) {
+			((CraftPlayer) pll).getHandle().playerConnection.sendPacket(p);
+		}

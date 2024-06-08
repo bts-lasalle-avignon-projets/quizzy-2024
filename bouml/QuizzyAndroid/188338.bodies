@@ -1,0 +1,161 @@
+class CraftPet
+!!!437938.java!!!	init() : void
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				for (Pet pet : following.keySet()) {
+					Player target = following.get(pet);
+					pet.move(target.getLocation());
+				}
+				for (Pet pet : attacking.keySet()) {
+					Player target = attacking.get(pet);
+					attackNear(pet, target);
+				}
+			}
+		}.runTaskTimer(LifePets.getInstance(), 20, 20);
+!!!438066.java!!!	attackNear(inout pet : Pet, inout enemy : Player) : void
+		if (enemy == null) {
+			Player nearestPlayer = null;
+			double nearDistance = Double.MAX_VALUE;
+			for (Entity ent : ((CraftPet)pet).getWorld().getNearbyEntities(((CraftPet)pet).getLocation(), 15, 15, 15)) {
+				if (ent instanceof Player && ent.getLocation().distance(pet.getLocation()) < nearDistance) {
+					nearestPlayer = (Player) ent;
+					nearDistance = ent.getLocation().distance(pet.getLocation());
+				}
+			}
+			if (nearestPlayer != null) {
+				attackNear(pet, nearestPlayer);
+			}
+		} else if (pet.getWorld().equals(enemy.getWorld()) && pet.getLocation().distance(enemy.getLocation()) < 2) {
+			Vector v = enemy.getLocation().subtract(pet.getLocation()).toVector().multiply(1).setY(0.75).normalize();
+			enemy.setVelocity(v);
+		}
+!!!438194.java!!!	CraftPet(inout owner : Player, inout type : EntityType, in defaultName : String, in name : String, inout movementType : MovementType)
+		this(owner, type, defaultName, name, movementType, craftID++);
+!!!438322.java!!!	CraftPet(inout owner : Player, inout type : EntityType, in defaultName : String, in name : String, inout movementType : MovementType, in id : int)
+		this.owner = owner;
+		this.type =  type;
+		this.defaultName = owner != null ? defaultName.replace("%player%", owner.getName()) : defaultName;
+		this.name =  name;
+		this.movementType =  movementType;
+		this.id = id;
+!!!438450.java!!!	getType() : EntityType
+		return type;
+!!!438578.java!!!	getPet() : Pet
+		return pet;
+!!!438706.java!!!	setPet(inout pet : Pet) : void
+		this.pet = pet;
+!!!438834.java!!!	spawn() : void
+		getPet().spawn(owner.getLocation());
+!!!438962.java!!!	getLocation() : Location
+		return entity != null ? entity.getLocation() : null;
+!!!439090.java!!!	getWorld() : World
+		Location loc = getLocation();
+		return loc != null ? loc.getWorld() : null;
+!!!439218.java!!!	getOwner() : Player
+		return owner;
+!!!439346.java!!!	getName() : String
+		return name != null ? name : defaultName;
+!!!439474.java!!!	getDefaultName() : String
+		return defaultName;
+!!!439602.java!!!	setCustomName(in name : String) : void
+		this.name = name;
+		if (isAlive()) {
+			entity.setCustomName(name);
+		}
+!!!439730.java!!!	hasCustomName() : boolean
+		return entity != null && entity.getCustomName() != null && !entity.getCustomName().equals(defaultName);
+!!!439858.java!!!	isAlive() : boolean
+		return entity != null && !entity.isDead();
+!!!439986.java!!!	attack(inout p : Player) : boolean
+		stopAttack();
+		if (!isAlive() || p == null) {
+			return false;
+		}
+		attacking.put(getPet(), p);
+		setFollow(p);
+		return true;
+!!!440114.java!!!	attack() : boolean
+		Player nearestPlayer = null;
+		double distance = Double.MAX_VALUE;
+		for (Entity ent : getWorld().getNearbyEntities(getLocation(), 15, 15, 15)) {
+			if (!(ent instanceof Player)) {
+				continue;
+			}
+			if (ent.getLocation().distance(getLocation()) > distance) {
+				distance = ent.getLocation().distance(getLocation());
+				nearestPlayer = (Player) ent;
+			}
+		}
+		return attack(nearestPlayer);
+!!!440242.java!!!	isAttack() : boolean
+		return attacking.containsKey(getPet());
+!!!440370.java!!!	stopAttack() : void
+		if (isAttack()) {
+			attacking.remove(getPet());
+		}
+!!!440498.java!!!	setFollow(inout p : Player) : void
+		stopFollow();
+		following.put(getPet(), p);
+!!!440626.java!!!	isFollow() : boolean
+		return following.containsKey(getPet());
+!!!440754.java!!!	stopFollow() : void
+		if (isFollow()) {
+			following.remove(getPet());
+		}
+!!!440882.java!!!	getMovementType() : MovementType
+		return movementType;
+!!!441010.java!!!	move(inout entity : Entity) : void
+		switch (((CraftPet)pet).movementType) {
+		case BUKKIT_PATH:
+			move(entity.getLocation());
+			break;
+		case MONSTER_TARGET:
+			if (pet.getEntity() instanceof Creature) {
+				((Creature)pet.getEntity()).setTarget((LivingEntity) entity);
+			}
+			break;
+		case VECTOR:
+			move(entity.getLocation());
+			break;
+		default:
+			break;
+		}
+!!!441138.java!!!	move(inout loc : Location) : void
+		switch (((CraftPet)pet).movementType) {
+		case BUKKIT_PATH:
+			((EntityInsentient) ((CraftEntity) ((LivingEntity) getPet().getEntity())).getHandle()).getNavigation().a(loc.getX(), loc.getY(),loc.getZ(), 1.75);
+			break;
+		case VECTOR:
+			Vector v = getLocation().subtract(loc).toVector().normalize();
+			getPet().getEntity().setVelocity(v.multiply(-1.5).setY(0.25));
+			break;
+		default:
+			break;
+		}
+!!!441266.java!!!	dispawn() : void
+		if (isAlive()) {
+			entity.remove();
+		}
+!!!441394.java!!!	spawn(inout loc : Location) : void
+		this.entity = loc.getWorld().spawnEntity(loc, getType());
+		this.entity.setCustomNameVisible(true);
+		this.entity.setCustomName(this.name != null ? name : getDefaultName());
+		if (this.entity instanceof Ageable) {
+			Ageable a = (Ageable) this.entity;
+			a.setAgeLock(true);
+			a.setBaby();
+			a.setBreed(false);
+		}
+		if (this.entity instanceof LivingEntity) {
+			LivingEntity l = (LivingEntity) this.entity;
+			l.setCanPickupItems(false);
+		}
+		if (this.entity instanceof Zombie) {
+			Zombie z = (Zombie) this.entity;
+			z.setVillager(false);
+			z.setBaby(true);
+		}
+!!!441522.java!!!	getID() : int
+		return id;

@@ -1,0 +1,21 @@
+class InventoryClick
+!!!390322.java!!!	onClick(inout e : InventoryClickEvent) : void
+		Player p = (Player) e.getWhoClicked();
+		if (e.getClickedInventory() == null || e.getClickedInventory().getTitle() == null || !e.getClickedInventory().getTitle().equalsIgnoreCase(LangCommand.inventory.getTitle())) {
+			return;
+		}
+		e.setCancelled(true);
+		if (e.getCurrentItem() == null || e.getCurrentItem().getType() == Material.AIR || !e.getCurrentItem().hasItemMeta() || !e.getCurrentItem().getItemMeta().hasDisplayName() || (!LangCommand.itemByCode.containsKey(e.getCurrentItem().getItemMeta().getDisplayName()) && e.getCurrentItem().getType() != Material.BARRIER)) {
+			return;
+		}
+		String code = e.getCurrentItem().getType() == Material.BARRIER && p.hasPermission("life.admin") ? "ADMIN" : LangCommand.itemByCode.get(e.getCurrentItem().getItemMeta().getDisplayName());
+		if (Join.playerLang.containsKey(p)) {
+			Join.playerLang.replace(p, code);
+		} else {
+			Join.playerLang.put(p, code);
+		}
+		try {
+			methods.setString(p.getUniqueId().toString(), "CODE", code);
+		} catch (Exception e2) {
+		}
+		p.closeInventory();

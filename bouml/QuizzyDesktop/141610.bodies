@@ -1,4 +1,20 @@
 class CommunicationBluetooth
+!!!128002.cpp!!!	separerTrame(in trameRecue : QString) : void
+
+    trameRecue.replace("\\n", "\n");
+    QStringList trames = trameRecue.split("\n");
+    for(int i = 0; i < trames.size(); ++i)
+    {
+        QString trame = trames[i];
+        if(!trame.isEmpty())
+        {
+            trame.append("\n");
+            if(verifierTrame(trame))
+            {
+                decoderTrame(trame);
+            }
+        }
+    }
 !!!164010.cpp!!!	verifierTrame(in trame : QString) : bool
 
     QRegExp regexTrame("^\\$(.*;.*|[^;]*)\n$");
@@ -189,6 +205,7 @@ class CommunicationBluetooth
 
     if(!socketTablette)
         return;
+    connecte = true;
     connect(socketTablette,
             SIGNAL(disconnected()),
             this,
@@ -198,8 +215,12 @@ class CommunicationBluetooth
     emit tabletteConnectee();
 !!!165418.cpp!!!	deconnecterTablette() : void
 
-    qDebug() << Q_FUNC_INFO;
-    emit tabletteDeconnectee();
+    if(connecte)
+    {
+        qDebug() << Q_FUNC_INFO;
+        connecte = false;
+        emit tabletteDeconnectee();
+    }
 !!!165546.cpp!!!	recevoirTrame() : void
 
     QByteArray donneesRecues;
@@ -208,7 +229,4 @@ class CommunicationBluetooth
     QString trame = QString(donneesRecues);
     qDebug() << Q_FUNC_INFO << "trame" << trame;
 
-    if(verifierTrame(trame))
-    {
-        decoderTrame(trame);
-    }
+    separerTrame(trame);

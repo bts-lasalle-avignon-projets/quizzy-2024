@@ -1,0 +1,262 @@
+class GestionnaireProtocoles
+!!!196530.java!!!	GestionnaireProtocoles(inout session : Session)
+        this.session = session;
+!!!196658.java!!!	envoyerQuiz() : void
+        for (Question question : session.getQuestions()) {
+            EnregistrerQuestion enregistrerQuestion = (EnregistrerQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_QUESTION);
+            enregistrerQuestion.genererTrame(question);
+            enregistrerQuestion.envoyer(session.getEcrans());
+        }
+!!!196786.java!!!	activerBumpers() : void
+        for (Participant participant : session.getParticipants())
+            activerBumpers(participant);
+!!!196914.java!!!	activerBumpers(inout participant : Participant) : void
+        Question question = session.getQuestionActuelle();
+        EnregistrerTempsQuestion indicationQuestion = (EnregistrerTempsQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_TEMPS_QUESTION);
+        indicationQuestion.genererTrame(session.getNumeroQuestion(), question.getTempsReponse());
+        indicationQuestion.envoyer(participant);
+
+        ActiverBumpers activerBuzzers = (ActiverBumpers) Protocole.getProtocole(TypeProtocole.ACTIVER_BUMPERS);
+        activerBuzzers.genererTrame(session.getNumeroQuestion());
+        activerBuzzers.envoyer(participant);
+!!!197042.java!!!	desactiverBumpers(inout participant : Participant) : void
+        DesactiverBumpers desactiverBuzzers = (DesactiverBumpers) Protocole.getProtocole(TypeProtocole.DESACTIVER_BUMPERS);
+        desactiverBuzzers.genererTrame(session.getNumeroQuestion());
+        desactiverBuzzers.envoyer(participant);
+!!!197170.java!!!	desactiverBumpers() : void
+        for (Participant participant : session.getParticipants())
+            desactiverBumpers(participant);
+!!!197298.java!!!	indiquerLancement(inout ecran : Ecran) : void
+        LancementSession lancement = (LancementSession) Protocole.getProtocole(TypeProtocole.LANCEMENT_SESSION);
+        lancement.genererTrame();
+        lancement.envoyer(ecran);
+!!!197426.java!!!	indiquerLancement() : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerLancement(ecran);
+!!!197554.java!!!	ajouterParticipant(inout ecran : Ecran, inout participant : Participant) : void
+        EnregistrerParticipant inscriptionParticipant = (EnregistrerParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_PARTICIPANT);
+        inscriptionParticipant.genererTrame(participant.getNom() /*TODO METTRE PID*/, participant.getNom());
+        inscriptionParticipant.envoyer(ecran);
+!!!197682.java!!!	ajouterParticipant(inout participant : Participant) : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            if (ecran.getPeripherique().estConnecte())
+                ajouterParticipant(ecran, participant);
+!!!197810.java!!!	preparerRelancement() : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            preparerRelancement(ecran);
+!!!197938.java!!!	preparerRelancement(inout ecran : Ecran) : void
+        indiquerLancement(ecran);
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() != null) {
+                ajouterParticipant(ecran, participant);
+            }
+        }
+!!!198066.java!!!	finSession() : void
+        for (Ecran ecran : session.getEcrans())
+            finSession(ecran);
+!!!198194.java!!!	finSession(inout ecran : Ecran) : void
+        FinSession finQuiz = (FinSession) Protocole.getProtocole(TypeProtocole.FIN_SESSION);
+        finQuiz.genererTrame();
+        finQuiz.envoyer(ecran);
+!!!198322.java!!!	questionSuivante() : void
+        for (Ecran ecran : session.getEcrans())
+            questionSuivante(ecran);
+!!!198450.java!!!	questionSuivante(inout ecran : Ecran) : void
+        AfficherQuestionSuivante questionSuivante = (AfficherQuestionSuivante) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
+        questionSuivante.genererTrame();
+        questionSuivante.envoyer(ecran);
+!!!198578.java!!!	questionPrecedente() : void
+        for (Ecran ecran : session.getEcrans())
+            questionPrecedente(ecran);
+!!!198706.java!!!	questionPrecedente(inout ecran : Ecran) : void
+        AfficherQuestionPrecedente questionPrecedente = (AfficherQuestionPrecedente) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
+        questionPrecedente.genererTrame();
+        questionPrecedente.envoyer(ecran);
+!!!198834.java!!!	demarrerChrono() : void
+        for (Ecran ecran : session.getEcrans())
+            demarrerChrono(ecran);
+!!!198962.java!!!	demarrerChrono(inout ecran : Ecran) : void
+        DemarrerChrono lancementQuestion = (DemarrerChrono) Protocole.getProtocole(TypeProtocole.DEMARRER_CHRONO);
+        lancementQuestion.genererTrame();
+        lancementQuestion.envoyer(ecran);
+!!!199090.java!!!	indiquerReponse(inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerReponse(ecran, participant, receptionReponse);
+!!!199218.java!!!	indiquerReponse(inout ecran : Ecran, inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        EnregistrerSelectionParticipant indicationReponseParticipant = (EnregistrerSelectionParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_SELECTION_PARTICIPANT);
+        indicationReponseParticipant.genererTrame(participant.getNom(), receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
+        indicationReponseParticipant.envoyer(ecran);
+!!!280242.java!!!	GestionnaireProtocoles(inout session : Session)
+        this.session = session;
+!!!280370.java!!!	envoyerQuiz() : void
+        for (Question question : session.getQuestions()) {
+            EnregistrerQuestion enregistrerQuestion = (EnregistrerQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_QUESTION);
+            enregistrerQuestion.genererTrame(question);
+            enregistrerQuestion.envoyer(session.getEcrans());
+        }
+!!!280498.java!!!	activerBumpers() : void
+        for (Participant participant : session.getParticipants())
+            activerBumpers(participant);
+!!!280626.java!!!	activerBumpers(inout participant : Participant) : void
+        Question question = session.getQuestionActuelle();
+        EnregistrerTempsQuestion indicationQuestion = (EnregistrerTempsQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_TEMPS_QUESTION);
+        indicationQuestion.genererTrame(session.getNumeroQuestion(), question.getTempsReponse());
+        indicationQuestion.envoyer(participant);
+
+        ActiverBumpers activerBuzzers = (ActiverBumpers) Protocole.getProtocole(TypeProtocole.ACTIVER_BUMPERS);
+        activerBuzzers.genererTrame(session.getNumeroQuestion());
+        activerBuzzers.envoyer(participant);
+!!!280754.java!!!	desactiverBumpers(inout participant : Participant) : void
+        DesactiverBumpers desactiverBuzzers = (DesactiverBumpers) Protocole.getProtocole(TypeProtocole.DESACTIVER_BUMPERS);
+        desactiverBuzzers.genererTrame(session.getNumeroQuestion());
+        desactiverBuzzers.envoyer(participant);
+!!!280882.java!!!	desactiverBumpers() : void
+        for (Participant participant : session.getParticipants())
+            desactiverBumpers(participant);
+!!!281010.java!!!	indiquerLancement(inout ecran : Ecran) : void
+        LancementSession lancement = (LancementSession) Protocole.getProtocole(TypeProtocole.LANCEMENT_SESSION);
+        lancement.genererTrame();
+        lancement.envoyer(ecran);
+!!!281138.java!!!	indiquerLancement() : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerLancement(ecran);
+!!!281266.java!!!	ajouterParticipant(inout ecran : Ecran, inout participant : Participant) : void
+        EnregistrerParticipant inscriptionParticipant = (EnregistrerParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_PARTICIPANT);
+        inscriptionParticipant.genererTrame(participant.getNom() /*TODO METTRE PID*/, participant.getNom());
+        inscriptionParticipant.envoyer(ecran);
+!!!281394.java!!!	ajouterParticipant(inout participant : Participant) : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            if (ecran.getPeripherique().estConnecte())
+                ajouterParticipant(ecran, participant);
+!!!281522.java!!!	preparerRelancement() : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            preparerRelancement(ecran);
+!!!281650.java!!!	preparerRelancement(inout ecran : Ecran) : void
+        indiquerLancement(ecran);
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() != null) {
+                ajouterParticipant(ecran, participant);
+            }
+        }
+!!!281778.java!!!	finSession() : void
+        for (Ecran ecran : session.getEcrans())
+            finSession(ecran);
+!!!281906.java!!!	finSession(inout ecran : Ecran) : void
+        FinSession finQuiz = (FinSession) Protocole.getProtocole(TypeProtocole.FIN_SESSION);
+        finQuiz.genererTrame();
+        finQuiz.envoyer(ecran);
+!!!282034.java!!!	questionSuivante() : void
+        for (Ecran ecran : session.getEcrans())
+            questionSuivante(ecran);
+!!!282162.java!!!	questionSuivante(inout ecran : Ecran) : void
+        AfficherQuestionSuivante questionSuivante = (AfficherQuestionSuivante) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
+        questionSuivante.genererTrame();
+        questionSuivante.envoyer(ecran);
+!!!282290.java!!!	questionPrecedente() : void
+        for (Ecran ecran : session.getEcrans())
+            questionPrecedente(ecran);
+!!!282418.java!!!	questionPrecedente(inout ecran : Ecran) : void
+        AfficherQuestionPrecedente questionPrecedente = (AfficherQuestionPrecedente) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
+        questionPrecedente.genererTrame();
+        questionPrecedente.envoyer(ecran);
+!!!282546.java!!!	demarrerChrono() : void
+        for (Ecran ecran : session.getEcrans())
+            demarrerChrono(ecran);
+!!!282674.java!!!	demarrerChrono(inout ecran : Ecran) : void
+        DemarrerChrono lancementQuestion = (DemarrerChrono) Protocole.getProtocole(TypeProtocole.DEMARRER_CHRONO);
+        lancementQuestion.genererTrame();
+        lancementQuestion.envoyer(ecran);
+!!!282802.java!!!	indiquerReponse(inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerReponse(ecran, participant, receptionReponse);
+!!!282930.java!!!	indiquerReponse(inout ecran : Ecran, inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        EnregistrerSelectionParticipant indicationReponseParticipant = (EnregistrerSelectionParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_SELECTION_PARTICIPANT);
+        indicationReponseParticipant.genererTrame(participant.getNom(), receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
+        indicationReponseParticipant.envoyer(ecran);
+!!!521650.java!!!	GestionnaireProtocoles(inout session : Session)
+        this.session = session;
+!!!521778.java!!!	envoyerQuiz() : void
+        for (Question question : session.getQuestions()) {
+            EnregistrerQuestion enregistrerQuestion = (EnregistrerQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_QUESTION);
+            enregistrerQuestion.genererTrame(question);
+            enregistrerQuestion.envoyer(session.getEcrans());
+        }
+!!!521906.java!!!	activerBumpers() : void
+        for (Participant participant : session.getParticipants())
+            activerBumpers(participant);
+!!!522034.java!!!	activerBumpers(inout participant : Participant) : void
+        Question question = session.getQuestionActuelle();
+        EnregistrerTempsQuestion indicationQuestion = (EnregistrerTempsQuestion) Protocole.getProtocole(TypeProtocole.ENREGISTRER_TEMPS_QUESTION);
+        indicationQuestion.genererTrame(session.getNumeroQuestion(), question.getTempsReponse());
+        indicationQuestion.envoyer(participant);
+
+        ActiverBumpers activerBuzzers = (ActiverBumpers) Protocole.getProtocole(TypeProtocole.ACTIVER_BUMPERS);
+        activerBuzzers.genererTrame(session.getNumeroQuestion());
+        activerBuzzers.envoyer(participant);
+!!!522162.java!!!	desactiverBumpers(inout participant : Participant) : void
+        DesactiverBumpers desactiverBuzzers = (DesactiverBumpers) Protocole.getProtocole(TypeProtocole.DESACTIVER_BUMPERS);
+        desactiverBuzzers.genererTrame(session.getNumeroQuestion());
+        desactiverBuzzers.envoyer(participant);
+!!!522290.java!!!	desactiverBumpers() : void
+        for (Participant participant : session.getParticipants())
+            desactiverBumpers(participant);
+!!!522418.java!!!	indiquerLancement(inout ecran : Ecran) : void
+        LancementSession lancement = (LancementSession) Protocole.getProtocole(TypeProtocole.LANCEMENT_SESSION);
+        lancement.genererTrame();
+        lancement.envoyer(ecran);
+!!!522546.java!!!	indiquerLancement() : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerLancement(ecran);
+!!!522674.java!!!	ajouterParticipant(inout ecran : Ecran, inout participant : Participant) : void
+        EnregistrerParticipant inscriptionParticipant = (EnregistrerParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_PARTICIPANT);
+        inscriptionParticipant.genererTrame(participant.getNom() /*TODO METTRE PID*/, participant.getNom());
+        inscriptionParticipant.envoyer(ecran);
+!!!522802.java!!!	ajouterParticipant(inout participant : Participant) : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            if (ecran.getPeripherique().estConnecte())
+                ajouterParticipant(ecran, participant);
+!!!522930.java!!!	preparerRelancement() : void
+        for (Ecran ecran : Parametres.getParametres().getEcrans())
+            preparerRelancement(ecran);
+!!!523058.java!!!	preparerRelancement(inout ecran : Ecran) : void
+        indiquerLancement(ecran);
+        for (Participant participant : Parametres.getParametres().getParticipants()) {
+            if (participant.getPeripherique() != null) {
+                ajouterParticipant(ecran, participant);
+            }
+        }
+!!!523186.java!!!	finSession() : void
+        for (Ecran ecran : session.getEcrans())
+            finSession(ecran);
+!!!523314.java!!!	finSession(inout ecran : Ecran) : void
+        FinSession finQuiz = (FinSession) Protocole.getProtocole(TypeProtocole.FIN_SESSION);
+        finQuiz.genererTrame();
+        finQuiz.envoyer(ecran);
+!!!523442.java!!!	questionSuivante() : void
+        for (Ecran ecran : session.getEcrans())
+            questionSuivante(ecran);
+!!!523570.java!!!	questionSuivante(inout ecran : Ecran) : void
+        AfficherQuestionSuivante questionSuivante = (AfficherQuestionSuivante) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
+        questionSuivante.genererTrame();
+        questionSuivante.envoyer(ecran);
+!!!523698.java!!!	questionPrecedente() : void
+        for (Ecran ecran : session.getEcrans())
+            questionPrecedente(ecran);
+!!!523826.java!!!	questionPrecedente(inout ecran : Ecran) : void
+        AfficherQuestionPrecedente questionPrecedente = (AfficherQuestionPrecedente) Protocole.getProtocole(TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
+        questionPrecedente.genererTrame();
+        questionPrecedente.envoyer(ecran);
+!!!523954.java!!!	demarrerChrono() : void
+        for (Ecran ecran : session.getEcrans())
+            demarrerChrono(ecran);
+!!!524082.java!!!	demarrerChrono(inout ecran : Ecran) : void
+        DemarrerChrono lancementQuestion = (DemarrerChrono) Protocole.getProtocole(TypeProtocole.DEMARRER_CHRONO);
+        lancementQuestion.genererTrame();
+        lancementQuestion.envoyer(ecran);
+!!!524210.java!!!	indiquerReponse(inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        for (Ecran ecran : session.getEcrans())
+            indiquerReponse(ecran, participant, receptionReponse);
+!!!524338.java!!!	indiquerReponse(inout ecran : Ecran, inout participant : Participant, inout receptionReponse : ReceptionReponse) : void
+        EnregistrerSelectionParticipant indicationReponseParticipant = (EnregistrerSelectionParticipant) Protocole.getProtocole(TypeProtocole.ENREGISTRER_SELECTION_PARTICIPANT);
+        indicationReponseParticipant.genererTrame(participant.getNom(), receptionReponse.getNumeroReponse(), receptionReponse.getTempsReponse());
+        indicationReponseParticipant.envoyer(ecran);

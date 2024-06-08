@@ -1,0 +1,65 @@
+class PopupNonConfigurerBinding
+!!!278194.java!!!	PopupNonConfigurerBinding(inout rootView : LinearLayout, inout btnAnnuler : Button, inout btnConfigurer : Button, inout btnDeconnecter : Button, inout imageView : ImageView, inout textView3 : TextView, inout titrePopup : TextView)
+    this.rootView = rootView;
+    this.btnAnnuler = btnAnnuler;
+    this.btnConfigurer = btnConfigurer;
+    this.btnDeconnecter = btnDeconnecter;
+    this.imageView = imageView;
+    this.textView3 = textView3;
+    this.titrePopup = titrePopup;
+!!!278322.java!!!	getRoot() : LinearLayout
+    return rootView;
+!!!278450.java!!!	inflate(inout inflater : LayoutInflater) : PopupNonConfigurerBinding
+    return inflate(inflater, null, false);
+!!!278578.java!!!	inflate(inout inflater : LayoutInflater, inout parent : ViewGroup, inout attachToParent : boolean) : PopupNonConfigurerBinding
+    View root = inflater.inflate(R.layout.popup_non_configurer, parent, false);
+    if (attachToParent) {
+      parent.addView(root);
+    }
+    return bind(root);
+!!!278706.java!!!	bind(inout rootView : View) : PopupNonConfigurerBinding
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.btn_annuler;
+      Button btnAnnuler = ViewBindings.findChildViewById(rootView, id);
+      if (btnAnnuler == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_configurer;
+      Button btnConfigurer = ViewBindings.findChildViewById(rootView, id);
+      if (btnConfigurer == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_deconnecter;
+      Button btnDeconnecter = ViewBindings.findChildViewById(rootView, id);
+      if (btnDeconnecter == null) {
+        break missingId;
+      }
+
+      id = R.id.imageView;
+      ImageView imageView = ViewBindings.findChildViewById(rootView, id);
+      if (imageView == null) {
+        break missingId;
+      }
+
+      id = R.id.textView3;
+      TextView textView3 = ViewBindings.findChildViewById(rootView, id);
+      if (textView3 == null) {
+        break missingId;
+      }
+
+      id = R.id.titre_popup;
+      TextView titrePopup = ViewBindings.findChildViewById(rootView, id);
+      if (titrePopup == null) {
+        break missingId;
+      }
+
+      return new PopupNonConfigurerBinding((LinearLayout) rootView, btnAnnuler, btnConfigurer,
+          btnDeconnecter, imageView, textView3, titrePopup);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));

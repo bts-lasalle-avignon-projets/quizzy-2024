@@ -1,0 +1,333 @@
+class Quiz
+!!!261042.java!!!	Quiz()
+        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run()
+                        {
+                            FragmentQuiz.getVueActive().mettreAjourBarreDeProgression();
+                        }
+                    });
+                    Question questionEnCours = getQuestionEnCours();
+                    if(questionEnCours != null && !estTermine() &&
+                       getTempsQuestionEnCours() >= questionEnCours.getTemps() && !estTempsMort() &&
+                       !estEnPause())
+                    {
+                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                afficherReponse();
+                                FragmentQuiz.getVueActive().mettreAjourDeroulement();
+                            }
+                        });
+                    }
+                    if(estTempsMort() &&
+                       System.currentTimeMillis() - heureDemarrageTempsMort > tempsEntreQuestion)
+                    {
+                        heureDemarrageTempsMort = 0;
+                        FragmentQuiz.getVueActive().getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                envoyerQuestionSuivante();
+                            }
+                        });
+                    }
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, 50, TimeUnit.MILLISECONDS);
+!!!261170.java!!!	getQuizEnCours() : Quiz
+        return quizEnCours;
+!!!261298.java!!!	genererQuiz(in theme : String, in nombreQuestions : int) : void
+        questions.clear();
+        questions.addAll(BaseDeDonnees.getInstance(null).getQuestionnaire(FragmentParametres.getVueActive().getNombreQuestion(), FragmentParametres.getVueActive().getThemeChoisi()));
+!!!261426.java!!!	getThemes() : List<String>
+        return null;
+!!!261554.java!!!	getTheme() : String
+        return theme;
+!!!261682.java!!!	getQuestions() : Question
+        return questions;
+!!!261810.java!!!	demarrer() : void
+        termine = false;
+        ecrans.clear();
+        // Test Ecran
+        ecrans.add(new Ecran(null));
+        // Fin Test Ecran
+
+        for(Participant participant: participants)
+        {
+            participant.setScore(0);
+            ProtocoleInscriptionParticipant inscriptionParticipant =
+              (ProtocoleInscriptionParticipant)Protocole.getProtocole(
+                TypeProtocole.INSCRIPTION_PARTICIPANT);
+            inscriptionParticipant.genererTrame(participant.getPID(), participant.getNom());
+            inscriptionParticipant.envoyer(ecrans);
+        }
+        for(Question question: questions)
+        {
+            ProtocoleEnvoiQuestion envoiQuestion =
+              (ProtocoleEnvoiQuestion)Protocole.getProtocole(TypeProtocole.ENVOI_QUESTION);
+            envoiQuestion.genererTrame(question);
+            envoiQuestion.envoyer(ecrans);
+        }
+
+        ProtocoleLancement lancement =
+          (ProtocoleLancement)Protocole.getProtocole(TypeProtocole.LANCEMENT);
+        lancement.genererTrame();
+        lancement.envoyer(ecrans);
+
+        envoyerQuestionSuivante();
+!!!261938.java!!!	ajouterParticipant(inout participant : Participant) : void
+        participants.add(participant);
+!!!262066.java!!!	arreter() : void
+        ProtocoleFinQuiz finQuiz = (ProtocoleFinQuiz)Protocole.getProtocole(TypeProtocole.FIN_QUIZ);
+        finQuiz.genererTrame();
+        finQuiz.envoyer(ecrans);
+
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        participants.clear();
+        questions.clear();
+        termine        = true;
+        indiceQuestion = 0;
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+!!!262194.java!!!	renitialiserReponses() : void
+        for(Participant participant: participants)
+        {
+            participant.setRepondu(false, 0, 0);
+        }
+!!!262322.java!!!	envoyerQuestionSuivante() : void
+        heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause        = 0;
+        if(indiceQuestion >= questions.size())
+        {
+            arreter();
+            return;
+        }
+        renitialiserReponses();
+
+        ProtocoleAfficherQuestionSuivante afficherQuestionSuivante =
+          (ProtocoleAfficherQuestionSuivante)Protocole.getProtocole(
+            TypeProtocole.AFFICHER_QUESTION_SUIVANTE);
+        afficherQuestionSuivante.genererTrame();
+        afficherQuestionSuivante.envoyer(ecrans);
+
+        envoyerQuestion();
+
+        ProtocoleLancementQuestion lancementQuestion =
+          (ProtocoleLancementQuestion)Protocole.getProtocole(TypeProtocole.DEMARRAGE_QUESTION);
+        lancementQuestion.genererTrame();
+        lancementQuestion.envoyer(ecrans);
+
+        indiceQuestion++;
+        heureDemarrageQuestion = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+!!!262450.java!!!	envoyerQuestionPrecedente() : void
+        heureDemarrageTempsMort = 0;
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+        heureDemarrageQuestion = 0;
+        totalTempsPause        = 0;
+        renitialiserReponses();
+        if(indiceQuestion > 0)
+        {
+            indiceQuestion--;
+        }
+        envoyerQuestion();
+
+        ProtocoleAfficherQuestionPrecedente afficherQuestionPrecedente =
+          (ProtocoleAfficherQuestionPrecedente)Protocole.getProtocole(
+            TypeProtocole.AFFICHER_QUESTION_PRECEDENTE);
+        afficherQuestionPrecedente.genererTrame();
+        afficherQuestionPrecedente.envoyer(ecrans);
+
+        heureDemarrageQuestion = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+!!!262578.java!!!	recupererReponseSaisie(inout peripherique : Peripherique, inout receptionReponse : ProtocoleReceptionReponse) : void
+        Participant participant = getParticipant(peripherique);
+        if(participant == null)
+        {
+            return;
+        }
+        long tempsReponse = receptionReponse.getTempsReponse() + totalTempsPause;
+        participant.setRepondu(true, receptionReponse.getNumeroReponse(), tempsReponse);
+        getQuestionEnCours().ajouterSelection(receptionReponse.getNumeroReponse());
+
+        Log.d(TAG,
+              "Réponse de " + participant.getNom() + " : Réponse N°" +
+                receptionReponse.getNumeroReponse() + " en " + tempsReponse + "ms.");
+
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participant);
+
+        ProtocoleIndicationReponseParticipant indicationReponseParticipant =
+          (ProtocoleIndicationReponseParticipant)Protocole.getProtocole(
+            TypeProtocole.INDICATION_REPONSE_PARTICIPANT);
+        indicationReponseParticipant.genererTrame(participant.getPID(),
+                                                  receptionReponse.getNumeroReponse(),
+                                                  tempsReponse);
+        indicationReponseParticipant.envoyer(ecrans);
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+
+        verifierParticipants();
+!!!262706.java!!!	verifierParticipants() : void
+        if(participants.isEmpty())
+        {
+            return;
+        }
+        for(Participant participant: participants)
+        {
+            if(!participant.estRepondu())
+            {
+                return;
+            }
+        }
+
+        ProtocoleAfficherReponse afficherReponse =
+          (ProtocoleAfficherReponse)Protocole.getProtocole(TypeProtocole.AFFICHER_REPONSE);
+        afficherReponse.genererTrame();
+        afficherReponse.envoyer(ecrans);
+
+        if(!estEnPause())
+        {
+            afficherReponse();
+        }
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+!!!262834.java!!!	getParticipant(inout peripherique : Peripherique) : Participant
+        for(Participant participant: participants)
+        {
+            if(participant.getPeripherique() == peripherique)
+            {
+                return participant;
+            }
+        }
+        return null;
+!!!262962.java!!!	envoyerQuestion() : void
+        ProtocoleIndicationQuestion indicationQuestion =
+          (ProtocoleIndicationQuestion)Protocole.getProtocole(TypeProtocole.INDICATION_QUESTION);
+        indicationQuestion.genererTrame(indiceQuestion + 1,
+                                        questions.get(indiceQuestion).getTemps());
+        indicationQuestion.envoyer(participants);
+
+        ProtocoleActiverBuzzers activerBuzzers =
+          (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+        activerBuzzers.genererTrame(indiceQuestion + 1);
+        activerBuzzers.envoyer(participants);
+!!!263090.java!!!	estTermine() : boolean
+        return termine;
+!!!263218.java!!!	getQuestionEnCours() : Question
+        if(indiceQuestion == 0)
+        {
+            return null;
+        }
+        return questions.get(indiceQuestion - 1);
+!!!263346.java!!!	getHeureDemarrageQuestion() : long
+        return heureDemarrageQuestion;
+!!!263474.java!!!	getTempsQuestionEnCours() : double
+        if(heureDemarrageQuestion == 0)
+        {
+            return -1;
+        }
+        long tempActuelle = System.currentTimeMillis();
+        long difference   = tempActuelle - heureDemarrageQuestion;
+        return (double)difference / 1000.0;
+!!!263602.java!!!	getParticipants() : Participant
+        return participants;
+!!!263730.java!!!	estTempsMort() : boolean
+        return heureDemarrageTempsMort > 0;
+!!!263858.java!!!	getDifferenceTempsMort() : long
+        return System.currentTimeMillis() - heureDemarrageTempsMort;
+!!!263986.java!!!	afficherReponse() : void
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        heureDemarrageTempsMort = System.currentTimeMillis();
+        FragmentQuiz.getVueActive().mettreAjourEtatBoutons();
+!!!264114.java!!!	basculerPause() : void
+        pause = !pause;
+        if(estEnPause())
+        {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+
+            ProtocoleDesactiverBuzzers desactiverBuzzers =
+              (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+            desactiverBuzzers.genererTrame(indiceQuestion);
+            desactiverBuzzers.envoyer(participants);
+        }
+        else
+        {
+            long tempsPause = System.currentTimeMillis() - heureDemarrageTempsPause;
+            totalTempsPause = System.currentTimeMillis() - heureDemarrageQuestion - tempsPause;
+            heureDemarrageQuestion += tempsPause;
+            heureDemarrageTempsPause = 0;
+
+            activerBuzzersParticipantsSansReponse();
+
+            verifierParticipants();
+        }
+!!!264242.java!!!	reinitialiser() : void
+        if(estTempsMort())
+        {
+            return;
+        }
+        for(Participant participant: participants)
+        {
+            participant.setRepondu(false, 0, 0);
+        }
+        getQuestionEnCours().getSelection().clear();
+        heureDemarrageQuestion = System.currentTimeMillis();
+        if(estEnPause())
+        {
+            heureDemarrageTempsPause = System.currentTimeMillis();
+        }
+
+        ProtocoleDesactiverBuzzers desactiverBuzzers =
+          (ProtocoleDesactiverBuzzers)Protocole.getProtocole(TypeProtocole.DESACTIVER_BUZZERS);
+        desactiverBuzzers.genererTrame(indiceQuestion);
+        desactiverBuzzers.envoyer(participants);
+
+        FragmentQuiz.getVueActive().getBarreProgression().setProgress(0);
+        if(!estEnPause())
+        {
+            activerBuzzersParticipantsSansReponse();
+        }
+
+        FragmentQuiz.getVueActive().mettreAjourDeroulement();
+!!!264370.java!!!	activerBuzzersParticipantsSansReponse() : void
+        List<Participant> listeParticipants = new ArrayList<>();
+        for(Participant participant: participants)
+        {
+            if(!participant.estRepondu())
+            {
+                listeParticipants.add(participant);
+            }
+        }
+        ProtocoleActiverBuzzers activerBuzzers =
+          (ProtocoleActiverBuzzers)Protocole.getProtocole(TypeProtocole.ACTIVER_BUZZERS);
+        activerBuzzers.genererTrame(indiceQuestion);
+        activerBuzzers.envoyer(listeParticipants);
+!!!264498.java!!!	estEnPause() : boolean
+        return pause;
+!!!264626.java!!!	ajouterEcran(inout ecran : Ecran) : void
+        this.ecrans.add(ecran);

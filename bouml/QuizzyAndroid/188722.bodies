@@ -1,0 +1,20 @@
+class Cat
+!!!445234.java!!!	Cat(inout owner : Player, inout catType : Type, in id : int)
+		super(owner, EntityType.OCELOT, "Chat de %player%", null, MovementType.BUKKIT_PATH, id);
+		setPet(this);
+		this.catType = catType;
+!!!445362.java!!!	Cat(inout owner : Player, inout catType : Type)
+		super(owner, EntityType.OCELOT, "Chat de %player%", null, MovementType.BUKKIT_PATH);
+		setPet(this);
+		this.catType = catType;
+!!!445490.java!!!	getEntity() : org.bukkit.entity.Ocelot
+		return (org.bukkit.entity.Ocelot) entity;
+!!!445618.java!!!	getCatType() : Type
+		return catType;
+!!!445746.java!!!	spawn() : void
+		super.spawn();
+		if (catType != null) {
+			getEntity().setCatType(catType);
+		}
+!!!445874.java!!!	clone(inout player : Player) : Cat
+		return new Cat(player, catType, getID());

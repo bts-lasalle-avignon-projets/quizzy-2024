@@ -1,0 +1,206 @@
+class FragmentQuiz
+!!!247602.java!!!	getVueActive() : FragmentQuiz
+        return vueActive;
+!!!247730.java!!!	onCreateView(inout inflater : LayoutInflater, inout container : ViewGroup, inout savedInstanceState : Bundle) : View
+        ModeleQuiz homeViewModel = new ViewModelProvider(this).get(ModeleQuiz.class);
+
+        binding   = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        vueActive = this;
+
+        btnLancerQuiz      = root.findViewById(R.id.btn_lancer);
+        btnAbandonnerQuiz  = root.findViewById(R.id.btn_arreter);
+        btnPauseQuiz       = root.findViewById(R.id.btn_pause);
+        btnReinitialiser   = root.findViewById(R.id.btn_reinitialiser);
+        liste_participants = root.findViewById(R.id.liste_participants);
+        if(this.adapterListeParticipants == null)
+        {
+            this.adapterListeParticipants =
+              new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+        }
+        liste_participants.setAdapter(this.adapterListeParticipants);
+        Log.d(TAG, "CREATE");
+        question         = root.findViewById(R.id.question);
+        barreProgression = root.findViewById(R.id.barreProgression);
+        barreProgression.setMax(100);
+        propositions.clear();
+        propositions.add(root.findViewById(R.id.reponse1));
+        propositions.add(root.findViewById(R.id.reponse2));
+        propositions.add(root.findViewById(R.id.reponse3));
+        propositions.add(root.findViewById(R.id.reponse4));
+        mettreAjourEtatBoutons();
+        mettreAjourDeroulement();
+
+        btnLancerQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                // Test QUIZ
+                Quiz quiz = Quiz.getQuizEnCours();
+                quiz.genererQuiz(null, 0);
+                quiz.demarrer();
+                mettreAjourEtatBoutons();
+            }
+        });
+
+        btnAbandonnerQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().arreter();
+                mettreAjourEtatBoutons();
+            }
+        });
+
+        btnPauseQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().basculerPause();
+                mettreAjourEtatBoutons();
+            }
+        });
+
+        btnReinitialiser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Quiz.getQuizEnCours().reinitialiser();
+                mettreAjourEtatBoutons();
+            }
+        });
+
+        return root;
+!!!247858.java!!!	mettreAjoutListeParticipants() : void
+        Quiz quiz = Quiz.getQuizEnCours();
+        if(quiz.estTermine())
+        {
+            adapterListeParticipants.clear();
+            return;
+        }
+        List<Participant> liste = quiz.getParticipants();
+        if(adapterListeParticipants.getCount() != quiz.getParticipants().size())
+        {
+            adapterListeParticipants.clear();
+            for(Participant participant: liste)
+            {
+                adapterListeParticipants.add(participant.getNom());
+            }
+        }
+        for(int i = 0; i < liste.size(); i++)
+        {
+            Participant participantAssocie = liste.get(i);
+            adapterListeParticipants.remove(adapterListeParticipants.getItem(i));
+            String affichageParticipant = participantAssocie.getNom() + " : ";
+            if(!participantAssocie.estRepondu())
+            {
+                affichageParticipant += "(en attente)";
+            }
+            else if(participantAssocie.getNumeroReponse() == 0)
+            {
+                affichageParticipant += "Aucune réponse";
+            }
+            else
+            {
+                affichageParticipant += "Réponse N°" + participantAssocie.getNumeroReponse() +
+                                        " (" + participantAssocie.getTempsReponse() + " ms)";
+            }
+            adapterListeParticipants.insert(affichageParticipant, i);
+        }
+!!!247986.java!!!	mettreAjourEtatBoutons() : void
+        if(Quiz.getQuizEnCours().estTermine())
+        {
+            btnLancerQuiz.setEnabled(true);
+            btnPauseQuiz.setEnabled(false);
+            btnAbandonnerQuiz.setEnabled(false);
+            btnReinitialiser.setEnabled(false);
+        }
+        else
+        {
+            btnLancerQuiz.setEnabled(false);
+            btnPauseQuiz.setEnabled(!Quiz.getQuizEnCours().estTempsMort());
+            btnReinitialiser.setEnabled(!Quiz.getQuizEnCours().estTempsMort());
+            btnAbandonnerQuiz.setEnabled(!Quiz.getQuizEnCours().estEnPause());
+        }
+!!!248114.java!!!	mettreAjourDeroulement() : void
+        if(Quiz.getQuizEnCours().estTermine())
+        {
+            question.setText("");
+            for(TextView proposition: propositions)
+            {
+                proposition.setText("");
+                proposition.setBackgroundResource(R.drawable.bg_sub_rounded);
+            }
+        }
+        else
+        {
+            Question questionEnCours = Quiz.getQuizEnCours().getQuestionEnCours();
+            question.setText(questionEnCours.getQuestion());
+            List<String> propositionsEnCours = questionEnCours.getReponses();
+            int          indiceReponse       = questionEnCours.getNumeroBonneReponse() - 1;
+            for(int i = 0; i < propositionsEnCours.size(); i++)
+            {
+                propositions.get(i).setText(propositionsEnCours.get(i));
+                if(i == indiceReponse && Quiz.getQuizEnCours().estTempsMort())
+                {
+                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_vert);
+                }
+                else if(Quiz.getQuizEnCours().getQuestionEnCours().estSelectionnee(i + 1))
+                {
+                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded_or);
+                }
+                else
+                {
+                    propositions.get(i).setBackgroundResource(R.drawable.bg_sub_rounded);
+                }
+            }
+        }
+        mettreAjourBarreDeProgression();
+        mettreAjoutListeParticipants();
+!!!248242.java!!!	mettreAjourBarreDeProgression() : void
+        if(Quiz.getQuizEnCours().estTermine())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.GRAY,
+              android.graphics.PorterDuff.Mode.SRC_IN);
+            barreProgression.setProgress(0);
+            return;
+        }
+        if(Quiz.getQuizEnCours().estTempsMort())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.RED,
+              android.graphics.PorterDuff.Mode.SRC_IN);
+            return;
+        }
+        else if(Quiz.getQuizEnCours().estEnPause())
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.YELLOW,
+              android.graphics.PorterDuff.Mode.SRC_IN);
+            return;
+        }
+        else
+        {
+            barreProgression.getProgressDrawable().setColorFilter(
+              Color.CYAN,
+              android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        barreProgression.setProgress(getProgression());
+!!!248370.java!!!	getBarreProgression() : ProgressBar
+        return barreProgression;
+!!!248498.java!!!	getProgression() : int
+        long heureDemarrageQuestion = Quiz.getQuizEnCours().getHeureDemarrageQuestion();
+        if(heureDemarrageQuestion == 0 && !Quiz.getQuizEnCours().estTempsMort())
+        {
+            return 0;
+        }
+        double tempsProgressionSecondes = Quiz.getQuizEnCours().getTempsQuestionEnCours();
+        int    pourcentageProgression =
+          (int)(tempsProgressionSecondes /
+                (double)Quiz.getQuizEnCours().getQuestionEnCours().getTemps() * 100.0);
+        return pourcentageProgression;
+!!!248626.java!!!	onDestroyView() : void
+        super.onDestroyView();
+        binding = null;
