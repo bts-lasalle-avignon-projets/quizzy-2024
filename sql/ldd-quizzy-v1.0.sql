@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "quiz" (
 	"points"	DOUBLE DEFAULT 1,
 	"temps"	INTEGER,
 	FOREIGN KEY("idEvaluation") REFERENCES "evaluations"("idEvaluation"),
+    FOREIGN KEY("idQuestion") REFERENCES "questions"("idQuestion"),
 	PRIMARY KEY("idQuestion","idEvaluation")
 );
 CREATE TABLE IF NOT EXISTS "reponses" (
