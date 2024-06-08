@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "resultats" (
 	"idParticipant"	INTEGER,
 	"score"	INTEGER,
 	PRIMARY KEY("idEvaluation","idParticipant"),
-	FOREIGN KEY("idParticipant") REFERENCES "participants",
+	FOREIGN KEY("idParticipant") REFERENCES "participants"("idParticipant"),
 	FOREIGN KEY("idEvaluation") REFERENCES "evaluations"("idEvaluation")
 );
 COMMIT;

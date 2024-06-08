@@ -171,7 +171,7 @@ Les différentes vues :
 
 ## Base de données
 
-![base de donees](/images/Android_v1.0_stucture_bdd.png)
+![base de donees](sql/schema-v1.0.png)
 
 Détails de la structure :
 
@@ -241,7 +241,7 @@ CREATE TABLE IF NOT EXISTS "resultats" (
 	"idParticipant"	INTEGER,
 	"score"	INTEGER,
 	PRIMARY KEY("idEvaluation","idParticipant"),
-	FOREIGN KEY("idParticipant") REFERENCES "participants",
+	FOREIGN KEY("idParticipant") REFERENCES "participants"("idParticipant"),
 	FOREIGN KEY("idEvaluation") REFERENCES "evaluations"("idEvaluation")
 );
 ```
