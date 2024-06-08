@@ -1,7 +1,7 @@
 format 224
 "quizzy-desktop" // quizzy-desktop
-  revision 8
-  modified_by 2 "btssn2"
+  revision 9
+  modified_by 6 "thomas"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -1565,6 +1565,14 @@ ${body}}
 	    cpp default "#include in source"
 	    classrelation_ref 135170 // <dependency>
 	  b parent class_ref 148138 // Fenetre
+      end
+
+      classrelation 128006 // <dependency>
+	relation 128006 -_->
+	  a public
+	    cpp default "#include in source"
+	    classrelation_ref 128006 // <dependency>
+	  b parent class_ref 134530 // EtatAttente
       end
     end
 

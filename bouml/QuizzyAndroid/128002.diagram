@@ -1,0 +1,301 @@
+format 224
+
+classcanvas 153730 class_ref 151218 // LancementSession
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 207922 // getFormat
+    operation_ref 208050 // getType
+    operation_ref 208178 // genererTrame
+  xyz 543.5 408.4 3113
+end
+classcanvas 153858 class_ref 150322 // AfficherQuestionSuivante
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 203698 // getFormat
+    operation_ref 203826 // getType
+    operation_ref 203954 // genererTrame
+  xyz 491 709.2 3079
+end
+classcanvas 153986 class_ref 150450 // AfficherReponse
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 204082 // getFormat
+    operation_ref 204210 // getType
+    operation_ref 204338 // genererTrame
+  xyz 419.7 289.1 3069
+end
+classcanvas 154114 class_ref 150578 // DemarrerChrono
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 204466 // getFormat
+    operation_ref 204594 // getType
+    operation_ref 204722 // genererTrame
+  xyz 488 349.1 3085
+end
+classcanvas 154242 class_ref 151474 // DesactiverBumpers
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  hidden_operations
+    operation_ref 208946 // DesactiverBumpers
+    operation_ref 209074 // getFormat
+    operation_ref 209202 // getType
+    operation_ref 209330 // getNumeroQuestion
+    operation_ref 209458 // genererTrame
+  xyz 215.6 322.9 3102
+end
+classcanvas 154370 class_ref 150834 // EnregistrerQuestion
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 205618 // EnregistrerQuestion
+    operation_ref 205746 // getFormat
+    operation_ref 205874 // getType
+    operation_ref 206002 // getLibelle
+    operation_ref 206130 // getPropositions
+    operation_ref 206258 // getTemps
+    operation_ref 206386 // getNumeroReponse
+    operation_ref 206514 // genererTrame
+  xyz 626.1 522.9 3097
+end
+classcanvas 154498 class_ref 151090 // FinSession
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 207538 // getFormat
+    operation_ref 207666 // getType
+    operation_ref 207794 // genererTrame
+  xyz 609.3 469.2 3108
+end
+classcanvas 154626 class_ref 149426 // ReceptionReponse
+  classdiagramsettings member_max_width 0 end
+  color lightorange
+  hidden_operations
+    operation_ref 202418 // ReceptionReponse
+    operation_ref 202546 // getFormat
+    operation_ref 202674 // getType
+    operation_ref 202802 // getTempsReponse
+    operation_ref 202930 // getNumeroReponse
+    operation_ref 203058 // getNumeroQuestion
+    operation_ref 203186 // genererTrame
+  xyz 136.4 644.4 3063
+end
+classcanvas 154754 class_ref 150066 // Acquitement
+  classdiagramsettings member_max_width 0 end
+  color lightorange
+  hidden_operations
+    operation_ref 202034 // getFormat
+    operation_ref 202162 // getType
+    operation_ref 202290 // genererTrame
+  xyz 143 567.1 3063
+end
+classcanvas 154882 class_ref 149938 // VerifierConnexion
+  classdiagramsettings member_max_width 0 end
+  hidden_operations
+    operation_ref 201650 // getFormat
+    operation_ref 201778 // getType
+    operation_ref 201906 // genererTrame
+  xyz 264.5 715.8 3069
+end
+classcanvas 155010 class_ref 151346 // ActiverBumpers
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  hidden_operations
+    operation_ref 208306 // ActiverBumpers
+    operation_ref 208434 // getFormat
+    operation_ref 208562 // getType
+    operation_ref 208690 // getNumeroQuestion
+    operation_ref 208818 // genererTrame
+  xyz 166.7 382.7 3096
+end
+classcanvas 155138 class_ref 150706 // EnregistrerParticipant
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 204850 // EnregistrerParticipant
+    operation_ref 204978 // getFormat
+    operation_ref 205106 // getType
+    operation_ref 205234 // getNom
+    operation_ref 205362 // getPID
+    operation_ref 205490 // genererTrame
+  xyz 601.5 582.9 3091
+end
+classcanvas 155266 class_ref 151730 // EnregistrerTempsQuestion
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  hidden_operations
+    operation_ref 210354 // EnregistrerTempsQuestion
+    operation_ref 210482 // getFormat
+    operation_ref 210610 // getType
+    operation_ref 210738 // getTempsReponse
+    operation_ref 210866 // getNumeroQuestion
+    operation_ref 210994 // genererTrame
+  xyz 29.8 495.9 3118
+end
+classcanvas 155394 class_ref 149554 // Protocole
+  classdiagramsettings member_max_width 0 end
+  hidden_attributes
+    attribute_ref 161202 // trame
+  hidden_operations
+    operation_ref 199346 // getFormat
+    operation_ref 199474 // getType
+    operation_ref 199602 // traiterTrame
+    operation_ref 199730 // getProtocole
+    operation_ref 199858 // getTrame
+    operation_ref 199986 // setTrame
+    operation_ref 200114 // genererTrame
+    operation_ref 200242 // envoyer
+    operation_ref 200370 // envoyer
+    operation_ref 200498 // estValide
+    operation_ref 200626 // estValide
+    operation_ref 200754 // extraireDonnees
+    operation_ref 200882 // toInt
+    operation_ref 201010 // toLong
+    operation_ref 524466 // getFormat
+    operation_ref 524594 // getType
+    operation_ref 524722 // traiterTrame
+    operation_ref 524850 // getProtocole
+    operation_ref 524978 // getTrame
+    operation_ref 525106 // setTrame
+    operation_ref 525234 // genererTrame
+    operation_ref 525362 // envoyer
+    operation_ref 525490 // envoyer
+    operation_ref 525618 // estValide
+    operation_ref 525746 // estValide
+    operation_ref 525874 // extraireDonnees
+    operation_ref 526002 // toInt
+    operation_ref 526130 // toLong
+  xyz 382.9 552.8 3057
+end
+classcanvas 155522 class_ref 150962 // EnregistrerSelectionParticipant
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 206642 // EnregistrerSelectionParticipant
+    operation_ref 206770 // getFormat
+    operation_ref 206898 // getType
+    operation_ref 207026 // getPID
+    operation_ref 207154 // getTempsReponse
+    operation_ref 207282 // getNumeroReponse
+    operation_ref 207410 // genererTrame
+  xyz 543.8 652.5 3103
+end
+classcanvas 155650 class_ref 151602 // EnregistrerResultat
+  classdiagramsettings member_max_width 0 end
+  color lightmediumblue
+  hidden_operations
+    operation_ref 209586 // EnregistrerResultat
+    operation_ref 209714 // getFormat
+    operation_ref 209842 // getType
+    operation_ref 209970 // getNumeroQuestion
+    operation_ref 210098 // estReponseVraie
+    operation_ref 210226 // genererTrame
+  xyz 106 439.2 3113
+end
+classcanvas 155778 class_ref 150194 // AfficherQuestionPrecedente
+  classdiagramsettings member_max_width 0 end
+  color green
+  hidden_operations
+    operation_ref 203314 // getFormat
+    operation_ref 203442 // getType
+    operation_ref 203570 // genererTrame
+  xyz 445.8 779.7 3074
+end
+relationcanvas 155906 relation_ref 156466 // <generalisation>
+  from ref 154370 z 3098 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 156290 relation_ref 157234 // <generalisation>
+  decenter_begin 936
+  from ref 155650 z 3114 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 156674 relation_ref 155826 // <generalisation>
+  decenter_begin 128
+  from ref 155778 z 3075 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 157058 relation_ref 157106 // <generalisation>
+  decenter_begin 725
+  from ref 154242 z 3103 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 157442 relation_ref 156338 // <generalisation>
+  decenter_begin 518
+  from ref 155138 z 3092 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 157826 relation_ref 155570 // <generalisation>
+  decenter_begin 532
+  from ref 154754 z 3064 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158210 relation_ref 155442 // <generalisation>
+  from ref 154882 z 3070 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158594 relation_ref 156722 // <generalisation>
+  decenter_begin 545
+  from ref 154498 z 3109 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 158978 relation_ref 155954 // <generalisation>
+  decenter_begin 136
+  from ref 153858 z 3080 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 159362 relation_ref 156210 // <generalisation>
+  decenter_begin 208
+  from ref 154114 z 3086 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 159490 relation_ref 156978 // <generalisation>
+  decenter_begin 888
+  from ref 155010 z 3097 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 159874 relation_ref 155698 // <generalisation>
+  decenter_begin 857
+  from ref 154626 z 3064 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 160258 relation_ref 157362 // <generalisation>
+  decenter_begin 794
+  from ref 155266 z 3119 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 160642 relation_ref 156082 // <generalisation>
+  decenter_begin 308
+  from ref 153986 z 3070 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 161026 relation_ref 156850 // <generalisation>
+  decenter_begin 216
+  from ref 153730 z 3114 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 161410 relation_ref 156594 // <generalisation>
+  decenter_begin 172
+  from ref 155522 z 3104 to ref 155394
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
