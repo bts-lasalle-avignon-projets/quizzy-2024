@@ -98,6 +98,11 @@ public abstract class Protocole
         return nombreArgumentsRequis == nombreArgumentsActuel;
     }
 
+    public boolean estValide()
+    {
+        return estValide(getTrame().split(";"));
+    }
+
     public boolean estValide(String... contenu)
     {
         return estValide(true, contenu);
