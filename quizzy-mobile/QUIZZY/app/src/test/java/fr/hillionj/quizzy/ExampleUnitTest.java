@@ -11,6 +11,9 @@ import fr.hillionj.quizzy.communication.protocoles.speciales.application.Recepti
 import fr.hillionj.quizzy.communication.protocoles.speciales.pupitre.ActiverBumpers;
 
 public class ExampleUnitTest {
+
+    // Identifiant de trame
+
     @Test
     public void testTrameIDCorrecte() {
         String trameIDCorrect = "$E;1\n";
@@ -22,6 +25,8 @@ public class ExampleUnitTest {
         String trameIDIncorrect = "$M;1\n";
         assertNull(Protocole.traiterTrame(trameIDIncorrect));
     }
+
+    // Intégritée de la trame
 
     @Test
     public void testTrameCorrecte() {
@@ -35,9 +40,11 @@ public class ExampleUnitTest {
         assertFalse(Protocole.traiterTrame(trameIncorrect).estValide());
     }
 
+    // Décodage de la trame
+
     @Test
     public void testDecodageTrame() {
-        String trame = "$R;1;3;4856\n"; //$U;QUESTION;REPONSE;TEMPS\n
+        String trame = "$R;1;3;4856\n"; //$R;QUESTION;REPONSE;TEMPS\n
         ReceptionReponse protocoleAssocie = (ReceptionReponse) Protocole.traiterTrame(trame);
         assertEquals(1, protocoleAssocie.getNumeroQuestion());
         assertEquals(3, protocoleAssocie.getNumeroReponse());

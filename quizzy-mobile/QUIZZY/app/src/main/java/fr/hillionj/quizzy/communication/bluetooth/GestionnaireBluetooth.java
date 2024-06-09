@@ -127,7 +127,7 @@ public class GestionnaireBluetooth {
                             if (protocoleRecue == null) {
                                 continue;
                             }
-                            Log.v("QUIZZY_" + this.getClass().getName(), "<- " + peripherique.getNom() + ": " + trame);
+                            Log.d("QUIZZY_" + this.getClass().getName() + "_TEST1", "<- " + peripherique.getNom() + ": " + trame);
                             switch (protocoleRecue.getType()) {
                                 case RECEPTION_REPONSE:
                                     Parametres.getParametres().getSession().selectionnerProposition(Parametres.getParametres().getParticipantAssocier(peripherique), (ReceptionReponse) protocoleRecue);

@@ -78,7 +78,7 @@ public abstract class Protocole
     public void envoyer(@NonNull ReceveurProtocole receveur)
     {
         if (receveur.getPeripherique() != null) {
-            Log.v("QUIZZY_" + this.getClass().getSimpleName(), "-> " + receveur.getPeripherique().getNom() + ": " + getTrame());
+            Log.v("QUIZZY_" + this.getClass().getSimpleName() + "_TEST1", "-> " + receveur.getPeripherique().getNom() + ": " + getTrame());
             receveur.getPeripherique().envoyer(getTrame());
         }
     }
