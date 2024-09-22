@@ -8,6 +8,7 @@
 	- [Présentation](#présentation)
 	- [Recette](#recette)
 	- [Screenshots](#screenshots)
+                - [Vidéo](#vidéo)
 		- [Interface Évaluateur (Tablette)](#interface-évaluateur-tablette)
 		- [Interface participant (Écran)](#interface-participant-écran)
 	- [Diaporamas de présentation](#diaporamas-de-présentation)
@@ -79,6 +80,10 @@ Le système **QUIZZY** permet de "jouer" et de s'évaluer en pleine immersion da
 | Dialoguer avec la tablette      |         |          |    X    |
 
 ## Screenshots
+
+### Vidéo
+
+[<img src="https://img.youtube.com/vi/_dPSoN5WaAY/maxresdefault.jpg" width="50%">](https://youtu.be/_dPSoN5WaAY)
 
 ### Interface Évaluateur (Tablette)
 
